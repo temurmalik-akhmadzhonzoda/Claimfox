@@ -10,13 +10,12 @@ export default function LoginPage() {
   const [password, setPassword] = useState('')
   const [error, setError] = useState<string | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
+
   const navigate = useNavigate()
   const { login, isAuthenticated } = useAuth()
 
   useEffect(() => {
-    if (isAuthenticated) {
-      navigate('/roles', { replace: true })
-    }
+    if (isAuthenticated) navigate('/roles', { replace: true })
   }, [isAuthenticated, navigate])
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -29,13 +28,16 @@ export default function LoginPage() {
     }
 
     setIsSubmitting(true)
-    const success = login(username, password)
-    if (success) {
-      navigate('/roles', { replace: true })
-    } else {
-      setError('Ungültige Zugangsdaten. Bitte nutze Benutzername "Ralf" und Passwort "2106".')
+    try {
+      const success = login(username, password)
+      if (success) {
+        navigate('/roles', { replace: true })
+      } else {
+        setError('Ungültige Anmeldedaten.')
+      }
+    } finally {
+      setIsSubmitting(false)
     }
-    setIsSubmitting(false)
   }
 
   return (
@@ -43,17 +45,19 @@ export default function LoginPage() {
       className="page"
       style={{
         minHeight: 'calc(100vh - 150px)',
+        display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
       }}
     >
       <div style={{ width: '100%', maxWidth: 480 }}>
-        <Header
-          title="Melde dich im ClaimFox Portal an"
-          subtitle="Nutze die Test-Zugangsdaten Ralf / 2106, um auf die Rollenverwaltung zuzugreifen."
-        />
+        <Header title="ClaimFox Portal" />
+
         <Card>
-          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          <form
+            onSubmit={handleSubmit}
+            style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
+          >
             <label className="form-field">
               Benutzername
               <input
@@ -61,8 +65,11 @@ export default function LoginPage() {
                 autoComplete="username"
                 value={username}
                 onChange={(event) => setUsername(event.target.value)}
+                disabled={isSubmitting}
+                required
               />
             </label>
+
             <label className="form-field">
               Passwort
               <input
@@ -71,9 +78,13 @@ export default function LoginPage() {
                 autoComplete="current-password"
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
+                disabled={isSubmitting}
+                required
               />
             </label>
+
             {error && <p className="error-text">{error}</p>}
+
             <Button type="submit" disabled={isSubmitting}>
               {isSubmitting ? 'Anmeldung läuft...' : 'Login'}
             </Button>
