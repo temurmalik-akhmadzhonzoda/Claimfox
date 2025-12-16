@@ -66,7 +66,7 @@ export default function LoginPage() {
           src={InsurfoxLogo}
           alt="Insurfox"
           style={{
-            height: 48,
+            height: 60,
             objectFit: 'contain',
             marginBottom: '0.5rem',
           }}
