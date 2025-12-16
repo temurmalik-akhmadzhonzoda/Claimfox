@@ -58,59 +58,61 @@ export default function LoginPage() {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          gap: '1.5rem',
+          gap: '1.75rem',
         }}
       >
-        {/* Insurfox Logo */}
+        {/* Logo bleibt zentriert */}
         <img
           src={InsurfoxLogo}
           alt="Insurfox"
           style={{
             height: 120,
             objectFit: 'contain',
-            marginBottom: '0.5rem',
           }}
         />
 
-        <Header title="ClaimFox Portal" />
+        {/* Inhalt linksbündig zum Container */}
+        <div style={{ width: '100%' }}>
+          <Header title="IaaS - Portal" />
 
-        <Card>
-          <form
-            onSubmit={handleSubmit}
-            style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
-          >
-            <label className="form-field">
-              Benutzername
-              <input
-                className="text-input"
-                autoComplete="username"
-                value={username}
-                onChange={(event) => setUsername(event.target.value)}
-                disabled={isSubmitting}
-                required
-              />
-            </label>
+          <Card>
+            <form
+              onSubmit={handleSubmit}
+              style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
+            >
+              <label className="form-field">
+                Benutzername
+                <input
+                  className="text-input"
+                  autoComplete="username"
+                  value={username}
+                  onChange={(event) => setUsername(event.target.value)}
+                  disabled={isSubmitting}
+                  required
+                />
+              </label>
 
-            <label className="form-field">
-              Passwort
-              <input
-                className="text-input"
-                type="password"
-                autoComplete="current-password"
-                value={password}
-                onChange={(event) => setPassword(event.target.value)}
-                disabled={isSubmitting}
-                required
-              />
-            </label>
+              <label className="form-field">
+                Passwort
+                <input
+                  className="text-input"
+                  type="password"
+                  autoComplete="current-password"
+                  value={password}
+                  onChange={(event) => setPassword(event.target.value)}
+                  disabled={isSubmitting}
+                  required
+                />
+              </label>
 
-            {error && <p className="error-text">{error}</p>}
+              {error && <p className="error-text">{error}</p>}
 
-            <Button type="submit" disabled={isSubmitting}>
-              {isSubmitting ? 'Anmeldung läuft...' : 'Login'}
-            </Button>
-          </form>
-        </Card>
+              <Button type="submit" disabled={isSubmitting}>
+                {isSubmitting ? 'Anmeldung läuft...' : 'Login'}
+              </Button>
+            </form>
+          </Card>
+        </div>
       </div>
     </section>
   )
