@@ -1,0 +1,20 @@
+{
+  "auth": {
+    "title": "Anmelden",
+    "username": "Benutzer",
+    "password": "Passwort",
+    "signin": "Anmelden",
+    "signing": "Anmelden…",
+    "errorRequired": "Bitte Benutzernamen und Passwort eingeben",
+    "errorInvalid": "Ungültiger Benutzername oder Passwort",
+    "demoExec": "Demo Exec",
+    "demoBroker": "Demo Broker",
+    "demoInsurer": "Demo Insurer"
+  },
+  "dashboard": { "title": "Mein Insurfox", "damageReport": "Schaden melden", "damageReportSubtitle": "Schadensmeldung in 3 Min", "topProducts": "Top Produkte" },
+  "products": { "title": "Produkte", "notfound": "Produkt nicht gefunden" },
+  "damages": { "title": "Schäden", "notfound": "Schaden nicht gefunden" },
+  "profile": { "title": "Mein Profil", "logout": "Abmelden" },
+  "damageReport": { "title": "Schadensmeldung", "submit": "Absenden" },
+  "common": { "back": "Zurück", "next": "Weiter" }
+}
