@@ -5,6 +5,7 @@ import Card from '@/components/ui/Card'
 import Header from '@/components/ui/Header'
 import { useAuth } from '@/features/auth/AuthContext'
 import InsurfoxLogo from '@/assets/logos/Insurfox_Logo_colored_dark.png'
+import { useI18n } from '@/i18n/I18nContext'
 
 export default function LoginPage() {
   const [username, setUsername] = useState('')
@@ -14,6 +15,7 @@ export default function LoginPage() {
 
   const navigate = useNavigate()
   const { login, isAuthenticated } = useAuth()
+  const { t } = useI18n()
 
   // Hard reset against browser autofill
   useEffect(() => {
@@ -30,7 +32,7 @@ export default function LoginPage() {
     setError(null)
 
     if (!username.trim() || !password.trim()) {
-      setError('Benutzername und Passwort sind erforderlich.')
+      setError(t('login.required'))
       return
     }
 
@@ -40,7 +42,7 @@ export default function LoginPage() {
       if (success) {
         navigate('/roles', { replace: true })
       } else {
-        setError('Ungültige Anmeldedaten.')
+        setError(t('login.invalid'))
       }
     } finally {
       setIsSubmitting(false)
@@ -48,15 +50,7 @@ export default function LoginPage() {
   }
 
   return (
-    <section
-      className="page"
-      style={{
-        minHeight: 'calc(100vh - 150px)',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
+    <section className="page login-page">
       <div
         style={{
           width: '100%',
@@ -79,7 +73,7 @@ export default function LoginPage() {
 
         {/* Left-aligned content */}
         <div style={{ width: '100%' }}>
-          <Header title="IaaS - Portal" />
+          <Header title={t('login.title')} />
 
           <Card>
             <form
@@ -92,11 +86,12 @@ export default function LoginPage() {
               }}
             >
               <label className="form-field">
-                Benutzername
+                {t('login.username')}
                 <input
                   className="text-input"
                   name="cf_username"
                   autoComplete="off"
+                  placeholder={t('login.username')}
                   value={username}
                   onChange={(event) => setUsername(event.target.value)}
                   disabled={isSubmitting}
@@ -105,12 +100,13 @@ export default function LoginPage() {
               </label>
 
               <label className="form-field">
-                Passwort
+                {t('login.password')}
                 <input
                   className="text-input"
                   type="password"
                   name="cf_password"
                   autoComplete="new-password"
+                  placeholder={t('login.password')}
                   value={password}
                   onChange={(event) => setPassword(event.target.value)}
                   disabled={isSubmitting}
@@ -121,7 +117,7 @@ export default function LoginPage() {
               {error && <p className="error-text">{error}</p>}
 
               <Button type="submit" disabled={isSubmitting}>
-                {isSubmitting ? 'Anmeldung läuft...' : 'Login'}
+                {isSubmitting ? t('login.submitting') : t('login.submit')}
               </Button>
             </form>
           </Card>

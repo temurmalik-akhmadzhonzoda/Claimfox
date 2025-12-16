@@ -3,30 +3,43 @@ import { useNavigate } from 'react-router-dom'
 import Button from '@/components/ui/Button'
 import Card from '@/components/ui/Card'
 import Header from '@/components/ui/Header'
+import { useI18n } from '@/i18n/I18nContext'
 
-type Step = 'language' | 'fullName' | 'email' | 'phone' | 'roleType' | 'privacy' | 'summary'
+const STORAGE_KEY = 'cf_registration_draft'
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
-type ChatMessage = {
+type Step = 'name' | 'email' | 'phone' | 'role' | 'privacy' | 'summary'
+
+type BotMessage = {
   id: string
-  author: 'bot' | 'user'
+  author: 'bot'
+  key: string
+  vars?: Record<string, string>
+  timestamp: number
+}
+
+type UserMessage = {
+  id: string
+  author: 'user'
   text: string
   timestamp: number
 }
 
+type ChatMessage = BotMessage | UserMessage
+
 type Answers = {
-  language?: 'de' | 'en'
-  fullName?: string
+  name?: string
   email?: string
   phone?: string
-  roleType?: string
-  privacyConsent?: 'yes' | 'no'
+  role?: string
+  privacyConsent?: boolean
 }
 
 type RegistrationState = {
   messages: ChatMessage[]
-  currentStep: Step
+  step: Step
   answers: Answers
-  isBotTyping: boolean
+  isTyping: boolean
   blocked: boolean
   completed: boolean
 }
@@ -38,65 +51,37 @@ type Action =
   | { type: 'SET_ANSWERS'; payload: Partial<Answers> }
   | { type: 'SET_BLOCKED'; payload: boolean }
   | { type: 'SET_COMPLETED'; payload: boolean }
-  | { type: 'RESET' }
-
-const STORAGE_KEY = 'cf_registration_draft'
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  | { type: 'RESET'; payload: RegistrationState }
 
 const initialState: RegistrationState = {
   messages: [],
-  currentStep: 'language',
+  step: 'name',
   answers: {},
-  isBotTyping: false,
+  isTyping: false,
   blocked: false,
   completed: false
 }
 
-const START_SEQUENCE = [
-  '👋 Willkommen bei Claimfox. Ich begleite dich Schritt für Schritt durch die Registrierung. Das dauert nur wenige Minuten.',
-  '👋 Welcome to Claimfox. I’ll guide you step by step through the registration process. It only takes a few minutes.',
-  'Bevor wir starten: Welche Sprache möchtest du verwenden?',
-  'Before we begin: Which language would you like to use?'
-]
+function isBrowser() {
+  return typeof window !== 'undefined'
+}
 
-const COPY = {
-  de: {
-    namePrompt: 'Wie lautet dein vollständiger Name?',
-    emailPrompt:
-      'Bitte gib deine E-Mail-Adresse an. Wir nutzen sie ausschließlich für die Registrierung und wichtige Informationen.',
-    emailInvalid: 'Diese E-Mail-Adresse sieht leider nicht korrekt aus. Bitte prüfe sie noch einmal.',
-    phonePrompt: 'Möchtest du zusätzlich eine Telefonnummer angeben? (optional – kann auch später ergänzt werden)',
-    rolePrompt: 'Wofür möchtest du Claimfox nutzen?',
-    privacyPrompt:
-      'Bevor wir fortfahren, benötigen wir deine Zustimmung zu unserer Datenschutzerklärung. Deine Daten werden vertraulich behandelt.',
-    privacyDeclined:
-      'Ohne deine Zustimmung können wir die Registrierung leider nicht abschließen. Du kannst den Prozess jederzeit neu starten.',
-    summary: (answers: Answers) =>
-      `Perfekt 👍 Hier ist eine kurze Zusammenfassung deiner Angaben: Name: ${answers.fullName ?? '–'}, E-Mail: ${answers.email ?? '–'}, Telefon: ${answers.phone || '–'}, Rolle: ${answers.roleType ?? '–'}. Möchtest du die Registrierung jetzt abschicken?`,
-    success: '🎉 Vielen Dank! Deine Registrierung wurde erfolgreich erfasst. Wir melden uns in Kürze bei dir.',
-    restartNotice: 'Alles klar, wir starten den Prozess neu. Bitte sag mir zuerst, welche Sprache du verwenden möchtest.',
-    editNotice: 'Kein Problem, wir können deine Angaben anpassen. Lass uns erneut mit deinem vollständigen Namen beginnen.',
-    languageRetry: 'Bitte antworte mit „Deutsch“ oder „English“. / Please answer with "Deutsch" or "English".',
-    yesOptions: ['ja', 'ja, ich stimme zu', 'j']
-  },
-  en: {
-    namePrompt: 'What is your full name?',
-    emailPrompt:
-      'Please enter your email address. We’ll only use it for registration and important information.',
-    emailInvalid: 'This email address doesn’t look quite right. Please check it again.',
-    phonePrompt: 'Would you like to provide a phone number? (optional – can also be added later)',
-    rolePrompt: 'What would you like to use Claimfox for?',
-    privacyPrompt:
-      'Before we continue, we need your consent to our privacy policy. Your data will be handled confidentially.',
-    privacyDeclined:
-      'Without your consent, we can’t complete the registration. You can restart the process at any time.',
-    summary: (answers: Answers) =>
-      `Great 👍 Here’s a short summary of your information: Name: ${answers.fullName ?? '–'}, Email: ${answers.email ?? '–'}, Phone: ${answers.phone || '–'}, Role: ${answers.roleType ?? '–'}. Would you like to submit your registration now?`,
-    success: '🎉 Thank you! Your registration has been successfully recorded. We’ll get back to you shortly.',
-    restartNotice: 'Got it, restarting the flow. Please tell me which language you would like to use.',
-    editNotice: 'No worries, we can adjust your information. Let’s start again with your full name.',
-    languageRetry: 'Bitte antworte mit „Deutsch“ oder „English“. / Please answer with "Deutsch" or "English".',
-    yesOptions: ['yes', 'y', 'yeah']
+function createBotMessage(key: string, vars?: Record<string, string>): BotMessage {
+  return {
+    id: `bot-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+    author: 'bot',
+    key,
+    vars,
+    timestamp: Date.now()
+  }
+}
+
+function createUserMessage(text: string): UserMessage {
+  return {
+    id: `user-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+    author: 'user',
+    text,
+    timestamp: Date.now()
   }
 }
 
@@ -105,9 +90,9 @@ function registrationReducer(state: RegistrationState, action: Action): Registra
     case 'ADD_MESSAGE':
       return { ...state, messages: [...state.messages, action.payload] }
     case 'SET_TYPING':
-      return { ...state, isBotTyping: action.payload }
+      return { ...state, isTyping: action.payload }
     case 'SET_STEP':
-      return { ...state, currentStep: action.payload }
+      return { ...state, step: action.payload }
     case 'SET_ANSWERS':
       return { ...state, answers: { ...state.answers, ...action.payload } }
     case 'SET_BLOCKED':
@@ -115,23 +100,14 @@ function registrationReducer(state: RegistrationState, action: Action): Registra
     case 'SET_COMPLETED':
       return { ...state, completed: action.payload }
     case 'RESET':
-      return initialState
+      return action.payload
     default:
       return state
   }
 }
 
-function createMessage(author: ChatMessage['author'], text: string): ChatMessage {
-  return {
-    id: `${author}-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
-    author,
-    text,
-    timestamp: Date.now()
-  }
-}
-
 function loadInitialState(): RegistrationState {
-  if (typeof window === 'undefined') {
+  if (!isBrowser()) {
     return initialState
   }
 
@@ -142,21 +118,20 @@ function loadInitialState(): RegistrationState {
     return {
       ...initialState,
       ...parsed,
-      isBotTyping: false
+      isTyping: false
     }
   } catch {
     return initialState
   }
 }
 
-function RegistrationPage() {
+export default function RegistrationPage() {
   const [state, dispatch] = useReducer(registrationReducer, undefined, loadInitialState)
   const [inputValue, setInputValue] = useState('')
   const chatContainerRef = useRef<HTMLDivElement>(null)
   const timeoutsRef = useRef<number[]>([])
   const navigate = useNavigate()
-
-  const activeLanguage: 'de' | 'en' = state.answers.language ?? 'de'
+  const { t } = useI18n()
 
   useEffect(() => {
     return () => {
@@ -166,39 +141,37 @@ function RegistrationPage() {
   }, [])
 
   useEffect(() => {
+    if (!isBrowser()) return
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state))
+  }, [state])
+
+  useEffect(() => {
     chatContainerRef.current?.scrollTo({
       top: chatContainerRef.current.scrollHeight,
       behavior: 'smooth'
     })
-  }, [state.messages.length, state.isBotTyping])
+  }, [state.messages.length, state.isTyping])
 
   useEffect(() => {
-    if (typeof window === 'undefined') return
-    window.localStorage.setItem(
-      STORAGE_KEY,
-      JSON.stringify({ ...state, isBotTyping: false })
-    )
-  }, [state])
-
-  useEffect(() => {
-    if (state.messages.length === 0 && !state.isBotTyping && state.currentStep === 'language') {
-      queueBotMessages(START_SEQUENCE)
+    if (!state.messages.length && !state.isTyping) {
+      queueBotMessages([
+        { key: 'registration.bot.welcome' },
+        { key: 'registration.bot.name' }
+      ])
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state.messages.length, state.isBotTyping, state.currentStep])
+  }, [state.messages.length, state.isTyping])
 
-  function queueBotMessages(texts: string[], onComplete?: () => void) {
-    if (!texts.length) return
+  function queueBotMessages(items: Array<{ key: string; vars?: Record<string, string> }>) {
+    if (!items.length) return
     dispatch({ type: 'SET_TYPING', payload: true })
     let delay = 0
-    texts.forEach((text, index) => {
-      const nextDelay = 300 + Math.floor(Math.random() * 300)
-      delay += nextDelay
+    items.forEach((item, index) => {
+      delay += 350 + Math.floor(Math.random() * 350)
       const timeoutId = window.setTimeout(() => {
-        dispatch({ type: 'ADD_MESSAGE', payload: createMessage('bot', text) })
-        if (index === texts.length - 1) {
+        dispatch({ type: 'ADD_MESSAGE', payload: createBotMessage(item.key, item.vars) })
+        if (index === items.length - 1) {
           dispatch({ type: 'SET_TYPING', payload: false })
-          onComplete?.()
         }
       }, delay)
       timeoutsRef.current.push(timeoutId)
@@ -211,143 +184,130 @@ function RegistrationPage() {
   }
 
   function sendUserInput(value: string) {
-    if (state.isBotTyping || state.blocked || state.completed) {
-      return
-    }
+    if (state.isTyping || state.blocked || state.completed) return
     const trimmed = value.trim()
-    if (!trimmed) {
-      return
-    }
-    dispatch({ type: 'ADD_MESSAGE', payload: createMessage('user', trimmed) })
+    if (!trimmed) return
+    dispatch({ type: 'ADD_MESSAGE', payload: createUserMessage(trimmed) })
     setInputValue('')
     processUserResponse(trimmed)
   }
 
   function processUserResponse(rawValue: string) {
-    const normalized = rawValue.trim().toLowerCase()
+    const trimmed = rawValue.trim()
+    const normalized = trimmed.toLowerCase()
 
-    switch (state.currentStep) {
-      case 'language': {
-        if (['de', 'deutsch', 'german', 'deutschland'].includes(normalized)) {
-          dispatch({ type: 'SET_ANSWERS', payload: { language: 'de' } })
-          dispatch({ type: 'SET_STEP', payload: 'fullName' })
-          queueBotMessages([COPY.de.namePrompt])
+    switch (state.step) {
+      case 'name': {
+        if (trimmed.length < 3) {
+          queueBotMessages([{ key: 'registration.bot.name' }])
           return
         }
-        if (['en', 'english', 'englisch'].includes(normalized)) {
-          dispatch({ type: 'SET_ANSWERS', payload: { language: 'en' } })
-          dispatch({ type: 'SET_STEP', payload: 'fullName' })
-          queueBotMessages([COPY.en.namePrompt])
-          return
-        }
-        queueBotMessages([COPY.de.languageRetry])
-        return
-      }
-      case 'fullName': {
-        if (rawValue.trim().length < 3) {
-          queueBotMessages([
-            state.answers.language === 'en'
-              ? 'Please share your full name so I can personalize the process.'
-              : 'Bitte teile mir deinen vollständigen Namen mit, damit ich dich richtig ansprechen kann.'
-          ])
-          return
-        }
-        dispatch({ type: 'SET_ANSWERS', payload: { fullName: rawValue.trim() } })
+        dispatch({ type: 'SET_ANSWERS', payload: { name: trimmed } })
         dispatch({ type: 'SET_STEP', payload: 'email' })
-        queueBotMessages([COPY[activeLanguage].emailPrompt])
+        queueBotMessages([{ key: 'registration.bot.email' }])
         return
       }
       case 'email': {
-        if (!EMAIL_REGEX.test(rawValue.trim())) {
-          queueBotMessages([COPY[activeLanguage].emailInvalid])
+        if (!EMAIL_REGEX.test(trimmed)) {
+          queueBotMessages([{ key: 'registration.bot.emailInvalid' }])
           return
         }
-        dispatch({ type: 'SET_ANSWERS', payload: { email: rawValue.trim() } })
+        dispatch({ type: 'SET_ANSWERS', payload: { email: trimmed } })
         dispatch({ type: 'SET_STEP', payload: 'phone' })
-        queueBotMessages([COPY[activeLanguage].phonePrompt])
+        queueBotMessages([{ key: 'registration.bot.phone' }])
         return
       }
       case 'phone': {
-        const skipWords = ['skip', 'überspringen', 'ueberspringen']
-        const phoneValue = skipWords.includes(normalized) ? undefined : rawValue.trim()
-        if (phoneValue && phoneValue.length < 5) {
+        const skipCommands = ['skip', 'überspringen', 'ueberspringen', 'auslassen']
+        if (skipCommands.includes(normalized)) {
+          dispatch({ type: 'SET_ANSWERS', payload: { phone: undefined } })
+          dispatch({ type: 'SET_STEP', payload: 'role' })
           queueBotMessages([
-            activeLanguage === 'en'
-              ? 'That number looks quite short. Please share a full phone number or type "Skip".'
-              : 'Diese Nummer ist sehr kurz. Bitte gib eine vollständige Telefonnummer an oder schreibe „Überspringen“.'
+            { key: 'registration.bot.skip' },
+            { key: 'registration.bot.role' },
+            { key: 'registration.bot.roleCustomer' },
+            { key: 'registration.bot.rolePartner' },
+            { key: 'registration.bot.roleInternal' }
           ])
           return
         }
-        dispatch({ type: 'SET_ANSWERS', payload: { phone: phoneValue } })
-        dispatch({ type: 'SET_STEP', payload: 'roleType' })
-        queueBotMessages([COPY[activeLanguage].rolePrompt])
+        if (trimmed.length < 5) {
+          queueBotMessages([{ key: 'registration.bot.phone' }])
+          return
+        }
+        dispatch({ type: 'SET_ANSWERS', payload: { phone: trimmed } })
+        dispatch({ type: 'SET_STEP', payload: 'role' })
+        queueBotMessages([
+          { key: 'registration.bot.role' },
+          { key: 'registration.bot.roleCustomer' },
+          { key: 'registration.bot.rolePartner' },
+          { key: 'registration.bot.roleInternal' }
+        ])
         return
       }
-      case 'roleType': {
-        if (rawValue.trim().length < 3) {
-          queueBotMessages([
-            activeLanguage === 'en'
-              ? 'Give me a quick hint about how you plan to use Claimfox.'
-              : 'Gib mir bitte kurz an, wofür du Claimfox nutzen möchtest.'
-          ])
+      case 'role': {
+        if (trimmed.length < 3) {
+          queueBotMessages([{ key: 'registration.bot.role' }])
           return
         }
-        dispatch({ type: 'SET_ANSWERS', payload: { roleType: rawValue.trim() } })
+        dispatch({ type: 'SET_ANSWERS', payload: { role: trimmed } })
         dispatch({ type: 'SET_STEP', payload: 'privacy' })
-        queueBotMessages([COPY[activeLanguage].privacyPrompt])
+        queueBotMessages([{ key: 'registration.bot.privacy' }])
         return
       }
       case 'privacy': {
-        const yesList = [...COPY[activeLanguage].yesOptions, 'ja, ich stimme zu']
-        if (yesList.includes(normalized)) {
-          const updatedAnswers = { ...state.answers, privacyConsent: 'yes' as const }
-          dispatch({ type: 'SET_ANSWERS', payload: { privacyConsent: 'yes' } })
-          dispatch({ type: 'SET_STEP', payload: 'summary' })
+        const positive = ['yes', 'y', 'ja', 'j', 'ok', 'okay', 'accept', 'zustimme', 'zustimmen']
+        const negative = ['no', 'n', 'nein']
+        if (positive.includes(normalized)) {
+          dispatch({ type: 'SET_ANSWERS', payload: { privacyConsent: true } })
           dispatch({ type: 'SET_BLOCKED', payload: false })
-          queueBotMessages([COPY[activeLanguage].summary(updatedAnswers)])
-          return
-        }
-        if (['no', 'nein', 'n'].includes(normalized)) {
-          dispatch({ type: 'SET_ANSWERS', payload: { privacyConsent: 'no' } })
-          dispatch({ type: 'SET_BLOCKED', payload: true })
-          queueBotMessages([COPY[activeLanguage].privacyDeclined])
-          return
-        }
-        queueBotMessages([
-          activeLanguage === 'en'
-            ? 'Please answer with Yes or No.'
-            : 'Bitte antworte mit Ja oder Nein.'
-        ])
-        return
-      }
-      case 'summary': {
-        const positiveOptions = [
-          'registrierung abschicken',
-          'abschicken',
-          'ja',
-          'yes',
-          'submit',
-          'ok'
-        ]
-        const editOptions = ['edit', 'bearbeiten', 'änderung', 'ändern']
-        if (positiveOptions.includes(normalized)) {
-          dispatch({ type: 'SET_COMPLETED', payload: true })
-          queueBotMessages([COPY[activeLanguage].success])
-          return
-        }
-        if (editOptions.includes(normalized)) {
-          dispatch({ type: 'SET_STEP', payload: 'fullName' })
+          dispatch({ type: 'SET_STEP', payload: 'summary' })
           queueBotMessages([
-            activeLanguage === 'en' ? COPY.en.editNotice : COPY.de.editNotice,
-            COPY[activeLanguage].namePrompt
+            { key: 'registration.bot.privacyYes' },
+            {
+              key: 'registration.bot.summary',
+              vars: {
+                name: state.answers.name ?? '–',
+                email: state.answers.email ?? '–',
+                phone: state.answers.phone ?? '–',
+                role: state.answers.role ?? '–'
+              }
+            }
           ])
           return
         }
-        queueBotMessages([
-          activeLanguage === 'en'
-            ? 'Please type “Registrierung abschicken” or “Edit”.'
-            : 'Bitte antworte mit „Registrierung abschicken“ oder „Edit“.'
-        ])
+        if (negative.includes(normalized)) {
+          dispatch({ type: 'SET_ANSWERS', payload: { privacyConsent: false } })
+          dispatch({ type: 'SET_BLOCKED', payload: true })
+          queueBotMessages([
+            { key: 'registration.bot.privacyNo' },
+            { key: 'registration.bot.privacyNoStop' }
+          ])
+          return
+        }
+        queueBotMessages([{ key: 'registration.bot.privacy' }])
+        return
+      }
+      case 'summary': {
+        const submitCommands = ['submit', 'abschicken', 'registrierung abschicken', t('registration.bot.submit').toLowerCase()]
+        const editCommands = ['edit', 'bearbeiten', t('registration.bot.edit').toLowerCase()]
+        if (submitCommands.includes(normalized)) {
+          dispatch({ type: 'SET_COMPLETED', payload: true })
+          queueBotMessages([{ key: 'registration.bot.success' }])
+          return
+        }
+        if (editCommands.includes(normalized)) {
+          dispatch({ type: 'SET_COMPLETED', payload: false })
+          dispatch({ type: 'SET_STEP', payload: 'name' })
+          queueBotMessages([{ key: 'registration.bot.name' }])
+          return
+        }
+        queueBotMessages([{ key: 'registration.bot.summary', vars: {
+          name: state.answers.name ?? '–',
+          email: state.answers.email ?? '–',
+          phone: state.answers.phone ?? '–',
+          role: state.answers.role ?? '–'
+        } }])
         return
       }
       default:
@@ -356,40 +316,37 @@ function RegistrationPage() {
   }
 
   function handleRestart() {
-    const previousLanguage: 'de' | 'en' = state.answers.language ?? 'de'
-    dispatch({ type: 'RESET' })
-    setInputValue('')
     timeoutsRef.current.forEach((id) => window.clearTimeout(id))
     timeoutsRef.current = []
-    if (typeof window !== 'undefined') {
+    if (isBrowser()) {
       window.localStorage.removeItem(STORAGE_KEY)
     }
-    queueBotMessages([
-      previousLanguage === 'en' ? COPY.en.restartNotice : COPY.de.restartNotice
-    ])
+    setInputValue('')
+    dispatch({ type: 'RESET', payload: initialState })
   }
 
-  const inputDisabled = state.isBotTyping || state.blocked || state.completed
-  const placeholder =
-    activeLanguage === 'en' ? 'Type your reply...' : 'Nachricht eingeben...'
+  const inputDisabled = state.isTyping || state.blocked || state.completed
+  const placeholder = state.blocked
+    ? t('registration.bot.privacyNoStop')
+    : t('registration.inputPlaceholder')
 
   return (
     <section className="page" style={{ gap: '1.5rem' }}>
       <Header
-        title="Registrierungsassistent"
-        subtitle="Unser KI-Bot begleitet dich durch alle Schritte der Registrierung und speichert deinen Fortschritt lokal."
+        title={t('registration.title')}
+        subtitle={t('registration.subtitle')}
         actions={
           <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
             <Button variant="secondary" onClick={() => navigate('/roles')}>
-              Zurück zur Übersicht
+              {t('registration.back')}
             </Button>
             <Button variant="secondary" onClick={handleRestart}>
-              Neu starten
+              {t('registration.restart')}
             </Button>
           </div>
         }
       />
-      <Card title="Dein Chat mit Claimfox" subtitle="Alle Eingaben bleiben lokal gespeichert (Draft).">
+      <Card>
         <div
           ref={chatContainerRef}
           style={{
@@ -423,10 +380,10 @@ function RegistrationPage() {
                 maxWidth: '80%'
               }}
             >
-              {message.text}
+              {message.author === 'bot' ? t(message.key, message.vars) : message.text}
             </div>
           ))}
-          {state.isBotTyping && (
+          {state.isTyping && (
             <div
               style={{
                 alignSelf: 'flex-start',
@@ -453,13 +410,7 @@ function RegistrationPage() {
             type="text"
             value={inputValue}
             onChange={(event) => setInputValue(event.target.value)}
-            placeholder={
-              state.blocked
-                ? activeLanguage === 'en'
-                  ? 'Consent required – please restart'
-                  : 'Datenschutz benötigt – bitte neu starten'
-                : placeholder
-            }
+            placeholder={placeholder}
             disabled={inputDisabled}
             style={{
               flex: 1,
@@ -471,31 +422,25 @@ function RegistrationPage() {
             }}
           />
           <Button type="submit" disabled={inputDisabled}>
-            {activeLanguage === 'en' ? 'Send' : 'Senden'}
+            {t('registration.send')}
           </Button>
         </form>
-        {state.currentStep === 'summary' && !state.completed && !state.blocked && (
+        {state.step === 'summary' && !state.completed && !state.blocked && (
           <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-            <Button
-              variant="secondary"
-              type="button"
-              onClick={() => sendUserInput('Registrierung abschicken')}
-            >
-              Registrierung abschicken
+            <Button variant="secondary" type="button" onClick={() => sendUserInput(t('registration.bot.submit'))}>
+              {t('registration.bot.submit')}
             </Button>
-            <Button variant="secondary" type="button" onClick={() => sendUserInput('Edit')}>
-              Edit
+            <Button variant="secondary" type="button" onClick={() => sendUserInput(t('registration.bot.edit'))}>
+              {t('registration.bot.edit')}
             </Button>
           </div>
         )}
         {state.completed && (
           <div style={{ marginTop: '1rem' }}>
-            <Button onClick={() => navigate('/roles')}>Zur Übersicht</Button>
+            <Button onClick={() => navigate('/roles')}>{t('registration.back')}</Button>
           </div>
         )}
       </Card>
     </section>
   )
 }
-
-export default RegistrationPage

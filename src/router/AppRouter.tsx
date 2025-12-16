@@ -4,6 +4,7 @@ import LoginPage from '@/pages/LoginPage'
 import RegistrationPage from '@/pages/RegistrationPage'
 import RolesPage from '@/pages/RolesPage'
 import ProtectedRoute from '@/router/ProtectedRoute'
+import ProtectedLayout from '@/layouts/ProtectedLayout'
 import { useAuth } from '@/features/auth/AuthContext'
 
 function NotFoundRedirect() {
@@ -16,7 +17,13 @@ export default function AppRouter() {
     <Routes>
       <Route path="/" element={<Navigate to="/home" replace />} />
       <Route path="/home" element={<LoginPage />} />
-      <Route element={<ProtectedRoute />}>
+      <Route
+        element={
+          <ProtectedRoute>
+            <ProtectedLayout />
+          </ProtectedRoute>
+        }
+      >
         <Route path="/roles" element={<RolesPage />} />
         <Route path="/registration" element={<RegistrationPage />} />
       </Route>

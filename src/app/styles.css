@@ -68,7 +68,8 @@ a {
 }
 
 .login-page {
-  min-height: calc(100vh - var(--header-height) - var(--bottom-nav-height));
+  min-height: 100vh;
+  padding: 48px 16px;
   align-items: center;
   justify-content: center;
 }

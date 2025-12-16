@@ -4,16 +4,14 @@ import Button from '@/components/ui/Button'
 import Card from '@/components/ui/Card'
 import Header from '@/components/ui/Header'
 import { useAuth } from '@/features/auth/AuthContext'
+import { useI18n } from '@/i18n/I18nContext'
 
-const ROLES = [
-  { name: 'Schadenmanager', description: 'Verwalte offene Schadenfälle und priorisiere neue Aufgaben.' },
-  { name: 'Partner Manager', description: 'Pflege Kontakte zu Gutachtern und Werkstätten.' },
-  { name: 'Reporting', description: 'Erstelle Kennzahlen und Auswertungen für das Controlling.' }
-]
+const ROLE_KEYS = ['claims', 'partner', 'reporting'] as const
 
 export default function RolesPage() {
   const { logout } = useAuth()
   const navigate = useNavigate()
+  const { t } = useI18n()
 
   function handleLogout() {
     logout()
@@ -23,11 +21,11 @@ export default function RolesPage() {
   return (
     <section className="page" style={{ gap: '2rem' }}>
       <Header
-        title="Rollenübersicht"
-        subtitle="Wähle eine Rolle aus, um weiterzuarbeiten. Diese Demo zeigt lediglich ein statisches Grid."
+        title={t('roles.title')}
+        subtitle={t('roles.subtitle')}
         actions={
           <Button variant="secondary" onClick={handleLogout}>
-            Logout
+            {t('roles.logout')}
           </Button>
         }
       />
@@ -38,20 +36,22 @@ export default function RolesPage() {
           gap: '1.25rem'
         }}
       >
-        {ROLES.map((role) => (
-          <Card key={role.name} title={role.name}>
-            <p style={{ marginTop: 0, color: '#494870', minHeight: '3rem' }}>{role.description}</p>
-            <Button style={{ width: '100%' }}>Ansehen</Button>
+        {ROLE_KEYS.map((key) => (
+          <Card key={key} title={t(`roles.cards.${key}.title`)}>
+            <p style={{ marginTop: 0, color: '#494870', minHeight: '3rem' }}>
+              {t(`roles.cards.${key}.description`)}
+            </p>
+            <Button style={{ width: '100%' }}>{t('roles.view')}</Button>
           </Card>
         ))}
         <Card
-          title="DE: Registrierung"
-          subtitle="EN: Registration"
+          title={t('roles.registrationCardTitle')}
+          subtitle={t('roles.registrationCardSubtitle')}
           interactive
           onClick={() => navigate('/registration')}
         >
           <p style={{ marginTop: 0, color: '#494870', minHeight: '3rem' }}>
-            Starte die neue, KI-gestützte Journey und melde Partner oder Kund:innen komfortabel an.
+            {t('roles.registrationCardSubtitle')}
           </p>
           <Button
             style={{ width: '100%' }}
@@ -60,7 +60,7 @@ export default function RolesPage() {
               navigate('/registration')
             }}
           >
-            Journey starten
+            {t('roles.startJourney')}
           </Button>
         </Card>
       </div>
