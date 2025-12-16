@@ -7,10 +7,10 @@ type ProtectedRouteProps = {
 }
 
 export default function ProtectedRoute({ children }: ProtectedRouteProps) {
-  const { isAuthenticated } = useAuth()
+  const { isLoggedIn } = useAuth()
   const location = useLocation()
 
-  if (!isAuthenticated) {
+  if (!isLoggedIn) {
     return <Navigate to="/login" replace state={{ from: location }} />
   }
 

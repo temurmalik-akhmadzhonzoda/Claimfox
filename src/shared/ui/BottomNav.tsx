@@ -5,9 +5,9 @@ import { Icon, IconName } from './icons'
 type NavItem = { to: string; label: string; icon: IconName; end?: boolean }
 
 const navItems: NavItem[] = [
-  { to: '/', label: 'Home', icon: 'home', end: true },
-  { to: '/products', label: 'Products', icon: 'products' },
-  { to: '/damages', label: 'Damages', icon: 'damages' },
+  { to: '/exec-login', label: 'Exec', icon: 'home' },
+  { to: '/exec-summary', label: 'Summary', icon: 'reporting' },
+  { to: '/chat', label: 'Chat', icon: 'damages' },
   { to: '/my-profile', label: 'Profile', icon: 'nav-profile' }
 ]
 

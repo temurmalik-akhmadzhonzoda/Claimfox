@@ -13,7 +13,7 @@ export default function LoginPage() {
   const navigate = useNavigate()
   const location = useLocation()
   const state = location.state as LocationState | null
-  const redirectTarget = state?.from?.pathname || '/my-profile'
+  const redirectTarget = state?.from?.pathname || '/exec-select'
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')

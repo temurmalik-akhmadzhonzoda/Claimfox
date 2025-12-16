@@ -1,48 +1,51 @@
 import React from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
-import AppShell from './AppShell'
+import AppLayout from './layout/AppLayout'
 import ProtectedRoute from '../auth/ProtectedRoute'
-import DashboardPage from '../features/dashboard/DashboardPage'
-import ProductsPage from '../features/products/ProductsPage'
-import ProductDetailPage from '../features/products/ProductDetailPage'
-import DamagesPage from '../features/damages/DamagesPage'
-import ClaimDetailPage from '../features/damages/ClaimDetailPage'
-import DamageReportPage from '../features/damages/DamageReportPage'
+import LoginPage from '../features/auth/LoginPage'
 import ProfilePage from '../features/profile/ProfilePage'
 import StubPage from '../features/stubs/StubPage'
-import LoginPage from '../features/auth/LoginPage'
+
+const stub = (title: string) => <StubPage title={title} />
 
 export default function Router() {
   return (
     <Routes>
-      <Route path="/login" element={<LoginPage />} />
+      <Route path="/" element={<AppLayout />}>
+        <Route index element={<Navigate to="/exec-login" replace />} />
 
-      <Route
-        path="/"
-        element={
-          <ProtectedRoute>
-            <AppShell />
-          </ProtectedRoute>
-        }
-      >
-        <Route index element={<Navigate to="/my-profile" replace />} />
-        <Route path="dashboard" element={<DashboardPage />} />
-        <Route path="products" element={<ProductsPage />} />
-        <Route path="products/:id" element={<ProductDetailPage />} />
-        <Route path="damages" element={<DamagesPage />} />
-        <Route path="damages/:id" element={<ClaimDetailPage />} />
-        <Route path="damage-report" element={<DamageReportPage />} />
+        <Route path="login" element={<LoginPage />} />
+        <Route path="profile" element={<Navigate to="/my-profile" replace />} />
+
+        <Route
+          path="chat"
+          element={<ProtectedRoute>{stub('Chat')}</ProtectedRoute>}
+        />
+        <Route
+          path="templates"
+          element={<ProtectedRoute>{stub('Templates')}</ProtectedRoute>}
+        />
+        <Route
+          path="vehicles"
+          element={<ProtectedRoute>{stub('Vehicles')}</ProtectedRoute>}
+        />
+
+        <Route path="my-fleet" element={stub('My Fleet')} />
+        <Route path="exec-login" element={stub('Executive Login')} />
+        <Route path="exec-select" element={stub('Executive Select')} />
+        <Route path="exec-summary" element={stub('Executive Summary')} />
+        <Route path="exec-detailed" element={stub('Executive Detailed')} />
+        <Route path="exec-pitch" element={stub('Executive Pitch')} />
+        <Route path="fleet-report" element={stub('Fleet Report')} />
         <Route path="my-profile" element={<ProfilePage />} />
-        <Route path="my-company" element={<StubPage title="My Company" />} />
-        <Route path="my-fleet" element={<StubPage title="My Fleet" />} />
-        <Route path="my-insurance" element={<StubPage title="My Insurance" />} />
-        <Route path="my-locations" element={<StubPage title="My Locations" />} />
-        <Route path="my-reporting" element={<StubPage title="My Reporting" />} />
-        <Route path="get-a-quote" element={<StubPage title="Get a quote" />} />
-        <Route path="presentations" element={<StubPage title="Presentations" />} />
-      </Route>
+        <Route path="profile-details" element={stub('Profile Details')} />
+        <Route path="company" element={stub('Company')} />
+        <Route path="insurances" element={stub('Insurances')} />
+        <Route path="locations" element={stub('Locations')} />
+        <Route path="get-quote" element={stub('Get Quote')} />
 
-      <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path="*" element={<Navigate to="/exec-login" replace />} />
+      </Route>
     </Routes>
   )
 }

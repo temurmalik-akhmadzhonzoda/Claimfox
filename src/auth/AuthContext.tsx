@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useMemo, useState, useCallback } from 'react'
+import React, { createContext, useCallback, useContext, useMemo, useState } from 'react'
 
 export type AuthUser = {
   username: string
@@ -8,34 +8,56 @@ export type AuthUser = {
 
 type AuthContextValue = {
   user: AuthUser | null
-  isAuthenticated: boolean
+  isLoggedIn: boolean
   login: (username: string, password: string) => Promise<void>
-  logout: () => Promise<void>
+  logout: () => void
 }
 
-const STORAGE_KEY = 'claimfox_auth_mock_v1'
+type UserRecord = AuthUser & { password: string }
+
+const STORAGE_KEY = 'claimfox_session_user'
+
+const VALID_USERS: UserRecord[] = [
+  { username: 'Sven', password: '9021', displayName: 'Sven', roles: ['executive'] },
+  { username: 'Jürgen', password: '9021', displayName: 'Jürgen', roles: ['executive'] }
+]
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined)
 
-function restoreUser(): AuthUser | null {
+function readUserFromSession(): AuthUser | null {
   if (typeof window === 'undefined') return null
   try {
-    const raw = window.localStorage.getItem(STORAGE_KEY)
+    const raw = window.sessionStorage.getItem(STORAGE_KEY)
     return raw ? (JSON.parse(raw) as AuthUser) : null
   } catch {
     return null
   }
 }
 
-function deriveRoles(username: string): string[] {
-  const normalized = username.toLowerCase()
-  if (normalized.includes('admin')) return ['admin', 'broker']
-  if (normalized.includes('insurer')) return ['insurer']
-  return ['broker']
+function persistUser(user: AuthUser | null) {
+  if (typeof window === 'undefined') return
+  try {
+    if (user) {
+      window.sessionStorage.setItem(STORAGE_KEY, JSON.stringify(user))
+    } else {
+      window.sessionStorage.removeItem(STORAGE_KEY)
+    }
+  } catch {
+    // ignore storage errors in mock auth
+  }
+}
+
+function findValidUser(username: string, password: string): AuthUser | null {
+  const user = VALID_USERS.find(
+    (candidate) => candidate.username === username && candidate.password === password
+  )
+  if (!user) return null
+  const { password: _password, ...authUser } = user
+  return authUser
 }
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<AuthUser | null>(() => restoreUser())
+  const [user, setUser] = useState<AuthUser | null>(() => readUserFromSession())
 
   const login = useCallback(async (username: string, password: string) => {
     const trimmedUsername = username.trim()
@@ -44,25 +66,24 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       throw new Error('Missing credentials')
     }
 
-    const authUser: AuthUser = {
-      username: trimmedUsername,
-      displayName: trimmedUsername,
-      roles: deriveRoles(trimmedUsername)
+    const authUser = findValidUser(trimmedUsername, trimmedPassword)
+    if (!authUser) {
+      throw new Error('Invalid credentials')
     }
 
     setUser(authUser)
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(authUser))
+    persistUser(authUser)
   }, [])
 
-  const logout = useCallback(async () => {
+  const logout = useCallback(() => {
     setUser(null)
-    window.localStorage.removeItem(STORAGE_KEY)
+    persistUser(null)
   }, [])
 
   const value = useMemo<AuthContextValue>(
     () => ({
       user,
-      isAuthenticated: !!user,
+      isLoggedIn: !!user,
       login,
       logout
     }),

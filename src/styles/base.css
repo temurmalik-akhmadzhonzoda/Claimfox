@@ -1,0 +1,93 @@
+:root {
+  /* Font stacks */
+  --font-display: "Barlow Condensed", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  --font-body: "Source Sans 3", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+
+  /* Type scale (Figma: Display/Heading/Body) */
+  --display-4xl: 80px;
+  --display-3xl: 72px;
+  --display-2xl: 64px;
+
+  --heading-xl: 56px;
+  --heading-lg: 48px;
+  --heading-md: 40px;
+  --heading-sm: 32px;
+  --heading-xs: 24px;
+
+  --body-lg: 20px;
+  --body-md: 16px;
+  --body-sm: 14px;
+  --body-xs: 12px;
+
+  /* Line-heights (robust + nah an Figma) */
+  --lh-tight: 1.05;
+  --lh-heading: 1.12;
+  --lh-body: 1.4;
+
+  /* Font weights */
+  --fw-regular: 400;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--body-md);
+  line-height: var(--lh-body);
+
+  /* Farben kommen aus tokens.css (deine Variablen) */
+  background: var(--bg, #0b0f1a);
+  color: var(--text, #ffffff);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Headings → Barlow Condensed */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  margin: 0;
+}
+
+/* Mapping für schnelle Nutzung */
+.h-display-4xl { font-size: var(--display-4xl); line-height: var(--lh-tight); font-weight: var(--fw-bold); }
+.h-display-3xl { font-size: var(--display-3xl); line-height: var(--lh-tight); font-weight: var(--fw-bold); }
+.h-display-2xl { font-size: var(--display-2xl); line-height: var(--lh-tight); font-weight: var(--fw-bold); }
+
+.h-xl { font-size: var(--heading-xl); line-height: var(--lh-heading); font-weight: var(--fw-bold); }
+.h-lg { font-size: var(--heading-lg); line-height: var(--lh-heading); font-weight: var(--fw-bold); }
+.h-md { font-size: var(--heading-md); line-height: var(--lh-heading); font-weight: var(--fw-semibold); }
+.h-sm { font-size: var(--heading-sm); line-height: var(--lh-heading); font-weight: var(--fw-semibold); }
+.h-xs { font-size: var(--heading-xs); line-height: var(--lh-heading); font-weight: var(--fw-semibold); }
+
+/* Body helpers */
+.t-lg { font-size: var(--body-lg); line-height: var(--lh-body); }
+.t-md { font-size: var(--body-md); line-height: var(--lh-body); }
+.t-sm { font-size: var(--body-sm); line-height: var(--lh-body); }
+.t-xs { font-size: var(--body-xs); line-height: var(--lh-body); }
+.t-semibold { font-weight: var(--fw-semibold); }
+.t-bold { font-weight: var(--fw-bold); }

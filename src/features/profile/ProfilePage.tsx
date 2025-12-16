@@ -17,8 +17,8 @@ export default function ProfilePage() {
         .toUpperCase()
     : 'IN'
 
-  async function handleLogout() {
-    await logout()
+  function handleLogout() {
+    logout()
     navigate('/login', { replace: true })
   }
 
