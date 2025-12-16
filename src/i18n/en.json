@@ -3,23 +3,29 @@
     "title": "Sign in",
     "username": "Username",
     "password": "Password",
-    "signin": "Sign in",
-    "signing": "Signing in…",
+    "signIn": "Sign in",
+    "signingIn": "Signing in…",
     "errorRequired": "Please enter username and password",
-    "errorInvalid": "Invalid username or password",
-    "demoExec": "Demo Exec",
-    "demoBroker": "Demo Broker",
-    "demoInsurer": "Demo Insurer"
+    "errorInvalid": "Invalid username or password"
   },
-  "dashboard": {
-    "title": "My Insurfox",
-    "damageReport": "Damage Report",
-    "damageReportSubtitle": "Damage Report online in 3 min",
-    "topProducts": "Top Products"
+  "overview": {
+    "title": "Please select your role",
+    "selected": "Selected: {{role}}",
+    "roles": {
+      "driver": "Driver",
+      "broker": "Broker",
+      "fleetManager": "Fleet Manager",
+      "insurer": "Insurer",
+      "logisticCompany": "Logistic Company",
+      "claimsManager": "Claims Manager",
+      "assessor": "Assessor",
+      "repairNetwork": "Repair Network",
+      "finance": "Finance",
+      "reinsurer": "Reinsurer"
+    }
   },
-  "products": { "title": "Products", "notfound": "Product not found" },
-  "damages": { "title": "Damages", "notfound": "Claim not found" },
-  "profile": { "title": "My Profile", "logout": "Logout" },
-  "damageReport": { "title": "Damage Report", "submit": "Submit" },
-  "common": { "back": "Back", "next": "Next" }
+  "profile": {
+    "title": "My profile",
+    "placeholder": "This section will be expanded soon."
+  }
 }

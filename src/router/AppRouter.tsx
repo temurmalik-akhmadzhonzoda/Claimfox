@@ -1,0 +1,26 @@
+import React from 'react'
+import { Navigate, Route, Routes } from 'react-router-dom'
+import LoginPage from '@/pages/LoginPage'
+import RegistrationPage from '@/pages/RegistrationPage'
+import RolesPage from '@/pages/RolesPage'
+import ProtectedRoute from '@/router/ProtectedRoute'
+import { useAuth } from '@/features/auth/AuthContext'
+
+function NotFoundRedirect() {
+  const { isAuthenticated } = useAuth()
+  return <Navigate to={isAuthenticated ? '/roles' : '/home'} replace />
+}
+
+export default function AppRouter() {
+  return (
+    <Routes>
+      <Route path="/" element={<Navigate to="/home" replace />} />
+      <Route path="/home" element={<LoginPage />} />
+      <Route element={<ProtectedRoute />}>
+        <Route path="/roles" element={<RolesPage />} />
+        <Route path="/registration" element={<RegistrationPage />} />
+      </Route>
+      <Route path="*" element={<NotFoundRedirect />} />
+    </Routes>
+  )
+}

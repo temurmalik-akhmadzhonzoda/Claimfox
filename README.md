@@ -1,10 +1,17 @@
-# ClaimFox / Insurfox — React SPA
+# Claimfox React
 
-Vite + React + TypeScript Single Page Application (SPA) für ClaimFox / Insurfox.  
-Deployment-Ziel: Netlify (https://claimfox.app).
-
-## Local development
-
-```bash
-npm install
-npm run dev
+## Quick start
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+2. Start the dev server:
+   ```bash
+   npm run dev
+   ```
+   Open the printed local URL and log in with `Seven / 9021` or `Jürgen / 9021`.
+3. Build for production:
+   ```bash
+   npm run build
+   ```
+   Deploy the generated `dist/` folder (already configured for Netlify SPA hosting).

@@ -2,17 +2,16 @@ import React, { useCallback } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import logo from '@/assets/logos/insurfox-logo-light.png'
-import { LANGUAGE_STORAGE_KEY } from '../constants/storageKeys'
 import './TopHeader.css'
 
-type LanguageCode = 'en' | 'de'
+const LANGUAGE_STORAGE_KEY = 'insurfox_language'
 
-const LANGUAGES: Array<{ label: string; value: LanguageCode }> = [
+const LANGUAGES: Array<{ label: string; value: 'de' | 'en' }> = [
   { label: 'DE', value: 'de' },
   { label: 'EN', value: 'en' }
 ]
 
-function normalizeLanguage(lng?: string): LanguageCode {
+function normalizeLanguage(lng?: string): 'de' | 'en' {
   if (!lng) return 'en'
   return lng.toLowerCase().startsWith('de') ? 'de' : 'en'
 }
@@ -20,52 +19,48 @@ function normalizeLanguage(lng?: string): LanguageCode {
 export default function TopHeader() {
   const location = useLocation()
   const { i18n } = useTranslation()
-  const activeLang = normalizeLanguage(i18n.language)
-  const pathname = location.pathname
-  const isLoginRoute = pathname === '/login'
-  if (pathname === '/exec-login') {
-    return null
-  }
+  const isLoginRoute = location.pathname === '/login'
+  const activeLanguage = normalizeLanguage(i18n.language)
 
-  const handleLanguageChange = useCallback(
-    (nextLanguage: LanguageCode) => {
-      if (nextLanguage === activeLang) return
-      i18n.changeLanguage(nextLanguage)
+  const handleLanguageSwitch = useCallback(
+    (nextLang: 'de' | 'en') => {
+      if (nextLang === activeLanguage) return
+      i18n.changeLanguage(nextLang)
       try {
         if (typeof window !== 'undefined') {
-          window.localStorage.setItem(LANGUAGE_STORAGE_KEY, nextLanguage)
+          window.localStorage.setItem(LANGUAGE_STORAGE_KEY, nextLang)
         }
       } catch (error) {
-        // ignore storage issues (private mode, etc.)
+        // ignore localStorage issues
       }
     },
-    [activeLang, i18n]
+    [activeLanguage, i18n]
   )
 
-  const logoImage = <img src={logo} alt="Insurfox" className="top-header__logo-image" />
+  const logoNode = <img src={logo} alt="Insurfox" className="top-header__logo-image" />
 
   return (
-    <div className="top-header">
+    <header className="top-header">
       <div className="top-header__inner">
         {isLoginRoute ? (
           <div className="top-header__logo" aria-label="Insurfox">
-            {logoImage}
+            {logoNode}
           </div>
         ) : (
-          <Link to="/my-profile" className="top-header__logo" aria-label="Go to my profile">
-            {logoImage}
+          <Link to="/my-profile" className="top-header__logo" aria-label="Go to profile">
+            {logoNode}
           </Link>
         )}
 
         <div className="top-header__lang-switch" role="group" aria-label="Language switch">
           {LANGUAGES.map((language) => {
-            const isActive = language.value === activeLang
+            const isActive = language.value === activeLanguage
             return (
               <button
                 key={language.value}
                 type="button"
                 className={`top-header__lang-btn${isActive ? ' is-active' : ''}`}
-                onClick={() => handleLanguageChange(language.value)}
+                onClick={() => handleLanguageSwitch(language.value)}
                 aria-pressed={isActive}
               >
                 {language.label}
@@ -74,6 +69,6 @@ export default function TopHeader() {
           })}
         </div>
       </div>
-    </div>
+    </header>
   )
 }

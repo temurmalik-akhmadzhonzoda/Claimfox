@@ -1,31 +1,47 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
-import { Icon, IconName } from './icons'
+import { useLocation, useNavigate } from 'react-router-dom'
+import './BottomNav.css'
 
-type NavItem = { to: string; label: string; icon: IconName; end?: boolean }
-
-const navItems: NavItem[] = [
-  { to: '/exec-login', label: 'Exec', icon: 'home' },
-  { to: '/exec-summary', label: 'Summary', icon: 'reporting' },
-  { to: '/chat', label: 'Chat', icon: 'damages' },
-  { to: '/my-profile', label: 'Profile', icon: 'nav-profile' }
-]
+const NAV_ITEMS = [
+  { label: 'Exec', path: '/overview', tab: 'exec' },
+  { label: 'Summary', path: '/overview', tab: 'summary' },
+  { label: 'Chat', path: '/overview', tab: 'chat' },
+  { label: 'Profile', path: '/my-profile' }
+] as const
 
 export default function BottomNav() {
+  const location = useLocation()
+  const navigate = useNavigate()
+  const params = new URLSearchParams(location.search)
+  const activeTab = params.get('tab') || 'exec'
+
+  function isActive(item: (typeof NAV_ITEMS)[number]) {
+    if (item.path === '/overview') {
+      return location.pathname === '/overview' && activeTab === (item.tab ?? 'exec')
+    }
+    return location.pathname === item.path
+  }
+
+  function handleClick(item: (typeof NAV_ITEMS)[number]) {
+    if (item.path === '/overview') {
+      const tab = item.tab ?? 'exec'
+      navigate(`/overview?tab=${tab}`)
+    } else {
+      navigate(item.path)
+    }
+  }
+
   return (
-    <nav className="bottom-nav">
-      {navItems.map((item) => (
-        <NavLink
-          to={item.to}
-          end={item.end}
-          key={item.to}
-          className={({ isActive }) => `bottom-nav-link${isActive ? ' active' : ''}`}
+    <nav className="bottom-nav" aria-label="Primary">
+      {NAV_ITEMS.map((item) => (
+        <button
+          key={item.label}
+          type="button"
+          className={`bottom-nav__link${isActive(item) ? ' is-active' : ''}`}
+          onClick={() => handleClick(item)}
         >
-          <span className="icon-badge">
-            <Icon name={item.icon} />
-          </span>
-          <span className="label">{item.label}</span>
-        </NavLink>
+          <span>{item.label}</span>
+        </button>
       ))}
     </nav>
   )
