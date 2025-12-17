@@ -144,7 +144,7 @@ export default function BrokerPortalLandingPage() {
             <div
               style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
                 gap: '1rem'
               }}
             >
@@ -152,12 +152,13 @@ export default function BrokerPortalLandingPage() {
                 <div
                   key={key}
                   style={{
-                    padding: '1.5rem',
-                    borderRadius: '20px',
-                    background: 'rgba(0,0,0,0.35)',
-                    border: '1px solid rgba(255,255,255,0.15)',
-                    backdropFilter: 'blur(8px)',
-                    minHeight: '120px',
+                    padding: '1.25rem',
+                    borderRadius: '18px',
+                    background: '#ffffff',
+                    color: '#0e0d1c',
+                    border: '1px solid rgba(0,0,0,0.08)',
+                    boxShadow: '0 12px 30px rgba(8, 4, 50, 0.1)',
+                    minHeight: '110px',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -189,17 +190,17 @@ export default function BrokerPortalLandingPage() {
                 <div
                   key={key}
                   style={{
-                    padding: '0.85rem 1.1rem',
+                    padding: '1.25rem 1.4rem',
                     borderRadius: '18px',
-                    background: 'rgba(0,0,0,0.4)',
-                    border: '1px solid rgba(255,255,255,0.12)',
-                    backdropFilter: 'blur(10px)',
-                    minHeight: '90px',
+                    background: '#ffffff',
+                    color: '#0e0d1c',
+                    border: '1px solid rgba(0,0,0,0.08)',
+                    boxShadow: '0 12px 30px rgba(8, 4, 50, 0.1)',
+                    minHeight: '110px',
                     display: 'flex',
                     alignItems: 'center',
-                    color: '#fff',
                     fontWeight: 600,
-                    lineHeight: 1.3
+                    lineHeight: 1.4
                   }}
                 >
                   {t(`brokerLanding.features.${key}`)}
@@ -208,36 +209,31 @@ export default function BrokerPortalLandingPage() {
             </div>
           </div>
 
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-              gap: '2rem',
-              alignItems: 'start'
-            }}
-          >
-            <div>
-              <h3 style={{ margin: 0, fontSize: '1.7rem' }}>{t('brokerLanding.sectorsTitle')}</h3>
-              <p style={{ marginTop: '0.35rem', color: 'rgba(255,255,255,0.85)' }}>{t('brokerLanding.sectorsSubtitle')}</p>
-            </div>
+          <div>
+            <h3 style={{ margin: 0, fontSize: '1.7rem' }}>{t('brokerLanding.sectorsTitle')}</h3>
+            <p style={{ marginTop: '0.35rem', color: 'rgba(255,255,255,0.85)' }}>{t('brokerLanding.sectorsSubtitle')}</p>
             <div
               style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-                gap: '0.75rem'
+                display: 'flex',
+                flexWrap: 'wrap',
+                gap: '0.65rem',
+                marginTop: '1rem'
               }}
             >
               {sectorKeys.map((key) => (
                 <span
                   key={key}
                   style={{
-                    padding: '0.65rem 1rem',
+                    padding: '0.65rem 0.95rem',
                     borderRadius: '999px',
-                    background: 'rgba(0,0,0,0.45)',
-                    border: '1px solid rgba(255,255,255,0.18)',
+                    background: '#ffffff',
+                    border: '1px solid rgba(0,0,0,0.1)',
                     fontSize: '0.95rem',
-                    color: '#fff',
-                    textAlign: 'center'
+                    color: '#0e0d1c',
+                    lineHeight: 1,
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis'
                   }}
                 >
                   {t(`brokerLanding.sectorsList.${key}`)}
