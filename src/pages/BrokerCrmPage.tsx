@@ -47,6 +47,36 @@ export default function BrokerCrmPage() {
   const maxRevenue = Math.max(...revenueData.map((entry) => Math.max(entry.current, entry.previous)))
   const maxLeads = Math.max(...leadsData.map((entry) => entry.value))
 
+  function getPotentialStyles(label: string) {
+    const normalized = label.toLowerCase()
+    if (['hoch', 'high'].includes(normalized)) {
+      return {
+        background: 'rgba(34,197,94,0.18)',
+        color: 'rgb(22,101,52)',
+        border: '1px solid rgba(34,197,94,0.35)'
+      }
+    }
+    if (['mittel', 'medium'].includes(normalized)) {
+      return {
+        background: 'rgba(249,115,22,0.18)',
+        color: 'rgb(154,52,18)',
+        border: '1px solid rgba(249,115,22,0.35)'
+      }
+    }
+    if (['gering', 'low'].includes(normalized)) {
+      return {
+        background: 'rgba(239,68,68,0.18)',
+        color: 'rgb(153,27,27)',
+        border: '1px solid rgba(239,68,68,0.35)'
+      }
+    }
+    return {
+      background: 'rgba(107,114,128,0.15)',
+      color: '#374151',
+      border: '1px solid rgba(107,114,128,0.25)'
+    }
+  }
+
   return (
     <section className="page" style={{ gap: '1.5rem' }}>
       <Header title={t('brokerCrm.title')} subtitle={t('brokerCrm.subtitle')} />
@@ -249,11 +279,12 @@ export default function BrokerCrmPage() {
                     <td style={{ padding: '0.75rem 0.25rem' }}>
                       <span
                         style={{
-                          background: '#f0f0ff',
-                          color: '#080064',
                           borderRadius: '999px',
-                          padding: '0.1rem 0.6rem',
-                          fontSize: '0.85rem'
+                          padding: '0.35rem 0.65rem',
+                          fontSize: '0.85rem',
+                          fontWeight: 700,
+                          whiteSpace: 'nowrap',
+                          ...getPotentialStyles(t(`brokerCrm.table.potentialLabels.${customer.potentialKey}`))
                         }}
                       >
                         {t(`brokerCrm.table.potentialLabels.${customer.potentialKey}`)}
