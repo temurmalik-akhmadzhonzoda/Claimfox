@@ -10,96 +10,92 @@ export default function BrokerPortalLandingPage() {
   const navigate = useNavigate()
 
   return (
-    <section className="page" style={{ padding: 0 }}>
+    <div
+      style={{
+        position: 'relative',
+        width: '100vw',
+        minHeight: '100vh',
+        overflow: 'hidden'
+      }}
+    >
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          backgroundImage: `url(${BrokerBackground})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      />
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'linear-gradient(180deg, rgba(4, 1, 20, 0.85) 0%, rgba(4, 1, 20, 0.45) 60%, rgba(4, 1, 20, 0.75) 100%)'
+        }}
+      />
+      <div
+        style={{
+          position: 'absolute',
+          top: '2rem',
+          right: '2rem',
+          zIndex: 2
+        }}
+      >
+        <Button
+          variant="secondary"
+          onClick={() => navigate('/broker-crm')}
+          style={{
+            borderColor: '#fff',
+            color: '#040114',
+            background: '#fff',
+            fontWeight: 600
+          }}
+        >
+          {t('brokerLanding.login')}
+        </Button>
+      </div>
       <div
         style={{
           position: 'relative',
-          minHeight: '100vh',
+          zIndex: 1,
           width: '100%',
-          overflow: 'hidden'
+          minHeight: '100vh',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'flex-start',
+          textAlign: 'center',
+          color: '#fff',
+          paddingTop: '56px'
         }}
       >
-        <div
+        <img
+          src={InsurfoxLogoLight}
+          alt="Insurfox"
           style={{
-            position: 'absolute',
-            inset: 0,
-            backgroundImage: `url(${BrokerBackground})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat'
+            height: '90px',
+            width: 'auto',
+            maxWidth: '260px',
+            objectFit: 'contain',
+            marginTop: '1rem'
           }}
         />
-        <div
+        <h1
           style={{
-            position: 'absolute',
-            inset: 0,
-            background:
-              'linear-gradient(180deg, rgba(4, 1, 20, 0.85) 0%, rgba(4, 1, 20, 0.45) 60%, rgba(4, 1, 20, 0.75) 100%)'
-          }}
-        />
-        <div
-          style={{
-            position: 'relative',
-            zIndex: 1,
-            minHeight: '100vh',
-            padding: '2.5rem clamp(1.5rem, 4vw, 4rem)',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: '2rem',
-            color: '#fff'
+            margin: '1.5rem 0 0',
+            color: '#ffffff',
+            fontSize: '1.85rem',
+            lineHeight: 1.4,
+            letterSpacing: '0.06em',
+            textTransform: 'uppercase',
+            textShadow: '0 10px 30px rgba(0, 0, 0, 0.45)'
           }}
         >
-          <div style={{ width: '100%', display: 'flex', justifyContent: 'flex-end' }}>
-            <Button
-              variant="secondary"
-              onClick={() => navigate('/broker-crm')}
-              style={{
-                borderColor: '#fff',
-                color: '#040114',
-                background: '#fff',
-                fontWeight: 600
-              }}
-            >
-              {t('brokerLanding.login')}
-            </Button>
-          </div>
-          <div
-            style={{
-              marginTop: '3rem',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              textAlign: 'center',
-              gap: '1rem'
-            }}
-          >
-            <img
-              src={InsurfoxLogoLight}
-              alt="Insurfox"
-              style={{
-                height: '90px',
-                maxWidth: '240px',
-                width: 'auto',
-                objectFit: 'contain'
-              }}
-            />
-            <h1
-              style={{
-                margin: 0,
-                color: '#ffffff',
-                fontSize: '2rem',
-                lineHeight: 1.3,
-                letterSpacing: '0.04em',
-                textTransform: 'uppercase',
-                textShadow: '0 10px 30px rgba(0, 0, 0, 0.45)'
-              }}
-            >
-              {t('brokerLanding.title')}
-            </h1>
-          </div>
-        </div>
+          {t('brokerLanding.title')}
+        </h1>
       </div>
-    </section>
+    </div>
   )
 }
