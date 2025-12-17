@@ -93,7 +93,7 @@ export default function LoginPage() {
 
         {/* Login Content */}
         <div style={{ width: '100%' }}>
-          <Header title={t('login.title')} />
+          <Header title={t('login.title')} titleColor="#ffffff" />
 
           <Card>
             <form

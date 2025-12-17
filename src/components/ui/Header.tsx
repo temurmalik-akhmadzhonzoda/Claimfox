@@ -4,9 +4,10 @@ type HeaderProps = {
   title: string
   subtitle?: string
   actions?: React.ReactNode
+  titleColor?: string
 }
 
-export default function Header({ title, subtitle, actions }: HeaderProps) {
+export default function Header({ title, subtitle, actions, titleColor = '#080064' }: HeaderProps) {
   return (
     <header
       style={{
@@ -31,7 +32,7 @@ export default function Header({ title, subtitle, actions }: HeaderProps) {
               margin: 0,
               fontSize: '2.1rem',
               lineHeight: 1.2,
-              color: '#080064',
+              color: titleColor,
             }}
           >
             {title}
