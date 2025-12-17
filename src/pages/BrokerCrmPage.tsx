@@ -287,20 +287,12 @@ export default function BrokerCrmPage() {
                           display: 'inline-flex',
                           alignItems: 'center',
                           justifyContent: 'center',
-                          gap: '0.35rem',
+                          textAlign: 'center',
+                          lineHeight: 1,
                           width: '58px',
                           ...getPotentialStyles(t(`brokerCrm.table.potentialLabels.${customer.potentialKey}`))
                         }}
                       >
-                        <span
-                          aria-hidden="true"
-                          style={{
-                            width: '0.35rem',
-                            height: '0.35rem',
-                            borderRadius: '999px',
-                            background: '#ffffff'
-                          }}
-                        />
                         {t(`brokerCrm.table.potentialLabels.${customer.potentialKey}`)}
                       </span>
                     </td>
