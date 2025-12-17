@@ -6,7 +6,7 @@ type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 
 const VARIANT_STYLES: Record<'primary' | 'secondary', React.CSSProperties> = {
   primary: {
-    background: 'linear-gradient(135deg, #5b2d8b, #ee6a7c)',
+    background: '#d4380d',
     color: '#fff'
   },
   secondary: {
@@ -26,26 +26,45 @@ export default function Button({
 }: ButtonProps) {
   const isDisabled = Boolean(props.disabled)
 
+  const baseStyle: React.CSSProperties = {
+    border: 'none',
+    borderRadius: '999px',
+    padding: '0.85rem 1.75rem',
+    fontWeight: 700,
+    display: 'inline-flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: '0.5rem',
+    boxShadow: variant === 'secondary' ? 'none' : '0 12px 24px rgba(212, 56, 13, 0.25)',
+    transition: 'transform 0.15s ease, opacity 0.15s ease, background-color 0.15s ease',
+    opacity: isDisabled ? 0.6 : 1,
+    cursor: isDisabled ? 'not-allowed' : 'pointer'
+  }
+
   return (
     <button
       {...props}
       type={type ?? 'button'}
       className={className}
       style={{
-        border: 'none',
-        borderRadius: '999px',
-        padding: '0.85rem 1.75rem',
-        fontWeight: 700,
-        display: 'inline-flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        gap: '0.5rem',
-        boxShadow: variant === 'secondary' ? 'none' : '0 12px 24px rgba(77, 38, 139, 0.25)',
-        transition: 'transform 0.15s ease, opacity 0.15s ease',
-        opacity: isDisabled ? 0.6 : 1,
-        cursor: isDisabled ? 'not-allowed' : 'pointer',
+        ...baseStyle,
         ...VARIANT_STYLES[variant],
         ...style
+      }}
+      onMouseEnter={(event) => {
+        props.onMouseEnter?.(event)
+        if (!isDisabled && variant === 'primary') {
+          event.currentTarget.style.backgroundColor = '#b9300b'
+        }
+      }}
+      onMouseLeave={(event) => {
+        props.onMouseLeave?.(event)
+        if (!isDisabled && variant === 'primary') {
+          event.currentTarget.style.backgroundColor = '#d4380d'
+        }
+        if (!isDisabled) {
+          event.currentTarget.style.transform = 'translateY(0)'
+        }
       }}
       onMouseDown={(event) => {
         props.onMouseDown?.(event)
@@ -55,12 +74,6 @@ export default function Button({
       }}
       onMouseUp={(event) => {
         props.onMouseUp?.(event)
-        if (!isDisabled) {
-          event.currentTarget.style.transform = 'translateY(0)'
-        }
-      }}
-      onMouseLeave={(event) => {
-        props.onMouseLeave?.(event)
         if (!isDisabled) {
           event.currentTarget.style.transform = 'translateY(0)'
         }
