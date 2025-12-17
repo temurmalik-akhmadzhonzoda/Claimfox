@@ -65,14 +65,13 @@ export default function BrokerPortalLandingPage() {
         }}
       >
         <Button
-          variant="secondary"
           onClick={() => navigate('/broker-crm')}
           style={{
-            borderColor: '#fff',
-            color: '#040114',
-            background: '#fff',
-            fontWeight: 600,
-            minWidth: '140px'
+            background: '#D3F261',
+            color: '#081120',
+            border: 'none',
+            paddingInline: '1.75rem',
+            fontWeight: 700
           }}
         >
           {t('brokerLanding.login')}
@@ -141,31 +140,6 @@ export default function BrokerPortalLandingPage() {
                   {t(`brokerLanding.valueLine${line}`)}
                 </p>
               ))}
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', marginTop: '1.5rem' }}>
-                <Button
-                  onClick={() => navigate('/broker-crm')}
-                  style={{
-                    background: '#D3F261',
-                    color: '#081120',
-                    border: 'none',
-                    paddingInline: '1.75rem',
-                    fontWeight: 700
-                  }}
-                >
-                  {t('brokerLanding.heroCTAPrimary')}
-                </Button>
-                <Button
-                  variant="secondary"
-                  onClick={() => navigate('/broker-crm')}
-                  style={{
-                    borderColor: '#ffffff',
-                    color: '#ffffff',
-                    background: 'transparent'
-                  }}
-                >
-                  {t('brokerLanding.heroCTASecondary')}
-                </Button>
-              </div>
             </div>
             <div
               style={{
@@ -215,16 +189,17 @@ export default function BrokerPortalLandingPage() {
                 <div
                   key={key}
                   style={{
-                    padding: '1.5rem',
+                    padding: '0.85rem 1.1rem',
                     borderRadius: '18px',
                     background: 'rgba(0,0,0,0.4)',
                     border: '1px solid rgba(255,255,255,0.12)',
                     backdropFilter: 'blur(10px)',
-                    minHeight: '140px',
+                    minHeight: '90px',
                     display: 'flex',
-                    alignItems: 'flex-start',
+                    alignItems: 'center',
                     color: '#fff',
-                    fontWeight: 600
+                    fontWeight: 600,
+                    lineHeight: 1.3
                   }}
                 >
                   {t(`brokerLanding.features.${key}`)}
@@ -302,40 +277,7 @@ export default function BrokerPortalLandingPage() {
             </div>
           </div>
 
-          <div
-            style={{
-              padding: '2rem',
-              borderRadius: '24px',
-              border: '1px solid rgba(255,255,255,0.18)',
-              background:
-                'linear-gradient(135deg, rgba(211,242,97,0.15), rgba(144,68,255,0.15))',
-              textAlign: 'center'
-            }}
-          >
-            <h3 style={{ marginTop: 0, fontSize: '1.9rem', color: '#ffffff' }}>{t('brokerLanding.heroHeadline')}</h3>
-            <p style={{ marginTop: '0.5rem', color: 'rgba(255,255,255,0.85)' }}>{t('brokerLanding.valueLine2')}</p>
-            <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap', marginTop: '1.25rem' }}>
-              <Button
-                onClick={() => navigate('/broker-crm')}
-                style={{
-                  background: '#D3F261',
-                  color: '#081120',
-                  border: 'none',
-                  paddingInline: '2rem',
-                  fontWeight: 700
-                }}
-              >
-                {t('brokerLanding.heroCTAPrimary')}
-              </Button>
-              <Button
-                variant="secondary"
-                onClick={() => navigate('/broker-crm')}
-                style={{ borderColor: '#ffffff', color: '#ffffff', background: 'transparent', minWidth: '160px' }}
-              >
-                {t('brokerLanding.heroCTASecondary')}
-              </Button>
-            </div>
-          </div>
+          <div />
         </div>
       </div>
     </div>
