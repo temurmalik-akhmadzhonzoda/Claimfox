@@ -1,5 +1,6 @@
 :root {
   --blue-dark: #080064;
+  --insurfox-orange: #d4380d;
   --blue-light: #6c7aff;
   --surface: #ffffff;
   --text: #0e0d1c;
@@ -91,8 +92,20 @@ a {
   border-radius: 12px;
   padding: 12px 14px;
   background: #fff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
+.text-input:focus {
+  outline: none;
+  border-color: var(--insurfox-orange);
+  box-shadow: 0 0 0 4px rgba(212, 56, 13, 0.16);
+}
+
+.text-input::placeholder {
+  color: #8a89a6;
+}
+
+/* ✅ Primary Button in Insurfox-Orange */
 .primary-button {
   width: 100%;
   border: none;
@@ -101,13 +114,30 @@ a {
   font-weight: 700;
   cursor: pointer;
   color: #fff;
-  background: linear-gradient(120deg, #5b2d8b, #ee6a7c);
-  transition: opacity 0.2s ease;
+  background: var(--insurfox-orange);
+  transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.08s ease;
+}
+
+.primary-button:hover {
+  background: #b9300b; /* etwas dunkler */
+  box-shadow: 0 10px 22px rgba(212, 56, 13, 0.22);
+}
+
+.primary-button:active {
+  transform: translateY(1px);
+  background: #a52a09;
+}
+
+.primary-button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(212, 56, 13, 0.22), 0 10px 22px rgba(212, 56, 13, 0.18);
 }
 
 .primary-button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
 }
 
 .error-text {
@@ -121,21 +151,23 @@ a {
   gap: 18px;
 }
 
+/* ✅ Cards stay white but use orange accent on hover/focus */
 .overview-card {
-  border: none;
+  border: 1px solid transparent;
   border-radius: 18px;
   padding: 24px;
   text-align: left;
   background: var(--surface);
   box-shadow: 0 15px 32px rgba(8, 4, 50, 0.08);
   cursor: pointer;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
 }
 
 .overview-card:hover,
 .overview-card:focus-visible {
   transform: translateY(-4px);
   box-shadow: 0 24px 40px rgba(8, 4, 50, 0.12);
+  border-color: rgba(212, 56, 13, 0.35);
   outline: none;
 }
 
