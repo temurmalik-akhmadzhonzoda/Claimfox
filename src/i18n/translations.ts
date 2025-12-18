@@ -21,6 +21,32 @@ type TranslationTree = {
     brokerPortal: string
     cards: Record<string, { title: string; description: string }>
   }
+  marketing: {
+    title: string
+    subtitle: string
+    highlights: {
+      title: string
+      ai: string
+      workflows: string
+      insights: string
+    }
+    modules: {
+      title: string
+      backoffice: string
+      tenders: string
+      fleetReporting: string
+      fleetManagement: string
+      registration: string
+      compliance: string
+    }
+    why: {
+      title: string
+      fast: string
+      ai: string
+      scale: string
+    }
+    cta: string
+  }
   registration: {
     title: string
     subtitle: string
@@ -222,8 +248,38 @@ export const translations: Record<Lang, TranslationTree> = {
         fleetManagement: {
           title: 'Fuhrparkverwaltung',
           description: 'Verwalte Fahrzeuge, Termine, Dokumente und Fahrerzuordnung.'
+        },
+        marketing: {
+          title: 'Marketing',
+          description: 'Präsentiere die Insurfox Plattform für Vertrieb und Stakeholder.'
         }
       }
+    },
+    marketing: {
+      title: 'Insurfox Plattform',
+      subtitle: 'Digitale Front- und Backend-Lösungen für Makler, MGAs und Flotten.',
+      highlights: {
+        title: 'Highlights',
+        ai: 'KI-gestützte Prozesse',
+        workflows: 'End-to-End Workflows',
+        insights: 'Reporting & Insights'
+      },
+      modules: {
+        title: 'Module',
+        backoffice: 'Backoffice & CRM',
+        tenders: 'Tender & Ausschreibungen',
+        fleetReporting: 'Fleet Reporting',
+        fleetManagement: 'Fuhrparkverwaltung',
+        registration: 'Registrierungsassistent',
+        compliance: 'Compliance'
+      },
+      why: {
+        title: 'Warum Insurfox?',
+        fast: 'Schneller arbeiten – weniger manuell.',
+        ai: 'Bessere Entscheidungen durch KI-Insights.',
+        scale: 'Skalierbar für wachsende Portfolios.'
+      },
+      cta: 'Zur Übersicht'
     },
     fleetReporting: {
       title: 'Fuhrpark-Reporting-Dashboard',
@@ -709,8 +765,38 @@ export const translations: Record<Lang, TranslationTree> = {
         fleetManagement: {
           title: 'Fleet Management',
           description: 'Manage vehicles, schedules, documentation, and driver assignments.'
+        },
+        marketing: {
+          title: 'Marketing',
+          description: 'Showcase the Insurfox platform for sales and stakeholders.'
         }
       }
+    },
+    marketing: {
+      title: 'Insurfox Platform',
+      subtitle: 'Digital front- and back-office solutions for brokers, MGAs, and fleets.',
+      highlights: {
+        title: 'Highlights',
+        ai: 'AI-powered processes',
+        workflows: 'End-to-end workflows',
+        insights: 'Reporting & insights'
+      },
+      modules: {
+        title: 'Modules',
+        backoffice: 'Backoffice & CRM',
+        tenders: 'Tenders & submissions',
+        fleetReporting: 'Fleet reporting',
+        fleetManagement: 'Fleet management',
+        registration: 'Registration assistant',
+        compliance: 'Compliance'
+      },
+      why: {
+        title: 'Why Insurfox?',
+        fast: 'Work faster — less manual effort.',
+        ai: 'Better decisions with AI insights.',
+        scale: 'Scales with growing portfolios.'
+      },
+      cta: 'Go to overview'
     },
     fleetReporting: {
       title: 'Fleet Reporting Dashboard',

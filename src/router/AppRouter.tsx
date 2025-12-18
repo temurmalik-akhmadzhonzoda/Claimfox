@@ -11,6 +11,7 @@ import { useAuth } from '@/features/auth/AuthContext'
 import BrokerCrmPage from '@/pages/BrokerCrmPage'
 import FleetReportingPage from '@/pages/FleetReportingPage'
 import FleetManagementPage from '@/pages/FleetManagementPage'
+import MarketingLandingPage from '@/pages/MarketingLandingPage'
 
 function NotFoundRedirect() {
   const { isAuthenticated } = useAuth()
@@ -32,6 +33,7 @@ export default function AppRouter() {
         <Route path="/roles" element={<RolesPage />} />
         <Route path="/registration" element={<RegistrationPage />} />
         <Route path="/broker-portal" element={<BrokerPortalLandingPage />} />
+        <Route path="/marketing" element={<MarketingLandingPage />} />
         <Route path="/broker-crm" element={<BrokerCrmPage />} />
         <Route path="/fleet-reporting" element={<FleetReportingPage />} />
         <Route path="/fleet-management" element={<FleetManagementPage />} />

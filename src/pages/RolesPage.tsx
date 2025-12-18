@@ -11,7 +11,8 @@ const ROLE_ITEMS = [
   { key: 'claims' },
   { key: 'partner' },
   { key: 'reporting', route: '/fleet-reporting' },
-  { key: 'fleetManagement', route: '/fleet-management' }
+  { key: 'fleetManagement', route: '/fleet-management' },
+  { key: 'marketing', route: '/marketing' }
 ] as const
 
 export default function RolesPage() {
