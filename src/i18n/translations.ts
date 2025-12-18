@@ -47,6 +47,87 @@ type TranslationTree = {
     }
     cta: string
   }
+  marketingFleet: {
+    hero: {
+      title: string
+      subtitle: string
+      login: string
+      illustrationTitle: string
+      illustrationValue: string
+      illustrationDescription: string
+    }
+    kpi: {
+      realTime: string
+      ai: string
+      tuv: string
+      claims: string
+      docs: string
+      compliance: string
+    }
+    manage: {
+      title: string
+      features: Record<
+        string,
+        {
+          title: string
+          description: string
+        }
+      >
+    }
+    ai: {
+      title: string
+      cards: Record<string, string>
+    }
+    preview: {
+      title: string
+      subtitle: string
+      kpis: {
+        uptime: string
+        openClaims: string
+        downtime: string
+      }
+      incidentsTitle: string
+      downtimeTitle: string
+      table: {
+        columns: {
+          date: string
+          vehicle: string
+          type: string
+          status: string
+          cost: string
+          ai: string
+        }
+        typeLabels: Record<string, string>
+        statusLabels: Record<string, string>
+        aiLabels: Record<string, string>
+        rows: Record<
+          string,
+          {
+            date: string
+            vehicle: string
+            typeKey: string
+            statusKey: string
+            cost: string
+            aiKey: string
+          }
+        >
+      }
+    }
+    usecases: {
+      title: string
+      items: Record<
+        string,
+        {
+          title: string
+          description: string
+        }
+      >
+    }
+    cta: {
+      primary: string
+      secondary: string
+    }
+  }
   registration: {
     title: string
     subtitle: string
@@ -281,6 +362,164 @@ export const translations: Record<Lang, TranslationTree> = {
         scale: 'Skalierbar für wachsende Portfolios.'
       },
       cta: 'Zur Übersicht'
+    },
+    marketingFleet: {
+      hero: {
+        title: 'IaaS Fuhrparkmanagement',
+        subtitle:
+          'Steuern Sie Fahrzeuge, Schäden, Termine, Dokumente und Policen – mit KI-Empfehlungen und Real-Time Insights.',
+        login: 'Login',
+        illustrationTitle: 'AI Live Alerts',
+        illustrationValue: '12 aktive Signale',
+        illustrationDescription: 'Live-Incidents, Prüfkapazitäten und Downtime-Prognosen im Überblick.'
+      },
+      kpi: {
+        realTime: 'Real-time Status & Alerts',
+        ai: 'KI-gestützte Priorisierung',
+        tuv: 'TÜV & Wartungsplanung',
+        claims: 'Schaden- & Kostenkontrolle',
+        docs: 'Dokumente & Policen',
+        compliance: 'Compliance & Reporting'
+      },
+      manage: {
+        title: 'Was Sie managen können',
+        features: {
+          vehicles: {
+            title: 'Fahrzeuge & Stammdaten',
+            description: 'VIN, Ausstattung, GPS, Sensor- und Nutzungshistorie auf einen Blick.'
+          },
+          schedules: {
+            title: 'Termine & Planung',
+            description: 'TÜV, Wartung, Werkstattkapazitäten und Ersatzfahrzeuge koordinieren.'
+          },
+          claims: {
+            title: 'Schäden & Reparaturen',
+            description: 'Schadenstatus, Kosten und Reparaturaufträge zentral steuern.'
+          },
+          downtime: {
+            title: 'Ausfallzeiten & Verfügbarkeit',
+            description: 'Kritische Fahrzeuge identifizieren und proaktiv Maßnahmen auslösen.'
+          },
+          documents: {
+            title: 'Dokumente & Policen',
+            description: 'Verträge, Policen, Fahrerakten und Nachweise sicher verwalten.'
+          },
+          reporting: {
+            title: 'Reporting & Compliance',
+            description: 'Auditfähige Berichte, ESG-Kennzahlen und regulatorische Nachweise.'
+          }
+        }
+      },
+      ai: {
+        title: 'Insurfox AI – Proaktive Empfehlungen',
+        cards: {
+          card1: 'Fahrzeug DE-789-XY: 40 % höhere Schadenfrequenz – Fahrertraining empfohlen.',
+          card2: 'Werkstattkapazität kritisch: 3 Fahrzeuge mit TÜV < 14 Tagen.',
+          card3: 'Region Berlin: 25 % mehr Vorfälle – Wetterkorrelation erkannt.',
+          card4: 'Cargo-Schäden +15 %: Routenoptimierung vorgeschlagen.',
+          card5: 'Ausfallzeiten steigen: Ersatzfahrzeug-Plan aktivieren.',
+          card6: 'Police läuft aus: Renewal-Prozess automatisch gestartet.'
+        }
+      },
+      preview: {
+        title: 'Real-Time Dashboard Preview',
+        subtitle: 'Echtzeit-KPIs, Alerts und Incident-Daten – bereit für Ihr Team.',
+        kpis: {
+          uptime: 'Verfügbarkeit',
+          openClaims: 'Offene Schäden',
+          downtime: 'Ø Ausfalltage (Monat)'
+        },
+        incidentsTitle: 'Incidents pro Monat',
+        downtimeTitle: 'Downtime-Trend',
+        table: {
+          columns: {
+            date: 'Datum',
+            vehicle: 'Fahrzeug',
+            type: 'Typ',
+            status: 'Status',
+            cost: 'Kosten',
+            ai: 'AI-Flag'
+          },
+          typeLabels: {
+            motor: 'Motor',
+            cargo: 'Cargo',
+            liability: 'Haftpflicht'
+          },
+          statusLabels: {
+            open: 'Offen',
+            repair: 'In Reparatur',
+            monitoring: 'Monitoring'
+          },
+          aiLabels: {
+            alert: 'Alert',
+            watch: 'Watch',
+            info: 'Info'
+          },
+          rows: {
+            row1: {
+              date: '03.03.2025',
+              vehicle: 'DE-789-XY',
+              typeKey: 'motor',
+              statusKey: 'repair',
+              cost: '€ 8.450',
+              aiKey: 'alert'
+            },
+            row2: {
+              date: '02.03.2025',
+              vehicle: 'HH-CARGO-12',
+              typeKey: 'cargo',
+              statusKey: 'open',
+              cost: '€ 5.870',
+              aiKey: 'watch'
+            },
+            row3: {
+              date: '01.03.2025',
+              vehicle: 'M-FL-2045',
+              typeKey: 'liability',
+              statusKey: 'monitoring',
+              cost: '€ 2.180',
+              aiKey: 'info'
+            },
+            row4: {
+              date: '27.02.2025',
+              vehicle: 'K-TR-330',
+              typeKey: 'motor',
+              statusKey: 'open',
+              cost: '€ 1.260',
+              aiKey: 'watch'
+            },
+            row5: {
+              date: '25.02.2025',
+              vehicle: 'B-DEL-901',
+              typeKey: 'cargo',
+              statusKey: 'repair',
+              cost: '€ 9.120',
+              aiKey: 'alert'
+            }
+          }
+        }
+      },
+      usecases: {
+        title: 'Für wen?',
+        items: {
+          logistics: {
+            title: 'Logistikunternehmen',
+            description: 'Komplexe LKW-, Trailer- und Cargo-Flotten mit europaweiten Standorten.'
+          },
+          delivery: {
+            title: 'Service- & Lieferflotten',
+            description: 'City- und Regionalflotten mit hohem Termindruck und Service-Leveln.'
+          },
+          industrial: {
+            title: 'Industrie & Mischflotten',
+            description: 'PKW, Transporter und Spezialfahrzeuge inklusive Bau- und Energieflotten.'
+          }
+        }
+      },
+      cta: {
+        primary: 'Demo ansehen',
+        secondary: 'Fleet Reporting öffnen'
+      }
     },
     fleetReporting: {
       title: 'Fuhrpark-Reporting-Dashboard',
@@ -799,6 +1038,164 @@ export const translations: Record<Lang, TranslationTree> = {
         scale: 'Scales with growing portfolios.'
       },
       cta: 'Go to overview'
+    },
+    marketingFleet: {
+      hero: {
+        title: 'IaaS Fleet Management',
+        subtitle:
+          'Manage vehicles, claims, schedules, documents and policies – powered by AI recommendations and real-time insights.',
+        login: 'Login',
+        illustrationTitle: 'AI live alerts',
+        illustrationValue: '12 active signals',
+        illustrationDescription: 'Live incidents, inspection load and downtime forecasts in one view.'
+      },
+      kpi: {
+        realTime: 'Real-time status & alerts',
+        ai: 'AI-powered prioritization',
+        tuv: 'Inspection & maintenance planning',
+        claims: 'Claims & cost control',
+        docs: 'Documents & policies',
+        compliance: 'Compliance & reporting'
+      },
+      manage: {
+        title: 'What you can manage',
+        features: {
+          vehicles: {
+            title: 'Vehicles & master data',
+            description: 'VIN, equipment, GPS, sensor and usage history in one place.'
+          },
+          schedules: {
+            title: 'Schedules & planning',
+            description: 'Coordinate inspections, maintenance, workshop capacity and replacements.'
+          },
+          claims: {
+            title: 'Claims & repairs',
+            description: 'Control claim status, costs and repair orders centrally.'
+          },
+          downtime: {
+            title: 'Downtime & availability',
+            description: 'Spot critical assets early and trigger proactive actions.'
+          },
+          documents: {
+            title: 'Documents & policies',
+            description: 'Manage contracts, policies, driver records and evidence securely.'
+          },
+          reporting: {
+            title: 'Reporting & compliance',
+            description: 'Audit-ready reports, ESG metrics and regulatory documentation.'
+          }
+        }
+      },
+      ai: {
+        title: 'Insurfox AI – Proactive recommendations',
+        cards: {
+          card1: 'Vehicle DE-789-XY: 40% higher claim frequency — driver training recommended.',
+          card2: 'Workshop capacity critical: 3 vehicles with inspection < 14 days.',
+          card3: 'Berlin region: incidents +25% — weather correlation detected.',
+          card4: 'Cargo claims +15%: route optimization suggested.',
+          card5: 'Downtime rising: activate backup vehicle plan.',
+          card6: 'Policy expiry upcoming: renewal workflow auto-triggered.'
+        }
+      },
+      preview: {
+        title: 'Real-time dashboard preview',
+        subtitle: 'Live KPIs, alerts and incident context for your teams.',
+        kpis: {
+          uptime: 'Availability',
+          openClaims: 'Open claims',
+          downtime: 'Avg. downtime (month)'
+        },
+        incidentsTitle: 'Incidents per month',
+        downtimeTitle: 'Downtime trend',
+        table: {
+          columns: {
+            date: 'Date',
+            vehicle: 'Vehicle',
+            type: 'Type',
+            status: 'Status',
+            cost: 'Cost',
+            ai: 'AI flag'
+          },
+          typeLabels: {
+            motor: 'Motor',
+            cargo: 'Cargo',
+            liability: 'Liability'
+          },
+          statusLabels: {
+            open: 'Open',
+            repair: 'In repair',
+            monitoring: 'Monitoring'
+          },
+          aiLabels: {
+            alert: 'Alert',
+            watch: 'Watch',
+            info: 'Info'
+          },
+          rows: {
+            row1: {
+              date: 'Mar 03, 2025',
+              vehicle: 'DE-789-XY',
+              typeKey: 'motor',
+              statusKey: 'repair',
+              cost: '€8,450',
+              aiKey: 'alert'
+            },
+            row2: {
+              date: 'Mar 02, 2025',
+              vehicle: 'HH-CARGO-12',
+              typeKey: 'cargo',
+              statusKey: 'open',
+              cost: '€5,870',
+              aiKey: 'watch'
+            },
+            row3: {
+              date: 'Mar 01, 2025',
+              vehicle: 'M-FL-2045',
+              typeKey: 'liability',
+              statusKey: 'monitoring',
+              cost: '€2,180',
+              aiKey: 'info'
+            },
+            row4: {
+              date: 'Feb 27, 2025',
+              vehicle: 'K-TR-330',
+              typeKey: 'motor',
+              statusKey: 'open',
+              cost: '€1,260',
+              aiKey: 'watch'
+            },
+            row5: {
+              date: 'Feb 25, 2025',
+              vehicle: 'B-DEL-901',
+              typeKey: 'cargo',
+              statusKey: 'repair',
+              cost: '€9,120',
+              aiKey: 'alert'
+            }
+          }
+        }
+      },
+      usecases: {
+        title: 'Who benefits?',
+        items: {
+          logistics: {
+            title: 'Logistics operators',
+            description: 'Complex truck, trailer and cargo fleets across Europe.'
+          },
+          delivery: {
+            title: 'Delivery & service fleets',
+            description: 'City and regional fleets with tight schedules and SLAs.'
+          },
+          industrial: {
+            title: 'Industrial & mixed fleets',
+            description: 'Cars, vans and special-purpose vehicles for construction or energy.'
+          }
+        }
+      },
+      cta: {
+        primary: 'View demo',
+        secondary: 'Open Fleet Reporting'
+      }
     },
     fleetReporting: {
       title: 'Fleet Reporting Dashboard',
