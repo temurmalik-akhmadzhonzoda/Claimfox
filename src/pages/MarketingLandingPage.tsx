@@ -6,7 +6,7 @@ import InsurfoxLogoLight from '@/assets/logos/insurfox-logo-light.png'
 import Background1 from '@/assets/images/background1.jpg'
 
 const heroKpiKeys = ['realTime', 'ai', 'tuv', 'claims', 'docs', 'compliance'] as const
-const manageFeatureKeys = ['vehicles', 'schedules', 'claims', 'downtime', 'documents', 'reporting'] as const
+const featureCardKeys = ['vehiclesMaster', 'realTime', 'aiPrioritization', 'tuvPlanning', 'claimsControl', 'docsPolicies'] as const
 const useCaseKeys = ['logistics', 'delivery', 'industrial'] as const
 
 const previewKpis = [
@@ -44,8 +44,8 @@ const iconProps = {
   strokeLinejoin: 'round'
 } as const
 
-const featureIcons: Record<(typeof manageFeatureKeys)[number], React.ReactNode> = {
-  vehicles: (
+const featureIcons: Record<(typeof featureCardKeys)[number], React.ReactNode> = {
+  vehiclesMaster: (
     <svg {...iconProps}>
       <rect x="3" y="6" width="18" height="12" rx="2" />
       <circle cx="7.5" cy="16.5" r="1.5" />
@@ -53,14 +53,27 @@ const featureIcons: Record<(typeof manageFeatureKeys)[number], React.ReactNode> 
       <path d="M6 6v-2h4l2 2h6" />
     </svg>
   ),
-  schedules: (
+  realTime: (
+    <svg {...iconProps}>
+      <path d="M3 15l4-4 3 3 5-5 6 6" />
+      <path d="M3 9h4" />
+      <path d="M17 5h4" />
+    </svg>
+  ),
+  aiPrioritization: (
+    <svg {...iconProps}>
+      <circle cx="12" cy="12" r="5" />
+      <path d="M12 2v3M12 19v3M4.93 4.93l2.12 2.12M16.95 16.95l2.12 2.12M2 12h3M19 12h3M4.93 19.07l2.12-2.12M16.95 7.05l2.12-2.12" />
+    </svg>
+  ),
+  tuvPlanning: (
     <svg {...iconProps}>
       <rect x="3" y="4" width="18" height="17" rx="2" />
       <path d="M8 2v4M16 2v4M3 10h18" />
       <path d="M9 14h6M9 18h4" />
     </svg>
   ),
-  claims: (
+  claimsControl: (
     <svg {...iconProps}>
       <path d="M5 7h14v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2Z" />
       <path d="M9 7V4a3 3 0 0 1 6 0v3" />
@@ -68,27 +81,11 @@ const featureIcons: Record<(typeof manageFeatureKeys)[number], React.ReactNode> 
       <path d="M10 16h4" />
     </svg>
   ),
-  downtime: (
-    <svg {...iconProps}>
-      <circle cx="12" cy="8" r="4" />
-      <path d="M5 21a7 7 0 0 1 14 0" />
-      <path d="M12 8v2l1.5 1" />
-    </svg>
-  ),
-  documents: (
+  docsPolicies: (
     <svg {...iconProps}>
       <path d="M7 3h7l5 5v13H7z" />
       <path d="M14 3v5h5" />
       <path d="M10 13h6M10 17h6" />
-    </svg>
-  ),
-  reporting: (
-    <svg {...iconProps}>
-      <path d="M4 19V5" />
-      <path d="M8 19V3" />
-      <path d="M12 19V9" />
-      <path d="M16 19V13" />
-      <path d="M20 19V7" />
     </svg>
   )
 }
@@ -181,21 +178,14 @@ function AiAlertsCard({ title, value, description }: { title: string; value: str
 }
 
 const layoutStyles = `
-  .marketing-manage-grid {
+  .marketing-feature-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 360px;
-    gap: 1.5rem;
-    align-items: start;
-  }
-  .marketing-manage-grid .ai-card-wrapper {
-    justify-self: end;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
   }
   @media (max-width: 900px) {
-    .marketing-manage-grid {
+    .marketing-feature-grid {
       grid-template-columns: minmax(0, 1fr);
-    }
-    .marketing-manage-grid .ai-card-wrapper {
-      justify-self: stretch;
     }
   }
 `
@@ -312,42 +302,34 @@ export default function MarketingLandingPage() {
             <header style={{ marginBottom: '1.5rem' }}>
               <h2 style={sectionTitleStyle}>{t('marketingFleet.manage.title')}</h2>
             </header>
-            <div className="marketing-manage-grid">
-              <div
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-                  gap: '1rem'
-                }}
-              >
-                {manageFeatureKeys.map((key) => (
-                  <div key={key} style={featureCardStyle}>
-                    <span>{featureIcons[key]}</span>
-                    <strong style={{ fontSize: '1.05rem' }}>{t(`marketingFleet.manage.features.${key}.title`)}</strong>
-                    <p style={{ margin: 0, fontSize: '0.95rem', color: 'rgba(255,255,255,0.85)', lineHeight: 1.45 }}>
-                      {t(`marketingFleet.manage.features.${key}.description`)}
-                    </p>
-                    <div style={miniIllustrationStyle}>
-                      <div style={{ flex: 1, height: '4px', background: 'rgba(255,255,255,0.25)', borderRadius: '4px' }} />
-                      <div
-                        style={{
-                          flex: 1,
-                          height: '4px',
-                          background: 'linear-gradient(90deg, rgba(212,56,13,0.8), rgba(255,255,255,0.3))',
-                          borderRadius: '4px'
-                        }}
-                      />
-                    </div>
+            <div style={{ width: '100%', maxWidth: '100%', marginBottom: '1.5rem' }}>
+              <AiAlertsCard
+                title={t('marketingFleet.hero.illustrationTitle')}
+                value={t('marketingFleet.hero.illustrationValue')}
+                description={t('marketingFleet.hero.illustrationDescription')}
+              />
+            </div>
+            <div className="marketing-feature-grid">
+              {featureCardKeys.map((key) => (
+                <div key={key} style={featureCardStyle}>
+                  <span>{featureIcons[key]}</span>
+                  <strong style={{ fontSize: '1.05rem' }}>{t(`marketingFleet.manage.features.${key}.title`)}</strong>
+                  <p style={{ margin: 0, fontSize: '0.95rem', color: 'rgba(255,255,255,0.85)', lineHeight: 1.45 }}>
+                    {t(`marketingFleet.manage.features.${key}.description`)}
+                  </p>
+                  <div style={miniIllustrationStyle}>
+                    <div style={{ flex: 1, height: '4px', background: 'rgba(255,255,255,0.25)', borderRadius: '4px' }} />
+                    <div
+                      style={{
+                        flex: 1,
+                        height: '4px',
+                        background: 'linear-gradient(90deg, rgba(212,56,13,0.8), rgba(255,255,255,0.3))',
+                        borderRadius: '4px'
+                      }}
+                    />
                   </div>
-                ))}
-              </div>
-              <div className="ai-card-wrapper" style={{ width: '100%', maxWidth: '420px' }}>
-                <AiAlertsCard
-                  title={t('marketingFleet.hero.illustrationTitle')}
-                  value={t('marketingFleet.hero.illustrationValue')}
-                  description={t('marketingFleet.hero.illustrationDescription')}
-                />
-              </div>
+                </div>
+              ))}
             </div>
           </section>
 

@@ -380,29 +380,29 @@ export const translations: Record<Lang, TranslationTree> = {
       manage: {
         title: 'Was Sie managen können',
         features: {
-          vehicles: {
+          vehiclesMaster: {
             title: 'Fahrzeuge & Stammdaten',
             description: 'VIN, Ausstattung, GPS, Sensor- und Nutzungshistorie auf einen Blick.'
           },
-          schedules: {
-            title: 'Termine & Planung',
-            description: 'TÜV, Wartung, Werkstattkapazitäten und Ersatzfahrzeuge koordinieren.'
+          realTime: {
+            title: 'Real-time Status & Alerts',
+            description: 'Live-Überblick über Statusmeldungen, Alerts und Ereignisse je Fahrzeug.'
           },
-          claims: {
-            title: 'Schäden & Reparaturen',
-            description: 'Schadenstatus, Kosten und Reparaturaufträge zentral steuern.'
+          aiPrioritization: {
+            title: 'KI-gestützte Priorisierung',
+            description: 'KI bewertet Risiken, Schäden und Maßnahmen automatisch nach Impact.'
           },
-          downtime: {
-            title: 'Ausfallzeiten & Verfügbarkeit',
-            description: 'Kritische Fahrzeuge identifizieren und proaktiv Maßnahmen auslösen.'
+          tuvPlanning: {
+            title: 'TÜV & Wartungsplanung',
+            description: 'TÜV-, Wartungs- und Werkstattkapazitäten koordinieren – inklusive Ersatzfahrzeuge.'
           },
-          documents: {
+          claimsControl: {
+            title: 'Schaden- & Kostenkontrolle',
+            description: 'Schadenstatus, Reparaturaufträge und Kostenprognosen zentral steuern.'
+          },
+          docsPolicies: {
             title: 'Dokumente & Policen',
-            description: 'Verträge, Policen, Fahrerakten und Nachweise sicher verwalten.'
-          },
-          reporting: {
-            title: 'Reporting & Compliance',
-            description: 'Auditfähige Berichte, ESG-Kennzahlen und regulatorische Nachweise.'
+            description: 'Verträge, Policen und Compliance-Nachweise revisionssicher verwalten.'
           }
         }
       },
@@ -1045,29 +1045,29 @@ export const translations: Record<Lang, TranslationTree> = {
       manage: {
         title: 'What you can manage',
         features: {
-          vehicles: {
+          vehiclesMaster: {
             title: 'Vehicles & master data',
-            description: 'VIN, equipment, GPS, sensor and usage history in one place.'
+            description: 'VIN, equipment, GPS, sensor and usage history at a glance.'
           },
-          schedules: {
-            title: 'Schedules & planning',
-            description: 'Coordinate inspections, maintenance, workshop capacity and replacements.'
+          realTime: {
+            title: 'Real-time status & alerts',
+            description: 'Live view of fleet notifications, alerts and incidents by asset.'
           },
-          claims: {
-            title: 'Claims & repairs',
-            description: 'Control claim status, costs and repair orders centrally.'
+          aiPrioritization: {
+            title: 'AI-powered prioritization',
+            description: 'AI ranks risks, claims and actions automatically by impact.'
           },
-          downtime: {
-            title: 'Downtime & availability',
-            description: 'Spot critical assets early and trigger proactive actions.'
+          tuvPlanning: {
+            title: 'Inspection & maintenance planning',
+            description: 'Coordinate inspections, maintenance capacity and replacement vehicles.'
           },
-          documents: {
+          claimsControl: {
+            title: 'Claims & cost control',
+            description: 'Track claim status, repair orders and cost forecasts centrally.'
+          },
+          docsPolicies: {
             title: 'Documents & policies',
-            description: 'Manage contracts, policies, driver records and evidence securely.'
-          },
-          reporting: {
-            title: 'Reporting & compliance',
-            description: 'Audit-ready reports, ESG metrics and regulatory documentation.'
+            description: 'Manage contracts, policies and compliance records in one place.'
           }
         }
       },
