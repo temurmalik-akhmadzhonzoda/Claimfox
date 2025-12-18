@@ -20,75 +20,106 @@ export default function RolesPage() {
   }
 
   return (
-    <div
-      style={{
-        minHeight: '100vh',
-        width: '100%',
-        backgroundImage: `linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.25)), url(${BackgroundLogin})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
-      }}
-    >
-      <section className="page" style={{ gap: '2rem' }}>
-        <Header
-          title={t('roles.title')}
-          subtitle={t('roles.subtitle')}
-          actions={
-            <Button variant="secondary" onClick={handleLogout}>
-              {t('roles.logout')}
-            </Button>
-          }
-        />
+    <div style={{ position: 'relative', minHeight: '100vh' }}>
+      <div
+        aria-hidden="true"
+        style={{
+          position: 'fixed',
+          inset: 0,
+          width: '100vw',
+          height: '100vh',
+          backgroundImage: `url(${BackgroundLogin})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          zIndex: 0
+        }}
+      />
+      <div
+        aria-hidden="true"
+        style={{
+          position: 'fixed',
+          inset: 0,
+          width: '100vw',
+          height: '100vh',
+          background: 'rgba(0,0,0,0.22)',
+          zIndex: 1
+        }}
+      />
+      <section className="page" style={{ gap: '2rem', position: 'relative', zIndex: 2 }}>
         <div
           style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-            gap: '1.25rem'
+            width: '100%',
+            maxWidth: '1200px',
+            margin: '0 auto',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '2rem'
           }}
         >
-          {ROLE_KEYS.map((key) => (
-            <Card key={key} title={t(`roles.cards.${key}.title`)}>
-              <p style={{ marginTop: 0, color: '#494870', minHeight: '3rem' }}>
-                {t(`roles.cards.${key}.description`)}
-              </p>
-              <Button style={{ width: '100%' }}>{t('roles.view')}</Button>
+          <Header
+            title={t('roles.title')}
+            subtitle={t('roles.subtitle')}
+            titleColor="#ffffff"
+            subtitleColor="rgba(255,255,255,0.85)"
+            actions={
+              <Button variant="secondary" onClick={handleLogout}>
+                {t('roles.logout')}
+              </Button>
+            }
+          />
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+              gap: '1.25rem'
+            }}
+          >
+            {ROLE_KEYS.map((key) => (
+              <Card key={key} title={t(`roles.cards.${key}.title`)} variant="glass" interactive>
+                <p style={{ marginTop: 0, color: 'rgba(255,255,255,0.85)', minHeight: '3rem' }}>
+                  {t(`roles.cards.${key}.description`)}
+                </p>
+                <Button style={{ width: '100%' }}>{t('roles.view')}</Button>
+              </Card>
+            ))}
+            <Card
+              title={t('roles.registrationCardTitle')}
+              subtitle={t('roles.registrationCardSubtitle')}
+              interactive
+              onClick={() => navigate('/registration')}
+              variant="glass"
+            >
+              <Button
+                style={{ width: '100%' }}
+                onClick={(event) => {
+                  event.stopPropagation()
+                  navigate('/registration')
+                }}
+              >
+                {t('roles.startJourney')}
+              </Button>
             </Card>
-          ))}
-          <Card
-            title={t('roles.registrationCardTitle')}
-            subtitle={t('roles.registrationCardSubtitle')}
-            interactive
-            onClick={() => navigate('/registration')}
-          >
-            <Button
-              style={{ width: '100%' }}
-              onClick={(event) => {
-                event.stopPropagation()
-                navigate('/registration')
-              }}
+            <Card
+              title={t('roles.brokerPortal')}
+              interactive
+              onClick={() => navigate('/broker-portal')}
+              variant="glass"
             >
-              {t('roles.startJourney')}
-            </Button>
-          </Card>
-          <Card
-            title={t('roles.brokerPortal')}
-            interactive
-            onClick={() => navigate('/broker-portal')}
-          >
-            <p style={{ marginTop: 0, color: '#494870', minHeight: '3rem' }}>
-              {t('roles.brokerPortal')}
-            </p>
-            <Button
-              style={{ width: '100%' }}
-              onClick={(event) => {
-                event.stopPropagation()
-                navigate('/broker-portal')
-              }}
-            >
-              {t('roles.view')}
-            </Button>
-          </Card>
+              <p style={{ marginTop: 0, color: 'rgba(255,255,255,0.85)', minHeight: '3rem' }}>
+                {t('roles.brokerPortal')}
+              </p>
+              <Button
+                style={{ width: '100%' }}
+                onClick={(event) => {
+                  event.stopPropagation()
+                  navigate('/broker-portal')
+                }}
+              >
+                {t('roles.view')}
+              </Button>
+            </Card>
+          </div>
         </div>
       </section>
     </div>
