@@ -23,24 +23,50 @@ const sectorKeys = [
 ] as const
 const whyKeys = ['relationship', 'automation', 'compliance'] as const
 
+const glassChipBaseStyle: React.CSSProperties = {
+  display: 'inline-flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  padding: '10px 14px',
+  borderRadius: '999px',
+  background: 'rgba(255,255,255,0.18)',
+  color: '#ffffff',
+  border: '1px solid rgba(255,255,255,0.4)',
+  fontSize: '0.95rem',
+  lineHeight: 1,
+  fontWeight: 700,
+  whiteSpace: 'nowrap',
+  textAlign: 'center',
+  boxShadow: '0 10px 28px rgba(0,0,0,0.18)',
+  backdropFilter: 'blur(10px)',
+  WebkitBackdropFilter: 'blur(10px)',
+  transition: 'transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease',
+  cursor: 'default'
+}
+
+function GlassChip({ label, weight = 700 }: { label: string; weight?: number }) {
+  const [hovered, setHovered] = React.useState(false)
+
+  return (
+    <span
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        ...glassChipBaseStyle,
+        fontWeight: weight,
+        transform: hovered ? 'translateY(-1px)' : undefined,
+        background: hovered ? 'rgba(255,255,255,0.22)' : glassChipBaseStyle.background,
+        boxShadow: hovered ? '0 14px 34px rgba(0,0,0,0.22)' : glassChipBaseStyle.boxShadow
+      }}
+    >
+      {label}
+    </span>
+  )
+}
+
 export default function BrokerPortalLandingPage() {
   const { t } = useI18n()
   const navigate = useNavigate()
-  const chipStyle: React.CSSProperties = {
-    display: 'inline-flex',
-    alignItems: 'center',
-    padding: '0.65rem 1rem',
-    borderRadius: '999px',
-    background: '#ffffff',
-    color: '#0e0d1c',
-    border: '1px solid rgba(0,0,0,0.1)',
-    fontSize: '0.95rem',
-    lineHeight: 1,
-    fontWeight: 600,
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis'
-  }
 
   return (
     <div
@@ -165,9 +191,7 @@ export default function BrokerPortalLandingPage() {
               }}
             >
               {(['coverage', 'automation', 'retention'] as const).map((key) => (
-                <span key={key} style={{ ...chipStyle }}>
-                  {t(`brokerLanding.heroStats.${key}`)}
-                </span>
+                <GlassChip key={key} label={t(`brokerLanding.heroStats.${key}`)} />
               ))}
             </div>
           </div>
@@ -187,9 +211,7 @@ export default function BrokerPortalLandingPage() {
               }}
             >
               {featureKeys.map((key) => (
-                <span key={key} style={{ ...chipStyle }}>
-                  {t(`brokerLanding.features.${key}`)}
-                </span>
+                <GlassChip key={key} label={t(`brokerLanding.features.${key}`)} />
               ))}
             </div>
           </div>
@@ -206,9 +228,7 @@ export default function BrokerPortalLandingPage() {
               }}
             >
               {sectorKeys.map((key) => (
-                <span key={key} style={{ ...chipStyle }}>
-                  {t(`brokerLanding.sectorsList.${key}`)}
-                </span>
+                <GlassChip key={key} label={t(`brokerLanding.sectorsList.${key}`)} weight={650} />
               ))}
             </div>
           </div>
