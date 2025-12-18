@@ -5,9 +5,16 @@ type HeaderProps = {
   subtitle?: string
   actions?: React.ReactNode
   titleColor?: string
+  subtitleColor?: string
 }
 
-export default function Header({ title, subtitle, actions, titleColor = '#080064' }: HeaderProps) {
+export default function Header({
+  title,
+  subtitle,
+  actions,
+  titleColor = '#080064',
+  subtitleColor = '#494870'
+}: HeaderProps) {
   return (
     <header
       style={{
@@ -43,7 +50,7 @@ export default function Header({ title, subtitle, actions, titleColor = '#080064
       </div>
 
       {subtitle && (
-        <p style={{ margin: 0, color: '#494870', maxWidth: '720px' }}>
+        <p style={{ margin: 0, color: subtitleColor, maxWidth: '720px' }}>
           {subtitle}
         </p>
       )}

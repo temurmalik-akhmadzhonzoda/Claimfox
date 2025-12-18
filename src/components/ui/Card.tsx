@@ -4,6 +4,7 @@ type CardProps = React.HTMLAttributes<HTMLDivElement> & {
   title?: React.ReactNode
   subtitle?: React.ReactNode
   interactive?: boolean
+  variant?: 'default' | 'glass'
 }
 
 export default function Card({
@@ -16,9 +17,11 @@ export default function Card({
   onClick,
   tabIndex,
   role,
+  variant = 'default',
   ...props
 }: CardProps) {
   const isInteractive = interactive || Boolean(onClick)
+  const isGlass = variant === 'glass'
 
   function handleKeyDown(event: React.KeyboardEvent<HTMLDivElement>) {
     if (!isInteractive) {
@@ -43,10 +46,14 @@ export default function Card({
       tabIndex={isInteractive ? tabIndex ?? 0 : tabIndex}
       className={className}
       style={{
-        backgroundColor: '#fff',
+        backgroundColor: isGlass ? 'rgba(255,255,255,0.16)' : '#fff',
+        border: isGlass ? '1px solid rgba(255,255,255,0.35)' : undefined,
         borderRadius: '24px',
         padding: '2rem',
-        boxShadow: '0 22px 50px rgba(8, 4, 50, 0.15)',
+        boxShadow: isGlass ? '0 18px 42px rgba(0,0,0,0.35)' : '0 22px 50px rgba(8, 4, 50, 0.15)',
+        backdropFilter: isGlass ? 'blur(12px)' : undefined,
+        WebkitBackdropFilter: isGlass ? 'blur(12px)' : undefined,
+        color: isGlass ? '#ffffff' : undefined,
         width: '100%',
         cursor: isInteractive ? 'pointer' : undefined,
         transition: isInteractive ? 'transform 0.2s ease, box-shadow 0.2s ease' : undefined,
@@ -56,12 +63,12 @@ export default function Card({
       {(title || subtitle) && (
         <header style={{ marginBottom: '1.5rem' }}>
           {title && (
-            <h2 style={{ margin: 0, fontSize: '1.3rem', color: '#080064' }}>
+            <h2 style={{ margin: 0, fontSize: '1.3rem', color: isGlass ? '#ffffff' : '#080064' }}>
               {title}
             </h2>
           )}
           {subtitle && (
-            <p style={{ marginTop: '0.35rem', marginBottom: 0, color: '#616075' }}>
+            <p style={{ marginTop: '0.35rem', marginBottom: 0, color: isGlass ? 'rgba(255,255,255,0.8)' : '#616075' }}>
               {subtitle}
             </p>
           )}

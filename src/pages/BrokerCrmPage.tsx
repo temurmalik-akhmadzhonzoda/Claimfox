@@ -42,6 +42,9 @@ const customers = [
 
 const activityKeys = ['followUp', 'proposal', 'documents', 'audit', 'training'] as const
 
+const GLASS_TEXT = 'rgba(255,255,255,0.85)'
+const GLASS_SUBTLE = 'rgba(255,255,255,0.65)'
+
 export default function BrokerCrmPage() {
   const { t } = useI18n()
 
@@ -79,18 +82,49 @@ export default function BrokerCrmPage() {
   }
 
   return (
-    <div
-      style={{
-        minHeight: '100vh',
-        width: '100%',
-        backgroundImage: `linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.25)), url(${BackgroundLogin})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
-      }}
-    >
-    <section className="page" style={{ gap: '1.5rem' }}>
-      <Header title={t('brokerCrm.title')} subtitle={t('brokerCrm.subtitle')} />
+    <div style={{ position: 'relative', minHeight: '100vh' }}>
+      <div
+        aria-hidden="true"
+        style={{
+          position: 'fixed',
+          inset: 0,
+          width: '100vw',
+          height: '100vh',
+          backgroundImage: `url(${BackgroundLogin})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          zIndex: 0
+        }}
+      />
+      <div
+        aria-hidden="true"
+        style={{
+          position: 'fixed',
+          inset: 0,
+          width: '100vw',
+          height: '100vh',
+          background: 'rgba(0,0,0,0.22)',
+          zIndex: 1
+        }}
+      />
+      <section className="page" style={{ gap: '1.5rem', position: 'relative', zIndex: 2 }}>
+        <div
+          style={{
+            width: '100%',
+            maxWidth: '1200px',
+            margin: '0 auto',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '1.5rem'
+          }}
+        >
+      <Header
+        title={t('brokerCrm.title')}
+        subtitle={t('brokerCrm.subtitle')}
+        titleColor="#ffffff"
+        subtitleColor="rgba(255,255,255,0.8)"
+      />
 
       <div
         style={{
@@ -100,10 +134,10 @@ export default function BrokerCrmPage() {
         }}
       >
         {kpiData.map((item) => (
-          <Card key={item.key}>
-            <p style={{ margin: 0, color: '#6f6c99', fontSize: '0.95rem' }}>{t(`brokerCrm.kpi.${item.key}`)}</p>
-            <div style={{ marginTop: '0.5rem', fontSize: '2rem', fontWeight: 700, color: '#080064' }}>{item.value}</div>
-            <span style={{ color: '#28a745', fontWeight: 600 }}>{item.trend}</span>
+          <Card key={item.key} variant="glass">
+            <p style={{ margin: 0, color: GLASS_TEXT, fontSize: '0.95rem' }}>{t(`brokerCrm.kpi.${item.key}`)}</p>
+            <div style={{ marginTop: '0.5rem', fontSize: '2rem', fontWeight: 700, color: '#ffffff' }}>{item.value}</div>
+            <span style={{ color: '#8ef3c6', fontWeight: 600 }}>{item.trend}</span>
           </Card>
         ))}
       </div>
@@ -115,8 +149,8 @@ export default function BrokerCrmPage() {
           gap: '1rem'
         }}
       >
-        <Card title={t('brokerCrm.charts.revenueTitle')} subtitle={t('brokerCrm.charts.revenueSubtitle')}>
-          <div style={{ display: 'flex', gap: '1rem', marginBottom: '0.5rem', color: '#6f6c99', fontSize: '0.9rem' }}>
+        <Card variant="glass" title={t('brokerCrm.charts.revenueTitle')} subtitle={t('brokerCrm.charts.revenueSubtitle')}>
+          <div style={{ display: 'flex', gap: '1rem', marginBottom: '0.5rem', color: GLASS_TEXT, fontSize: '0.9rem' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
               <span style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#7f3fff' }} />
               {t('brokerCrm.charts.revenueLegendCurrent')}
@@ -147,16 +181,16 @@ export default function BrokerCrmPage() {
                     }}
                   />
                 </div>
-                <small style={{ color: '#6f6c99' }}>{entry.label}</small>
+                <small style={{ color: GLASS_SUBTLE }}>{entry.label}</small>
               </div>
             ))}
           </div>
         </Card>
-        <Card title={t('brokerCrm.charts.leadsTitle')} subtitle={t('brokerCrm.charts.leadsSubtitle')}>
+        <Card variant="glass" title={t('brokerCrm.charts.leadsTitle')} subtitle={t('brokerCrm.charts.leadsSubtitle')}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
             {leadsData.map((entry) => (
               <div key={entry.key} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <span style={{ width: '120px', color: '#6f6c99', fontSize: '0.95rem' }}>
+                <span style={{ width: '120px', color: GLASS_TEXT, fontSize: '0.95rem' }}>
                   {t(`brokerCrm.charts.leadsLegend${entry.key.charAt(0).toUpperCase()}${entry.key.slice(1)}`)}
                 </span>
                 <div
@@ -164,7 +198,7 @@ export default function BrokerCrmPage() {
                     flex: 1,
                     height: '12px',
                     borderRadius: '999px',
-                    background: '#f0f0ff',
+                    background: 'rgba(255,255,255,0.15)',
                     overflow: 'hidden'
                   }}
                 >
@@ -181,14 +215,14 @@ export default function BrokerCrmPage() {
                     }}
                   />
                 </div>
-                <strong style={{ color: '#080064' }}>{entry.value}</strong>
+                <strong style={{ color: '#ffffff' }}>{entry.value}</strong>
               </div>
             ))}
           </div>
         </Card>
       </div>
 
-      <Card title={t('brokerCrm.ai.title')} subtitle={t('brokerCrm.ai.subtitle')}>
+      <Card variant="glass" title={t('brokerCrm.ai.title')} subtitle={t('brokerCrm.ai.subtitle')}>
         <div
           style={{
             display: 'grid',
@@ -201,9 +235,10 @@ export default function BrokerCrmPage() {
               key={key}
               style={{
                 padding: '1rem 1.25rem',
-                borderRadius: '16px',
-                border: '1px solid #eceafd',
-                background: '#fdfdff',
+                borderRadius: '18px',
+                background: 'rgba(255,255,255,0.12)',
+                border: '1px solid rgba(255,255,255,0.3)',
+                boxShadow: '0 12px 30px rgba(0,0,0,0.28)',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
@@ -213,7 +248,7 @@ export default function BrokerCrmPage() {
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '0.75rem' }}>
                 <div style={{ minWidth: 0 }}>
-                  <p style={{ margin: 0, fontWeight: 600, color: '#080064', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                  <p style={{ margin: 0, fontWeight: 600, color: '#ffffff', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                     {t(`brokerCrm.ai.items.${key}.name`)}
                   </p>
                 </div>
@@ -221,8 +256,8 @@ export default function BrokerCrmPage() {
                   style={{
                     padding: '0.2rem 0.55rem',
                     borderRadius: '999px',
-                    background: probabilityItemKeys.has(key) ? '#e9f7f1' : '#efe8ff',
-                    color: probabilityItemKeys.has(key) ? '#0c6b4d' : '#5c30c5',
+                    background: probabilityItemKeys.has(key) ? 'rgba(25, 214, 152, 0.18)' : 'rgba(167, 140, 255, 0.18)',
+                    color: probabilityItemKeys.has(key) ? '#74f2c2' : '#d7c7ff',
                     fontWeight: 600,
                     fontSize: '0.85rem',
                     whiteSpace: 'nowrap',
@@ -235,16 +270,16 @@ export default function BrokerCrmPage() {
                   {t(`brokerCrm.ai.items.${key}.value`)}
                 </span>
               </div>
-              <small style={{ color: '#6f6c99', textTransform: 'uppercase', letterSpacing: '0.08em', fontSize: '0.75rem' }}>
+              <small style={{ color: GLASS_SUBTLE, textTransform: 'uppercase', letterSpacing: '0.08em', fontSize: '0.75rem' }}>
                 {t(`brokerCrm.ai.items.${key}.type`)}
               </small>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', color: '#6f6c99', marginTop: '0.25rem' }}>
-                <span style={{ fontSize: '0.75rem', letterSpacing: '0.06em', textTransform: 'uppercase', color: '#a09dbf' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', color: GLASS_SUBTLE, marginTop: '0.25rem' }}>
+                <span style={{ fontSize: '0.75rem', letterSpacing: '0.06em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)' }}>
                   {t('brokerCrm.ai.labels.recommendation')}
                 </span>
                 <strong
                   style={{
-                    color: '#080064',
+                    color: '#ffffff',
                     fontSize: '0.95rem',
                     display: '-webkit-box',
                     WebkitLineClamp: 2,
@@ -267,27 +302,32 @@ export default function BrokerCrmPage() {
           gap: '1rem'
         }}
       >
-        <Card title={t('brokerCrm.table.title')}>
+        <Card variant="glass" title={t('brokerCrm.table.title')}>
           <div style={{ overflowX: 'auto' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse', color: '#ffffff' }}>
               <thead>
-                <tr style={{ textAlign: 'left', color: '#6f6c99', fontSize: '0.9rem' }}>
-                  <th style={{ padding: '0.5rem 0.25rem' }}>{t('brokerCrm.table.name')}</th>
-                  <th style={{ padding: '0.5rem 0.25rem' }}>{t('brokerCrm.table.status')}</th>
-                  <th style={{ padding: '0.5rem 0.25rem' }}>{t('brokerCrm.table.lastContact')}</th>
-                  <th style={{ padding: '0.5rem 0.25rem' }}>{t('brokerCrm.table.potential')}</th>
-                  <th style={{ padding: '0.5rem 0.25rem' }}>{t('brokerCrm.table.nextStep')}</th>
+                <tr style={{ textAlign: 'left', color: 'rgba(255,255,255,0.78)', fontSize: '0.9rem', background: 'rgba(255,255,255,0.08)' }}>
+                  <th style={{ padding: '0.6rem 0.4rem' }}>{t('brokerCrm.table.name')}</th>
+                  <th style={{ padding: '0.6rem 0.4rem' }}>{t('brokerCrm.table.status')}</th>
+                  <th style={{ padding: '0.6rem 0.4rem' }}>{t('brokerCrm.table.lastContact')}</th>
+                  <th style={{ padding: '0.6rem 0.4rem' }}>{t('brokerCrm.table.potential')}</th>
+                  <th style={{ padding: '0.6rem 0.4rem' }}>{t('brokerCrm.table.nextStep')}</th>
                 </tr>
               </thead>
               <tbody>
                 {customers.map((customer, index) => (
-                  <tr key={customer.name} style={{ borderTop: index === 0 ? 'none' : '1px solid #f1f0ff' }}>
-                    <td style={{ padding: '0.75rem 0.25rem', fontWeight: 600 }}>{customer.name}</td>
-                    <td style={{ padding: '0.75rem 0.25rem', color: '#6f6c99' }}>
+                  <tr
+                    key={customer.name}
+                    style={{
+                      borderTop: index === 0 ? 'none' : '1px solid rgba(255,255,255,0.12)'
+                    }}
+                  >
+                    <td style={{ padding: '0.75rem 0.4rem', fontWeight: 600 }}>{customer.name}</td>
+                    <td style={{ padding: '0.75rem 0.4rem', color: GLASS_TEXT }}>
                       {t(`brokerCrm.table.statusLabels.${customer.statusKey}`)}
                     </td>
-                    <td style={{ padding: '0.75rem 0.25rem', color: '#6f6c99' }}>{customer.lastContact}</td>
-                    <td style={{ padding: '0.75rem 0.25rem' }}>
+                    <td style={{ padding: '0.75rem 0.4rem', color: GLASS_TEXT }}>{customer.lastContact}</td>
+                    <td style={{ padding: '0.75rem 0.4rem' }}>
                       <span
                         style={{
                           borderRadius: '999px',
@@ -307,7 +347,7 @@ export default function BrokerCrmPage() {
                         {t(`brokerCrm.table.potentialLabels.${customer.potentialKey}`)}
                       </span>
                     </td>
-                    <td style={{ padding: '0.75rem 0.25rem', color: '#080064' }}>
+                    <td style={{ padding: '0.75rem 0.4rem', color: '#ffffff' }}>
                       {t(`brokerCrm.table.nextSteps.${customer.nextStepKey}`)}
                     </td>
                   </tr>
@@ -316,17 +356,19 @@ export default function BrokerCrmPage() {
             </table>
           </div>
         </Card>
-        <Card title={t('brokerCrm.activities.title')}>
+        <Card variant="glass" title={t('brokerCrm.activities.title')}>
           <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
             {activityKeys.map((key) => (
               <li
                 key={key}
                 style={{
                   padding: '0.75rem 0.85rem',
-                  borderRadius: '12px',
-                  background: '#f8f8ff',
-                  color: '#080064',
-                  fontWeight: 500
+                  borderRadius: '14px',
+                  background: 'rgba(255,255,255,0.12)',
+                  border: '1px solid rgba(255,255,255,0.25)',
+                  color: '#ffffff',
+                  fontWeight: 500,
+                  boxShadow: '0 8px 22px rgba(0,0,0,0.2)'
                 }}
               >
                 {t(`brokerCrm.activities.${key}`)}
@@ -335,7 +377,8 @@ export default function BrokerCrmPage() {
           </ul>
         </Card>
       </div>
-    </section>
+        </div>
+      </section>
     </div>
   )
 }
