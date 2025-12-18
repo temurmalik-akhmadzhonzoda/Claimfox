@@ -2,6 +2,7 @@ import React from 'react'
 import Card from '@/components/ui/Card'
 import Header from '@/components/ui/Header'
 import { useI18n } from '@/i18n/I18nContext'
+import BackgroundLogin from '@/assets/images/background_login.png'
 
 const kpiData = [
   { key: 'activeCustomers', value: '248', trend: '+12%' },
@@ -78,6 +79,16 @@ export default function BrokerCrmPage() {
   }
 
   return (
+    <div
+      style={{
+        minHeight: '100vh',
+        width: '100%',
+        backgroundImage: `linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.25)), url(${BackgroundLogin})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}
+    >
     <section className="page" style={{ gap: '1.5rem' }}>
       <Header title={t('brokerCrm.title')} subtitle={t('brokerCrm.subtitle')} />
 
@@ -325,5 +336,6 @@ export default function BrokerCrmPage() {
         </Card>
       </div>
     </section>
+    </div>
   )
 }
