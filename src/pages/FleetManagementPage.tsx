@@ -46,6 +46,13 @@ const listCellStyle: React.CSSProperties = {
   color: '#ffffff'
 }
 
+const SECTION_CARD_STYLE: React.CSSProperties = {
+  borderRadius: '24px',
+  padding: '1.5rem',
+  background: 'rgba(255,255,255,0.12)',
+  border: '1px solid rgba(255,255,255,0.18)'
+}
+
 type VehicleType = 'car' | 'truck' | 'trailer' | 'delivery'
 type VehicleStatus = 'active' | 'maintenance' | 'down'
 type InspectionStatus = 'ok' | 'dueSoon' | 'overdue'
@@ -369,8 +376,9 @@ export default function FleetManagementPage() {
         <div
           style={{
             width: '100%',
-            maxWidth: '1260px',
+            maxWidth: '1200px',
             margin: '0 auto',
+            padding: '2.5rem 1.25rem 4rem',
             display: 'flex',
             flexDirection: 'column',
             gap: '1.5rem'
@@ -398,243 +406,272 @@ export default function FleetManagementPage() {
             ))}
           </div>
 
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'minmax(0, 1.1fr) minmax(0, 0.9fr)',
-              gap: '1.25rem',
-              alignItems: 'start'
-            }}
-          >
-            <Card variant="glass">
-              <header style={{ marginBottom: '1rem', color: '#ffffff' }}>
-                <h2 style={{ margin: 0 }}>{t('fleetManagement.list.title')}</h2>
-              </header>
-              <div
-                style={{
-                  display: 'flex',
-                  flexWrap: 'wrap',
-                  gap: '1rem',
-                  marginBottom: '1rem'
-                }}
-              >
-                <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', alignItems: 'center' }}>
-                  <span style={{ color: GLASS_SUBTLE }}>{t('fleetManagement.filters.typeLabel')}:</span>
-                  {TYPE_FILTERS.map((filter) => (
-                    <button
-                      key={filter.value}
-                      type="button"
-                      onClick={() => setTypeFilter(filter.value)}
-                      style={{
-                        borderRadius: '999px',
-                        border: '1px solid rgba(255,255,255,0.35)',
-                        background: typeFilter === filter.value ? 'rgba(255,255,255,0.3)' : 'rgba(255,255,255,0.12)',
-                        color: '#ffffff',
-                        padding: '0.35rem 0.9rem',
-                        cursor: 'pointer'
-                      }}
-                    >
-                      {t(filter.labelKey)}
-                    </button>
-                  ))}
-                </div>
-                <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', alignItems: 'center' }}>
-                  <span style={{ color: GLASS_SUBTLE }}>{t('fleetManagement.filters.statusLabel')}:</span>
-                  {STATUS_FILTERS.map((filter) => (
-                    <button
-                      key={filter.value}
-                      type="button"
-                      onClick={() => setStatusFilter(filter.value)}
-                      style={{
-                        ...trafficBadgeStyles(STATUS_FILTER_VARIANTS[filter.value], {
-                          minWidth: '110px',
-                          height: '34px',
-                          cursor: 'pointer',
-                          transform: statusFilter === filter.value ? 'translateY(-1px)' : undefined
-                        })
-                      }}
-                      onMouseEnter={(event) => {
-                        event.currentTarget.style.filter = 'brightness(1.05)'
-                      }}
-                      onMouseLeave={(event) => {
-                        event.currentTarget.style.filter = 'none'
-                        event.currentTarget.style.transform = statusFilter === filter.value ? 'translateY(-1px)' : 'none'
-                      }}
-                    >
-                      {t(filter.labelKey)}
-                    </button>
-                  ))}
-                </div>
-                <div style={{ flex: 1, minWidth: '240px' }}>
-                  <input
-                    type="text"
-                    value={searchTerm}
-                    onChange={(event) => setSearchTerm(event.target.value)}
-                    placeholder={t('fleetManagement.filters.searchPlaceholder')}
+          <Card variant="glass" style={SECTION_CARD_STYLE}>
+            <header style={{ marginBottom: '1rem', color: '#ffffff' }}>
+              <h2 style={{ margin: 0 }}>{t('fleetManagement.list.title')}</h2>
+            </header>
+            <div
+              style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                gap: '1rem',
+                marginBottom: '1rem'
+              }}
+            >
+              <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', alignItems: 'center' }}>
+                <span style={{ color: GLASS_SUBTLE }}>{t('fleetManagement.filters.typeLabel')}:</span>
+                {TYPE_FILTERS.map((filter) => (
+                  <button
+                    key={filter.value}
+                    type="button"
+                    onClick={() => setTypeFilter(filter.value)}
                     style={{
-                      width: '100%',
-                      padding: '0.55rem 0.85rem',
                       borderRadius: '999px',
                       border: '1px solid rgba(255,255,255,0.35)',
-                      background: 'rgba(0,0,0,0.25)',
-                      color: '#ffffff'
+                      background: typeFilter === filter.value ? 'rgba(255,255,255,0.3)' : 'rgba(255,255,255,0.12)',
+                      color: '#ffffff',
+                      padding: '0.35rem 0.9rem',
+                      cursor: 'pointer'
                     }}
-                  />
-                </div>
+                  >
+                    {t(filter.labelKey)}
+                  </button>
+                ))}
               </div>
+              <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', alignItems: 'center' }}>
+                <span style={{ color: GLASS_SUBTLE }}>{t('fleetManagement.filters.statusLabel')}:</span>
+                {STATUS_FILTERS.map((filter) => (
+                  <button
+                    key={filter.value}
+                    type="button"
+                    onClick={() => setStatusFilter(filter.value)}
+                    style={{
+                      ...trafficBadgeStyles(STATUS_FILTER_VARIANTS[filter.value], {
+                        minWidth: '110px',
+                        height: '34px',
+                        cursor: 'pointer',
+                        transform: statusFilter === filter.value ? 'translateY(-1px)' : undefined
+                      })
+                    }}
+                    onMouseEnter={(event) => {
+                      event.currentTarget.style.filter = 'brightness(1.05)'
+                    }}
+                    onMouseLeave={(event) => {
+                      event.currentTarget.style.filter = 'none'
+                      event.currentTarget.style.transform = statusFilter === filter.value ? 'translateY(-1px)' : 'none'
+                    }}
+                  >
+                    {t(filter.labelKey)}
+                  </button>
+                ))}
+              </div>
+              <div style={{ flex: 1, minWidth: '240px' }}>
+                <input
+                  type="text"
+                  value={searchTerm}
+                  onChange={(event) => setSearchTerm(event.target.value)}
+                  placeholder={t('fleetManagement.filters.searchPlaceholder')}
+                  style={{
+                    width: '100%',
+                    padding: '0.55rem 0.85rem',
+                    borderRadius: '999px',
+                    border: '1px solid rgba(255,255,255,0.35)',
+                    background: 'rgba(0,0,0,0.25)',
+                    color: '#ffffff'
+                  }}
+                />
+              </div>
+            </div>
 
-              <div
-                style={{
-                  border: '1px solid rgba(255,255,255,0.25)',
-                  borderRadius: '18px',
-                  overflow: 'hidden',
-                  background: 'rgba(255,255,255,0.06)'
-                }}
-              >
-                <table style={{ width: '100%', borderCollapse: 'collapse', color: '#ffffff', fontSize: '0.92rem' }}>
-                  <thead>
-                    <tr style={{ textAlign: 'left', background: 'rgba(255,255,255,0.08)' }}>
-                      <th style={listHeaderCellStyle}>{lang === 'de' ? 'Fahrzeug' : 'Vehicle'}</th>
-                      <th style={listHeaderCellStyle}>{t('fleetManagement.filters.statusLabel')}</th>
-                      <th style={listHeaderCellStyle}>{lang === 'de' ? 'Standort' : 'Location'}</th>
-                      <th style={listHeaderCellStyle}>{t('fleetManagement.detail.inspection')}</th>
-                      <th style={listHeaderCellStyle}>{t('fleetManagement.detail.maintenance')}</th>
-                      <th style={{ ...listHeaderCellStyle, textAlign: 'right' }}>{t('fleetManagement.detail.downtime')}</th>
+            <div
+              style={{
+                border: '1px solid rgba(255,255,255,0.25)',
+                borderRadius: '18px',
+                overflow: 'hidden',
+                background: 'rgba(255,255,255,0.06)'
+              }}
+            >
+              <table style={{ width: '100%', borderCollapse: 'collapse', color: '#ffffff', fontSize: '0.92rem' }}>
+                <thead>
+                  <tr style={{ textAlign: 'left', background: 'rgba(255,255,255,0.08)' }}>
+                    <th style={listHeaderCellStyle}>{lang === 'de' ? 'Fahrzeug' : 'Vehicle'}</th>
+                    <th style={listHeaderCellStyle}>{t('fleetManagement.filters.statusLabel')}</th>
+                    <th style={listHeaderCellStyle}>{lang === 'de' ? 'Standort' : 'Location'}</th>
+                    <th style={listHeaderCellStyle}>{t('fleetManagement.detail.inspection')}</th>
+                    <th style={listHeaderCellStyle}>{t('fleetManagement.detail.maintenance')}</th>
+                    <th style={{ ...listHeaderCellStyle, textAlign: 'right' }}>{t('fleetManagement.detail.downtime')}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredVehicles.length === 0 ? (
+                    <tr>
+                      <td style={{ ...listCellStyle, textAlign: 'center' }} colSpan={6}>
+                        {lang === 'de' ? 'Keine Fahrzeuge gefunden.' : 'No vehicles found.'}
+                      </td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    {filteredVehicles.length === 0 ? (
-                      <tr>
-                        <td style={{ ...listCellStyle, textAlign: 'center' }} colSpan={6}>
-                          {lang === 'de' ? 'Keine Fahrzeuge gefunden.' : 'No vehicles found.'}
-                        </td>
-                      </tr>
-                    ) : (
-                      filteredVehicles.map((vehicle) => (
-                        <tr
-                          key={vehicle.id}
-                          onClick={() => setSelectedVehicleId(vehicle.id)}
-                          style={{
-                            cursor: 'pointer',
-                            background: vehicle.id === selectedVehicleId ? 'rgba(255,255,255,0.08)' : undefined
-                          }}
-                        >
-                          <td style={listCellStyle}>
-                            <div style={{ display: 'flex', flexDirection: 'column' }}>
-                              <strong>{vehicle.plate}</strong>
-                              <span style={{ color: GLASS_SUBTLE }}>{vehicle.vin}</span>
-                            </div>
-                          </td>
-                          <td style={listCellStyle}>
-                            <span style={getStatusBadgeStyles(vehicle.status)}>
-                              {t(`fleetManagement.list.statusBadges.${vehicle.status}`)}
-                            </span>
-                          </td>
-                          <td style={listCellStyle}>{vehicle.location}</td>
-                          <td style={listCellStyle}>{vehicle.inspectionDate}</td>
-                          <td style={listCellStyle}>{vehicle.maintenanceDate}</td>
-                          <td style={{ ...listCellStyle, textAlign: 'right' }}>{vehicle.downtimeDays}d</td>
-                        </tr>
-                      ))
-                    )}
-                  </tbody>
-                </table>
-              </div>
-            </Card>
-
-            <Card variant="glass">
-              <header style={{ marginBottom: '1rem', color: '#ffffff' }}>
-                <h2 style={{ margin: 0 }}>
-                  {selectedVehicle ? `${t('fleetManagement.detail.title')} – ${selectedVehicle.plate}` : t('fleetManagement.detail.title')}
-                </h2>
-              </header>
-              {!selectedVehicle ? (
-                <p style={{ color: GLASS_SUBTLE }}>{t('fleetManagement.filters.searchPlaceholder')}</p>
-              ) : (
-              <div
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-                  gap: '1.25rem'
-                }}
-              >
-                <div>
-                  <h3 style={{ margin: '0 0 0.5rem', color: '#ffffff' }}>{t('fleetManagement.detail.overview')}</h3>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem', color: GLASS_TEXT }}>
-                    <span>VIN: {selectedVehicle.vin}</span>
-                    <span>
-                      {t('fleetManagement.filters.typeLabel')}: {t(`fleetManagement.filters.typeOptions.${selectedVehicle.type}`)}
-                    </span>
-                    <span>
-                      {t('fleetManagement.detail.usage')}:{' '}
-                      {t(`fleetManagement.detail.usageLabels.${selectedVehicle.usage}`)}
-                    </span>
-                    <span>
-                      {t('fleetManagement.detail.schedule')}: {selectedVehicle.location}
-                    </span>
-                    <span>
-                      {t('fleetReporting.vehicles.cards.inspection')}: {selectedVehicle.inspectionDate}
-                    </span>
-                    <span style={getInspectionBadgeStyles(selectedVehicle.inspectionStatus)}>
-                      {t('fleetManagement.detail.inspectionStatus.' + selectedVehicle.inspectionStatus)}
-                    </span>
-                  </div>
-                </div>
-
-                <div>
-                  <h3 style={{ margin: '0 0 0.5rem', color: '#ffffff' }}>{t('fleetManagement.detail.schedule')}</h3>
-                  <ul style={{ listStyle: 'none', padding: 0, margin: 0, color: GLASS_TEXT, display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
-                    <li>
-                      {t('fleetManagement.detail.inspection')}: {selectedVehicle.inspectionDate}{' '}
-                      <span style={getInspectionBadgeStyles(selectedVehicle.inspectionStatus)}>
-                        {t(`fleetManagement.detail.inspectionStatus.${selectedVehicle.inspectionStatus}`)}
-                      </span>
-                    </li>
-                    <li>
-                      {t('fleetManagement.detail.maintenance')}: {selectedVehicle.maintenanceDate}
-                    </li>
-                    <li>
-                      {t('fleetManagement.detail.downtime')}: {selectedVehicle.downtimeDays}d
-                    </li>
-                    {selectedVehicle.repairAppointments.map((appointment) => (
-                      <li key={appointment.date}>
-                        {appointment.date} – {appointment.note}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div>
-                  <h3 style={{ margin: '0 0 0.5rem', color: '#ffffff' }}>{t('fleetManagement.detail.documents')}</h3>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-                    {selectedVehicle.documents.map((doc) => (
-                      <div
-                        key={doc}
+                  ) : (
+                    filteredVehicles.map((vehicle) => (
+                      <tr
+                        key={vehicle.id}
+                        onClick={() => setSelectedVehicleId(vehicle.id)}
                         style={{
-                          padding: '0.45rem 0.7rem',
-                          borderRadius: '12px',
-                          border: '1px solid rgba(255,255,255,0.35)',
-                          color: '#ffffff',
-                          display: 'flex',
-                          justifyContent: 'space-between',
-                          alignItems: 'center'
+                          cursor: 'pointer',
+                          background: vehicle.id === selectedVehicleId ? 'rgba(255,255,255,0.08)' : undefined
                         }}
                       >
-                        <span>{t(`fleetManagement.detail.documentsList.${doc}`)}</span>
-                        <Button
-                          variant="secondary"
-                          style={{ padding: '0.45rem 1rem', fontSize: '0.85rem', borderRadius: '12px' }}
-                        >
-                          {t('fleetManagement.detail.upload')}
-                        </Button>
-                      </div>
-                    ))}
+                        <td style={listCellStyle}>
+                          <div style={{ display: 'flex', flexDirection: 'column' }}>
+                            <strong>{vehicle.plate}</strong>
+                            <span style={{ color: GLASS_SUBTLE }}>{vehicle.vin}</span>
+                          </div>
+                        </td>
+                        <td style={listCellStyle}>
+                          <span style={getStatusBadgeStyles(vehicle.status)}>
+                            {t(`fleetManagement.list.statusBadges.${vehicle.status}`)}
+                          </span>
+                        </td>
+                        <td style={listCellStyle}>{vehicle.location}</td>
+                        <td style={listCellStyle}>{vehicle.inspectionDate}</td>
+                        <td style={listCellStyle}>{vehicle.maintenanceDate}</td>
+                        <td style={{ ...listCellStyle, textAlign: 'right' }}>{vehicle.downtimeDays}d</td>
+                      </tr>
+                    ))
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </Card>
+
+          {!selectedVehicle ? (
+            <Card variant="glass" style={SECTION_CARD_STYLE}>
+              <p style={{ color: GLASS_SUBTLE, margin: 0 }}>{t('fleetManagement.filters.searchPlaceholder')}</p>
+            </Card>
+          ) : (
+            <>
+              <Card variant="glass" style={SECTION_CARD_STYLE}>
+                <header style={{ marginBottom: '1rem', color: '#ffffff' }}>
+                  <h2 style={{ margin: 0 }}>
+                    {t('fleetManagement.detail.title')} – {selectedVehicle.plate}
+                  </h2>
+                </header>
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+                    gap: '1.25rem'
+                  }}
+                >
+                  <div>
+                    <h3 style={{ margin: '0 0 0.5rem', color: '#ffffff' }}>{t('fleetManagement.detail.overview')}</h3>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem', color: GLASS_TEXT }}>
+                      <span>VIN: {selectedVehicle.vin}</span>
+                      <span>
+                        {t('fleetManagement.filters.typeLabel')}: {t(`fleetManagement.filters.typeOptions.${selectedVehicle.type}`)}
+                      </span>
+                      <span>
+                        {t('fleetManagement.detail.usage')}:{' '}
+                        {t(`fleetManagement.detail.usageLabels.${selectedVehicle.usage}`)}
+                      </span>
+                      <span>
+                        {t('fleetManagement.detail.schedule')}: {selectedVehicle.location}
+                      </span>
+                      <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+                        {t('fleetManagement.filters.statusLabel')}:
+                        <span style={getStatusBadgeStyles(selectedVehicle.status)}>
+                          {t(`fleetManagement.list.statusBadges.${selectedVehicle.status}`)}
+                        </span>
+                      </span>
+                      <span style={getInspectionBadgeStyles(selectedVehicle.inspectionStatus)}>
+                        {t('fleetManagement.detail.inspectionStatus.' + selectedVehicle.inspectionStatus)}
+                      </span>
+                    </div>
+                  </div>
+                  <div>
+                    <h3 style={{ margin: '0 0 0.5rem', color: '#ffffff' }}>{t('fleetManagement.detail.schedule')}</h3>
+                    <ul
+                      style={{
+                        listStyle: 'none',
+                        padding: 0,
+                        margin: 0,
+                        color: GLASS_TEXT,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '0.4rem'
+                      }}
+                    >
+                      <li>
+                        {t('fleetManagement.detail.inspection')}: {selectedVehicle.inspectionDate}{' '}
+                        <span style={getInspectionBadgeStyles(selectedVehicle.inspectionStatus)}>
+                          {t(`fleetManagement.detail.inspectionStatus.${selectedVehicle.inspectionStatus}`)}
+                        </span>
+                      </li>
+                      <li>
+                        {t('fleetManagement.detail.maintenance')}: {selectedVehicle.maintenanceDate}
+                      </li>
+                      <li>
+                        {t('fleetManagement.detail.downtime')}: {selectedVehicle.downtimeDays}d
+                      </li>
+                      {selectedVehicle.repairAppointments.map((appointment) => (
+                        <li key={appointment.date}>
+                          {appointment.date} – {appointment.note}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
+              </Card>
 
-                <div>
-                  <h3 style={{ margin: '0 0 0.5rem', color: '#ffffff' }}>{t('fleetManagement.detail.policies')}</h3>
-                  <table style={{ width: '100%', borderCollapse: 'collapse', color: '#ffffff', fontSize: '0.9rem' }}>
+              <Card variant="glass" style={SECTION_CARD_STYLE}>
+                <header style={{ marginBottom: '1rem', color: '#ffffff' }}>
+                  <h2 style={{ margin: 0 }}>{t('fleetManagement.detail.documents')}</h2>
+                </header>
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+                    gap: '0.9rem'
+                  }}
+                >
+                  {selectedVehicle.documents.map((doc) => (
+                    <div
+                      key={doc}
+                      style={{
+                        padding: '0.6rem 0.85rem',
+                        borderRadius: '14px',
+                        border: '1px solid rgba(255,255,255,0.35)',
+                        color: '#ffffff',
+                        background: 'rgba(0,0,0,0.25)',
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        gap: '0.75rem',
+                        flexWrap: 'wrap'
+                      }}
+                    >
+                      <span>{t(`fleetManagement.detail.documentsList.${doc}`)}</span>
+                      <Button variant="secondary" style={{ borderRadius: '12px', padding: '0.35rem 0.9rem', fontSize: '0.85rem' }}>
+                        {t('fleetManagement.detail.upload')}
+                      </Button>
+                    </div>
+                  ))}
+                  {!selectedVehicle.documents.length && <span style={{ color: GLASS_SUBTLE }}>—</span>}
+                </div>
+              </Card>
+
+              <Card variant="glass" style={SECTION_CARD_STYLE}>
+                <header style={{ marginBottom: '1rem', color: '#ffffff' }}>
+                  <h2 style={{ margin: 0 }}>{t('fleetManagement.detail.policies')}</h2>
+                </header>
+                <div style={{ overflowX: 'auto' }}>
+                  <table
+                    style={{
+                      width: '100%',
+                      minWidth: '720px',
+                      borderCollapse: 'collapse',
+                      color: '#ffffff',
+                      fontSize: '0.9rem'
+                    }}
+                  >
                     <thead>
                       <tr style={{ textAlign: 'left', color: 'rgba(255,255,255,0.75)' }}>
                         <th>{t('fleetManagement.detail.policiesColumns.number')}</th>
@@ -648,7 +685,7 @@ export default function FleetManagementPage() {
                     <tbody>
                       {selectedVehicle.policies.map((policy) => (
                         <tr key={policy.number}>
-                          <td style={{ padding: '0.4rem 0.2rem' }}>{policy.number}</td>
+                          <td style={{ padding: '0.5rem 0.35rem' }}>{policy.number}</td>
                           <td>{t(`fleetManagement.detail.policyLines.${policy.line}`)}</td>
                           <td>{policy.sum}</td>
                           <td>{policy.deductible}</td>
@@ -668,93 +705,97 @@ export default function FleetManagementPage() {
                     </tbody>
                   </table>
                 </div>
+              </Card>
 
-                <div style={{ gridColumn: '1 / -1' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem' }}>
-                    <h3 style={{ margin: 0, color: '#ffffff' }}>{t('fleetManagement.detail.drivers')}</h3>
-                    <Button variant="secondary" onClick={() => setShowDriverPicker((prev) => !prev)}>
-                      {t('fleetManagement.detail.addDriver')}
-                    </Button>
+              <Card variant="glass" style={SECTION_CARD_STYLE}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.75rem' }}>
+                  <div>
+                    <h2 style={{ margin: 0, color: '#ffffff' }}>{t('fleetManagement.detail.drivers')}</h2>
+                    <p style={{ margin: '0.3rem 0 0', color: GLASS_SUBTLE }}>
+                      {t('fleetManagement.driverPicker.title')}
+                    </p>
                   </div>
-                  {showDriverPicker && (
-                    <div
-                      style={{
-                        marginTop: '0.75rem',
-                        padding: '0.75rem',
-                        borderRadius: '16px',
-                        border: '1px solid rgba(255,255,255,0.35)',
-                        background: 'rgba(0,0,0,0.2)'
-                      }}
-                    >
-                      <p style={{ margin: '0 0 0.5rem', color: GLASS_TEXT }}>{t('fleetManagement.driverPicker.title')}</p>
-                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-                        {availableDrivers.map((driver) => (
-                          <Button key={driver.id} onClick={() => handleAssignDriver(driver.id)}>
-                            {driver.name}
-                          </Button>
-                        ))}
-                        {!availableDrivers.length && <span style={{ color: GLASS_SUBTLE }}>—</span>}
-                      </div>
-                    </div>
-                  )}
+                  <Button variant="secondary" onClick={() => setShowDriverPicker((prev) => !prev)}>
+                    {t('fleetManagement.detail.addDriver')}
+                  </Button>
+                </div>
+                {showDriverPicker && (
                   <div
                     style={{
-                      marginTop: '1rem',
-                      display: 'grid',
-                      gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-                      gap: '0.75rem'
+                      marginTop: '0.9rem',
+                      padding: '0.9rem',
+                      borderRadius: '16px',
+                      border: '1px solid rgba(255,255,255,0.35)',
+                      background: 'rgba(0,0,0,0.2)'
                     }}
                   >
-                    {selectedVehicle.driverIds.map((id) => {
-                      const driver = DRIVER_DIRECTORY.find((entry) => entry.id === id)
-                      if (!driver) return null
-                      return (
-                        <div
-                          key={driver.id}
-                          style={{
-                            padding: '0.9rem',
-                            borderRadius: '16px',
-                            border: '1px solid rgba(255,255,255,0.35)',
-                            background: 'rgba(255,255,255,0.1)',
-                            color: '#ffffff',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            gap: '0.35rem'
-                          }}
-                        >
-                          <strong>{driver.name}</strong>
-                          <span style={{ color: GLASS_SUBTLE }}>
-                            ID: {driver.employeeId} • {driver.birthDate}
-                          </span>
-                          <span style={{ color: GLASS_SUBTLE }}>
-                            {t('fleetManagement.detail.licenses')}: {driver.licenseClasses.join(', ')}
-                          </span>
-                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '0.5rem' }}>
-                            <span style={{ color: GLASS_SUBTLE }}>
-                              {t('fleetManagement.detail.licenseValidity')}: {driver.licenseValidUntil}
-                            </span>
-                            <span
-                              style={{
-                                padding: '0.2rem 0.6rem',
-                                borderRadius: '999px',
-                                color: '#ffffff',
-                                fontSize: '0.75rem',
-                                fontWeight: 700,
-                                ...getLicenseBadgeStyles(driver.licenseStatus)
-                              }}
-                            >
-                              {t(`fleetManagement.detail.licenseStatus.${driver.licenseStatus}`)}
-                            </span>
-                          </div>
-                        </div>
-                      )
-                    })}
+                    <p style={{ margin: '0 0 0.5rem', color: GLASS_TEXT }}>{t('fleetManagement.driverPicker.title')}</p>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+                      {availableDrivers.map((driver) => (
+                        <Button key={driver.id} onClick={() => handleAssignDriver(driver.id)}>
+                          {driver.name}
+                        </Button>
+                      ))}
+                      {!availableDrivers.length && <span style={{ color: GLASS_SUBTLE }}>—</span>}
+                    </div>
                   </div>
+                )}
+                <div
+                  style={{
+                    marginTop: '1rem',
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+                    gap: '0.75rem'
+                  }}
+                >
+                  {selectedVehicle.driverIds.map((id) => {
+                    const driver = DRIVER_DIRECTORY.find((entry) => entry.id === id)
+                    if (!driver) return null
+                    return (
+                      <div
+                        key={driver.id}
+                        style={{
+                          padding: '0.9rem',
+                          borderRadius: '16px',
+                          border: '1px solid rgba(255,255,255,0.35)',
+                          background: 'rgba(255,255,255,0.1)',
+                          color: '#ffffff',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          gap: '0.35rem'
+                        }}
+                      >
+                        <strong>{driver.name}</strong>
+                        <span style={{ color: GLASS_SUBTLE }}>
+                          ID: {driver.employeeId} • {driver.birthDate}
+                        </span>
+                        <span style={{ color: GLASS_SUBTLE }}>
+                          {t('fleetManagement.detail.licenses')}: {driver.licenseClasses.join(', ')}
+                        </span>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '0.5rem' }}>
+                          <span style={{ color: GLASS_SUBTLE }}>
+                            {t('fleetManagement.detail.licenseValidity')}: {driver.licenseValidUntil}
+                          </span>
+                          <span
+                            style={{
+                              padding: '0.2rem 0.6rem',
+                              borderRadius: '999px',
+                              color: '#ffffff',
+                              fontSize: '0.75rem',
+                              fontWeight: 700,
+                              ...getLicenseBadgeStyles(driver.licenseStatus)
+                            }}
+                          >
+                            {t(`fleetManagement.detail.licenseStatus.${driver.licenseStatus}`)}
+                          </span>
+                        </div>
+                      </div>
+                    )
+                  })}
                 </div>
-              </div>
-              )}
-            </Card>
-          </div>
+              </Card>
+            </>
+          )}
         </div>
       </section>
     </div>
