@@ -1,15 +1,34 @@
-import React from 'react'
+import React, { useMemo, useState } from 'react'
 import Card from '@/components/ui/Card'
 import Header from '@/components/ui/Header'
+import Button from '@/components/ui/Button'
 import { useI18n } from '@/i18n/I18nContext'
 import BackgroundLogin from '@/assets/images/background_login.png'
 
-const kpis = [
+type KpiItem =
+  | { key: keyof typeof KPI_LABELS; value: string; icon: string; unit?: string }
+  | { key: keyof typeof KPI_LABELS; icon: string; valueKey: string }
+
+const KPI_LABELS = {
+  totalClaims: 'fleetReporting.kpi.totalClaims',
+  openClaims: 'fleetReporting.kpi.openClaims',
+  lossRatio: 'fleetReporting.kpi.lossRatio',
+  avgCost: 'fleetReporting.kpi.avgCost',
+  coverageRate: 'fleetReporting.kpi.coverageRate',
+  activeVehicles: 'fleetReporting.kpi.activeVehicles',
+  downtime: 'fleetReporting.kpi.downtime',
+  topCause: 'fleetReporting.kpi.topCause'
+} as const
+
+const kpis: KpiItem[] = [
   { key: 'totalClaims', value: '248', icon: '📋' },
   { key: 'openClaims', value: '32', icon: '⚠️' },
   { key: 'lossRatio', value: '61.4%', icon: '📊' },
   { key: 'avgCost', value: '€3,420', icon: '💶' },
-  { key: 'coverageRate', value: '86%', icon: '✅' }
+  { key: 'coverageRate', value: '86%', icon: '✅' },
+  { key: 'activeVehicles', value: '312', icon: '🚚' },
+  { key: 'downtime', value: '3.1', icon: '⏱️' },
+  { key: 'topCause', icon: '🛑', valueKey: 'fleetReporting.kpiValues.topCause' }
 ] as const
 
 const monthlyClaims = [
@@ -33,10 +52,133 @@ const severityBreakdown = [
   { key: 'low', value: 27, color: '#3DD598' }
 ] as const
 
-const aiItemKeys = ['item1', 'item2', 'item3', 'item4'] as const
+const aiItemKeys = ['item1', 'item2', 'item3', 'item4', 'item5', 'item6'] as const
 
 const filterTypeOptions = ['all', 'motor', 'liability', 'cargo'] as const
 const filterRangeOptions = ['last30', 'last12'] as const
+
+const vehicleRecords = [
+  {
+    id: 'veh1',
+    plate: 'DE-789-XY',
+    type: 'truck',
+    status: 'active',
+    location: 'Berlin Depot',
+    inspection: '2025-05-12',
+    maintenance: '2025-04-02',
+    downtime: 2
+  },
+  {
+    id: 'veh2',
+    plate: 'HH-CARGO-12',
+    type: 'trailer',
+    status: 'maintenance',
+    location: 'Hamburg Hafen',
+    inspection: '2025-06-30',
+    maintenance: '2025-03-18',
+    downtime: 6
+  },
+  {
+    id: 'veh3',
+    plate: 'M-FL-2045',
+    type: 'car',
+    status: 'active',
+    location: 'München City',
+    inspection: '2025-01-10',
+    maintenance: '2025-02-28',
+    downtime: 1
+  },
+  {
+    id: 'veh4',
+    plate: 'K-TR-330',
+    type: 'truck',
+    status: 'down',
+    location: 'Köln Werkstatt',
+    inspection: '2024-12-05',
+    maintenance: '2025-03-05',
+    downtime: 12
+  },
+  {
+    id: 'veh5',
+    plate: 'FRA-LOG-71',
+    type: 'trailer',
+    status: 'active',
+    location: 'Frankfurt Cargo Hub',
+    inspection: '2025-08-14',
+    maintenance: '2025-05-22',
+    downtime: 4
+  },
+  {
+    id: 'veh6',
+    plate: 'B-DEL-901',
+    type: 'delivery',
+    status: 'maintenance',
+    location: 'Berlin Lieferzentrum',
+    inspection: '2025-04-18',
+    maintenance: '2025-03-05',
+    downtime: 5
+  },
+  {
+    id: 'veh7',
+    plate: 'S-TR-550',
+    type: 'truck',
+    status: 'active',
+    location: 'Stuttgart',
+    inspection: '2025-09-01',
+    maintenance: '2025-05-30',
+    downtime: 2
+  },
+  {
+    id: 'veh8',
+    plate: 'HH-DEL-72',
+    type: 'delivery',
+    status: 'down',
+    location: 'Hamburg Innenstadt',
+    inspection: '2025-02-10',
+    maintenance: '2025-01-25',
+    downtime: 9
+  },
+  {
+    id: 'veh9',
+    plate: 'M-LOG-24',
+    type: 'car',
+    status: 'active',
+    location: 'München',
+    inspection: '2025-07-11',
+    maintenance: '2025-05-10',
+    downtime: 0
+  },
+  {
+    id: 'veh10',
+    plate: 'D-TR-84',
+    type: 'trailer',
+    status: 'active',
+    location: 'Düsseldorf',
+    inspection: '2025-06-01',
+    maintenance: '2025-04-17',
+    downtime: 1
+  },
+  {
+    id: 'veh11',
+    plate: 'HB-DEL-18',
+    type: 'delivery',
+    status: 'maintenance',
+    location: 'Bremen',
+    inspection: '2025-03-20',
+    maintenance: '2025-02-14',
+    downtime: 7
+  },
+  {
+    id: 'veh12',
+    plate: 'F-TR-95',
+    type: 'truck',
+    status: 'active',
+    location: 'Frankfurt',
+    inspection: '2025-11-02',
+    maintenance: '2025-07-18',
+    downtime: 3
+  }
+] as const
 
 const tableRows = [
   {
@@ -104,6 +246,36 @@ const tableRows = [
 const GLASS_TEXT = 'rgba(255,255,255,0.85)'
 const GLASS_SUBTLE = 'rgba(255,255,255,0.65)'
 
+type VehicleTypeFilter = 'all' | 'car' | 'truck' | 'trailer' | 'delivery'
+type VehicleStatusFilter = 'all' | 'active' | 'maintenance' | 'down'
+
+function KpiCard({ icon, label, value }: { icon: string; label: string; value: string }) {
+  return (
+    <Card variant="glass">
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+        <div
+          style={{
+            width: '42px',
+            height: '42px',
+            borderRadius: '14px',
+            background: 'rgba(0,0,0,0.2)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '1.5rem'
+          }}
+        >
+          {icon}
+        </div>
+        <div style={{ flex: 1 }}>
+          <p style={{ margin: 0, color: GLASS_SUBTLE, fontSize: '0.9rem' }}>{label}</p>
+          <div style={{ marginTop: '0.2rem', fontSize: '1.85rem', fontWeight: 700, color: '#ffffff' }}>{value}</div>
+        </div>
+      </div>
+    </Card>
+  )
+}
+
 function getCoverageBadgeStyles(variant: 'covered' | 'uncovered') {
   if (variant === 'covered') {
     return {
@@ -143,6 +315,22 @@ function getAiBadgeStyles(tag: 'alert' | 'watch' | 'normal') {
 export default function FleetReportingPage() {
   const { t } = useI18n()
   const maxMonthly = Math.max(...monthlyClaims.map((entry) => entry.value))
+  const [vehicleType, setVehicleType] = useState<VehicleTypeFilter>('all')
+  const [vehicleStatus, setVehicleStatus] = useState<VehicleStatusFilter>('all')
+  const [vehicleSearch, setVehicleSearch] = useState('')
+
+  const filteredVehicles = useMemo(() => {
+    const search = vehicleSearch.trim().toLowerCase()
+    return vehicleRecords.filter((vehicle) => {
+      const matchType = vehicleType === 'all' || vehicle.type === vehicleType
+      const matchStatus = vehicleStatus === 'all' || vehicle.status === vehicleStatus
+      const matchSearch =
+        !search ||
+        vehicle.plate.toLowerCase().includes(search) ||
+        vehicle.location.toLowerCase().includes(search)
+      return matchType && matchStatus && matchSearch
+    })
+  }, [vehicleStatus, vehicleType, vehicleSearch])
 
   return (
     <div style={{ position: 'relative', minHeight: '100vh' }}>
@@ -192,17 +380,15 @@ export default function FleetReportingPage() {
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
               gap: '1rem'
             }}
           >
-            {kpis.map((item) => (
-              <Card key={item.key} variant="glass">
-                <p style={{ margin: 0, fontSize: '0.95rem', color: GLASS_SUBTLE }}>{t(`fleetReporting.kpi.${item.key}`)}</p>
-                <div style={{ marginTop: '0.5rem', fontSize: '2rem', fontWeight: 700, color: '#ffffff' }}>{item.value}</div>
-                <span style={{ fontSize: '1.5rem' }}>{item.icon}</span>
-              </Card>
-            ))}
+            {kpis.map((item) => {
+              const label = t(`fleetReporting.kpi.${item.key}`)
+              const value = 'valueKey' in item ? t(item.valueKey) : item.value
+              return <KpiCard key={item.key} icon={item.icon} label={label} value={value} />
+            })}
           </div>
 
           <div
@@ -293,6 +479,132 @@ export default function FleetReportingPage() {
                   }}
                 >
                   {t(`fleetReporting.ai.items.${key}`)}
+                </div>
+              ))}
+            </div>
+          </Card>
+
+          <Card variant="glass" title={t('fleetReporting.vehicles.title')}>
+            <div
+              style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                gap: '1rem',
+                marginBottom: '1rem',
+                color: GLASS_TEXT
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+                <span style={{ color: GLASS_SUBTLE }}>{t('fleetReporting.vehicles.filters.typeLabel')}:</span>
+                {['all', 'car', 'truck', 'trailer', 'delivery'].map((option) => (
+                  <button
+                    key={option}
+                    type="button"
+                    onClick={() => setVehicleType(option as VehicleTypeFilter)}
+                    style={{
+                      borderRadius: '999px',
+                      border: '1px solid rgba(255,255,255,0.35)',
+                      background: vehicleType === option ? 'rgba(255,255,255,0.3)' : 'rgba(255,255,255,0.12)',
+                      color: '#ffffff',
+                      padding: '0.35rem 0.9rem',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    {t(`fleetReporting.vehicles.filters.typeOptions.${option}`)}
+                  </button>
+                ))}
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+                <span style={{ color: GLASS_SUBTLE }}>{t('fleetReporting.vehicles.filters.statusLabel')}:</span>
+                {['all', 'active', 'maintenance', 'down'].map((option) => (
+                  <button
+                    key={option}
+                    type="button"
+                    onClick={() => setVehicleStatus(option as VehicleStatusFilter)}
+                    style={{
+                      borderRadius: '999px',
+                      border: '1px solid rgba(255,255,255,0.35)',
+                      background: vehicleStatus === option ? 'rgba(255,255,255,0.3)' : 'rgba(255,255,255,0.12)',
+                      color: '#ffffff',
+                      padding: '0.35rem 0.9rem',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    {t(`fleetReporting.vehicles.filters.statusOptions.${option}`)}
+                  </button>
+                ))}
+              </div>
+              <div style={{ flex: 1, minWidth: '220px' }}>
+                <input
+                  type="text"
+                  value={vehicleSearch}
+                  onChange={(event) => setVehicleSearch(event.target.value)}
+                  placeholder={t('fleetReporting.vehicles.filters.searchPlaceholder')}
+                  style={{
+                    width: '100%',
+                    padding: '0.55rem 0.85rem',
+                    borderRadius: '999px',
+                    border: '1px solid rgba(255,255,255,0.35)',
+                    background: 'rgba(0,0,0,0.25)',
+                    color: '#ffffff'
+                  }}
+                />
+              </div>
+            </div>
+
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+                gap: '1rem'
+              }}
+            >
+              {filteredVehicles.map((vehicle) => (
+                <div
+                  key={vehicle.id}
+                  style={{
+                    padding: '1rem 1.2rem',
+                    borderRadius: '18px',
+                    border: '1px solid rgba(255,255,255,0.35)',
+                    background: 'rgba(255,255,255,0.1)',
+                    boxShadow: '0 12px 32px rgba(0,0,0,0.25)',
+                    color: '#ffffff',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '0.45rem'
+                  }}
+                >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '0.5rem' }}>
+                    <strong style={{ fontSize: '1.1rem' }}>{vehicle.plate}</strong>
+                    <span
+                      style={{
+                        padding: '0.3rem 0.8rem',
+                        borderRadius: '999px',
+                        border: '1px solid rgba(255,255,255,0.35)',
+                        fontSize: '0.75rem',
+                        background: 'rgba(0,0,0,0.2)'
+                      }}
+                    >
+                      {t(`fleetReporting.vehicles.filters.typeOptions.${vehicle.type}`)}
+                    </span>
+                  </div>
+                  <span style={{ color: GLASS_SUBTLE }}>{vehicle.location}</span>
+                  <span style={{ color: GLASS_SUBTLE }}>
+                    {t('fleetReporting.vehicles.cards.status')}:{' '}
+                    <strong>{t(`fleetReporting.vehicles.statusBadges.${vehicle.status}`)}</strong>
+                  </span>
+                  <span style={{ color: GLASS_SUBTLE }}>
+                    {t('fleetReporting.vehicles.cards.inspection')}: {vehicle.inspection}
+                  </span>
+                  <span style={{ color: GLASS_SUBTLE }}>
+                    {t('fleetReporting.vehicles.cards.maintenance')}: {vehicle.maintenance}
+                  </span>
+                  <span style={{ color: GLASS_SUBTLE }}>
+                    {t('fleetReporting.vehicles.cards.downtime')}: {vehicle.downtime}d
+                  </span>
+                  <Button variant="secondary" style={{ marginTop: '0.35rem' }}>
+                    {t('fleetReporting.vehicles.cards.open')}
+                  </Button>
                 </div>
               ))}
             </div>

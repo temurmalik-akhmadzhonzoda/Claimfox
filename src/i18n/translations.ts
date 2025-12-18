@@ -218,6 +218,10 @@ export const translations: Record<Lang, TranslationTree> = {
         reporting: {
           title: 'Fleet Reporting',
           description: 'Fuhrpark-Kennzahlen, KPIs und Schadenreports bereitstellen.'
+        },
+        fleetManagement: {
+          title: 'Fuhrparkverwaltung',
+          description: 'Verwalte Fahrzeuge, Termine, Dokumente und Fahrerzuordnung.'
         }
       }
     },
@@ -229,7 +233,13 @@ export const translations: Record<Lang, TranslationTree> = {
         openClaims: 'Offene Schäden',
         lossRatio: 'Schadenquote',
         avgCost: 'Ø Schadenkosten',
-        coverageRate: 'Deckungsquote'
+        coverageRate: 'Deckungsquote',
+        activeVehicles: 'Aktive Fahrzeuge',
+        downtime: 'Ø Ausfalltage / Monat',
+        topCause: 'Top-Schadenursache'
+      },
+      kpiValues: {
+        topCause: 'Auffahrunfall'
       },
       charts: {
         monthlyTitle: 'Schäden pro Monat',
@@ -255,7 +265,44 @@ export const translations: Record<Lang, TranslationTree> = {
           item1: 'Fahrzeug DE-789-XY zeigt 40 % höhere Schadenfrequenz als der Fuhrpark-Durchschnitt.',
           item2: 'Region Berlin verzeichnet 25 % mehr Vorfälle in Q4. Wetterkorrelation erkannt.',
           item3: 'Fahrerschulung für Team Nord empfohlen – wiederkehrende Unfallmuster.',
-          item4: 'Cargo-Schäden steigen im November um 15 %. Routenoptimierung empfohlen.'
+          item4: 'Cargo-Schäden steigen im November um 15 %. Routenoptimierung empfohlen.',
+          item5: 'Trailer-Cluster Süd zeigt gehäufte Rangierschäden. Parkplatz-/Routenführung prüfen.',
+          item6: 'Werkstattkosten steigen bei “Delivery Vans” um 12 %. Präventivwartung empfohlen.'
+        }
+      },
+      vehicles: {
+        title: 'Fahrzeuge',
+        filters: {
+          typeLabel: 'Fahrzeugtyp',
+          statusLabel: 'Status',
+          searchPlaceholder: 'Kennzeichen oder VIN suchen …',
+          typeOptions: {
+            all: 'Alle',
+            car: 'PKW',
+            truck: 'LKW',
+            trailer: 'Trailer',
+            delivery: 'Delivery Vans'
+          },
+          statusOptions: {
+            all: 'Alle',
+            active: 'Aktiv',
+            maintenance: 'In Werkstatt',
+            down: 'Ausfall'
+          }
+        },
+        cards: {
+          type: 'Typ',
+          status: 'Status',
+          location: 'Standort',
+          inspection: 'Nächster TÜV',
+          maintenance: 'Nächste Wartung',
+          downtime: 'Ausfalltage YTD',
+          open: 'Öffnen'
+        },
+        statusBadges: {
+          active: 'Aktiv',
+          maintenance: 'Werkstatt',
+          down: 'Ausfall'
         }
       },
       filters: {
@@ -326,6 +373,102 @@ export const translations: Record<Lang, TranslationTree> = {
             ai: 'Temperaturabweichung + verspätete Meldung'
           }
         }
+      }
+    },
+    fleetManagement: {
+      title: 'Fuhrparkverwaltung',
+      subtitle: 'Fahrzeuge, Dokumente, Versicherungen und Fahrer zentral steuern.',
+      kpi: {
+        active: 'Aktive Fahrzeuge',
+        workshop: 'In Werkstatt',
+        inspectionDue: 'TÜV fällig (30 Tage)',
+        openTasks: 'Offene Aufgaben'
+      },
+      filters: {
+        typeLabel: 'Fahrzeugtyp',
+        statusLabel: 'Status',
+        searchPlaceholder: 'Kennzeichen oder VIN suchen …',
+        typeOptions: {
+          all: 'Alle',
+          car: 'PKW',
+          truck: 'LKW',
+          trailer: 'Trailer',
+          delivery: 'Delivery Vans'
+        },
+        statusOptions: {
+          all: 'Alle',
+          active: 'Aktiv',
+          maintenance: 'In Werkstatt',
+          down: 'Ausfall'
+        }
+      },
+      list: {
+        title: 'Fahrzeugliste',
+        open: 'Öffnen',
+        statusBadges: {
+          active: 'Aktiv',
+          maintenance: 'Werkstatt',
+          down: 'Ausfall'
+        }
+      },
+      detail: {
+        title: 'Fahrzeugdetails',
+        overview: 'Stammdaten',
+        usage: 'Einsatz',
+        usageLabels: {
+          longhaul: 'Fernverkehr',
+          regional: 'Regionale Distribution',
+          city: 'City Delivery',
+          cargo: 'Cargo & Trailer'
+        },
+        schedule: 'Termine & Wartung',
+        inspection: 'TÜV Termin',
+        inspectionStatus: {
+          ok: 'OK',
+          dueSoon: 'Fällig bald',
+          overdue: 'Überfällig'
+        },
+        maintenance: 'Nächste Wartung',
+        downtime: 'Ausfalltage (12 Monate)',
+        documents: 'Dokumente',
+        documentsList: {
+          registration: 'Fahrzeugschein.pdf',
+          leasing: 'Leasingvertrag.pdf',
+          maintenance: 'Wartungsnachweise.zip'
+        },
+        upload: 'Upload',
+        policies: 'Versicherungspolicen',
+        policiesColumns: {
+          number: 'Police',
+          line: 'Sparte',
+          sum: 'Deckungssumme',
+          deductible: 'Selbstbehalt',
+          term: 'Laufzeit',
+          status: 'Status'
+        },
+        policyLines: {
+          liability: 'Haftpflicht',
+          casco: 'Kasko',
+          cargo: 'Cargo'
+        },
+        policyStatus: {
+          active: 'Aktiv',
+          pending: 'Ausstehend'
+        },
+        drivers: 'Fahrerzuordnung',
+        primaryDriver: 'Primärfahrer',
+        addDriver: 'Fahrer hinzufügen',
+        licenses: 'Führerscheinklassen',
+        licenseValidity: 'Gültig bis',
+        licenseStatus: {
+          valid: 'Gültig',
+          expiring: 'Läuft bald ab',
+          expired: 'Abgelaufen'
+        }
+      },
+      driverPicker: {
+        title: 'Verfügbare Fahrer',
+        assign: 'Zuweisen'
       }
     },
     registration: {
@@ -561,6 +704,10 @@ export const translations: Record<Lang, TranslationTree> = {
         reporting: {
           title: 'Fleet Reporting',
           description: 'Deliver fleet KPIs, dashboards, and claims reporting.'
+        },
+        fleetManagement: {
+          title: 'Fleet Management',
+          description: 'Manage vehicles, schedules, documentation, and driver assignments.'
         }
       }
     },
@@ -572,7 +719,13 @@ export const translations: Record<Lang, TranslationTree> = {
         openClaims: 'Open claims',
         lossRatio: 'Loss ratio',
         avgCost: 'Avg. claim cost',
-        coverageRate: 'Coverage rate'
+        coverageRate: 'Coverage rate',
+        activeVehicles: 'Active vehicles',
+        downtime: 'Avg. downtime days / month',
+        topCause: 'Top claim cause'
+      },
+      kpiValues: {
+        topCause: 'Rear-end collision'
       },
       charts: {
         monthlyTitle: 'Claims per month',
@@ -598,7 +751,44 @@ export const translations: Record<Lang, TranslationTree> = {
           item1: 'Vehicle DE-789-XY shows a 40% higher claim frequency than the fleet average.',
           item2: 'Region Berlin reports 25% more incidents in Q4. Weather correlation detected.',
           item3: 'Driver coaching recommended for Team North based on recurring accident patterns.',
-          item4: 'Cargo claims up 15% in November. Route optimization suggested.'
+          item4: 'Cargo claims up 15% in November. Route optimization suggested.',
+          item5: 'Trailer cluster South shows increased maneuvering damage. Review yard routing.',
+          item6: 'Repair costs for “Delivery Vans” up 12%. Recommend preventive maintenance.'
+        }
+      },
+      vehicles: {
+        title: 'Vehicles',
+        filters: {
+          typeLabel: 'Vehicle type',
+          statusLabel: 'Status',
+          searchPlaceholder: 'Search license plate or VIN …',
+          typeOptions: {
+            all: 'All',
+            car: 'Cars',
+            truck: 'Trucks',
+            trailer: 'Trailers',
+            delivery: 'Delivery vans'
+          },
+          statusOptions: {
+            all: 'All',
+            active: 'Active',
+            maintenance: 'In workshop',
+            down: 'Out of service'
+          }
+        },
+        cards: {
+          type: 'Type',
+          status: 'Status',
+          location: 'Location',
+          inspection: 'Next inspection',
+          maintenance: 'Next maintenance',
+          downtime: 'Downtime YTD',
+          open: 'Open'
+        },
+        statusBadges: {
+          active: 'Active',
+          maintenance: 'Workshop',
+          down: 'Out'
         }
       },
       filters: {
@@ -669,6 +859,102 @@ export const translations: Record<Lang, TranslationTree> = {
             ai: 'Temperature deviation + delayed notification'
           }
         }
+      }
+    },
+    fleetManagement: {
+      title: 'Fleet Management',
+      subtitle: 'Manage vehicles, documentation, insurance policies, and driver assignments.',
+      kpi: {
+        active: 'Active vehicles',
+        workshop: 'In workshop',
+        inspectionDue: 'Inspection due (30 days)',
+        openTasks: 'Open tasks'
+      },
+      filters: {
+        typeLabel: 'Vehicle type',
+        statusLabel: 'Status',
+        searchPlaceholder: 'Search license plate or VIN …',
+        typeOptions: {
+          all: 'All',
+          car: 'Cars',
+          truck: 'Trucks',
+          trailer: 'Trailers',
+          delivery: 'Delivery vans'
+        },
+        statusOptions: {
+          all: 'All',
+          active: 'Active',
+          maintenance: 'In workshop',
+          down: 'Out of service'
+        }
+      },
+      list: {
+        title: 'Vehicle list',
+        open: 'Open',
+        statusBadges: {
+          active: 'Active',
+          maintenance: 'Workshop',
+          down: 'Out'
+        }
+      },
+      detail: {
+        title: 'Vehicle details',
+        overview: 'Profile',
+        usage: 'Usage',
+        usageLabels: {
+          longhaul: 'Long-haul',
+          regional: 'Regional distribution',
+          city: 'City delivery',
+          cargo: 'Cargo & trailer'
+        },
+        schedule: 'Schedule & maintenance',
+        inspection: 'Inspection',
+        inspectionStatus: {
+          ok: 'OK',
+          dueSoon: 'Due soon',
+          overdue: 'Overdue'
+        },
+        maintenance: 'Next maintenance',
+        downtime: 'Downtime (12 months)',
+        documents: 'Documents',
+        documentsList: {
+          registration: 'Registration.pdf',
+          leasing: 'Leasing-agreement.pdf',
+          maintenance: 'Maintenance-records.zip'
+        },
+        upload: 'Upload',
+        policies: 'Insurance policies',
+        policiesColumns: {
+          number: 'Policy',
+          line: 'Line',
+          sum: 'Sum insured',
+          deductible: 'Deductible',
+          term: 'Term',
+          status: 'Status'
+        },
+        policyLines: {
+          liability: 'Liability',
+          casco: 'Comprehensive',
+          cargo: 'Cargo'
+        },
+        policyStatus: {
+          active: 'Active',
+          pending: 'Pending'
+        },
+        drivers: 'Driver assignment',
+        primaryDriver: 'Primary driver',
+        addDriver: 'Add driver',
+        licenses: 'License classes',
+        licenseValidity: 'Valid until',
+        licenseStatus: {
+          valid: 'Valid',
+          expiring: 'Expiring soon',
+          expired: 'Expired'
+        }
+      },
+      driverPicker: {
+        title: 'Available drivers',
+        assign: 'Assign'
       }
     },
     registration: {

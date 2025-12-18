@@ -10,6 +10,7 @@ import ProtectedLayout from '@/layouts/ProtectedLayout'
 import { useAuth } from '@/features/auth/AuthContext'
 import BrokerCrmPage from '@/pages/BrokerCrmPage'
 import FleetReportingPage from '@/pages/FleetReportingPage'
+import FleetManagementPage from '@/pages/FleetManagementPage'
 
 function NotFoundRedirect() {
   const { isAuthenticated } = useAuth()
@@ -33,6 +34,7 @@ export default function AppRouter() {
         <Route path="/broker-portal" element={<BrokerPortalLandingPage />} />
         <Route path="/broker-crm" element={<BrokerCrmPage />} />
         <Route path="/fleet-reporting" element={<FleetReportingPage />} />
+        <Route path="/fleet-management" element={<FleetManagementPage />} />
       </Route>
       <Route path="*" element={<NotFoundRedirect />} />
     </Routes>

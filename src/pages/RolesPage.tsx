@@ -10,7 +10,8 @@ import BackgroundLogin from '@/assets/images/background_login.png'
 const ROLE_ITEMS = [
   { key: 'claims' },
   { key: 'partner' },
-  { key: 'reporting', route: '/fleet-reporting' }
+  { key: 'reporting', route: '/fleet-reporting' },
+  { key: 'fleetManagement', route: '/fleet-management' }
 ] as const
 
 export default function RolesPage() {
