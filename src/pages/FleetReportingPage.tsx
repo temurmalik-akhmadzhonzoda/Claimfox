@@ -562,7 +562,21 @@ function KpiCard({ icon, label, value }: { icon: React.ReactNode; label: string;
         <div style={{ flex: '0 0 auto', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{icon}</div>
         <div>
           <p style={{ margin: 0, color: 'rgba(255,255,255,0.78)', fontSize: '0.9rem' }}>{label}</p>
-          <div style={{ marginTop: '0.3rem', fontSize: '2rem', fontWeight: 700, color: '#ffffff' }}>{value}</div>
+          <div
+            style={{
+              marginTop: '0.3rem',
+              fontSize: '2rem',
+              fontWeight: 700,
+              color: '#ffffff',
+              maxWidth: '100%',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap'
+            }}
+            title={value}
+          >
+            {value}
+          </div>
         </div>
       </div>
     </Card>
