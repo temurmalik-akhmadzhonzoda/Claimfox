@@ -7,8 +7,6 @@ import Background1 from '@/assets/images/background1.jpg'
 
 const heroKpiKeys = ['realTime', 'ai', 'tuv', 'claims', 'docs', 'compliance'] as const
 const manageFeatureKeys = ['vehicles', 'schedules', 'claims', 'downtime', 'documents', 'reporting'] as const
-const aiCardKeys = ['card1', 'card2', 'card3', 'card4', 'card5', 'card6'] as const
-const previewRowKeys = ['row1', 'row2', 'row3', 'row4', 'row5'] as const
 const useCaseKeys = ['logistics', 'delivery', 'industrial'] as const
 
 const previewKpis = [
@@ -130,12 +128,10 @@ const aiIcon = (
   </svg>
 )
 
-function IllustrationPanel({ title, value, description }: { title: string; value: string; description: string }) {
+function AiAlertsCard({ title, value, description }: { title: string; value: string; description: string }) {
   return (
     <div
       style={{
-        flex: '0 0 360px',
-        maxWidth: '100%',
         borderRadius: '28px',
         padding: '1.75rem',
         background: 'linear-gradient(135deg, rgba(8,0,100,0.85) 0%, rgba(19,16,64,0.6) 60%, rgba(212,56,13,0.35) 100%)',
@@ -184,12 +180,34 @@ function IllustrationPanel({ title, value, description }: { title: string; value
   )
 }
 
+const layoutStyles = `
+  .marketing-manage-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 360px;
+    gap: 1.5rem;
+    align-items: start;
+  }
+  .marketing-manage-grid .ai-card-wrapper {
+    justify-self: end;
+  }
+  @media (max-width: 900px) {
+    .marketing-manage-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .marketing-manage-grid .ai-card-wrapper {
+      justify-self: stretch;
+    }
+  }
+`
+
 export default function MarketingLandingPage() {
   const { t } = useI18n()
   const navigate = useNavigate()
 
   return (
-    <div style={{ position: 'relative', minHeight: '100vh', color: '#ffffff', overflow: 'hidden' }}>
+    <>
+      <style>{layoutStyles}</style>
+      <div style={{ position: 'relative', minHeight: '100vh', color: '#ffffff', overflow: 'hidden' }}>
       <div
         aria-hidden="true"
         style={{
@@ -252,50 +270,41 @@ export default function MarketingLandingPage() {
             gap: '2.5rem'
           }}
         >
-          <section style={heroGridStyle}>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', maxWidth: '680px' }}>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                <img src={InsurfoxLogoLight} alt="Insurfox" style={{ width: '150px', height: 'auto' }} />
-                <h1 style={{ margin: 0, fontSize: 'clamp(2.2rem, 4vw, 3.5rem)', letterSpacing: '-0.03em' }}>
-                  {t('marketingFleet.hero.title')}
-                </h1>
-                <p style={{ margin: 0, fontSize: '1.1rem', color: 'rgba(255,255,255,0.9)', maxWidth: '640px' }}>
-                  {t('marketingFleet.hero.subtitle')}
-                </p>
-              </div>
-              <div
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
-                  gap: '0.85rem'
-                }}
-              >
-                {heroKpiKeys.map((key) => (
-                  <div
-                    key={key}
-                    style={{
-                      padding: '0.85rem 1rem',
-                      borderRadius: '999px',
-                      background: 'rgba(255,255,255,0.16)',
-                      border: '1px solid rgba(255,255,255,0.35)',
-                      textAlign: 'center',
-                      fontWeight: 600,
-                      letterSpacing: '0.01em',
-                      backdropFilter: 'blur(14px)',
-                      WebkitBackdropFilter: 'blur(14px)'
-                    }}
-                  >
-                    {t(`marketingFleet.kpi.${key}`)}
-                  </div>
-                ))}
-              </div>
+          <section style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <img src={InsurfoxLogoLight} alt="Insurfox" style={{ width: '150px', height: 'auto' }} />
+              <h1 style={{ margin: 0, fontSize: 'clamp(2.2rem, 4vw, 3.5rem)', letterSpacing: '-0.03em', maxWidth: '680px' }}>
+                {t('marketingFleet.hero.title')}
+              </h1>
+              <p style={{ margin: 0, fontSize: '1.1rem', color: 'rgba(255,255,255,0.9)', maxWidth: '640px' }}>
+                {t('marketingFleet.hero.subtitle')}
+              </p>
             </div>
-            <div style={{ justifySelf: 'end', width: '100%', maxWidth: '480px' }}>
-              <IllustrationPanel
-                title={t('marketingFleet.hero.illustrationTitle')}
-                value={t('marketingFleet.hero.illustrationValue')}
-                description={t('marketingFleet.hero.illustrationDescription')}
-              />
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+                gap: '0.85rem'
+              }}
+            >
+              {heroKpiKeys.map((key) => (
+                <div
+                  key={key}
+                  style={{
+                    padding: '0.85rem 1rem',
+                    borderRadius: '999px',
+                    background: 'rgba(255,255,255,0.16)',
+                    border: '1px solid rgba(255,255,255,0.35)',
+                    textAlign: 'center',
+                    fontWeight: 600,
+                    letterSpacing: '0.01em',
+                    backdropFilter: 'blur(14px)',
+                    WebkitBackdropFilter: 'blur(14px)'
+                  }}
+                >
+                  {t(`marketingFleet.kpi.${key}`)}
+                </div>
+              ))}
             </div>
           </section>
 
@@ -303,55 +312,42 @@ export default function MarketingLandingPage() {
             <header style={{ marginBottom: '1.5rem' }}>
               <h2 style={sectionTitleStyle}>{t('marketingFleet.manage.title')}</h2>
             </header>
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-                gap: '1rem'
-              }}
-            >
-              {manageFeatureKeys.map((key) => (
-                <div key={key} style={featureCardStyle}>
-                  <span>{featureIcons[key]}</span>
-                  <strong style={{ fontSize: '1.05rem' }}>{t(`marketingFleet.manage.features.${key}.title`)}</strong>
-                  <p style={{ margin: 0, fontSize: '0.95rem', color: 'rgba(255,255,255,0.85)', lineHeight: 1.45 }}>
-                    {t(`marketingFleet.manage.features.${key}.description`)}
-                  </p>
-                  <div style={miniIllustrationStyle}>
-                    <div style={{ flex: 1, height: '4px', background: 'rgba(255,255,255,0.25)', borderRadius: '4px' }} />
-                    <div
-                      style={{
-                        flex: 1,
-                        height: '4px',
-                        background: 'linear-gradient(90deg, rgba(212,56,13,0.8), rgba(255,255,255,0.3))',
-                        borderRadius: '4px'
-                      }}
-                    />
+            <div className="marketing-manage-grid">
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+                  gap: '1rem'
+                }}
+              >
+                {manageFeatureKeys.map((key) => (
+                  <div key={key} style={featureCardStyle}>
+                    <span>{featureIcons[key]}</span>
+                    <strong style={{ fontSize: '1.05rem' }}>{t(`marketingFleet.manage.features.${key}.title`)}</strong>
+                    <p style={{ margin: 0, fontSize: '0.95rem', color: 'rgba(255,255,255,0.85)', lineHeight: 1.45 }}>
+                      {t(`marketingFleet.manage.features.${key}.description`)}
+                    </p>
+                    <div style={miniIllustrationStyle}>
+                      <div style={{ flex: 1, height: '4px', background: 'rgba(255,255,255,0.25)', borderRadius: '4px' }} />
+                      <div
+                        style={{
+                          flex: 1,
+                          height: '4px',
+                          background: 'linear-gradient(90deg, rgba(212,56,13,0.8), rgba(255,255,255,0.3))',
+                          borderRadius: '4px'
+                        }}
+                      />
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          <section style={glassSectionStyle}>
-            <header style={{ marginBottom: '1.2rem' }}>
-              <h2 style={sectionTitleStyle}>{t('marketingFleet.ai.title')}</h2>
-            </header>
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-                gap: '0.9rem'
-              }}
-            >
-              {aiCardKeys.map((key) => (
-                <div key={key} style={aiCardStyle}>
-                  <span style={{ display: 'inline-flex' }}>{aiIcon}</span>
-                  <p style={{ margin: 0, fontSize: '0.95rem', color: 'rgba(255,255,255,0.9)', lineHeight: 1.45 }}>
-                    {t(`marketingFleet.ai.cards.${key}`)}
-                  </p>
-                </div>
-              ))}
+                ))}
+              </div>
+              <div className="ai-card-wrapper" style={{ width: '100%', maxWidth: '420px' }}>
+                <AiAlertsCard
+                  title={t('marketingFleet.hero.illustrationTitle')}
+                  value={t('marketingFleet.hero.illustrationValue')}
+                  description={t('marketingFleet.hero.illustrationDescription')}
+                />
+              </div>
             </div>
           </section>
 
@@ -431,44 +427,6 @@ export default function MarketingLandingPage() {
                 </div>
               </div>
             </div>
-            <div style={{ overflowX: 'auto' }}>
-              <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: '620px' }}>
-                <thead>
-                  <tr>
-                    {(['date', 'vehicle', 'type', 'status', 'cost', 'ai'] as const).map((column) => (
-                      <th key={column} style={tableHeaderStyle}>
-                        {t(`marketingFleet.preview.table.columns.${column}`)}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {previewRowKeys.map((key) => {
-                    const date = t(`marketingFleet.preview.table.rows.${key}.date`)
-                    const vehicle = t(`marketingFleet.preview.table.rows.${key}.vehicle`)
-                    const typeKey = t(`marketingFleet.preview.table.rows.${key}.typeKey`)
-                    const statusKey = t(`marketingFleet.preview.table.rows.${key}.statusKey`)
-                    const cost = t(`marketingFleet.preview.table.rows.${key}.cost`)
-                    const aiKey = t(`marketingFleet.preview.table.rows.${key}.aiKey`)
-
-                    return (
-                      <tr key={key}>
-                        <td style={tableCellStyle}>{date}</td>
-                        <td style={tableCellStyle}>{vehicle}</td>
-                        <td style={tableCellStyle}>{t(`marketingFleet.preview.table.typeLabels.${typeKey}`)}</td>
-                        <td style={tableCellStyle}>{t(`marketingFleet.preview.table.statusLabels.${statusKey}`)}</td>
-                        <td style={{ ...tableCellStyle, textAlign: 'right', fontVariantNumeric: 'tabular-nums' }}>{cost}</td>
-                        <td style={tableCellStyle}>
-                          <span style={aiFlagStyle(aiKey)}>
-                            {t(`marketingFleet.preview.table.aiLabels.${aiKey}`)}
-                          </span>
-                        </td>
-                      </tr>
-                    )
-                  })}
-                </tbody>
-              </table>
-            </div>
           </section>
 
           <section style={glassSectionStyle}>
@@ -525,6 +483,7 @@ export default function MarketingLandingPage() {
         </div>
       </section>
     </div>
+  </>
   )
 }
 
@@ -544,13 +503,6 @@ const sectionTitleStyle: React.CSSProperties = {
   letterSpacing: '-0.01em'
 }
 
-const heroGridStyle: React.CSSProperties = {
-  display: 'grid',
-  gridTemplateColumns: 'minmax(0, 1.2fr) minmax(0, 0.8fr)',
-  gap: '2.5rem',
-  alignItems: 'start'
-}
-
 const featureCardStyle: React.CSSProperties = {
   borderRadius: '22px',
   padding: '1.4rem',
@@ -566,17 +518,6 @@ const miniIllustrationStyle: React.CSSProperties = {
   display: 'flex',
   gap: '0.4rem',
   alignItems: 'center'
-}
-
-const aiCardStyle: React.CSSProperties = {
-  padding: '1.2rem',
-  borderRadius: '18px',
-  background: 'rgba(255,255,255,0.08)',
-  border: '1px solid rgba(255,255,255,0.18)',
-  boxShadow: '0 14px 34px rgba(0,0,0,0.25)',
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '0.7rem'
 }
 
 const previewKpiCardStyle: React.CSSProperties = {
@@ -599,42 +540,6 @@ const chartTitleStyle: React.CSSProperties = {
   margin: '0 0 0.8rem',
   fontSize: '1rem',
   color: 'rgba(255,255,255,0.9)'
-}
-
-const tableHeaderStyle: React.CSSProperties = {
-  textAlign: 'left',
-  padding: '0.65rem',
-  fontSize: '0.85rem',
-  color: 'rgba(255,255,255,0.8)',
-  letterSpacing: '0.05em',
-  textTransform: 'uppercase'
-}
-
-const tableCellStyle: React.CSSProperties = {
-  padding: '0.7rem',
-  borderTop: '1px solid rgba(255,255,255,0.08)',
-  color: '#ffffff',
-  fontSize: '0.95rem'
-}
-
-function aiFlagStyle(variant: string): React.CSSProperties {
-  const colors: Record<string, { bg: string; border: string }> = {
-    alert: { bg: 'rgba(212,56,13,0.3)', border: 'rgba(212,56,13,0.7)' },
-    watch: { bg: 'rgba(255,215,0,0.3)', border: 'rgba(255,215,0,0.7)' },
-    info: { bg: 'rgba(96,165,250,0.3)', border: 'rgba(96,165,250,0.7)' }
-  }
-
-  const palette = colors[variant] ?? colors.info
-  return {
-    display: 'inline-flex',
-    padding: '0.2rem 0.7rem',
-    borderRadius: '999px',
-    border: `1px solid ${palette.border}`,
-    background: palette.bg,
-    fontSize: '0.8rem',
-    fontWeight: 700,
-    color: '#ffffff'
-  }
 }
 
 const useCaseCardStyle: React.CSSProperties = {

@@ -74,10 +74,6 @@ type TranslationTree = {
         }
       >
     }
-    ai: {
-      title: string
-      cards: Record<string, string>
-    }
     preview: {
       title: string
       subtitle: string
@@ -408,17 +404,6 @@ export const translations: Record<Lang, TranslationTree> = {
             title: 'Reporting & Compliance',
             description: 'Auditfähige Berichte, ESG-Kennzahlen und regulatorische Nachweise.'
           }
-        }
-      },
-      ai: {
-        title: 'Insurfox AI – Proaktive Empfehlungen',
-        cards: {
-          card1: 'Fahrzeug DE-789-XY: 40 % höhere Schadenfrequenz – Fahrertraining empfohlen.',
-          card2: 'Werkstattkapazität kritisch: 3 Fahrzeuge mit TÜV < 14 Tagen.',
-          card3: 'Region Berlin: 25 % mehr Vorfälle – Wetterkorrelation erkannt.',
-          card4: 'Cargo-Schäden +15 %: Routenoptimierung vorgeschlagen.',
-          card5: 'Ausfallzeiten steigen: Ersatzfahrzeug-Plan aktivieren.',
-          card6: 'Police läuft aus: Renewal-Prozess automatisch gestartet.'
         }
       },
       preview: {
@@ -1084,17 +1069,6 @@ export const translations: Record<Lang, TranslationTree> = {
             title: 'Reporting & compliance',
             description: 'Audit-ready reports, ESG metrics and regulatory documentation.'
           }
-        }
-      },
-      ai: {
-        title: 'Insurfox AI – Proactive recommendations',
-        cards: {
-          card1: 'Vehicle DE-789-XY: 40% higher claim frequency — driver training recommended.',
-          card2: 'Workshop capacity critical: 3 vehicles with inspection < 14 days.',
-          card3: 'Berlin region: incidents +25% — weather correlation detected.',
-          card4: 'Cargo claims +15%: route optimization suggested.',
-          card5: 'Downtime rising: activate backup vehicle plan.',
-          card6: 'Policy expiry upcoming: renewal workflow auto-triggered.'
         }
       },
       preview: {
