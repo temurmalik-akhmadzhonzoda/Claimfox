@@ -53,6 +53,25 @@ const SECTION_CARD_STYLE: React.CSSProperties = {
   border: '1px solid rgba(255,255,255,0.18)'
 }
 
+const detailLabelStyle: React.CSSProperties = {
+  fontSize: '0.85rem',
+  color: GLASS_SUBTLE,
+  margin: 0
+}
+
+const detailValueStyle: React.CSSProperties = {
+  fontSize: '1rem',
+  color: '#ffffff',
+  fontWeight: 600,
+  margin: 0
+}
+
+const detailRowStyle: React.CSSProperties = {
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '0.2rem'
+}
+
 type VehicleType = 'car' | 'truck' | 'trailer' | 'delivery'
 type VehicleStatus = 'active' | 'maintenance' | 'down'
 type InspectionStatus = 'ok' | 'dueSoon' | 'overdue'
@@ -548,7 +567,7 @@ export default function FleetManagementPage() {
             </Card>
           ) : (
             <>
-              <Card variant="glass" style={SECTION_CARD_STYLE}>
+              <Card variant="glass" style={{ ...SECTION_CARD_STYLE, padding: '1.75rem' }}>
                 <header style={{ marginBottom: '1rem', color: '#ffffff' }}>
                   <h2 style={{ margin: 0 }}>
                     {t('fleetManagement.detail.title')} – {selectedVehicle.plate}
@@ -557,66 +576,65 @@ export default function FleetManagementPage() {
                 <div
                   style={{
                     display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
                     gap: '1.25rem'
                   }}
                 >
-                  <div>
-                    <h3 style={{ margin: '0 0 0.5rem', color: '#ffffff' }}>{t('fleetManagement.detail.overview')}</h3>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem', color: GLASS_TEXT }}>
-                      <span>VIN: {selectedVehicle.vin}</span>
-                      <span>
-                        {t('fleetManagement.filters.typeLabel')}: {t(`fleetManagement.filters.typeOptions.${selectedVehicle.type}`)}
-                      </span>
-                      <span>
-                        {t('fleetManagement.detail.usage')}:{' '}
-                        {t(`fleetManagement.detail.usageLabels.${selectedVehicle.usage}`)}
-                      </span>
-                      <span>
-                        {t('fleetManagement.detail.schedule')}: {selectedVehicle.location}
-                      </span>
-                      <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
-                        {t('fleetManagement.filters.statusLabel')}:
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+                    <h3 style={{ margin: 0, color: '#ffffff' }}>{t('fleetManagement.detail.overview')}</h3>
+                    <div style={detailRowStyle}>
+                      <p style={detailLabelStyle}>VIN</p>
+                      <p style={detailValueStyle}>{selectedVehicle.vin}</p>
+                    </div>
+                    <div style={detailRowStyle}>
+                      <p style={detailLabelStyle}>{t('fleetManagement.filters.typeLabel')}</p>
+                      <p style={detailValueStyle}>{t(`fleetManagement.filters.typeOptions.${selectedVehicle.type}`)}</p>
+                    </div>
+                    <div style={detailRowStyle}>
+                      <p style={detailLabelStyle}>{t('fleetManagement.detail.usage')}</p>
+                      <p style={detailValueStyle}>{t(`fleetManagement.detail.usageLabels.${selectedVehicle.usage}`)}</p>
+                    </div>
+                    <div style={detailRowStyle}>
+                      <p style={detailLabelStyle}>{t('fleetManagement.detail.schedule')}</p>
+                      <p style={detailValueStyle}>{selectedVehicle.location}</p>
+                    </div>
+                    <div style={detailRowStyle}>
+                      <p style={detailLabelStyle}>{t('fleetManagement.filters.statusLabel')}</p>
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.45rem', alignItems: 'center' }}>
+                        <p style={{ ...detailValueStyle, margin: 0 }}>
+                          {t(`fleetManagement.list.statusBadges.${selectedVehicle.status}`)}
+                        </p>
                         <span style={getStatusBadgeStyles(selectedVehicle.status)}>
                           {t(`fleetManagement.list.statusBadges.${selectedVehicle.status}`)}
                         </span>
-                      </span>
-                      <span style={getInspectionBadgeStyles(selectedVehicle.inspectionStatus)}>
-                        {t('fleetManagement.detail.inspectionStatus.' + selectedVehicle.inspectionStatus)}
-                      </span>
+                      </div>
                     </div>
                   </div>
-                  <div>
-                    <h3 style={{ margin: '0 0 0.5rem', color: '#ffffff' }}>{t('fleetManagement.detail.schedule')}</h3>
-                    <ul
-                      style={{
-                        listStyle: 'none',
-                        padding: 0,
-                        margin: 0,
-                        color: GLASS_TEXT,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        gap: '0.4rem'
-                      }}
-                    >
-                      <li>
-                        {t('fleetManagement.detail.inspection')}: {selectedVehicle.inspectionDate}{' '}
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+                    <h3 style={{ margin: 0, color: '#ffffff' }}>{t('fleetManagement.detail.schedule')}</h3>
+                    <div style={detailRowStyle}>
+                      <p style={detailLabelStyle}>{t('fleetManagement.detail.inspection')}</p>
+                      <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '0.5rem' }}>
+                        <p style={{ ...detailValueStyle, margin: 0 }}>{selectedVehicle.inspectionDate}</p>
                         <span style={getInspectionBadgeStyles(selectedVehicle.inspectionStatus)}>
                           {t(`fleetManagement.detail.inspectionStatus.${selectedVehicle.inspectionStatus}`)}
                         </span>
-                      </li>
-                      <li>
-                        {t('fleetManagement.detail.maintenance')}: {selectedVehicle.maintenanceDate}
-                      </li>
-                      <li>
-                        {t('fleetManagement.detail.downtime')}: {selectedVehicle.downtimeDays}d
-                      </li>
-                      {selectedVehicle.repairAppointments.map((appointment) => (
-                        <li key={appointment.date}>
-                          {appointment.date} – {appointment.note}
-                        </li>
-                      ))}
-                    </ul>
+                      </div>
+                    </div>
+                    <div style={detailRowStyle}>
+                      <p style={detailLabelStyle}>{t('fleetManagement.detail.maintenance')}</p>
+                      <p style={detailValueStyle}>{selectedVehicle.maintenanceDate}</p>
+                    </div>
+                    <div style={detailRowStyle}>
+                      <p style={detailLabelStyle}>{t('fleetManagement.detail.downtime')}</p>
+                      <p style={detailValueStyle}>{selectedVehicle.downtimeDays}d</p>
+                    </div>
+                    {selectedVehicle.repairAppointments.map((appointment) => (
+                      <div key={appointment.date} style={detailRowStyle}>
+                        <p style={detailLabelStyle}>{appointment.date}</p>
+                        <p style={detailValueStyle}>{appointment.note}</p>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </Card>
