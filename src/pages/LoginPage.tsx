@@ -9,10 +9,14 @@ import { useI18n } from '@/i18n/I18nContext'
 // ✅ Neues Logo (light)
 import InsurfoxLogoLight from '@/assets/logos/insurfox-logo-light.png'
 
-// ✅ Hintergrundbild Login (shared with /home)
+// ✅ Hintergrundbild Login (shared base image)
 import LoginBackground from '@/assets/images/background_login.png'
 
-export default function LoginPage() {
+type LoginPageProps = {
+  variant?: 'default' | 'home'
+}
+
+export default function LoginPage({ variant = 'default' }: LoginPageProps) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState<string | null>(null)
@@ -54,6 +58,9 @@ export default function LoginPage() {
     }
   }
 
+  const overlayColor = variant === 'home' ? 'rgba(0,0,0,0.22)' : 'rgba(0,0,0,0.35)'
+  const backgroundFilter = variant === 'home' ? 'brightness(1.3)' : 'none'
+
   return (
     <section
       className="page login-page"
@@ -61,15 +68,33 @@ export default function LoginPage() {
         position: 'relative',
         minHeight: '100vh',
         width: '100%',
-        backgroundImage: `linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url(${LoginBackground})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'center'
       }}
     >
+      <div
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          inset: 0,
+          backgroundImage: `url(${LoginBackground})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          filter: backgroundFilter,
+          zIndex: 0
+        }}
+      />
+      <div
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          inset: 0,
+          background: `linear-gradient(${overlayColor}, ${overlayColor})`,
+          zIndex: 0
+        }}
+      />
       {/* Overlay Container */}
       <div
         style={{

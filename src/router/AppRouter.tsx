@@ -1,6 +1,7 @@
 import React from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import LoginPage from '@/pages/LoginPage'
+import HomePage from '@/pages/HomePage'
 import RegistrationPage from '@/pages/RegistrationPage'
 import RolesPage from '@/pages/RolesPage'
 import BrokerPortalLandingPage from '@/pages/BrokerPortalLandingPage'
@@ -19,7 +20,7 @@ export default function AppRouter() {
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/home" replace />} />
-      <Route path="/home" element={<LoginPage />} />
+      <Route path="/home" element={<HomePage />} />
       <Route
         element={
           <ProtectedRoute>
