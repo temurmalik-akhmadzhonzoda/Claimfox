@@ -2,8 +2,8 @@ import React, { useMemo, useState } from 'react'
 import Card from '@/components/ui/Card'
 import Header from '@/components/ui/Header'
 import Button from '@/components/ui/Button'
+import FullscreenBackground from '@/components/layout/FullscreenBackground'
 import { useI18n } from '@/i18n/I18nContext'
-import BackgroundLogin from '@/assets/images/background_login.png'
 
 const GLASS_TEXT = 'rgba(255,255,255,0.85)'
 const GLASS_SUBTLE = 'rgba(255,255,255,0.65)'
@@ -365,33 +365,8 @@ export default function FleetManagementPage() {
   }
 
   return (
-    <div style={{ position: 'relative', minHeight: '100vh' }}>
-      <div
-        aria-hidden="true"
-        style={{
-          position: 'fixed',
-          inset: 0,
-          width: '100vw',
-          height: '100vh',
-          backgroundImage: `url(${BackgroundLogin})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          zIndex: 0
-        }}
-      />
-      <div
-        aria-hidden="true"
-        style={{
-          position: 'fixed',
-          inset: 0,
-          width: '100vw',
-          height: '100vh',
-          background: 'rgba(0,0,0,0.22)',
-          zIndex: 1
-        }}
-      />
-      <section className="page" style={{ gap: '1.5rem', position: 'relative', zIndex: 2 }}>
+    <FullscreenBackground overlay="linear-gradient(rgba(0,0,0,0.22), rgba(0,0,0,0.22))">
+      <section className="page" style={{ gap: '1.5rem' }}>
         <div
           style={{
             width: '100%',
@@ -811,6 +786,6 @@ export default function FleetManagementPage() {
           )}
         </div>
       </section>
-    </div>
+    </FullscreenBackground>
   )
 }

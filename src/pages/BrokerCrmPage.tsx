@@ -1,8 +1,8 @@
 import React from 'react'
 import Card from '@/components/ui/Card'
 import Header from '@/components/ui/Header'
+import FullscreenBackground from '@/components/layout/FullscreenBackground'
 import { useI18n } from '@/i18n/I18nContext'
-import BackgroundLogin from '@/assets/images/background_login.png'
 
 const kpiData = [
   { key: 'activeCustomers', value: '248', trend: '+12%' },
@@ -82,33 +82,8 @@ export default function BrokerCrmPage() {
   }
 
   return (
-    <div style={{ position: 'relative', minHeight: '100vh' }}>
-      <div
-        aria-hidden="true"
-        style={{
-          position: 'fixed',
-          inset: 0,
-          width: '100vw',
-          height: '100vh',
-          backgroundImage: `url(${BackgroundLogin})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          zIndex: 0
-        }}
-      />
-      <div
-        aria-hidden="true"
-        style={{
-          position: 'fixed',
-          inset: 0,
-          width: '100vw',
-          height: '100vh',
-          background: 'rgba(0,0,0,0.22)',
-          zIndex: 1
-        }}
-      />
-      <section className="page" style={{ gap: '1.5rem', position: 'relative', zIndex: 2 }}>
+    <FullscreenBackground overlay="linear-gradient(rgba(0,0,0,0.22), rgba(0,0,0,0.22))">
+      <section className="page" style={{ gap: '1.5rem' }}>
         <div
           style={{
             width: '100%',
@@ -379,6 +354,6 @@ export default function BrokerCrmPage() {
       </div>
         </div>
       </section>
-    </div>
+    </FullscreenBackground>
   )
 }

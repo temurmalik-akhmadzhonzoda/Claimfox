@@ -5,7 +5,7 @@ import Card from '@/components/ui/Card'
 import Header from '@/components/ui/Header'
 import { useI18n } from '@/i18n/I18nContext'
 import ClaimsfoxIcon from '@/assets/logos/Claimsfox_icon.png'
-import BackgroundLogin from '@/assets/images/background_login.png'
+import FullscreenBackground from '@/components/layout/FullscreenBackground'
 
 const STORAGE_KEY = 'cf_registration_draft'
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -902,34 +902,10 @@ export default function RegistrationPage() {
   )
 
   return (
-    <div style={{ position: 'relative', minHeight: '100vh' }}>
-      <div
-        aria-hidden="true"
-        style={{
-          position: 'fixed',
-          inset: 0,
-          zIndex: -2,
-          backgroundImage: `url(${BackgroundLogin})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat'
-        }}
-      />
-      <div
-        aria-hidden="true"
-        style={{
-          position: 'fixed',
-          inset: 0,
-          zIndex: -1,
-          backgroundImage: 'linear-gradient(180deg, rgba(8,16,64,0.7), rgba(8,16,64,0.45))'
-        }}
-      />
-
+    <FullscreenBackground overlay="linear-gradient(180deg, rgba(8,16,64,0.7), rgba(8,16,64,0.45))">
       <section
         className="registration-page"
         style={{
-          position: 'relative',
-          zIndex: 1,
           minHeight: '100vh',
           width: '100%',
           display: 'flex',
@@ -952,18 +928,7 @@ export default function RegistrationPage() {
               </div>
             }
           />
-
-          <Card
-            style={{
-              background: 'rgba(255,255,255,0.08)',
-              border: '1px solid rgba(255,255,255,0.25)',
-              borderRadius: '28px',
-              padding: '1.5rem',
-              backdropFilter: 'blur(26px)',
-              color: '#0e0d1c',
-              boxShadow: '0 30px 80px rgba(8,0,40,0.35)'
-            }}
-          >
+          <Card variant="glass" style={{ padding: '1.5rem', color: '#0e0d1c' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', minHeight: '70vh' }}>
               <div
                 ref={chatContainerRef}
@@ -1346,6 +1311,6 @@ export default function RegistrationPage() {
           </Card>
         </div>
       </section>
-    </div>
+    </FullscreenBackground>
   )
 }

@@ -46,13 +46,13 @@ export default function Card({
       tabIndex={isInteractive ? tabIndex ?? 0 : tabIndex}
       className={className}
       style={{
-        backgroundColor: isGlass ? 'rgba(255,255,255,0.16)' : '#fff',
-        border: isGlass ? '1px solid rgba(255,255,255,0.35)' : undefined,
+        backgroundColor: isGlass ? 'rgba(255,255,255,0.1)' : '#fff',
+        border: isGlass ? '1px solid rgba(255,255,255,0.15)' : undefined,
         borderRadius: '24px',
         padding: '2rem',
-        boxShadow: isGlass ? '0 18px 42px rgba(0,0,0,0.35)' : '0 22px 50px rgba(8, 4, 50, 0.15)',
-        backdropFilter: isGlass ? 'blur(12px)' : undefined,
-        WebkitBackdropFilter: isGlass ? 'blur(12px)' : undefined,
+        boxShadow: isGlass ? '0 20px 60px rgba(0,0,0,0.35)' : '0 22px 50px rgba(8, 4, 50, 0.15)',
+        backdropFilter: isGlass ? 'blur(18px)' : undefined,
+        WebkitBackdropFilter: isGlass ? 'blur(18px)' : undefined,
         color: isGlass ? '#ffffff' : undefined,
         width: '100%',
         cursor: isInteractive ? 'pointer' : undefined,

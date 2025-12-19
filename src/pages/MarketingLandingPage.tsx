@@ -1,6 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import Button from '@/components/ui/Button'
+import FullscreenBackground from '@/components/layout/FullscreenBackground'
 import { useI18n } from '@/i18n/I18nContext'
 import InsurfoxLogoLight from '@/assets/logos/insurfox-logo-light.png'
 import Background1 from '@/assets/images/background1.jpg'
@@ -197,69 +198,50 @@ export default function MarketingLandingPage() {
   return (
     <>
       <style>{layoutStyles}</style>
-      <div style={{ position: 'relative', minHeight: '100vh', color: '#ffffff', overflow: 'hidden' }}>
-      <div
-        aria-hidden="true"
-        style={{
-          position: 'fixed',
-          inset: 0,
-          backgroundImage: `url(${Background1})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          zIndex: 0
-        }}
-      />
-      <div
-        aria-hidden="true"
-        style={{
-          position: 'fixed',
-          inset: 0,
-          background: 'linear-gradient(180deg, rgba(8,0,100,0.7) 0%, rgba(8,0,100,0.55) 40%, rgba(8,0,100,0.8) 100%)',
-          zIndex: 1
-        }}
-      />
-      <div
-        style={{
-          position: 'fixed',
-          top: 'calc(var(--header-height, 72px) + 10px)',
-          right: '3vw',
-          zIndex: 4
-        }}
+      <FullscreenBackground
+        overlay="linear-gradient(180deg, rgba(8,0,100,0.7) 0%, rgba(8,0,100,0.55) 40%, rgba(8,0,100,0.8) 100%)"
+        backgroundImage={Background1}
       >
-        <Button
-          onClick={() => navigate('/fleet-reporting')}
-          style={{
-            background: '#D4380D',
-            borderColor: '#D4380D',
-            borderRadius: '999px',
-            padding: '0.6rem 1.4rem',
-            boxShadow: '0 16px 36px rgba(0,0,0,0.35)'
-          }}
-        >
-          {t('marketingFleet.hero.login')}
-        </Button>
-      </div>
-      <section
-        className="page"
-        style={{
-          position: 'relative',
-          zIndex: 2,
-          paddingTop: 'calc(var(--header-height, 72px) + 3rem)',
-          paddingBottom: '4rem'
-        }}
-      >
-        <div
-          style={{
-            width: '100%',
-            maxWidth: '1320px',
-            margin: '0 auto',
-            padding: '0 3vw',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '2.5rem'
-          }}
-        >
+        <div style={{ position: 'relative', minHeight: '100vh', color: '#ffffff', overflow: 'hidden' }}>
+          <div
+            style={{
+              position: 'absolute',
+              top: 'calc(var(--header-height, 72px) + 10px)',
+              right: '3vw',
+              zIndex: 4
+            }}
+          >
+            <Button
+              onClick={() => navigate('/fleet-reporting')}
+              style={{
+                background: '#D4380D',
+                borderColor: '#D4380D',
+                borderRadius: '999px',
+                padding: '0.6rem 1.4rem',
+                boxShadow: '0 16px 36px rgba(0,0,0,0.35)'
+              }}
+            >
+              {t('marketingFleet.hero.login')}
+            </Button>
+          </div>
+          <section
+            className="page"
+            style={{
+              paddingTop: 'calc(var(--header-height, 72px) + 3rem)',
+              paddingBottom: '4rem'
+            }}
+          >
+            <div
+              style={{
+                width: '100%',
+                maxWidth: '1320px',
+                margin: '0 auto',
+                padding: '0 3vw',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '2.5rem'
+              }}
+            >
           <section style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <img src={InsurfoxLogoLight} alt="Insurfox" style={{ width: '150px', height: 'auto' }} />
@@ -462,10 +444,11 @@ export default function MarketingLandingPage() {
               </Button>
             </div>
           </section>
+            </div>
+          </section>
         </div>
-      </section>
-    </div>
-  </>
+      </FullscreenBackground>
+    </>
   )
 }
 

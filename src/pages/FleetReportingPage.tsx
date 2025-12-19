@@ -2,8 +2,8 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import Card from '@/components/ui/Card'
 import Header from '@/components/ui/Header'
 import Button from '@/components/ui/Button'
+import FullscreenBackground from '@/components/layout/FullscreenBackground'
 import { useI18n } from '@/i18n/I18nContext'
-import BackgroundLogin from '@/assets/images/background_login.png'
 
 type KpiItem =
   | { key: keyof typeof KPI_LABELS; value: string; icon: React.ReactNode; unit?: string; valueSize?: 'normal' | 'compact' }
@@ -1004,33 +1004,8 @@ export default function FleetReportingPage() {
   return (
     <>
       <style>{KPI_GRID_CSS}</style>
-      <div style={{ position: 'relative', minHeight: '100vh' }}>
-      <div
-        aria-hidden="true"
-        style={{
-          position: 'fixed',
-          inset: 0,
-          width: '100vw',
-          height: '100vh',
-          backgroundImage: `url(${BackgroundLogin})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          zIndex: 0
-        }}
-      />
-      <div
-        aria-hidden="true"
-        style={{
-          position: 'fixed',
-          inset: 0,
-          width: '100vw',
-          height: '100vh',
-          background: 'rgba(0,0,0,0.22)',
-          zIndex: 1
-        }}
-      />
-      <section className="page" style={{ gap: '1.5rem', position: 'relative', zIndex: 2 }}>
+      <FullscreenBackground overlay="linear-gradient(rgba(0,0,0,0.22), rgba(0,0,0,0.22))">
+      <section className="page" style={{ gap: '1.5rem' }}>
         <div
           style={{
             width: '100%',
@@ -1489,7 +1464,7 @@ export default function FleetReportingPage() {
           </Card>
         </div>
       </section>
-    </div>
+      </FullscreenBackground>
     </>
   )
 }

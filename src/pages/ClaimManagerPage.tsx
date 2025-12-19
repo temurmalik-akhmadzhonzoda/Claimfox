@@ -1,8 +1,8 @@
 import React, { useMemo, useState } from 'react'
 import Button from '@/components/ui/Button'
 import Card from '@/components/ui/Card'
+import FullscreenBackground from '@/components/layout/FullscreenBackground'
 import { useI18n } from '@/i18n/I18nContext'
-import BackgroundLogin from '@/assets/images/background_login.png'
 
 type CostStatus = 'pending' | 'approved' | 'rejected'
 
@@ -217,44 +217,21 @@ export default function ClaimManagerPage() {
   }
 
   return (
-    <div style={{ position: 'relative', minHeight: '100vh' }}>
-      <div
-        aria-hidden="true"
-        style={{
-          position: 'fixed',
-          inset: 0,
-          zIndex: -2,
-          backgroundImage: `url(${BackgroundLogin})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat'
-        }}
-      />
-      <div
-        aria-hidden="true"
-        style={{
-          position: 'fixed',
-          inset: 0,
-          zIndex: -1,
-          backgroundImage: 'linear-gradient(180deg, rgba(8,16,64,0.72), rgba(8,16,64,0.45))'
-        }}
-      />
-
-      <section
-        style={{
-          position: 'relative',
-          zIndex: 1,
-          minHeight: '100vh',
-          width: '100%',
-          color: '#ffffff',
-          padding: 'calc(var(--header-height) + 32px) 1.25rem 4rem'
-        }}
-      >
-        <style>{layoutStyles}</style>
-        <div
-          className="claim-manager-app-stack"
-          style={{ width: '100%', maxWidth: 1200, margin: '0 auto' }}
+    <>
+      <FullscreenBackground overlay="linear-gradient(180deg, rgba(8,16,64,0.72), rgba(8,16,64,0.45))">
+        <section
+          style={{
+            minHeight: '100vh',
+            width: '100%',
+            color: '#ffffff',
+            padding: 'calc(var(--header-height) + 32px) 1.25rem 4rem'
+          }}
         >
+          <style>{layoutStyles}</style>
+          <div
+            className="claim-manager-app-stack"
+            style={{ width: '100%', maxWidth: 1200, margin: '0 auto' }}
+          >
           <Card style={{ ...CARD_STYLE, padding: '2rem' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               <span style={{ letterSpacing: '0.4em', fontSize: '0.75rem', color: TEXT_COLORS.muted, textTransform: 'uppercase' }}>
@@ -651,7 +628,8 @@ export default function ClaimManagerPage() {
             </div>
           </Card>
         </div>
-      </section>
+        </section>
+      </FullscreenBackground>
 
       <Modal open={costModalOpen} onClose={() => setCostModalOpen(false)}>
         <h3 style={{ marginTop: 0 }}>{t('claimManager.app.costs.modal.title')}</h3>
@@ -786,6 +764,6 @@ export default function ClaimManagerPage() {
           {t('claimManager.app.documents.close')}
         </Button>
       </Modal>
-    </div>
+    </>
   )
 }
