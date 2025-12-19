@@ -2,7 +2,6 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import Button from '@/components/ui/Button'
 import Card from '@/components/ui/Card'
-import FullscreenBackground from '@/components/layout/FullscreenBackground'
 import { useI18n } from '@/i18n/I18nContext'
 import InsurfoxLogoLight from '@/assets/logos/insurfox-logo-light.png'
 
@@ -99,7 +98,6 @@ export default function ClaimManagerMarketingPage() {
   return (
     <>
       <style>{gridStyles}</style>
-      <FullscreenBackground overlay="linear-gradient(180deg, rgba(8,16,64,0.72), rgba(8,16,64,0.45))">
         <section
           style={{
             minHeight: '100vh',
@@ -232,7 +230,6 @@ export default function ClaimManagerMarketingPage() {
             </Card>
           </div>
         </section>
-      </FullscreenBackground>
     </>
   )
 }

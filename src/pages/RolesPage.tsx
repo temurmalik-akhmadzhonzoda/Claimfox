@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 import Button from '@/components/ui/Button'
 import Card from '@/components/ui/Card'
 import Header from '@/components/ui/Header'
-import FullscreenBackground from '@/components/layout/FullscreenBackground'
 import { useAuth } from '@/features/auth/AuthContext'
 import { useI18n } from '@/i18n/I18nContext'
 
@@ -31,8 +30,7 @@ export default function RolesPage() {
   }
 
   return (
-    <FullscreenBackground overlay="linear-gradient(rgba(0,0,0,0.22), rgba(0,0,0,0.22))">
-      <section className="page" style={{ gap: '2rem' }}>
+    <section className="page" style={{ gap: '2rem' }}>
         <div
           style={{
             width: '100%',
@@ -129,6 +127,5 @@ export default function RolesPage() {
           </div>
         </div>
       </section>
-    </FullscreenBackground>
   )
 }

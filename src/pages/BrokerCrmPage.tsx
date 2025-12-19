@@ -1,7 +1,6 @@
 import React from 'react'
 import Card from '@/components/ui/Card'
 import Header from '@/components/ui/Header'
-import FullscreenBackground from '@/components/layout/FullscreenBackground'
 import { useI18n } from '@/i18n/I18nContext'
 
 const kpiData = [
@@ -82,8 +81,7 @@ export default function BrokerCrmPage() {
   }
 
   return (
-    <FullscreenBackground overlay="linear-gradient(rgba(0,0,0,0.22), rgba(0,0,0,0.22))">
-      <section className="page" style={{ gap: '1.5rem' }}>
+    <section className="page" style={{ gap: '1.5rem' }}>
         <div
           style={{
             width: '100%',
@@ -354,6 +352,5 @@ export default function BrokerCrmPage() {
       </div>
         </div>
       </section>
-    </FullscreenBackground>
   )
 }

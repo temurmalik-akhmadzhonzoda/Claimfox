@@ -1,10 +1,8 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import Button from '@/components/ui/Button'
-import FullscreenBackground from '@/components/layout/FullscreenBackground'
 import { useI18n } from '@/i18n/I18nContext'
 import InsurfoxLogoLight from '@/assets/logos/insurfox-logo-light.png'
-import Background1 from '@/assets/images/background1.jpg'
 
 const heroKpiKeys = ['realTime', 'ai', 'tuv', 'claims', 'docs', 'compliance'] as const
 const featureCardKeys = ['vehiclesMaster', 'realTime', 'aiPrioritization', 'tuvPlanning', 'claimsControl', 'docsPolicies'] as const
@@ -198,11 +196,7 @@ export default function MarketingLandingPage() {
   return (
     <>
       <style>{layoutStyles}</style>
-      <FullscreenBackground
-        overlay="linear-gradient(180deg, rgba(8,0,100,0.7) 0%, rgba(8,0,100,0.55) 40%, rgba(8,0,100,0.8) 100%)"
-        backgroundImage={Background1}
-      >
-        <div style={{ position: 'relative', minHeight: '100vh', color: '#ffffff', overflow: 'hidden' }}>
+      <div style={{ position: 'relative', minHeight: '100vh', color: '#ffffff', overflow: 'hidden' }}>
           <div
             style={{
               position: 'absolute',
@@ -447,8 +441,7 @@ export default function MarketingLandingPage() {
             </div>
           </section>
         </div>
-      </FullscreenBackground>
-    </>
+      </>
   )
 }
 

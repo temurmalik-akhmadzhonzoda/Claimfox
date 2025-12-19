@@ -1,7 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import Button from '@/components/ui/Button'
-import FullscreenBackground from '@/components/layout/FullscreenBackground'
 import { useI18n } from '@/i18n/I18nContext'
 import InsurfoxLogoLight from '@/assets/logos/insurfox-logo-light.png'
 import BrokerBackground from '@/assets/images/background_broker.png'
@@ -164,19 +163,14 @@ export default function BrokerPortalLandingPage() {
   const navigate = useNavigate()
 
   return (
-    <FullscreenBackground
-      backgroundImage={BrokerBackground}
-      overlay="linear-gradient(180deg, rgba(4, 1, 20, 0.8) 0%, rgba(4, 1, 20, 0.4) 60%, rgba(4, 1, 20, 0.8) 100%)"
-      backgroundStyle={{ filter: 'brightness(1.3)' }}
+    <div
+      style={{
+        position: 'relative',
+        minHeight: '100vh',
+        overflow: 'hidden',
+        color: '#fff'
+      }}
     >
-      <div
-        style={{
-          position: 'relative',
-          minHeight: '100vh',
-          overflow: 'hidden',
-          color: '#fff'
-        }}
-      >
       <div
         style={{
           position: 'absolute',
@@ -399,7 +393,6 @@ export default function BrokerPortalLandingPage() {
 
         </div>
       </div>
-      </div>
-    </FullscreenBackground>
+    </div>
   )
 }

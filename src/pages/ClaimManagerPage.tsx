@@ -1,7 +1,6 @@
 import React, { useMemo, useState } from 'react'
 import Button from '@/components/ui/Button'
 import Card from '@/components/ui/Card'
-import FullscreenBackground from '@/components/layout/FullscreenBackground'
 import { useI18n } from '@/i18n/I18nContext'
 
 type CostStatus = 'pending' | 'approved' | 'rejected'
@@ -218,7 +217,6 @@ export default function ClaimManagerPage() {
 
   return (
     <>
-      <FullscreenBackground overlay="linear-gradient(180deg, rgba(8,16,64,0.72), rgba(8,16,64,0.45))">
         <section
           style={{
             minHeight: '100vh',
@@ -629,7 +627,6 @@ export default function ClaimManagerPage() {
           </Card>
         </div>
         </section>
-      </FullscreenBackground>
 
       <Modal open={costModalOpen} onClose={() => setCostModalOpen(false)}>
         <h3 style={{ marginTop: 0 }}>{t('claimManager.app.costs.modal.title')}</h3>

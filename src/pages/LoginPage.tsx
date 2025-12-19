@@ -3,16 +3,11 @@ import { useNavigate } from 'react-router-dom'
 import Button from '@/components/ui/Button'
 import Card from '@/components/ui/Card'
 import Header from '@/components/ui/Header'
-import FullscreenBackground from '@/components/layout/FullscreenBackground'
 import { useAuth } from '@/features/auth/AuthContext'
 import { useI18n } from '@/i18n/I18nContext'
 import InsurfoxLogoLight from '@/assets/logos/insurfox-logo-light.png'
 
-type LoginPageProps = {
-  variant?: 'default' | 'home'
-}
-
-export default function LoginPage({ variant = 'default' }: LoginPageProps) {
+export default function LoginPage() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState<string | null>(null)
@@ -54,76 +49,68 @@ export default function LoginPage({ variant = 'default' }: LoginPageProps) {
     }
   }
 
-  const overlayColor = variant === 'home' ? 'rgba(0,0,0,0.22)' : 'rgba(0,0,0,0.35)'
-  const backgroundFilter = variant === 'home' ? 'brightness(1.3)' : 'none'
-
   return (
-    <FullscreenBackground
-      overlay={`linear-gradient(${overlayColor}, ${overlayColor})`}
-      backgroundStyle={backgroundFilter !== 'none' ? { filter: backgroundFilter } : undefined}
+    <section
+      className="page login-page"
+      style={{
+        minHeight: '100vh',
+        width: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '4rem 1rem'
+      }}
     >
-      <section
-        className="page login-page"
+      <div
         style={{
-          minHeight: '100vh',
           width: '100%',
+          maxWidth: 480,
           display: 'flex',
+          flexDirection: 'column',
           alignItems: 'center',
-          justifyContent: 'center',
-          padding: '4rem 1rem'
+          gap: '1.75rem'
         }}
       >
-        <div
-          style={{
-            width: '100%',
-            maxWidth: 480,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: '1.75rem'
-          }}
-        >
-          <img src={InsurfoxLogoLight} alt="Insurfox" style={{ height: 110, objectFit: 'contain' }} />
-          <div style={{ width: '100%' }}>
-            <Header title={t('login.title')} titleColor="#ffffff" />
-            <Card variant="glass">
-              <form onSubmit={handleSubmit} autoComplete="off" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                <label className="form-field">
-                  {t('login.username')}
-                  <input
-                    className="text-input"
-                    name="cf_username"
-                    autoComplete="off"
-                    placeholder={t('login.username')}
-                    value={username}
-                    onChange={(event) => setUsername(event.target.value)}
-                    disabled={isSubmitting}
-                    required
-                  />
-                </label>
-                <label className="form-field">
-                  {t('login.password')}
-                  <input
-                    className="text-input"
-                    type="password"
-                    name="cf_password"
-                    autoComplete="new-password"
-                    placeholder={t('login.password')}
-                    value={password}
-                    onChange={(event) => setPassword(event.target.value)}
-                    disabled={isSubmitting}
-                    required
-                  />
-                </label>
-                {error && <p className="error-text">{error}</p>}
-                <Button type="submit" disabled={isSubmitting}>
-                  {isSubmitting ? t('login.submitting') : t('login.submit')}
-                </Button>
-              </form>
-            </Card>
-          </div>
+        <img src={InsurfoxLogoLight} alt="Insurfox" style={{ height: 110, objectFit: 'contain' }} />
+        <div style={{ width: '100%' }}>
+          <Header title={t('login.title')} titleColor="#ffffff" />
+          <Card variant="glass">
+            <form onSubmit={handleSubmit} autoComplete="off" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <label className="form-field">
+                {t('login.username')}
+                <input
+                  className="text-input"
+                  name="cf_username"
+                  autoComplete="off"
+                  placeholder={t('login.username')}
+                  value={username}
+                  onChange={(event) => setUsername(event.target.value)}
+                  disabled={isSubmitting}
+                  required
+                />
+              </label>
+              <label className="form-field">
+                {t('login.password')}
+                <input
+                  className="text-input"
+                  type="password"
+                  name="cf_password"
+                  autoComplete="new-password"
+                  placeholder={t('login.password')}
+                  value={password}
+                  onChange={(event) => setPassword(event.target.value)}
+                  disabled={isSubmitting}
+                  required
+                />
+              </label>
+              {error && <p className="error-text">{error}</p>}
+              <Button type="submit" disabled={isSubmitting}>
+                {isSubmitting ? t('login.submitting') : t('login.submit')}
+              </Button>
+            </form>
+          </Card>
         </div>
-      </section>
-    </FullscreenBackground>
+      </div>
+    </section>
   )
 }

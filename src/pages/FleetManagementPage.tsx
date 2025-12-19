@@ -2,7 +2,6 @@ import React, { useMemo, useState } from 'react'
 import Card from '@/components/ui/Card'
 import Header from '@/components/ui/Header'
 import Button from '@/components/ui/Button'
-import FullscreenBackground from '@/components/layout/FullscreenBackground'
 import { useI18n } from '@/i18n/I18nContext'
 
 const GLASS_TEXT = 'rgba(255,255,255,0.85)'
@@ -365,7 +364,6 @@ export default function FleetManagementPage() {
   }
 
   return (
-    <FullscreenBackground overlay="linear-gradient(rgba(0,0,0,0.22), rgba(0,0,0,0.22))">
       <section className="page" style={{ gap: '1.5rem' }}>
         <div
           style={{
@@ -786,6 +784,5 @@ export default function FleetManagementPage() {
           )}
         </div>
       </section>
-    </FullscreenBackground>
   )
 }

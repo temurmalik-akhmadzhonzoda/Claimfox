@@ -5,7 +5,6 @@ import Card from '@/components/ui/Card'
 import Header from '@/components/ui/Header'
 import { useI18n } from '@/i18n/I18nContext'
 import ClaimsfoxIcon from '@/assets/logos/Claimsfox_icon.png'
-import FullscreenBackground from '@/components/layout/FullscreenBackground'
 
 const STORAGE_KEY = 'cf_registration_draft'
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -902,7 +901,6 @@ export default function RegistrationPage() {
   )
 
   return (
-    <FullscreenBackground overlay="linear-gradient(180deg, rgba(8,16,64,0.7), rgba(8,16,64,0.45))">
       <section
         className="registration-page"
         style={{
@@ -1311,6 +1309,5 @@ export default function RegistrationPage() {
           </Card>
         </div>
       </section>
-    </FullscreenBackground>
   )
 }

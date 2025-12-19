@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import Card from '@/components/ui/Card'
 import Header from '@/components/ui/Header'
 import Button from '@/components/ui/Button'
-import FullscreenBackground from '@/components/layout/FullscreenBackground'
 import { useI18n } from '@/i18n/I18nContext'
 
 type KpiItem =
@@ -1004,7 +1003,6 @@ export default function FleetReportingPage() {
   return (
     <>
       <style>{KPI_GRID_CSS}</style>
-      <FullscreenBackground overlay="linear-gradient(rgba(0,0,0,0.22), rgba(0,0,0,0.22))">
       <section className="page" style={{ gap: '1.5rem' }}>
         <div
           style={{
@@ -1464,7 +1462,6 @@ export default function FleetReportingPage() {
           </Card>
         </div>
       </section>
-      </FullscreenBackground>
     </>
   )
 }
