@@ -7,8 +7,14 @@ import { useAuth } from '@/features/auth/AuthContext'
 import { useI18n } from '@/i18n/I18nContext'
 import BackgroundLogin from '@/assets/images/background_login.png'
 
-const ROLE_ITEMS = [
-  { key: 'claims' },
+type RoleItem = {
+  key: 'claims' | 'partner' | 'reporting' | 'fleetManagement'
+  route?: string
+  ctaKey?: string
+}
+
+const ROLE_ITEMS: RoleItem[] = [
+  { key: 'claims', route: '/claim-manager', ctaKey: 'roles.cards.claims.cta' },
   { key: 'partner' },
   { key: 'reporting', route: '/marketing' },
   { key: 'fleetManagement', route: '/fleet-management' }
@@ -104,7 +110,7 @@ export default function RolesPage() {
                         : undefined
                     }
                   >
-                    {t('roles.view')}
+                    {item.ctaKey ? t(item.ctaKey) : t('roles.view')}
                   </Button>
                 </Card>
               )

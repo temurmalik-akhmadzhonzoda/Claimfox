@@ -1,0 +1,261 @@
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import Button from '@/components/ui/Button'
+import Card from '@/components/ui/Card'
+import { useI18n } from '@/i18n/I18nContext'
+import InsurfoxLogoLight from '@/assets/logos/insurfox-logo-light.png'
+import BackgroundLogin from '@/assets/images/background_login.png'
+
+const featureKeys = [
+  'statusTimeline',
+  'coverage',
+  'partners',
+  'workflows',
+  'documents',
+  'aiInsights'
+] as const
+
+const featureIcons: Record<(typeof featureKeys)[number], React.ReactNode> = {
+  statusTimeline: (
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#D4380D" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="6" cy="6" r="2" />
+      <circle cx="12" cy="12" r="2" />
+      <circle cx="18" cy="6" r="2" />
+      <path d="M6 8v12" />
+      <path d="M12 14v6" />
+      <path d="M18 8v12" />
+      <path d="M6 12h6l6-4" />
+    </svg>
+  ),
+  coverage: (
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#D4380D" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 3 5 6v7c0 4.5 3.1 6.9 7 8 3.9-1.1 7-3.5 7-8V6l-7-3Z" />
+      <path d="m9 12 2 2 4-4" />
+    </svg>
+  ),
+  partners: (
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#D4380D" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M9 17v-2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2" />
+      <circle cx="6" cy="9" r="3" />
+      <path d="M21 17v-2a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v2" />
+      <circle cx="17" cy="9" r="3" />
+    </svg>
+  ),
+  workflows: (
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#D4380D" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M5 7h14v4H5z" />
+      <path d="M5 13h14v4H5z" />
+      <path d="M9 3v4" />
+      <path d="M15 17v4" />
+      <path d="M9 13V7" />
+      <path d="M15 17v-4" />
+    </svg>
+  ),
+  documents: (
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#D4380D" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M7 3h7l5 5v13H7z" />
+      <path d="M14 3v5h5" />
+      <path d="M10 13h6M10 17h6" />
+    </svg>
+  ),
+  aiInsights: (
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#D4380D" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="5" />
+      <path d="M12 2v3M12 19v3M4.93 4.93l2.12 2.12M16.95 16.95l2.12 2.12M2 12h3M19 12h3M4.93 19.07l2.12-2.12M16.95 7.05l2.12-2.12" />
+    </svg>
+  )
+}
+
+const previewKpis = [
+  { key: 'active', value: '128' },
+  { key: 'sla', value: '92%' },
+  { key: 'ai', value: '14' }
+] as const
+
+const previewBars = [60, 90, 75, 88, 70, 95]
+
+const gridStyles = `
+  .claim-manager-feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+  @media (max-width: 1100px) {
+    .claim-manager-feature-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 720px) {
+    .claim-manager-feature-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+`
+
+export default function ClaimManagerMarketingPage() {
+  const { t } = useI18n()
+  const navigate = useNavigate()
+
+  return (
+    <>
+      <style>{gridStyles}</style>
+      <div style={{ position: 'relative', minHeight: '100vh', color: '#ffffff' }}>
+        <div
+          aria-hidden="true"
+          style={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: -2,
+            backgroundImage: `url(${BackgroundLogin})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat'
+          }}
+        />
+        <div
+          aria-hidden="true"
+          style={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: -1,
+            backgroundImage: 'linear-gradient(180deg, rgba(8,16,64,0.72), rgba(8,16,64,0.45))'
+          }}
+        />
+
+        <section
+          style={{
+            position: 'relative',
+            zIndex: 1,
+            minHeight: '100vh',
+            width: '100%',
+            padding: 'calc(var(--header-height) + 32px) 1.25rem 4rem',
+            display: 'flex',
+            justifyContent: 'center'
+          }}
+        >
+          <div style={{ width: '100%', maxWidth: 1200, display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem' }}>
+              <img src={InsurfoxLogoLight} alt="Insurfox" style={{ height: '56px' }} />
+              <Button
+                onClick={() => navigate('/claim-manager-app')}
+                style={{ background: '#D4380D', padding: '0.65rem 1.4rem' }}
+              >
+                {t('claimManager.marketing.hero.login')}
+              </Button>
+            </div>
+
+            <div
+              style={{
+                textAlign: 'center',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '1rem',
+                alignItems: 'center'
+              }}
+            >
+              <p style={{ letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.7)', margin: 0 }}>
+                {t('claimManager.marketing.hero.overline')}
+              </p>
+              <h1 style={{ margin: 0, fontSize: '3rem', fontWeight: 700 }}>{t('claimManager.marketing.hero.title')}</h1>
+              <p style={{ maxWidth: '760px', color: 'rgba(255,255,255,0.85)', fontSize: '1.15rem' }}>
+                {t('claimManager.marketing.hero.subtitle')}
+              </p>
+            </div>
+
+            <div className="claim-manager-feature-grid">
+              {featureKeys.map((key) => (
+                <Card
+                  key={key}
+                  variant="glass"
+                  style={{
+                    background: 'rgba(255,255,255,0.08)',
+                    border: '1px solid rgba(255,255,255,0.25)',
+                    minHeight: '180px'
+                  }}
+                >
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                    {featureIcons[key]}
+                    <div>
+                      <h3 style={{ margin: '0 0 0.35rem' }}>{t(`claimManager.marketing.features.${key}.title`)}</h3>
+                      <p style={{ margin: 0, color: 'rgba(255,255,255,0.75)' }}>
+                        {t(`claimManager.marketing.features.${key}.description`)}
+                      </p>
+                    </div>
+                  </div>
+                </Card>
+              ))}
+            </div>
+
+            <Card
+              variant="glass"
+              style={{
+                background: 'rgba(255,255,255,0.09)',
+                border: '1px solid rgba(255,255,255,0.2)',
+                display: 'flex',
+                flexWrap: 'wrap',
+                gap: '1.75rem',
+                alignItems: 'center'
+              }}
+            >
+              <div style={{ flex: '1 1 320px' }}>
+                <h2 style={{ margin: '0 0 0.5rem' }}>{t('claimManager.marketing.preview.title')}</h2>
+                <p style={{ margin: 0, color: 'rgba(255,255,255,0.75)' }}>
+                  {t('claimManager.marketing.preview.subtitle')}
+                </p>
+                <div style={{ marginTop: '1rem', display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                  {previewKpis.map((item) => (
+                    <div
+                      key={item.key}
+                      style={{
+                        flex: '1 1 120px',
+                        padding: '0.85rem',
+                        borderRadius: '14px',
+                        background: 'rgba(255,255,255,0.12)',
+                        border: '1px solid rgba(255,255,255,0.2)'
+                      }}
+                    >
+                      <p style={{ margin: 0, fontSize: '0.85rem', color: 'rgba(255,255,255,0.7)' }}>
+                        {t(`claimManager.marketing.preview.kpis.${item.key}`)}
+                      </p>
+                      <strong style={{ fontSize: '1.4rem' }}>{item.value}</strong>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div
+                style={{
+                  flex: '1 1 360px',
+                  background: 'rgba(8,16,64,0.6)',
+                  borderRadius: '20px',
+                  padding: '1.25rem',
+                  border: '1px solid rgba(255,255,255,0.1)',
+                  boxShadow: '0 30px 50px rgba(3,0,40,0.4)'
+                }}
+              >
+                <p style={{ margin: '0 0 1rem', fontWeight: 600 }}>{t('claimManager.marketing.preview.chartTitle')}</p>
+                <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-end', height: '180px' }}>
+                  {previewBars.map((value, index) => (
+                    <div key={value + index} style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
+                      <div
+                        style={{
+                          width: '100%',
+                          height: `${value}%`,
+                          borderRadius: '12px',
+                          background: 'linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.15))',
+                          boxShadow: '0 10px 25px rgba(0,0,0,0.35)'
+                        }}
+                      />
+                    </div>
+                  ))}
+                </div>
+                <p style={{ margin: '1rem 0 0', color: 'rgba(255,255,255,0.75)' }}>
+                  {t('claimManager.marketing.preview.notes')}
+                </p>
+              </div>
+            </Card>
+          </div>
+        </section>
+      </div>
+    </>
+  )
+}

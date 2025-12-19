@@ -12,6 +12,8 @@ import BrokerCrmPage from '@/pages/BrokerCrmPage'
 import FleetReportingPage from '@/pages/FleetReportingPage'
 import FleetManagementPage from '@/pages/FleetManagementPage'
 import MarketingLandingPage from '@/pages/MarketingLandingPage'
+import ClaimManagerMarketingPage from '@/pages/ClaimManagerMarketingPage'
+import ClaimManagerPage from '@/pages/ClaimManagerPage'
 
 function NotFoundRedirect() {
   const { isAuthenticated } = useAuth()
@@ -37,6 +39,8 @@ export default function AppRouter() {
         <Route path="/broker-crm" element={<BrokerCrmPage />} />
         <Route path="/fleet-reporting" element={<FleetReportingPage />} />
         <Route path="/fleet-management" element={<FleetManagementPage />} />
+        <Route path="/claim-manager" element={<ClaimManagerMarketingPage />} />
+        <Route path="/claim-manager-app" element={<ClaimManagerPage />} />
       </Route>
       <Route path="*" element={<NotFoundRedirect />} />
     </Routes>

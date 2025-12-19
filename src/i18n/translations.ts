@@ -312,7 +312,8 @@ export const translations: Record<Lang, TranslationTree> = {
       cards: {
         claims: {
           title: 'Schadenmanager',
-          description: 'Verwalte offene Schadenfälle und priorisiere neue Aufgaben.'
+          description: 'Sachbearbeiter-Cockpit für schnelle Entscheidungen, Freigaben, Partnersteuerung und AI-Hinweise.',
+          cta: 'Öffnen'
         },
         partner: {
           title: 'Partner Manager',
@@ -504,6 +505,217 @@ export const translations: Record<Lang, TranslationTree> = {
       cta: {
         primary: 'Demo ansehen',
         secondary: 'Fleet Reporting öffnen'
+      }
+    },
+    claimManager: {
+      rolesCard: {
+        description: 'Sachbearbeiter-Cockpit für schnelle Entscheidungen, Freigaben, Partnersteuerung und AI-Hinweise.',
+        cta: 'Öffnen'
+      },
+      marketing: {
+        hero: {
+          overline: 'Claims Intelligence',
+          title: 'Schadenmanager',
+          subtitle:
+            'Sachbearbeiter-Cockpit für schnelle Entscheidungen, Freigaben und Partnersteuerung – mit KI, Dokumenten und Deckungsprüfung im Überblick.',
+          login: 'Login'
+        },
+        features: {
+          statusTimeline: {
+            title: 'Status & Timeline',
+            description: 'Alle Stationen der Schadenbearbeitung, Eskalationen und SLAs in einer Ansicht.'
+          },
+          coverage: {
+            title: 'Deckung & Policen',
+            description: 'Automatische Policenprüfung, Limits und Selbstbehalte mit KI-Unterstützung.'
+          },
+          partners: {
+            title: 'Partnersteuerung',
+            description: 'Werkstatt, Gutachter oder Abschlepper direkt aus dem Schadenfall beauftragen.'
+          },
+          workflows: {
+            title: 'Kostenfreigabe & Workflows',
+            description: 'Freigaben mit Checklisten, Kommentaren und Audit-Trail.'
+          },
+          documents: {
+            title: 'Dokumente & Bilder',
+            description: 'Polizei, KV, Fotos und Rechnungen sicher im Kontext der Schadenakte.'
+          },
+          aiInsights: {
+            title: 'Insurfox AI Hinweise',
+            description: 'Verdachtsmomente, Plausibilitäten und Next-Best-Actions für Sachbearbeiter:innen.'
+          }
+        },
+        preview: {
+          title: 'Dashboard Preview',
+          subtitle: 'KPIs, Alerts und Timeline – bereit für schnelle Entscheidungen.',
+          kpis: {
+            active: 'Aktive Schäden',
+            sla: 'SLA eingehalten',
+            ai: 'AI Alerts'
+          },
+          chartTitle: 'Kostenentwicklung / Woche',
+          notes: 'Demo-Daten: kombinierte KPI-Sicht mit AI Alerts und Status-Clustern.'
+        }
+      },
+      app: {
+        header: {
+          overline: 'Claim file',
+          title: 'Schadenakte',
+          claimId: 'Schaden-ID',
+          claimIdValue: 'CLM-2025-0471',
+          date: 'Ereignis',
+          dateValue: '12. März 2025',
+          status: 'Status'
+        },
+        statusOptions: {
+          intake: 'Eingang',
+          review: 'Prüfung',
+          approval: 'Freigabe',
+          repair: 'Reparatur',
+          closure: 'Abschluss'
+        },
+        actions: {
+          approveCosts: 'Kostenfreigabe',
+          assignSurveyor: 'Gutachter beauftragen',
+          changePartner: 'Partner ändern'
+        },
+        kpis: {
+          totalIncurred: 'Gesamtschaden',
+          reserve: 'Reserve',
+          approved: 'Freigegeben',
+          openItems: 'Offene Positionen',
+          deductible: 'Selbstbehalt',
+          coverage: 'Deckungsstatus',
+          coverageValue: 'Gedeckt',
+          fraudRisk: 'Betrugsrisiko',
+          handlingTime: 'Bearbeitungszeit'
+        },
+        kpiValues: {
+          totalIncurred: '€ 12.480',
+          reserve: '€ 3.200',
+          approved: '€ 6.210',
+          openItems: '3',
+          deductible: '€ 500',
+          coverage: 'Gedeckt',
+          fraudRisk: 'Mittel',
+          handlingTime: '9 T'
+        },
+        details: {
+          title: 'Schadendetails',
+          type: 'Schadenart',
+          location: 'Ort & Uhrzeit',
+          incidentTime: 'Zeitpunkt',
+          vehicle: 'Fahrzeug',
+          summary: 'Kurzbeschreibung',
+          values: {
+            type: 'Kasko / Auffahrunfall',
+            location: 'Hamburg Hafen, 11:32',
+            vehicle: 'HH-CL 2045 • WDD2130041A123456',
+            summary: 'Kunde meldet Auffahrunfall an der Zufahrt Tor 4. Sensorwerte + Zeugenbericht vorhanden.'
+          }
+        },
+        timeline: {
+          title: 'Timeline & SLA',
+          steps: {
+            intake: 'Eingang',
+            review: 'Prüfung',
+            approval: 'Freigabe',
+            repair: 'Reparatur',
+            closure: 'Abschluss'
+          }
+        },
+        costs: {
+          title: 'Kosten & Freigabe',
+          confirm: 'Kosten überprüfen',
+          table: {
+            position: 'Position',
+            amount: 'Betrag',
+            status: 'Status',
+            note: 'Notiz'
+          },
+          items: {
+            bodywork: 'Karosserie',
+            paint: 'Lackierung',
+            rental: 'Mietwagen'
+          },
+          status: {
+            pending: 'Offen',
+            approved: 'Freigegeben',
+            rejected: 'Abgelehnt'
+          },
+          notePlaceholder: 'Kommentar hinzufügen …',
+          modal: {
+            title: 'Kostenübernahme bestätigen',
+            checkbox: 'Policy geprüft & Limits eingehalten',
+            confirm: 'Kosten freigeben',
+            cancel: 'Abbrechen'
+          }
+        },
+        coverage: {
+          title: 'Deckung & Police',
+          policyNumber: 'Police',
+          policyValue: 'POL-DE-4711',
+          term: 'Laufzeit',
+          termValue: '01.01.2024 – 31.12.2024',
+          limit: 'Deckungssumme',
+          limitValue: '€ 15.000',
+          exclusion: 'Ausschlüsse',
+          exclusionValue: 'Glasbruch ausgeschlossen',
+          covered: 'Gedeckt',
+          notCovered: 'Nicht gedeckt',
+          note: 'Risikoanalyse zeigt volle Deckung für Reparatur und Mietwagen.'
+        },
+        partner: {
+          title: 'Partnersteuerung',
+          changeButton: 'Partner wechseln',
+          modalTitle: 'Partnerauswahl',
+          confirm: 'Übernehmen',
+          options: {
+            partner1: { name: 'KFZ Werkstatt Müller GmbH' },
+            partner1Address: 'Hamburg, Süderstraße 54',
+            partner2: { name: 'Autopartner Nord GmbH' },
+            partner2Address: 'Lübeck, Baltic Park 3',
+            partner3: { name: 'Karosserie 24' },
+            partner3Address: 'Bremerhaven, Dock 2'
+          }
+        },
+        ai: {
+          title: 'Insurfox AI Hinweise',
+          items: {
+            hint1: 'Fraud suspicion: mittleres Risiko – Schadenhöhe +18 % über Benchmark.',
+            hint2: 'Fehlender Polizeibericht – Upload anfordern.',
+            hint3: 'Ähnliche Schäden in den letzten 12 Monaten (3 Fälle) – Plausibilitätscheck.',
+            hint4: 'Empfehlung: Gutachter beauftragen (Severity Score 0.72).',
+            hint5: 'Partnerkapazität: Werkstatt Müller frei ab 15.03.'
+          }
+        },
+        documents: {
+          title: 'Dokumente',
+          media: 'Bilder & Medien',
+          mediaLabel: 'Foto',
+          list: {
+            estimate: 'Kostenvoranschlag.pdf',
+            police: 'Polizeibericht.pdf',
+            survey: 'Gutachten.pdf',
+            invoice: 'Rechnung.pdf'
+          },
+          previewTitle: 'Vorschau',
+          close: 'Schließen'
+        },
+        surveyor: {
+          title: 'Gutachter auswählen',
+          mapTitle: 'Einsatzgebiet & Entfernung',
+          confirm: 'Bestätigen',
+          options: {
+            surveyor1: 'MobilExpert GmbH',
+            surveyor1Region: 'Region Hamburg',
+            surveyor2: 'NordGutachter AG',
+            surveyor2Region: 'Region Schleswig-Holstein',
+            surveyor3: 'SchnellCheck Service',
+            surveyor3Region: 'Region Niedersachsen'
+          }
+        }
       }
     },
     fleetReporting: {
@@ -987,7 +1199,8 @@ export const translations: Record<Lang, TranslationTree> = {
       cards: {
         claims: {
           title: 'Claims Manager',
-          description: 'Manage open claims and prioritize the next actions.'
+          description: 'Claims handler cockpit for fast decisions, approvals, partner orchestration and AI insights.',
+          cta: 'Open'
         },
         partner: {
           title: 'Partner Manager',
@@ -1179,6 +1392,217 @@ export const translations: Record<Lang, TranslationTree> = {
       cta: {
         primary: 'View demo',
         secondary: 'Open Fleet Reporting'
+      }
+    },
+    claimManager: {
+      rolesCard: {
+        description: 'Claims handler cockpit for fast decisions, approvals, partner orchestration and AI insights.',
+        cta: 'Open'
+      },
+      marketing: {
+        hero: {
+          overline: 'Claims intelligence',
+          title: 'Claim Manager',
+          subtitle:
+            'Claims handler cockpit for fast decisions, approvals and partner orchestration – with AI, documents and coverage validation in one place.',
+          login: 'Login'
+        },
+        features: {
+          statusTimeline: {
+            title: 'Status & timeline',
+            description: 'All processing stages, escalations and SLAs in one view.'
+          },
+          coverage: {
+            title: 'Coverage & policies',
+            description: 'Automated policy validation, limits and deductibles with AI support.'
+          },
+          partners: {
+            title: 'Partner orchestration',
+            description: 'Dispatch workshops, surveyors or towing services directly from the claim file.'
+          },
+          workflows: {
+            title: 'Cost approval & workflows',
+            description: 'Approvals with checklists, comments and a full audit trail.'
+          },
+          documents: {
+            title: 'Documents & media',
+            description: 'Police reports, estimates and photos managed securely in context.'
+          },
+          aiInsights: {
+            title: 'Insurfox AI insights',
+            description: 'Suspicion flags, plausibility checks and next-best-actions for handlers.'
+          }
+        },
+        preview: {
+          title: 'Dashboard preview',
+          subtitle: 'KPIs, alerts and timeline — built for decisive claims teams.',
+          kpis: {
+            active: 'Active claims',
+            sla: 'SLA adherence',
+            ai: 'AI alerts'
+          },
+          chartTitle: 'Cost progression per week',
+          notes: 'Demo data: combined KPI + AI alert view with status clustering.'
+        }
+      },
+      app: {
+        header: {
+          overline: 'Claim file',
+          title: 'Claim file',
+          claimId: 'Claim ID',
+          claimIdValue: 'CLM-2025-0471',
+          date: 'Incident',
+          dateValue: '12 March 2025',
+          status: 'Status'
+        },
+        statusOptions: {
+          intake: 'Intake',
+          review: 'Review',
+          approval: 'Approval',
+          repair: 'Repair',
+          closure: 'Closure'
+        },
+        actions: {
+          approveCosts: 'Approve costs',
+          assignSurveyor: 'Assign surveyor',
+          changePartner: 'Change partner'
+        },
+        kpis: {
+          totalIncurred: 'Total incurred',
+          reserve: 'Reserve',
+          approved: 'Approved',
+          openItems: 'Open items',
+          deductible: 'Deductible',
+          coverage: 'Coverage status',
+          coverageValue: 'Covered',
+          fraudRisk: 'Fraud risk',
+          handlingTime: 'Handling time'
+        },
+        kpiValues: {
+          totalIncurred: '€12,480',
+          reserve: '€3,200',
+          approved: '€6,210',
+          openItems: '3',
+          deductible: '€500',
+          coverage: 'Covered',
+          fraudRisk: 'Medium',
+          handlingTime: '9 d'
+        },
+        details: {
+          title: 'Claim details',
+          type: 'Claim type',
+          location: 'Location & time',
+          incidentTime: 'Timestamp',
+          vehicle: 'Vehicle',
+          summary: 'Summary',
+          values: {
+            type: 'Comprehensive / rear impact',
+            location: 'Port of Hamburg, 11:32',
+            vehicle: 'HH-CL 2045 • WDD2130041A123456',
+            summary: 'Driver reports a rear-end collision at Gate 4. Sensor data and witness statement available.'
+          }
+        },
+        timeline: {
+          title: 'Timeline & SLA',
+          steps: {
+            intake: 'Intake',
+            review: 'Review',
+            approval: 'Approval',
+            repair: 'Repair',
+            closure: 'Closure'
+          }
+        },
+        costs: {
+          title: 'Costs & approval',
+          confirm: 'Review costs',
+          table: {
+            position: 'Line item',
+            amount: 'Amount',
+            status: 'Status',
+            note: 'Note'
+          },
+          items: {
+            bodywork: 'Bodywork',
+            paint: 'Paint',
+            rental: 'Rental car'
+          },
+          status: {
+            pending: 'Pending',
+            approved: 'Approved',
+            rejected: 'Rejected'
+          },
+          notePlaceholder: 'Add comment …',
+          modal: {
+            title: 'Confirm cost coverage',
+            checkbox: 'Policy checked & limits respected',
+            confirm: 'Approve costs',
+            cancel: 'Cancel'
+          }
+        },
+        coverage: {
+          title: 'Coverage & policy',
+          policyNumber: 'Policy',
+          policyValue: 'POL-DE-4711',
+          term: 'Term',
+          termValue: '01 Jan 2024 – 31 Dec 2024',
+          limit: 'Limit',
+          limitValue: '€15,000',
+          exclusion: 'Exclusions',
+          exclusionValue: 'Glass breakage excluded',
+          covered: 'Covered',
+          notCovered: 'Not covered',
+          note: 'Coverage analysis confirms repair and rental expenses.'
+        },
+        partner: {
+          title: 'Partner management',
+          changeButton: 'Change partner',
+          modalTitle: 'Select partner',
+          confirm: 'Apply',
+          options: {
+            partner1: { name: 'Müller Bodyshop' },
+            partner1Address: 'Hamburg, Süderstraße 54',
+            partner2: { name: 'Autopartner North' },
+            partner2Address: 'Lübeck, Baltic Park 3',
+            partner3: { name: 'Bodyshop 24' },
+            partner3Address: 'Bremerhaven, Dock 2'
+          }
+        },
+        ai: {
+          title: 'Insurfox AI insights',
+          items: {
+            hint1: 'Fraud suspicion medium — claim amount +18% above benchmark.',
+            hint2: 'Missing police report — request upload.',
+            hint3: 'Repeated pattern: 3 similar claims in 12 months.',
+            hint4: 'Recommend surveyor due to severity score 0.72.',
+            hint5: 'Workshop capacity: Müller available from Mar 15.'
+          }
+        },
+        documents: {
+          title: 'Documents',
+          media: 'Media & photos',
+          mediaLabel: 'Photo',
+          list: {
+            estimate: 'Estimate.pdf',
+            police: 'Police-report.pdf',
+            survey: 'Survey.pdf',
+            invoice: 'Invoice.pdf'
+          },
+          previewTitle: 'Preview',
+          close: 'Close'
+        },
+        surveyor: {
+          title: 'Assign surveyor',
+          mapTitle: 'Region & distance',
+          confirm: 'Confirm',
+          options: {
+            surveyor1: 'MobilExpert GmbH',
+            surveyor1Region: 'Hamburg region',
+            surveyor2: 'NordGutachter AG',
+            surveyor2Region: 'Schleswig-Holstein region',
+            surveyor3: 'SchnellCheck Service',
+            surveyor3Region: 'Lower Saxony region'
+          }
+        }
       }
     },
     fleetReporting: {
