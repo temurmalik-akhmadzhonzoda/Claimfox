@@ -40,12 +40,12 @@ type PartnerCard = {
 }
 
 const KPI_DATA = [
-  { labelKey: 'active', value: '128' },
-  { labelKey: 'delayed', value: '14' },
-  { labelKey: 'incidents', value: '7' },
-  { labelKey: 'coverage', value: '92%' },
-  { labelKey: 'highRisk', value: '9' },
-  { labelKey: 'etaDeviation', value: '18m' }
+  { key: 'activeShipments', value: '128' },
+  { key: 'delayed', value: '14' },
+  { key: 'incidents', value: '7' },
+  { key: 'coverageOk', value: '92%' },
+  { key: 'highRisk', value: '9' },
+  { key: 'avgEtaDeviation', value: '18m' }
 ] as const
 
 const shipments: Shipment[] = [
@@ -165,27 +165,27 @@ const shipments: Shipment[] = [
 
 const coverageCards = [
   {
-    title: 'Carrier’s Liability',
+    titleKey: 'liability',
     policy: 'CL-LOG-2042',
     limit: '€ 500k / incident',
     deductible: '€ 25k',
-    status: 'Active',
+    statusKey: 'active',
     validity: '01.01 – 31.12.2025'
   },
   {
-    title: 'Cargo Insurance',
+    titleKey: 'cargo',
     policy: 'CARGO-7718',
     limit: '€ 2 Mio / year',
     deductible: '€ 10k',
-    status: 'Active',
+    statusKey: 'active',
     validity: '01.04 – 31.03.2026'
   },
   {
-    title: 'Add-ons',
+    titleKey: 'addons',
     policy: 'Temp & High Value',
     limit: '€ 250k / load',
     deductible: '€ 8k',
-    status: 'Selective',
+    statusKey: 'selective',
     validity: 'Per contract'
   }
 ]
@@ -311,9 +311,17 @@ export default function LogisticsAppPage() {
           }}
         >
           {KPI_DATA.map((kpi) => (
-            <Card key={kpi.labelKey} variant="glass" style={{ padding: '1rem', minHeight: '110px' }}>
-              <p style={{ margin: 0, color: 'rgba(255,255,255,0.66)', letterSpacing: '0.06em', textTransform: 'uppercase', fontSize: '0.8rem' }}>
-                {t(`logisticsApp.kpis.${kpi.labelKey}`)}
+            <Card key={kpi.key} variant="glass" style={{ padding: '1rem', minHeight: '110px' }}>
+              <p
+                style={{
+                  margin: 0,
+                  color: 'rgba(255,255,255,0.66)',
+                  letterSpacing: '0.06em',
+                  textTransform: 'uppercase',
+                  fontSize: '0.8rem'
+                }}
+              >
+                {t(`logisticsApp.kpi.${kpi.key}`)}
               </p>
               <p style={{ margin: '0.3rem 0 0', fontSize: '1.8rem', fontWeight: 600 }}>{kpi.value}</p>
             </Card>
@@ -321,7 +329,26 @@ export default function LogisticsAppPage() {
         </div>
 
         <Card variant="glass" style={{ display: 'flex', flexDirection: 'column', gap: '1rem', padding: '1.25rem' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', alignItems: 'center', justifyContent: 'space-between' }}>
+            <h2 style={{ margin: 0 }}>{t('logisticsApp.sections.shipments')}</h2>
+            <input
+              type="search"
+              value={search}
+              onChange={(event) => setSearch(event.target.value)}
+              placeholder={t('logisticsApp.filters.search')}
+              style={{
+                flex: '1 1 280px',
+                minWidth: '240px',
+                borderRadius: '20px',
+                border: '1px solid rgba(255,255,255,0.25)',
+                background: 'rgba(255,255,255,0.08)',
+                color: '#fff',
+                padding: '0.5rem 1rem'
+              }}
+            />
+          </div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', alignItems: 'center' }}>
+            <span style={{ color: 'rgba(255,255,255,0.7)', fontWeight: 600 }}>{t('logisticsApp.filters.statusLabel')}:</span>
             {statusFilters.map((filter) => (
               <button
                 key={filter.key}
@@ -340,39 +367,34 @@ export default function LogisticsAppPage() {
                 {filter.label}
               </button>
             ))}
-            <input
-              type="search"
-              value={search}
-              onChange={(event) => setSearch(event.target.value)}
-              placeholder={t('logisticsApp.filters.search')}
-              style={{
-                flex: '1 1 240px',
-                minWidth: '240px',
-                borderRadius: '20px',
-                border: '1px solid rgba(255,255,255,0.25)',
-                background: 'rgba(255,255,255,0.08)',
-                color: '#fff',
-                padding: '0.5rem 1rem'
-              }}
-            />
           </div>
           <div style={{ overflowX: 'auto', paddingBottom: '0.5rem' }}>
             <table style={{ width: '100%', minWidth: '1100px', borderCollapse: 'separate', borderSpacing: 0 }}>
+              <caption style={{ textAlign: 'left', marginBottom: '0.75rem', fontWeight: 600, color: '#fff' }}>
+                {t('logisticsApp.table.shipments.title')}
+              </caption>
               <thead>
                 <tr style={{ textAlign: 'left', color: 'rgba(255,255,255,0.7)', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-                  <th style={{ paddingBottom: '0.6rem' }}>{t('logisticsApp.table.shipment')}</th>
-                  <th>{t('logisticsApp.table.customer')}</th>
-                  <th>{t('logisticsApp.table.route')}</th>
-                  <th>{t('logisticsApp.table.status')}</th>
-                  <th>{t('logisticsApp.table.eta')}</th>
-                  <th>{t('logisticsApp.table.coverage')}</th>
-                  <th>{t('logisticsApp.table.cargo')}</th>
-                  <th>{t('logisticsApp.table.value')}</th>
-                  <th>{t('logisticsApp.table.thirdParty')}</th>
-                  <th>{t('logisticsApp.table.note')}</th>
+                  <th style={{ paddingBottom: '0.6rem' }}>{t('logisticsApp.table.shipments.col.shipment')}</th>
+                  <th>{t('logisticsApp.table.shipments.col.customer')}</th>
+                  <th>{t('logisticsApp.table.shipments.col.route')}</th>
+                  <th>{t('logisticsApp.table.shipments.col.status')}</th>
+                  <th>{t('logisticsApp.table.shipments.col.eta')}</th>
+                  <th>{t('logisticsApp.table.shipments.col.coverage')}</th>
+                  <th>{t('logisticsApp.table.shipments.col.cargo')}</th>
+                  <th>{t('logisticsApp.table.shipments.col.value')}</th>
+                  <th>{t('logisticsApp.table.shipments.col.thirdParty')}</th>
+                  <th>{t('logisticsApp.table.shipments.col.aiHint')}</th>
                 </tr>
               </thead>
               <tbody>
+                {filteredShipments.length === 0 && (
+                  <tr>
+                    <td colSpan={10} style={{ padding: '1rem', color: 'rgba(255,255,255,0.75)' }}>
+                      {t('logisticsApp.table.shipments.empty')}
+                    </td>
+                  </tr>
+                )}
                 {filteredShipments.map((shipment) => (
                   <tr key={shipment.id} style={{ borderTop: '1px solid rgba(255,255,255,0.12)', color: '#fff' }}>
                     <td style={{ padding: '0.6rem 0.35rem' }}>
@@ -402,29 +424,42 @@ export default function LogisticsAppPage() {
           </div>
         </Card>
 
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-            gap: '1rem'
-          }}
-        >
+        <div>
+          <h2 style={{ margin: '1rem 0 0.5rem' }}>{t('logisticsApp.coverage.title')}</h2>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+              gap: '1rem'
+            }}
+          >
           {coverageCards.map((card) => (
-            <Card key={card.title} variant="glass" style={{ minHeight: '180px' }}>
-              <h3 style={{ marginTop: 0 }}>{card.title}</h3>
-              <p style={{ margin: '0.25rem 0', color: 'rgba(255,255,255,0.78)' }}>{card.policy}</p>
-              <p style={{ margin: '0.25rem 0', color: 'rgba(255,255,255,0.78)' }}>{card.limit}</p>
-              <p style={{ margin: '0.25rem 0', color: 'rgba(255,255,255,0.78)' }}>{card.deductible}</p>
-              <p style={{ margin: '0.25rem 0', color: '#D3F261' }}>{card.status}</p>
-              <p style={{ margin: '0.25rem 0', color: 'rgba(255,255,255,0.75)' }}>{card.validity}</p>
+            <Card key={card.titleKey} variant="glass" style={{ minHeight: '180px' }}>
+              <h3 style={{ marginTop: 0 }}>{t(`logisticsApp.coverageCards.${card.titleKey}.title`)}</h3>
+              <p style={{ margin: '0.25rem 0', color: 'rgba(255,255,255,0.78)' }}>
+                {t('logisticsApp.coverage.policyId')}: {card.policy}
+              </p>
+              <p style={{ margin: '0.25rem 0', color: 'rgba(255,255,255,0.78)' }}>
+                {t('logisticsApp.coverage.limit')}: {card.limit}
+              </p>
+              <p style={{ margin: '0.25rem 0', color: 'rgba(255,255,255,0.78)' }}>
+                {t('logisticsApp.coverage.deductible')}: {card.deductible}
+              </p>
+              <p style={{ margin: '0.25rem 0', color: '#D3F261' }}>
+                {t('logisticsApp.coverage.status')}: {t(`logisticsApp.coverage.statusLabels.${card.statusKey}`)}
+              </p>
+              <p style={{ margin: '0.25rem 0', color: 'rgba(255,255,255,0.75)' }}>
+                {t('logisticsApp.coverage.validity')}: {card.validity}
+              </p>
             </Card>
           ))}
+          </div>
         </div>
 
         <Card variant="glass" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.75rem' }}>
             <div>
-              <h2 style={{ margin: 0 }}>{t('logisticsApp.sections.incidents')}</h2>
+              <h2 style={{ margin: 0 }}>{t('logisticsApp.incidents.title')}</h2>
               <p style={{ margin: 0, color: 'rgba(255,255,255,0.75)' }}>{t('logisticsApp.incidents.subtitle')}</p>
             </div>
             <Button variant="secondary" style={{ background: '#ffffff', color: '#0B1028', borderRadius: '999px' }}>
@@ -461,13 +496,15 @@ export default function LogisticsAppPage() {
           </div>
         </Card>
 
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-            gap: '1rem'
-          }}
-        >
+        <div>
+          <h2 style={{ margin: '1rem 0 0.5rem' }}>{t('logisticsApp.sections.thirdParty')}</h2>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+              gap: '1rem'
+            }}
+          >
           {partners.map((partner) => (
             <Card key={partner.titleKey} variant="glass" style={{ minHeight: '180px' }}>
               <h3 style={{ marginTop: 0 }}>{t(`logisticsApp.thirdParty.${partner.titleKey}`)}</h3>
@@ -477,6 +514,7 @@ export default function LogisticsAppPage() {
               <p style={{ margin: '0.2rem 0', color: 'rgba(255,255,255,0.78)' }}>{partner.email}</p>
             </Card>
           ))}
+          </div>
         </div>
 
         <Card variant="glass">

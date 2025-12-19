@@ -372,45 +372,6 @@ export const translations: Record<Lang, TranslationTree> = {
     logisticsApp: {
       title: 'Logistik Cockpit',
       subtitle: 'Aufträge, Routen, Versicherungsschutz und Incidents im Überblick',
-      kpis: {
-        active: 'Aktive Aufträge',
-        delayed: 'Verzögert',
-        incidents: 'Incidents',
-        coverage: 'Deckung OK',
-        highRisk: 'High Risk Shipments',
-        etaDeviation: 'Ø ETA Abweichung'
-      },
-      filters: {
-        search: 'Sendungsnummer, Route oder Kunde suchen …',
-        statusAll: 'Alle',
-        statusInTransit: 'In Transit',
-        statusDelayed: 'Verzögert',
-        statusDelivered: 'Zugestellt',
-        statusIncident: 'Incident'
-      },
-      table: {
-        shipment: 'Auftrag',
-        customer: 'Auftraggeber',
-        route: 'Route',
-        status: 'Status',
-        eta: 'ETA',
-        coverage: 'Deckung',
-        cargo: 'Cargo',
-        value: 'Wert',
-        thirdParty: 'Third Party',
-        note: 'Hinweis',
-        statusLabels: {
-          inTransit: 'In Transit',
-          delayed: 'Verzögert',
-          delivered: 'Zugestellt',
-          incident: 'Incident'
-        },
-        coverageLabels: {
-          covered: 'Gedeckt',
-          partial: 'Teilweise',
-          uncovered: 'Keine Deckung'
-        }
-      },
       sections: {
         overview: 'Übersicht',
         shipments: 'Aktuelle Aufträge',
@@ -419,17 +380,93 @@ export const translations: Record<Lang, TranslationTree> = {
         thirdParty: 'Third Party',
         documents: 'Dokumente'
       },
+      kpi: {
+        activeShipments: 'Aktive Sendungen',
+        delayed: 'Verzögert',
+        incidents: 'Offene Incidents',
+        coverageOk: 'Deckung OK',
+        highRisk: 'Hohes Risiko',
+        avgEtaDeviation: 'Ø ETA-Abweichung'
+      },
+      filters: {
+        search: 'Sendungsnummer, Route oder Kunde suchen …',
+        statusLabel: 'Status',
+        statusAll: 'Alle',
+        statusInTransit: 'In Transit',
+        statusDelayed: 'Verzögert',
+        statusDelivered: 'Zugestellt',
+        statusIncident: 'Incident'
+      },
+      table: {
+        shipments: {
+          title: 'Live Sendungen',
+          col: {
+            shipment: 'Auftrag',
+            customer: 'Auftraggeber',
+            route: 'Route',
+            status: 'Status',
+            eta: 'ETA',
+            coverage: 'Deckung',
+            cargo: 'Fracht',
+            value: 'Wert',
+            thirdParty: 'Third Party',
+            aiHint: 'AI Hinweis'
+          },
+          empty: 'Keine Demo-Daten gefunden.'
+        },
+        statusLabels: {
+          inTransit: 'In Transit',
+          delayed: 'Verzögert',
+          delivered: 'Zugestellt',
+          incident: 'Incident'
+        },
+        coverageLabels: {
+          covered: 'Gedeckt',
+          partial: 'Teilgedeckt',
+          uncovered: 'Nicht gedeckt'
+        }
+      },
+      coverage: {
+        title: 'Versicherung & Deckung',
+        policyId: 'Police',
+        limit: 'Deckungssumme',
+        deductible: 'Selbstbehalt',
+        validity: 'Laufzeit',
+        status: 'Status',
+        covered: 'Gedeckt',
+        partial: 'Teilgedeckt',
+        notCovered: 'Nicht gedeckt',
+        statusLabels: {
+          active: 'Aktiv',
+          selective: 'Selektiv',
+          inactive: 'Inaktiv'
+        }
+      },
+      coverageCards: {
+        liability: { title: 'Frachtführerhaftpflicht' },
+        cargo: { title: 'Cargo Insurance' },
+        addons: { title: 'Add-ons' }
+      },
       incidents: {
+        title: 'Schäden & Incidents',
         subtitle: 'Aktuelle Schäden & Untersuchungen',
         cta: 'Incident öffnen',
-        status: 'Status',
-        statusLabels: {
-          open: 'Offen',
-          review: 'In Prüfung',
-          closed: 'Geschlossen'
-        },
+        type: 'Typ',
+        state: 'Status',
         cost: 'Kosten',
-        documents: 'Dokumente'
+        documents: 'Dokumente',
+        risk: 'Risiko',
+        stateOpen: 'Offen',
+        stateReview: 'In Prüfung',
+        stateClosed: 'Geschlossen',
+        riskLow: 'Niedrig',
+        riskMed: 'Mittel',
+        riskHigh: 'Hoch'
+      },
+      documents: {
+        title: 'Dokumente',
+        upload: 'Upload',
+        download: 'Download'
       },
       thirdParty: {
         shipper: 'Shipper',
@@ -1364,16 +1401,25 @@ export const translations: Record<Lang, TranslationTree> = {
     logisticsApp: {
       title: 'Logistics Cockpit',
       subtitle: 'Orders, routes, coverage and incidents at a glance',
-      kpis: {
-        active: 'Active shipments',
+      sections: {
+        overview: 'Overview',
+        shipments: 'Live shipments',
+        coverage: 'Insurance & coverage',
+        incidents: 'Claims & incidents',
+        thirdParty: 'Third party',
+        documents: 'Documents'
+      },
+      kpi: {
+        activeShipments: 'Active shipments',
         delayed: 'Delayed',
-        incidents: 'Incidents',
-        coverage: 'Coverage OK',
-        highRisk: 'High risk shipments',
-        etaDeviation: 'Avg. ETA deviation'
+        incidents: 'Open incidents',
+        coverageOk: 'Coverage OK',
+        highRisk: 'High risk',
+        avgEtaDeviation: 'Avg. ETA deviation'
       },
       filters: {
         search: 'Search shipment, route or customer …',
+        statusLabel: 'Status',
         statusAll: 'All',
         statusInTransit: 'In transit',
         statusDelayed: 'Delayed',
@@ -1381,16 +1427,22 @@ export const translations: Record<Lang, TranslationTree> = {
         statusIncident: 'Incident'
       },
       table: {
-        shipment: 'Shipment',
-        customer: 'Customer',
-        route: 'Route',
-        status: 'Status',
-        eta: 'ETA',
-        coverage: 'Coverage',
-        cargo: 'Cargo type',
-        value: 'Value',
-        thirdParty: 'Third party',
-        note: 'AI hint',
+        shipments: {
+          title: 'Live shipments',
+          col: {
+            shipment: 'Shipment',
+            customer: 'Customer',
+            route: 'Route',
+            status: 'Status',
+            eta: 'ETA',
+            coverage: 'Coverage',
+            cargo: 'Cargo',
+            value: 'Value',
+            thirdParty: 'Third party',
+            aiHint: 'AI hint'
+          },
+          empty: 'No demo data found.'
+        },
         statusLabels: {
           inTransit: 'In transit',
           delayed: 'Delayed',
@@ -1403,25 +1455,47 @@ export const translations: Record<Lang, TranslationTree> = {
           uncovered: 'Not covered'
         }
       },
-      sections: {
-        overview: 'Overview',
-        shipments: 'Live shipments',
-        coverage: 'Insurance & coverage',
-        incidents: 'Claims & incidents',
-        thirdParty: 'Third party',
-        documents: 'Documents'
+      coverage: {
+        title: 'Insurance & coverage',
+        policyId: 'Policy',
+        limit: 'Limit',
+        deductible: 'Deductible',
+        validity: 'Validity',
+        status: 'Status',
+        covered: 'Covered',
+        partial: 'Partial',
+        notCovered: 'Not covered',
+        statusLabels: {
+          active: 'Active',
+          selective: 'Selective',
+          inactive: 'Inactive'
+        }
+      },
+      coverageCards: {
+        liability: { title: 'Carrier’s liability' },
+        cargo: { title: 'Cargo insurance' },
+        addons: { title: 'Add-ons' }
       },
       incidents: {
+        title: 'Claims & incidents',
         subtitle: 'Current claims & investigations',
         cta: 'Open incident',
-        status: 'Status',
-        statusLabels: {
-          open: 'Open',
-          review: 'In review',
-          closed: 'Closed'
-        },
+        type: 'Type',
+        state: 'Status',
         cost: 'Cost',
-        documents: 'Documents'
+        documents: 'Documents',
+        risk: 'Risk',
+        stateOpen: 'Open',
+        stateReview: 'In review',
+        stateClosed: 'Closed',
+        riskLow: 'Low',
+        riskMed: 'Medium',
+        riskHigh: 'High'
+      },
+      documents: {
+        title: 'Documents',
+        upload: 'Upload',
+        download: 'Download'
       },
       thirdParty: {
         shipper: 'Shipper',
