@@ -31,6 +31,7 @@ type TranslationTree = {
     intro: string
     timeStampMessage: string
     askLocation: string
+    askDescription: string
     locationButton: string
     locationPending: string
     locationPendingShort: string
@@ -39,14 +40,27 @@ type TranslationTree = {
     locationUnknown: string
     nextPrompt: string
     botAck: string
+    claimNumberMessage: string
     inputPlaceholder: string
     send: string
     back: string
+    street: string
+    houseNumber: string
+    postalCode: string
+    city: string
+    upload: string
+    uploadEmpty: string
+    uploadCount: string
+    demoStreet: string
+    demoHouseNumber: string
+    demoPostalCode: string
+    demoCity: string
     infoTitle: string
     infoSubtitle: string
     infoLocation: string
     infoDate: string
     infoTime: string
+    infoClaimNumber: string
     infoStatus: string
     statusOpen: string
     demoHint: string
@@ -511,22 +525,36 @@ export const translations: Record<Lang, TranslationTree> = {
       intro: 'Willkommen im Schadenmanagement. Ich begleite dich Schritt für Schritt.',
       timeStampMessage: 'Schaden gemeldet am {{date}} um {{time}}.',
       askLocation: 'Darf ich deinen Standort verwenden, um den Schadenort automatisch zu erfassen?',
+      askDescription: 'Beschreibe kurz, was passiert ist.',
       locationButton: 'Standort freigeben',
       locationPending: 'Standort wird abgefragt …',
       locationPendingShort: 'Wird ermittelt …',
-      locationGranted: 'Standort erfasst: {{coords}}',
+      locationGranted: 'Standort erfasst: {{address}}',
       locationDenied: 'Standort nicht verfügbar – bitte Adresse manuell ergänzen.',
       locationUnknown: 'Nicht erfasst',
       nextPrompt: 'Beschreibe kurz den Schaden und lade optional Fotos hoch.',
       botAck: 'Danke! Die Notiz ist in der Schadenakte gespeichert.',
+      claimNumberMessage: 'Versicherungsfall eröffnet. Schadennummer: {{claimNumber}}.',
       inputPlaceholder: 'Kurze Beschreibung eingeben …',
       send: 'Senden',
       back: 'Zurück',
+      street: 'Straße',
+      houseNumber: 'Hausnummer',
+      postalCode: 'PLZ',
+      city: 'Ort',
+      upload: 'Bilder hochladen',
+      uploadEmpty: 'Keine Bilder ausgewählt',
+      uploadCount: '{{count}} Bild(er) ausgewählt',
+      demoStreet: 'Musterstraße',
+      demoHouseNumber: '17a',
+      demoPostalCode: '10115',
+      demoCity: 'Berlin',
       infoTitle: 'Live-Check',
       infoSubtitle: 'Automatisch generierte Eckdaten für die Schadenakte.',
       infoLocation: 'Standort',
       infoDate: 'Datum',
       infoTime: 'Uhrzeit',
+      infoClaimNumber: 'Schadennummer',
       infoStatus: 'Status',
       statusOpen: 'Offen',
       demoHint: 'Zeitstempel und Standort werden direkt dem Schadenticket zugeordnet.'
@@ -1669,22 +1697,36 @@ export const translations: Record<Lang, TranslationTree> = {
       intro: 'Welcome to the claims process. I will guide you step by step.',
       timeStampMessage: 'Claim recorded on {{date}} at {{time}}.',
       askLocation: 'May I use your location to capture the incident site automatically?',
+      askDescription: 'Briefly describe what happened.',
       locationButton: 'Share location',
       locationPending: 'Requesting location …',
       locationPendingShort: 'Locating …',
-      locationGranted: 'Location captured: {{coords}}',
+      locationGranted: 'Location captured: {{address}}',
       locationDenied: 'Location unavailable — please add the address manually.',
       locationUnknown: 'Not captured',
       nextPrompt: 'Briefly describe the incident and upload photos if available.',
       botAck: 'Thanks! Your note is stored in the claim file.',
+      claimNumberMessage: 'Insurance case created. Claim number: {{claimNumber}}.',
       inputPlaceholder: 'Enter a short description …',
       send: 'Send',
       back: 'Back',
+      street: 'Street',
+      houseNumber: 'House number',
+      postalCode: 'Postal code',
+      city: 'City',
+      upload: 'Upload photos',
+      uploadEmpty: 'No photos selected',
+      uploadCount: '{{count}} photo(s) selected',
+      demoStreet: 'Maple Street',
+      demoHouseNumber: '17A',
+      demoPostalCode: '10001',
+      demoCity: 'Berlin',
       infoTitle: 'Live check',
       infoSubtitle: 'Auto-generated data points for the claim file.',
       infoLocation: 'Location',
       infoDate: 'Date',
       infoTime: 'Time',
+      infoClaimNumber: 'Claim number',
       infoStatus: 'Status',
       statusOpen: 'Open',
       demoHint: 'Timestamp and location are attached to the claim ticket.'
