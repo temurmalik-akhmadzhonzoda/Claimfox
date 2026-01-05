@@ -69,12 +69,13 @@ export default function RolesPage() {
                   variant="glass"
                   interactive={hasRoute}
                   onClick={hasRoute ? () => navigate(item.route!) : undefined}
+                  style={{ display: 'flex', flexDirection: 'column', height: '100%' }}
                 >
                   <p style={{ marginTop: 0, color: 'rgba(255,255,255,0.85)', minHeight: '3rem' }}>
                     {t(`roles.cards.${item.key}.description`)}
                   </p>
                   <Button
-                    style={{ width: '100%' }}
+                    style={{ width: '100%', marginTop: 'auto' }}
                     onClick={
                       hasRoute
                         ? (event) => {
@@ -95,9 +96,10 @@ export default function RolesPage() {
               interactive
               onClick={() => navigate('/registration')}
               variant="glass"
+              style={{ display: 'flex', flexDirection: 'column', height: '100%' }}
             >
               <Button
-                style={{ width: '100%' }}
+                style={{ width: '100%', marginTop: 'auto' }}
                 onClick={(event) => {
                   event.stopPropagation()
                   navigate('/registration')
@@ -111,12 +113,13 @@ export default function RolesPage() {
               interactive
               onClick={() => navigate('/broker-portal')}
               variant="glass"
+              style={{ display: 'flex', flexDirection: 'column', height: '100%' }}
             >
               <p style={{ marginTop: 0, color: 'rgba(255,255,255,0.85)', minHeight: '3rem' }}>
                 {t('roles.brokerPortal')}
               </p>
               <Button
-                style={{ width: '100%' }}
+                style={{ width: '100%', marginTop: 'auto' }}
                 onClick={(event) => {
                   event.stopPropagation()
                   navigate('/broker-portal')
