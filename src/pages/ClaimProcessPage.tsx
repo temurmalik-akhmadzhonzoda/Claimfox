@@ -75,12 +75,15 @@ export default function ClaimProcessPage() {
   const [houseNumber, setHouseNumber] = useState('')
   const [postalCode, setPostalCode] = useState('')
   const [city, setCity] = useState('')
+  const [coords, setCoords] = useState<string | null>(null)
   const [claimNumber] = useState(() => `DE-${Math.floor(100000 + Math.random() * 900000)}`)
   const [files, setFiles] = useState<File[]>([])
 
   const locationLabel =
     street && houseNumber && postalCode && city
       ? `${street} ${houseNumber}, ${postalCode} ${city}`
+      : coords
+      ? coords
       : locationState === 'pending'
       ? t('claimProcess.locationPendingShort')
       : locationState === 'denied'
@@ -88,19 +91,16 @@ export default function ClaimProcessPage() {
       : t('claimProcess.locationUnknown')
 
   const locationDetail =
-    street && houseNumber && postalCode && city ? locationLabel : t('claimProcess.locationUnknown')
+    street && houseNumber && postalCode && city
+      ? locationLabel
+      : coords
+      ? coords
+      : t('claimProcess.locationUnknown')
 
   const uploadLabel =
     files.length === 0
       ? t('claimProcess.uploadEmpty')
       : t('claimProcess.uploadCount', { count: files.length })
-
-  function fillDemoAddress() {
-    setStreet(t('claimProcess.demoStreet'))
-    setHouseNumber(t('claimProcess.demoHouseNumber'))
-    setPostalCode(t('claimProcess.demoPostalCode'))
-    setCity(t('claimProcess.demoCity'))
-  }
 
   function getTimeStamp() {
     return new Date().toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' })
@@ -139,15 +139,11 @@ export default function ClaimProcessPage() {
     }
 
     navigator.geolocation.getCurrentPosition(
-      () => {
-        const demoStreet = t('claimProcess.demoStreet')
-        const demoHouseNumber = t('claimProcess.demoHouseNumber')
-        const demoPostalCode = t('claimProcess.demoPostalCode')
-        const demoCity = t('claimProcess.demoCity')
-        const demoAddress = `${demoStreet} ${demoHouseNumber}, ${demoPostalCode} ${demoCity}`
-        fillDemoAddress()
+      (position) => {
+        const coordsText = `${position.coords.latitude.toFixed(5)}, ${position.coords.longitude.toFixed(5)}`
+        setCoords(coordsText)
         setLocationState('granted')
-        appendMessage('bot', t('claimProcess.locationGranted', { address: demoAddress }))
+        appendMessage('bot', t('claimProcess.locationGranted', { coords: coordsText }))
       },
       () => {
         setLocationState('denied')
@@ -233,16 +229,14 @@ export default function ClaimProcessPage() {
                   })}
                 </div>
 
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', alignItems: 'center' }}>
-                  <Button
-                    onClick={handleLocationRequest}
-                    disabled={locationState === 'pending'}
-                    style={{ padding: '0.6rem 1.3rem' }}
-                  >
-                    {t('claimProcess.locationButton')}
-                  </Button>
-                  <span style={{ color: '#ffffff', fontSize: '0.9rem' }}>{t('claimProcess.nextPrompt')}</span>
-                </div>
+                {locationState === 'idle' && (
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', alignItems: 'center' }}>
+                    <Button onClick={handleLocationRequest} style={{ padding: '0.6rem 1.3rem' }}>
+                      {t('claimProcess.locationButton')}
+                    </Button>
+                    <span style={{ color: '#ffffff', fontSize: '0.9rem' }}>{t('claimProcess.nextPrompt')}</span>
+                  </div>
+                )}
 
                 <div style={{ display: 'grid', gap: '0.75rem', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))' }}>
                   <input

@@ -51,10 +51,6 @@ type TranslationTree = {
     upload: string
     uploadEmpty: string
     uploadCount: string
-    demoStreet: string
-    demoHouseNumber: string
-    demoPostalCode: string
-    demoCity: string
     infoTitle: string
     infoSubtitle: string
     infoLocation: string
@@ -529,7 +525,7 @@ export const translations: Record<Lang, TranslationTree> = {
       locationButton: 'Standort freigeben',
       locationPending: 'Standort wird abgefragt …',
       locationPendingShort: 'Wird ermittelt …',
-      locationGranted: 'Standort erfasst: {{address}}',
+      locationGranted: 'Standort erfasst: {{coords}}',
       locationDenied: 'Standort nicht verfügbar – bitte Adresse manuell ergänzen.',
       locationUnknown: 'Nicht erfasst',
       nextPrompt: 'Beschreibe kurz den Schaden und lade optional Fotos hoch.',
@@ -545,10 +541,6 @@ export const translations: Record<Lang, TranslationTree> = {
       upload: 'Bilder hochladen',
       uploadEmpty: 'Keine Bilder ausgewählt',
       uploadCount: '{{count}} Bild(er) ausgewählt',
-      demoStreet: 'Musterstraße',
-      demoHouseNumber: '17a',
-      demoPostalCode: '10115',
-      demoCity: 'Berlin',
       infoTitle: 'Live-Check',
       infoSubtitle: 'Automatisch generierte Eckdaten für die Schadenakte.',
       infoLocation: 'Standort',
@@ -1701,7 +1693,7 @@ export const translations: Record<Lang, TranslationTree> = {
       locationButton: 'Share location',
       locationPending: 'Requesting location …',
       locationPendingShort: 'Locating …',
-      locationGranted: 'Location captured: {{address}}',
+      locationGranted: 'Location captured: {{coords}}',
       locationDenied: 'Location unavailable — please add the address manually.',
       locationUnknown: 'Not captured',
       nextPrompt: 'Briefly describe the incident and upload photos if available.',
@@ -1717,10 +1709,6 @@ export const translations: Record<Lang, TranslationTree> = {
       upload: 'Upload photos',
       uploadEmpty: 'No photos selected',
       uploadCount: '{{count}} photo(s) selected',
-      demoStreet: 'Maple Street',
-      demoHouseNumber: '17A',
-      demoPostalCode: '10001',
-      demoCity: 'Berlin',
       infoTitle: 'Live check',
       infoSubtitle: 'Auto-generated data points for the claim file.',
       infoLocation: 'Location',
