@@ -10,6 +10,10 @@ const STORAGE_KEY = 'cf_auth'
 const VALID_USERNAME = 'ralf'
 const VALID_PASSWORD = '2106'
 
+const ADDITIONAL_CREDENTIALS = [
+  { username: 'insurteam', password: '2105' }
+]
+
 const AuthContext = createContext<AuthContextValue | undefined>(undefined)
 
 function isBrowser() {
@@ -36,7 +40,15 @@ function persistState(nextState: boolean) {
 
 function credentialsMatch(username: string, password: string) {
   const normalizedUsername = username.trim().toLowerCase()
-  return normalizedUsername === VALID_USERNAME.toLowerCase() && password.trim() === VALID_PASSWORD
+  const normalizedPassword = password.trim()
+
+  if (normalizedUsername === VALID_USERNAME.toLowerCase() && normalizedPassword === VALID_PASSWORD) {
+    return true
+  }
+
+  return ADDITIONAL_CREDENTIALS.some(
+    (cred) => normalizedUsername === cred.username.toLowerCase() && normalizedPassword === cred.password
+  )
 }
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
