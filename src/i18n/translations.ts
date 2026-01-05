@@ -28,6 +28,9 @@ type TranslationTree = {
   claimProcess: {
     title: string
     subtitle: string
+    chatTitle: string
+    chatSubtitle: string
+    chatStatus: string
     intro: string
     timeStampMessage: string
     askLocation: string
@@ -518,6 +521,9 @@ export const translations: Record<Lang, TranslationTree> = {
     claimProcess: {
       title: 'Schadenmeldung',
       subtitle: 'Demo MVP: Chatbot-Flow mit Standortabfrage, Zeitstempelung und strukturierter Schadenaufnahme.',
+      chatTitle: 'Schadenaufnahme Assistent',
+      chatSubtitle: 'Sichere Session mit Protokollierung und Zeitstempel.',
+      chatStatus: 'Live',
       intro: 'Willkommen im Schadenmanagement. Ich begleite dich Schritt für Schritt.',
       timeStampMessage: 'Schaden gemeldet am {{date}} um {{time}}.',
       askLocation: 'Darf ich deinen Standort verwenden, um den Schadenort automatisch zu erfassen?',
@@ -1686,6 +1692,9 @@ export const translations: Record<Lang, TranslationTree> = {
     claimProcess: {
       title: 'Claims Process',
       subtitle: 'Demo MVP: chatbot flow with location capture, timestamps, and structured claim intake.',
+      chatTitle: 'Claims Intake Assistant',
+      chatSubtitle: 'Secure session with audit trail and timestamps.',
+      chatStatus: 'Live',
       intro: 'Welcome to the claims process. I will guide you step by step.',
       timeStampMessage: 'Claim recorded on {{date}} at {{time}}.',
       askLocation: 'May I use your location to capture the incident site automatically?',

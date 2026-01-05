@@ -19,15 +19,75 @@ const layoutStyles = `
     gap: 1.5rem;
     grid-template-columns: minmax(0, 1fr);
   }
+  .claim-process-chat-shell {
+    background: linear-gradient(135deg, rgba(255,255,255,0.25), rgba(212,56,13,0.35));
+    border-radius: 26px;
+    padding: 1px;
+  }
+  .claim-process-chat-surface {
+    background: rgba(255,255,255,0.96);
+    border-radius: 26px;
+    padding: 1.5rem;
+    box-shadow: 0 30px 60px rgba(7, 5, 50, 0.18);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .claim-process-chat-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .claim-process-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    background: rgba(212,56,13,0.12);
+    color: #8b2307;
+  }
+  .claim-process-messages {
+    background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(248,247,255,0.98));
+    border-radius: 20px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    min-height: 360px;
+    border: 1px solid rgba(8,0,40,0.06);
+  }
+  .claim-process-bubble {
+    padding: 0.85rem 1.1rem;
+    border-radius: 18px;
+    box-shadow: 0 12px 25px rgba(8, 4, 50, 0.08);
+    white-space: pre-line;
+  }
+  .claim-process-user {
+    background: linear-gradient(140deg, #ffe4db, #fff1ea);
+  }
+  .claim-process-bot {
+    background: #f8f7ff;
+  }
+  .claim-process-input {
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.35);
+    padding: 0.7rem 0.9rem;
+    background: rgba(255,255,255,0.9);
+    color: #0e0d1c;
+  }
   @media (min-width: 980px) {
     .claim-process-grid {
       grid-template-columns: minmax(0, 1.55fr) minmax(0, 0.9fr);
     }
   }
 `
-
-const BOT_BUBBLE = '#F8F7FF'
-const USER_BUBBLE = '#FFE4DB'
 
 export default function ClaimProcessPage() {
   const { t, lang } = useI18n()
@@ -196,107 +256,105 @@ export default function ClaimProcessPage() {
 
           <div className="claim-process-grid">
             <Card variant="glass" style={{ padding: '1.5rem', color: '#0e0d1c' }}>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                <div
-                  style={{
-                    background: 'rgba(255,255,255,0.95)',
-                    borderRadius: '20px',
-                    padding: '1.25rem',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '0.75rem',
-                    minHeight: '360px'
-                  }}
-                >
-                  {messages.map((message) => {
-                    const isUser = message.author === 'user'
-                    return (
-                      <div
-                        key={message.id}
-                        style={{
-                          display: 'flex',
-                          justifyContent: isUser ? 'flex-end' : 'flex-start',
-                          gap: '0.5rem'
-                        }}
-                      >
-                        {!isUser && (
-                          <img src={ClaimsfoxIcon} alt="Claimsfox" style={{ width: '28px', height: '28px' }} />
-                        )}
-                        <div style={{ maxWidth: '78%', display: 'flex', flexDirection: 'column', alignItems: isUser ? 'flex-end' : 'flex-start' }}>
+              <div className="claim-process-chat-shell">
+                <div className="claim-process-chat-surface">
+                  <div className="claim-process-chat-header">
+                    <div>
+                      <strong style={{ fontSize: '1.05rem' }}>{t('claimProcess.chatTitle')}</strong>
+                      <p style={{ margin: '0.2rem 0 0', color: 'rgba(8,0,40,0.6)', fontSize: '0.9rem' }}>
+                        {t('claimProcess.chatSubtitle')}
+                      </p>
+                    </div>
+                    <div className="claim-process-pill">{t('claimProcess.chatStatus')}</div>
+                  </div>
+                  <div className="claim-process-messages">
+                    {messages.map((message) => {
+                      const isUser = message.author === 'user'
+                      return (
+                        <div
+                          key={message.id}
+                          style={{
+                            display: 'flex',
+                            justifyContent: isUser ? 'flex-end' : 'flex-start',
+                            gap: '0.5rem'
+                          }}
+                        >
+                          {!isUser && (
+                            <img src={ClaimsfoxIcon} alt="Claimsfox" style={{ width: '28px', height: '28px' }} />
+                          )}
                           <div
                             style={{
-                              background: isUser ? USER_BUBBLE : BOT_BUBBLE,
-                              color: '#0e0d1c',
-                              padding: '0.85rem 1.1rem',
-                              borderRadius: isUser ? '18px 18px 4px 18px' : '18px 18px 18px 4px',
-                              boxShadow: '0 12px 25px rgba(8, 4, 50, 0.08)',
-                              whiteSpace: 'pre-line'
+                              maxWidth: '78%',
+                              display: 'flex',
+                              flexDirection: 'column',
+                              alignItems: isUser ? 'flex-end' : 'flex-start'
                             }}
                           >
-                            {message.text}
+                            <div
+                              className={`claim-process-bubble ${isUser ? 'claim-process-user' : 'claim-process-bot'}`}
+                              style={{
+                                borderRadius: isUser ? '18px 18px 4px 18px' : '18px 18px 18px 4px'
+                              }}
+                            >
+                              {message.text}
+                            </div>
+                            <span style={{ fontSize: '0.7rem', color: 'rgba(8,0,40,0.5)', marginTop: '0.25rem' }}>
+                              {message.time}
+                            </span>
                           </div>
-                          <span style={{ fontSize: '0.7rem', color: 'rgba(8,0,40,0.5)', marginTop: '0.25rem' }}>
-                            {message.time}
-                          </span>
                         </div>
-                      </div>
-                    )
-                  })}
-                </div>
-
-                {locationState === 'idle' && (
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', alignItems: 'center' }}>
-                    <Button onClick={handleLocationRequest} style={{ padding: '0.6rem 1.3rem' }}>
-                      {t('claimProcess.locationButton')}
-                    </Button>
-                    <span style={{ color: '#ffffff', fontSize: '0.9rem' }}>{t('claimProcess.nextPrompt')}</span>
+                      )
+                    })}
                   </div>
-                )}
-
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', alignItems: 'center' }}>
-                  <label
-                    style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '0.5rem',
-                      background: '#d4380d',
-                      color: '#fff',
-                      padding: '0.6rem 1.2rem',
-                      borderRadius: '999px',
-                      cursor: 'pointer',
-                      fontWeight: 700
-                    }}
-                  >
-                    <input
-                      type="file"
-                      accept="image/*"
-                      multiple
-                      onChange={(event) => setFiles(Array.from(event.target.files ?? []))}
-                      style={{ display: 'none' }}
-                    />
-                    {t('claimProcess.upload')}
-                  </label>
-                  <span style={{ color: 'rgba(255,255,255,0.8)' }}>{uploadLabel}</span>
                 </div>
+              </div>
 
-                <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                  <input
-                    value={draft}
-                    onChange={(event) => setDraft(event.target.value)}
-                    placeholder={t('claimProcess.inputPlaceholder')}
-                    style={{
-                      flex: '1 1 240px',
-                      borderRadius: '14px',
-                      border: '1px solid rgba(255,255,255,0.35)',
-                      padding: '0.7rem 0.9rem',
-                      background: 'rgba(255,255,255,0.9)',
-                      color: '#0e0d1c'
-                    }}
-                  />
-                  <Button onClick={handleSend} style={{ padding: '0.6rem 1.5rem' }}>
-                    {t('claimProcess.send')}
+              {locationState === 'idle' && (
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', alignItems: 'center', marginTop: '1rem' }}>
+                  <Button onClick={handleLocationRequest} style={{ padding: '0.6rem 1.3rem' }}>
+                    {t('claimProcess.locationButton')}
                   </Button>
+                  <span style={{ color: '#ffffff', fontSize: '0.9rem' }}>{t('claimProcess.nextPrompt')}</span>
                 </div>
+              )}
+
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', alignItems: 'center', marginTop: '1rem' }}>
+                <label
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    background: '#d4380d',
+                    color: '#fff',
+                    padding: '0.6rem 1.2rem',
+                    borderRadius: '999px',
+                    cursor: 'pointer',
+                    fontWeight: 700
+                  }}
+                >
+                  <input
+                    type="file"
+                    accept="image/*"
+                    multiple
+                    onChange={(event) => setFiles(Array.from(event.target.files ?? []))}
+                    style={{ display: 'none' }}
+                  />
+                  {t('claimProcess.upload')}
+                </label>
+                <span style={{ color: 'rgba(255,255,255,0.8)' }}>{uploadLabel}</span>
+              </div>
+
+              <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', marginTop: '1rem' }}>
+                <input
+                  value={draft}
+                  onChange={(event) => setDraft(event.target.value)}
+                  placeholder={t('claimProcess.inputPlaceholder')}
+                  className="claim-process-input"
+                  style={{ flex: '1 1 240px' }}
+                />
+                <Button onClick={handleSend} style={{ padding: '0.6rem 1.5rem' }}>
+                  {t('claimProcess.send')}
+                </Button>
               </div>
             </Card>
 
