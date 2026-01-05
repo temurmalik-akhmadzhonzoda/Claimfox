@@ -78,24 +78,7 @@ export default function ClaimProcessPage() {
   const [coords, setCoords] = useState<string | null>(null)
   const [claimNumber] = useState(() => `DE-${Math.floor(100000 + Math.random() * 900000)}`)
   const [files, setFiles] = useState<File[]>([])
-
-  const locationLabel =
-    street && houseNumber && postalCode && city
-      ? `${street} ${houseNumber}, ${postalCode} ${city}`
-      : coords
-      ? coords
-      : locationState === 'pending'
-      ? t('claimProcess.locationPendingShort')
-      : locationState === 'denied'
-      ? t('claimProcess.locationUnknown')
-      : t('claimProcess.locationUnknown')
-
-  const locationDetail =
-    street && houseNumber && postalCode && city
-      ? locationLabel
-      : coords
-      ? coords
-      : t('claimProcess.locationUnknown')
+  const [addressConfirmed, setAddressConfirmed] = useState(false)
 
   const uploadLabel =
     files.length === 0
@@ -127,6 +110,24 @@ export default function ClaimProcessPage() {
     appendMessage('bot', t('claimProcess.claimNumberMessage', { claimNumber }))
   }
 
+  async function resolveAddress(lat: number, lon: number) {
+    const response = await fetch(
+      `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}&addressdetails=1&accept-language=${lang}`
+    )
+    if (!response.ok) {
+      throw new Error('Reverse geocoding failed')
+    }
+    const data = (await response.json()) as {
+      address?: Record<string, string>
+    }
+    const address = data.address ?? {}
+    const road = address.road || address.pedestrian || address.residential || ''
+    const number = address.house_number || ''
+    const postcode = address.postcode || ''
+    const cityValue = address.city || address.town || address.village || address.hamlet || ''
+    return { road, number, postcode, cityValue }
+  }
+
   function handleLocationRequest() {
     if (locationState === 'pending') return
     setLocationState('pending')
@@ -142,8 +143,22 @@ export default function ClaimProcessPage() {
       (position) => {
         const coordsText = `${position.coords.latitude.toFixed(5)}, ${position.coords.longitude.toFixed(5)}`
         setCoords(coordsText)
-        setLocationState('granted')
-        appendMessage('bot', t('claimProcess.locationGranted', { coords: coordsText }))
+        void resolveAddress(position.coords.latitude, position.coords.longitude)
+          .then((address) => {
+            setStreet(address.road)
+            setHouseNumber(address.number)
+            setPostalCode(address.postcode)
+            setCity(address.cityValue)
+            const streetLine = [address.road, address.number].filter(Boolean).join(' ')
+            const cityLine = [address.postcode, address.cityValue].filter(Boolean).join(' ')
+            const resolvedLabel = [streetLine, cityLine].filter(Boolean).join(', ')
+            appendMessage('bot', t('claimProcess.locationGranted', { address: resolvedLabel || coordsText }))
+            setLocationState('granted')
+          })
+          .catch(() => {
+            setLocationState('denied')
+            appendMessage('bot', t('claimProcess.locationDenied'))
+          })
       },
       () => {
         setLocationState('denied')
@@ -238,57 +253,6 @@ export default function ClaimProcessPage() {
                   </div>
                 )}
 
-                <div style={{ display: 'grid', gap: '0.75rem', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))' }}>
-                  <input
-                    value={street}
-                    onChange={(event) => setStreet(event.target.value)}
-                    placeholder={t('claimProcess.street')}
-                    style={{
-                      borderRadius: '14px',
-                      border: '1px solid rgba(255,255,255,0.35)',
-                      padding: '0.6rem 0.85rem',
-                      background: 'rgba(255,255,255,0.9)',
-                      color: '#0e0d1c'
-                    }}
-                  />
-                  <input
-                    value={houseNumber}
-                    onChange={(event) => setHouseNumber(event.target.value)}
-                    placeholder={t('claimProcess.houseNumber')}
-                    style={{
-                      borderRadius: '14px',
-                      border: '1px solid rgba(255,255,255,0.35)',
-                      padding: '0.6rem 0.85rem',
-                      background: 'rgba(255,255,255,0.9)',
-                      color: '#0e0d1c'
-                    }}
-                  />
-                  <input
-                    value={postalCode}
-                    onChange={(event) => setPostalCode(event.target.value)}
-                    placeholder={t('claimProcess.postalCode')}
-                    style={{
-                      borderRadius: '14px',
-                      border: '1px solid rgba(255,255,255,0.35)',
-                      padding: '0.6rem 0.85rem',
-                      background: 'rgba(255,255,255,0.9)',
-                      color: '#0e0d1c'
-                    }}
-                  />
-                  <input
-                    value={city}
-                    onChange={(event) => setCity(event.target.value)}
-                    placeholder={t('claimProcess.city')}
-                    style={{
-                      borderRadius: '14px',
-                      border: '1px solid rgba(255,255,255,0.35)',
-                      padding: '0.6rem 0.85rem',
-                      background: 'rgba(255,255,255,0.9)',
-                      color: '#0e0d1c'
-                    }}
-                  />
-                </div>
-
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', alignItems: 'center' }}>
                   <label
                     style={{
@@ -346,10 +310,55 @@ export default function ClaimProcessPage() {
                 </div>
 
                 <div style={{ display: 'grid', gap: '0.75rem' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem' }}>
-                    <span style={{ color: 'rgba(255,255,255,0.7)' }}>{t('claimProcess.infoLocation')}</span>
-                    <strong>{locationDetail}</strong>
-                  </div>
+                  {!addressConfirmed && (
+                    <>
+                      <div
+                        style={{
+                          display: 'grid',
+                          gap: '0.75rem',
+                          gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))'
+                        }}
+                      >
+                        {[ 
+                          { label: t('claimProcess.street'), value: street, onChange: setStreet },
+                          { label: t('claimProcess.houseNumber'), value: houseNumber, onChange: setHouseNumber },
+                          { label: t('claimProcess.postalCode'), value: postalCode, onChange: setPostalCode },
+                          { label: t('claimProcess.city'), value: city, onChange: setCity }
+                        ].map((field) => (
+                          <div
+                            key={field.label}
+                            style={{
+                              borderRadius: '16px',
+                              border: '1px solid rgba(255,255,255,0.25)',
+                              background: 'rgba(255,255,255,0.08)',
+                              padding: '0.65rem'
+                            }}
+                          >
+                            <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.75rem' }}>{field.label}</span>
+                            <input
+                              value={field.value}
+                              onChange={(event) => field.onChange(event.target.value)}
+                              placeholder={field.label}
+                              style={{
+                                width: '100%',
+                                marginTop: '0.35rem',
+                                borderRadius: '12px',
+                                border: '1px solid rgba(255,255,255,0.35)',
+                                padding: '0.45rem 0.6rem',
+                                background: 'rgba(255,255,255,0.9)',
+                                color: '#0e0d1c'
+                              }}
+                            />
+                          </div>
+                        ))}
+                      </div>
+                      <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                        <Button onClick={() => setAddressConfirmed(true)} style={{ padding: '0.55rem 1.4rem' }}>
+                          {t('claimProcess.send')}
+                        </Button>
+                      </div>
+                    </>
+                  )}
                   <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem' }}>
                     <span style={{ color: 'rgba(255,255,255,0.7)' }}>{t('claimProcess.infoDate')}</span>
                     <strong>{dateLabel}</strong>
