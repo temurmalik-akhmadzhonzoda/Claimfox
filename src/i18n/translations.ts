@@ -10,6 +10,10 @@ type TranslationTree = {
     required: string
     invalid: string
   }
+  header: {
+    login: string
+    logout: string
+  }
   roles: {
     title: string
     subtitle: string
@@ -427,6 +431,10 @@ export const translations: Record<Lang, TranslationTree> = {
       submitting: 'Anmeldung läuft …',
       required: 'Bitte Benutzername und Passwort eingeben.',
       invalid: 'Ungültige Anmeldedaten.'
+    },
+    header: {
+      login: 'Login',
+      logout: 'Logout'
     },
     roles: {
       title: 'Rollenübersicht',
@@ -1550,6 +1558,10 @@ export const translations: Record<Lang, TranslationTree> = {
       submitting: 'Signing in …',
       required: 'Please enter username and password.',
       invalid: 'Invalid credentials.'
+    },
+    header: {
+      login: 'Login',
+      logout: 'Logout'
     },
     roles: {
       title: 'Role overview',
