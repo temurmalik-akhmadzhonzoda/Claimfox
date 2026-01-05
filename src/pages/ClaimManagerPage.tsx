@@ -124,7 +124,7 @@ function Modal({
         position: 'fixed',
         inset: 0,
         background: 'rgba(8,0,32,0.65)',
-        zIndex: 50,
+        zIndex: 200,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
