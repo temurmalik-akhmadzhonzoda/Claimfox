@@ -342,7 +342,16 @@ export default function ClaimProcessPage() {
           />
 
           <div className="claim-process-grid">
-            <Card variant="glass" style={{ padding: '1.5rem', color: '#0e0d1c' }}>
+            <Card
+              variant="glass"
+              style={{
+                padding: 0,
+                color: '#0e0d1c',
+                backgroundColor: 'transparent',
+                border: 'none',
+                boxShadow: 'none'
+              }}
+            >
               <div className="claim-process-chat-shell">
                 <div className="claim-process-chat-surface">
                   <div className="claim-process-chat-header">
