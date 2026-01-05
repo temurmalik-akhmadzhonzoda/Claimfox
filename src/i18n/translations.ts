@@ -61,6 +61,7 @@ type TranslationTree = {
     claimNumberMessage: string
     inputPlaceholder: string
     send: string
+    openManager: string
     back: string
     street: string
     houseNumber: string
@@ -572,6 +573,7 @@ export const translations: Record<Lang, TranslationTree> = {
       botAck: 'Danke, ich habe das notiert.',
       claimNumberMessage: 'Ihre Schadennummer: {{claimNumber}}.',
       inputPlaceholder: 'Kurzbeschreibung …',
+      openManager: 'Schadenmanager öffnen',
       send: 'Absenden',
       back: 'Zurück',
       street: 'Straße',
@@ -1762,6 +1764,7 @@ export const translations: Record<Lang, TranslationTree> = {
       botAck: 'Thanks, noted.',
       claimNumberMessage: 'Your claim number: {{claimNumber}}.',
       inputPlaceholder: 'Short description …',
+      openManager: 'Open claim manager',
       send: 'Submit',
       back: 'Back',
       street: 'Street',

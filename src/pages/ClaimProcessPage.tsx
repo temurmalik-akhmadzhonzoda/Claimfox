@@ -157,6 +157,23 @@ export default function ClaimProcessPage() {
       ? t('claimProcess.uploadEmpty')
       : t('claimProcess.uploadCount', { count: files.length })
   const messagesRef = useRef<HTMLDivElement | null>(null)
+  const addressValue = useMemo(() => {
+    const streetLine = [street, houseNumber].filter(Boolean).join(' ')
+    const cityLine = [postalCode, city].filter(Boolean).join(' ')
+    return [streetLine, cityLine].filter(Boolean).join(', ')
+  }, [street, houseNumber, postalCode, city])
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const payload = {
+      claimNumber: claimNumber ?? undefined,
+      incidentTime: incidentTime || undefined,
+      address: addressValue || undefined,
+      description: description || undefined,
+      photoCount: files.length
+    }
+    window.localStorage.setItem('claimfox_claim_assistant', JSON.stringify(payload))
+  }, [addressValue, claimNumber, description, files.length, incidentTime])
 
   function getTimeStamp() {
     return new Date().toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' })
@@ -363,7 +380,25 @@ export default function ClaimProcessPage() {
                         </p>
                       )}
                     </div>
-                    <div className="claim-process-pill">{t('claimProcess.chatStatus')}</div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+                      {claimNumber && (
+                        <Button
+                          variant="secondary"
+                          onClick={() => navigate('/claim-manager-case')}
+                          style={{
+                            background: 'rgba(255,255,255,0.85)',
+                            border: '1px solid rgba(8,0,40,0.12)',
+                            color: '#2a1a4a',
+                            padding: '0.35rem 0.9rem',
+                            fontSize: '0.85rem',
+                            fontWeight: 600
+                          }}
+                        >
+                          {t('claimProcess.openManager')}
+                        </Button>
+                      )}
+                      <div className="claim-process-pill">{t('claimProcess.chatStatus')}</div>
+                    </div>
                   </div>
                   <div ref={messagesRef} className="claim-process-messages">
                     {messages.map((message) => {

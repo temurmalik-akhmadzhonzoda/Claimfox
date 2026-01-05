@@ -176,7 +176,19 @@ const layoutStyles = `
   }
 `
 
-export default function ClaimManagerPage() {
+type ClaimAssistantData = {
+  claimNumber?: string
+  incidentTime?: string
+  address?: string
+  description?: string
+  photoCount?: number
+}
+
+type ClaimManagerPageProps = {
+  assistantData?: ClaimAssistantData
+}
+
+export default function ClaimManagerPage({ assistantData }: ClaimManagerPageProps) {
   const { t } = useI18n()
   const [claimStatus, setClaimStatus] = useState<(typeof timelineSteps)[number]>('review')
   const [costItems, setCostItems] = useState<CostItem[]>(initialCosts)
@@ -204,11 +216,11 @@ export default function ClaimManagerPage() {
   const detailValues = useMemo(
     () => ({
       type: t('claimManager.app.details.values.type'),
-      location: t('claimManager.app.details.values.location'),
+      location: assistantData?.address || t('claimManager.app.details.values.location'),
       vehicle: t('claimManager.app.details.values.vehicle'),
-      summary: t('claimManager.app.details.values.summary')
+      summary: assistantData?.description || t('claimManager.app.details.values.summary')
     }),
-    [t]
+    [assistantData, t]
   )
 
   function handleCostChange(id: string, field: keyof CostItem, value: string) {
@@ -267,10 +279,12 @@ export default function ClaimManagerPage() {
               </h1>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center', color: TEXT_COLORS.secondary }}>
                 <span>
-                  {t('claimManager.app.header.claimId')}: <strong>{t('claimManager.app.header.claimIdValue')}</strong>
+                  {t('claimManager.app.header.claimId')}:{' '}
+                  <strong>{assistantData?.claimNumber || t('claimManager.app.header.claimIdValue')}</strong>
                 </span>
                 <span>
-                  {t('claimManager.app.header.date')}: <strong>{t('claimManager.app.header.dateValue')}</strong>
+                  {t('claimManager.app.header.date')}:{' '}
+                  <strong>{assistantData?.incidentTime || t('claimManager.app.header.dateValue')}</strong>
                 </span>
                 <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.45rem' }}>
                   {t('claimManager.app.header.status')}:
