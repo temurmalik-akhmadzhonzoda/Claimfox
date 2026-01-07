@@ -1054,7 +1054,7 @@ export default function FleetReportingPage() {
 
             <Card variant="glass">
               <header style={{ marginBottom: '1rem' }}>
-                <h2 style={{ margin: 0, fontSize: '1.2rem', color: '#0e0d1c' }}>{t('fleetReporting.charts.coverageTitle')}</h2>
+                <h2 style={{ margin: 0, fontSize: '1.2rem', color: 'var(--insurfox-orange)' }}>{t('fleetReporting.charts.coverageTitle')}</h2>
                 <p style={{ margin: '0.35rem 0 0', color: GLASS_SUBTLE }}>{t('fleetReporting.charts.coverageSubtitle')}</p>
               </header>
               <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-end', marginBottom: '1.5rem' }}>
@@ -1068,7 +1068,7 @@ export default function FleetReportingPage() {
                 </div>
               </div>
               <header style={{ marginBottom: '1rem' }}>
-                <h3 style={{ margin: 0, fontSize: '1.1rem', color: '#0e0d1c' }}>{t('fleetReporting.charts.severityTitle')}</h3>
+                <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--insurfox-orange)' }}>{t('fleetReporting.charts.severityTitle')}</h3>
                 <p style={{ margin: '0.25rem 0 0', color: GLASS_SUBTLE }}>{t('fleetReporting.charts.severitySubtitle')}</p>
               </header>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>

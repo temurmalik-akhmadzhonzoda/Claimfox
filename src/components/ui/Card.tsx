@@ -61,7 +61,7 @@ export default function Card({
       {(title || subtitle) && (
         <header style={{ marginBottom: '1.5rem' }}>
           {title && (
-            <h2 style={{ margin: 0, fontSize: '1.3rem', color: '#0e0d1c' }}>
+            <h2 style={{ margin: 0, fontSize: '1.3rem', color: 'var(--insurfox-orange)' }}>
               {title}
             </h2>
           )}

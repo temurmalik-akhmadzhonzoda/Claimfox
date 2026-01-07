@@ -554,7 +554,7 @@ export default function FleetManagementPage() {
                   }}
                 >
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
-                    <h3 style={{ margin: 0, color: '#0e0d1c' }}>{t('fleetManagement.detail.overview')}</h3>
+                    <h3 style={{ margin: 0, color: 'var(--insurfox-orange)' }}>{t('fleetManagement.detail.overview')}</h3>
                     <div style={detailRowStyle}>
                       <p style={detailLabelStyle}>VIN</p>
                       <p style={detailValueStyle}>{selectedVehicle.vin}</p>
@@ -579,7 +579,7 @@ export default function FleetManagementPage() {
                     </div>
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
-                    <h3 style={{ margin: 0, color: '#0e0d1c' }}>{t('fleetManagement.detail.schedule')}</h3>
+                    <h3 style={{ margin: 0, color: 'var(--insurfox-orange)' }}>{t('fleetManagement.detail.schedule')}</h3>
                     <div style={detailRowStyle}>
                       <p style={detailLabelStyle}>{t('fleetManagement.detail.inspection')}</p>
                       <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '0.5rem' }}>
@@ -696,7 +696,7 @@ export default function FleetManagementPage() {
               <Card variant="glass" style={SECTION_CARD_STYLE}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.75rem' }}>
                   <div>
-                    <h2 style={{ margin: 0, color: '#0e0d1c' }}>{t('fleetManagement.detail.drivers')}</h2>
+                    <h2 style={{ margin: 0, color: 'var(--insurfox-orange)' }}>{t('fleetManagement.detail.drivers')}</h2>
                     <p style={{ margin: '0.3rem 0 0', color: GLASS_SUBTLE }}>
                       {t('fleetManagement.driverPicker.title')}
                     </p>

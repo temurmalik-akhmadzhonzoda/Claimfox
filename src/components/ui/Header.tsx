@@ -12,7 +12,7 @@ export default function Header({
   title,
   subtitle,
   actions,
-  titleColor = '#080064',
+  titleColor = 'var(--insurfox-orange)',
   subtitleColor = '#494870'
 }: HeaderProps) {
   return (
