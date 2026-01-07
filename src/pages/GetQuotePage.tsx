@@ -6,16 +6,23 @@ import { useI18n } from '@/i18n/I18nContext'
 
 const inputStyle: React.CSSProperties = {
   width: '100%',
-  borderRadius: '12px',
-  border: '1px solid rgba(255,255,255,0.25)',
-  padding: '0.6rem 0.75rem',
-  background: 'rgba(0,0,0,0.2)',
-  color: '#ffffff'
+  borderRadius: '10px',
+  border: '1px solid #d9d9d9',
+  padding: '0.65rem 0.85rem',
+  background: '#ffffff',
+  color: '#0e0d1c'
 }
 
 const labelStyle: React.CSSProperties = {
-  color: 'rgba(255,255,255,0.75)',
+  color: '#65748b',
   fontSize: '0.85rem'
+}
+
+const cardStyle: React.CSSProperties = {
+  background: '#ffffff',
+  borderRadius: '16px',
+  boxShadow: '0 8px 24px rgba(15, 23, 42, 0.08)',
+  border: '1px solid #ececec'
 }
 
 export default function GetQuotePage() {
@@ -25,13 +32,21 @@ export default function GetQuotePage() {
   const [privacyAccepted, setPrivacyAccepted] = useState(false)
 
   return (
-    <section className="page" style={{ gap: '1.75rem' }}>
+    <section
+      className="page"
+      style={{
+        gap: '1.75rem',
+        background: '#f7f7f8',
+        minHeight: 'calc(100vh - var(--header-height))',
+        padding: '2.5rem 24px 3rem'
+      }}
+    >
       <div style={{ width: '100%', maxWidth: 1200, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
         <Header
           title={t('getQuote.title')}
           subtitle={t('getQuote.subtitle')}
-          titleColor="#ffffff"
-          subtitleColor="rgba(255,255,255,0.82)"
+          titleColor="#0e0d1c"
+          subtitleColor="#65748b"
         />
 
         <div
@@ -42,7 +57,7 @@ export default function GetQuotePage() {
           }}
         >
           <div style={{ display: 'grid', gap: '1.25rem' }}>
-            <Card variant="glass" title={t('getQuote.progress.title')} subtitle={t('getQuote.progress.subtitle')}>
+            <Card style={cardStyle} title={t('getQuote.progress.title')} subtitle={t('getQuote.progress.subtitle')}>
               <div
                 style={{
                   display: 'inline-flex',
@@ -50,8 +65,8 @@ export default function GetQuotePage() {
                   gap: '0.5rem',
                   padding: '0.35rem 0.9rem',
                   borderRadius: '999px',
-                  background: 'rgba(255,255,255,0.15)',
-                  color: '#ffffff',
+                  background: '#fef1ec',
+                  color: '#d4380d',
                   fontWeight: 600
                 }}
               >
@@ -59,7 +74,7 @@ export default function GetQuotePage() {
               </div>
             </Card>
 
-            <Card variant="glass" title={t('getQuote.company.title')} subtitle={t('getQuote.company.subtitle')}>
+            <Card style={cardStyle} title={t('getQuote.company.title')} subtitle={t('getQuote.company.subtitle')}>
               <div style={{ display: 'grid', gap: '0.75rem' }}>
                 <label style={labelStyle}>{t('getQuote.company.locationLabel')}</label>
                 <select style={inputStyle} defaultValue="">
@@ -72,10 +87,10 @@ export default function GetQuotePage() {
               </div>
             </Card>
 
-            <Card variant="glass" title={t('getQuote.vehicles.title')} subtitle={t('getQuote.vehicles.subtitle')}>
+            <Card style={cardStyle} title={t('getQuote.vehicles.title')} subtitle={t('getQuote.vehicles.subtitle')}>
               <div style={{ display: 'grid', gap: '1rem' }}>
                 <div style={{ display: 'grid', gap: '0.75rem' }}>
-                  <strong style={{ color: '#ffffff' }}>{t('getQuote.vehicles.primary')}</strong>
+                  <strong style={{ color: '#0e0d1c' }}>{t('getQuote.vehicles.primary')}</strong>
                   <label style={labelStyle}>{t('getQuote.vehicles.count')}</label>
                   <input style={inputStyle} type="number" placeholder="4" />
                   <label style={labelStyle}>{t('getQuote.vehicles.weight')}</label>
@@ -87,10 +102,10 @@ export default function GetQuotePage() {
                   </select>
                 </div>
 
-                <div style={{ height: 1, background: 'rgba(255,255,255,0.12)' }} />
+                <div style={{ height: 1, background: '#ececec' }} />
 
                 <div style={{ display: 'grid', gap: '0.75rem' }}>
-                  <strong style={{ color: '#ffffff' }}>{t('getQuote.vehicles.additional')}</strong>
+                  <strong style={{ color: '#0e0d1c' }}>{t('getQuote.vehicles.additional')}</strong>
                   <label style={labelStyle}>{t('getQuote.vehicles.count')}</label>
                   <input style={inputStyle} type="number" placeholder="6" />
                   <label style={labelStyle}>{t('getQuote.vehicles.weight')}</label>
@@ -108,7 +123,7 @@ export default function GetQuotePage() {
               </div>
             </Card>
 
-            <Card variant="glass" title={t('getQuote.deductible.title')} subtitle={t('getQuote.deductible.subtitle')}>
+            <Card style={cardStyle} title={t('getQuote.deductible.title')} subtitle={t('getQuote.deductible.subtitle')}>
               <div style={{ display: 'grid', gap: '0.85rem' }}>
                 <label style={labelStyle}>{t('getQuote.deductible.amountLabel')}</label>
                 <input style={inputStyle} placeholder="750 EUR" />
@@ -116,7 +131,7 @@ export default function GetQuotePage() {
                 <div style={{ display: 'grid', gap: '0.6rem' }}>
                   <span style={labelStyle}>{t('getQuote.deductible.courier')}</span>
                   <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                    <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#ffffff' }}>
+                    <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#0e0d1c' }}>
                       <input
                         type="radio"
                         name="courier"
@@ -125,7 +140,7 @@ export default function GetQuotePage() {
                       />
                       {t('getQuote.yes')}
                     </label>
-                    <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#ffffff' }}>
+                    <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#0e0d1c' }}>
                       <input
                         type="radio"
                         name="courier"
@@ -140,7 +155,7 @@ export default function GetQuotePage() {
                 <div style={{ display: 'grid', gap: '0.6rem' }}>
                   <span style={labelStyle}>{t('getQuote.deductible.cold')}</span>
                   <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                    <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#ffffff' }}>
+                    <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#0e0d1c' }}>
                       <input
                         type="radio"
                         name="cold"
@@ -149,7 +164,7 @@ export default function GetQuotePage() {
                       />
                       {t('getQuote.yes')}
                     </label>
-                    <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#ffffff' }}>
+                    <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#0e0d1c' }}>
                       <input
                         type="radio"
                         name="cold"
@@ -163,15 +178,15 @@ export default function GetQuotePage() {
               </div>
             </Card>
 
-            <Card variant="glass" title={t('getQuote.preInsurer.title')} subtitle={t('getQuote.preInsurer.subtitle')}>
+            <Card style={cardStyle} title={t('getQuote.preInsurer.title')} subtitle={t('getQuote.preInsurer.subtitle')}>
               <div style={{ display: 'grid', gap: '0.75rem' }}>
                 <label style={labelStyle}>{t('getQuote.preInsurer.exists')}</label>
                 <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                  <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#ffffff' }}>
+                  <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#0e0d1c' }}>
                     <input type="radio" name="prior" defaultChecked />
                     {t('getQuote.yes')}
                   </label>
-                  <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#ffffff' }}>
+                  <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#0e0d1c' }}>
                     <input type="radio" name="prior" />
                     {t('getQuote.no')}
                   </label>
@@ -185,8 +200,8 @@ export default function GetQuotePage() {
           </div>
 
           <div style={{ display: 'grid', gap: '1.25rem', alignSelf: 'start' }}>
-            <Card variant="glass" title={t('getQuote.summary.title')} subtitle={t('getQuote.summary.subtitle')}>
-              <div style={{ display: 'grid', gap: '0.6rem', color: '#ffffff' }}>
+            <Card style={cardStyle} title={t('getQuote.summary.title')} subtitle={t('getQuote.summary.subtitle')}>
+              <div style={{ display: 'grid', gap: '0.6rem', color: '#0e0d1c' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                   <span>{t('getQuote.summary.netAnnual')}</span>
                   <strong>xxx,xx €</strong>
@@ -199,7 +214,7 @@ export default function GetQuotePage() {
                   <span>{t('getQuote.summary.grossAnnual')}</span>
                   <strong>xxx,xx €</strong>
                 </div>
-                <div style={{ height: 1, background: 'rgba(255,255,255,0.12)' }} />
+                <div style={{ height: 1, background: '#ececec' }} />
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                   <span>{t('getQuote.summary.contract')}</span>
                   <strong>xx.xx.20xx - xx.xx.20xx</strong>
@@ -207,8 +222,8 @@ export default function GetQuotePage() {
               </div>
             </Card>
 
-            <Card variant="glass" title={t('getQuote.confirm.title')} subtitle={t('getQuote.confirm.subtitle')}>
-              <label style={{ display: 'flex', gap: '0.6rem', color: 'rgba(255,255,255,0.8)', fontSize: '0.95rem' }}>
+            <Card style={cardStyle} title={t('getQuote.confirm.title')} subtitle={t('getQuote.confirm.subtitle')}>
+              <label style={{ display: 'flex', gap: '0.6rem', color: '#0e0d1c', fontSize: '0.95rem' }}>
                 <input
                   type="checkbox"
                   checked={privacyAccepted}
@@ -216,7 +231,17 @@ export default function GetQuotePage() {
                 />
                 {t('getQuote.confirm.privacy')}
               </label>
-              <Button style={{ width: '100%', marginTop: '1rem' }}>{t('getQuote.confirm.submit')}</Button>
+              <Button
+                style={{
+                  width: '100%',
+                  marginTop: '1rem',
+                  background: '#d4380d',
+                  borderColor: '#d4380d',
+                  color: '#ffffff'
+                }}
+              >
+                {t('getQuote.confirm.submit')}
+              </Button>
             </Card>
           </div>
         </div>
