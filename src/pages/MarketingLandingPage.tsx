@@ -2,7 +2,6 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import Button from '@/components/ui/Button'
 import { useI18n } from '@/i18n/I18nContext'
-import InsurfoxLogoDark from '@/assets/logos/Insurfox_Logo_colored_dark.png'
 
 const heroKpiKeys = ['realTime', 'ai', 'tuv', 'claims', 'docs', 'compliance'] as const
 const featureCardKeys = ['vehiclesMaster', 'realTime', 'aiPrioritization', 'tuvPlanning', 'claimsControl', 'docsPolicies'] as const
@@ -256,7 +255,6 @@ export default function MarketingLandingPage() {
           >
             <section style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              <img src={InsurfoxLogoDark} alt="Insurfox" style={{ width: '150px', height: 'auto' }} />
               <h1 style={{ margin: 0, fontSize: 'clamp(2.2rem, 4vw, 3.5rem)', letterSpacing: '-0.03em', maxWidth: '680px' }}>
                 {t('marketingFleet.hero.title')}
               </h1>

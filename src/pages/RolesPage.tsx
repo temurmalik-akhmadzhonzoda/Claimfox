@@ -60,7 +60,6 @@ export default function RolesPage() {
           <Header
             title={t('roles.title')}
             subtitle={t('roles.subtitle')}
-            titleColor="#0e0d1c"
             subtitleColor="#65748b"
             actions={
               <Button variant="secondary" onClick={handleLogout}>

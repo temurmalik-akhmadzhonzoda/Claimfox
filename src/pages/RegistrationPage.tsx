@@ -4,7 +4,6 @@ import Button from '@/components/ui/Button'
 import Card from '@/components/ui/Card'
 import Header from '@/components/ui/Header'
 import { useI18n } from '@/i18n/I18nContext'
-import InsurfoxLogoDark from '@/assets/logos/Insurfox_Logo_colored_dark.png'
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -35,8 +34,7 @@ export default function RegistrationPage() {
   return (
     <section className="page registration-page" style={{ gap: '1.75rem' }}>
       <div style={{ width: '100%', maxWidth: 980, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
-          <img src={InsurfoxLogoDark} alt="Insurfox" style={{ height: 56, objectFit: 'contain' }} />
+        <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
           <Button variant="secondary" onClick={() => navigate('/roles')}>
             {t('registration.back')}
           </Button>
@@ -45,7 +43,6 @@ export default function RegistrationPage() {
         <Header
           title={t('registration.title')}
           subtitle={t('registration.subtitle')}
-          titleColor="#0e0d1c"
           subtitleColor="#65748b"
         />
 

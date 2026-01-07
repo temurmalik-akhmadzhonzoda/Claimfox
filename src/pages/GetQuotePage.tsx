@@ -45,7 +45,6 @@ export default function GetQuotePage() {
         <Header
           title={t('getQuote.title')}
           subtitle={t('getQuote.subtitle')}
-          titleColor="#0e0d1c"
           subtitleColor="#65748b"
         />
 

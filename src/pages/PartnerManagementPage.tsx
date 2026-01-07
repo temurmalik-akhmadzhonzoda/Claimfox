@@ -81,7 +81,6 @@ export default function PartnerManagementPage() {
         <Header
           title={t('partnerManagement.title')}
           subtitle={t('partnerManagement.subtitle')}
-          titleColor="#0e0d1c"
           subtitleColor="#65748b"
           actions={<Button variant="secondary">{t('partnerManagement.actions.addPartner')}</Button>}
         />
