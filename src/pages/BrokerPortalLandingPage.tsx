@@ -2,6 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import Button from '@/components/ui/Button'
 import { useI18n } from '@/i18n/I18nContext'
+import LoginBackground from '@/assets/images/background_login.png'
 
 const featureKeys = ['crm', 'tender', 'ai', 'insights', 'workflows', 'compliance'] as const
 const trustKeys = ['crm', 'tender', 'ai'] as const
@@ -211,49 +212,55 @@ export default function BrokerPortalLandingPage() {
           <div
             style={{
               textAlign: 'center',
-              background: 'linear-gradient(135deg, #0b1c6c 0%, #123b9a 100%)',
+              backgroundImage: `linear-gradient(135deg, rgba(11, 28, 108, 0.85) 0%, rgba(18, 59, 154, 0.85) 100%), url(${LoginBackground})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
               borderRadius: '32px',
               padding: '2.5rem clamp(1rem, 4vw, 3rem)',
               color: '#ffffff',
-              boxShadow: '0 30px 70px rgba(11, 28, 108, 0.25)'
+              boxShadow: '0 30px 70px rgba(11, 28, 108, 0.25)',
+              width: '100vw',
+              marginLeft: 'calc(50% - 50vw)'
             }}
           >
-            <h1
-              style={{
-                margin: 0,
-                color: '#ffffff',
-                fontSize: 'clamp(2.6rem, 4vw, 3.6rem)',
-                lineHeight: 1.25,
-                letterSpacing: '0.05em',
-                textTransform: 'uppercase'
-              }}
-            >
-              {t('brokerPortal.title')}
-            </h1>
-            <p
-              style={{
-                marginTop: '1rem',
-                maxWidth: '740px',
-                marginInline: 'auto',
-                color: 'rgba(255,255,255,0.82)',
-                fontSize: '1.08rem',
-                lineHeight: 1.6
-              }}
-            >
-              {t('brokerLanding.heroSubline')}
-            </p>
-            <div
-              style={{
-                marginTop: '1.5rem',
-                display: 'flex',
-                flexWrap: 'wrap',
-                justifyContent: 'center',
-                gap: '0.75rem'
-              }}
-            >
-              {trustKeys.map((key) => (
-                <GlassChip key={key} label={t(`brokerLanding.trust.${key}`)} icon={trustIcons[key]} weight={650} />
-              ))}
+            <div style={{ width: '100%', maxWidth: '1280px', margin: '0 auto' }}>
+              <h1
+                style={{
+                  margin: 0,
+                  color: '#ffffff',
+                  fontSize: 'clamp(2.6rem, 4vw, 3.6rem)',
+                  lineHeight: 1.25,
+                  letterSpacing: '0.05em',
+                  textTransform: 'uppercase'
+                }}
+              >
+                {t('brokerPortal.title')}
+              </h1>
+              <p
+                style={{
+                  marginTop: '1rem',
+                  maxWidth: '740px',
+                  marginInline: 'auto',
+                  color: 'rgba(255,255,255,0.82)',
+                  fontSize: '1.08rem',
+                  lineHeight: 1.6
+                }}
+              >
+                {t('brokerLanding.heroSubline')}
+              </p>
+              <div
+                style={{
+                  marginTop: '1.5rem',
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  justifyContent: 'center',
+                  gap: '0.75rem'
+                }}
+              >
+                {trustKeys.map((key) => (
+                  <GlassChip key={key} label={t(`brokerLanding.trust.${key}`)} icon={trustIcons[key]} weight={650} />
+                ))}
+              </div>
             </div>
           </div>
 

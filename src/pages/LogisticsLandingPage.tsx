@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import Card from '@/components/ui/Card'
 import Button from '@/components/ui/Button'
 import { useI18n } from '@/i18n/I18nContext'
+import LoginBackground from '@/assets/images/background_login.png'
 
 const KPI_KEYS = ['liveShipments', 'coverageRate', 'openIncidents', 'etaDeviation'] as const
 const FEATURE_KEYS = ['realtime', 'coverage', 'incidents', 'thirdparty', 'ai', 'routes'] as const
@@ -56,11 +57,15 @@ const previewBars = [68, 92, 78, 84, 73, 96]
 const PREVIEW_VALUE_KEYS = ['eta', 'temp', 'customs'] as const
 
 const heroBlockStyle: React.CSSProperties = {
-  background: 'linear-gradient(135deg, #0b1c6c 0%, #123b9a 100%)',
+  backgroundImage: `linear-gradient(135deg, rgba(11, 28, 108, 0.85) 0%, rgba(18, 59, 154, 0.85) 100%), url(${LoginBackground})`,
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
   borderRadius: '32px',
   padding: '2.5rem clamp(1rem, 4vw, 3rem)',
   color: '#ffffff',
-  boxShadow: '0 30px 70px rgba(11, 28, 108, 0.25)'
+  boxShadow: '0 30px 70px rgba(11, 28, 108, 0.25)',
+  width: '100vw',
+  marginLeft: 'calc(50% - 50vw)'
 }
 
 export default function LogisticsLandingPage() {
@@ -78,6 +83,7 @@ export default function LogisticsLandingPage() {
     >
       <div style={{ width: '100%', maxWidth: 1220, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
         <div style={heroBlockStyle}>
+          <div style={{ width: '100%', maxWidth: 1220, margin: '0 auto' }}>
           <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
             <Button
               onClick={() => navigate('/logistics-app')}
@@ -134,6 +140,7 @@ export default function LogisticsLandingPage() {
                 <p style={{ margin: 0, fontSize: '2rem', fontWeight: 700 }}>{t(`logisticsLanding.kpiValues.${key}`)}</p>
               </Card>
             ))}
+          </div>
           </div>
         </div>
 

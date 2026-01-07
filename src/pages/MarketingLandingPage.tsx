@@ -2,6 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import Button from '@/components/ui/Button'
 import { useI18n } from '@/i18n/I18nContext'
+import LoginBackground from '@/assets/images/background_login.png'
 
 const heroKpiKeys = ['realTime', 'ai', 'tuv', 'claims', 'docs', 'compliance'] as const
 const featureCardKeys = ['vehiclesMaster', 'realTime', 'aiPrioritization', 'tuvPlanning', 'claimsControl', 'docsPolicies'] as const
@@ -258,44 +259,50 @@ export default function MarketingLandingPage() {
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '1.5rem',
-                background: 'linear-gradient(135deg, #0b1c6c 0%, #123b9a 100%)',
+                backgroundImage: `linear-gradient(135deg, rgba(11, 28, 108, 0.85) 0%, rgba(18, 59, 154, 0.85) 100%), url(${LoginBackground})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
                 borderRadius: '32px',
                 padding: '2.5rem clamp(1rem, 4vw, 3rem)',
                 color: '#ffffff',
-                boxShadow: '0 30px 70px rgba(11, 28, 108, 0.25)'
+                boxShadow: '0 30px 70px rgba(11, 28, 108, 0.25)',
+                width: '100vw',
+                marginLeft: 'calc(50% - 50vw)'
               }}
             >
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                <h1 style={{ margin: 0, fontSize: 'clamp(2.2rem, 4vw, 3.5rem)', letterSpacing: '-0.03em', maxWidth: '680px' }}>
-                  {t('marketingFleet.hero.title')}
-                </h1>
-                <p style={{ margin: 0, fontSize: '1.1rem', color: 'rgba(255,255,255,0.82)', maxWidth: '640px' }}>
-                  {t('marketingFleet.hero.subtitle')}
-                </p>
-              </div>
-              <div
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
-                  gap: '0.85rem'
-                }}
-              >
-                {heroKpiKeys.map((key) => (
-                  <div
-                    key={key}
-                    style={{
-                      padding: '0.85rem 1rem',
-                      borderRadius: '999px',
-                      background: 'rgba(255,255,255,0.12)',
-                      border: '1px solid rgba(255,255,255,0.24)',
-                      textAlign: 'center',
-                      fontWeight: 600,
-                      letterSpacing: '0.01em'
-                    }}
-                  >
-                    {t(`marketingFleet.kpi.${key}`)}
-                  </div>
-                ))}
+              <div style={{ width: '100%', maxWidth: '1320px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                  <h1 style={{ margin: 0, fontSize: 'clamp(2.2rem, 4vw, 3.5rem)', letterSpacing: '-0.03em', maxWidth: '680px' }}>
+                    {t('marketingFleet.hero.title')}
+                  </h1>
+                  <p style={{ margin: 0, fontSize: '1.1rem', color: 'rgba(255,255,255,0.82)', maxWidth: '640px' }}>
+                    {t('marketingFleet.hero.subtitle')}
+                  </p>
+                </div>
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+                    gap: '0.85rem'
+                  }}
+                >
+                  {heroKpiKeys.map((key) => (
+                    <div
+                      key={key}
+                      style={{
+                        padding: '0.85rem 1rem',
+                        borderRadius: '999px',
+                        background: 'rgba(255,255,255,0.12)',
+                        border: '1px solid rgba(255,255,255,0.24)',
+                        textAlign: 'center',
+                        fontWeight: 600,
+                        letterSpacing: '0.01em'
+                      }}
+                    >
+                      {t(`marketingFleet.kpi.${key}`)}
+                    </div>
+                  ))}
+                </div>
               </div>
             </section>
 
