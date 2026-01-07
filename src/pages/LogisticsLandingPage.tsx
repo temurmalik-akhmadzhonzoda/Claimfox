@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import Card from '@/components/ui/Card'
 import Button from '@/components/ui/Button'
 import { useI18n } from '@/i18n/I18nContext'
-import LoginBackground from '@/assets/images/background_login.png'
+import HeroBlockBackground from '@/assets/images/hero_block_1.png'
 
 const KPI_KEYS = ['liveShipments', 'coverageRate', 'openIncidents', 'etaDeviation'] as const
 const FEATURE_KEYS = ['realtime', 'coverage', 'incidents', 'thirdparty', 'ai', 'routes'] as const
@@ -57,7 +57,7 @@ const previewBars = [68, 92, 78, 84, 73, 96]
 const PREVIEW_VALUE_KEYS = ['eta', 'temp', 'customs'] as const
 
 const heroBlockStyle: React.CSSProperties = {
-  backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)), linear-gradient(135deg, rgba(11, 28, 108, 0.85) 0%, rgba(18, 59, 154, 0.85) 100%), url(${LoginBackground})`,
+  backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)), linear-gradient(135deg, rgba(11, 28, 108, 0.85) 0%, rgba(18, 59, 154, 0.85) 100%), url(${HeroBlockBackground})`,
   backgroundSize: 'cover',
   backgroundPosition: 'center',
   padding: '2.5rem clamp(1rem, 4vw, 3rem)',

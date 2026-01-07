@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import Button from '@/components/ui/Button'
 import Card from '@/components/ui/Card'
 import { useI18n } from '@/i18n/I18nContext'
-import LoginBackground from '@/assets/images/background_login.png'
+import HeroBlockBackground from '@/assets/images/hero_block_1.png'
 
 const featureKeys = [
   'statusTimeline',
@@ -135,7 +135,7 @@ export default function ClaimManagerMarketingPage() {
           <div style={{ width: '100%', maxWidth: 1200, display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
             <div
               style={{
-                backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)), linear-gradient(135deg, rgba(11, 28, 108, 0.85) 0%, rgba(18, 59, 154, 0.85) 100%), url(${LoginBackground})`,
+                backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)), linear-gradient(135deg, rgba(11, 28, 108, 0.85) 0%, rgba(18, 59, 154, 0.85) 100%), url(${HeroBlockBackground})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 padding: '2.5rem clamp(1rem, 4vw, 3rem)',

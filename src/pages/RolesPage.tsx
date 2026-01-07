@@ -5,6 +5,7 @@ import Card from '@/components/ui/Card'
 import Header from '@/components/ui/Header'
 import { useAuth } from '@/features/auth/AuthContext'
 import { useI18n } from '@/i18n/I18nContext'
+import HeroBlockBackground from '@/assets/images/hero_block_1.png'
 
 type RoleItem = {
   key: 'claims' | 'claimProcess' | 'partner' | 'reporting' | 'fleetManagement' | 'logistics' | 'featureTree' | 'getQuote'
@@ -57,16 +58,35 @@ export default function RolesPage() {
             gap: '2rem'
           }}
         >
-          <Header
-            title={t('roles.title')}
-            subtitle={t('roles.subtitle')}
-            subtitleColor="#65748b"
-            actions={
-              <Button variant="secondary" onClick={handleLogout}>
-                {t('roles.logout')}
-              </Button>
-            }
-          />
+          <div
+            style={{
+              backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)), linear-gradient(135deg, rgba(11, 28, 108, 0.85) 0%, rgba(18, 59, 154, 0.85) 100%), url(${HeroBlockBackground})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              padding: '2.5rem clamp(1rem, 4vw, 3rem)',
+              color: '#ffffff',
+              boxShadow: '0 30px 70px rgba(11, 28, 108, 0.25)',
+              width: '100vw',
+              marginLeft: 'calc(50% - 50vw)'
+            }}
+          >
+            <div style={{ width: '100%', maxWidth: 1200, margin: '0 auto' }}>
+              <Header
+                title={t('roles.title')}
+                subtitle={t('roles.subtitle')}
+                subtitleColor="rgba(255,255,255,0.82)"
+                actions={
+                  <Button
+                    variant="secondary"
+                    onClick={handleLogout}
+                    style={{ background: '#ffffff', color: '#0b1c6c', borderColor: 'transparent' }}
+                  >
+                    {t('roles.logout')}
+                  </Button>
+                }
+              />
+            </div>
+          </div>
           <div
             style={{
               display: 'grid',
