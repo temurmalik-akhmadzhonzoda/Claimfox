@@ -132,31 +132,42 @@ export default function ClaimManagerMarketingPage() {
           }}
         >
           <div style={{ width: '100%', maxWidth: 1200, display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
-            <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem' }}>
-              <Button
-                onClick={() => navigate('/claim-manager-app')}
-                style={{ background: '#D4380D', padding: '0.65rem 1.4rem' }}
-              >
-                {t('claimManager.marketing.hero.login')}
-              </Button>
-            </div>
-
             <div
               style={{
-                textAlign: 'center',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '1rem',
-                alignItems: 'center'
+                background: 'linear-gradient(135deg, #0b1c6c 0%, #123b9a 100%)',
+                borderRadius: '32px',
+                padding: '2.5rem clamp(1rem, 4vw, 3rem)',
+                color: '#ffffff',
+                boxShadow: '0 30px 70px rgba(11, 28, 108, 0.25)'
               }}
             >
-              <p style={{ letterSpacing: '0.2em', textTransform: 'uppercase', color: '#94a3b8', margin: 0 }}>
-                {t('claimManager.marketing.hero.overline')}
-              </p>
-              <h1 style={{ margin: 0, fontSize: '3rem', fontWeight: 700 }}>{t('claimManager.marketing.hero.title')}</h1>
-              <p style={{ maxWidth: '760px', color: '#475569', fontSize: '1.15rem' }}>
-                {t('claimManager.marketing.hero.subtitle')}
-              </p>
+              <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem' }}>
+                <Button
+                  onClick={() => navigate('/claim-manager-app')}
+                  style={{ background: '#ffffff', color: '#0b1c6c', padding: '0.65rem 1.4rem' }}
+                >
+                  {t('claimManager.marketing.hero.login')}
+                </Button>
+              </div>
+
+              <div
+                style={{
+                  textAlign: 'center',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '1rem',
+                  alignItems: 'center',
+                  marginTop: '1.5rem'
+                }}
+              >
+                <p style={{ letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.7)', margin: 0 }}>
+                  {t('claimManager.marketing.hero.overline')}
+                </p>
+                <h1 style={{ margin: 0, fontSize: '3rem', fontWeight: 700 }}>{t('claimManager.marketing.hero.title')}</h1>
+                <p style={{ maxWidth: '760px', color: 'rgba(255,255,255,0.82)', fontSize: '1.15rem' }}>
+                  {t('claimManager.marketing.hero.subtitle')}
+                </p>
+              </div>
             </div>
 
             <div className="claim-manager-feature-grid">

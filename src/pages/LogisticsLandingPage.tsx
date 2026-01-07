@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 import Card from '@/components/ui/Card'
 import Button from '@/components/ui/Button'
 import { useI18n } from '@/i18n/I18nContext'
-import InsurfoxLogoDark from '@/assets/logos/Insurfox_Logo_colored_dark.png'
 
 const KPI_KEYS = ['liveShipments', 'coverageRate', 'openIncidents', 'etaDeviation'] as const
 const FEATURE_KEYS = ['realtime', 'coverage', 'incidents', 'thirdparty', 'ai', 'routes'] as const
@@ -56,6 +55,14 @@ const featureIcons: Record<(typeof FEATURE_KEYS)[number], React.ReactNode> = {
 const previewBars = [68, 92, 78, 84, 73, 96]
 const PREVIEW_VALUE_KEYS = ['eta', 'temp', 'customs'] as const
 
+const heroBlockStyle: React.CSSProperties = {
+  background: 'linear-gradient(135deg, #0b1c6c 0%, #123b9a 100%)',
+  borderRadius: '32px',
+  padding: '2.5rem clamp(1rem, 4vw, 3rem)',
+  color: '#ffffff',
+  boxShadow: '0 30px 70px rgba(11, 28, 108, 0.25)'
+}
+
 export default function LogisticsLandingPage() {
   const { t } = useI18n()
   const navigate = useNavigate()
@@ -70,43 +77,64 @@ export default function LogisticsLandingPage() {
       }}
     >
       <div style={{ width: '100%', maxWidth: 1220, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
-          <img src={InsurfoxLogoDark} alt="Insurfox" style={{ height: 70, objectFit: 'contain' }} />
-          <Button
-            onClick={() => navigate('/logistics-app')}
-            style={{ background: '#D4380D', padding: '0.65rem 1.5rem', borderRadius: '999px', fontWeight: 600 }}
-          >
-            {t('logisticsLanding.login')}
-          </Button>
-        </div>
-
-        <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center' }}>
-          <p style={{ margin: 0, letterSpacing: '0.32em', textTransform: 'uppercase', color: '#64748b' }}>
-            {t('logisticsLanding.badge')}
-          </p>
-          <h1 style={{ margin: 0, fontSize: 'clamp(2.8rem, 5vw, 3.8rem)', fontWeight: 700 }}>{t('logisticsLanding.title')}</h1>
-          <p style={{ margin: 0, maxWidth: '840px', color: '#475569', fontSize: '1.2rem' }}>{t('logisticsLanding.subtitle')}</p>
-        </div>
-
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
-            gap: '1rem'
-          }}
-        >
-          {KPI_KEYS.map((key) => (
-            <Card
-              key={key}
-              variant="glass"
-              style={{ padding: '1.1rem', minHeight: '120px', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}
+        <div style={heroBlockStyle}>
+          <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+            <Button
+              onClick={() => navigate('/logistics-app')}
+              style={{ background: '#ffffff', color: '#0b1c6c', padding: '0.65rem 1.5rem', borderRadius: '999px', fontWeight: 600 }}
             >
-              <p style={{ margin: 0, color: '#64748b', letterSpacing: '0.08em', textTransform: 'uppercase', fontSize: '0.85rem' }}>
-                {t(`logisticsLanding.kpi.${key}`)}
-              </p>
-              <p style={{ margin: 0, fontSize: '2rem', fontWeight: 700 }}>{t(`logisticsLanding.kpiValues.${key}`)}</p>
-            </Card>
-          ))}
+              {t('logisticsLanding.login')}
+            </Button>
+          </div>
+
+          <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center', marginTop: '1.5rem' }}>
+            <p style={{ margin: 0, letterSpacing: '0.32em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.72)' }}>
+              {t('logisticsLanding.badge')}
+            </p>
+            <h1 style={{ margin: 0, fontSize: 'clamp(2.8rem, 5vw, 3.8rem)', fontWeight: 700 }}>{t('logisticsLanding.title')}</h1>
+            <p style={{ margin: 0, maxWidth: '840px', color: 'rgba(255,255,255,0.82)', fontSize: '1.2rem' }}>
+              {t('logisticsLanding.subtitle')}
+            </p>
+          </div>
+
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+              gap: '1rem',
+              marginTop: '2rem'
+            }}
+          >
+            {KPI_KEYS.map((key) => (
+              <Card
+                key={key}
+                variant="glass"
+                style={{
+                  padding: '1.1rem',
+                  minHeight: '120px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '0.4rem',
+                  background: 'rgba(255,255,255,0.12)',
+                  border: '1px solid rgba(255,255,255,0.24)',
+                  color: '#ffffff'
+                }}
+              >
+                <p
+                  style={{
+                    margin: 0,
+                    color: 'rgba(255,255,255,0.7)',
+                    letterSpacing: '0.08em',
+                    textTransform: 'uppercase',
+                    fontSize: '0.85rem'
+                  }}
+                >
+                  {t(`logisticsLanding.kpi.${key}`)}
+                </p>
+                <p style={{ margin: 0, fontSize: '2rem', fontWeight: 700 }}>{t(`logisticsLanding.kpiValues.${key}`)}</p>
+              </Card>
+            ))}
+          </div>
         </div>
 
         <div

@@ -253,41 +253,51 @@ export default function MarketingLandingPage() {
               gap: '2.5rem'
             }}
           >
-            <section style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              <h1 style={{ margin: 0, fontSize: 'clamp(2.2rem, 4vw, 3.5rem)', letterSpacing: '-0.03em', maxWidth: '680px' }}>
-                {t('marketingFleet.hero.title')}
-              </h1>
-              <p style={{ margin: 0, fontSize: '1.1rem', color: '#475569', maxWidth: '640px' }}>
-                {t('marketingFleet.hero.subtitle')}
-              </p>
-            </div>
-            <div
+            <section
               style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
-                gap: '0.85rem'
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '1.5rem',
+                background: 'linear-gradient(135deg, #0b1c6c 0%, #123b9a 100%)',
+                borderRadius: '32px',
+                padding: '2.5rem clamp(1rem, 4vw, 3rem)',
+                color: '#ffffff',
+                boxShadow: '0 30px 70px rgba(11, 28, 108, 0.25)'
               }}
             >
-              {heroKpiKeys.map((key) => (
-                <div
-                  key={key}
-                  style={{
-                    padding: '0.85rem 1rem',
-                    borderRadius: '999px',
-                    background: '#ffffff',
-                    border: '1px solid #e2e8f0',
-                    textAlign: 'center',
-                    fontWeight: 600,
-                    letterSpacing: '0.01em',
-                    boxShadow: '0 12px 24px rgba(15, 23, 42, 0.08)'
-                  }}
-                >
-                  {t(`marketingFleet.kpi.${key}`)}
-                </div>
-              ))}
-            </div>
-          </section>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                <h1 style={{ margin: 0, fontSize: 'clamp(2.2rem, 4vw, 3.5rem)', letterSpacing: '-0.03em', maxWidth: '680px' }}>
+                  {t('marketingFleet.hero.title')}
+                </h1>
+                <p style={{ margin: 0, fontSize: '1.1rem', color: 'rgba(255,255,255,0.82)', maxWidth: '640px' }}>
+                  {t('marketingFleet.hero.subtitle')}
+                </p>
+              </div>
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+                  gap: '0.85rem'
+                }}
+              >
+                {heroKpiKeys.map((key) => (
+                  <div
+                    key={key}
+                    style={{
+                      padding: '0.85rem 1rem',
+                      borderRadius: '999px',
+                      background: 'rgba(255,255,255,0.12)',
+                      border: '1px solid rgba(255,255,255,0.24)',
+                      textAlign: 'center',
+                      fontWeight: 600,
+                      letterSpacing: '0.01em'
+                    }}
+                  >
+                    {t(`marketingFleet.kpi.${key}`)}
+                  </div>
+                ))}
+              </div>
+            </section>
 
           <section style={glassSectionStyle}>
             <header style={{ marginBottom: '1.5rem' }}>

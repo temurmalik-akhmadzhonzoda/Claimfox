@@ -2,7 +2,6 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import Button from '@/components/ui/Button'
 import { useI18n } from '@/i18n/I18nContext'
-import InsurfoxLogoDark from '@/assets/logos/Insurfox_Logo_colored_dark.png'
 
 const featureKeys = ['crm', 'tender', 'ai', 'insights', 'workflows', 'compliance'] as const
 const trustKeys = ['crm', 'tender', 'ai'] as const
@@ -209,22 +208,20 @@ export default function BrokerPortalLandingPage() {
             gap: '3.5rem'
           }}
         >
-          <div style={{ textAlign: 'center' }}>
-            <img
-              src={InsurfoxLogoDark}
-              alt="Insurfox"
-              style={{
-                height: '90px',
-                width: 'auto',
-                maxWidth: '260px',
-                objectFit: 'contain',
-                marginBottom: '1.25rem'
-              }}
-            />
+          <div
+            style={{
+              textAlign: 'center',
+              background: 'linear-gradient(135deg, #0b1c6c 0%, #123b9a 100%)',
+              borderRadius: '32px',
+              padding: '2.5rem clamp(1rem, 4vw, 3rem)',
+              color: '#ffffff',
+              boxShadow: '0 30px 70px rgba(11, 28, 108, 0.25)'
+            }}
+          >
             <h1
               style={{
                 margin: 0,
-                color: '#0f172a',
+                color: '#ffffff',
                 fontSize: 'clamp(2.6rem, 4vw, 3.6rem)',
                 lineHeight: 1.25,
                 letterSpacing: '0.05em',
@@ -238,7 +235,7 @@ export default function BrokerPortalLandingPage() {
                 marginTop: '1rem',
                 maxWidth: '740px',
                 marginInline: 'auto',
-                color: '#475569',
+                color: 'rgba(255,255,255,0.82)',
                 fontSize: '1.08rem',
                 lineHeight: 1.6
               }}
