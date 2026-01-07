@@ -431,6 +431,17 @@ type TranslationTree = {
   registration: {
     title: string
     subtitle: string
+    emailLabel: string
+    emailPlaceholder: string
+    emailError: string
+    privacyText: string
+    privacyLinkText: string
+    privacyLink: string
+    privacyError: string
+    submit: string
+    success: string
+    alreadyRegistered: string
+    login: string
     inputPlaceholder: string
     send: string
     restart: string
@@ -1686,8 +1697,19 @@ export const translations: Record<Lang, TranslationTree> = {
       }
     },
     registration: {
-      title: 'Registrierungsassistent',
-      subtitle: 'Unser Bot speichert deinen Fortschritt lokal und führt dich Schritt für Schritt durch die Journey.',
+      title: 'Registrieren ist einfach.',
+      subtitle: 'Geben Sie einfach Ihre E-Mail Adresse ein und wir senden Ihnen einen individuellen Link zu.',
+      emailLabel: 'E-Mail Adresse',
+      emailPlaceholder: 'Geben Sie Ihre E-Mail Adresse hier ein',
+      emailError: 'Bitte geben Sie eine gültige E-Mail Adresse ein.',
+      privacyText: 'Ich habe die',
+      privacyLinkText: 'Datenschutzerklärung',
+      privacyLink: 'https://insurfox.de/de/datenschutz/',
+      privacyError: 'Bitte stimmen Sie der Datenschutzerklärung zu.',
+      submit: 'Jetzt registrieren',
+      success: 'Vielen Dank! Wir senden Ihnen einen Link per E-Mail.',
+      alreadyRegistered: 'Schon registriert?',
+      login: 'Anmelden',
       inputPlaceholder: 'Nachricht eingeben …',
       send: 'Senden',
       restart: 'Neu starten',
@@ -3048,8 +3070,19 @@ export const translations: Record<Lang, TranslationTree> = {
       }
     },
     registration: {
-      title: 'Registration assistant',
-      subtitle: 'Our bot keeps your progress locally and guides you through the journey step by step.',
+      title: 'Registering is easy.',
+      subtitle: 'Enter your email address and we will send you a personal link.',
+      emailLabel: 'Email address',
+      emailPlaceholder: 'Enter your email address here',
+      emailError: 'Please enter a valid email address.',
+      privacyText: 'I have read the',
+      privacyLinkText: 'privacy policy',
+      privacyLink: 'https://insurfox.de/en/privacy/',
+      privacyError: 'Please accept the privacy policy.',
+      submit: 'Register now',
+      success: 'Thanks! We will email your personal link shortly.',
+      alreadyRegistered: 'Already registered?',
+      login: 'Sign in',
       inputPlaceholder: 'Type your reply …',
       send: 'Send',
       restart: 'Restart',
