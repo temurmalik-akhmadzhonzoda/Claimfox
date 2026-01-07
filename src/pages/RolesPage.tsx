@@ -60,7 +60,7 @@ export default function RolesPage() {
         >
           <div
             style={{
-              backgroundImage: `linear-gradient(135deg, rgba(11, 28, 108, 0.85) 0%, rgba(18, 59, 154, 0.85) 100%), url(${HeroBlockBackground})`,
+              backgroundImage: `linear-gradient(135deg, rgba(7, 20, 74, 0.9) 0%, rgba(11, 45, 122, 0.9) 100%), url(${HeroBlockBackground})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               padding: '2.5rem clamp(1rem, 4vw, 3rem)',
@@ -75,15 +75,6 @@ export default function RolesPage() {
                 title={t('roles.title')}
                 subtitle={t('roles.subtitle')}
                 subtitleColor="rgba(255,255,255,0.82)"
-                actions={
-                  <Button
-                    variant="secondary"
-                    onClick={handleLogout}
-                    style={{ background: '#ffffff', color: '#0b1c6c', borderColor: 'transparent' }}
-                  >
-                    {t('roles.logout')}
-                  </Button>
-                }
               />
             </div>
           </div>
@@ -107,7 +98,7 @@ export default function RolesPage() {
                 >
                   <p style={descriptionStyle}>{t(`roles.cards.${item.key}.description`)}</p>
                   <Button
-                    style={{ width: '100%', marginTop: 'auto' }}
+                    style={{ width: '100%', marginTop: 'auto', padding: '0.55rem 0.9rem', fontSize: '0.9rem', borderRadius: '999px' }}
                     onClick={
                       hasRoute
                         ? (event) => {
@@ -131,7 +122,7 @@ export default function RolesPage() {
             >
               <p style={descriptionStyle}>{t('roles.registrationCardSubtitle')}</p>
               <Button
-                style={{ width: '100%', marginTop: 'auto' }}
+                style={{ width: '100%', marginTop: 'auto', padding: '0.55rem 0.9rem', fontSize: '0.9rem', borderRadius: '999px' }}
                 onClick={(event) => {
                   event.stopPropagation()
                   navigate('/registration')
@@ -149,7 +140,7 @@ export default function RolesPage() {
             >
               <p style={descriptionStyle}>{t('roles.brokerPortal')}</p>
               <Button
-                style={{ width: '100%', marginTop: 'auto' }}
+                style={{ width: '100%', marginTop: 'auto', padding: '0.55rem 0.9rem', fontSize: '0.9rem', borderRadius: '999px' }}
                 onClick={(event) => {
                   event.stopPropagation()
                   navigate('/broker-portal')

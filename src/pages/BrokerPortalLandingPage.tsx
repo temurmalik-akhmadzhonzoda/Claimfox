@@ -212,7 +212,7 @@ export default function BrokerPortalLandingPage() {
           <div
             style={{
               textAlign: 'center',
-              backgroundImage: `linear-gradient(135deg, rgba(11, 28, 108, 0.85) 0%, rgba(18, 59, 154, 0.85) 100%), url(${HeroBlockBackground})`,
+              backgroundImage: `linear-gradient(135deg, rgba(7, 20, 74, 0.9) 0%, rgba(11, 45, 122, 0.9) 100%), url(${HeroBlockBackground})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               padding: '2.5rem clamp(1rem, 4vw, 3rem)',
