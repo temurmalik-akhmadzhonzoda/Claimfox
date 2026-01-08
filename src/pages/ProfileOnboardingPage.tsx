@@ -67,13 +67,15 @@ function IllustrationPanel({ image, secondaryImage }: { image: string; secondary
           borderRadius: '22px',
           border: '1px solid #e2e8f0',
           overflow: 'hidden',
-          background: '#ffffff'
+          background: '#ffffff',
+          width: '100%',
+          aspectRatio: '1 / 1'
         }}
       >
         <img
           src={image}
           alt=""
-          style={{ width: '100%', aspectRatio: '1 / 1', objectFit: 'cover', display: 'block' }}
+          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
         />
       </div>
       <div
@@ -81,13 +83,15 @@ function IllustrationPanel({ image, secondaryImage }: { image: string; secondary
           borderRadius: '22px',
           border: '1px solid #e2e8f0',
           overflow: 'hidden',
-          background: '#ffffff'
+          background: '#ffffff',
+          width: '100%',
+          aspectRatio: '1 / 1'
         }}
       >
         <img
           src={secondaryImage}
           alt=""
-          style={{ width: '100%', aspectRatio: '1 / 1', objectFit: 'cover', display: 'block' }}
+          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
         />
       </div>
     </div>
