@@ -251,27 +251,28 @@ export default function ProfileOnboardingPage() {
 
   return (
     <section className="page" style={{ gap: '1.5rem' }}>
-      <div style={{ width: '100%', maxWidth: 1100, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+      <div style={{ width: '100%', maxWidth: 1100, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
         <Header title={t('profile.onboarding.title')} subtitle={t('profile.onboarding.subtitle')} subtitleColor="#65748b" />
 
-        <Card>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem' }}>
-              <strong style={{ color: '#0f172a' }}>{t('profile.progress.title')}</strong>
-              <span style={{ color: '#64748b', fontWeight: 600 }}>{progressPercent}%</span>
-            </div>
-            <div style={{ height: 10, background: '#e2e8f0', borderRadius: '999px', overflow: 'hidden' }}>
-              <div style={{ height: '100%', width: `${progressPercent}%`, background: '#D4380D' }} />
-            </div>
-            <span style={{ color: '#94a3b8', fontSize: '0.85rem' }}>
-              {t('profile.progress.caption', { percent: progressPercent })}
-            </span>
-          </div>
-        </Card>
+        <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(260px, 340px)', gap: '1.25rem', alignItems: 'start' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <Card>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem' }}>
+                  <strong style={{ color: '#0f172a' }}>{t('profile.progress.title')}</strong>
+                  <span style={{ color: '#64748b', fontWeight: 600 }}>{progressPercent}%</span>
+                </div>
+                <div style={{ height: 8, background: '#e2e8f0', borderRadius: '999px', overflow: 'hidden' }}>
+                  <div style={{ height: '100%', width: `${progressPercent}%`, background: '#D4380D' }} />
+                </div>
+                <span style={{ color: '#94a3b8', fontSize: '0.82rem' }}>
+                  {t('profile.progress.caption', { percent: progressPercent })}
+                </span>
+              </div>
+            </Card>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(280px, 360px)', gap: '1.5rem' }}>
-          <Card>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <Card>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.9rem' }}>
               <div>
                 <span
                   style={{
@@ -362,62 +363,65 @@ export default function ProfileOnboardingPage() {
                 )}
 
               <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.75rem', marginTop: '1.5rem' }}>
-                <div style={{ display: 'flex', gap: '0.75rem' }}>
-                  <Button variant="secondary" onClick={handleLater}>
+                <div style={{ display: 'flex', gap: '0.6rem', alignItems: 'center', flexWrap: 'wrap' }}>
+                  <Button variant="secondary" onClick={handleLater} style={{ padding: '0.45rem 0.85rem', fontSize: '0.85rem' }}>
                     {t('profile.actions.later')}
                   </Button>
-                  <Button variant="secondary" onClick={handleSkip}>
+                  <Button variant="secondary" onClick={handleSkip} style={{ padding: '0.45rem 0.85rem', fontSize: '0.85rem' }}>
                     {t('profile.actions.skip')}
                   </Button>
-                </div>
-                <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
-                  <Button variant="secondary" onClick={handleSave}>
+                  <Button variant="secondary" onClick={handleSave} style={{ padding: '0.45rem 0.85rem', fontSize: '0.85rem' }}>
                     {t('profile.actions.save')}
                   </Button>
-                  {saved && <span style={{ alignSelf: 'center', color: '#15803d', fontWeight: 600 }}>{t('profile.saved')}</span>}
                   <Button
                     onClick={handleNext}
                     disabled={activeField.required ? !isFieldComplete(activeField) : false}
+                    style={{ padding: '0.45rem 0.95rem', fontSize: '0.85rem' }}
                   >
                     {stepIndex === totalSteps - 1 ? t('profile.actions.finish') : t('profile.actions.next')}
                   </Button>
+                  {saved && <span style={{ alignSelf: 'center', color: '#15803d', fontWeight: 600 }}>{t('profile.saved')}</span>}
                 </div>
               </div>
             </div>
           </Card>
+          </div>
 
-          <IllustrationPanel />
-        </div>
-
-        <Card>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-            <strong style={{ color: '#0f172a' }}>{t('profile.registration.title')}</strong>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
-              <div style={{ flex: '1 1 260px' }}>
-                <label style={{ display: 'block', fontWeight: 600, color: '#475569', marginBottom: '0.3rem' }}>
-                  {t('profile.fields.email')}
-                </label>
-                <input
-                  type="email"
-                  value={storedEmail}
-                  readOnly
-                  className="text-input"
-                  style={{ background: '#f8fafc' }}
-                />
-                <p style={{ margin: '0.4rem 0 0', color: '#94a3b8', fontSize: '0.85rem' }}>{t('profile.registration.emailHint')}</p>
-              </div>
-              <div style={{ flex: '1 1 260px' }}>
-                <label style={{ display: 'block', fontWeight: 600, color: '#475569', marginBottom: '0.3rem' }}>
-                  {t('profile.fields.privacyConsent')}
-                </label>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <input type="checkbox" checked={storedConsent} readOnly />
-                  <span style={{ color: '#475569' }}>{t('profile.registration.consentHint')}</span>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <IllustrationPanel />
+            <Card>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+                <strong style={{ color: '#0f172a' }}>{t('profile.registration.title')}</strong>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                  <div>
+                    <label style={{ display: 'block', fontWeight: 600, color: '#475569', marginBottom: '0.25rem' }}>
+                      {t('profile.fields.email')}
+                    </label>
+                    <input
+                      type="email"
+                      value={storedEmail}
+                      readOnly
+                      className="text-input"
+                      style={{ background: '#f8fafc' }}
+                    />
+                    <p style={{ margin: '0.35rem 0 0', color: '#94a3b8', fontSize: '0.82rem' }}>
+                      {t('profile.registration.emailHint')}
+                    </p>
+                  </div>
+                  <div>
+                    <label style={{ display: 'block', fontWeight: 600, color: '#475569', marginBottom: '0.25rem' }}>
+                      {t('profile.fields.privacyConsent')}
+                    </label>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                      <input type="checkbox" checked={storedConsent} readOnly />
+                      <span style={{ color: '#475569', fontSize: '0.9rem' }}>{t('profile.registration.consentHint')}</span>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
+            </Card>
           </div>
-        </Card>
+        </div>
       </div>
     </section>
   )
