@@ -89,9 +89,6 @@ export default function MvpPage() {
             </Card>
           ))}
         </div>
-        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <Button onClick={() => navigate('/profile')}>{t('mvp.nextStep')}</Button>
-        </div>
       </div>
     </section>
   )

@@ -58,7 +58,7 @@ const COMPANY_FIELDS: FieldDefinition[] = [
 
 const STORAGE_KEY = 'cf_profile_wizard'
 
-function IllustrationPanel() {
+function IllustrationPanel({ image }: { image: string }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
       <div
@@ -70,114 +70,12 @@ function IllustrationPanel() {
         }}
       >
         <img
-          src={lkwFahrerImage}
+          src={image}
           alt=""
-          style={{ width: '100%', height: '200px', objectFit: 'cover', display: 'block' }}
+          style={{ width: '100%', aspectRatio: '1 / 1', objectFit: 'cover', display: 'block' }}
         />
       </div>
-      <div
-        style={{
-          position: 'relative',
-          minHeight: '320px',
-          borderRadius: '24px',
-          border: '1px solid #e2e8f0',
-          background: 'linear-gradient(180deg, #ffffff 0%, #f8fafc 55%, #ffffff 100%)',
-          overflow: 'hidden',
-          padding: '1.5rem'
-        }}
-      >
-        <div style={{ position: 'absolute', top: '8%', right: '6%', width: '12px', height: '12px', borderRadius: '50%', background: '#D4380D' }} />
-        <div style={{ position: 'absolute', top: '12%', left: '10%', width: '10px', height: '10px', borderRadius: '50%', background: '#94a3b8' }} />
-        <div style={{ position: 'absolute', bottom: '16%', right: '14%', width: '18px', height: '18px', borderRadius: '50%', background: '#e2e8f0' }} />
-        <IllustrationScene variant="A" />
-      </div>
-
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: '0.75rem' }}>
-        {(['B', 'C', 'D'] as const).map((variant) => (
-          <div
-            key={variant}
-            style={{
-              borderRadius: '18px',
-              border: '1px solid #e2e8f0',
-              padding: '0.75rem',
-              background: '#ffffff',
-              minHeight: '120px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}
-          >
-            <IllustrationScene variant={variant} />
-          </div>
-        ))}
-      </div>
     </div>
-  )
-}
-
-type IllustrationVariant = 'A' | 'B' | 'C' | 'D'
-
-function IllustrationScene({ variant }: { variant: IllustrationVariant }) {
-  const stroke = '#cbd5e1'
-  const accent = '#D4380D'
-  const dark = '#1f2a5f'
-
-  if (variant === 'B') {
-    return (
-      <svg width="100%" height="100%" viewBox="0 0 220 120" fill="none">
-        <path d="M10 95h200" stroke={stroke} strokeWidth="1.4" strokeLinecap="round" />
-        <circle cx="50" cy="68" r="18" stroke={stroke} strokeWidth="1.4" />
-        <circle cx="150" cy="68" r="18" stroke={stroke} strokeWidth="1.4" />
-        <path d="M38 68h24M138 68h24" stroke={stroke} strokeWidth="1.4" />
-        <path d="M72 40h78l18 20H54l18-20Z" stroke={stroke} strokeWidth="1.4" />
-        <path d="M60 60h100v32a8 8 0 0 1-8 8H68a8 8 0 0 1-8-8V60Z" stroke={stroke} strokeWidth="1.4" />
-        <path d="M100 78h38" stroke={accent} strokeWidth="1.6" strokeLinecap="round" />
-        <path d="M16 28c12-10 30-10 42 0" stroke={stroke} strokeWidth="1.4" strokeLinecap="round" />
-        <path d="M160 32c10-8 26-8 36 0" stroke={stroke} strokeWidth="1.4" strokeLinecap="round" />
-      </svg>
-    )
-  }
-
-  if (variant === 'C') {
-    return (
-      <svg width="100%" height="100%" viewBox="0 0 220 120" fill="none">
-        <path d="M14 92c30-18 60-26 94-26 40 0 74 12 98 34" stroke={stroke} strokeWidth="1.4" strokeLinecap="round" />
-        <rect x="20" y="30" width="48" height="32" rx="8" stroke={stroke} strokeWidth="1.4" />
-        <rect x="86" y="20" width="60" height="42" rx="10" stroke={stroke} strokeWidth="1.4" />
-        <rect x="162" y="34" width="40" height="28" rx="8" stroke={stroke} strokeWidth="1.4" />
-        <path d="M30 46h26M96 38h34M96 52h24" stroke={accent} strokeWidth="1.6" strokeLinecap="round" />
-        <circle cx="178" cy="80" r="10" stroke={dark} strokeWidth="1.6" />
-        <path d="M178 76v8M174 80h8" stroke={dark} strokeWidth="1.6" strokeLinecap="round" />
-      </svg>
-    )
-  }
-
-  if (variant === 'D') {
-    return (
-      <svg width="100%" height="100%" viewBox="0 0 220 120" fill="none">
-        <path d="M12 86h196" stroke={stroke} strokeWidth="1.4" strokeLinecap="round" />
-        <path d="M36 86V40l24-14 24 14v46" stroke={stroke} strokeWidth="1.4" />
-        <path d="M120 86V34l30-18 30 18v52" stroke={stroke} strokeWidth="1.4" />
-        <path d="M48 58h24M132 54h26" stroke={accent} strokeWidth="1.6" strokeLinecap="round" />
-        <path d="M20 30c12-10 30-10 42 0" stroke={stroke} strokeWidth="1.4" strokeLinecap="round" />
-        <path d="M150 24c12-10 30-10 42 0" stroke={stroke} strokeWidth="1.4" strokeLinecap="round" />
-      </svg>
-    )
-  }
-
-  return (
-    <svg width="100%" height="100%" viewBox="0 0 320 260" fill="none">
-      <path d="M30 210h260" stroke={stroke} strokeWidth="1.6" strokeLinecap="round" />
-      <path d="M60 210V120l36-20 38 20v90" stroke={stroke} strokeWidth="1.6" />
-      <path d="M160 210V110l46-26 46 26v100" stroke={stroke} strokeWidth="1.6" />
-      <path d="M80 146h36M180 136h40" stroke={accent} strokeWidth="1.8" strokeLinecap="round" />
-      <path d="M96 176h22M196 174h24" stroke={stroke} strokeWidth="1.6" strokeLinecap="round" />
-      <path d="M40 86c16-12 40-12 56 0" stroke={stroke} strokeWidth="1.6" strokeLinecap="round" />
-      <path d="M210 70c16-12 40-12 56 0" stroke={stroke} strokeWidth="1.6" strokeLinecap="round" />
-      <path d="M130 54c12-10 28-10 40 0" stroke={stroke} strokeWidth="1.6" strokeLinecap="round" />
-      <circle cx="258" cy="170" r="14" stroke={dark} strokeWidth="1.8" />
-      <path d="M258 164v12M252 170h12" stroke={dark} strokeWidth="1.8" strokeLinecap="round" />
-    </svg>
   )
 }
 
@@ -204,6 +102,8 @@ export default function ProfileOnboardingPage() {
   const steps = useMemo(() => [...PERSONAL_FIELDS, ...COMPANY_FIELDS], [])
   const totalSteps = steps.length
   const activeField = steps[stepIndex]
+  const stepImages = useMemo(() => [lkwFahrerImage], [])
+  const activeImage = stepImages[stepIndex % stepImages.length]
 
   const progressPercent = Math.round(((stepIndex + 1) / totalSteps) * 100)
 
@@ -258,6 +158,12 @@ export default function ProfileOnboardingPage() {
   function handleLater() {
     persist(stepIndex, formData, false)
     navigate('/profile')
+  }
+
+  function handleReset() {
+    setStepIndex(0)
+    setFormData({})
+    persist(0, {}, false)
   }
 
   return (
@@ -391,6 +297,9 @@ export default function ProfileOnboardingPage() {
                   <Button variant="secondary" onClick={handleSave} style={{ padding: '0.45rem 0.85rem', fontSize: '0.85rem' }}>
                     {t('profile.actions.save')}
                   </Button>
+                  <Button variant="secondary" onClick={handleReset} style={{ padding: '0.45rem 0.85rem', fontSize: '0.85rem' }}>
+                    {t('profile.overview.reset')}
+                  </Button>
                   <Button
                     onClick={handleNext}
                     disabled={activeField.required ? !isFieldComplete(activeField) : false}
@@ -405,7 +314,7 @@ export default function ProfileOnboardingPage() {
           </Card>
           </div>
 
-          <IllustrationPanel />
+          <IllustrationPanel image={activeImage} />
         </div>
       </div>
     </section>
