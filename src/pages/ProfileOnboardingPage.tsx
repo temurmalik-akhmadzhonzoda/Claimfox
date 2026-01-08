@@ -4,6 +4,7 @@ import Header from '@/components/ui/Header'
 import Card from '@/components/ui/Card'
 import Button from '@/components/ui/Button'
 import { useI18n } from '@/i18n/I18nContext'
+import lkwFahrerImage from '@/assets/images/lkw_fahrer.png'
 
 type FieldType = 'text' | 'email' | 'password' | 'tel' | 'boolean' | 'select'
 
@@ -60,6 +61,20 @@ const STORAGE_KEY = 'cf_profile_wizard'
 function IllustrationPanel() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <div
+        style={{
+          borderRadius: '22px',
+          border: '1px solid #e2e8f0',
+          overflow: 'hidden',
+          background: '#ffffff'
+        }}
+      >
+        <img
+          src={lkwFahrerImage}
+          alt=""
+          style={{ width: '100%', height: '200px', objectFit: 'cover', display: 'block' }}
+        />
+      </div>
       <div
         style={{
           position: 'relative',
@@ -170,10 +185,6 @@ export default function ProfileOnboardingPage() {
   const { t } = useI18n()
   const navigate = useNavigate()
 
-  const storedEmail = typeof window !== 'undefined' ? window.localStorage.getItem('registrationEmail') ?? '' : ''
-  const storedConsent =
-    typeof window !== 'undefined' ? window.localStorage.getItem('registrationPrivacyConsent') === 'true' : false
-
   const [stepIndex, setStepIndex] = useState(() => {
     if (typeof window === 'undefined') return 0
     const raw = window.localStorage.getItem(STORAGE_KEY)
@@ -254,7 +265,14 @@ export default function ProfileOnboardingPage() {
       <div style={{ width: '100%', maxWidth: 1100, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
         <Header title={t('profile.onboarding.title')} subtitle={t('profile.onboarding.subtitle')} subtitleColor="#65748b" />
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(260px, 340px)', gap: '1.25rem', alignItems: 'start' }}>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'minmax(0, 1fr) minmax(260px, 340px)',
+            gap: '1.25rem',
+            alignItems: 'stretch'
+          }}
+        >
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <Card>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
@@ -387,40 +405,7 @@ export default function ProfileOnboardingPage() {
           </Card>
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            <IllustrationPanel />
-            <Card>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-                <strong style={{ color: '#0f172a' }}>{t('profile.registration.title')}</strong>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                  <div>
-                    <label style={{ display: 'block', fontWeight: 600, color: '#475569', marginBottom: '0.25rem' }}>
-                      {t('profile.fields.email')}
-                    </label>
-                    <input
-                      type="email"
-                      value={storedEmail}
-                      readOnly
-                      className="text-input"
-                      style={{ background: '#f8fafc' }}
-                    />
-                    <p style={{ margin: '0.35rem 0 0', color: '#94a3b8', fontSize: '0.82rem' }}>
-                      {t('profile.registration.emailHint')}
-                    </p>
-                  </div>
-                  <div>
-                    <label style={{ display: 'block', fontWeight: 600, color: '#475569', marginBottom: '0.25rem' }}>
-                      {t('profile.fields.privacyConsent')}
-                    </label>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                      <input type="checkbox" checked={storedConsent} readOnly />
-                      <span style={{ color: '#475569', fontSize: '0.9rem' }}>{t('profile.registration.consentHint')}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Card>
-          </div>
+          <IllustrationPanel />
         </div>
       </div>
     </section>
