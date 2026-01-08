@@ -33,6 +33,22 @@ type TranslationTree = {
   profile: {
     title: string
     subtitle: string
+    overview: {
+      title: string
+      subtitle: string
+      edit: string
+      open: string
+      summaryTitle: string
+      summarySubtitle: string
+      sections: {
+        title: string
+        personal: string
+        company: string
+        insurances: string
+        fleet: string
+        locations: string
+      }
+    }
     stepLabel: string
     saved: string
     passwordMismatch: string
@@ -96,6 +112,11 @@ type TranslationTree = {
         de: string
         en: string
       }
+    }
+    placeholders: {
+      insurances: string
+      fleet: string
+      locations: string
     }
   }
   policyPurchase: {
@@ -858,6 +879,23 @@ export const translations: Record<Lang, TranslationTree> = {
     profile: {
       title: 'Profil',
       subtitle: 'Vervollständigen Sie Ihr Profil Schritt für Schritt.',
+      overview: {
+        title: 'Mein Profil',
+        subtitle: 'Verwalten Sie Ihre Daten und greifen Sie auf weitere Bereiche zu.',
+        edit: 'Profil bearbeiten',
+        open: 'Öffnen',
+        back: 'Zurück zur Übersicht',
+        summaryTitle: 'Ihre Basisdaten',
+        summarySubtitle: 'Ein kurzer Überblick der wichtigsten Angaben.',
+        sections: {
+          title: 'Bereiche',
+          personal: 'Persönliche Daten',
+          company: 'Unternehmensdaten',
+          insurances: 'Meine Versicherungen',
+          fleet: 'Mein Fuhrpark',
+          locations: 'Meine Standorte'
+        }
+      },
       stepLabel: 'Schritt {{current}} von {{total}}',
       saved: 'Gespeichert',
       passwordMismatch: 'Die Passwörter stimmen nicht überein.',
@@ -921,6 +959,11 @@ export const translations: Record<Lang, TranslationTree> = {
           de: 'Deutsch',
           en: 'Englisch'
         }
+      },
+      placeholders: {
+        insurances: 'Hier entsteht der Bereich für Ihre Versicherungen.',
+        fleet: 'Hier entsteht der Bereich für Ihren Fuhrpark.',
+        locations: 'Hier entsteht der Bereich für Ihre Standorte.'
       }
     },
     policyPurchase: {
@@ -2414,6 +2457,23 @@ export const translations: Record<Lang, TranslationTree> = {
     profile: {
       title: 'Profile',
       subtitle: 'Complete your profile step by step.',
+      overview: {
+        title: 'My profile',
+        subtitle: 'Manage your data and access additional areas.',
+        edit: 'Edit profile',
+        open: 'Open',
+        back: 'Back to overview',
+        summaryTitle: 'Your base data',
+        summarySubtitle: 'A quick overview of the key information.',
+        sections: {
+          title: 'Sections',
+          personal: 'Personal details',
+          company: 'Company details',
+          insurances: 'My insurances',
+          fleet: 'My fleet',
+          locations: 'My locations'
+        }
+      },
       stepLabel: 'Step {{current}} of {{total}}',
       saved: 'Saved',
       passwordMismatch: 'Passwords do not match.',
@@ -2477,6 +2537,11 @@ export const translations: Record<Lang, TranslationTree> = {
           de: 'German',
           en: 'English'
         }
+      },
+      placeholders: {
+        insurances: 'This is where your insurances will appear.',
+        fleet: 'This is where your fleet will appear.',
+        locations: 'This is where your locations will appear.'
       }
     },
     policyPurchase: {

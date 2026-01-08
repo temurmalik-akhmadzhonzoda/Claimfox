@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Header from '@/components/ui/Header'
 import Card from '@/components/ui/Card'
 import Button from '@/components/ui/Button'
@@ -56,6 +57,7 @@ const STORAGE_KEY = 'cf_profile_wizard'
 
 export default function MyProfilePage() {
   const { t } = useI18n()
+  const navigate = useNavigate()
 
   const storedEmail = typeof window !== 'undefined' ? window.localStorage.getItem('registrationEmail') ?? '' : ''
   const storedConsent =
@@ -73,6 +75,12 @@ export default function MyProfilePage() {
     const raw = window.localStorage.getItem(STORAGE_KEY)
     const parsed = raw ? (JSON.parse(raw) as { data?: Record<string, string | boolean> }) : undefined
     return parsed?.data ?? {}
+  })
+  const [completed, setCompleted] = useState(() => {
+    if (typeof window === 'undefined') return false
+    const raw = window.localStorage.getItem(STORAGE_KEY)
+    const parsed = raw ? (JSON.parse(raw) as { completed?: boolean }) : undefined
+    return parsed?.completed ?? false
   })
 
   function isFieldComplete(field: FieldDefinition) {
@@ -117,7 +125,7 @@ export default function MyProfilePage() {
     const bounded = Math.max(0, Math.min(steps.length - 1, nextStep))
     setStepIndex(bounded)
     if (typeof window !== 'undefined') {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ step: bounded, data: formData }))
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ step: bounded, data: formData, completed }))
     }
   }
 
@@ -125,16 +133,89 @@ export default function MyProfilePage() {
     const next = { ...formData, [fieldKey]: value }
     setFormData(next)
     if (typeof window !== 'undefined') {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ step: stepIndex, data: next }))
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ step: stepIndex, data: next, completed }))
     }
   }
 
   function handleSave() {
     if (typeof window !== 'undefined') {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ step: stepIndex, data: formData }))
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ step: stepIndex, data: formData, completed }))
     }
     setSaved(true)
     setTimeout(() => setSaved(false), 2000)
+  }
+
+  function markCompleted() {
+    setCompleted(true)
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ step: stepIndex, data: formData, completed: true }))
+    }
+  }
+
+  if (completed) {
+    return (
+      <section className="page" style={{ gap: '1.5rem' }}>
+        <div style={{ width: '100%', maxWidth: 980, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          <Header title={t('profile.overview.title')} subtitle={t('profile.overview.subtitle')} subtitleColor="#65748b" />
+          <Card>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <strong style={{ color: '#0f172a' }}>{t('profile.overview.sections.title')}</strong>
+              <div style={{ display: 'grid', gap: '0.75rem' }}>
+                {[
+                  { key: 'personal', label: t('profile.overview.sections.personal'), action: () => navigate('/profile/personal') },
+                  { key: 'company', label: t('profile.overview.sections.company'), action: () => navigate('/profile/company') },
+                  { key: 'insurances', label: t('profile.overview.sections.insurances'), action: () => navigate('/profile/insurances') },
+                  { key: 'fleet', label: t('profile.overview.sections.fleet'), action: () => navigate('/profile/fleet') },
+                  { key: 'locations', label: t('profile.overview.sections.locations'), action: () => navigate('/profile/locations') }
+                ].map((item) => (
+                  <div
+                    key={item.key}
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      gap: '1rem',
+                      padding: '0.75rem 1rem',
+                      border: '1px solid #e2e8f0',
+                      borderRadius: '14px',
+                      background: '#f8fafc'
+                    }}
+                  >
+                    <span style={{ fontWeight: 600, color: '#0f172a' }}>{item.label}</span>
+                    <Button variant="secondary" onClick={item.action}>
+                      {t('profile.overview.open')}
+                    </Button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Card>
+          <Card>
+            <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.75rem', alignItems: 'center' }}>
+              <div>
+                <strong style={{ color: '#0f172a' }}>{t('profile.overview.summaryTitle')}</strong>
+                <p style={{ margin: '0.35rem 0 0', color: '#64748b' }}>{t('profile.overview.summarySubtitle')}</p>
+              </div>
+              <Button onClick={() => setCompleted(false)}>{t('profile.overview.edit')}</Button>
+            </div>
+            <div style={{ display: 'grid', gap: '0.75rem', marginTop: '1rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', color: '#475569' }}>
+                <span>{t('profile.fields.email')}</span>
+                <strong>{storedEmail || '—'}</strong>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', color: '#475569' }}>
+                <span>{t('profile.fields.companyName')}</span>
+                <strong>{typeof formData['company.name'] === 'string' ? formData['company.name'] : '—'}</strong>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', color: '#475569' }}>
+                <span>{t('profile.fields.contactFirstName')}</span>
+                <strong>{typeof formData['contact.first_name'] === 'string' ? formData['contact.first_name'] : '—'}</strong>
+              </div>
+            </div>
+          </Card>
+        </div>
+      </section>
+    )
   }
 
   return (
@@ -290,7 +371,13 @@ export default function MyProfilePage() {
                 {t('profile.actions.back')}
               </Button>
               <Button
-                onClick={() => updateStep(stepIndex + 1)}
+                onClick={() => {
+                  if (stepIndex === steps.length - 1) {
+                    markCompleted()
+                  } else {
+                    updateStep(stepIndex + 1)
+                  }
+                }}
                 disabled={!currentRequiredComplete}
               >
                 {stepIndex === steps.length - 1 ? t('profile.actions.finish') : t('profile.actions.next')}

@@ -24,6 +24,11 @@ import LogisticsAppPage from '@/pages/LogisticsAppPage'
 import MvpPage from '@/pages/MvpPage'
 import PolicyPurchasePage from '@/pages/PolicyPurchasePage'
 import MyProfilePage from '@/pages/MyProfilePage'
+import ProfilePersonalPage from '@/pages/ProfilePersonalPage'
+import ProfileCompanyPage from '@/pages/ProfileCompanyPage'
+import ProfileInsurancesPage from '@/pages/ProfileInsurancesPage'
+import ProfileFleetPage from '@/pages/ProfileFleetPage'
+import ProfileLocationsPage from '@/pages/ProfileLocationsPage'
 
 function NotFoundRedirect() {
   const { isAuthenticated } = useAuth()
@@ -64,6 +69,11 @@ export default function AppRouter() {
         <Route path="/mvp" element={<MvpPage />} />
         <Route path="/policy-purchase" element={<PolicyPurchasePage />} />
         <Route path="/profile" element={<MyProfilePage />} />
+        <Route path="/profile/personal" element={<ProfilePersonalPage />} />
+        <Route path="/profile/company" element={<ProfileCompanyPage />} />
+        <Route path="/profile/insurances" element={<ProfileInsurancesPage />} />
+        <Route path="/profile/fleet" element={<ProfileFleetPage />} />
+        <Route path="/profile/locations" element={<ProfileLocationsPage />} />
       </Route>
       <Route path="*" element={<NotFoundRedirect />} />
     </Routes>
