@@ -921,7 +921,7 @@ export const translations: Record<Lang, TranslationTree> = {
       actions: {
         back: 'Zurück',
         next: 'Weiter',
-        save: 'Speichern & später fortsetzen',
+        save: 'Änderungen speichern',
         finish: 'Profil abschließen'
       },
       fields: {
@@ -2499,7 +2499,7 @@ export const translations: Record<Lang, TranslationTree> = {
       actions: {
         back: 'Back',
         next: 'Next',
-        save: 'Save & continue later',
+        save: 'Save changes',
         finish: 'Finish profile'
       },
       fields: {

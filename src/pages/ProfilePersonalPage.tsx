@@ -53,6 +53,7 @@ export default function ProfilePersonalPage() {
     const parsed = raw ? (JSON.parse(raw) as { data?: Record<string, string | boolean> }) : undefined
     return parsed?.data ?? {}
   })
+  const [initialData, setInitialData] = useState(() => formData)
 
   function handleChange(fieldKey: string, value: string | boolean) {
     const next = { ...formData, [fieldKey]: value }
@@ -70,9 +71,12 @@ export default function ProfilePersonalPage() {
       const parsed = raw ? (JSON.parse(raw) as { step?: number; completed?: boolean }) : undefined
       window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ step: parsed?.step ?? 0, data: formData, completed: parsed?.completed ?? false }))
     }
+    setInitialData(formData)
     setSaved(true)
     setTimeout(() => setSaved(false), 2000)
   }
+ 
+  const hasChanges = JSON.stringify(initialData) !== JSON.stringify(formData)
 
   return (
     <section className="page" style={{ gap: '1.5rem' }}>
@@ -154,13 +158,12 @@ export default function ProfilePersonalPage() {
               </p>
             )}
           <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.75rem', marginTop: '1.5rem' }}>
-            <div style={{ display: 'flex', gap: '0.75rem' }}>
-              <Button variant="secondary" onClick={handleSave}>
+            <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+              <Button onClick={handleSave} disabled={!hasChanges}>
                 {t('profile.actions.save')}
               </Button>
               {saved && <span style={{ alignSelf: 'center', color: '#15803d', fontWeight: 600 }}>{t('profile.saved')}</span>}
             </div>
-            <Button onClick={() => navigate('/profile')}>{t('profile.overview.back')}</Button>
           </div>
         </Card>
       </div>

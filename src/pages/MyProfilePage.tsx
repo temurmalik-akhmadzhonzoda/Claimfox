@@ -203,9 +203,15 @@ export default function MyProfilePage() {
                 <span>{t('profile.fields.email')}</span>
                 <strong>{storedEmail || '—'}</strong>
               </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', color: '#475569' }}>
-                <span>{t('profile.fields.companyName')}</span>
-                <strong>{typeof formData['company.name'] === 'string' ? formData['company.name'] : '—'}</strong>
+              <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', color: '#475569' }}>
+                <span style={{ flex: '1 1 220px' }}>
+                  {t('profile.fields.companyName')}:{' '}
+                  <strong>{typeof formData['company.name'] === 'string' ? formData['company.name'] : '—'}</strong>
+                </span>
+                <span style={{ flex: '1 1 220px' }}>
+                  {t('profile.fields.legalForm')}:{' '}
+                  <strong>{typeof formData['company.legal_form'] === 'string' ? formData['company.legal_form'] : '—'}</strong>
+                </span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', color: '#475569' }}>
                 <span>{t('profile.fields.contactFirstName')}</span>
