@@ -5,6 +5,7 @@ import Card from '@/components/ui/Card'
 import Button from '@/components/ui/Button'
 import { useI18n } from '@/i18n/I18nContext'
 import lkwFahrerImage from '@/assets/images/lkw_fahrer.png'
+import ffhvImage from '@/assets/images/ffhv.png'
 
 type FieldType = 'text' | 'email' | 'password' | 'tel' | 'boolean' | 'select'
 
@@ -58,7 +59,7 @@ const COMPANY_FIELDS: FieldDefinition[] = [
 
 const STORAGE_KEY = 'cf_profile_wizard'
 
-function IllustrationPanel({ image }: { image: string }) {
+function IllustrationPanel({ image, secondaryImage }: { image: string; secondaryImage: string }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
       <div
@@ -71,6 +72,20 @@ function IllustrationPanel({ image }: { image: string }) {
       >
         <img
           src={image}
+          alt=""
+          style={{ width: '100%', aspectRatio: '1 / 1', objectFit: 'cover', display: 'block' }}
+        />
+      </div>
+      <div
+        style={{
+          borderRadius: '22px',
+          border: '1px solid #e2e8f0',
+          overflow: 'hidden',
+          background: '#ffffff'
+        }}
+      >
+        <img
+          src={secondaryImage}
           alt=""
           style={{ width: '100%', aspectRatio: '1 / 1', objectFit: 'cover', display: 'block' }}
         />
@@ -104,6 +119,7 @@ export default function ProfileOnboardingPage() {
   const activeField = steps[stepIndex]
   const stepImages = useMemo(() => [lkwFahrerImage], [])
   const activeImage = stepImages[stepIndex % stepImages.length]
+  const secondaryImage = ffhvImage
 
   const progressPercent = Math.round(((stepIndex + 1) / totalSteps) * 100)
 
@@ -287,23 +303,23 @@ export default function ProfileOnboardingPage() {
                 )}
 
               <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.75rem', marginTop: '1.5rem' }}>
-                <div style={{ display: 'flex', gap: '0.6rem', alignItems: 'center', flexWrap: 'wrap' }}>
-                  <Button variant="secondary" onClick={handleLater} style={{ padding: '0.45rem 0.85rem', fontSize: '0.85rem' }}>
+                <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', flexWrap: 'wrap' }}>
+                  <Button variant="secondary" onClick={handleLater} style={{ padding: '0.4rem 0.7rem', fontSize: '0.8rem' }}>
                     {t('profile.actions.later')}
                   </Button>
-                  <Button variant="secondary" onClick={handleSkip} style={{ padding: '0.45rem 0.85rem', fontSize: '0.85rem' }}>
+                  <Button variant="secondary" onClick={handleSkip} style={{ padding: '0.4rem 0.7rem', fontSize: '0.8rem' }}>
                     {t('profile.actions.skip')}
                   </Button>
-                  <Button variant="secondary" onClick={handleSave} style={{ padding: '0.45rem 0.85rem', fontSize: '0.85rem' }}>
+                  <Button variant="secondary" onClick={handleSave} style={{ padding: '0.4rem 0.7rem', fontSize: '0.8rem' }}>
                     {t('profile.actions.save')}
                   </Button>
-                  <Button variant="secondary" onClick={handleReset} style={{ padding: '0.45rem 0.85rem', fontSize: '0.85rem' }}>
+                  <Button variant="secondary" onClick={handleReset} style={{ padding: '0.4rem 0.7rem', fontSize: '0.8rem' }}>
                     {t('profile.overview.reset')}
                   </Button>
                   <Button
                     onClick={handleNext}
                     disabled={activeField.required ? !isFieldComplete(activeField) : false}
-                    style={{ padding: '0.45rem 0.95rem', fontSize: '0.85rem' }}
+                    style={{ padding: '0.4rem 0.8rem', fontSize: '0.8rem' }}
                   >
                     {stepIndex === totalSteps - 1 ? t('profile.actions.finish') : t('profile.actions.next')}
                   </Button>
@@ -314,7 +330,7 @@ export default function ProfileOnboardingPage() {
           </Card>
           </div>
 
-          <IllustrationPanel image={activeImage} />
+          <IllustrationPanel image={activeImage} secondaryImage={secondaryImage} />
         </div>
       </div>
     </section>
