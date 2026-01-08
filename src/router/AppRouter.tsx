@@ -29,6 +29,7 @@ import ProfileCompanyPage from '@/pages/ProfileCompanyPage'
 import ProfileInsurancesPage from '@/pages/ProfileInsurancesPage'
 import ProfileFleetPage from '@/pages/ProfileFleetPage'
 import ProfileLocationsPage from '@/pages/ProfileLocationsPage'
+import ProfileOnboardingPage from '@/pages/ProfileOnboardingPage'
 
 function NotFoundRedirect() {
   const { isAuthenticated } = useAuth()
@@ -69,6 +70,7 @@ export default function AppRouter() {
         <Route path="/mvp" element={<MvpPage />} />
         <Route path="/policy-purchase" element={<PolicyPurchasePage />} />
         <Route path="/profile" element={<MyProfilePage />} />
+        <Route path="/profile/onboarding" element={<ProfileOnboardingPage />} />
         <Route path="/profile/personal" element={<ProfilePersonalPage />} />
         <Route path="/profile/company" element={<ProfileCompanyPage />} />
         <Route path="/profile/insurances" element={<ProfileInsurancesPage />} />

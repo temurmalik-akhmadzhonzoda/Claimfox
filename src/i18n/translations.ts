@@ -38,16 +38,28 @@ type TranslationTree = {
       subtitle: string
       edit: string
       open: string
+      back: string
       summaryTitle: string
       summarySubtitle: string
       sections: {
         title: string
+        onboarding: string
         personal: string
         company: string
         insurances: string
         fleet: string
         locations: string
       }
+    }
+    onboarding: {
+      title: string
+      subtitle: string
+      cardTitle: string
+      cardSubtitle: string
+      start: string
+      resume: string
+      completed: string
+      incomplete: string
     }
     stepLabel: string
     saved: string
@@ -601,6 +613,7 @@ type TranslationTree = {
     privacyLink: string
     privacyError: string
     submit: string
+    nextStep: string
     success: string
     alreadyRegistered: string
     login: string
@@ -889,12 +902,23 @@ export const translations: Record<Lang, TranslationTree> = {
         summarySubtitle: 'Ein kurzer Überblick der wichtigsten Angaben.',
         sections: {
           title: 'Bereiche',
+          onboarding: 'Onboarding',
           personal: 'Persönliche Daten',
           company: 'Unternehmensdaten',
           insurances: 'Meine Versicherungen',
           fleet: 'Mein Fuhrpark',
           locations: 'Meine Standorte'
         }
+      },
+      onboarding: {
+        title: 'Onboarding',
+        subtitle: 'Persönliche und Unternehmensdaten erfassen.',
+        cardTitle: 'Onboarding',
+        cardSubtitle: 'Erfassen Sie Ihre Daten in zwei Schritten.',
+        start: 'Onboarding starten',
+        resume: 'Onboarding fortsetzen',
+        completed: 'Profil abgeschlossen',
+        incomplete: 'Onboarding noch nicht abgeschlossen'
       },
       stepLabel: 'Schritt {{current}} von {{total}}',
       saved: 'Gespeichert',
@@ -2074,6 +2098,7 @@ export const translations: Record<Lang, TranslationTree> = {
       privacyLink: 'https://insurfox.de/de/datenschutz/',
       privacyError: 'Bitte stimmen Sie der Datenschutzerklärung zu.',
       submit: 'Jetzt registrieren',
+      nextStep: 'Nächster Schritt',
       success: 'Vielen Dank! Wir senden Ihnen einen Link per E-Mail.',
       alreadyRegistered: 'Schon registriert?',
       login: 'Anmelden',
@@ -2467,12 +2492,23 @@ export const translations: Record<Lang, TranslationTree> = {
         summarySubtitle: 'A quick overview of the key information.',
         sections: {
           title: 'Sections',
+          onboarding: 'Onboarding',
           personal: 'Personal details',
           company: 'Company details',
           insurances: 'My insurances',
           fleet: 'My fleet',
           locations: 'My locations'
         }
+      },
+      onboarding: {
+        title: 'Onboarding',
+        subtitle: 'Capture personal and company details.',
+        cardTitle: 'Onboarding',
+        cardSubtitle: 'Complete your data in two steps.',
+        start: 'Start onboarding',
+        resume: 'Resume onboarding',
+        completed: 'Profile completed',
+        incomplete: 'Onboarding not completed'
       },
       stepLabel: 'Step {{current}} of {{total}}',
       saved: 'Saved',
@@ -3652,6 +3688,7 @@ export const translations: Record<Lang, TranslationTree> = {
       privacyLink: 'https://insurfox.de/en/privacy/',
       privacyError: 'Please accept the privacy policy.',
       submit: 'Register now',
+      nextStep: 'Next step',
       success: 'Thanks! We will email your personal link shortly.',
       alreadyRegistered: 'Already registered?',
       login: 'Sign in',

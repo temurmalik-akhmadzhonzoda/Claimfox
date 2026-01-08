@@ -96,6 +96,13 @@ export default function RegistrationPage() {
             <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
               <Button type="submit">{t('registration.submit')}</Button>
             </div>
+            {submitted && !error && (
+              <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
+                <Button type="button" onClick={() => navigate('/profile/onboarding')}>
+                  {t('registration.nextStep')}
+                </Button>
+              </div>
+            )}
           </form>
 
           <div style={{ marginTop: '1rem', color: '#2f2b3a', fontSize: '0.95rem' }}>
