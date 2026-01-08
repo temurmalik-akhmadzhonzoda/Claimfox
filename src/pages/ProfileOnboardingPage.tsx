@@ -12,48 +12,79 @@ type FieldDefinition = {
   labelKey: string
   required: boolean
   type: FieldType
+  group: 'personal' | 'company'
   options?: Array<{ value: string; labelKey: string }>
 }
 
 const PERSONAL_FIELDS: FieldDefinition[] = [
-  { key: 'contact.salutation', labelKey: 'profile.fields.salutation', required: false, type: 'text' },
-  { key: 'contact.first_name', labelKey: 'profile.fields.contactFirstName', required: true, type: 'text' },
-  { key: 'contact.last_name', labelKey: 'profile.fields.contactLastName', required: true, type: 'text' },
-  { key: 'contact.phone_country_code', labelKey: 'profile.fields.phoneCountryCode', required: true, type: 'text' },
-  { key: 'contact.phone', labelKey: 'profile.fields.phone', required: true, type: 'tel' },
+  { key: 'contact.salutation', labelKey: 'profile.fields.salutation', required: false, type: 'text', group: 'personal' },
+  { key: 'contact.first_name', labelKey: 'profile.fields.contactFirstName', required: true, type: 'text', group: 'personal' },
+  { key: 'contact.last_name', labelKey: 'profile.fields.contactLastName', required: true, type: 'text', group: 'personal' },
+  { key: 'contact.phone_country_code', labelKey: 'profile.fields.phoneCountryCode', required: true, type: 'text', group: 'personal' },
+  { key: 'contact.phone', labelKey: 'profile.fields.phone', required: true, type: 'tel', group: 'personal' },
   {
     key: 'account.language',
     labelKey: 'profile.fields.language',
     required: true,
     type: 'select',
+    group: 'personal',
     options: [
       { value: 'de', labelKey: 'profile.options.language.de' },
       { value: 'en', labelKey: 'profile.options.language.en' }
     ]
   },
-  { key: 'account.password', labelKey: 'profile.fields.password', required: true, type: 'password' },
-  { key: 'account.password_confirm', labelKey: 'profile.fields.passwordConfirm', required: true, type: 'password' },
-  { key: 'account.advisor_code', labelKey: 'profile.fields.advisorCode', required: false, type: 'text' },
-  { key: 'company.director.first_name', labelKey: 'profile.fields.directorFirstName', required: true, type: 'text' },
-  { key: 'company.director.last_name', labelKey: 'profile.fields.directorLastName', required: true, type: 'text' },
-  { key: 'kyc.has_branch_in_sanctioned_region', labelKey: 'profile.fields.kycBranch', required: true, type: 'boolean' },
-  { key: 'kyc.director_from_sanctioned_region', labelKey: 'profile.fields.kycDirector', required: true, type: 'boolean' },
-  { key: 'kyc.has_business_with_sanctioned_region', labelKey: 'profile.fields.kycBusiness', required: true, type: 'boolean' }
+  { key: 'account.password', labelKey: 'profile.fields.password', required: true, type: 'password', group: 'personal' },
+  { key: 'account.password_confirm', labelKey: 'profile.fields.passwordConfirm', required: true, type: 'password', group: 'personal' },
+  { key: 'account.advisor_code', labelKey: 'profile.fields.advisorCode', required: false, type: 'text', group: 'personal' },
+  { key: 'company.director.first_name', labelKey: 'profile.fields.directorFirstName', required: true, type: 'text', group: 'personal' },
+  { key: 'company.director.last_name', labelKey: 'profile.fields.directorLastName', required: true, type: 'text', group: 'personal' },
+  { key: 'kyc.has_branch_in_sanctioned_region', labelKey: 'profile.fields.kycBranch', required: true, type: 'boolean', group: 'personal' },
+  { key: 'kyc.director_from_sanctioned_region', labelKey: 'profile.fields.kycDirector', required: true, type: 'boolean', group: 'personal' },
+  { key: 'kyc.has_business_with_sanctioned_region', labelKey: 'profile.fields.kycBusiness', required: true, type: 'boolean', group: 'personal' }
 ]
 
 const COMPANY_FIELDS: FieldDefinition[] = [
-  { key: 'company.name', labelKey: 'profile.fields.companyName', required: true, type: 'text' },
-  { key: 'company.legal_form', labelKey: 'profile.fields.legalForm', required: true, type: 'text' },
-  { key: 'company.address.street', labelKey: 'profile.fields.street', required: true, type: 'text' },
-  { key: 'company.address.house_number', labelKey: 'profile.fields.houseNumber', required: true, type: 'text' },
-  { key: 'company.address.additional', labelKey: 'profile.fields.addressAdditional', required: false, type: 'text' },
-  { key: 'company.address.zip', labelKey: 'profile.fields.zip', required: true, type: 'text' },
-  { key: 'company.address.city', labelKey: 'profile.fields.city', required: true, type: 'text' },
-  { key: 'company.address.country', labelKey: 'profile.fields.country', required: true, type: 'text' },
-  { key: 'company.vat_id', labelKey: 'profile.fields.vatId', required: false, type: 'text' }
+  { key: 'company.name', labelKey: 'profile.fields.companyName', required: true, type: 'text', group: 'company' },
+  { key: 'company.legal_form', labelKey: 'profile.fields.legalForm', required: true, type: 'text', group: 'company' },
+  { key: 'company.address.street', labelKey: 'profile.fields.street', required: true, type: 'text', group: 'company' },
+  { key: 'company.address.house_number', labelKey: 'profile.fields.houseNumber', required: true, type: 'text', group: 'company' },
+  { key: 'company.address.additional', labelKey: 'profile.fields.addressAdditional', required: false, type: 'text', group: 'company' },
+  { key: 'company.address.zip', labelKey: 'profile.fields.zip', required: true, type: 'text', group: 'company' },
+  { key: 'company.address.city', labelKey: 'profile.fields.city', required: true, type: 'text', group: 'company' },
+  { key: 'company.address.country', labelKey: 'profile.fields.country', required: true, type: 'text', group: 'company' },
+  { key: 'company.vat_id', labelKey: 'profile.fields.vatId', required: false, type: 'text', group: 'company' }
 ]
 
 const STORAGE_KEY = 'cf_profile_wizard'
+
+function IllustrationPanel() {
+  return (
+    <div
+      style={{
+        position: 'relative',
+        minHeight: '320px',
+        borderRadius: '24px',
+        border: '1px solid #e2e8f0',
+        background: 'linear-gradient(180deg, #fff6f1 0%, #ffffff 60%)',
+        overflow: 'hidden',
+        padding: '1.5rem'
+      }}
+    >
+      <div style={{ position: 'absolute', top: '-20%', right: '-10%', width: '220px', height: '220px', borderRadius: '50%', background: '#ffe3d5' }} />
+      <div style={{ position: 'absolute', bottom: '-15%', left: '-10%', width: '180px', height: '180px', borderRadius: '50%', background: '#fef3c7' }} />
+      <svg width="100%" height="100%" viewBox="0 0 320 260" fill="none">
+        <path d="M40 210c25-32 65-50 110-50 48 0 92 22 120 56" stroke="#D4380D" strokeWidth="2.5" strokeLinecap="round" />
+        <circle cx="86" cy="120" r="28" stroke="#1f2a5f" strokeWidth="2" />
+        <circle cx="216" cy="120" r="28" stroke="#1f2a5f" strokeWidth="2" />
+        <path d="M66 120h40M196 120h40" stroke="#1f2a5f" strokeWidth="2" />
+        <path d="M150 70h40l18 24h-76l18-24Z" stroke="#1f2a5f" strokeWidth="2" />
+        <path d="M120 92h80v68a8 8 0 0 1-8 8h-64a8 8 0 0 1-8-8V92Z" stroke="#1f2a5f" strokeWidth="2" />
+        <path d="M140 120h40" stroke="#D4380D" strokeWidth="2" strokeLinecap="round" />
+        <path d="M140 140h28" stroke="#D4380D" strokeWidth="2" strokeLinecap="round" />
+      </svg>
+    </div>
+  )
+}
 
 export default function ProfileOnboardingPage() {
   const { t } = useI18n()
@@ -79,6 +110,12 @@ export default function ProfileOnboardingPage() {
 
   const [saved, setSaved] = useState(false)
 
+  const steps = useMemo(() => [...PERSONAL_FIELDS, ...COMPANY_FIELDS], [])
+  const totalSteps = steps.length
+  const activeField = steps[stepIndex]
+
+  const progressPercent = Math.round(((stepIndex + 1) / totalSteps) * 100)
+
   function isFieldComplete(field: FieldDefinition) {
     const value = formData[field.key]
     if (field.type === 'boolean') {
@@ -87,74 +124,196 @@ export default function ProfileOnboardingPage() {
     return typeof value === 'string' && value.trim().length > 0
   }
 
-  const requiredFields = useMemo(() => {
-    const base = [...PERSONAL_FIELDS, ...COMPANY_FIELDS].filter((field) => field.required)
-    return base
-  }, [])
-
-  const completedRequired = requiredFields.filter(isFieldComplete).length + (storedEmail ? 1 : 0)
-  const totalRequired = requiredFields.length + 1
-  const completion = Math.round((completedRequired / totalRequired) * 100)
-
-  const steps = [
-    {
-      key: 'personal',
-      title: t('profile.steps.personal.title'),
-      subtitle: t('profile.steps.personal.subtitle'),
-      fields: PERSONAL_FIELDS
-    },
-    {
-      key: 'company',
-      title: t('profile.steps.company.title'),
-      subtitle: t('profile.steps.company.subtitle'),
-      fields: COMPANY_FIELDS
-    }
-  ] as const
-
-  const activeStep = steps[stepIndex]
-  const currentRequiredComplete = activeStep.fields.filter((field) => field.required).every(isFieldComplete)
-
-  function updateStep(nextStep: number) {
-    const bounded = Math.max(0, Math.min(steps.length - 1, nextStep))
-    setStepIndex(bounded)
+  function persist(nextStep: number, nextData: Record<string, string | boolean>, completed = false) {
     if (typeof window !== 'undefined') {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ step: bounded, data: formData, completed: false }))
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ step: nextStep, data: nextData, completed }))
     }
   }
 
   function handleChange(fieldKey: string, value: string | boolean) {
     const next = { ...formData, [fieldKey]: value }
     setFormData(next)
-    if (typeof window !== 'undefined') {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ step: stepIndex, data: next, completed: false }))
-    }
+    persist(stepIndex, next, false)
   }
 
   function handleSave() {
-    if (typeof window !== 'undefined') {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ step: stepIndex, data: formData, completed: false }))
-    }
+    persist(stepIndex, formData, false)
     setSaved(true)
     setTimeout(() => setSaved(false), 2000)
   }
 
-  function markCompleted() {
-    if (typeof window !== 'undefined') {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ step: stepIndex, data: formData, completed: true }))
+  function handleSkip() {
+    if (stepIndex === totalSteps - 1) {
+      persist(stepIndex, formData, true)
+      navigate('/profile')
+      return
     }
+    const nextStep = stepIndex + 1
+    setStepIndex(nextStep)
+    persist(nextStep, formData, false)
+  }
+
+  function handleNext() {
+    if (stepIndex === totalSteps - 1) {
+      persist(stepIndex, formData, true)
+      navigate('/profile')
+      return
+    }
+    const nextStep = stepIndex + 1
+    setStepIndex(nextStep)
+    persist(nextStep, formData, false)
+  }
+
+  function handleLater() {
+    persist(stepIndex, formData, false)
     navigate('/profile')
   }
 
   return (
     <section className="page" style={{ gap: '1.5rem' }}>
-      <div style={{ width: '100%', maxWidth: 980, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+      <div style={{ width: '100%', maxWidth: 1100, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
         <Header title={t('profile.onboarding.title')} subtitle={t('profile.onboarding.subtitle')} subtitleColor="#65748b" />
+
+        <Card>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem' }}>
+              <strong style={{ color: '#0f172a' }}>{t('profile.progress.title')}</strong>
+              <span style={{ color: '#64748b', fontWeight: 600 }}>{progressPercent}%</span>
+            </div>
+            <div style={{ height: 10, background: '#e2e8f0', borderRadius: '999px', overflow: 'hidden' }}>
+              <div style={{ height: '100%', width: `${progressPercent}%`, background: '#D4380D' }} />
+            </div>
+            <span style={{ color: '#94a3b8', fontSize: '0.85rem' }}>
+              {t('profile.progress.caption', { percent: progressPercent })}
+            </span>
+          </div>
+        </Card>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(280px, 360px)', gap: '1.5rem' }}>
+          <Card>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <div>
+                <span
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    padding: '0.25rem 0.85rem',
+                    borderRadius: '999px',
+                    background: activeField.group === 'personal' ? '#fde8df' : '#e0ecff',
+                    color: '#1f2a5f',
+                    fontWeight: 700,
+                    fontSize: '0.8rem',
+                    letterSpacing: '0.08em',
+                    textTransform: 'uppercase'
+                  }}
+                >
+                  {activeField.group === 'personal' ? t('profile.steps.personal.title') : t('profile.steps.company.title')}
+                </span>
+                <h2 style={{ margin: '0.6rem 0 0' }}>{t(activeField.labelKey)}</h2>
+                <p style={{ margin: '0.35rem 0 0', color: '#64748b' }}>
+                  {t('profile.stepLabel', { current: stepIndex + 1, total: totalSteps })}
+                </p>
+              </div>
+
+              {activeField.type === 'boolean' ? (
+                <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                  <button
+                    type="button"
+                    onClick={() => handleChange(activeField.key, true)}
+                    style={{
+                      borderRadius: '999px',
+                      padding: '0.55rem 1.2rem',
+                      border: '1px solid #d9d9d9',
+                      background: formData[activeField.key] === true ? '#fde8df' : '#ffffff',
+                      color: '#0f172a',
+                      fontWeight: 600,
+                      cursor: 'pointer'
+                    }}
+                  >
+                    {t('profile.options.yes')}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handleChange(activeField.key, false)}
+                    style={{
+                      borderRadius: '999px',
+                      padding: '0.55rem 1.2rem',
+                      border: '1px solid #d9d9d9',
+                      background: formData[activeField.key] === false ? '#fde8df' : '#ffffff',
+                      color: '#0f172a',
+                      fontWeight: 600,
+                      cursor: 'pointer'
+                    }}
+                  >
+                    {t('profile.options.no')}
+                  </button>
+                </div>
+              ) : activeField.type === 'select' ? (
+                <select
+                  className="text-input"
+                  value={typeof formData[activeField.key] === 'string' ? (formData[activeField.key] as string) : ''}
+                  onChange={(event) => handleChange(activeField.key, event.target.value)}
+                >
+                  <option value="">{t('profile.options.select')}</option>
+                  {activeField.options?.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {t(option.labelKey)}
+                    </option>
+                  ))}
+                </select>
+              ) : (
+                <input
+                  className="text-input"
+                  type={activeField.type}
+                  value={typeof formData[activeField.key] === 'string' ? (formData[activeField.key] as string) : ''}
+                  onChange={(event) => handleChange(activeField.key, event.target.value)}
+                />
+              )}
+
+              {activeField.required && (
+                <span style={{ color: '#94a3b8', fontSize: '0.85rem' }}>{t('profile.onboarding.requiredHint')}</span>
+              )}
+
+              {activeField.key === 'account.password_confirm' &&
+                formData['account.password'] &&
+                formData['account.password_confirm'] &&
+                formData['account.password'] !== formData['account.password_confirm'] && (
+                  <p style={{ margin: 0, color: '#B42318', fontWeight: 600 }}>{t('profile.passwordMismatch')}</p>
+                )}
+
+              <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.75rem', marginTop: '1.5rem' }}>
+                <div style={{ display: 'flex', gap: '0.75rem' }}>
+                  <Button variant="secondary" onClick={handleLater}>
+                    {t('profile.actions.later')}
+                  </Button>
+                  <Button variant="secondary" onClick={handleSkip}>
+                    {t('profile.actions.skip')}
+                  </Button>
+                </div>
+                <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+                  <Button variant="secondary" onClick={handleSave}>
+                    {t('profile.actions.save')}
+                  </Button>
+                  {saved && <span style={{ alignSelf: 'center', color: '#15803d', fontWeight: 600 }}>{t('profile.saved')}</span>}
+                  <Button
+                    onClick={handleNext}
+                    disabled={activeField.required ? !isFieldComplete(activeField) : false}
+                  >
+                    {stepIndex === totalSteps - 1 ? t('profile.actions.finish') : t('profile.actions.next')}
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </Card>
+
+          <IllustrationPanel />
+        </div>
 
         <Card>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
             <strong style={{ color: '#0f172a' }}>{t('profile.registration.title')}</strong>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
-              <div style={{ flex: '1 1 280px' }}>
+              <div style={{ flex: '1 1 260px' }}>
                 <label style={{ display: 'block', fontWeight: 600, color: '#475569', marginBottom: '0.3rem' }}>
                   {t('profile.fields.email')}
                 </label>
@@ -167,7 +326,7 @@ export default function ProfileOnboardingPage() {
                 />
                 <p style={{ margin: '0.4rem 0 0', color: '#94a3b8', fontSize: '0.85rem' }}>{t('profile.registration.emailHint')}</p>
               </div>
-              <div style={{ flex: '1 1 280px' }}>
+              <div style={{ flex: '1 1 260px' }}>
                 <label style={{ display: 'block', fontWeight: 600, color: '#475569', marginBottom: '0.3rem' }}>
                   {t('profile.fields.privacyConsent')}
                 </label>
@@ -176,135 +335,6 @@ export default function ProfileOnboardingPage() {
                   <span style={{ color: '#475569' }}>{t('profile.registration.consentHint')}</span>
                 </div>
               </div>
-            </div>
-          </div>
-        </Card>
-
-        <Card>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem' }}>
-              <strong style={{ color: '#0f172a' }}>{t('profile.progress.title')}</strong>
-              <span style={{ color: '#64748b', fontWeight: 600 }}>{completion}%</span>
-            </div>
-            <div style={{ height: 10, background: '#e2e8f0', borderRadius: '999px', overflow: 'hidden' }}>
-              <div style={{ height: '100%', width: `${completion}%`, background: '#D4380D' }} />
-            </div>
-            <span style={{ color: '#94a3b8', fontSize: '0.85rem' }}>
-              {t('profile.progress.caption', { percent: completion })}
-            </span>
-          </div>
-        </Card>
-
-        <Card>
-          <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.75rem', alignItems: 'center' }}>
-            <div>
-              <h2 style={{ margin: 0 }}>{activeStep.title}</h2>
-              <p style={{ margin: '0.35rem 0 0', color: '#64748b' }}>{activeStep.subtitle}</p>
-            </div>
-            <span style={{ color: '#94a3b8', fontWeight: 600 }}>
-              {t('profile.stepLabel', { current: stepIndex + 1, total: steps.length })}
-            </span>
-          </div>
-
-          <div style={{ display: 'grid', gap: '1rem', marginTop: '1.25rem' }}>
-            {activeStep.fields.map((field) => {
-              const value = formData[field.key]
-              return (
-                <label key={field.key} style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem', color: '#475569' }}>
-                  <span style={{ fontWeight: 600 }}>
-                    {t(field.labelKey)}
-                    {field.required ? ' *' : ''}
-                  </span>
-                  {field.type === 'boolean' ? (
-                    <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                      <button
-                        type="button"
-                        onClick={() => handleChange(field.key, true)}
-                        style={{
-                          borderRadius: '999px',
-                          padding: '0.45rem 1rem',
-                          border: '1px solid #d9d9d9',
-                          background: value === true ? '#fde8df' : '#ffffff',
-                          color: '#0f172a',
-                          fontWeight: 600,
-                          cursor: 'pointer'
-                        }}
-                      >
-                        {t('profile.options.yes')}
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => handleChange(field.key, false)}
-                        style={{
-                          borderRadius: '999px',
-                          padding: '0.45rem 1rem',
-                          border: '1px solid #d9d9d9',
-                          background: value === false ? '#fde8df' : '#ffffff',
-                          color: '#0f172a',
-                          fontWeight: 600,
-                          cursor: 'pointer'
-                        }}
-                      >
-                        {t('profile.options.no')}
-                      </button>
-                    </div>
-                  ) : field.type === 'select' ? (
-                    <select
-                      className="text-input"
-                      value={typeof value === 'string' ? value : ''}
-                      onChange={(event) => handleChange(field.key, event.target.value)}
-                    >
-                      <option value="">{t('profile.options.select')}</option>
-                      {field.options?.map((option) => (
-                        <option key={option.value} value={option.value}>
-                          {t(option.labelKey)}
-                        </option>
-                      ))}
-                    </select>
-                  ) : (
-                    <input
-                      className="text-input"
-                      type={field.type}
-                      value={typeof value === 'string' ? value : ''}
-                      onChange={(event) => handleChange(field.key, event.target.value)}
-                    />
-                  )}
-                </label>
-              )
-            })}
-          </div>
-
-          {formData['account.password'] &&
-            formData['account.password_confirm'] &&
-            formData['account.password'] !== formData['account.password_confirm'] && (
-              <p style={{ marginTop: '0.75rem', color: '#B42318', fontWeight: 600 }}>
-                {t('profile.passwordMismatch')}
-              </p>
-            )}
-
-          <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.75rem', marginTop: '1.5rem' }}>
-            <div style={{ display: 'flex', gap: '0.75rem' }}>
-              <Button variant="secondary" onClick={handleSave}>
-                {t('profile.actions.save')}
-              </Button>
-              {saved && <span style={{ alignSelf: 'center', color: '#15803d', fontWeight: 600 }}>{t('profile.saved')}</span>}
-            </div>
-            <div style={{ display: 'flex', gap: '0.75rem' }}>
-              <Button variant="secondary" onClick={() => navigate('/profile')}>
-                {t('profile.overview.back')}
-              </Button>
-              <Button
-                onClick={() => {
-                  if (stepIndex === steps.length - 1) {
-                    markCompleted()
-                  } else {
-                    updateStep(stepIndex + 1)
-                  }
-                }}
-                disabled={!currentRequiredComplete}
-              >
-                {stepIndex === steps.length - 1 ? t('profile.actions.finish') : t('profile.actions.next')}
-              </Button>
             </div>
           </div>
         </Card>

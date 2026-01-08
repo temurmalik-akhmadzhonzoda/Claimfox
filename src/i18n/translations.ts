@@ -34,18 +34,18 @@ type TranslationTree = {
   profile: {
     title: string
     subtitle: string
-      overview: {
+    overview: {
+      title: string
+      subtitle: string
+      edit: string
+      open: string
+      back: string
+      reset: string
+      summaryTitle: string
+      summarySubtitle: string
+      sections: {
         title: string
-        subtitle: string
-        edit: string
-        open: string
-        back: string
-        reset: string
-        summaryTitle: string
-        summarySubtitle: string
-        sections: {
-          title: string
-          onboarding: string
+        onboarding: string
         personal: string
         company: string
         insurances: string
@@ -62,6 +62,7 @@ type TranslationTree = {
       resume: string
       completed: string
       incomplete: string
+      requiredHint: string
     }
     stepLabel: string
     saved: string
@@ -90,6 +91,8 @@ type TranslationTree = {
       next: string
       save: string
       finish: string
+      later: string
+      skip: string
     }
     fields: {
       email: string
@@ -926,7 +929,8 @@ export const translations: Record<Lang, TranslationTree> = {
         start: 'Onboarding starten',
         resume: 'Onboarding fortsetzen',
         completed: 'Profil abgeschlossen',
-        incomplete: 'Onboarding noch nicht abgeschlossen'
+        incomplete: 'Onboarding noch nicht abgeschlossen',
+        requiredHint: 'Pflichtfeld'
       },
       stepLabel: 'Schritt {{current}} von {{total}}',
       saved: 'Gespeichert',
@@ -954,7 +958,9 @@ export const translations: Record<Lang, TranslationTree> = {
         back: 'Zurück',
         next: 'Weiter',
         save: 'Änderungen speichern',
-        finish: 'Profil abschließen'
+        finish: 'Profil abschließen',
+        later: 'Später fortsetzen',
+        skip: 'Überspringen'
       },
       fields: {
         email: 'E-Mail Adresse',
@@ -2522,7 +2528,8 @@ export const translations: Record<Lang, TranslationTree> = {
         start: 'Start onboarding',
         resume: 'Resume onboarding',
         completed: 'Profile completed',
-        incomplete: 'Onboarding not completed'
+        incomplete: 'Onboarding not completed',
+        requiredHint: 'Required field'
       },
       stepLabel: 'Step {{current}} of {{total}}',
       saved: 'Saved',
@@ -2550,7 +2557,9 @@ export const translations: Record<Lang, TranslationTree> = {
         back: 'Back',
         next: 'Next',
         save: 'Save changes',
-        finish: 'Finish profile'
+        finish: 'Finish profile',
+        later: 'Continue later',
+        skip: 'Skip'
       },
       fields: {
         email: 'Email address',
