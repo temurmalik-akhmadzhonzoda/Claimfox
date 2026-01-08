@@ -21,6 +21,7 @@ import FeatureTreePage from '@/pages/FeatureTreePage'
 import GetQuotePage from '@/pages/GetQuotePage'
 import LogisticsLandingPage from '@/pages/LogisticsLandingPage'
 import LogisticsAppPage from '@/pages/LogisticsAppPage'
+import MvpPage from '@/pages/MvpPage'
 
 function NotFoundRedirect() {
   const { isAuthenticated } = useAuth()
@@ -58,6 +59,7 @@ export default function AppRouter() {
         <Route path="/get-quote" element={<GetQuotePage />} />
         <Route path="/logistics" element={<LogisticsLandingPage />} />
         <Route path="/logistics-app" element={<LogisticsAppPage />} />
+        <Route path="/mvp" element={<MvpPage />} />
       </Route>
       <Route path="*" element={<NotFoundRedirect />} />
     </Routes>

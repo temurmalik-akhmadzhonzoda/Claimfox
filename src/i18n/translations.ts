@@ -25,6 +25,11 @@ type TranslationTree = {
       brokerPortal: string
     cards: Record<string, { title: string; description: string }>
   }
+  mvp: {
+    title: string
+    subtitle: string
+    steps: Record<string, { title: string; description: string }>
+  }
   getQuote: {
     title: string
     subtitle: string
@@ -692,6 +697,10 @@ export const translations: Record<Lang, TranslationTree> = {
       registrationCardSubtitle: 'Starte die neue, KI-gestützte Journey und melde Partner oder Kund:innen komfortabel an.',
       brokerPortal: 'Maklerportal',
       cards: {
+        mvp: {
+          title: 'MVP Übersicht',
+          description: 'Schneller Einstieg in alle Prozessschritte des MVP.'
+        },
         claims: {
           title: 'Schadenmanager',
           description: 'Sachbearbeiter-Cockpit für schnelle Entscheidungen, Freigaben, Partnersteuerung und AI-Hinweise.',
@@ -732,6 +741,32 @@ export const translations: Record<Lang, TranslationTree> = {
           title: 'Spedition / Logistik',
           description: 'Transporte, Routen, Versicherungen und Schäden zentral steuern – mit Echtzeit-Status und KI-Alerts.',
           cta: 'Ansehen'
+        }
+      }
+    },
+    mvp: {
+      title: 'MVP Übersicht',
+      subtitle: 'Alle Prozessschritte im Überblick – klicke dich durch die MVP-Strecke.',
+      steps: {
+        registration: {
+          title: 'Registrierung',
+          description: 'Erfasse die E-Mail-Adresse und starte den Onboarding-Prozess.'
+        },
+        claimProcess: {
+          title: 'Schadenmeldung',
+          description: 'Chatbasierte Erfassung mit Standort, Zeitstempel und strukturierten Daten.'
+        },
+        claimManager: {
+          title: 'Schadenmanager',
+          description: 'Steuere Freigaben, Dokumente und Partner im Cockpit.'
+        },
+        partnerManagement: {
+          title: 'Partner Management',
+          description: 'Werkstätten, Gutachter und Dienstleister koordinieren.'
+        },
+        getQuote: {
+          title: 'Angebot anfragen',
+          description: 'Mehrstufige Anfrage für Versicherungs- und Fahrzeugdaten.'
         }
       }
     },
@@ -2133,6 +2168,10 @@ export const translations: Record<Lang, TranslationTree> = {
       registrationCardSubtitle: 'Launch the guided, AI-supported journey to onboard partners or customers with ease.',
       brokerPortal: 'Broker Portal',
       cards: {
+        mvp: {
+          title: 'MVP overview',
+          description: 'Quick access to the core MVP process steps.'
+        },
         claims: {
           title: 'Claims Manager',
           description: 'Claims handler cockpit for fast decisions, approvals, partner orchestration and AI insights.',
@@ -2173,6 +2212,32 @@ export const translations: Record<Lang, TranslationTree> = {
           title: 'Logistics',
           description: 'Manage transports, routes, coverage and incidents with real-time status and AI alerts.',
           cta: 'View'
+        }
+      }
+    },
+    mvp: {
+      title: 'MVP overview',
+      subtitle: 'All process steps at a glance — click through the MVP flow.',
+      steps: {
+        registration: {
+          title: 'Registration',
+          description: 'Capture the email address and start onboarding.'
+        },
+        claimProcess: {
+          title: 'Claim intake',
+          description: 'Chat-based intake with location, timestamps, and structured data.'
+        },
+        claimManager: {
+          title: 'Claim manager',
+          description: 'Manage approvals, documents, and partners in one cockpit.'
+        },
+        partnerManagement: {
+          title: 'Partner management',
+          description: 'Coordinate workshops, surveyors, and service partners.'
+        },
+        getQuote: {
+          title: 'Get a quote',
+          description: 'Multi-step request for insurance and vehicle details.'
         }
       }
     },

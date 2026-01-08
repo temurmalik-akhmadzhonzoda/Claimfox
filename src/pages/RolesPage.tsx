@@ -3,17 +3,17 @@ import { useNavigate } from 'react-router-dom'
 import Button from '@/components/ui/Button'
 import Card from '@/components/ui/Card'
 import Header from '@/components/ui/Header'
-import { useAuth } from '@/features/auth/AuthContext'
 import { useI18n } from '@/i18n/I18nContext'
 import HeroBlockBackground from '@/assets/images/hero_block_1.png'
 
 type RoleItem = {
-  key: 'claims' | 'claimProcess' | 'partner' | 'reporting' | 'fleetManagement' | 'logistics' | 'featureTree' | 'getQuote'
+  key: 'claims' | 'claimProcess' | 'partner' | 'reporting' | 'fleetManagement' | 'logistics' | 'featureTree' | 'getQuote' | 'mvp'
   route?: string
   ctaKey?: string
 }
 
 const ROLE_ITEMS: RoleItem[] = [
+  { key: 'mvp', route: '/mvp' },
   { key: 'claims', route: '/claim-manager', ctaKey: 'roles.cards.claims.cta' },
   { key: 'claimProcess', route: '/claim-process', ctaKey: 'roles.cards.claimProcess.cta' },
   { key: 'partner', route: '/partner-management' },
@@ -37,14 +37,8 @@ const descriptionStyle: React.CSSProperties = {
 }
 
 export default function RolesPage() {
-  const { logout } = useAuth()
   const navigate = useNavigate()
   const { t } = useI18n()
-
-  function handleLogout() {
-    logout()
-    navigate('/home', { replace: true })
-  }
 
   return (
     <section className="page" style={{ gap: '2rem' }}>
@@ -113,24 +107,6 @@ export default function RolesPage() {
                 </Card>
               )
             })}
-            <Card
-              title={t('roles.registrationCardTitle')}
-              interactive
-              onClick={() => navigate('/registration')}
-              variant="glass"
-              style={{ display: 'flex', flexDirection: 'column', height: '100%', padding: '1.25rem', minHeight: '200px' }}
-            >
-              <p style={descriptionStyle}>{t('roles.registrationCardSubtitle')}</p>
-              <Button
-                style={{ width: '100%', marginTop: 'auto', padding: '0.55rem 0.9rem', fontSize: '0.9rem', borderRadius: '999px' }}
-                onClick={(event) => {
-                  event.stopPropagation()
-                  navigate('/registration')
-                }}
-              >
-                {t('roles.view')}
-              </Button>
-            </Card>
             <Card
               title={t('roles.brokerPortal')}
               interactive
