@@ -20,6 +20,7 @@ type RoleItem = {
     | 'whitepaper'
     | 'intern'
     | 'brokerPortal'
+    | 'aiOnboarding'
   route?: string
   ctaKey?: string
 }
@@ -41,6 +42,7 @@ const PROCESS_ITEMS: RoleItem[] = [
 const INTERNAL_ITEMS: RoleItem[] = [
   { key: 'mvp', route: '/mvp' },
   { key: 'whitepaper', route: '/ai-whitepaper' },
+  { key: 'aiOnboarding', route: '/ai-onboarding' },
   { key: 'featureTree', route: '/feature-tree', ctaKey: 'roles.cards.featureTree.cta' },
   { key: 'intern', route: '/intern' }
 ]

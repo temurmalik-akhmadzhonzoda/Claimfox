@@ -186,6 +186,27 @@ type TranslationTree = {
       subtitle: string
     }
   }
+  aiOnboarding: {
+    kicker: string
+    title: string
+    subtitle: string
+    heroChip: string
+    summaryTitle: string
+    summarySubtitle: string
+    sections: {
+      intent: { title: string; body: string }
+      pipeline: { title: string; body: string }
+      guardrails: { title: string; body: string }
+      tools: { title: string; body: string }
+      rollout: { title: string; body: string }
+    }
+    cta: {
+      primary: string
+      secondary: string
+      title: string
+      subtitle: string
+    }
+  }
   getQuote: {
     title: string
     subtitle: string
@@ -895,6 +916,10 @@ export const translations: Record<Lang, TranslationTree> = {
           title: 'Intern',
           description: 'Passwortgeschützte Playbooks, Standards und technische Leitlinien.'
         },
+        aiOnboarding: {
+          title: 'KI Onboarding',
+          description: 'Entwickler-Perspektive für KI im Onboarding-Prozess.'
+        },
         reporting: {
           title: 'Fleet Reporting',
           description: 'Fuhrpark-Kennzahlen, KPIs und Schadenreports bereitstellen.'
@@ -1130,6 +1155,42 @@ export const translations: Record<Lang, TranslationTree> = {
         secondary: 'Expertenkontakt',
         title: 'Bereit für souveräne KI?',
         subtitle: 'Erhalten Sie das Whitepaper und sprechen Sie mit unserem Team über Ihren AI-Stack.'
+      }
+    },
+    aiOnboarding: {
+      kicker: 'KI Onboarding',
+      title: 'KI im Onboarding-Prozess',
+      subtitle: 'So nutzt das Entwicklerteam KI, um Datenqualität, Compliance und Geschwindigkeit zu optimieren.',
+      heroChip: 'Developer View',
+      summaryTitle: 'Überblick',
+      summarySubtitle: 'Technische Perspektive auf KI-gestütztes Onboarding.',
+      sections: {
+        intent: {
+          title: 'Zielbild & Nutzen',
+          body: 'KI unterstützt das Onboarding mit Validierungen, Vorschlägen und Priorisierungen — ohne autonome Entscheidungen.'
+        },
+        pipeline: {
+          title: 'Datenpipeline',
+          body: 'Eingaben werden validiert, pseudonymisiert und in strukturierte Features überführt, bevor Modelle bewertet werden.'
+        },
+        guardrails: {
+          title: 'Guardrails & Compliance',
+          body: 'Allowlists, Audit-Trails und Model Approvals sind fest im Code verankert.'
+        },
+        tools: {
+          title: 'Tooling & Monitoring',
+          body: 'Model Registry, Feature Store und Logging sorgen für Transparenz und Reproduzierbarkeit.'
+        },
+        rollout: {
+          title: 'Rollout-Strategie',
+          body: 'Feature Flags, Shadow Runs und Human-in-the-Loop sichern die Qualität im Live-Betrieb.'
+        }
+      },
+      cta: {
+        primary: 'Architektur ansehen',
+        secondary: 'Team kontaktieren',
+        title: 'Nächster Schritt',
+        subtitle: 'Diskutieren Sie den KI-Einsatz im Onboarding mit unserem Entwicklerteam.'
       }
     },
     featureTree: {
@@ -2572,6 +2633,10 @@ export const translations: Record<Lang, TranslationTree> = {
           title: 'Internal',
           description: 'Password-protected playbooks, standards, and technical guidelines.'
         },
+        aiOnboarding: {
+          title: 'AI Onboarding',
+          description: 'Developer view of AI usage within onboarding flows.'
+        },
         reporting: {
           title: 'Fleet Reporting',
           description: 'Deliver fleet KPIs, dashboards, and claims reporting.'
@@ -2807,6 +2872,42 @@ export const translations: Record<Lang, TranslationTree> = {
         secondary: 'Talk to an expert',
         title: 'Ready for sovereign AI?',
         subtitle: 'Get the whitepaper and discuss your AI stack with our team.'
+      }
+    },
+    aiOnboarding: {
+      kicker: 'AI Onboarding',
+      title: 'AI inside the onboarding flow',
+      subtitle: 'How the engineering team uses AI to improve data quality, compliance, and speed.',
+      heroChip: 'Developer View',
+      summaryTitle: 'Overview',
+      summarySubtitle: 'Technical perspective on AI-assisted onboarding.',
+      sections: {
+        intent: {
+          title: 'Intent & value',
+          body: 'AI supports onboarding with validation, suggestions, and prioritization — no autonomous decisions.'
+        },
+        pipeline: {
+          title: 'Data pipeline',
+          body: 'Inputs are validated, pseudonymized, and transformed into structured features before model scoring.'
+        },
+        guardrails: {
+          title: 'Guardrails & compliance',
+          body: 'Allowlists, audit trails, and model approvals are enforced in code.'
+        },
+        tools: {
+          title: 'Tooling & monitoring',
+          body: 'Model registry, feature store, and logging provide transparency and reproducibility.'
+        },
+        rollout: {
+          title: 'Rollout strategy',
+          body: 'Feature flags, shadow runs, and human-in-the-loop reviews secure quality in production.'
+        }
+      },
+      cta: {
+        primary: 'View architecture',
+        secondary: 'Contact team',
+        title: 'Next step',
+        subtitle: 'Discuss AI onboarding with our engineering team.'
       }
     },
     featureTree: {
