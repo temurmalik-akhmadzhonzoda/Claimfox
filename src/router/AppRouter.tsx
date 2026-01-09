@@ -31,6 +31,7 @@ import ProfileFleetPage from '@/pages/ProfileFleetPage'
 import ProfileLocationsPage from '@/pages/ProfileLocationsPage'
 import ProfileOnboardingPage from '@/pages/ProfileOnboardingPage'
 import AiWhitepaperPage from '@/pages/AiWhitepaperPage'
+import InternPage from '@/pages/InternPage'
 
 function NotFoundRedirect() {
   const { isAuthenticated } = useAuth()
@@ -78,6 +79,7 @@ export default function AppRouter() {
         <Route path="/profile/fleet" element={<ProfileFleetPage />} />
         <Route path="/profile/locations" element={<ProfileLocationsPage />} />
         <Route path="/ai-whitepaper" element={<AiWhitepaperPage />} />
+        <Route path="/intern" element={<InternPage />} />
       </Route>
       <Route path="*" element={<NotFoundRedirect />} />
     </Routes>
