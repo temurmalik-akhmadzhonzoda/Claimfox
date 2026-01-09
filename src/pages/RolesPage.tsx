@@ -7,7 +7,17 @@ import { useI18n } from '@/i18n/I18nContext'
 import HeroBlockBackground from '@/assets/images/hero_block_1.png'
 
 type RoleItem = {
-  key: 'claims' | 'claimProcess' | 'partner' | 'reporting' | 'fleetManagement' | 'logistics' | 'featureTree' | 'getQuote' | 'mvp'
+  key:
+    | 'claims'
+    | 'claimProcess'
+    | 'partner'
+    | 'reporting'
+    | 'fleetManagement'
+    | 'logistics'
+    | 'featureTree'
+    | 'getQuote'
+    | 'mvp'
+    | 'whitepaper'
   route?: string
   ctaKey?: string
 }
@@ -20,6 +30,7 @@ const ROLE_ITEMS: RoleItem[] = [
   { key: 'reporting', route: '/marketing' },
   { key: 'featureTree', route: '/feature-tree', ctaKey: 'roles.cards.featureTree.cta' },
   { key: 'getQuote', route: '/get-quote', ctaKey: 'roles.cards.getQuote.cta' },
+  { key: 'whitepaper', route: '/ai-whitepaper' },
   { key: 'logistics', route: '/logistics', ctaKey: 'roles.cards.logistics.cta' },
   { key: 'fleetManagement', route: '/fleet-management' }
 ] as const

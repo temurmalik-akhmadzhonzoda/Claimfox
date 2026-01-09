@@ -23,7 +23,7 @@ type TranslationTree = {
       registrationCardTitle: string
       registrationCardSubtitle: string
       brokerPortal: string
-    cards: Record<string, { title: string; description: string }>
+    cards: Record<string, { title: string; description: string; cta?: string }>
   }
   mvp: {
     title: string
@@ -140,6 +140,46 @@ type TranslationTree = {
     title: string
     subtitle: string
     placeholder: string
+  }
+  whitepaper: {
+    kicker: string
+    heroTitle: string
+    heroSubtitle: string
+    heroChip: string
+    summaryTitle: string
+    summarySubtitle: string
+    summaryBody: string
+    metrics: {
+      ai: string
+      sovereign: string
+      scalable: string
+    }
+    useCases: {
+      title: string
+      subtitle: string
+      risk: string
+      claim: string
+      fraud: string
+      docs: string
+      maintenance: string
+      route: string
+    }
+    sections: {
+      context: { title: string; body: string }
+      native: { title: string; body: string }
+      ecosystem: { title: string; body: string }
+      useCases: { title: string; body: string }
+      data: { title: string; body: string }
+      governance: { title: string; body: string }
+      investors: { title: string; body: string }
+      conclusion: { title: string; body: string }
+    }
+    cta: {
+      primary: string
+      secondary: string
+      title: string
+      subtitle: string
+    }
   }
   getQuote: {
     title: string
@@ -837,6 +877,10 @@ export const translations: Record<Lang, TranslationTree> = {
           description: 'Mehrstufige Anfrage für Frachtführerhaftung und Fahrzeugdaten.',
           cta: 'Öffnen'
         },
+        whitepaper: {
+          title: 'KI Whitepaper',
+          description: 'Native KI-Systeme auf souveräner IaaS für Versicherer, Logistiker & Investoren.'
+        },
         reporting: {
           title: 'Fleet Reporting',
           description: 'Fuhrpark-Kennzahlen, KPIs und Schadenreports bereitstellen.'
@@ -1008,6 +1052,71 @@ export const translations: Record<Lang, TranslationTree> = {
       title: 'Police kaufen',
       subtitle: 'Abschlussstrecke für Policen und Zahlungsinformationen.',
       placeholder: 'Hier entsteht die Kaufstrecke für Policen.'
+    },
+    whitepaper: {
+      kicker: 'Whitepaper',
+      heroTitle: 'Native KI-Systeme auf souveräner IaaS',
+      heroSubtitle: 'Zukunftssichere KI-Nutzung für Versicherer, Logistiker & Investoren.',
+      heroChip: 'Sovereign AI Layer',
+      summaryTitle: 'Executive Summary',
+      summarySubtitle: 'Strategische Einordnung für Entscheider.',
+      summaryBody:
+        'Dieses Whitepaper beschreibt den Einsatz nativer KI-Systeme auf einer souveränen IaaS-Plattform für Versicherer, Logistiker und Investoren. Ziel ist es, KI effizient, regulatorisch sicher und wirtschaftlich skalierbar einzusetzen.',
+      metrics: {
+        ai: 'Native KI-Stacks',
+        sovereign: 'Datenhoheit garantiert',
+        scalable: 'Skalierbar & auditierbar'
+      },
+      useCases: {
+        title: 'Zulässige KI-Anwendungsfälle',
+        subtitle: 'Fokus auf klare Use Cases mit messbarem Mehrwert und regulatorischer Absicherung.',
+        risk: 'Risiko-Scoring',
+        claim: 'Schadenprognose',
+        fraud: 'Betrugserkennung',
+        docs: 'Dokumentenanalyse',
+        maintenance: 'Predictive Maintenance',
+        route: 'Routenoptimierung'
+      },
+      sections: {
+        context: {
+          title: 'Ausgangslage',
+          body: 'KI wird zum zentralen Wettbewerbsfaktor in Versicherung und Logistik. Gleichzeitig steigen Anforderungen an Datenschutz, Transparenz und Haftung.'
+        },
+        native: {
+          title: 'Native KI auf IaaS',
+          body: 'Native KI-Systeme laufen vollständig innerhalb der Infrastruktur. Daten, Modelle und Entscheidungen bleiben unter Kontrolle der Betreiber und sind auditierbar.'
+        },
+        ecosystem: {
+          title: 'Beteiligte im Ökosystem',
+          body: 'Versicherer, Rückversicherer, Flottenbetreiber, Logistikunternehmen und Partner greifen rollenbasiert auf KI-Services zu.'
+        },
+        useCases: {
+          title: 'KI-Anwendungsfälle',
+          body: 'Risiko-Scoring, Schadenprognose, Betrugserkennung, Dokumentenanalyse, Predictive Maintenance und Routenoptimierung.'
+        },
+        data: {
+          title: 'Datenbasis',
+          body: 'Genutzt werden Fahrzeug-, Telematik-, Wartungs- und Schadendaten. Personenbezogene Daten nur pseudonymisiert und zweckgebunden.'
+        },
+        governance: {
+          title: 'Governance & Compliance',
+          body: 'Datensouveränität, Modellversionierung, Audit-Trails und Vorbereitung auf EU AI Act sind integraler Bestandteil.'
+        },
+        investors: {
+          title: 'Investorenperspektive',
+          body: 'Hohe Skalierbarkeit, regulatorischer Rückenwind und starke Kundenbindung machen dieses Modell wirtschaftlich attraktiv.'
+        },
+        conclusion: {
+          title: 'Fazit',
+          body: 'Native KI auf IaaS verbindet Innovation, Sicherheit und Skalierbarkeit und schafft nachhaltigen Mehrwert.'
+        }
+      },
+      cta: {
+        primary: 'Whitepaper anfordern',
+        secondary: 'Expertenkontakt',
+        title: 'Bereit für souveräne KI?',
+        subtitle: 'Erhalten Sie das Whitepaper und sprechen Sie mit unserem Team über Ihren AI-Stack.'
+      }
     },
     featureTree: {
       title: 'Feature Tree',
@@ -2436,6 +2545,10 @@ export const translations: Record<Lang, TranslationTree> = {
           description: 'Multi-step quote flow for carrier liability and vehicles.',
           cta: 'Open'
         },
+        whitepaper: {
+          title: 'AI Whitepaper',
+          description: 'Native AI systems on sovereign IaaS for insurers, logistics leaders, and investors.'
+        },
         reporting: {
           title: 'Fleet Reporting',
           description: 'Deliver fleet KPIs, dashboards, and claims reporting.'
@@ -2607,6 +2720,71 @@ export const translations: Record<Lang, TranslationTree> = {
       title: 'Purchase policy',
       subtitle: 'Checkout flow for policies and payment details.',
       placeholder: 'The policy purchase flow will be built here.'
+    },
+    whitepaper: {
+      kicker: 'Whitepaper',
+      heroTitle: 'Native AI systems on sovereign IaaS',
+      heroSubtitle: 'Future-proof AI adoption for insurers, logistics leaders, and investors.',
+      heroChip: 'Sovereign AI Layer',
+      summaryTitle: 'Executive summary',
+      summarySubtitle: 'Strategic context for decision makers.',
+      summaryBody:
+        'This whitepaper outlines native AI systems on a sovereign IaaS platform for insurers, logistics operators, and investors. The goal is to deploy AI efficiently, safely, and at scale while staying compliant.',
+      metrics: {
+        ai: 'Native AI stacks',
+        sovereign: 'Data sovereignty',
+        scalable: 'Scalable & auditable'
+      },
+      useCases: {
+        title: 'Permitted AI use cases',
+        subtitle: 'Focused on high-value, compliant applications with measurable impact.',
+        risk: 'Risk scoring',
+        claim: 'Claim forecasting',
+        fraud: 'Fraud detection',
+        docs: 'Document analysis',
+        maintenance: 'Predictive maintenance',
+        route: 'Route optimization'
+      },
+      sections: {
+        context: {
+          title: 'Current situation',
+          body: 'AI becomes the key competitive factor in insurance and logistics, while requirements for privacy, transparency, and liability rise.'
+        },
+        native: {
+          title: 'Native AI on IaaS',
+          body: 'Native AI runs fully inside the infrastructure. Data, models, and decisions stay controlled and auditable by operators.'
+        },
+        ecosystem: {
+          title: 'Ecosystem participants',
+          body: 'Insurers, reinsurers, fleet operators, logistics firms, and partners access AI services through role-based controls.'
+        },
+        useCases: {
+          title: 'AI use cases',
+          body: 'Risk scoring, claim forecasting, fraud detection, document analysis, predictive maintenance, and route optimization.'
+        },
+        data: {
+          title: 'Data foundation',
+          body: 'Vehicle, telematics, maintenance, and claims data are used. Personal data is pseudonymized and purpose-bound.'
+        },
+        governance: {
+          title: 'Governance & compliance',
+          body: 'Data sovereignty, model versioning, audit trails, and readiness for the EU AI Act are built in.'
+        },
+        investors: {
+          title: 'Investor view',
+          body: 'High scalability, regulatory tailwinds, and strong customer lock-in make this model attractive.'
+        },
+        conclusion: {
+          title: 'Conclusion',
+          body: 'Native AI on IaaS combines innovation, security, and scalability to create sustainable value.'
+        }
+      },
+      cta: {
+        primary: 'Request whitepaper',
+        secondary: 'Talk to an expert',
+        title: 'Ready for sovereign AI?',
+        subtitle: 'Get the whitepaper and discuss your AI stack with our team.'
+      }
     },
     featureTree: {
       title: 'Feature tree',

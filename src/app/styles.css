@@ -218,6 +218,255 @@ h6 {
     transform: translateY(0);
   }
 }
+
+@keyframes whitepaperFloat {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes whitepaperDrift {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(-14px, 10px, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.whitepaper-hero {
+  background: radial-gradient(circle at top left, #ffffff 10%, #f1f4fb 45%, #e9edf6 100%);
+  padding: clamp(2rem, 6vw, 4rem) clamp(1.5rem, 6vw, 5rem);
+  border-radius: 28px;
+  box-shadow: 0 40px 80px rgba(11, 24, 58, 0.18);
+  width: 100%;
+}
+
+.whitepaper-hero-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: center;
+}
+
+.whitepaper-hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.whitepaper-kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.whitepaper-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.1;
+  margin: 0;
+  color: var(--insurfox-orange);
+}
+
+.whitepaper-subtitle {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #334155;
+}
+
+.whitepaper-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.whitepaper-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.whitepaper-metric {
+  padding: 0.65rem 1rem;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  font-weight: 600;
+  color: #1f2a5f;
+  box-shadow: 0 18px 30px rgba(15, 23, 42, 0.08);
+}
+
+.whitepaper-hero-graphic {
+  position: relative;
+  min-height: 360px;
+  border-radius: 26px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+  padding: 2rem;
+}
+
+.whitepaper-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(0.5px);
+  opacity: 0.8;
+}
+
+.whitepaper-orb-primary {
+  width: 160px;
+  height: 160px;
+  background: rgba(212, 56, 13, 0.18);
+  top: -40px;
+  right: -40px;
+  animation: whitepaperFloat 6s ease-in-out infinite;
+}
+
+.whitepaper-orb-secondary {
+  width: 120px;
+  height: 120px;
+  background: rgba(15, 23, 42, 0.08);
+  bottom: -30px;
+  left: -20px;
+  animation: whitepaperDrift 7s ease-in-out infinite;
+}
+
+.whitepaper-network {
+  width: 100%;
+  height: 100%;
+}
+
+.whitepaper-chip {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  background: #0f172a;
+  color: #ffffff;
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.whitepaper-section-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.whitepaper-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.whitepaper-section h3 {
+  margin: 0;
+}
+
+.whitepaper-section p {
+  margin: 0;
+  color: #475569;
+  line-height: 1.6;
+}
+
+.whitepaper-section-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.whitepaper-section-number {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  background: rgba(212, 56, 13, 0.12);
+  color: #d4380d;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.whitepaper-usecases {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: center;
+  background: #ffffff;
+  border-radius: 24px;
+  border: 1px solid #e2e8f0;
+  padding: 2rem;
+}
+
+.whitepaper-usecases h2 {
+  margin: 0 0 0.5rem;
+}
+
+.whitepaper-usecases p {
+  margin: 0;
+  color: #475569;
+  line-height: 1.6;
+}
+
+.whitepaper-chip-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: flex-start;
+}
+
+.whitepaper-chip-outline {
+  border: 1px solid #dbe4f0;
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  font-weight: 600;
+  color: #1f2a5f;
+  background: #f8fafc;
+}
+
+.whitepaper-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #0f172a 0%, #1f2a5f 100%);
+  color: #ffffff;
+}
+
+.whitepaper-footer h2 {
+  margin: 0 0 0.6rem;
+  color: #ffffff;
+}
+
+.whitepaper-footer p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+@media (max-width: 920px) {
+  .whitepaper-hero-inner,
+  .whitepaper-usecases {
+    grid-template-columns: 1fr;
+  }
+}
 /* =========================
    GLOBAL BUTTON STYLES (Insurfox Orange)
    ========================= */
