@@ -881,6 +881,10 @@ export const translations: Record<Lang, TranslationTree> = {
           title: 'KI Whitepaper',
           description: 'Native KI-Systeme auf souveräner IaaS für Versicherer, Logistiker & Investoren.'
         },
+        intern: {
+          title: 'Intern',
+          description: 'Passwortgeschützte Playbooks, Standards und technische Leitlinien.'
+        },
         reporting: {
           title: 'Fleet Reporting',
           description: 'Fuhrpark-Kennzahlen, KPIs und Schadenreports bereitstellen.'
@@ -2548,6 +2552,10 @@ export const translations: Record<Lang, TranslationTree> = {
         whitepaper: {
           title: 'AI Whitepaper',
           description: 'Native AI systems on sovereign IaaS for insurers, logistics leaders, and investors.'
+        },
+        intern: {
+          title: 'Internal',
+          description: 'Password-protected playbooks, standards, and technical guidelines.'
         },
         reporting: {
           title: 'Fleet Reporting',

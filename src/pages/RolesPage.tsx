@@ -31,6 +31,7 @@ const ROLE_ITEMS: RoleItem[] = [
   { key: 'featureTree', route: '/feature-tree', ctaKey: 'roles.cards.featureTree.cta' },
   { key: 'getQuote', route: '/get-quote', ctaKey: 'roles.cards.getQuote.cta' },
   { key: 'whitepaper', route: '/ai-whitepaper' },
+  { key: 'intern', route: '/intern' },
   { key: 'logistics', route: '/logistics', ctaKey: 'roles.cards.logistics.cta' },
   { key: 'fleetManagement', route: '/fleet-management' }
 ] as const
