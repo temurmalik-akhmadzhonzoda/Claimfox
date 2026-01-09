@@ -200,8 +200,10 @@ export default function RolesPage() {
           {renderSection(t('roles.sections.processes'), PROCESS_ITEMS)}
           <div style={{ height: 2, background: '#1f2a5f', width: '100%', borderRadius: 999 }} />
           {renderSection(t('roles.sections.internal'), INTERNAL_ITEMS, true)}
-          {showAuth && (
-            <Card style={{ maxWidth: 520 }}>
+        </div>
+        {showAuth && (
+          <div className="modal-backdrop" onClick={() => setShowAuth(false)}>
+            <div className="modal-card" onClick={(event) => event.stopPropagation()}>
               <form onSubmit={handleAuthSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '0.9rem' }}>
                 <strong>{t('roles.internalAuth.title')}</strong>
                 <span style={{ color: '#64748b' }}>{t('roles.internalAuth.subtitle')}</span>
@@ -224,11 +226,16 @@ export default function RolesPage() {
                   />
                 </label>
                 {authError && <span className="error-text">{authError}</span>}
-                <Button type="submit">{t('roles.internalAuth.submit')}</Button>
+                <div style={{ display: 'flex', gap: '0.6rem', justifyContent: 'flex-end' }}>
+                  <Button type="button" variant="secondary" onClick={() => setShowAuth(false)}>
+                    {t('profile.actions.back')}
+                  </Button>
+                  <Button type="submit">{t('roles.internalAuth.submit')}</Button>
+                </div>
               </form>
-            </Card>
-          )}
-        </div>
+            </div>
+          </div>
+        )}
       </section>
   )
 }
