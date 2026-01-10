@@ -9,24 +9,47 @@ export default function RegulatoryGovernancePage() {
   const { lang } = useI18n()
   const [activeSlide, setActiveSlide] = useState(0)
   const deck = useMemo(() => translations[lang]?.regulatoryDeck ?? translations.en.regulatoryDeck, [lang])
-  const slides = useMemo(
-    () =>
-      Array.from({ length: 18 }, (_, index) => {
-        const slide = deck.slides[String(index + 1)]
-        return {
-          title: slide.title,
-          bullets: slide.bullets,
-          footer: slide.footer
-        }
-      }),
-    [deck]
-  )
+  const slides = useMemo(() => {
+    const slide = (index: number) => deck.slides[String(index)]
+    return [
+      {
+        title: `${slide(1).title} / ${slide(2).title}`,
+        bullets: [...slide(1).bullets, ...slide(2).bullets, ...slide(3).bullets],
+        footer: slide(1).footer
+      },
+      {
+        title: `${slide(4).title} / ${slide(5).title}`,
+        bullets: [...slide(4).bullets, ...slide(5).bullets, ...slide(6).bullets]
+      },
+      {
+        title: `${slide(7).title} / ${slide(8).title}`,
+        bullets: [...slide(7).bullets, ...slide(8).bullets, ...slide(9).bullets]
+      },
+      {
+        title: `${slide(10).title} / ${slide(11).title}`,
+        bullets: [...slide(10).bullets, ...slide(11).bullets, ...slide(12).bullets],
+        footer: slide(11).footer
+      },
+      {
+        title: `${slide(13).title} / ${slide(14).title}`,
+        bullets: [...slide(13).bullets, ...slide(14).bullets, ...slide(15).bullets]
+      },
+      {
+        title: `${slide(16).title} / ${slide(17).title}`,
+        bullets: [...slide(16).bullets, ...slide(17).bullets, ...slide(18).bullets]
+      }
+    ]
+  }, [deck])
 
   const totalSlides = slides.length
 
   function goToSlide(nextIndex: number) {
     setActiveSlide(Math.max(0, Math.min(nextIndex, totalSlides - 1)))
   }
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+  }, [])
 
   useEffect(() => {
     function handleKeyDown(event: KeyboardEvent) {

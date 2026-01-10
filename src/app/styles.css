@@ -478,7 +478,7 @@ h6 {
 .regulatory-slider {
   height: 100%;
   position: relative;
-  padding-bottom: 64px;
+  padding-bottom: 72px;
   overflow: hidden;
 }
 
@@ -494,7 +494,7 @@ h6 {
 }
 
 .regulatory-layout {
-  height: 100%;
+  height: calc(100% - 32px);
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
   gap: 1.6rem;
@@ -503,7 +503,7 @@ h6 {
 .regulatory-left-card {
   background: #ffffff;
   border-radius: 24px;
-  padding: clamp(1.5rem, 3vw, 2.5rem);
+  padding: clamp(1.2rem, 2.6vw, 2rem);
   box-shadow: 0 24px 50px rgba(15, 23, 42, 0.12);
   border: 1px solid rgba(15, 23, 42, 0.08);
   height: 100%;
@@ -539,8 +539,16 @@ h6 {
 
 .regulatory-slide-content h1 {
   margin: 0;
-  font-size: clamp(1.8rem, 2.6vw, 2.6rem);
+  font-size: clamp(1.6rem, 2.4vw, 2.4rem);
   color: #0f172a;
+}
+
+.regulatory-slide-content ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: #475569;
+  line-height: 1.7;
+  font-size: 1.02rem;
 }
 
 .regulatory-section {
@@ -589,7 +597,7 @@ h6 {
 .regulatory-highlight-card {
   background: #ffffff;
   border-radius: 24px;
-  padding: clamp(1.3rem, 2.6vw, 2rem);
+  padding: clamp(1.1rem, 2.2vw, 1.8rem);
   box-shadow: 0 22px 44px rgba(15, 23, 42, 0.1);
   border: 1px solid rgba(15, 23, 42, 0.08);
   display: grid;
@@ -609,7 +617,7 @@ h6 {
   padding-left: 1.1rem;
   color: #475569;
   line-height: 1.7;
-  font-size: 1rem;
+  font-size: 0.98rem;
 }
 
 .regulatory-kicker {
@@ -623,7 +631,7 @@ h6 {
 .regulatory-nav {
   position: absolute;
   left: 50%;
-  bottom: 18px;
+  bottom: 12px;
   transform: translateX(-50%);
   display: flex;
   align-items: center;
