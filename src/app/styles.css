@@ -639,6 +639,28 @@ h6 {
   gap: 1.5rem;
 }
 
+.framework-header-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.framework-download {
+  border: none;
+  background: #ffffff;
+  border-radius: 999px;
+  padding: 0.55rem 1rem;
+  font-weight: 600;
+  color: #0f172a;
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.12);
+  cursor: pointer;
+}
+
+.framework-download:hover {
+  box-shadow: 0 14px 28px rgba(15, 23, 42, 0.18);
+}
+
 .regulatory-framework-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -664,8 +686,19 @@ h6 {
 }
 
 @media (max-width: 960px) {
+  .framework-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
   .regulatory-framework-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media print {
+  .framework-download {
+    display: none;
   }
 }
 

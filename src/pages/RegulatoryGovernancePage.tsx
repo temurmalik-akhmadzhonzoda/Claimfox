@@ -310,11 +310,20 @@ export default function RegulatoryGovernancePage() {
   return (
     <InternAuthGate>
       <section className="page regulatory-framework-page">
-        <Header
-          title="Regulatory & AI Governance Framework"
-          subtitle={lang === 'en' ? 'Regulatory overview for supervision, audits, and governance' : 'Regulatorische Übersicht für Aufsicht, Audits und Governance'}
-          subtitleColor="#65748b"
-        />
+        <div className="framework-header-row">
+          <Header
+            title="Regulatory & AI Governance Framework"
+            subtitle={lang === 'en' ? 'Regulatory overview for supervision, audits, and governance' : 'Regulatorische Übersicht für Aufsicht, Audits und Governance'}
+            subtitleColor="#65748b"
+          />
+          <button
+            type="button"
+            className="framework-download"
+            onClick={() => window.print()}
+          >
+            {lang === 'en' ? 'Download PDF' : 'PDF herunterladen'}
+          </button>
+        </div>
         <div className="regulatory-framework-grid">
           <div className="regulatory-framework-column">
             {sections.slice(0, 7).map((section) => (
