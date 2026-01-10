@@ -779,17 +779,22 @@ h6 {
 }
 
 .deck-dot.active {
-  background: #ffffff;
-  border-color: #ffffff;
+  background: var(--insurfox-orange);
+  border-color: var(--insurfox-orange);
 }
 
-.deck-nav button {
-  padding: 2px 6px;
-  font-size: 0.6rem;
-  background: transparent;
-  border-radius: 999px;
-  box-shadow: none;
+.deck-arrow {
+  border: none;
+  background: none;
   color: #ffffff;
+  font-size: 0.9rem;
+  padding: 0;
+  cursor: pointer;
+}
+
+.deck-arrow:disabled {
+  opacity: 0.3;
+  cursor: default;
 }
 
 @media (prefers-reduced-motion: reduce) {

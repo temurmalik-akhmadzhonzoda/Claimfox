@@ -349,9 +349,15 @@ export default function InsurfoxNativeAiPage() {
               ))}
             </div>
             <div className="deck-nav">
-              <Button variant="secondary" onClick={() => goToSlide(activeSlide - 1)} disabled={activeSlide === 0}>
+              <button
+                type="button"
+                className="deck-arrow"
+                onClick={() => goToSlide(activeSlide - 1)}
+                disabled={activeSlide === 0}
+                aria-label="Previous slide"
+              >
                 ←
-              </Button>
+              </button>
               <div className="deck-dots">
                 {Array.from({ length: SLIDE_TOTAL }).map((_, index) => (
                   <button
@@ -363,9 +369,15 @@ export default function InsurfoxNativeAiPage() {
                   />
                 ))}
               </div>
-              <Button variant="secondary" onClick={() => goToSlide(activeSlide + 1)} disabled={activeSlide === SLIDE_TOTAL - 1}>
+              <button
+                type="button"
+                className="deck-arrow"
+                onClick={() => goToSlide(activeSlide + 1)}
+                disabled={activeSlide === SLIDE_TOTAL - 1}
+                aria-label="Next slide"
+              >
                 →
-              </Button>
+              </button>
             </div>
           </div>
         </div>
