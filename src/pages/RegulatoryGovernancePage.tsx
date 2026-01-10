@@ -4,6 +4,7 @@ import Card from '@/components/ui/Card'
 import InternAuthGate from '@/components/InternAuthGate'
 import { useI18n } from '@/i18n/I18nContext'
 import type { Lang } from '@/i18n/translations'
+import InsurfoxLogo from '@/assets/logos/Insurfox_Logo_colored_dark.png'
 
 type SectionBlock = {
   id: string
@@ -325,6 +326,9 @@ export default function RegulatoryGovernancePage() {
           </button>
         </div>
         <div className="framework-print">
+          <div className="framework-print-header">
+            <img src={InsurfoxLogo} alt="Insurfox" />
+          </div>
           <h1>Regulatory & AI Governance Framework</h1>
           {sections.map((section) => (
             <div key={section.id} className="framework-print-section">

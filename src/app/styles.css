@@ -671,6 +671,17 @@ h6 {
   color: #0f172a;
 }
 
+.framework-print-header {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 1rem;
+}
+
+.framework-print-header img {
+  height: 28px;
+  width: auto;
+}
+
 .framework-print-section {
   margin-bottom: 1rem;
 }
@@ -678,7 +689,7 @@ h6 {
 .framework-print-section h2 {
   margin: 0 0 0.4rem;
   font-size: 1rem;
-  color: #0f172a;
+  color: var(--insurfox-orange);
 }
 
 .framework-print-section p,
@@ -743,7 +754,8 @@ h6 {
   }
 
   .framework-header-row,
-  .regulatory-framework-grid {
+  .regulatory-framework-grid,
+  header {
     display: none;
   }
 
@@ -756,6 +768,7 @@ h6 {
     margin: 0;
     padding: 0;
     gap: 0;
+    background: none;
   }
 }
 
