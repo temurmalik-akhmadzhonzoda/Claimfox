@@ -247,6 +247,7 @@ type TranslationTree = {
       docType: string
       country: string
       audit: string
+      ocr: string
       notice: string
     }
     status: {
@@ -261,6 +262,25 @@ type TranslationTree = {
       next: string
       verify: string
       restart: string
+    }
+    ocr: {
+      title: string
+      name: string
+      number: string
+      dob: string
+      expiry: string
+      nationality: string
+    }
+    camera: {
+      capture: string
+      take: string
+      guide: string
+      error: string
+      title: {
+        front: string
+        back: string
+        selfie: string
+      }
     }
   }
   aiOnboarding: {
@@ -1319,7 +1339,8 @@ export const translations: Record<Lang, TranslationTree> = {
         title: 'Dokument scannen',
         subtitle: 'Laden Sie ein Foto der Vorder- und Rückseite hoch.',
         front: 'Vorderseite',
-        back: 'Rückseite'
+        back: 'Rückseite',
+        placeholder: 'Noch kein Bild'
       },
       verify: {
         title: 'Dokument verifizieren',
@@ -1332,7 +1353,8 @@ export const translations: Record<Lang, TranslationTree> = {
       selfie: {
         title: 'Selfie aufnehmen',
         subtitle: 'Nehmen Sie ein Selfie auf, um den Abgleich zu starten.',
-        capture: 'Selfie-Datei'
+        capture: 'Selfie-Datei',
+        overlay: 'Gesicht in die Silhouette setzen'
       },
       summary: {
         title: 'Ergebnis',
@@ -1341,6 +1363,7 @@ export const translations: Record<Lang, TranslationTree> = {
         docType: 'Dokumenttyp',
         country: 'Ausstellendes Land',
         audit: 'Audit-ID',
+        ocr: 'OCR-Auslesung',
         notice: 'Alle Prüfergebnisse wurden protokolliert. Bei Misserfolg wenden Sie sich an den Support.'
       },
       status: {
@@ -1355,6 +1378,25 @@ export const translations: Record<Lang, TranslationTree> = {
         next: 'Weiter',
         verify: 'Jetzt prüfen',
         restart: 'Neu starten'
+      },
+      ocr: {
+        title: 'OCR-Auslesung',
+        name: 'Name',
+        number: 'Dokumentnummer',
+        dob: 'Geburtsdatum',
+        expiry: 'Ablaufdatum',
+        nationality: 'Nationalität'
+      },
+      camera: {
+        capture: 'Kamera öffnen',
+        take: 'Foto aufnehmen',
+        guide: 'Dokument innerhalb des Rahmens ausrichten',
+        error: 'Kamera konnte nicht gestartet werden.',
+        title: {
+          front: 'Vorderseite erfassen',
+          back: 'Rückseite erfassen',
+          selfie: 'Selfie aufnehmen'
+        }
       }
     },
     featureTree: {
@@ -3122,7 +3164,8 @@ export const translations: Record<Lang, TranslationTree> = {
         title: 'Scan document',
         subtitle: 'Upload a photo of the front and back.',
         front: 'Front side',
-        back: 'Back side'
+        back: 'Back side',
+        placeholder: 'No image yet'
       },
       verify: {
         title: 'Verify document',
@@ -3135,7 +3178,8 @@ export const translations: Record<Lang, TranslationTree> = {
       selfie: {
         title: 'Capture selfie',
         subtitle: 'Take a selfie to match against the document.',
-        capture: 'Selfie file'
+        capture: 'Selfie file',
+        overlay: 'Align your face inside the frame'
       },
       summary: {
         title: 'Result',
@@ -3144,6 +3188,7 @@ export const translations: Record<Lang, TranslationTree> = {
         docType: 'Document type',
         country: 'Issuing country',
         audit: 'Audit ID',
+        ocr: 'OCR extraction',
         notice: 'All verification signals were logged. If it fails, contact support.'
       },
       status: {
@@ -3158,6 +3203,25 @@ export const translations: Record<Lang, TranslationTree> = {
         next: 'Next',
         verify: 'Run verification',
         restart: 'Restart'
+      },
+      ocr: {
+        title: 'OCR extraction',
+        name: 'Name',
+        number: 'Document number',
+        dob: 'Date of birth',
+        expiry: 'Expiry date',
+        nationality: 'Nationality'
+      },
+      camera: {
+        capture: 'Open camera',
+        take: 'Capture photo',
+        guide: 'Align the document inside the frame',
+        error: 'Camera could not be started.',
+        title: {
+          front: 'Capture front side',
+          back: 'Capture back side',
+          selfie: 'Capture selfie'
+        }
       }
     },
     featureTree: {

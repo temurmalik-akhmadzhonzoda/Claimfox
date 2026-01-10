@@ -1,10 +1,11 @@
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import Header from '@/components/ui/Header'
 import Card from '@/components/ui/Card'
 import Button from '@/components/ui/Button'
 import { useI18n } from '@/i18n/I18nContext'
 
 type VerificationStatus = 'idle' | 'success' | 'failed'
+type CaptureTarget = 'front' | 'back' | 'selfie' | null
 
 const steps = [
   'identification.steps.start',
@@ -23,12 +24,21 @@ export default function UserIdentificationPage() {
   const [frontFile, setFrontFile] = useState<File | null>(null)
   const [backFile, setBackFile] = useState<File | null>(null)
   const [selfieFile, setSelfieFile] = useState<File | null>(null)
+  const [frontImage, setFrontImage] = useState<string | null>(null)
+  const [backImage, setBackImage] = useState<string | null>(null)
+  const [selfieImage, setSelfieImage] = useState<string | null>(null)
+  const [captureTarget, setCaptureTarget] = useState<CaptureTarget>(null)
+  const [cameraError, setCameraError] = useState('')
+  const [ocrData, setOcrData] = useState<Record<string, string> | null>(null)
   const [verificationStatus, setVerificationStatus] = useState<VerificationStatus>('idle')
   const [auditId] = useState(() => `ID-${Math.random().toString(36).slice(2, 8).toUpperCase()}`)
+  const videoRef = useRef<HTMLVideoElement | null>(null)
+  const canvasRef = useRef<HTMLCanvasElement | null>(null)
+  const streamRef = useRef<MediaStream | null>(null)
 
   const progress = Math.round(((activeStep + 1) / steps.length) * 100)
-  const isDocComplete = docType && issuingCountry && frontFile && backFile
-  const isSelfieComplete = Boolean(selfieFile)
+  const isDocComplete = docType && issuingCountry && (frontImage || frontFile) && (backImage || backFile)
+  const isSelfieComplete = Boolean(selfieImage || selfieFile)
 
   const overallStatus = useMemo(() => {
     if (verificationStatus === 'failed') return 'failed'
@@ -51,6 +61,64 @@ export default function UserIdentificationPage() {
       setVerificationStatus('failed')
     }
   }
+
+  async function startCamera(target: CaptureTarget) {
+    setCameraError('')
+    setCaptureTarget(target)
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: target === 'selfie' ? 'user' : 'environment' },
+        audio: false
+      })
+      streamRef.current = stream
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream
+      }
+    } catch (error) {
+      setCameraError(t('identification.camera.error'))
+    }
+  }
+
+  function stopCamera() {
+    streamRef.current?.getTracks().forEach((track) => track.stop())
+    streamRef.current = null
+    setCaptureTarget(null)
+  }
+
+  function captureFrame() {
+    if (!videoRef.current || !canvasRef.current) return
+    const video = videoRef.current
+    const canvas = canvasRef.current
+    canvas.width = video.videoWidth
+    canvas.height = video.videoHeight
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
+    const dataUrl = canvas.toDataURL('image/jpeg', 0.9)
+    if (captureTarget === 'front') {
+      setFrontImage(dataUrl)
+      setOcrData({
+        docNumber: `ID${Math.random().toString(36).slice(2, 8).toUpperCase()}`,
+        name: 'MAX MUSTERMANN',
+        dob: '12.05.1990',
+        expiry: '12.05.2030',
+        nationality: issuingCountry || 'DE'
+      })
+    }
+    if (captureTarget === 'back') {
+      setBackImage(dataUrl)
+    }
+    if (captureTarget === 'selfie') {
+      setSelfieImage(dataUrl)
+    }
+    stopCamera()
+  }
+
+  useEffect(() => {
+    return () => {
+      stopCamera()
+    }
+  }, [])
 
   return (
     <section className="page" style={{ gap: '2rem' }}>
@@ -119,6 +187,26 @@ export default function UserIdentificationPage() {
           <Card>
             <h2>{t('identification.capture.title')}</h2>
             <p style={{ color: '#475569' }}>{t('identification.capture.subtitle')}</p>
+            <div style={{ display: 'grid', gap: '1rem', marginTop: '1rem', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))' }}>
+              <div className="id-preview-card">
+                <span>{t('identification.capture.front')}</span>
+                {frontImage ? <img src={frontImage} alt="" /> : <div className="id-placeholder">{t('identification.capture.placeholder')}</div>}
+                <div className="id-actions">
+                  <Button variant="secondary" onClick={() => startCamera('front')}>
+                    {t('identification.camera.capture')}
+                  </Button>
+                </div>
+              </div>
+              <div className="id-preview-card">
+                <span>{t('identification.capture.back')}</span>
+                {backImage ? <img src={backImage} alt="" /> : <div className="id-placeholder">{t('identification.capture.placeholder')}</div>}
+                <div className="id-actions">
+                  <Button variant="secondary" onClick={() => startCamera('back')}>
+                    {t('identification.camera.capture')}
+                  </Button>
+                </div>
+              </div>
+            </div>
             <div style={{ display: 'grid', gap: '1rem', marginTop: '1rem', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))' }}>
               <label className="form-field">
                 {t('identification.capture.front')}
@@ -168,6 +256,31 @@ export default function UserIdentificationPage() {
                 <strong>{verificationStatus === 'success' ? t('identification.status.ok') : t('identification.status.pending')}</strong>
               </div>
             </div>
+            {ocrData && (
+              <div className="ocr-card">
+                <strong>{t('identification.ocr.title')}</strong>
+                <div>
+                  <span>{t('identification.ocr.name')}</span>
+                  <strong>{ocrData.name}</strong>
+                </div>
+                <div>
+                  <span>{t('identification.ocr.number')}</span>
+                  <strong>{ocrData.docNumber}</strong>
+                </div>
+                <div>
+                  <span>{t('identification.ocr.dob')}</span>
+                  <strong>{ocrData.dob}</strong>
+                </div>
+                <div>
+                  <span>{t('identification.ocr.expiry')}</span>
+                  <strong>{ocrData.expiry}</strong>
+                </div>
+                <div>
+                  <span>{t('identification.ocr.nationality')}</span>
+                  <strong>{ocrData.nationality}</strong>
+                </div>
+              </div>
+            )}
             {verificationStatus === 'failed' && (
               <p style={{ color: '#b42318', fontWeight: 600 }}>{t('identification.verify.failed')}</p>
             )}
@@ -187,6 +300,10 @@ export default function UserIdentificationPage() {
           <Card>
             <h2>{t('identification.selfie.title')}</h2>
             <p style={{ color: '#475569' }}>{t('identification.selfie.subtitle')}</p>
+            <div className="selfie-frame">
+              {selfieImage ? <img src={selfieImage} alt="" /> : <div className="selfie-placeholder" />}
+              <div className="selfie-overlay">{t('identification.selfie.overlay')}</div>
+            </div>
             <label className="form-field">
               {t('identification.selfie.capture')}
               <input type="file" accept="image/*" onChange={(event) => setSelfieFile(event.target.files?.[0] ?? null)} />
@@ -214,18 +331,24 @@ export default function UserIdentificationPage() {
                   {overallStatus === 'success' ? t('identification.status.success') : t('identification.status.failed')}
                 </strong>
               </div>
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <span>{t('identification.summary.docType')}</span>
+              <strong>{docType || '—'}</strong>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <span>{t('identification.summary.country')}</span>
+              <strong>{issuingCountry || '—'}</strong>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <span>{t('identification.summary.audit')}</span>
+              <strong>{auditId}</strong>
+            </div>
+            {ocrData && (
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span>{t('identification.summary.docType')}</span>
-                <strong>{docType || '—'}</strong>
+                <span>{t('identification.summary.ocr')}</span>
+                <strong>{t('identification.status.ok')}</strong>
               </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span>{t('identification.summary.country')}</span>
-                <strong>{issuingCountry || '—'}</strong>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span>{t('identification.summary.audit')}</span>
-                <strong>{auditId}</strong>
-              </div>
+            )}
             </div>
             <p style={{ marginTop: '1rem', color: '#475569' }}>{t('identification.summary.notice')}</p>
             <div style={{ display: 'flex', gap: '0.6rem', marginTop: '1.5rem' }}>
@@ -234,6 +357,43 @@ export default function UserIdentificationPage() {
               </Button>
             </div>
           </Card>
+        )}
+
+        {captureTarget && (
+          <div className="modal-backdrop" onClick={stopCamera}>
+            <div className="modal-card id-camera-modal" onClick={(event) => event.stopPropagation()}>
+              <div className="id-camera-header">
+                <strong>{t(`identification.camera.title.${captureTarget}`)}</strong>
+                <Button variant="secondary" onClick={stopCamera}>
+                  {t('identification.actions.back')}
+                </Button>
+              </div>
+              {cameraError ? (
+                <p style={{ color: '#b42318' }}>{cameraError}</p>
+              ) : (
+                <div className="id-camera-view">
+                  <video ref={videoRef} autoPlay playsInline />
+                  {captureTarget !== 'selfie' && (
+                    <div className="id-camera-overlay">
+                      <div className="id-camera-frame" />
+                      <div className="id-camera-line" />
+                      <p>{t('identification.camera.guide')}</p>
+                    </div>
+                  )}
+                  {captureTarget === 'selfie' && (
+                    <div className="selfie-overlay-layer">
+                      <div className="selfie-cutout" />
+                      <p>{t('identification.selfie.overlay')}</p>
+                    </div>
+                  )}
+                </div>
+              )}
+              <div className="id-camera-actions">
+                <Button onClick={captureFrame}>{t('identification.camera.take')}</Button>
+              </div>
+              <canvas ref={canvasRef} style={{ display: 'none' }} />
+            </div>
+          </div>
         )}
       </div>
     </section>
