@@ -28,7 +28,6 @@ type SlideContent = {
   note?: string
 }
 
-const COVER_TITLE = 'INSURFOX AI IaaS'
 const DECK_TITLE = 'INSURFOX AI IaaS'
 const DECK_SUBTITLE = 'AI & Data Governance Framework'
 
@@ -39,36 +38,26 @@ const CONTENT_SLIDES: SlideContent[] = [
       'Insurfox is an AI-native Insurance IaaS enabling governable AI in regulated markets.',
       'AI & Data Governance is embedded into the architecture (not policy-only).',
       'No external AI providers; no data/model exfiltration.',
-      'Full control over data, models, and decision support.'
-    ],
-    footer: 'Governance reduces risk and increases scalability.'
+      'Full control over data, models, and decision support.',
+      'Governance reduces risk and increases scalability.'
+    ]
   },
   {
-    title: 'Market Reality',
+    title: 'Market Reality & Core Assumption',
     bullets: [
       'Rising AI adoption in underwriting, claims, pricing.',
       'Increasing regulatory requirements (GDPR/DSGVO, BaFin, EU AI Act).',
-      'External platform dependence increases operational and compliance risk.'
-    ]
-  },
-  {
-    title: 'Insurfox Core Assumption',
-    paragraphs: [
+      'External platform dependence increases operational and compliance risk.',
       'AI is not a feature; it is a control-relevant component of insurance value creation.',
-      'Therefore governance must be enforced technically, not retrofitted organizationally.'
+      'Governance must be enforced technically, not retrofitted organizationally.'
     ]
   },
   {
-    title: 'Insurfox Positioning',
+    title: 'Insurfox Positioning & Governance Definition',
     bullets: [
       'End-to-end insurance processes on one platform.',
       'Native AI embedded into process execution.',
-      'Clear separation of system, AI decision support, and insurer decision authority.'
-    ]
-  },
-  {
-    title: 'Definition: AI & Data Governance',
-    bullets: [
+      'Clear separation of system, AI decision support, and insurer decision authority.',
       'Controlled data flows and purpose binding.',
       'Versioned, auditable model lifecycle.',
       'Role-based access and accountability.',
@@ -83,49 +72,34 @@ const CONTENT_SLIDES: SlideContent[] = [
     diagram: 'layers'
   },
   {
-    title: 'Native AI as Governance Prerequisite',
+    title: 'Native AI & Role of AI',
     bullets: [
       'Internal training + inference environments.',
       'Model registry + versioning.',
-      'No external AI APIs or third-party model hosting.'
+      'No external AI APIs or third-party model hosting.',
+      'Risk indicators and pricing recommendations.',
+      'Fraud/anomaly detection and portfolio analytics.',
+      'No legally binding automated decisions.'
     ],
     diagram: 'flow'
   },
   {
-    title: 'Role of AI',
-    bullets: [
-      'Risk indicators and pricing recommendations.',
-      'Fraud/anomaly detection.',
-      'Portfolio and process analytics.',
-      'No legally binding automated decisions.'
-    ]
-  },
-  {
-    title: 'Sensitive Data: Designed for Control',
-    bullets: [
-      'Health data, biometric data, location/mobility data can be processed when lawful.',
-      'Processing is purpose-bound, access-restricted, and fully logged.'
-    ]
-  },
-  {
     title: 'Sensitive Data Governance',
     bullets: [
-      'Segregated data zones.',
-      'Separate restricted models and pipelines.',
+      'Health data, biometric data, location/mobility data can be processed when lawful.',
+      'Processing is purpose-bound, access-restricted, and fully logged.',
+      'Segregated data zones and restricted pipelines.',
       'Mandatory human review.'
     ],
     diagram: 'zone'
   },
   {
-    title: 'Data Sovereignty & Tenant Isolation',
+    title: 'Data Sovereignty & Interfaces',
     bullets: [
       'Insurer retains data ownership and governance.',
       'Tenant isolation at infrastructure level.',
       'No cross-tenant learning or model sharing.'
-    ]
-  },
-  {
-    title: 'Interfaces & Integration',
+    ],
     twoLists: {
       leftTitle: 'Inbound',
       leftItems: ['Policies', 'Claims history', 'Pricing/tariff parameters', 'Optional real-time signals'],
@@ -135,16 +109,13 @@ const CONTENT_SLIDES: SlideContent[] = [
     diagram: 'matrix'
   },
   {
-    title: 'Historical Data Requirements',
+    title: 'Historical Data & Governance Advantage',
     twoLists: {
       leftTitle: 'Required',
       leftItems: ['Policy/contract data', 'Claims history', 'Claims handling/process data', 'Object/risk data'],
       rightTitle: 'Optional',
       rightItems: ['Telematics', 'Process times', 'Health programs', 'Status/event streams']
-    }
-  },
-  {
-    title: 'Governance as Economic Advantage',
+    },
     bullets: [
       'Lower regulatory and operational risk.',
       'Higher partner and supervisory trust.',
@@ -162,16 +133,13 @@ const CONTENT_SLIDES: SlideContent[] = [
     }
   },
   {
-    title: 'Summary',
+    title: 'Summary & Closing',
     bullets: [
       'AI-native Insurance IaaS',
       'Governance-by-design architecture',
-      'Safe innovation with controlled sensitive data use'
+      'Safe innovation with controlled sensitive data use',
+      'Insurfox AI IaaS provides AI & Data Governance as infrastructure for regulated insurance markets.'
     ]
-  },
-  {
-    title: 'Closing',
-    paragraphs: ['Insurfox AI IaaS provides AI & Data Governance as infrastructure for regulated insurance markets.']
   }
 ]
 
@@ -181,7 +149,6 @@ function CoverSlide({ isActive }: { isActive: boolean }) {
   return (
     <div className={`deck-slide deck-cover${isActive ? ' is-active' : ''}`}>
       <div className="deck-cover-bg" style={{ backgroundImage: `url(${CoverImage})` }} />
-      <div className="deck-cover-title">{COVER_TITLE}</div>
     </div>
   )
 }
