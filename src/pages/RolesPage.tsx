@@ -24,6 +24,9 @@ type RoleItem = {
     | 'identification'
     | 'regulatoryGovernance'
     | 'auditAppendix'
+    | 'registration'
+    | 'profile'
+    | 'policyPurchase'
   route?: string
   ctaKey?: string
 }
@@ -38,10 +41,13 @@ const OVERVIEW_ITEMS: RoleItem[] = [
 ]
 
 const PROCESS_ITEMS: RoleItem[] = [
-  { key: 'claimProcess', route: '/claim-process', ctaKey: 'roles.cards.claimProcess.cta' },
-  { key: 'getQuote', route: '/get-quote', ctaKey: 'roles.cards.getQuote.cta' },
+  { key: 'registration', route: '/registration' },
   { key: 'onboarding', route: '/profile/onboarding' },
-  { key: 'identification', route: '/user-identification' }
+  { key: 'profile', route: '/profile' },
+  { key: 'identification', route: '/user-identification' },
+  { key: 'getQuote', route: '/get-quote', ctaKey: 'roles.cards.getQuote.cta' },
+  { key: 'policyPurchase', route: '/policy-purchase' },
+  { key: 'claimProcess', route: '/claim-process', ctaKey: 'roles.cards.claimProcess.cta' }
 ]
 
 const GOVERNANCE_ITEMS: RoleItem[] = [
@@ -135,6 +141,7 @@ export default function RolesPage() {
         variant="glass"
         interactive={hasRoute}
         onClick={handleClick}
+        className="card roles-card"
         style={{ display: 'flex', flexDirection: 'column', height: '100%', padding: '0.85rem', minHeight: '150px' }}
       >
         <p style={descriptionStyle}>{t(descriptionKey)}</p>

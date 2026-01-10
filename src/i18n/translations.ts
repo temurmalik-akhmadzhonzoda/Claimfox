@@ -1013,6 +1013,14 @@ export const translations: Record<Lang, TranslationTree> = {
           title: 'Onboarding',
           description: 'Aktueller Onboarding-Prozess mit Wizard und Fortschrittsanzeige.'
         },
+        registration: {
+          title: 'Registrierung',
+          description: 'Erfassung der E-Mail-Adresse als Startpunkt des Prozesses.'
+        },
+        profile: {
+          title: 'User Profilseite',
+          description: 'Übersicht und Pflege der erfassten Nutzer- und Firmendaten.'
+        },
         identification: {
           title: 'User Identifikation',
           description: 'Verifizierung von Ausweisdokument und Selfie-Abgleich.'
@@ -1038,6 +1046,10 @@ export const translations: Record<Lang, TranslationTree> = {
           title: 'Angebot anfragen',
           description: 'Mehrstufige Anfrage für Frachtführerhaftung und Fahrzeugdaten.',
           cta: 'Öffnen'
+        },
+        policyPurchase: {
+          title: 'Police kaufen',
+          description: 'Abschlussstrecke für Policen und Zahlungsinformationen.'
         },
         whitepaper: {
           title: 'KI Whitepaper',
@@ -2933,6 +2945,14 @@ export const translations: Record<Lang, TranslationTree> = {
           title: 'Onboarding',
           description: 'Current onboarding flow with wizard steps and progress tracking.'
         },
+        registration: {
+          title: 'Registration',
+          description: 'Capture the email address as the start of the process.'
+        },
+        profile: {
+          title: 'User Profile',
+          description: 'Overview and maintenance of captured user and company data.'
+        },
         identification: {
           title: 'User Identification',
           description: 'Verify ID document and match with selfie.'
@@ -2958,6 +2978,10 @@ export const translations: Record<Lang, TranslationTree> = {
           title: 'Get a Quote',
           description: 'Multi-step quote flow for carrier liability and vehicles.',
           cta: 'Open'
+        },
+        policyPurchase: {
+          title: 'Purchase Policy',
+          description: 'Checkout flow for policies and payment details.'
         },
         whitepaper: {
           title: 'AI Whitepaper',

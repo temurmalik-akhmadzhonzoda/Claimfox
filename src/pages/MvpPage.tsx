@@ -8,26 +8,14 @@ import InternAuthGate from '@/components/InternAuthGate'
 
 type MvpStep = {
   key:
-    | 'registration'
-    | 'onboarding'
-    | 'profile'
-    | 'getQuote'
-    | 'policyPurchase'
     | 'authentication'
-    | 'claimProcess'
     | 'aiModules'
     | 'dashboards'
   route: string
 }
 
 const MVP_STEPS: MvpStep[] = [
-  { key: 'registration', route: '/registration' },
-  { key: 'onboarding', route: '/profile/onboarding' },
-  { key: 'profile', route: '/profile' },
-  { key: 'getQuote', route: '/get-quote' },
-  { key: 'policyPurchase', route: '/policy-purchase' },
   { key: 'authentication', route: '/login' },
-  { key: 'claimProcess', route: '/claim-process' },
   { key: 'aiModules', route: '/feature-tree' },
   { key: 'dashboards', route: '/fleet-reporting' }
 ]
