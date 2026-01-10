@@ -32,7 +32,7 @@ function getSlides(lang: Lang): SlideContent[] {
         id: 1,
         title: 'Purpose, Scope and Regulatory Landscape',
         intro:
-          'Diese Präsentation beschreibt das Regulatory & AI Governance Framework der Insurfox AI IaaS. Fokus ist der kontrollierte KI-Einsatz in Versicherungsprozessen für eine aufsichts- und auditfähige Umsetzung.',
+          'Dieses Dokument beschreibt das Regulatory & AI Governance Framework der Insurfox AI IaaS. Es zeigt, wie KI in Versicherungsprozessen kontrolliert, nachvollziehbar und regulatorisch konform eingesetzt wird.',
         sections: [
           {
             heading: 'Scope',
@@ -44,34 +44,34 @@ function getSlides(lang: Lang): SlideContent[] {
           },
           {
             heading: 'Intended audience',
-            bullets: ['Supervisory authorities', 'Insurers & reinsurers', 'Auditors']
+            bullets: ['Aufsichtsbehörden', 'Versicherer & Rückversicherer', 'Prüfungsinstanzen']
           }
         ],
         footer: 'Scope: Insurance, Health, Mobility, InsurTech'
       },
       {
         id: 2,
-        title: 'Roles, Accountability and Decision Authority',
+        title: 'Rolle, Verantwortlichkeit und Entscheidungshoheit',
         intro:
-          'Insurfox agiert als Technologie- und Prozessplattform und ist nicht der Risikoträger. Entscheidungen mit Rechtswirkung verbleiben beim Versicherer.',
+          'Insurfox agiert ausschließlich als Technologie- und Prozessplattform und ist nicht Risikoträger. Entscheidungshoheit und Haftung verbleiben beim Versicherer bzw. Rückversicherer.',
         sections: [
           {
-            heading: 'Role allocation',
-            bullets: ['Provider: Insurfox Plattformbetrieb', 'Deployer: Versicherer und Rückversicherer']
+            heading: 'Rollenaufteilung',
+            bullets: ['Provider: Plattformbetrieb & Controls (Insurfox)', 'Deployer: Versicherer & Rückversicherer']
           },
           {
-            heading: 'Decision authority',
+            heading: 'Entscheidungshoheit',
             bullets: ['Human-in-the-Loop verpflichtend', 'Keine autonomen, bindenden Entscheidungen']
           },
           {
-            heading: 'Responsibility allocation',
+            heading: 'Verantwortlichkeit',
             table: {
               headers: ['Responsibility', 'Assigned to'],
               rows: [
-                ['Platform operation & controls', 'Insurfox'],
-                ['Underwriting & claims decision', 'Insurer'],
-                ['Risk acceptance & pricing', 'Insurer'],
-                ['Compliance reporting', 'Insurer (with Insurfox support)']
+                ['Plattformbetrieb & Controls', 'Insurfox'],
+                ['Underwriting & Schadenentscheidung', 'Versicherer'],
+                ['Pricing & Risikotragung', 'Versicherer'],
+                ['Regulatorisches Reporting', 'Versicherer (mit Insurfox Support)']
               ]
             }
           }
@@ -81,56 +81,56 @@ function getSlides(lang: Lang): SlideContent[] {
         id: 3,
         title: 'AI Governance Framework',
         intro:
-          'Governance verbindet Policy, Model Lifecycle und operative Aufsicht. Der Fokus liegt auf nachvollziehbarer Nutzung und kontrollierten Releases.',
+          'Governance ist integraler Bestandteil der Architektur und wird technisch erzwungen. Fokus: klare Use Cases, kontrollierte Modelle, überprüfbare Outputs.',
         sections: [
           {
-            heading: 'Permitted AI usage',
-            bullets: ['Decision support only', 'Risk/pricing recommendations', 'Fraud/anomaly detection']
+            heading: 'Zulässige KI-Nutzung',
+            bullets: ['Entscheidungsunterstützung', 'Risiko-/Tarifempfehlungen', 'Betrugs- und Anomalieerkennung']
           },
           {
-            heading: 'Model lifecycle governance',
-            bullets: ['Registry & versioning', 'Controlled release process', 'Documented training sources']
+            heading: 'Model Lifecycle',
+            bullets: ['Registry & Versionierung', 'Kontrollierte Releases', 'Dokumentierte Trainingsquellen']
           },
           {
             heading: 'Explainability',
-            bullets: ['Score-level explainability', 'Documented rationale & features']
+            bullets: ['Erklärbare Scores', 'Dokumentierte Merkmale & Logik']
           },
           {
-            heading: 'Human oversight',
-            bullets: ['Review & override', 'Escalation paths for material decisions']
+            heading: 'Human Oversight',
+            bullets: ['Review & Override', 'Eskalationspfade für wesentliche Entscheidungen']
           }
         ]
       },
       {
         id: 4,
-        title: 'Data Governance and Sensitive Data Controls',
+        title: 'Data Governance & Sensitive Data Controls',
         intro:
-          'Datensouveränität wird durch klare Prinzipien, rechtliche Grundlagen und technische Kontrollen abgesichert.',
+          'Datenverarbeitung erfolgt zweckgebunden, minimiert und rechtmäßig. Sensitive Daten werden nur unter klaren Voraussetzungen verarbeitet.',
         sections: [
           {
-            heading: 'Data governance principles',
-            bullets: ['Purpose limitation', 'Data minimisation', 'Lawful processing', 'Role-based access control']
+            heading: 'Data Governance Principles',
+            bullets: ['Zweckbindung', 'Datenminimierung', 'Rechtmäßige Verarbeitung', 'RBAC']
           },
           {
-            heading: 'Sensitive data handling',
+            heading: 'Sensitive Daten',
             bullets: [
-              'Health, biometric and location data where legally permitted',
-              'Lawful basis: consent or statutory obligation',
-              'Enhanced safeguards for sensitive data'
+              'Gesundheits-, biometrische und Standortdaten (nur rechtlich zulässig)',
+              'Rechtsgrundlage: Einwilligung oder gesetzliche Verpflichtung',
+              'Zusätzliche Schutzmechanismen'
             ]
           },
           {
             heading: 'Controls',
-            bullets: ['Segregated domains', 'Restricted access', 'Separate pipelines', 'Enhanced review']
+            bullets: ['Getrennte Domänen', 'Eingeschränkter Zugriff', 'Separate Pipelines', 'Erweiterte Reviews']
           },
           {
             heading: 'Control levels',
             table: {
-              headers: ['Standard controls', 'Additional for sensitive data'],
+              headers: ['Standard', 'Zusätzlich (sensitiv)'],
               rows: [
-                ['RBAC, logging, encryption', 'Restricted model access'],
-                ['Tenant isolation', 'Separate processing pipelines'],
-                ['Retention policies', 'Mandatory human review']
+                ['RBAC, Logging, Verschlüsselung', 'Restriktiver Modellzugriff'],
+                ['Mandantentrennung', 'Separate Verarbeitungspfade'],
+                ['Retention Policies', 'Verpflichtender Human Review']
               ]
             }
           }
@@ -138,53 +138,53 @@ function getSlides(lang: Lang): SlideContent[] {
       },
       {
         id: 5,
-        title: 'Auditability, Traceability and Record-Keeping',
+        title: 'Auditability, Traceability & Record-Keeping',
         intro:
-          'Auditierbarkeit basiert auf vollständigen Logs, nachvollziehbaren Modellständen und dokumentierten Entscheidungen.',
+          'Auditierbarkeit ist durch strukturierte Logs, nachvollziehbare Modellstände und dokumentierte Entscheidungen sichergestellt.',
         sections: [
           {
-            heading: 'What is logged',
-            bullets: ['Input data', 'Model version', 'Output score', 'Timestamp', 'User interaction']
+            heading: 'Was wird protokolliert',
+            bullets: ['Eingabedaten', 'Modellversion', 'KI-Output', 'Zeitstempel', 'User-Interaktionen']
           },
           {
             heading: 'Evidence matrix',
             table: {
               headers: ['Event', 'Recorded fields'],
               rows: [
-                ['Input', 'Schema, source, timestamp'],
-                ['Model execution', 'Model ID, version, parameters'],
-                ['Output', 'Score, confidence, rationale'],
-                ['User action', 'Reviewer, decision, timestamp']
+                ['Input', 'Schema, Quelle, Zeitstempel'],
+                ['Model execution', 'Model-ID, Version, Parameter'],
+                ['Output', 'Score, Confidence, Rationale'],
+                ['User action', 'Reviewer, Entscheidung, Zeitstempel']
               ]
             }
           },
           {
-            heading: 'Retention & supervisory evidence',
-            text: 'Retention aligned with regulatory requirements and supervisory review readiness.'
+            heading: 'Retention & Prüfungsfähigkeit',
+            text: 'Aufbewahrung gemäß regulatorischer Anforderungen und jederzeit auditfähig.'
           }
         ]
       },
       {
         id: 6,
-        title: 'Third-Party Risk, Security and EU AI Act Alignment',
+        title: 'Third-Party Risk, Security & EU AI Act Alignment',
         intro:
-          'Sicherheitsmaßnahmen und EU-AI-Act-Konformität sind integraler Bestandteil der Infrastruktur.',
+          'Outsourcing-Risiken, Sicherheit und EU-AI-Act-Konformität werden durch die Systemarchitektur abgedeckt.',
         sections: [
           {
-            heading: 'Third-party risk & outsourcing',
-            bullets: ['No external AI providers', 'No transfer of training/inference data', 'No foundation model dependency']
+            heading: 'Outsourcing & Drittparteien',
+            bullets: ['Keine externen KI-Anbieter', 'Kein Datenabfluss', 'Keine Foundation-Model-Abhängigkeit']
           },
           {
             heading: 'Security measures',
-            bullets: ['Tenant isolation', 'Encryption at rest/in transit', 'Monitoring & logging', 'Incident response']
+            bullets: ['Mandantentrennung', 'Verschlüsselung at rest/in transit', 'Monitoring & Logging', 'Incident Response']
           },
           {
             heading: 'Data residency & sovereignty',
-            bullets: ['Jurisdiction configurable', 'Insurer retains ownership', 'No cross-tenant usage']
+            bullets: ['Jurisdiktion konfigurierbar', 'Versicherer behält Datenhoheit', 'Keine Cross-Tenant-Nutzung']
           },
           {
             heading: 'EU AI Act alignment',
-            bullets: ['Risk management', 'Transparency', 'Human oversight', 'Logging & auditability']
+            bullets: ['Risikomanagement', 'Transparenz', 'Human Oversight', 'Logging & Auditierbarkeit']
           }
         ]
       }
@@ -196,7 +196,7 @@ function getSlides(lang: Lang): SlideContent[] {
       id: 1,
       title: 'Purpose, Scope and Regulatory Landscape',
       intro:
-        'This presentation describes the Regulatory & AI Governance Framework of the Insurfox AI IaaS. It focuses on controlled AI use within insurance processes for supervisory and audit readiness.',
+        'This document describes the Regulatory & AI Governance Framework of the Insurfox AI IaaS. It explains how AI is used in insurance processes in a controlled, traceable, and compliant manner.',
       sections: [
         {
           heading: 'Scope',
@@ -217,7 +217,7 @@ function getSlides(lang: Lang): SlideContent[] {
       id: 2,
       title: 'Roles, Accountability and Decision Authority',
       intro:
-        'Insurfox operates as a technology and process platform and is not the risk carrier. Binding decisions remain with the insurer.',
+        'Insurfox operates solely as a technology and process platform and is not the risk carrier. Decision authority and liability remain with the insurer or reinsurer.',
       sections: [
         {
           heading: 'Role allocation',
@@ -245,7 +245,7 @@ function getSlides(lang: Lang): SlideContent[] {
       id: 3,
       title: 'AI Governance Framework',
       intro:
-        'Governance connects policy, model lifecycle, and operational oversight with controlled releases and clear accountability.',
+        'Governance connects policy, model lifecycle, and operational oversight with controlled releases and traceable outputs.',
       sections: [
         {
           heading: 'Permitted AI usage',
@@ -269,7 +269,7 @@ function getSlides(lang: Lang): SlideContent[] {
       id: 4,
       title: 'Data Governance and Sensitive Data Controls',
       intro:
-        'Data sovereignty is ensured through clear principles, lawful bases, and technical controls.',
+        'Data processing follows purpose limitation, minimisation, and lawful bases. Sensitive data is handled only under clear safeguards.',
       sections: [
         {
           heading: 'Data governance principles',
@@ -304,7 +304,7 @@ function getSlides(lang: Lang): SlideContent[] {
       id: 5,
       title: 'Auditability, Traceability and Record-Keeping',
       intro:
-        'Auditability is built on complete logs, traceable model states, and documented decisions.',
+        'Auditability is ensured through complete logs, traceable model states, and documented decisions.',
       sections: [
         {
           heading: 'What is logged',
@@ -332,7 +332,7 @@ function getSlides(lang: Lang): SlideContent[] {
       id: 6,
       title: 'Third-Party Risk, Security and EU AI Act Alignment',
       intro:
-        'Security measures and EU AI Act alignment are embedded in the infrastructure design.',
+        'Outsourcing risk, security controls, and EU AI Act alignment are embedded in the system architecture.',
       sections: [
         {
           heading: 'Third-party risk & outsourcing',
