@@ -1,6 +1,5 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import Button from '@/components/ui/Button'
 import Card from '@/components/ui/Card'
 import Header from '@/components/ui/Header'
 import { useI18n } from '@/i18n/I18nContext'
@@ -139,23 +138,6 @@ export default function RolesPage() {
         style={{ display: 'flex', flexDirection: 'column', height: '100%', padding: '1rem', minHeight: '175px' }}
       >
         <p style={descriptionStyle}>{t(descriptionKey)}</p>
-        <Button
-          style={{ width: '100%', marginTop: 'auto', padding: '0.45rem 0.8rem', fontSize: '0.85rem', borderRadius: '999px' }}
-          onClick={
-            hasRoute
-              ? (event) => {
-                  event.stopPropagation()
-                  if (requireAuth) {
-                    handleInternalAccess(item.route!)
-                    return
-                  }
-                  navigate(item.route!)
-                }
-              : undefined
-          }
-        >
-          {t('roles.view')}
-        </Button>
       </Card>
     )
   }
