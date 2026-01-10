@@ -123,15 +123,32 @@ export default function UserIdentificationPage() {
         <Header title={t('identification.title')} subtitle={t('identification.subtitle')} subtitleColor="#65748b" />
 
         <Card>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) auto', gap: '1rem', alignItems: 'center' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
               <strong style={{ color: '#0f172a' }}>{t('identification.progress')}</strong>
               <span style={{ color: '#64748b' }}>{t(steps[activeStep])}</span>
+              <div style={{ height: 8, background: '#e2e8f0', borderRadius: 999, marginTop: '0.6rem', overflow: 'hidden' }}>
+                <div style={{ height: '100%', width: `${progress}%`, background: '#d4380d' }} />
+              </div>
             </div>
-            <div style={{ minWidth: 180, textAlign: 'right', color: '#64748b', fontWeight: 600 }}>{progress}%</div>
-          </div>
-          <div style={{ height: 8, background: '#e2e8f0', borderRadius: 999, marginTop: '0.75rem', overflow: 'hidden' }}>
-            <div style={{ height: '100%', width: `${progress}%`, background: '#d4380d' }} />
+            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+              <span style={{ color: '#64748b', fontWeight: 600 }}>{progress}%</span>
+              <Button variant="secondary" onClick={handleBack} disabled={activeStep === 0}>
+                {t('identification.actions.back')}
+              </Button>
+              <Button
+                onClick={handleNext}
+                disabled={
+                  (activeStep === 0 && false) ||
+                  (activeStep === 1 && !isDocComplete) ||
+                  (activeStep === 2 && verificationStatus !== 'success') ||
+                  (activeStep === 3 && !isSelfieComplete) ||
+                  activeStep >= steps.length - 1
+                }
+              >
+                {t('identification.actions.next')}
+              </Button>
+            </div>
           </div>
         </Card>
 
@@ -264,7 +281,6 @@ export default function UserIdentificationPage() {
             <p style={{ color: '#475569' }}>{t('identification.selfie.subtitle')}</p>
             <div className="selfie-frame">
               {selfieImage ? <img src={selfieImage} alt="" /> : <div className="selfie-placeholder" />}
-              <div className="selfie-overlay">{t('identification.selfie.overlay')}</div>
             </div>
             <div style={{ display: 'flex', gap: '0.6rem', marginTop: '1rem', flexWrap: 'wrap' }}>
               <Button variant="secondary" onClick={() => startCamera('selfie')}>
@@ -350,7 +366,6 @@ export default function UserIdentificationPage() {
                   )}
                   {captureTarget === 'selfie' && (
                     <div className="selfie-overlay-layer">
-                      <div className="selfie-silhouette" />
                       <p>{t('identification.selfie.overlay')}</p>
                     </div>
                   )}
