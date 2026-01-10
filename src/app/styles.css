@@ -742,6 +742,10 @@ h6 {
 @media print {
   @page {
     size: A4 portrait;
+    margin: 14mm 20mm 20mm 20mm;
+  }
+
+  @page :first {
     margin: 6mm 20mm 20mm 20mm;
   }
 
