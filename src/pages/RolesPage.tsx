@@ -59,10 +59,10 @@ const GOVERNANCE_ITEMS: RoleItem[] = [
 ]
 
 const PRESENTATION_ITEMS: RoleItem[] = [
-  { key: 'whitepaper', route: '/ai-whitepaper' },
-  { key: 'strategicDeepDive', route: '/governance/strategic-deep-dive' },
   { key: 'insurfoxWhitepaper', route: '/insurfox-whitepaper' },
-  { key: 'requirementsCatalog', route: '/requirements-catalog' }
+  { key: 'strategicDeepDive', route: '/governance/strategic-deep-dive' },
+  { key: 'requirementsCatalog', route: '/requirements-catalog' },
+  { key: 'whitepaper', route: '/ai-whitepaper' }
 ]
 
 const DEVELOPMENT_ITEMS: RoleItem[] = [
