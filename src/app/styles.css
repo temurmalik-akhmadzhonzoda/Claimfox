@@ -735,20 +735,48 @@ h6 {
 }
 
 .strategic-deep-dive-page {
-  max-width: 1200px;
-  margin: 0 auto;
+  max-width: none;
+  margin: 0;
   gap: 1.5rem;
+}
+
+.strategic-shell {
+  width: 100%;
+}
+
+.strategic-header {
+  padding: 0 24px;
 }
 
 .strategic-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.5rem;
+  padding: 0 24px 24px;
 }
 
-.strategic-column {
-  display: grid;
-  gap: 1.25rem;
+.strategic-card {
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.1);
+  padding: 1.5rem;
+}
+
+.strategic-card--full {
+  grid-column: 1 / -1;
+}
+
+.strategic-card header {
+  margin-bottom: 1rem;
+}
+
+.strategic-card header h2 {
+  font-size: 1.35rem;
+}
+
+@media (max-width: 1200px) {
+  .strategic-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 960px) {

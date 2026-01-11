@@ -234,39 +234,29 @@ export default function StrategicDeepDivePage() {
   return (
     <InternAuthGate>
       <section className="page strategic-deep-dive-page">
-        <div className="framework-header-row">
-          <Header
-            title="Strategic Technology & AI Governance Deep Dive"
-            subtitle="Insurfox IaaS – Enabling Regulated AI at Scale"
-            subtitleColor="#65748b"
-          />
-          <button
-            type="button"
-            className="framework-download"
-            onClick={() => window.print()}
-          >
-            PDF herunterladen
-          </button>
-        </div>
-        <div className="strategic-grid">
-          <div className="strategic-column">
-            {sections.slice(0, 10).map((section) => (
-              <Card key={section.id} title={section.title}>
-                {section.intro && <p className="framework-paragraph">{section.intro}</p>}
-                {section.text && <p className="framework-paragraph">{section.text}</p>}
-                {section.bullets && (
-                  <ul className="framework-list">
-                    {section.bullets.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                )}
-              </Card>
-            ))}
+        <div className="strategic-shell">
+          <div className="framework-header-row strategic-header">
+            <Header
+              title="Strategic Technology & AI Governance Deep Dive"
+              subtitle="Insurfox IaaS – Enabling Regulated AI at Scale"
+              subtitleColor="#65748b"
+            />
+            <button
+              type="button"
+              className="framework-download"
+              onClick={() => window.print()}
+            >
+              PDF herunterladen
+            </button>
           </div>
-          <div className="strategic-column">
-            {sections.slice(10).map((section) => (
-              <Card key={section.id} title={section.title}>
+          <div className="strategic-grid">
+            {sections.map((section, index) => (
+              <Card
+                key={section.id}
+                title={section.title}
+                className={`card strategic-card${index === 0 ? ' strategic-card--full' : ''}`}
+              >
+                {section.intro && <p className="framework-paragraph">{section.intro}</p>}
                 {section.text && <p className="framework-paragraph">{section.text}</p>}
                 {section.bullets && (
                   <ul className="framework-list">
