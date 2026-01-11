@@ -500,23 +500,75 @@ export default function AuditAppendixPage() {
 
   return (
     <InternAuthGate>
-      <section className="page audit-appendix-page">
-        <Header
-          title={content.title}
-          subtitle={content.subtitle}
-          subtitleColor="#65748b"
-        />
-        <div className="audit-appendix-grid">
-          <div className="audit-column">
-            {content.left.map((section) => (
-              <SectionCard key={section.id} section={section} />
-            ))}
+      <section className="page strategic-deep-dive-page">
+        <div className="strategic-shell">
+          <div className="framework-header-row strategic-header">
+            <Header
+              title={content.title}
+              subtitle={content.subtitle}
+              subtitleColor="#65748b"
+            />
+            <button
+              type="button"
+              className="framework-download"
+              onClick={() => window.print()}
+            >
+              {lang === 'en' ? 'Download PDF' : 'PDF herunterladen'}
+            </button>
           </div>
-          <div className="audit-column">
-            {content.right.map((section) => (
-              <SectionCard key={section.id} section={section} />
-            ))}
+          <div className="strategic-grid">
+            <div className="strategic-column">
+              {content.left.map((section) => (
+                <SectionCard key={section.id} section={section} />
+              ))}
+            </div>
+            <div className="strategic-column">
+              {content.right.map((section) => (
+                <SectionCard key={section.id} section={section} />
+              ))}
+            </div>
           </div>
+        </div>
+        <div className="framework-print">
+          <div className="framework-print-header">
+            <img src={InsurfoxLogo} alt="Insurfox" />
+          </div>
+          <h1>{content.title}</h1>
+          <p className="framework-print-subtitle">{content.subtitle}</p>
+          {[...content.left, ...content.right].map((section) => (
+            <div key={section.id} className="framework-print-section">
+              <h2>{section.title}</h2>
+              {section.intro && <p>{section.intro}</p>}
+              {section.text && <p>{section.text}</p>}
+              {section.bullets && (
+                <ul>
+                  {section.bullets.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              )}
+              {section.subSections?.map((sub) => (
+                <div key={sub.title}>
+                  <h2>{sub.title}</h2>
+                  {sub.text && <p>{sub.text}</p>}
+                  {sub.bullets && (
+                    <ul>
+                      {sub.bullets.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              ))}
+              {section.table && (
+                <ul>
+                  {section.table.rows.map((row) => (
+                    <li key={`${row.label}-${row.value}`}>{`${row.label}: ${row.value}`}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          ))}
         </div>
       </section>
     </InternAuthGate>
