@@ -286,6 +286,74 @@ export default function InsurfoxWhitepaperPage() {
               <p key={paragraph}>{paragraph}</p>
             ))}
           </Card>
+          <div className="insurfox-whitepaper-media">
+            <Card className="insurfox-whitepaper-media-card">
+              <div className="insurfox-whitepaper-media-header">
+                <h3>{lang === 'en' ? 'Ecosystem Coverage' : 'Ecosystem Coverage'}</h3>
+                <span>{lang === 'en' ? 'Stakeholders connected' : 'Stakeholders connected'}</span>
+              </div>
+              <div className="insurfox-whitepaper-bars">
+                <div>
+                  <span>{lang === 'en' ? 'Insurers' : 'Insurers'}</span>
+                  <div className="insurfox-whitepaper-bar">
+                    <div style={{ width: '82%' }} />
+                  </div>
+                </div>
+                <div>
+                  <span>{lang === 'en' ? 'Brokers' : 'Brokers'}</span>
+                  <div className="insurfox-whitepaper-bar">
+                    <div style={{ width: '74%' }} />
+                  </div>
+                </div>
+                <div>
+                  <span>{lang === 'en' ? 'Logistics' : 'Logistics'}</span>
+                  <div className="insurfox-whitepaper-bar">
+                    <div style={{ width: '68%' }} />
+                  </div>
+                </div>
+                <div>
+                  <span>{lang === 'en' ? 'Enterprise' : 'Enterprise'}</span>
+                  <div className="insurfox-whitepaper-bar">
+                    <div style={{ width: '61%' }} />
+                  </div>
+                </div>
+              </div>
+            </Card>
+            <Card className="insurfox-whitepaper-media-card">
+              <div className="insurfox-whitepaper-media-header">
+                <h3>{lang === 'en' ? 'AI-Enabled Value Chain' : 'AI-Enabled Value Chain'}</h3>
+                <span>{lang === 'en' ? 'From risk to claims' : 'From risk to claims'}</span>
+              </div>
+              <div className="insurfox-whitepaper-flow">
+                <div>
+                  <strong>{lang === 'en' ? 'Risk' : 'Risk'}</strong>
+                  <span>{lang === 'en' ? 'Signals' : 'Signals'}</span>
+                </div>
+                <div>
+                  <strong>{lang === 'en' ? 'Pricing' : 'Pricing'}</strong>
+                  <span>{lang === 'en' ? 'Recommendations' : 'Recommendations'}</span>
+                </div>
+                <div>
+                  <strong>{lang === 'en' ? 'Claims' : 'Claims'}</strong>
+                  <span>{lang === 'en' ? 'Automation' : 'Automation'}</span>
+                </div>
+              </div>
+            </Card>
+          </div>
+        </div>
+        <div className="insurfox-whitepaper-signals">
+          <Card className="insurfox-whitepaper-signal-card">
+            <h3>{lang === 'en' ? 'AI Governance' : 'AI Governance'}</h3>
+            <p>{lang === 'en' ? 'Decision support with auditable models and controlled data flows.' : 'Decision support with auditable models and controlled data flows.'}</p>
+          </Card>
+          <Card className="insurfox-whitepaper-signal-card">
+            <h3>{lang === 'en' ? 'Operational Efficiency' : 'Operational Efficiency'}</h3>
+            <p>{lang === 'en' ? 'Unified workflows reduce friction across underwriting, claims and servicing.' : 'Unified workflows reduce friction across underwriting, claims and servicing.'}</p>
+          </Card>
+          <Card className="insurfox-whitepaper-signal-card">
+            <h3>{lang === 'en' ? 'Scalable Integration' : 'Scalable Integration'}</h3>
+            <p>{lang === 'en' ? 'API-first architecture enables partner onboarding with minimal lift.' : 'API-first architecture enables partner onboarding with minimal lift.'}</p>
+          </Card>
         </div>
         <div className="insurfox-whitepaper-grid">
           {content.sections.map((section) => (
