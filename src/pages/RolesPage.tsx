@@ -27,6 +27,7 @@ type RoleItem = {
     | 'registration'
     | 'profile'
     | 'policyPurchase'
+    | 'strategicDeepDive'
   route?: string
   ctaKey?: string
 }
@@ -56,7 +57,8 @@ const GOVERNANCE_ITEMS: RoleItem[] = [
 ]
 
 const PRESENTATION_ITEMS: RoleItem[] = [
-  { key: 'whitepaper', route: '/ai-whitepaper' }
+  { key: 'whitepaper', route: '/ai-whitepaper' },
+  { key: 'strategicDeepDive', route: '/governance/strategic-deep-dive' }
 ]
 
 const DEVELOPMENT_ITEMS: RoleItem[] = [

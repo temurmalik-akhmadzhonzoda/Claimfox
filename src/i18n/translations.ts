@@ -1033,6 +1033,10 @@ export const translations: Record<Lang, TranslationTree> = {
           title: 'Audit Appendix',
           description: 'Prüfungsnahe Referenz mit Rollen, Kontrollen und Governance-Nachweisen.'
         },
+        strategicDeepDive: {
+          title: 'Strategic Technology & AI Governance Deep Dive',
+          description: 'Strategischer Deep Dive zur Technologie- und Governance-Architektur.'
+        },
         partner: {
           title: 'Partner Manager',
           description: 'Pflege Kontakte zu Gutachtern, Werkstätten und Dienstleistern.'
@@ -2964,6 +2968,10 @@ export const translations: Record<Lang, TranslationTree> = {
         auditAppendix: {
           title: 'Audit Appendix',
           description: 'Audit-ready reference with responsibilities, controls, and governance evidence.'
+        },
+        strategicDeepDive: {
+          title: 'Strategic Technology & AI Governance Deep Dive',
+          description: 'Strategic deep dive into architecture and AI governance.'
         },
         partner: {
           title: 'Partner Manager',

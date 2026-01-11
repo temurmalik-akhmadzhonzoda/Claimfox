@@ -671,6 +671,12 @@ h6 {
   color: #0f172a;
 }
 
+.framework-print-subtitle {
+  margin: 0 0 1rem;
+  color: #111827;
+  font-size: 0.98rem;
+}
+
 .framework-print-header {
   display: flex;
   justify-content: flex-start;
@@ -728,6 +734,23 @@ h6 {
   line-height: 1.7;
 }
 
+.strategic-deep-dive-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 1.5rem;
+}
+
+.strategic-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1.5rem;
+}
+
+.strategic-column {
+  display: grid;
+  gap: 1.25rem;
+}
+
 @media (max-width: 960px) {
   .framework-header-row {
     flex-direction: column;
@@ -764,6 +787,7 @@ h6 {
 
   .framework-header-row,
   .regulatory-framework-grid,
+  .strategic-grid,
   header {
     display: none;
   }
@@ -773,6 +797,14 @@ h6 {
   }
 
   .regulatory-framework-page {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    gap: 0;
+    background: none;
+  }
+
+  .strategic-deep-dive-page {
     max-width: none;
     margin: 0;
     padding: 0;
