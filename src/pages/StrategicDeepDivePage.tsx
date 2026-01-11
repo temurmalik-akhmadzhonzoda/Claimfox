@@ -34,7 +34,7 @@ function getSections(lang: 'de' | 'en'): SectionBlock[] {
         title: '2. Context and strategic baseline',
         bullets: ['incurring regulatory risks', 'losing operational control', 'creating strategic dependencies on external AI providers'],
         text:
-          'Insurers and reinsurers face the challenge of using AI productively. Insurfox addresses this gap by providing AI as an integrated infrastructure component within an Insurance IaaS platform.'
+          'Insurers and reinsurers face the challenge of using AI productively. Insurfox addresses this gap by providing AI as an integrated infrastructure component within an Insurance IaaS platform. With this solution it is possible to avoid:'
       },
       {
         id: 'overview',
