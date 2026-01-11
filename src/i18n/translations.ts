@@ -1041,6 +1041,10 @@ export const translations: Record<Lang, TranslationTree> = {
           title: 'Insurfox Whitepaper',
           description: 'AI-getriebene Versicherungsplattform für Logistik, Transport & Mobility.'
         },
+        requirementsCatalog: {
+          title: 'Anforderungskatalog',
+          description: 'Short Version für die Zusammenarbeit mit Versicherungen auf der Insurfox AI IaaS Plattform.'
+        },
         partner: {
           title: 'Partner Manager',
           description: 'Pflege Kontakte zu Gutachtern, Werkstätten und Dienstleistern.'
@@ -2980,6 +2984,10 @@ export const translations: Record<Lang, TranslationTree> = {
         insurfoxWhitepaper: {
           title: 'Insurfox Whitepaper',
           description: 'AI-driven insurance platform for logistics, transport, and mobility.'
+        },
+        requirementsCatalog: {
+          title: 'Requirements Catalog',
+          description: 'Short version for insurer collaboration on the Insurfox AI IaaS platform.'
         },
         partner: {
           title: 'Partner Manager',

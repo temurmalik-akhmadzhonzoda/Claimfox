@@ -38,6 +38,7 @@ import RegulatoryGovernancePage from '@/pages/RegulatoryGovernancePage'
 import AuditAppendixPage from '@/pages/AuditAppendixPage'
 import StrategicDeepDivePage from '@/pages/StrategicDeepDivePage'
 import InsurfoxWhitepaperPage from '@/pages/InsurfoxWhitepaperPage'
+import RequirementsCatalogPage from '@/pages/RequirementsCatalogPage'
 
 function NotFoundRedirect() {
   const { isAuthenticated } = useAuth()
@@ -92,6 +93,7 @@ export default function AppRouter() {
         <Route path="/governance/audit-appendix" element={<AuditAppendixPage />} />
         <Route path="/governance/strategic-deep-dive" element={<StrategicDeepDivePage />} />
         <Route path="/insurfox-whitepaper" element={<InsurfoxWhitepaperPage />} />
+        <Route path="/requirements-catalog" element={<RequirementsCatalogPage />} />
       </Route>
       <Route path="*" element={<NotFoundRedirect />} />
     </Routes>

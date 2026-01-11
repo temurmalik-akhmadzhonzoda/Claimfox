@@ -29,6 +29,7 @@ type RoleItem = {
     | 'policyPurchase'
     | 'strategicDeepDive'
     | 'insurfoxWhitepaper'
+    | 'requirementsCatalog'
   route?: string
   ctaKey?: string
 }
@@ -60,7 +61,8 @@ const GOVERNANCE_ITEMS: RoleItem[] = [
 const PRESENTATION_ITEMS: RoleItem[] = [
   { key: 'whitepaper', route: '/ai-whitepaper' },
   { key: 'strategicDeepDive', route: '/governance/strategic-deep-dive' },
-  { key: 'insurfoxWhitepaper', route: '/insurfox-whitepaper' }
+  { key: 'insurfoxWhitepaper', route: '/insurfox-whitepaper' },
+  { key: 'requirementsCatalog', route: '/requirements-catalog' }
 ]
 
 const DEVELOPMENT_ITEMS: RoleItem[] = [
