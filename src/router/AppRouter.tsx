@@ -39,6 +39,7 @@ import AuditAppendixPage from '@/pages/AuditAppendixPage'
 import StrategicDeepDivePage from '@/pages/StrategicDeepDivePage'
 import InsurfoxWhitepaperPage from '@/pages/InsurfoxWhitepaperPage'
 import RequirementsCatalogPage from '@/pages/RequirementsCatalogPage'
+import QuestionsQicPage from '@/pages/QuestionsQicPage'
 
 function NotFoundRedirect() {
   const { isAuthenticated } = useAuth()
@@ -94,6 +95,7 @@ export default function AppRouter() {
         <Route path="/governance/strategic-deep-dive" element={<StrategicDeepDivePage />} />
         <Route path="/insurfox-whitepaper" element={<InsurfoxWhitepaperPage />} />
         <Route path="/requirements-catalog" element={<RequirementsCatalogPage />} />
+        <Route path="/questions-qic" element={<QuestionsQicPage />} />
       </Route>
       <Route path="*" element={<NotFoundRedirect />} />
     </Routes>

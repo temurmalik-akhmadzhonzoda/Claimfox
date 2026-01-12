@@ -1045,6 +1045,10 @@ export const translations: Record<Lang, TranslationTree> = {
           title: 'Anforderungskatalog',
           description: 'Short Version für die Zusammenarbeit mit Versicherungen auf der Insurfox AI IaaS Plattform.'
         },
+        questionsQic: {
+          title: 'Fragen QIC',
+          description: 'Questionnaire für die Zusammenarbeit mit Insurfox AI IaaS.'
+        },
         partner: {
           title: 'Partner Manager',
           description: 'Pflege Kontakte zu Gutachtern, Werkstätten und Dienstleistern.'
@@ -2988,6 +2992,10 @@ export const translations: Record<Lang, TranslationTree> = {
         requirementsCatalog: {
           title: 'Requirements Catalog',
           description: 'Short version for insurer collaboration on the Insurfox AI IaaS platform.'
+        },
+        questionsQic: {
+          title: 'QIC Questions',
+          description: 'Questionnaire for collaboration with Insurfox AI IaaS.'
         },
         partner: {
           title: 'Partner Manager',

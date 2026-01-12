@@ -30,6 +30,7 @@ type RoleItem = {
     | 'strategicDeepDive'
     | 'insurfoxWhitepaper'
     | 'requirementsCatalog'
+    | 'questionsQic'
   route?: string
   ctaKey?: string
 }
@@ -62,7 +63,8 @@ const PRESENTATION_ITEMS: RoleItem[] = [
   { key: 'insurfoxWhitepaper', route: '/insurfox-whitepaper' },
   { key: 'strategicDeepDive', route: '/governance/strategic-deep-dive' },
   { key: 'requirementsCatalog', route: '/requirements-catalog' },
-  { key: 'whitepaper', route: '/ai-whitepaper' }
+  { key: 'whitepaper', route: '/ai-whitepaper' },
+  { key: 'questionsQic', route: '/questions-qic' }
 ]
 
 const DEVELOPMENT_ITEMS: RoleItem[] = [
