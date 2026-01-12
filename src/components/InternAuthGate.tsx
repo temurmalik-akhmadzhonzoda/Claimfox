@@ -20,7 +20,7 @@ export default function InternAuthGate({ children }: InternAuthGateProps) {
   const [pin, setPin] = useState('')
   const [error, setError] = useState('')
 
-  const isValid = useMemo(() => username.trim().toLowerCase() === 'ralf' && pin.trim() === '1704', [username, pin])
+  const isValid = useMemo(() => username.trim().toLowerCase() === 'insurteam' && pin.trim() === '2105', [username, pin])
 
   function handleLogin(event: React.FormEvent) {
     event.preventDefault()

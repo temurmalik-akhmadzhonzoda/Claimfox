@@ -107,7 +107,7 @@ export default function RolesPage() {
 
   function handleAuthSubmit(event: React.FormEvent) {
     event.preventDefault()
-    const valid = authUser.trim().toLowerCase() === 'ralf' && authPin.trim() === '1704'
+    const valid = authUser.trim().toLowerCase() === 'insurteam' && authPin.trim() === '2105'
     if (!valid) {
       setAuthError(t('roles.internalAuth.error'))
       return
