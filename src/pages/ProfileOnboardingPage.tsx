@@ -118,10 +118,16 @@ export default function ProfileOnboardingPage() {
 
   const [saved, setSaved] = useState(false)
 
-  const steps = useMemo(() => [...PERSONAL_FIELDS, ...COMPANY_FIELDS], [])
-  const totalSteps = steps.length
-  const activeField = steps[stepIndex]
-  const stepImages = useMemo(() => [lkwFahrerImage], [])
+  const groups = useMemo(
+    () => [
+      { key: 'personal', titleKey: 'profile.steps.personal.title', subtitleKey: 'profile.steps.personal.subtitle', fields: PERSONAL_FIELDS },
+      { key: 'company', titleKey: 'profile.steps.company.title', subtitleKey: 'profile.steps.company.subtitle', fields: COMPANY_FIELDS }
+    ],
+    []
+  )
+  const totalSteps = groups.length
+  const activeGroup = groups[stepIndex]
+  const stepImages = useMemo(() => [lkwFahrerImage, ffhvImage], [])
   const activeImage = stepImages[stepIndex % stepImages.length]
   const secondaryImage = ffhvImage
 
@@ -133,6 +139,16 @@ export default function ProfileOnboardingPage() {
       return value === true || value === false
     }
     return typeof value === 'string' && value.trim().length > 0
+  }
+
+  function isGroupComplete() {
+    const requiredFields = activeGroup.fields.filter((field) => field.required)
+    const requiredComplete = requiredFields.every((field) => isFieldComplete(field))
+    const passwordMismatch =
+      formData['account.password'] &&
+      formData['account.password_confirm'] &&
+      formData['account.password'] !== formData['account.password_confirm']
+    return requiredComplete && !passwordMismatch
   }
 
   function persist(nextStep: number, nextData: Record<string, string | boolean>, completed = false) {
@@ -153,7 +169,7 @@ export default function ProfileOnboardingPage() {
     setTimeout(() => setSaved(false), 2000)
   }
 
-  function handleSkip() {
+  function handleNext() {
     if (stepIndex === totalSteps - 1) {
       persist(stepIndex, formData, true)
       navigate('/profile')
@@ -164,7 +180,7 @@ export default function ProfileOnboardingPage() {
     persist(nextStep, formData, false)
   }
 
-  function handleNext() {
+  function handleSkip() {
     if (stepIndex === totalSteps - 1) {
       persist(stepIndex, formData, true)
       navigate('/profile')
@@ -234,7 +250,7 @@ export default function ProfileOnboardingPage() {
                     alignItems: 'center',
                     padding: '0.25rem 0.85rem',
                     borderRadius: '999px',
-                    background: activeField.group === 'personal' ? '#fde8df' : '#e0ecff',
+                    background: activeGroup.key === 'personal' ? '#fde8df' : '#e0ecff',
                     color: '#1f2a5f',
                     fontWeight: 700,
                     fontSize: '0.8rem',
@@ -242,75 +258,80 @@ export default function ProfileOnboardingPage() {
                     textTransform: 'uppercase'
                   }}
                 >
-                  {activeField.group === 'personal' ? t('profile.steps.personal.title') : t('profile.steps.company.title')}
+                  {t(activeGroup.titleKey)}
                 </span>
-                <h2 style={{ margin: '0.6rem 0 0' }}>{t(activeField.labelKey)}</h2>
-                <p style={{ margin: '0.35rem 0 0', color: '#64748b' }}>
-                  {t('profile.stepLabel', { current: stepIndex + 1, total: totalSteps })}
-                </p>
+                <h2 style={{ margin: '0.6rem 0 0' }}>{t(activeGroup.subtitleKey)}</h2>
+                <p style={{ margin: '0.35rem 0 0', color: '#64748b' }}>{t('profile.stepLabel', { current: stepIndex + 1, total: totalSteps })}</p>
               </div>
 
-              {activeField.type === 'boolean' ? (
-                <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                  <button
-                    type="button"
-                    onClick={() => handleChange(activeField.key, true)}
-                    style={{
-                      borderRadius: '999px',
-                      padding: '0.55rem 1.2rem',
-                      border: '1px solid #d9d9d9',
-                      background: formData[activeField.key] === true ? '#fde8df' : '#ffffff',
-                      color: '#0f172a',
-                      fontWeight: 600,
-                      cursor: 'pointer'
-                    }}
-                  >
-                    {t('profile.options.yes')}
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => handleChange(activeField.key, false)}
-                    style={{
-                      borderRadius: '999px',
-                      padding: '0.55rem 1.2rem',
-                      border: '1px solid #d9d9d9',
-                      background: formData[activeField.key] === false ? '#fde8df' : '#ffffff',
-                      color: '#0f172a',
-                      fontWeight: 600,
-                      cursor: 'pointer'
-                    }}
-                  >
-                    {t('profile.options.no')}
-                  </button>
-                </div>
-              ) : activeField.type === 'select' ? (
-                <select
-                  className="text-input"
-                  value={typeof formData[activeField.key] === 'string' ? (formData[activeField.key] as string) : ''}
-                  onChange={(event) => handleChange(activeField.key, event.target.value)}
-                >
-                  <option value="">{t('profile.options.select')}</option>
-                  {activeField.options?.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {t(option.labelKey)}
-                    </option>
-                  ))}
-                </select>
-              ) : (
-                <input
-                  className="text-input"
-                  type={activeField.type}
-                  value={typeof formData[activeField.key] === 'string' ? (formData[activeField.key] as string) : ''}
-                  onChange={(event) => handleChange(activeField.key, event.target.value)}
-                />
-              )}
+              <div style={{ display: 'grid', gap: '0.75rem' }}>
+                {activeGroup.fields.map((field) => (
+                  <label key={field.key} className="form-field" style={{ display: 'grid', gap: '0.4rem' }}>
+                    <span>
+                      {t(field.labelKey)}
+                      {field.required ? ' *' : ''}
+                    </span>
+                    {field.type === 'boolean' ? (
+                      <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                        <button
+                          type="button"
+                          onClick={() => handleChange(field.key, true)}
+                          style={{
+                            borderRadius: '999px',
+                            padding: '0.55rem 1.2rem',
+                            border: '1px solid #d9d9d9',
+                            background: formData[field.key] === true ? '#fde8df' : '#ffffff',
+                            color: '#0f172a',
+                            fontWeight: 600,
+                            cursor: 'pointer'
+                          }}
+                        >
+                          {t('profile.options.yes')}
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => handleChange(field.key, false)}
+                          style={{
+                            borderRadius: '999px',
+                            padding: '0.55rem 1.2rem',
+                            border: '1px solid #d9d9d9',
+                            background: formData[field.key] === false ? '#fde8df' : '#ffffff',
+                            color: '#0f172a',
+                            fontWeight: 600,
+                            cursor: 'pointer'
+                          }}
+                        >
+                          {t('profile.options.no')}
+                        </button>
+                      </div>
+                    ) : field.type === 'select' ? (
+                      <select
+                        className="text-input"
+                        value={typeof formData[field.key] === 'string' ? (formData[field.key] as string) : ''}
+                        onChange={(event) => handleChange(field.key, event.target.value)}
+                      >
+                        <option value="">{t('profile.options.select')}</option>
+                        {field.options?.map((option) => (
+                          <option key={option.value} value={option.value}>
+                            {t(option.labelKey)}
+                          </option>
+                        ))}
+                      </select>
+                    ) : (
+                      <input
+                        className="text-input"
+                        type={field.type}
+                        value={typeof formData[field.key] === 'string' ? (formData[field.key] as string) : ''}
+                        onChange={(event) => handleChange(field.key, event.target.value)}
+                      />
+                    )}
+                  </label>
+                ))}
+              </div>
 
-              {activeField.required && (
-                <span style={{ color: '#94a3b8', fontSize: '0.85rem' }}>{t('profile.onboarding.requiredHint')}</span>
-              )}
+              <span style={{ color: '#94a3b8', fontSize: '0.85rem' }}>{t('profile.onboarding.requiredHint')}</span>
 
-              {activeField.key === 'account.password_confirm' &&
-                formData['account.password'] &&
+              {formData['account.password'] &&
                 formData['account.password_confirm'] &&
                 formData['account.password'] !== formData['account.password_confirm'] && (
                   <p style={{ margin: 0, color: '#B42318', fontWeight: 600 }}>{t('profile.passwordMismatch')}</p>
@@ -335,7 +356,7 @@ export default function ProfileOnboardingPage() {
                   </Button>
                   <Button
                     onClick={handleNext}
-                    disabled={activeField.required ? !isFieldComplete(activeField) : false}
+                    disabled={!isGroupComplete()}
                     style={{ padding: '0.3rem 0.55rem', fontSize: '0.74rem' }}
                   >
                     {stepIndex === totalSteps - 1 ? t('profile.actions.finish') : t('profile.actions.next')}
