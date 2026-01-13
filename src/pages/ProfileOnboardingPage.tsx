@@ -5,7 +5,8 @@ import Card from '@/components/ui/Card'
 import Button from '@/components/ui/Button'
 import { useI18n } from '@/i18n/I18nContext'
 import lkwFahrerImage from '@/assets/images/lkw_fahrer.png'
-import ffhvImage from '@/assets/images/ffhv.png'
+import ffhvImage from '@/assets/images/ffhv_helv.png'
+import ffhvTextImage from '@/assets/images/ffhv_helv_text.png'
 
 type FieldType = 'text' | 'email' | 'password' | 'tel' | 'boolean' | 'select'
 
@@ -67,7 +68,7 @@ function IllustrationPanel({ image, secondaryImage }: { image: string; secondary
           borderRadius: '22px',
           border: '1px solid #e2e8f0',
           overflow: 'hidden',
-          background: '#ffffff',
+          background: 'transparent',
           width: '100%',
           flex: 1
         }}
@@ -75,7 +76,7 @@ function IllustrationPanel({ image, secondaryImage }: { image: string; secondary
         <img
           src={image}
           alt=""
-          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+          style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block', background: 'transparent' }}
         />
       </div>
       <div
@@ -83,7 +84,7 @@ function IllustrationPanel({ image, secondaryImage }: { image: string; secondary
           borderRadius: '22px',
           border: '1px solid #e2e8f0',
           overflow: 'hidden',
-          background: '#ffffff',
+          background: 'transparent',
           width: '100%',
           flex: 1
         }}
@@ -91,7 +92,7 @@ function IllustrationPanel({ image, secondaryImage }: { image: string; secondary
         <img
           src={secondaryImage}
           alt=""
-          style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block', background: '#ffffff' }}
+          style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block', background: 'transparent' }}
         />
       </div>
     </div>
@@ -127,9 +128,9 @@ export default function ProfileOnboardingPage() {
   )
   const totalSteps = groups.length
   const activeGroup = groups[stepIndex]
-  const stepImages = useMemo(() => [lkwFahrerImage, ffhvImage], [])
+  const stepImages = useMemo(() => [ffhvImage], [])
   const activeImage = stepImages[stepIndex % stepImages.length]
-  const secondaryImage = ffhvImage
+  const secondaryImage = ffhvTextImage
 
   const progressPercent = Math.round(((stepIndex + 1) / totalSteps) * 100)
 
