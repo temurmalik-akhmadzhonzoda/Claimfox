@@ -204,7 +204,7 @@ export default function ProfileOnboardingPage() {
             alignItems: 'stretch'
           }}
         >
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', height: '100%' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <Card>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem' }}>
@@ -220,7 +220,7 @@ export default function ProfileOnboardingPage() {
               </div>
             </Card>
 
-            <Card style={{ flex: 1 }}>
+            <Card style={{ flexShrink: 0 }}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.9rem' }}>
               <div>
                 <span
