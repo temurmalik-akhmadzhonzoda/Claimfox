@@ -126,6 +126,18 @@ function getQicContent(lang: 'de' | 'en') {
             'Was definiert aus QIC-Sicht eine erfolgreiche langfristige Partnerschaft mit Insurfox?',
             'Dieser Fragebogen dient dazu, einen strukturierten strategischen Dialog aufzusetzen und konkrete Kooperationsmöglichkeiten zu identifizieren, abgestimmt auf QICs Geschäftsziele, Governance-Standards und langfristige Marktpositionierung.'
           ]
+        },
+        {
+          id: 'XI',
+          title: 'XI. Pricing, Tarification & Integration Readiness',
+          questions: [
+            'How is pricing and premium calculation currently structured within QIC across the relevant lines of business?',
+            'Which organisational functions are responsible for pricing and tariff definition (e.g. actuarial, underwriting, central pricing units)?',
+            'To what extent is pricing rule-based, model-driven or individually underwritten?',
+            'Which systems or platforms are used today to calculate, approve and apply premiums across the policy lifecycle?',
+            'How are pricing decisions governed, documented and audited?',
+            'From QIC’s perspective, would it be feasible to integrate pricing logic or pricing decision support into an external, controlled insurance platform such as Insurfox, while retaining full ownership, governance and approval authority over pricing decisions?'
+          ]
         }
       ]
     }
@@ -244,6 +256,18 @@ function getQicContent(lang: 'de' | 'en') {
           'Which external developments (technology, regulation, customer behaviour) are most critical for future positioning?',
           'What would define a successful long-term partnership between QIC and Insurfox from QIC’s perspective?',
           'This questionnaire is intended to establish a structured strategic dialogue and identify concrete collaboration opportunities, aligned with QIC’s business objectives, governance standards and long-term market positioning.'
+        ]
+      },
+      {
+        id: 'XI',
+        title: 'XI. Pricing, Tarification & Integration Readiness',
+        questions: [
+          'How is pricing and premium calculation currently structured within QIC across the relevant lines of business?',
+          'Which organisational functions are responsible for pricing and tariff definition (e.g. actuarial, underwriting, central pricing units)?',
+          'To what extent is pricing rule-based, model-driven or individually underwritten?',
+          'Which systems or platforms are used today to calculate, approve and apply premiums across the policy lifecycle?',
+          'How are pricing decisions governed, documented and audited?',
+          'From QIC’s perspective, would it be feasible to integrate pricing logic or pricing decision support into an external, controlled insurance platform such as Insurfox, while retaining full ownership, governance and approval authority over pricing decisions?'
         ]
       }
     ]
