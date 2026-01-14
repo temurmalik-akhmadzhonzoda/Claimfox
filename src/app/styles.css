@@ -1567,28 +1567,22 @@ h6 {
     display: block;
   }
 
-  .cv-print-header img {
-    width: 120px;
-    height: auto;
-    margin-bottom: 12px;
-  }
-
   .cv-print h1 {
     margin: 0 0 0.4rem;
     font-size: 1.6rem;
-    color: #0f172a;
+    color: #0b1b2b;
   }
 
   .cv-print h2 {
     margin: 0 0 0.8rem;
     font-size: 1.2rem;
-    color: #d4380d;
+    color: #0f172a;
   }
 
   .cv-print h3 {
     margin: 1rem 0 0.4rem;
     font-size: 1.05rem;
-    color: #d4380d;
+    color: #1f2a5f;
   }
 
   .cv-print h4 {
@@ -1601,7 +1595,7 @@ h6 {
   .cv-print li {
     font-size: 0.95rem;
     line-height: 1.45;
-    color: #0f172a;
+    color: #1c2430;
   }
 }
 @media (max-width: 1100px) {

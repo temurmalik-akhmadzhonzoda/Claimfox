@@ -3,7 +3,6 @@ import Header from '@/components/ui/Header'
 import Card from '@/components/ui/Card'
 import Button from '@/components/ui/Button'
 import CvAuthGate from '@/components/CvAuthGate'
-import InsurfoxLogo from '@/assets/logos/Insurfox_Logo_colored_dark.png'
 
 export default function CvPage() {
   return (
@@ -143,9 +142,6 @@ export default function CvPage() {
         </div>
 
         <div className="cv-print">
-          <div className="cv-print-header">
-            <img src={InsurfoxLogo} alt="Insurfox" />
-          </div>
           <h1>Lebenslauf</h1>
           <h2>Ralf Mitterbauer</h2>
           <p>IT Product Owner | Produktmanager Software & Plattformen</p>
