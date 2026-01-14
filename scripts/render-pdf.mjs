@@ -10,7 +10,10 @@ const cvPath = path.resolve('cv.html')
 
 await fs.mkdir(distDir, { recursive: true })
 
-const browser = await puppeteer.launch({ headless: 'new' })
+const browser = await puppeteer.launch({
+  headless: 'new',
+  args: ['--disable-crashpad', '--disable-crash-reporter', '--noerrdialogs']
+})
 const page = await browser.newPage()
 
 await page.emulateMediaType('print')

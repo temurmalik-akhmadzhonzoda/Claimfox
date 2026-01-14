@@ -41,6 +41,7 @@ import InsurfoxWhitepaperPage from '@/pages/InsurfoxWhitepaperPage'
 import RequirementsCatalogPage from '@/pages/RequirementsCatalogPage'
 import QuestionsQicPage from '@/pages/QuestionsQicPage'
 import CvPage from '@/pages/CvPage'
+import AnschreibenPage from '@/pages/AnschreibenPage'
 
 function NotFoundRedirect() {
   const { isAuthenticated } = useAuth()
@@ -98,6 +99,7 @@ export default function AppRouter() {
         <Route path="/requirements-catalog" element={<RequirementsCatalogPage />} />
         <Route path="/questions-qic" element={<QuestionsQicPage />} />
         <Route path="/cv" element={<CvPage />} />
+        <Route path="/anschreiben" element={<AnschreibenPage />} />
       </Route>
       <Route path="*" element={<NotFoundRedirect />} />
     </Routes>
