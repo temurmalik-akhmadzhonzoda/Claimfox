@@ -1576,6 +1576,23 @@ h6 {
     display: block;
   }
 
+  .cv-print-combined {
+    display: none;
+  }
+
+  .print-page-break {
+    break-before: page;
+    page-break-before: always;
+  }
+
+  body.print-combined .cv-print {
+    display: none;
+  }
+
+  body.print-combined .cv-print-combined {
+    display: block;
+  }
+
   .cv-print h1 {
     margin: 0 0 0.4rem;
     font-size: 1.6rem;
