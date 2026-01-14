@@ -41,7 +41,7 @@ export default function CvPage() {
               <h3>Profil</h3>
               <p>
                 Tiefes Verständnis für Versicherungsprozesse, Schadensteuerung und Partnernetzwerke, kombiniert mit moderner Produkt-, Plattform-
-                und Microservice-Denke.
+                und Architekturorientierung.
               </p>
               <p>
                 Sehr ausgeprägte Schnittstellenkompetenz zwischen Fachbereichen, IT, agilen Teams und externen Dienstleistern sowie nachgewiesene
@@ -179,7 +179,7 @@ export default function CvPage() {
           <p>
             Erfahrener Product Owner und Product Lead mit langjähriger Verantwortung für die strategische Weiterentwicklung zentraler
             Plattform-, Partner- und Prozesssysteme in komplexen, regulierten Umfeldern. Tiefes Verständnis für Versicherungsprozesse,
-            Schadensteuerung und Partnernetzwerke, kombiniert mit moderner Produkt-, Plattform- und Microservice-Denke.
+            Schadensteuerung und Partnernetzwerke, kombiniert mit moderner Produkt-, Plattform- und Architekturorientierung.
           </p>
           <p>
             Sehr ausgeprägte Schnittstellenkompetenz zwischen Fachbereichen, IT, agilen Teams und externen Dienstleistern sowie nachgewiesene
