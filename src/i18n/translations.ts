@@ -1049,6 +1049,10 @@ export const translations: Record<Lang, TranslationTree> = {
           title: 'Fragen QIC',
           description: 'Questionnaire für die Zusammenarbeit mit Insurfox AI IaaS.'
         },
+        setup: {
+          title: 'Setup',
+          description: 'Zielarchitektur, Plattform-Schichten und Integrationsprinzipien der Insurfox IaaS.'
+        },
         partner: {
           title: 'Partner Manager',
           description: 'Pflege Kontakte zu Gutachtern, Werkstätten und Dienstleistern.'
@@ -2996,6 +3000,10 @@ export const translations: Record<Lang, TranslationTree> = {
         questionsQic: {
           title: 'QIC Questions',
           description: 'Questionnaire for collaboration with Insurfox AI IaaS.'
+        },
+        setup: {
+          title: 'Setup',
+          description: 'Target architecture, platform layers, and integration principles for Insurfox IaaS.'
         },
         partner: {
           title: 'Partner Manager',

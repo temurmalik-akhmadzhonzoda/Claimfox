@@ -31,6 +31,7 @@ type RoleItem = {
     | 'insurfoxWhitepaper'
     | 'requirementsCatalog'
     | 'questionsQic'
+    | 'setup'
   route?: string
   ctaKey?: string
 }
@@ -69,6 +70,7 @@ const PRESENTATION_ITEMS: RoleItem[] = [
 
 const DEVELOPMENT_ITEMS: RoleItem[] = [
   { key: 'mvp', route: '/mvp' },
+  { key: 'setup', route: '/setup' },
   { key: 'aiOnboarding', route: '/ai-onboarding' },
   { key: 'featureTree', route: '/feature-tree', ctaKey: 'roles.cards.featureTree.cta' },
   { key: 'intern', route: '/intern' }

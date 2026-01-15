@@ -1637,7 +1637,7 @@ h6 {
     color: #1f2a5f;
   }
 
-  .cv-print h4 {
+.cv-print h4 {
     margin: 0.4rem 0 0.15rem;
     font-size: 0.95rem;
     color: #0f172a;
@@ -1648,6 +1648,48 @@ h6 {
     font-size: 0.95rem;
     line-height: 1.45;
     color: #1c2430;
+  }
+}
+
+.setup-page {
+  max-width: none;
+  margin: 0;
+}
+
+.setup-shell {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.setup-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.setup-card h3 {
+  margin: 0 0 0.7rem;
+  color: #0f172a;
+}
+
+.setup-card ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.setup-card li {
+  color: #475569;
+  line-height: 1.55;
+  margin-bottom: 0.4rem;
+}
+
+@media (max-width: 980px) {
+  .setup-grid {
+    grid-template-columns: 1fr;
   }
 }
 @media (max-width: 1100px) {
