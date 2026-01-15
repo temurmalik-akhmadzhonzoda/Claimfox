@@ -43,6 +43,7 @@ import QuestionsQicPage from '@/pages/QuestionsQicPage'
 import CvPage from '@/pages/CvPage'
 import AnschreibenPage from '@/pages/AnschreibenPage'
 import SetupPage from '@/pages/SetupPage'
+import StoryblokTestPage from '@/pages/StoryblokTestPage'
 
 function NotFoundRedirect() {
   const { isAuthenticated } = useAuth()
@@ -100,6 +101,7 @@ export default function AppRouter() {
         <Route path="/requirements-catalog" element={<RequirementsCatalogPage />} />
         <Route path="/questions-qic" element={<QuestionsQicPage />} />
         <Route path="/setup" element={<SetupPage />} />
+        <Route path="/storyblok-test" element={<StoryblokTestPage />} />
         <Route path="/cv" element={<CvPage />} />
         <Route path="/anschreiben" element={<AnschreibenPage />} />
       </Route>
