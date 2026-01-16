@@ -19,9 +19,17 @@ export default function ClaimManagerCasePage() {
   const assistantData = useMemo<StoredClaimData | undefined>(() => loadAssistantClaim(), [])
 
   const caseList = useMemo(() => {
-    if (storedClaims.length) return storedClaims
-    if (assistantData) return [assistantData]
-    return DEMO_CLAIMS
+    const combined = [...storedClaims, ...DEMO_CLAIMS]
+    if (assistantData) {
+      combined.unshift(assistantData)
+    }
+    const seen = new Set<string>()
+    return combined.filter((claim) => {
+      const id = claim.claimNumber || ''
+      if (!id || seen.has(id)) return false
+      seen.add(id)
+      return true
+    })
   }, [assistantData, storedClaims])
 
   const resolvedClaimNumber = claimNumber ? decodeURIComponent(claimNumber) : null
