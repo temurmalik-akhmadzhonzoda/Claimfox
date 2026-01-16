@@ -37,7 +37,11 @@ export default function ClaimManagerCasePage() {
         }}
       >
         <div className="roles-hero-inner">
-          <Header title={t('roles.title')} subtitle={t('roles.subtitle')} subtitleColor="rgba(255,255,255,0.82)" />
+          <Header
+            title={t('claimManager.app.caseHeader.title')}
+            subtitle={t('claimManager.app.caseHeader.subtitle')}
+            subtitleColor="rgba(255,255,255,0.82)"
+          />
         </div>
       </div>
       <ClaimManagerPage

@@ -2198,6 +2198,10 @@ export const translations: Record<Lang, TranslationTree> = {
           title: 'Insurfox Schadenmanager',
           subtitle: 'Offene Schadenfälle in Bearbeitung'
         },
+        caseHeader: {
+          title: 'Schadenakte',
+          subtitle: 'Schadenübersicht und Schadenstatus mit KI Entscheidungsvorlagen'
+        },
         header: {
           overline: 'Claim file',
           title: 'Schadenakte',
@@ -4195,6 +4199,10 @@ export const translations: Record<Lang, TranslationTree> = {
         listHeader: {
           title: 'Insurfox Claims Manager',
           subtitle: 'Open claims currently in progress'
+        },
+        caseHeader: {
+          title: 'Claim file',
+          subtitle: 'Claim overview and status with AI decision templates'
         },
         header: {
           overline: 'Claim file',
