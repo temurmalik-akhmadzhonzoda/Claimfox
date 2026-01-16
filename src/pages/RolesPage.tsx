@@ -193,6 +193,18 @@ export default function RolesPage() {
         {renderSection(t('roles.sections.projectLanding'), PROJECT_LANDING_ITEMS)}
         <div className="roles-divider" />
         {renderSection(t('roles.sections.development'), DEVELOPMENT_ITEMS)}
+        <div className="roles-divider" />
+        <div className="roles-section">
+          <h2 style={{ margin: 0 }}>
+            <button
+              type="button"
+              className="roles-section-link"
+              onClick={() => navigate('/internal-docs')}
+            >
+              {t('roles.sections.internalDocs')}
+            </button>
+          </h2>
+        </div>
       </div>
     </section>
   )

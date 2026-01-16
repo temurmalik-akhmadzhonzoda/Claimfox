@@ -47,6 +47,7 @@ import SetupPage from '@/pages/SetupPage'
 import StoryblokTestPage from '@/pages/StoryblokTestPage'
 import LandingSitemapPage from '@/pages/LandingSitemapPage'
 import LandingToolsPage from '@/pages/LandingToolsPage'
+import InternalDocsOverviewPage from '@/pages/InternalDocsOverviewPage'
 
 function NotFoundRedirect() {
   const { isAuthenticated } = useAuth()
@@ -108,6 +109,7 @@ export default function AppRouter() {
         <Route path="/storyblok-test" element={<StoryblokTestPage />} />
         <Route path="/landing/sitemap" element={<LandingSitemapPage />} />
         <Route path="/landing/tools" element={<LandingToolsPage />} />
+        <Route path="/internal-docs" element={<InternalDocsOverviewPage />} />
         <Route path="/cv" element={<CvPage />} />
         <Route path="/anschreiben" element={<AnschreibenPage />} />
       </Route>

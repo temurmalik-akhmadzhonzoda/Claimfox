@@ -982,10 +982,15 @@ export const translations: Record<Lang, TranslationTree> = {
         overview: 'Rollenübersicht',
         processes: 'Prozesse',
         internal: 'Interne Dokumentation',
+        internalDocs: 'Interne Dokumentationen',
         governance: 'Governance',
         presentations: 'Präsentationen',
         development: 'Development',
         projectLanding: 'Projekt Landing Page'
+      },
+      internalDocs: {
+        title: 'Interne Dokumentationen',
+        subtitle: 'Übersicht der internen Inhalte und Ressourcen.'
       },
       overviewGroups: {
         insurance: 'Versicherung',
@@ -2951,10 +2956,15 @@ export const translations: Record<Lang, TranslationTree> = {
         overview: 'Role overview',
         processes: 'Processes',
         internal: 'Internal documentation',
+        internalDocs: 'Internal documentation',
         governance: 'Governance',
         presentations: 'Presentations',
         development: 'Development',
         projectLanding: 'Project landing page'
+      },
+      internalDocs: {
+        title: 'Internal documentation',
+        subtitle: 'Overview of internal materials and resources.'
       },
       overviewGroups: {
         insurance: 'Insurance',
