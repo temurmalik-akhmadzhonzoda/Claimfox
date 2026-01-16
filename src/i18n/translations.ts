@@ -4283,11 +4283,11 @@ export const translations: Record<Lang, TranslationTree> = {
           handlingTime: 'Handling time'
         },
         kpiValues: {
-          totalIncurred: '€12,480',
-          reserve: '€3,200',
-          approved: '€6,210',
+          totalIncurred: '$12,480',
+          reserve: '$3,200',
+          approved: '$6,210',
           openItems: '3',
-          deductible: '€500',
+          deductible: '$500',
           coverage: 'Covered',
           fraudRisk: 'Medium',
           handlingTime: '9 d'
@@ -4350,7 +4350,7 @@ export const translations: Record<Lang, TranslationTree> = {
           term: 'Term',
           termValue: '01 Jan 2024 – 31 Dec 2024',
           limit: 'Limit',
-          limitValue: '€15,000',
+          limitValue: '$15,000',
           exclusion: 'Exclusions',
           exclusionValue: 'Glass breakage excluded',
           covered: 'Covered',

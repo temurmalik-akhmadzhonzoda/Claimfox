@@ -191,7 +191,7 @@ type ClaimAssistantData = {
   descriptionEn?: string
   damageTypeKey?: string
   statusKey?: (typeof timelineSteps)[number]
-  kpiValues?: Partial<Record<(typeof KPI_KEYS)[number], string>> & {
+  kpiValues?: Partial<Record<(typeof KPI_KEYS)[number], string | number>> & {
     coverageEn?: string
     fraudRiskEn?: string
     handlingTimeEn?: string
@@ -201,6 +201,7 @@ type ClaimAssistantData = {
     policyNumber: string
     term: string
     limit: string
+    limitAmount?: number
     limitEn?: string
     exclusion: string
     exclusionEn?: string
@@ -263,9 +264,34 @@ export default function ClaimManagerPage({
     }
   }, [assistantData, isEnglish])
 
+  function formatCurrencyValue(value: number | string | undefined) {
+    if (value === undefined || value === null || value === '') return ''
+    if (typeof value === 'number') {
+      return new Intl.NumberFormat(isEnglish ? 'en-US' : 'de-DE', {
+        style: 'currency',
+        currency: isEnglish ? 'USD' : 'EUR',
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
+      }).format(value)
+    }
+    const numeric = Number(String(value).replace(/[^\d.-]/g, ''))
+    if (Number.isFinite(numeric)) {
+      return new Intl.NumberFormat(isEnglish ? 'en-US' : 'de-DE', {
+        style: 'currency',
+        currency: isEnglish ? 'USD' : 'EUR',
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
+      }).format(numeric)
+    }
+    return value
+  }
+
   function resolveKpiValue(key: (typeof KPI_KEYS)[number]) {
     if (!assistantData?.kpiValues) {
       return t(`claimManager.app.kpiValues.${key}`)
+    }
+    if (['totalIncurred', 'reserve', 'approved', 'deductible'].includes(key)) {
+      return formatCurrencyValue(assistantData.kpiValues[key])
     }
     if (key === 'coverage') {
       return isEnglish
@@ -314,9 +340,11 @@ export default function ClaimManagerPage({
     () => ({
       policyNumber: assistantData?.coverage?.policyNumber || t('claimManager.app.coverage.policyValue'),
       term: assistantData?.coverage?.term || t('claimManager.app.coverage.termValue'),
-      limit: isEnglish
-        ? assistantData?.coverage?.limitEn || assistantData?.coverage?.limit || t('claimManager.app.coverage.limitValue')
-        : assistantData?.coverage?.limit || t('claimManager.app.coverage.limitValue'),
+      limit: assistantData?.coverage?.limitAmount
+        ? formatCurrencyValue(assistantData.coverage.limitAmount)
+        : isEnglish
+          ? assistantData?.coverage?.limitEn || assistantData?.coverage?.limit || t('claimManager.app.coverage.limitValue')
+          : assistantData?.coverage?.limit || t('claimManager.app.coverage.limitValue'),
       exclusion: isEnglish
         ? assistantData?.coverage?.exclusionEn || assistantData?.coverage?.exclusion || t('claimManager.app.coverage.exclusionValue')
         : assistantData?.coverage?.exclusion || t('claimManager.app.coverage.exclusionValue'),
@@ -327,6 +355,11 @@ export default function ClaimManagerPage({
     }),
     [assistantData, isEnglish, t]
   )
+
+  function parseCurrencyInput(value: string) {
+    const numeric = Number(value.replace(/[^\d.-]/g, ''))
+    return Number.isFinite(numeric) ? numeric : 0
+  }
 
   function handleCostChange(id: string, field: keyof CostItem, value: string) {
     setCostItems((prev) =>
@@ -627,9 +660,11 @@ export default function ClaimManagerPage({
                       <td style={{ padding: '0.6rem 0.4rem', color: TEXT_COLORS.secondary }}>{t(`claimManager.app.costs.items.${item.labelKey}`)}</td>
                       <td style={{ padding: '0.6rem 0.4rem' }}>
                         <input
-                          type="number"
-                          value={item.amount}
-                          onChange={(event) => handleCostChange(item.id, 'amount', event.target.value)}
+                          type="text"
+                          value={formatCurrencyValue(item.amount)}
+                          onChange={(event) =>
+                            handleCostChange(item.id, 'amount', String(parseCurrencyInput(event.target.value)))
+                          }
                           style={{
                             width: '100%',
                             borderRadius: '14px',

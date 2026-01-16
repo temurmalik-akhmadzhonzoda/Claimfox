@@ -22,7 +22,7 @@ export type ClaimCoverage = {
   policyNumber: string
   term: string
   limit: string
-  limitEn?: string
+  limitAmount?: number
   exclusion: string
   exclusionEn?: string
   covered: boolean
@@ -31,11 +31,11 @@ export type ClaimCoverage = {
 }
 
 export type ClaimKpiValues = {
-  totalIncurred: string
-  reserve: string
-  approved: string
+  totalIncurred: number | string
+  reserve: number | string
+  approved: number | string
   openItems: string
-  deductible: string
+  deductible: number | string
   coverage: string
   coverageEn?: string
   fraudRisk: string
@@ -827,11 +827,12 @@ function buildCostItems(seed: number): ClaimCostItem[] {
 
 function buildCoverage(seed: number): ClaimCoverage {
   const covered = seed % 6 !== 0
+  const limitAmount = 50000 + seed * 900
   return {
     policyNumber: `POL-${2024 + (seed % 2)}-${8000 + seed}`,
     term: covered ? '01.01.2025 - 31.12.2025' : '01.07.2024 - 30.06.2025',
-    limit: formatEuro(50000 + seed * 900),
-    limitEn: formatEuro(50000 + seed * 900),
+    limit: formatEuro(limitAmount),
+    limitAmount,
     exclusion: covered ? 'Keine Ausschlüsse relevant' : 'Abzug aufgrund Sonderregelung',
     exclusionEn: covered ? 'No exclusions applicable' : 'Deduction due to special clause',
     covered,
@@ -850,11 +851,11 @@ function buildKpis(seed: number): ClaimKpiValues {
   const coverage = seed % 6 === 0 ? 'Teilgedeckt' : 'Gedeckt'
   const coverageEn = seed % 6 === 0 ? 'Partially covered' : 'Covered'
   return {
-    totalIncurred: formatEuro(total),
-    reserve: formatEuro(reserve),
-    approved: formatEuro(approved),
+    totalIncurred: total,
+    reserve,
+    approved,
     openItems: `${2 + (seed % 5)}`,
-    deductible: formatEuro(deductible),
+    deductible,
     coverage,
     coverageEn,
     fraudRisk: fraudLevels[seed % fraudLevels.length],
