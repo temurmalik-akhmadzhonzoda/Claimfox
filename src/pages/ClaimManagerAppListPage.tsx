@@ -2,6 +2,7 @@ import React, { useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Button from '@/components/ui/Button'
 import Card from '@/components/ui/Card'
+import Header from '@/components/ui/Header'
 import { useI18n } from '@/i18n/I18nContext'
 import {
   DEMO_CLAIMS,
@@ -9,6 +10,7 @@ import {
   loadClaims,
   StoredClaimData
 } from '@/data/claimManagerClaims'
+import HeroBlockBackground from '@/assets/images/hero_block_1.png'
 
 const CARD_STYLE: React.CSSProperties = {
   background: '#ffffff',
@@ -32,15 +34,18 @@ export default function ClaimManagerAppListPage() {
   }, [assistantData, storedClaims])
 
   return (
-    <section
-      style={{
-        minHeight: '100vh',
-        width: '100%',
-        color: '#0e0d1c',
-        padding: '32px 1.25rem 4rem'
-      }}
-    >
-      <div style={{ width: '100%', maxWidth: 1200, margin: '0 auto' }}>
+    <section style={{ minHeight: '100vh', width: '100%', color: '#0e0d1c' }}>
+      <div
+        className="roles-hero"
+        style={{
+          backgroundImage: `linear-gradient(135deg, rgba(7, 20, 74, 0.9) 0%, rgba(11, 45, 122, 0.9) 100%), url(${HeroBlockBackground})`
+        }}
+      >
+        <div className="roles-hero-inner">
+          <Header title={t('roles.title')} subtitle={t('roles.subtitle')} subtitleColor="rgba(255,255,255,0.82)" />
+        </div>
+      </div>
+      <div style={{ width: '100%', maxWidth: 1200, margin: '0 auto', padding: '32px 1.25rem 4rem' }}>
         <Card style={CARD_STYLE}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <div>
@@ -59,14 +64,6 @@ export default function ClaimManagerAppListPage() {
               >
                 {t('header.logout')}
               </Button>
-            </div>
-            <div>
-              <h1 style={{ margin: 0, fontSize: '1.8rem', fontWeight: 600, color: 'var(--insurfox-orange)' }}>
-                {t('claimManager.app.caseList.title')}
-              </h1>
-              <p style={{ margin: '0.4rem 0 0', color: '#64748b' }}>
-                {t('claimManager.app.caseList.subtitle')}
-              </p>
             </div>
             {caseList.length ? (
               <div style={{ overflowX: 'auto' }}>

@@ -7,9 +7,13 @@ import {
   loadClaims,
   StoredClaimData
 } from '@/data/claimManagerClaims'
+import Header from '@/components/ui/Header'
+import HeroBlockBackground from '@/assets/images/hero_block_1.png'
+import { useI18n } from '@/i18n/I18nContext'
 
 export default function ClaimManagerCasePage() {
   const navigate = useNavigate()
+  const { t } = useI18n()
   const { claimNumber } = useParams()
   const storedClaims = useMemo(() => loadClaims(), [])
   const assistantData = useMemo<StoredClaimData | undefined>(() => loadAssistantClaim(), [])
@@ -25,10 +29,22 @@ export default function ClaimManagerCasePage() {
     caseList.find((claim) => claim.claimNumber && claim.claimNumber === resolvedClaimNumber) ?? caseList[0]
 
   return (
-    <ClaimManagerPage
-      assistantData={selectedClaim}
-      fullWidth
-      onBack={() => navigate('/claim-manager-app')}
-    />
+    <>
+      <div
+        className="roles-hero"
+        style={{
+          backgroundImage: `linear-gradient(135deg, rgba(7, 20, 74, 0.9) 0%, rgba(11, 45, 122, 0.9) 100%), url(${HeroBlockBackground})`
+        }}
+      >
+        <div className="roles-hero-inner">
+          <Header title={t('roles.title')} subtitle={t('roles.subtitle')} subtitleColor="rgba(255,255,255,0.82)" />
+        </div>
+      </div>
+      <ClaimManagerPage
+        assistantData={selectedClaim}
+        fullWidth
+        onBack={() => navigate('/claim-manager-app')}
+      />
+    </>
   )
 }

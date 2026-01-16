@@ -290,12 +290,6 @@ export default function ClaimManagerPage({
           {caseList}
           <Card style={{ ...CARD_STYLE, padding: '2rem' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-              <span style={{ letterSpacing: '0.4em', fontSize: '0.75rem', color: TEXT_COLORS.muted, textTransform: 'uppercase' }}>
-                {t('claimManager.app.header.overline')}
-              </span>
-              <h1 style={{ margin: 0, fontSize: 'clamp(2.5rem, 4vw, 3.5rem)', fontWeight: 600, color: 'var(--insurfox-orange)' }}>
-                {t('claimManager.app.header.title')}
-              </h1>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center', color: TEXT_COLORS.secondary }}>
                 <span>
                   {t('claimManager.app.header.claimId')}:{' '}
