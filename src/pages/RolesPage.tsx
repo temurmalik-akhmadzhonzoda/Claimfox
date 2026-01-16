@@ -137,6 +137,34 @@ export default function RolesPage() {
     )
   }
 
+  function renderOverview() {
+    return (
+      <div className="roles-section">
+        <h2 style={{ margin: 0 }}>{t('roles.sections.overview')}</h2>
+        <div className="roles-subsection">
+          <h3>{t('roles.overviewGroups.insurance')}</h3>
+          <div className="roles-grid">
+            {['claims', 'partner'].map((key) => renderCard(OVERVIEW_ITEMS.find((item) => item.key === key)!))}
+          </div>
+        </div>
+        <div className="roles-subsection">
+          <h3>{t('roles.overviewGroups.fleet')}</h3>
+          <div className="roles-grid">
+            {['reporting', 'fleetManagement'].map((key) => renderCard(OVERVIEW_ITEMS.find((item) => item.key === key)!))}
+          </div>
+        </div>
+        <div className="roles-subsection">
+          <h3>{t('roles.overviewGroups.logistics')}</h3>
+          <div className="roles-grid">{['logistics'].map((key) => renderCard(OVERVIEW_ITEMS.find((item) => item.key === key)!))}</div>
+        </div>
+        <div className="roles-subsection">
+          <h3>{t('roles.overviewGroups.broker')}</h3>
+          <div className="roles-grid">{['brokerPortal'].map((key) => renderCard(OVERVIEW_ITEMS.find((item) => item.key === key)!))}</div>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <section className="page roles-page">
       <div className="roles-container">
@@ -154,7 +182,7 @@ export default function RolesPage() {
             />
           </div>
         </div>
-        {renderSection(t('roles.sections.overview'), OVERVIEW_ITEMS)}
+        {renderOverview()}
         <div className="roles-divider" />
         {renderSection(t('roles.sections.processes'), PROCESS_ITEMS)}
         <div className="roles-divider" />

@@ -987,6 +987,12 @@ export const translations: Record<Lang, TranslationTree> = {
         development: 'Development',
         projectLanding: 'Projekt Landing Page'
       },
+      overviewGroups: {
+        insurance: 'Versicherung',
+        fleet: 'Flotte',
+        logistics: 'Spedition / Logistik',
+        broker: 'Makler'
+      },
       internalAuth: {
         title: 'Interne Dokumentation',
         subtitle: 'Bitte Zugangsdaten eingeben, um fortzufahren.',
@@ -2947,6 +2953,12 @@ export const translations: Record<Lang, TranslationTree> = {
         presentations: 'Presentations',
         development: 'Development',
         projectLanding: 'Project landing page'
+      },
+      overviewGroups: {
+        insurance: 'Insurance',
+        fleet: 'Fleet',
+        logistics: 'Logistics',
+        broker: 'Broker'
       },
       internalAuth: {
         title: 'Internal documentation',
