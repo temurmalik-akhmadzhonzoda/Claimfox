@@ -57,7 +57,7 @@ export default function ClaimManagerAppListPage() {
                   fontWeight: 600
                 }}
               >
-                {t('claimManager.app.actions.backToList')}
+                {t('header.logout')}
               </Button>
             </div>
             <div>

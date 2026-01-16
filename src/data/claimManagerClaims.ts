@@ -355,7 +355,15 @@ export function loadClaims() {
     const raw = window.localStorage.getItem(CLAIMS_LIST_KEY)
     if (!raw) return []
     const parsed = JSON.parse(raw) as StoredClaimData[]
-    return Array.isArray(parsed) ? parsed : []
+    if (!Array.isArray(parsed)) return []
+    const merged = [...parsed, ...DEMO_CLAIMS]
+    const seen = new Set<string>()
+    return merged.filter((claim) => {
+      const id = claim.claimNumber || ''
+      if (!id || seen.has(id)) return false
+      seen.add(id)
+      return true
+    })
   } catch {
     return []
   }
