@@ -113,8 +113,8 @@ export default function HomePage() {
             <button type="button" onClick={() => navigate('/insurance')}>{copy.nav.insurance}</button>
             <button type="button" onClick={() => navigate('/broker-portal')}>{copy.nav.broker}</button>
             <button type="button" onClick={() => navigate('/logistics')}>{copy.nav.logistics}</button>
-            <button type="button" onClick={() => navigate('/fleet-management')}>{copy.nav.fleet}</button>
-            <button type="button" onClick={() => navigate('/partner-management-overview')}>{copy.nav.partner}</button>
+            <button type="button" onClick={() => navigate('/fleet')}>{copy.nav.fleet}</button>
+            <button type="button" onClick={() => navigate('/partner')}>{copy.nav.partner}</button>
             <div className="home-marketing-lang-switch" role="group" aria-label="Language switch">
               <button type="button" className={lang === 'de' ? 'is-active' : ''} onClick={() => setLang('de')}>
                 DE

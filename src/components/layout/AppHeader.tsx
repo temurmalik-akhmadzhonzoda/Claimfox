@@ -31,8 +31,8 @@ export default function AppHeader() {
     { label: 'Versicherungen', route: '/insurance' },
     { label: 'Makler', route: '/broker-portal' },
     { label: 'Logistik', route: '/logistics' },
-    { label: 'Flotte', route: '/fleet-management' },
-    { label: 'Partner', route: '/partner-management-overview' }
+    { label: 'Flotte', route: '/fleet' },
+    { label: 'Partner', route: '/partner' }
   ]
 
   return (
