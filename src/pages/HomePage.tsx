@@ -20,9 +20,14 @@ export default function HomePage() {
             <button type="button" onClick={() => navigate('/logistics')}>Logistik</button>
             <button type="button" onClick={() => navigate('/fleet-management')}>Flotte</button>
             <button type="button" onClick={() => navigate('/partner-management-overview')}>Partner</button>
-            <Button onClick={() => navigate('/login')} style={{ padding: '0.6rem 1.4rem' }}>
+            <Button onClick={() => navigate('/login')} className="home-marketing-login" style={{ padding: '0.6rem 1.4rem' }}>
               Anmelden
             </Button>
+            <button type="button" className="home-marketing-menu" aria-label="Menü öffnen">
+              <span />
+              <span />
+              <span />
+            </button>
           </nav>
         </div>
       </header>
