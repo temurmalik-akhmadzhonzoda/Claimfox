@@ -519,6 +519,12 @@ h6 {
     display: inline-flex;
     padding: 0.45rem 1rem !important;
     font-size: 0.85rem;
+    min-width: 38px;
+    justify-content: center;
+  }
+
+  .home-marketing-login-text {
+    display: none;
   }
 
   .home-marketing-menu {

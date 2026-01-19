@@ -15,13 +15,17 @@ export default function HomePage() {
         <div className="home-marketing-header-inner">
           <img src={InsurfoxLogo} alt="Insurfox" className="home-marketing-logo" />
           <nav className="home-marketing-nav">
-            <button type="button" onClick={() => navigate('/roles')}>Versicherungen</button>
+            <button type="button" onClick={() => navigate('/insurance')}>Versicherungen</button>
             <button type="button" onClick={() => navigate('/broker-portal')}>Makler</button>
             <button type="button" onClick={() => navigate('/logistics')}>Logistik</button>
             <button type="button" onClick={() => navigate('/fleet-management')}>Flotte</button>
             <button type="button" onClick={() => navigate('/partner-management-overview')}>Partner</button>
-            <Button onClick={() => navigate('/login')} className="home-marketing-login" style={{ padding: '0.6rem 1.4rem' }}>
-              Anmelden
+            <Button onClick={() => navigate('/login')} className="home-marketing-login" style={{ padding: '0.5rem 1.1rem' }}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="8" r="4" />
+                <path d="M4 20c1.8-3.5 5-6 8-6s6.2 2.5 8 6" />
+              </svg>
+              <span className="home-marketing-login-text">Anmelden</span>
             </Button>
             <button type="button" className="home-marketing-menu" aria-label="Menü öffnen">
               <span />

@@ -27,6 +27,7 @@ import PartnerManagementPartsPage from '@/pages/PartnerManagementPartsPage'
 import FeatureTreePage from '@/pages/FeatureTreePage'
 import GetQuotePage from '@/pages/GetQuotePage'
 import LogisticsLandingPage from '@/pages/LogisticsLandingPage'
+import InsuranceLandingPage from '@/pages/InsuranceLandingPage'
 import LogisticsAppPage from '@/pages/LogisticsAppPage'
 import MvpPage from '@/pages/MvpPage'
 import PolicyPurchasePage from '@/pages/PolicyPurchasePage'
@@ -97,6 +98,7 @@ export default function AppRouter() {
         <Route path="/feature-tree" element={<FeatureTreePage />} />
         <Route path="/get-quote" element={<GetQuotePage />} />
         <Route path="/logistics" element={<LogisticsLandingPage />} />
+        <Route path="/insurance" element={<InsuranceLandingPage />} />
         <Route path="/logistics-app" element={<LogisticsAppPage />} />
         <Route path="/mvp" element={<MvpPage />} />
         <Route path="/policy-purchase" element={<PolicyPurchasePage />} />
