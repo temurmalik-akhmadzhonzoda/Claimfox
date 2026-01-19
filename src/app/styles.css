@@ -249,7 +249,7 @@ h6 {
 }
 
 .home-marketing-logo {
-  height: 34px;
+  height: 48px;
 }
 
 .home-marketing-nav {
@@ -343,11 +343,13 @@ h6 {
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: 520px;
 }
 
 .home-hero-image {
   display: block;
-  height: auto;
+  height: 100%;
+  width: 100%;
   object-fit: contain;
 }
 
@@ -360,6 +362,12 @@ h6 {
   height: 100%;
   pointer-events: none;
   mix-blend-mode: normal;
+}
+
+@media (max-width: 900px) {
+  .home-hero-media {
+    min-height: 360px;
+  }
 }
 
 .home-value,
