@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import Card from '@/components/ui/Card'
 import Button from '@/components/ui/Button'
 import { useI18n } from '@/i18n/I18nContext'
-import HeroBlockBackground from '@/assets/images/hero_block_1.png'
+import HomeHeroBackground from '@/assets/images/Home1.png'
+import LogisticsHeroImage from '@/assets/images/logistik_portal.png'
 
 const KPI_KEYS = ['liveShipments', 'coverageRate', 'openIncidents', 'etaDeviation'] as const
 const FEATURE_KEYS = ['realtime', 'coverage', 'incidents', 'thirdparty', 'ai', 'routes'] as const
@@ -56,17 +57,6 @@ const featureIcons: Record<(typeof FEATURE_KEYS)[number], React.ReactNode> = {
 const previewBars = [68, 92, 78, 84, 73, 96]
 const PREVIEW_VALUE_KEYS = ['eta', 'temp', 'customs'] as const
 
-const heroBlockStyle: React.CSSProperties = {
-  backgroundImage: `linear-gradient(135deg, rgba(7, 20, 74, 0.9) 0%, rgba(11, 45, 122, 0.9) 100%), url(${HeroBlockBackground})`,
-  backgroundSize: 'cover',
-  backgroundPosition: 'center',
-  padding: '2.5rem clamp(1rem, 4vw, 3rem)',
-  color: '#ffffff',
-  boxShadow: '0 30px 70px rgba(11, 28, 108, 0.25)',
-  width: '100vw',
-  marginLeft: 'calc(50% - 50vw)'
-}
-
 export default function LogisticsLandingPage() {
   const { t } = useI18n()
   const navigate = useNavigate()
@@ -81,66 +71,61 @@ export default function LogisticsLandingPage() {
       }}
     >
       <div style={{ width: '100%', maxWidth: 1220, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
-        <div style={heroBlockStyle}>
-          <div style={{ width: '100%', maxWidth: 1220, margin: '0 auto' }}>
-          <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
-            <Button
-              onClick={() => navigate('/logistics-app')}
-              style={{ background: '#ffffff', color: '#0b1c6c', padding: '0.65rem 1.5rem', borderRadius: '999px', fontWeight: 600 }}
-            >
-              {t('logisticsLanding.login')}
-            </Button>
-          </div>
-
-          <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center', marginTop: '1.5rem' }}>
-            <p style={{ margin: 0, letterSpacing: '0.32em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.72)' }}>
-              {t('logisticsLanding.badge')}
-            </p>
-            <h1 style={{ margin: 0, fontSize: 'clamp(2.8rem, 5vw, 3.8rem)', fontWeight: 700 }}>{t('logisticsLanding.title')}</h1>
-            <p style={{ margin: 0, maxWidth: '840px', color: 'rgba(255,255,255,0.82)', fontSize: '1.2rem' }}>
-              {t('logisticsLanding.subtitle')}
-            </p>
-          </div>
-
+        <div
+          style={{
+            position: 'relative',
+            backgroundImage: `linear-gradient(135deg, rgba(7, 20, 74, 0.9) 0%, rgba(11, 45, 122, 0.9) 100%), url(${HomeHeroBackground})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            padding: '3.5rem clamp(1.5rem, 4vw, 3.25rem)',
+            color: '#ffffff',
+            boxShadow: '0 30px 70px rgba(11, 28, 108, 0.25)',
+            width: '100vw',
+            marginLeft: 'calc(50% - 50vw)'
+          }}
+        >
           <div
             style={{
+              width: '100%',
+              maxWidth: 1220,
+              margin: '0 auto',
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
-              gap: '1rem',
-              marginTop: '2rem'
+              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gap: '2.5rem',
+              alignItems: 'center'
             }}
           >
-            {KPI_KEYS.map((key) => (
-              <Card
-                key={key}
-                variant="glass"
-                style={{
-                  padding: '1.1rem',
-                  minHeight: '120px',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '0.4rem',
-                  background: 'rgba(255,255,255,0.12)',
-                  border: '1px solid rgba(255,255,255,0.24)',
-                  color: '#ffffff'
-                }}
-              >
-                <p
-                  style={{
-                    margin: 0,
-                    color: 'rgba(255,255,255,0.7)',
-                    letterSpacing: '0.08em',
-                    textTransform: 'uppercase',
-                    fontSize: '0.85rem'
-                  }}
-                >
-                  {t(`logisticsLanding.kpi.${key}`)}
-                </p>
-                <p style={{ margin: 0, fontSize: '2rem', fontWeight: 700 }}>{t(`logisticsLanding.kpiValues.${key}`)}</p>
-              </Card>
-            ))}
+            <div style={{ textAlign: 'left' }}>
+              <p style={{ margin: 0, letterSpacing: '0.32em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.72)' }}>
+                {t('logisticsLanding.badge')}
+              </p>
+              <h1 style={{ margin: '0.75rem 0 0', fontSize: 'clamp(2.8rem, 5vw, 3.8rem)', fontWeight: 700, color: 'var(--insurfox-orange)' }}>
+                {t('logisticsLanding.title')}
+              </h1>
+              <p style={{ marginTop: '1rem', maxWidth: '720px', color: 'rgba(255,255,255,0.82)', fontSize: '1.2rem' }}>
+                {t('logisticsLanding.subtitle')}
+              </p>
+            </div>
+            <div
+              style={{
+                background: '#ffffff',
+                borderRadius: '24px',
+                padding: '1.5rem',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                boxShadow: '0 30px 70px rgba(11, 28, 108, 0.25)',
+                border: '1px solid rgba(148, 163, 184, 0.2)',
+                aspectRatio: '1 / 1',
+                maxWidth: '420px',
+                width: '100%',
+                justifySelf: 'end'
+              }}
+            >
+              <img src={LogisticsHeroImage} alt="Logistikportal" style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }} />
+            </div>
           </div>
-          </div>
+          <span style={{ position: 'absolute', left: 0, bottom: 0, width: 260, height: 4, background: '#d4380d' }} />
         </div>
 
         <div
