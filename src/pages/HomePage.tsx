@@ -137,6 +137,7 @@ export default function HomePage() {
               }}
               className="home-marketing-login"
               style={{ padding: '0.5rem 1.1rem' }}
+              disableHover
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="8" r="4" />

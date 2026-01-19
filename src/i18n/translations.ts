@@ -13,6 +13,13 @@ type TranslationTree = {
   header: {
     login: string
     logout: string
+    nav: {
+      insurance: string
+      broker: string
+      logistics: string
+      fleet: string
+      partner: string
+    }
   }
   roles: {
       title: string
@@ -967,7 +974,14 @@ export const translations: Record<Lang, TranslationTree> = {
     },
     header: {
       login: 'Login',
-      logout: 'Logout'
+      logout: 'Logout',
+      nav: {
+        insurance: 'Versicherungen',
+        broker: 'Makler',
+        logistics: 'Logistik',
+        fleet: 'Flotte',
+        partner: 'Partner'
+      }
     },
     roles: {
       title: 'Insurfox AI IaaS',
@@ -3040,7 +3054,14 @@ export const translations: Record<Lang, TranslationTree> = {
     },
     header: {
       login: 'Login',
-      logout: 'Logout'
+      logout: 'Logout',
+      nav: {
+        insurance: 'Insurance',
+        broker: 'Broker',
+        logistics: 'Logistics',
+        fleet: 'Fleet',
+        partner: 'Partner'
+      }
     },
     roles: {
       title: 'Insurfox AI IaaS',

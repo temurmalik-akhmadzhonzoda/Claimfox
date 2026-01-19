@@ -2,6 +2,7 @@ import React from 'react'
 
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: 'primary' | 'secondary'
+  disableHover?: boolean
 }
 
 const VARIANT_STYLES: Record<'primary' | 'secondary', React.CSSProperties> = {
@@ -22,6 +23,7 @@ export default function Button({
   style,
   variant = 'primary',
   type,
+  disableHover = false,
   ...props
 }: ButtonProps) {
   const isDisabled = Boolean(props.disabled)
@@ -53,28 +55,28 @@ export default function Button({
       }}
       onMouseEnter={(event) => {
         props.onMouseEnter?.(event)
-        if (!isDisabled && variant === 'primary') {
+        if (!isDisabled && variant === 'primary' && !disableHover) {
           event.currentTarget.style.backgroundColor = '#b9300b'
         }
       }}
       onMouseLeave={(event) => {
         props.onMouseLeave?.(event)
-        if (!isDisabled && variant === 'primary') {
+        if (!isDisabled && variant === 'primary' && !disableHover) {
           event.currentTarget.style.backgroundColor = '#d4380d'
         }
-        if (!isDisabled) {
+        if (!isDisabled && !disableHover) {
           event.currentTarget.style.transform = 'translateY(0)'
         }
       }}
       onMouseDown={(event) => {
         props.onMouseDown?.(event)
-        if (!isDisabled) {
+        if (!isDisabled && !disableHover) {
           event.currentTarget.style.transform = 'translateY(1px)'
         }
       }}
       onMouseUp={(event) => {
         props.onMouseUp?.(event)
-        if (!isDisabled) {
+        if (!isDisabled && !disableHover) {
           event.currentTarget.style.transform = 'translateY(0)'
         }
       }}

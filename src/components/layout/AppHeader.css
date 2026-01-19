@@ -101,10 +101,6 @@
   color: #ffffff;
 }
 
-.app-header__lang-btn:hover {
-  color: #0e0d1c;
-}
-
 .app-header__auth-btn {
   border: 1px solid #d9d9d9;
   background: #ffffff;
@@ -115,11 +111,6 @@
   font-weight: 600;
   cursor: pointer;
   transition: color 0.2s ease, border-color 0.2s ease;
-}
-
-.app-header__auth-btn:hover {
-  color: #0e0d1c;
-  border-color: #bdbdbd;
 }
 
 @media (max-width: 640px) {

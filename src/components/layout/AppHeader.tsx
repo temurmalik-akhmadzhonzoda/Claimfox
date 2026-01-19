@@ -28,11 +28,11 @@ export default function AppHeader() {
   }
 
   const navItems = [
-    { label: 'Versicherungen', route: '/insurance' },
-    { label: 'Makler', route: '/broker-portal' },
-    { label: 'Logistik', route: '/logistics' },
-    { label: 'Flotte', route: '/fleet' },
-    { label: 'Partner', route: '/partner' }
+    { label: t('header.nav.insurance'), route: '/insurance' },
+    { label: t('header.nav.broker'), route: '/broker-portal' },
+    { label: t('header.nav.logistics'), route: '/logistics' },
+    { label: t('header.nav.fleet'), route: '/fleet' },
+    { label: t('header.nav.partner'), route: '/partner' }
   ]
 
   return (
