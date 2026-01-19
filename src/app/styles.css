@@ -267,13 +267,19 @@ h6 {
 }
 
 .home-hero {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  padding: 4rem 0 3rem;
+  background-size: cover;
+  background-position: center;
+  color: #ffffff;
+  position: relative;
+}
+
+.home-hero-inner {
   max-width: 1300px;
   margin: 0 auto;
-  padding: 3.5rem 1.5rem 2.5rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2.5rem;
-  align-items: start;
+  padding: 0 1.5rem;
 }
 
 .home-hero-content h1 {
@@ -285,7 +291,7 @@ h6 {
 
 .home-hero-content p {
   font-size: 1.05rem;
-  color: #475569;
+  color: rgba(255, 255, 255, 0.82);
   line-height: 1.6;
   margin-bottom: 1.5rem;
 }
@@ -295,76 +301,21 @@ h6 {
   letter-spacing: 0.12em;
   font-weight: 700;
   font-size: 0.75rem;
-  color: #0f172a;
+  color: rgba(255, 255, 255, 0.8);
 }
 
-.home-hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.9rem;
-  margin-bottom: 1.5rem;
-}
-
-.home-hero-metrics {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 1rem;
-}
-
-.home-hero-metrics div {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-  background: #fff;
-  border-radius: 16px;
-  padding: 0.9rem 1rem;
-  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
-  border: 1px solid rgba(148, 163, 184, 0.16);
-}
-
-.home-hero-metrics strong {
-  color: #0f172a;
-}
-
-.home-hero-metrics span {
-  font-size: 0.85rem;
-  color: #64748b;
-}
-
-.home-hero-media img {
-  width: 100%;
-  border-radius: 24px;
-  box-shadow: 0 30px 70px rgba(11, 28, 108, 0.25);
-  border: 1px solid rgba(148, 163, 184, 0.2);
-}
-
-.home-hero-media {
-  position: relative;
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  min-height: 0;
-  align-self: flex-start;
-  background: transparent;
-  border: none;
-  box-shadow: none;
-}
-
-.home-hero-overlay {
-  position: relative;
-  border-radius: 0;
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: contain;
-  pointer-events: none;
-  mix-blend-mode: normal;
-  box-sizing: border-box;
+.home-hero-accent {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 260px;
+  height: 4px;
+  background: var(--insurfox-orange);
 }
 
 @media (max-width: 900px) {
-  .home-hero-media {
-    min-height: 0;
+  .home-hero {
+    padding: 3rem 0 2.5rem;
   }
 }
 

@@ -2,8 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import Button from '@/components/ui/Button'
 import InsurfoxLogo from '@/assets/logos/Insurfox_Logo_colored_dark.png'
-import HomeHeroImage from '@/assets/images/Home1.png'
-import HomeHeroOverlay from '@/assets/images/plattform_home.png'
+import HomeHeroImage from '@/assets/images/iaas_home.png'
 import ProductImage from '@/assets/images/Produkt1.png'
 
 export default function HomePage() {
@@ -27,18 +26,18 @@ export default function HomePage() {
         </div>
       </header>
 
-      <section className="home-hero">
-        <div className="home-hero-content">
-          <span className="home-hero-kicker">Insurfox AI IaaS</span>
-          <h1>AI-native Insurance-IaaS für regulierte Märkte.</h1>
-          <p>
-            Eine integrierte Plattform für Versicherer, Logistik und Mobility – mit Governance-by-Design,
-            End-to-End-Prozessen und klarer Kontrolle über Daten, Modelle und Entscheidungen.
-          </p>
+      <section className="home-hero" style={{ backgroundImage: `url(${HomeHeroImage})` }}>
+        <div className="home-hero-inner">
+          <div className="home-hero-content">
+            <span className="home-hero-kicker">Insurfox AI IaaS</span>
+            <h1>AI-native Insurance-IaaS für regulierte Märkte.</h1>
+            <p>
+              Eine integrierte Plattform für Versicherer, Logistik und Mobility – mit Governance-by-Design,
+              End-to-End-Prozessen und klarer Kontrolle über Daten, Modelle und Entscheidungen.
+            </p>
+          </div>
         </div>
-        <div className="home-hero-media">
-          <img src={HomeHeroOverlay} alt="" aria-hidden className="home-hero-overlay" />
-        </div>
+        <span className="home-hero-accent" aria-hidden />
       </section>
 
       <section className="home-value">
