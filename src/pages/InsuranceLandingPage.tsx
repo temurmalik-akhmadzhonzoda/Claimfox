@@ -1,9 +1,12 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useI18n } from '@/i18n/I18nContext'
+import HomeHeroBackground from '@/assets/images/Home1.png'
 import InsuranceHeroImage from '@/assets/images/insurance_processes.png'
 
 export default function InsuranceLandingPage() {
   const { lang } = useI18n()
+  const navigate = useNavigate()
   const [isHeroPreviewOpen, setIsHeroPreviewOpen] = React.useState(false)
 
   const copy = {
@@ -37,6 +40,19 @@ export default function InsuranceLandingPage() {
     ]
   }
 
+  const roleCards = [
+    {
+      title: lang === 'en' ? 'Claims Manager' : 'Schadenmanager',
+      body: lang === 'en' ? 'Overview of open claims with AI-supported workflows.' : 'Übersicht offener Schadenfälle mit KI-gestützten Workflows.',
+      route: '/claim-manager'
+    },
+    {
+      title: lang === 'en' ? 'Partner Management' : 'Partner Management',
+      body: lang === 'en' ? 'Partner networks and live communication per claim.' : 'Partnernetzwerke und Live-Kommunikation je Schadenfall.',
+      route: '/partner-management-overview'
+    }
+  ]
+
   return (
     <section
       style={{
@@ -50,7 +66,9 @@ export default function InsuranceLandingPage() {
         <div
           style={{
             position: 'relative',
-            background: '#0b1b5a',
+            backgroundImage: `url(${HomeHeroBackground})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
             padding: '3.5rem clamp(1.5rem, 4vw, 3.25rem)',
             color: '#ffffff',
             boxShadow: '0 30px 70px rgba(11, 28, 108, 0.25)',
@@ -128,6 +146,46 @@ export default function InsuranceLandingPage() {
               <p style={{ margin: 0, color: '#475569', lineHeight: 1.55 }}>{section.body}</p>
             </div>
           ))}
+        </div>
+
+        <div style={{ display: 'grid', gap: '1.5rem' }}>
+          <div>
+            <h2 style={{ margin: '0 0 0.5rem', color: 'var(--insurfox-orange)' }}>
+              {lang === 'en' ? 'Insurance roles' : 'Versicherungsrollen'}
+            </h2>
+            <p style={{ margin: 0, color: '#475569' }}>
+              {lang === 'en'
+                ? 'Open key insurance views and partner workflows.'
+                : 'Öffnen Sie zentrale Versicherungsansichten und Partnerprozesse.'}
+            </p>
+          </div>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+              gap: '1.5rem'
+            }}
+          >
+            {roleCards.map((card) => (
+              <button
+                key={card.title}
+                type="button"
+                onClick={() => navigate(card.route)}
+                style={{
+                  textAlign: 'left',
+                  background: '#ffffff',
+                  borderRadius: '20px',
+                  padding: '1.5rem',
+                  border: '1px solid rgba(148, 163, 184, 0.16)',
+                  boxShadow: '0 16px 32px rgba(15, 23, 42, 0.08)',
+                  cursor: 'pointer'
+                }}
+              >
+                <h3 style={{ margin: '0 0 0.5rem', color: 'var(--insurfox-orange)' }}>{card.title}</h3>
+                <p style={{ margin: 0, color: '#475569', lineHeight: 1.55 }}>{card.body}</p>
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
