@@ -13,7 +13,9 @@ export default function HomePage() {
     <main className="home-marketing">
       <header className="home-marketing-header">
         <div className="home-marketing-header-inner">
-          <img src={InsurfoxLogo} alt="Insurfox" className="home-marketing-logo" />
+          <button type="button" onClick={() => navigate('/home')} className="home-marketing-logo-button" aria-label="Insurfox Home">
+            <img src={InsurfoxLogo} alt="Insurfox" className="home-marketing-logo" />
+          </button>
           <nav className="home-marketing-nav">
             <button type="button" onClick={() => navigate('/insurance')}>Versicherungen</button>
             <button type="button" onClick={() => navigate('/broker-portal')}>Makler</button>

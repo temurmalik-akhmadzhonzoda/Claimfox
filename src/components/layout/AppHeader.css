@@ -34,6 +34,41 @@
   display: block;
 }
 
+.app-header__nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.app-header__nav button {
+  border: none;
+  background: none;
+  font-size: 0.95rem;
+  color: #0f172a;
+  cursor: pointer;
+}
+
+.app-header__menu {
+  display: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  background: #ffffff;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 6px;
+}
+
+.app-header__menu span {
+  display: block;
+  width: 16px;
+  height: 2px;
+  background: #0f172a;
+  border-radius: 999px;
+}
+
 .app-header__actions {
   display: inline-flex;
   align-items: center;
@@ -90,5 +125,18 @@
 @media (max-width: 640px) {
   .app-header__inner {
     padding: 0 16px;
+  }
+
+  .app-header__nav button {
+    display: none;
+  }
+
+  .app-header__menu {
+    display: inline-flex;
+  }
+
+  .app-header__auth-btn {
+    padding: 6px 8px;
+    font-size: 0.8rem;
   }
 }

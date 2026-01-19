@@ -27,12 +27,33 @@ export default function AppHeader() {
     navigate('/login')
   }
 
+  const navItems = [
+    { label: 'Versicherungen', route: '/insurance' },
+    { label: 'Makler', route: '/broker-portal' },
+    { label: 'Logistik', route: '/logistics' },
+    { label: 'Flotte', route: '/fleet-management' },
+    { label: 'Partner', route: '/partner-management-overview' }
+  ]
+
   return (
     <header className="app-header">
       <div className="app-header__inner">
-        <Link to="/roles" className="app-header__logo" aria-label="Insurfox">
+        <Link to="/home" className="app-header__logo" aria-label="Insurfox">
           <img src={logoDark} alt="Insurfox" />
         </Link>
+
+        <nav className="app-header__nav" aria-label="Primary">
+          {navItems.map((item) => (
+            <button key={item.route} type="button" onClick={() => navigate(item.route)}>
+              {item.label}
+            </button>
+          ))}
+          <button type="button" className="app-header__menu" aria-label="Menü öffnen">
+            <span />
+            <span />
+            <span />
+          </button>
+        </nav>
 
         <div className="app-header__actions">
           <div className="app-header__lang-switch" role="group" aria-label="Language switch">

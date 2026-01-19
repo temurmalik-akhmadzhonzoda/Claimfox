@@ -266,6 +266,13 @@ h6 {
   cursor: pointer;
 }
 
+.home-marketing-logo-button {
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+}
+
 .home-marketing-menu {
   display: none;
   width: 38px;

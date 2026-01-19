@@ -2,7 +2,6 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import Button from '@/components/ui/Button'
 import { useI18n } from '@/i18n/I18nContext'
-import HomeHeroBackground from '@/assets/images/Home1.png'
 import BrokerPortalHeroImage from '@/assets/images/makler_portal.png'
 
 const featureKeys = ['crm', 'tender', 'ai', 'insights', 'workflows', 'compliance'] as const
@@ -212,13 +211,11 @@ export default function BrokerPortalLandingPage() {
         >
           <div
             style={{
-              position: 'relative',
-              backgroundImage: `linear-gradient(135deg, rgba(7, 20, 74, 0.9) 0%, rgba(11, 45, 122, 0.9) 100%), url(${HomeHeroBackground})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              padding: '3.5rem clamp(1.5rem, 4vw, 3.25rem)',
-              color: '#ffffff',
-              boxShadow: '0 30px 70px rgba(11, 28, 108, 0.25)',
+            position: 'relative',
+            background: '#0b1b5a',
+            padding: '3.5rem clamp(1.5rem, 4vw, 3.25rem)',
+            color: '#ffffff',
+            boxShadow: '0 30px 70px rgba(11, 28, 108, 0.25)',
               width: '100vw',
               marginLeft: 'calc(50% - 50vw)'
             }}
