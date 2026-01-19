@@ -64,14 +64,14 @@ export default function LogisticsLandingPage() {
 
   const roleCards = [
     {
-      title: t('roles.cards.logistics.title'),
-      body: t('roles.cards.logistics.description'),
-      route: '/logistics'
-    },
-    {
       title: t('roles.cards.fleetManagement.title'),
       body: t('roles.cards.fleetManagement.description'),
       route: '/fleet-management'
+    },
+    {
+      title: t('roles.cards.logistics.title'),
+      body: t('roles.cards.logistics.description'),
+      route: '/logistics'
     }
   ]
 
