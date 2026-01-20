@@ -3,11 +3,13 @@ import { useNavigate } from 'react-router-dom'
 import { useI18n } from '@/i18n/I18nContext'
 import HomeHeroBackground from '@/assets/images/Home1.png'
 import InsuranceHeroImage from '@/assets/images/insurance_processes.png'
+import AiInsuranceProcessImage from '@/assets/images/ai_insurance_process.png'
 
 export default function InsuranceLandingPage() {
   const { lang } = useI18n()
   const navigate = useNavigate()
   const [isHeroPreviewOpen, setIsHeroPreviewOpen] = React.useState(false)
+  const [isAiPreviewOpen, setIsAiPreviewOpen] = React.useState(false)
 
   const copy = {
     title: lang === 'en' ? 'Insurance Processes, End-to-End.' : 'Versicherungsprozesse – Ende zu Ende.',
@@ -52,6 +54,14 @@ export default function InsuranceLandingPage() {
       route: '/partner-management-overview'
     }
   ]
+
+  const aiBlock = {
+    title: lang === 'en' ? 'Native AI' : 'Native AI',
+    body:
+      lang === 'en'
+        ? 'AI-supported underwriting, claims and governance workflows within a controlled insurance platform.'
+        : 'KI-gestütztes Underwriting, Schadenprozesse und Governance-Workflows in einer kontrollierten Versicherungsplattform.'
+  }
 
   return (
     <section
@@ -148,6 +158,50 @@ export default function InsuranceLandingPage() {
           ))}
         </div>
 
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'minmax(0, 1.1fr) minmax(0, 0.9fr)',
+            gap: '1.5rem',
+            alignItems: 'center'
+          }}
+        >
+          <div
+            style={{
+              background: '#ffffff',
+              borderRadius: '20px',
+              padding: '1.75rem',
+              border: '1px solid rgba(148, 163, 184, 0.16)',
+              boxShadow: '0 16px 32px rgba(15, 23, 42, 0.08)'
+            }}
+          >
+            <h2 style={{ margin: '0 0 0.75rem', color: 'var(--insurfox-orange)' }}>{aiBlock.title}</h2>
+            <p style={{ margin: 0, color: '#475569', lineHeight: 1.6 }}>{aiBlock.body}</p>
+          </div>
+          <button
+            type="button"
+            onClick={() => setIsAiPreviewOpen(true)}
+            style={{
+              background: '#ffffff',
+              borderRadius: '24px',
+              padding: '1.5rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              boxShadow: '0 30px 70px rgba(11, 28, 108, 0.25)',
+              border: '1px solid rgba(148, 163, 184, 0.2)',
+              cursor: 'pointer'
+            }}
+            aria-label="AI Insurance Bildvorschau öffnen"
+          >
+            <img
+              src={AiInsuranceProcessImage}
+              alt="AI Insurance Process"
+              style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
+            />
+          </button>
+        </div>
+
         <div style={{ display: 'grid', gap: '1.5rem' }}>
           <div>
             <h2 style={{ margin: '0 0 0.5rem', color: 'var(--insurfox-orange)' }}>
@@ -196,6 +250,17 @@ export default function InsuranceLandingPage() {
           </button>
           <div className="hero-image-modal__content">
             <img src={InsuranceHeroImage} alt="Insurance processes" />
+          </div>
+        </div>
+      )}
+
+      {isAiPreviewOpen && (
+        <div className="hero-image-modal" role="dialog" aria-modal="true">
+          <button type="button" className="hero-image-modal__close" onClick={() => setIsAiPreviewOpen(false)} aria-label="Schließen">
+            ×
+          </button>
+          <div className="hero-image-modal__content">
+            <img src={AiInsuranceProcessImage} alt="AI Insurance Process" />
           </div>
         </div>
       )}
