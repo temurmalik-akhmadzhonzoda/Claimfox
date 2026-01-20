@@ -14,7 +14,7 @@ export default function FullscreenBgLayout({ showHeader = true }: FullscreenBgLa
         <div
           style={{
             minHeight: '100vh',
-            paddingTop: showHeader ? 'var(--header-height)' : 0
+            paddingTop: 0
           }}
         >
           <Outlet />
