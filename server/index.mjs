@@ -23,18 +23,40 @@ const mimeTypes = {
   '.woff2': 'font/woff2'
 }
 
-function resolveBaseUrl() {
+async function isReachable(url) {
+  try {
+    const controller = new AbortController()
+    const timeout = setTimeout(() => controller.abort(), 2000)
+    const response = await fetch(url, { method: 'GET', signal: controller.signal })
+    clearTimeout(timeout)
+    return response.ok
+  } catch {
+    return false
+  }
+}
+
+async function resolveBaseUrl() {
   if (process.env.PDF_BASE_URL) {
     return process.env.PDF_BASE_URL
   }
-  if (isProd && fs.existsSync(indexHtml)) {
+  const devBaseUrl = process.env.VITE_DEV_SERVER_URL || `http://127.0.0.1:${devPort}`
+  const hasDist = fs.existsSync(indexHtml)
+
+  if (await isReachable(devBaseUrl)) {
+    return devBaseUrl
+  }
+
+  if (hasDist) {
     return `http://127.0.0.1:${port}`
   }
-  return `http://127.0.0.1:${devPort}`
+
+  throw new Error(
+    `Dev server not reachable at ${devBaseUrl} and no dist build found. Start Vite or build the app.`
+  )
 }
 
 async function renderBusinessModelPdf(lang) {
-  const baseUrl = resolveBaseUrl()
+  const baseUrl = await resolveBaseUrl()
   const targetUrl = `${baseUrl}/business-model-antares?print=1&lang=${encodeURIComponent(lang)}`
 
   const browser = await puppeteer.launch({
@@ -48,12 +70,18 @@ async function renderBusinessModelPdf(lang) {
     await page.goto(targetUrl, { waitUntil: ['load', 'networkidle0'] })
     await page.evaluate(() => document.fonts?.ready)
 
-    return await page.pdf({
+    const pdfBuffer = await page.pdf({
       format: 'A4',
       printBackground: true,
       preferCSSPageSize: true,
       margin: { top: '0cm', right: '0cm', bottom: '0cm', left: '0cm' }
     })
+    const buffer = Buffer.from(pdfBuffer)
+    console.log(`[pdf] buffer length: ${buffer.length}`)
+    if (buffer.length === 0) {
+      throw new Error('PDF buffer is empty')
+    }
+    return buffer
   } finally {
     await browser.close()
   }
@@ -90,7 +118,7 @@ const server = http.createServer(async (req, res) => {
     return
   }
 
-  if (isProd && fs.existsSync(distDir)) {
+  if (fs.existsSync(distDir)) {
     if (url.pathname === '/' || url.pathname === '') {
       serveFile(res, indexHtml)
       return
