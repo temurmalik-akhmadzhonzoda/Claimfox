@@ -305,7 +305,7 @@ function getModelContent(lang: 'de' | 'en') {
       leadAssignment: {
         title: 'Leadzuweisung',
         paragraphs: [
-          'Leads ausweisen. Direkter Leadzugang ab sofort zu allen Vorständen und Aufsichtsräten wie z. B. DB Schenker, Dachser, Hellmann Logistik, Transporeon, timocom etc.'
+          'Direkter Leadzugang ab sofort zu allen Vorständen und Aufsichtsräten wie z. B. DB Schenker, Dachser, Hellmann Logistik, Transporeon, timocom etc.'
         ]
       },
       claims: {
