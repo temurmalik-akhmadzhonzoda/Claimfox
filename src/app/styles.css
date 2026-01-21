@@ -1481,6 +1481,222 @@ h6 {
   line-height: 1.6;
 }
 
+.antares-marketing-page {
+  background: radial-gradient(circle at top, rgba(248, 250, 252, 0.95) 0%, rgba(240, 244, 255, 0.6) 40%, rgba(248, 250, 252, 0.9) 100%);
+  padding-bottom: 2rem;
+}
+
+.antares-header {
+  padding: 0 24px;
+  align-items: flex-start;
+}
+
+.antares-header-copy {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.antares-eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.7rem;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.antares-title {
+  margin: 0;
+  font-size: clamp(2.4rem, 4vw, 3.2rem);
+  color: #0f172a;
+  letter-spacing: -0.01em;
+}
+
+.antares-subtitle {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #1f2937;
+}
+
+.antares-model {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #475569;
+  letter-spacing: 0.02em;
+}
+
+.antares-hero {
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+.antares-hero-card {
+  padding: 2rem;
+  box-shadow: 0 22px 44px rgba(15, 23, 42, 0.1);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(248, 250, 252, 0.98) 100%);
+}
+
+.antares-hero-card p {
+  margin: 0 0 0.9rem;
+  color: #475569;
+  line-height: 1.7;
+}
+
+.antares-highlight {
+  margin-top: 1rem;
+  padding: 1rem 1.2rem;
+  border-left: 3px solid #f05a22;
+  background: #fff7f1;
+  color: #0f172a;
+  font-weight: 600;
+}
+
+.antares-hero-callout {
+  padding: 1.6rem;
+  background: linear-gradient(135deg, rgba(248, 250, 252, 0.92) 0%, #ffffff 100%);
+  box-shadow: 0 18px 36px rgba(15, 23, 42, 0.08);
+}
+
+.antares-hero-callout h3 {
+  margin: 0 0 0.8rem;
+  font-size: 1rem;
+  color: #0f172a;
+}
+
+.antares-hero-callout ul {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: #475569;
+  line-height: 1.65;
+}
+
+.antares-section {
+  padding: 0 24px;
+  display: grid;
+  gap: 1.2rem;
+}
+
+.antares-section-head h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  color: #0f172a;
+}
+
+.antares-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.antares-grid-two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.antares-card {
+  padding: 1.6rem;
+  box-shadow: 0 18px 36px rgba(15, 23, 42, 0.08);
+  background: #ffffff;
+}
+
+.antares-card h3 {
+  margin: 0 0 0.7rem;
+  font-size: 1.05rem;
+  color: var(--insurfox-orange);
+}
+
+.antares-card p {
+  margin: 0;
+  color: #475569;
+  line-height: 1.7;
+}
+
+.antares-card ul {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: #475569;
+  line-height: 1.7;
+}
+
+.antares-scope-card {
+  background: linear-gradient(135deg, rgba(248, 250, 252, 0.92) 0%, #ffffff 100%);
+}
+
+.antares-statement-card {
+  border-left: 3px solid #f05a22;
+  background: #fff7f1;
+}
+
+.antares-statement-card p {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.antares-table {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.antares-table-row {
+  display: grid;
+  grid-template-columns: 0.8fr 1fr 1fr;
+  gap: 1rem;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.antares-table-header {
+  background: #0f172a;
+  color: #ffffff;
+  font-weight: 600;
+  border-color: #0f172a;
+}
+
+.antares-table-row span {
+  font-size: 0.95rem;
+}
+
+.antares-metrics {
+  display: grid;
+  gap: 1rem;
+}
+
+.antares-metric {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: #f8fafc;
+}
+
+.antares-metric span {
+  color: #475569;
+}
+
+.antares-metric strong {
+  color: #0f172a;
+  font-size: 1.1rem;
+}
+
+.antares-core-card {
+  background: linear-gradient(120deg, #111827 0%, #1f2a5f 100%);
+  color: #ffffff;
+}
+
+.antares-core-card h2 {
+  margin: 0 0 0.6rem;
+  color: #ffffff;
+  font-size: 1.4rem;
+}
+
+.antares-core-card p {
+  color: #e2e8f0;
+}
+
 .profile-overview-page {
   max-width: none;
   margin: 0;
@@ -2161,6 +2377,18 @@ h6 {
 }
 @media (max-width: 1100px) {
   .insurfox-whitepaper-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .antares-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .antares-grid-two {
+    grid-template-columns: 1fr;
+  }
+
+  .antares-table-row {
     grid-template-columns: 1fr;
   }
 
