@@ -382,8 +382,32 @@ function getModelContent(lang: 'de' | 'en') {
 
 export default function BusinessModelAntaresPage() {
   const { lang } = useI18n()
-  const content = useMemo(() => getModelContent(lang), [lang])
+  const searchParams = typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : null
+  const queryLang = searchParams?.get('lang')
+  const resolvedLang = queryLang === 'en' || queryLang === 'de' ? queryLang : lang
+  const isPrintMode = searchParams?.get('print') === '1'
+  const content = useMemo(() => getModelContent(resolvedLang), [resolvedLang])
   const [isPreviewOpen, setIsPreviewOpen] = useState(false)
+
+  const handlePdfDownload = async () => {
+    const downloadLang = resolvedLang === 'en' ? 'en' : 'de'
+    const baseUrl = import.meta.env.VITE_PDF_BASE_URL || ''
+    const response = await fetch(
+      `${baseUrl}/api/pdf/business-model-antares?lang=${downloadLang}`
+    )
+    if (!response.ok) {
+      throw new Error('PDF download failed')
+    }
+    const blob = await response.blob()
+    const url = window.URL.createObjectURL(blob)
+    const anchor = document.createElement('a')
+    anchor.href = url
+    anchor.download = `insurfox-antares-business-model-${downloadLang}.pdf`
+    document.body.appendChild(anchor)
+    anchor.click()
+    anchor.remove()
+    window.URL.revokeObjectURL(url)
+  }
 
   return (
     <section className="page insurfox-whitepaper-page antares-marketing-page">
@@ -406,13 +430,17 @@ export default function BusinessModelAntaresPage() {
                 <h1 className="antares-title antares-title-accent">{content.title}</h1>
                 <p className="antares-subtitle">{content.subtitle}</p>
               </div>
-              <button
-                type="button"
-                className="framework-download"
-                onClick={() => window.print()}
-              >
-                {lang === 'en' ? 'Download PDF' : 'PDF herunterladen'}
-              </button>
+              {!isPrintMode && (
+                <button
+                  type="button"
+                  className="framework-download"
+                  onClick={() => {
+                    handlePdfDownload().catch(() => {})
+                  }}
+                >
+                  {resolvedLang === 'en' ? 'Download PDF' : 'PDF herunterladen'}
+                </button>
+              )}
             </div>
             <div className="antares-hero">
               <Card className="antares-hero-card antares-hero-split">
@@ -440,10 +468,10 @@ export default function BusinessModelAntaresPage() {
               </div>
               <Card className="antares-card">
                 <div className="antares-table">
-                  <div className="antares-table-row antares-table-header">
-                    <span>{lang === 'en' ? 'Metric' : 'Kennzahl'}</span>
-                    <span>{lang === 'en' ? 'Value' : 'Wert'}</span>
-                    <span>{lang === 'en' ? 'Reference' : 'Referenz'}</span>
+              <div className="antares-table-row antares-table-header">
+                    <span>{resolvedLang === 'en' ? 'Metric' : 'Kennzahl'}</span>
+                    <span>{resolvedLang === 'en' ? 'Value' : 'Wert'}</span>
+                    <span>{resolvedLang === 'en' ? 'Reference' : 'Referenz'}</span>
                   </div>
                   {content.marketContext.rows.map((row) => (
                     <div key={row.label} className="antares-table-row">

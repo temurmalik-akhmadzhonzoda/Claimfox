@@ -7,14 +7,20 @@
    ```
 2. Start the dev server:
    ```bash
-   npm run dev
+    npm run dev
    ```
-   Open the printed local URL and log in with `Seven / 9021` or `Jürgen / 9021`.
+   This starts Vite and the local PDF server in parallel. Open the printed local URL and log in with `Seven / 9021` or `Jürgen / 9021`.
 3. Build for production:
    ```bash
    npm run build
    ```
    Deploy the generated `dist/` folder (already configured for Netlify SPA hosting).
+
+## PDF server
+- Dev: `npm run dev` starts Vite + the PDF API on `http://127.0.0.1:3001`.
+- Prod: run `npm run start` to serve the PDF API (and `dist/` if present).
+- Endpoint: `GET /api/pdf/business-model-antares?lang=de|en`
+- Frontend uses `VITE_PDF_BASE_URL` to reach the API (set in `.env.development`).
 
 ## CV PDF export
 1. Generate the PDF:
