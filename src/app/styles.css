@@ -1572,6 +1572,12 @@ h6 {
   line-height: 1.65;
 }
 
+.antares-note {
+  margin: 0.9rem 0 0;
+  color: #475569;
+  line-height: 1.6;
+}
+
 .antares-section {
   padding: 0 24px;
   display: grid;
@@ -1591,6 +1597,10 @@ h6 {
 
 .antares-grid-two {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.antares-grid-three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .antares-card {
@@ -1616,6 +1626,20 @@ h6 {
   padding-left: 1.2rem;
   color: #475569;
   line-height: 1.7;
+}
+
+.antares-ai-card {
+  background: linear-gradient(135deg, rgba(248, 250, 252, 0.96) 0%, #ffffff 100%);
+}
+
+.antares-result {
+  margin-top: 0.9rem;
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  background: rgba(240, 90, 34, 0.08);
+  color: #0f172a;
+  font-size: 0.92rem;
+  line-height: 1.5;
 }
 
 .antares-scope-card {
@@ -1680,6 +1704,13 @@ h6 {
 .antares-metric strong {
   color: #0f172a;
   font-size: 1.1rem;
+}
+
+.antares-note-card {
+  display: flex;
+  align-items: center;
+  background: #fff7f1;
+  border-left: 3px solid #f05a22;
 }
 
 .antares-core-card {
@@ -2385,6 +2416,10 @@ h6 {
   }
 
   .antares-grid-two {
+    grid-template-columns: 1fr;
+  }
+
+  .antares-grid-three {
     grid-template-columns: 1fr;
   }
 
