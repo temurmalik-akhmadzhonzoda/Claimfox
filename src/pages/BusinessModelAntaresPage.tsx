@@ -1,8 +1,7 @@
 import React, { useMemo } from 'react'
 import Card from '@/components/ui/Card'
 import InsurfoxLogo from '@/assets/logos/Insurfox_Logo_colored_dark.png'
-import AntaresHeroImage from '@/assets/images/insurfox_antares.png'
-import AntaresHeroImageDe from '@/assets/images/Poster-Antares-big.png'
+import AntaresHeroImage from '@/assets/images/Poster-Antares-big.png'
 import { useI18n } from '@/i18n/I18nContext'
 
 function getModelContent(lang: 'de' | 'en') {
@@ -368,7 +367,6 @@ function getModelContent(lang: 'de' | 'en') {
 export default function BusinessModelAntaresPage() {
   const { lang } = useI18n()
   const content = useMemo(() => getModelContent(lang), [lang])
-  const heroImage = lang === 'de' ? AntaresHeroImageDe : AntaresHeroImage
 
   return (
     <section className="page insurfox-whitepaper-page antares-marketing-page">
@@ -391,7 +389,7 @@ export default function BusinessModelAntaresPage() {
           </button>
         </div>
         <div className="antares-hero">
-          <Card className="antares-hero-card">
+          <Card className="antares-hero-card antares-hero-split">
             <div className="antares-hero-content">
               <h2>{content.model}</h2>
               {content.overview.paragraphs.map((paragraph) => (
@@ -399,7 +397,7 @@ export default function BusinessModelAntaresPage() {
               ))}
             </div>
             <div className="antares-hero-media">
-              <img src={heroImage} alt="Insurfox x Antares" />
+              <img src={AntaresHeroImage} alt="Insurfox x Antares" />
             </div>
           </Card>
         </div>

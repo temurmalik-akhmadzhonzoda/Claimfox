@@ -1538,6 +1538,13 @@ h6 {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(248, 250, 252, 0.98) 100%);
 }
 
+.antares-hero-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
+  gap: 1.5rem;
+  align-items: center;
+}
+
 .antares-hero-content h2 {
   margin: 0 0 1rem;
   color: #0f172a;
@@ -1551,7 +1558,6 @@ h6 {
 }
 
 .antares-hero-media {
-  margin-top: 1rem;
   border-radius: 18px;
   overflow: hidden;
 }
@@ -1559,6 +1565,7 @@ h6 {
 .antares-hero-media img {
   width: 100%;
   height: auto;
+  max-height: 360px;
   display: block;
   object-fit: cover;
 }
@@ -2459,6 +2466,10 @@ h6 {
   }
 
   .antares-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .antares-hero-split {
     grid-template-columns: 1fr;
   }
 
