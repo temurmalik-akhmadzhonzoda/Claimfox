@@ -115,6 +115,12 @@ function getModelContent(lang: 'de' | 'en') {
         ]
       }
     },
+    leadAssignment: {
+      title: 'Lead Allocation',
+      paragraphs: [
+        'Immediate direct lead access to executive boards and supervisory boards, e.g. DB Schenker, Dachser, Hellmann Logistics, Transporeon, timocom, etc.'
+      ]
+    },
     claims: {
       title: 'Claims Governance Framework',
       bullets: [
@@ -288,12 +294,19 @@ function getModelContent(lang: 'de' | 'en') {
           bullets: [
             'Portfolioaufbau und Risikoaggregation',
             'Broker-Onboarding und Distribution-Management',
-            'Policierung und Vertragsadministration',
+            'Policierung und Vertragsadministration, Prolongierung, Editierung, Digitale Nachträge',
             'Delegiertes Underwriting im vereinbarten Rahmen',
             'Delegierte Schadenbearbeitung für geringwertige Schäden (bei Datenvollständigkeit)',
+            'KI getriebene Auswertung von Unternehmens und Risikodaten für die zukünftige Tarifberechnung der Antares Produkte (Real Time)',
             'Laufendes Portfoliomonitoring und Reporting'
           ]
         }
+      },
+      leadAssignment: {
+        title: 'Leadzuweisung',
+        paragraphs: [
+          'Leads ausweisen. Direkter Leadzugang ab sofort zu allen Vorständen und Aufsichtsräten wie z. B. DB Schenker, Dachser, Hellmann Logistik, Transporeon, timocom etc.'
+        ]
       },
       claims: {
         title: 'Schaden-Governance-Framework',
@@ -532,6 +545,16 @@ export default function BusinessModelAntaresPage() {
         </section>
         <section className="antares-section">
           <div className="antares-section-head">
+            <h2>{content.leadAssignment.title}</h2>
+          </div>
+          <Card className="antares-card">
+            {content.leadAssignment.paragraphs.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </Card>
+        </section>
+        <section className="antares-section">
+          <div className="antares-section-head">
             <h2>{content.claims.title}</h2>
           </div>
           <Card className="antares-card">
@@ -709,6 +732,12 @@ export default function BusinessModelAntaresPage() {
               <li key={item}>{item}</li>
             ))}
           </ul>
+        </div>
+        <div className="framework-print-section">
+          <h2>{content.leadAssignment.title}</h2>
+          {content.leadAssignment.paragraphs.map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
+          ))}
         </div>
         <div className="framework-print-section">
           <h2>{content.claims.title}</h2>
