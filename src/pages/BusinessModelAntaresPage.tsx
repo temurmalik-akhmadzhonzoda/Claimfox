@@ -6,8 +6,8 @@ import { useI18n } from '@/i18n/I18nContext'
 
 function getModelContent(lang: 'de' | 'en') {
   const enContent = {
-    title: 'INSURFOX x ANTARES',
-    subtitle: 'European Logistics and Fleet Insurance Portfolio',
+    title: 'INSURFOX × ANTARES',
+    subtitle: 'European Logistics & Fleet Insurance Portfolio',
     model: 'Executive Investment Proposition',
     overview: {
       paragraphs: [
@@ -19,9 +19,9 @@ function getModelContent(lang: 'de' | 'en') {
     marketContext: {
       title: 'Market Context',
       paragraphs: [
-        'The European fleet insurance market represents a multi-billion-euro premium pool, estimated at ~USD 13.2bn (2024), with projected growth toward ~USD 26.7bn by 2032 (~9% CAGR).',
-        "Logistics-related insurance (fleet, cargo, carrier's liability) forms a core sub-segment of European Commercial P&C, characterized by professional insureds, repeatable risk structures and high data availability.",
-        'Premium flows are recurring and compounding, driven by fleet continuity, contractual logistics chains and high renewal ratios.'
+        'The European fleet insurance market represents a multi-billion-euro premium pool, estimated at ~USD 13.2bn in 2024, with projected growth toward ~USD 26.7bn by 2032 (~9% CAGR).',
+        "Logistics-related insurance (fleet, cargo, carrier's liability) is a core sub-segment of European Commercial P&C, driven by professional insureds, repeatable risk structures and high data availability.",
+        'Premium flows are recurring and compounding, supported by fleet continuity, contractual logistics chains and high renewal ratios - creating a durable underwriting base.'
       ]
     },
     portfolioScope: {
@@ -99,7 +99,7 @@ function getModelContent(lang: 'de' | 'en') {
         bullets: [
           'Portfolio construction and risk aggregation',
           'Broker onboarding and distribution management',
-          'Policierung and contract administration',
+          'Policy issuance and contract administration',
           'Delegated underwriting within agreed authority',
           'Delegated claims handling for low-value claims (subject to data completeness)',
           'Ongoing portfolio monitoring and reporting'
@@ -175,22 +175,22 @@ function getModelContent(lang: 'de' | 'en') {
 
   if (lang === 'de') {
     return {
-      title: 'INSURFOX x ANTARES',
-      subtitle: 'Europaeisches Logistik- und Flottenversicherungsportfolio',
-      model: 'Investmentthese fuer Entscheider',
+      title: 'INSURFOX × ANTARES',
+      subtitle: 'Europäisches Logistik- und Flottenversicherungsportfolio',
+      model: 'Investmentthese für Entscheider',
       overview: {
         paragraphs: [
-          'Insurfox etabliert und managt als Managing General Agent (MGA) ein paneuropaeisches Logistik- und Flottenversicherungsportfolio, wobei Antares als alleiniger Kapazitaetsgeber und Lead Underwriter agiert.',
-          'Das Portfolio adressiert ein strukturell attraktives Segment des europaeischen Non-Life-Marktes und fokussiert Logistik-, Transport- und Flottenrisiken mit standardisierter Risikoannahme, kontrollierter Underwriting-Execution, vorhersehbarem Schadenverhalten und wiederkehrendem, brokergetriebenem Praemienzufluss.',
+          'Insurfox etabliert und managt als Managing General Agent (MGA) ein paneuropäisches Logistik- und Flottenversicherungsportfolio, wobei Antares als alleiniger Kapazitätsgeber und Lead Underwriter agiert.',
+          'Das Portfolio adressiert ein strukturell attraktives Segment des europäischen Non-Life-Marktes und fokussiert Logistik-, Transport- und Flottenrisiken mit standardisierter Risikoannahme, kontrollierter Underwriting-Execution, vorhersehbarem Schadenverhalten und wiederkehrendem, brokergetriebenem Prämienzufluss.',
           "Ziel ist ein transparentes, steuerbares und profitables Specialty-Portfolio im Einklang mit den Portfolio-Steering- und Kapitaleffizienz-Prinzipien von Lloyd's."
         ]
       },
       marketContext: {
         title: 'Marktkontext',
         paragraphs: [
-          'Der europaeische Flottenversicherungsmarkt umfasst einen mehrmilliardigen Praemienpool, geschaetzt auf ca. USD 13,2 Mrd. (2024) mit Wachstum auf ca. USD 26,7 Mrd. bis 2032 (~9% CAGR).',
-          "Logistiknahe Versicherungen (Fleet, Cargo, Frachtfuehrerhaftpflicht) bilden ein zentrales Teilsegment der europaeischen Commercial P&C mit professionellen Versicherungsnehmern, wiederholbaren Risikostrukturen und hoher Datenverfuegbarkeit.",
-          'Praemienfluesse sind wiederkehrend und kumulativ, getrieben durch Flottenkontinuitaet, vertragliche Logistikketten und hohe Renewal-Raten.'
+          'Der europäische Flottenversicherungsmarkt umfasst einen mehrmilliardigen Prämienpool, geschätzt auf ca. USD 13,2 Mrd. (2024), mit Wachstum auf rund USD 26,7 Mrd. bis 2032 (~9 % CAGR).',
+          'Logistiknahe Versicherungen (Fleet, Cargo, Frachtführerhaftpflicht) bilden ein Kernsegment der europäischen Commercial P&C mit professionellen Versicherungsnehmern, wiederholbaren Risikostrukturen und hoher Datenverfügbarkeit.',
+          'Prämienflüsse sind wiederkehrend und kumulativ, getragen durch Flottenkontinuität, vertragliche Logistikketten und hohe Erneuerungsquoten.'
         ]
       },
       portfolioScope: {
@@ -202,14 +202,14 @@ function getModelContent(lang: 'de' | 'en') {
             'Spediteure',
             'Transportunternehmen',
             'Flottenbetreiber',
-            'Mobilitaets- und Subunternehmernetzwerke'
+            'Mobilitäts- und Subunternehmernetzwerke'
           ]
         },
         lines: {
           title: 'Versicherungslinien',
           bullets: [
             'Kfz-Flottenversicherung',
-            'Frachtfuehrerhaftpflicht',
+            'Frachtführerhaftpflicht',
             'Transportversicherung',
             'Logistik-Kombipolicen',
             'Zusatzdeckungen (Cyber, D&O, Rechtsschutz, Equipment)'
@@ -217,38 +217,38 @@ function getModelContent(lang: 'de' | 'en') {
         },
         geography: {
           title: 'Geografie',
-          bullets: ['Deutschland (Initialaufbau)', "EU-Expansion ueber das Lloyd's-Europe-Framework"]
+          bullets: ['Deutschland (Initialaufbau)', "EU-Expansion über das Lloyd's-Europe-Framework"]
         },
         risk: {
           title: 'Risikoprofil',
           bullets: [
             'Professioneller Versicherungsnehmerstamm',
             'Repetitive, homogene Risikostrukturen',
-            'Hohe Frequenz bei kontrollierter Schadenhoehe',
-            'Geringere Volatilitaet gegenueber SME-Retail-Portfolios',
-            'Begrenzte Tail-Exposure'
+            'Hohe Frequenz bei kontrollierter Schadenhöhe',
+            'Geringere Volatilität gegenüber KMU-Retail-Portfolios',
+            'Begrenztes Tail-Exposure'
           ]
         }
       },
       premiumOutlook: {
-        title: 'Erwartete Praemienentwicklung (GWP)',
+        title: 'Erwartete Prämienentwicklung (GWP)',
         rows: [
-          { year: 'Jahr 1', conservative: 'EUR 3-5m', upside: 'EUR 7m' },
-          { year: 'Jahr 2', conservative: 'EUR 10-15m', upside: 'EUR 20m' },
-          { year: 'Jahr 3', conservative: 'EUR 25-40m', upside: 'EUR 50m+' }
+          { year: 'Jahr 1', conservative: 'EUR 3–5 Mio.', upside: 'EUR 7 Mio.' },
+          { year: 'Jahr 2', conservative: 'EUR 10–15 Mio.', upside: 'EUR 20 Mio.' },
+          { year: 'Jahr 3', conservative: 'EUR 25–40 Mio.', upside: 'EUR 50 Mio.+' }
         ],
-        bullets: ['Broker-Aggregation', 'Embedded Fleet Onboarding', 'Standardisierte Underwriting-Logik', 'Portfolio-Renewals'],
+        bullets: ['Broker-Aggregation', 'Eingebettetes Flotten-Onboarding', 'Standardisierte Underwriting-Logik', 'Portfolio-Erneuerungen'],
         driversLabel: 'Wachstumstreiber'
       },
       economics: {
-        title: 'Zielportfolio-Oekonomie',
+        title: 'Zielportfolio-Ökonomie',
         metrics: [
-          { label: 'Gross Loss Ratio', value: '45-55%' },
-          { label: 'Expense Ratio', value: '20-25%' },
+          { label: 'Brutto-Schadenquote', value: '45-55%' },
+          { label: 'Kostenquote', value: '20-25%' },
           { label: 'Combined Ratio', value: '<= 80%' },
-          { label: 'Claims Frequency', value: 'Mittel' },
-          { label: 'Claims Severity', value: 'Kontrolliert' },
-          { label: 'Tail Risk', value: 'Begrenzt' }
+          { label: 'Schadenfrequenz', value: 'Mittel' },
+          { label: 'Schadenhöhe', value: 'Kontrolliert' },
+          { label: 'Tail-Risiko', value: 'Begrenzt' }
         ]
       },
       operatingModel: {
@@ -256,10 +256,10 @@ function getModelContent(lang: 'de' | 'en') {
         antares: {
           title: 'Rolle von Antares',
           bullets: [
-            'Alleiniger Risikotraeger',
+            'Alleiniger Risikoträger',
             'Lead Underwriting Authority',
-            'Kapitalbereitstellung und Kapazitaetssteuerung',
-            'Finale Claims-Entscheidung',
+            'Kapitalbereitstellung und Kapazitätssteuerung',
+            'Finale Schadenentscheidung',
             'Portfolio-Governance und Aufsicht'
           ]
         },
@@ -270,7 +270,7 @@ function getModelContent(lang: 'de' | 'en') {
             'Broker-Onboarding und Distribution-Management',
             'Policierung und Vertragsadministration',
             'Delegiertes Underwriting im vereinbarten Rahmen',
-            'Delegierte Schadenbearbeitung fuer Low-Value-Claims (bei Datenvollstaendigkeit)',
+            'Delegierte Schadenbearbeitung für geringwertige Schäden (bei Datenvollständigkeit)',
             'Laufendes Portfoliomonitoring und Reporting'
           ]
         }
@@ -278,21 +278,21 @@ function getModelContent(lang: 'de' | 'en') {
       claims: {
         title: 'Schaden-Governance-Framework',
         bullets: [
-          'Antares behaelt die finale Claims Authority',
-          'Optionale Delegation bis EUR 10.000 bei vollstaendiger strukturierter digitaler FNOL und vordefinierten Eskalationsregeln',
-          'Loss Adjusters fuer grosse oder komplexe Schaeden'
+          'Antares behält die finale Claims Authority',
+          'Optionale Delegation bis EUR 10.000 bei vollständig strukturierter digitaler FNOL und vordefinierten Eskalationsregeln',
+          'Loss Adjuster für große oder komplexe Schäden'
         ]
       },
       qualityControl: {
-        title: 'Portfolio-Qualitaetskontrolle',
+        title: 'Portfolio-Qualitätskontrolle',
         traditional: {
           title: 'Traditionelle Brokerportfolios',
           bullets: [
-            'Inkonsistente Submissions',
+            'Inkonsistente Einreichungen',
             'PDF-basierte Risikodaten',
-            'Fragmentierte Exposure',
+            'Fragmentierte Exposure-Daten',
             'Begrenzte Transparenz',
-            'Volatile Loss Ratios'
+            'Volatile Schadenquoten'
           ]
         },
         insurfox: {
@@ -305,15 +305,15 @@ function getModelContent(lang: 'de' | 'en') {
             'Reporting auf Portfolioebene'
           ]
         },
-        result: 'Antares erhaelt ein aggregiertes, kontinuierlich gesteuertes Portfolio - keine isolierten Broker-Risiken.'
+        result: 'Antares erhält ein aggregiertes, kontinuierlich gesteuertes Portfolio - keine isolierten Broker-Risiken.'
       },
       strategicValue: {
-        title: 'Strategischer Wert fuer Antares',
+        title: 'Strategischer Wert für Antares',
         bullets: [
-          'Exklusive Kapazitaetsposition',
-          'Lead Underwriting Rolle',
-          'Vollstaendige Portfolio-Transparenz',
-          'Wiederkehrende Praemien-Pipeline',
+          'Exklusive Kapazitätsposition',
+          'Lead-Underwriting-Rolle',
+          'Vollständige Portfolio-Transparenz',
+          'Wiederkehrende Prämien-Pipeline',
           'Kapitaleffiziente Allokation',
           'Skalierbare europaweite Expansion',
           'Langfristiges MGA-Partnerschaftsmodell'
@@ -323,7 +323,7 @@ function getModelContent(lang: 'de' | 'en') {
         title: 'Entscheidungsrahmen',
         antares: {
           title: 'Antares',
-          bullets: ['Kapazitaetsappetit', 'Ziel-Loss-Ratio-Korridor', 'Initiale Line Size', 'Governance- und Reporting-Kadenz']
+          bullets: ['Kapazitätsappetit', 'Ziel-Schadenquoten-Korridor', 'Initiale Liniengröße', 'Governance- und Reporting-Kadenz']
         },
         insurfox: {
           title: 'Insurfox',
@@ -333,8 +333,8 @@ function getModelContent(lang: 'de' | 'en') {
       coreStatement: {
         title: 'Kernpositionierung',
         paragraphs: [
-          'Insurfox agiert als MGA und liefert ein skalierbares und kontrolliertes europaeisches Logistik-Versicherungsportfolio.',
-          'Antares stellt Kapital, Underwriting Authority und Risiko-Fuehrung bereit.'
+          'Insurfox agiert als MGA und liefert ein skalierbares und kontrolliertes europäisches Logistik-Versicherungsportfolio.',
+          'Antares stellt Kapital, Underwriting Authority und Risiko-Führung bereit.'
         ]
       },
       labels: {
