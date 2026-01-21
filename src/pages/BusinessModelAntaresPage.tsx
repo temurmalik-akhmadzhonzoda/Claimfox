@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import Card from '@/components/ui/Card'
 import InsurfoxLogo from '@/assets/logos/Insurfox_Logo_colored_dark.png'
 import AntaresHeroImage from '@/assets/images/Poster-Antares-big.png'
@@ -369,10 +369,14 @@ function getModelContent(lang: 'de' | 'en') {
 export default function BusinessModelAntaresPage() {
   const { lang } = useI18n()
   const content = useMemo(() => getModelContent(lang), [lang])
+  const [isPreviewOpen, setIsPreviewOpen] = useState(false)
 
   return (
     <section className="page insurfox-whitepaper-page antares-marketing-page">
       <div className="insurfox-whitepaper-shell">
+        <div className="antares-print-cover">
+          <img src={AntaresHeroImage} alt="Insurfox powered by Antares" />
+        </div>
         <div className="antares-print-header">
           <img src={InsurfoxLogo} alt="Insurfox" />
         </div>
@@ -399,7 +403,13 @@ export default function BusinessModelAntaresPage() {
               ))}
             </div>
             <div className="antares-hero-media">
-              <img src={AntaresHeroImage} alt="Insurfox x Antares" />
+              <button
+                type="button"
+                className="antares-image-button"
+                onClick={() => setIsPreviewOpen(true)}
+              >
+                <img src={AntaresHeroImage} alt="Insurfox powered by Antares" />
+              </button>
             </div>
           </Card>
         </div>
@@ -754,6 +764,21 @@ export default function BusinessModelAntaresPage() {
           ))}
         </div>
       </div>
+      {isPreviewOpen && (
+        <div className="antares-image-overlay" role="dialog" aria-modal="true">
+          <div className="antares-image-overlay-content">
+            <button
+              type="button"
+              className="antares-image-close"
+              onClick={() => setIsPreviewOpen(false)}
+              aria-label={lang === 'en' ? 'Close preview' : 'Vorschau schließen'}
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+            <img src={AntaresHeroImage} alt="Insurfox powered by Antares" />
+          </div>
+        </div>
+      )}
     </section>
   )
 }
