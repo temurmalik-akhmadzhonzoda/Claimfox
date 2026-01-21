@@ -21,6 +21,7 @@ export default function HomePage() {
       logistics: lang === 'en' ? 'Logistics' : 'Logistik',
       fleet: lang === 'en' ? 'Fleet' : 'Flotte',
       partner: lang === 'en' ? 'Partners' : 'Partner',
+      demo: lang === 'en' ? 'Demo' : 'Demo',
       login: lang === 'en' ? 'Login' : 'Anmelden',
       logout: lang === 'en' ? 'Logout' : 'Abmelden'
     },
@@ -118,6 +119,7 @@ export default function HomePage() {
             <button type="button" onClick={() => navigate('/logistics')}>{copy.nav.logistics}</button>
             <button type="button" onClick={() => navigate('/fleet')}>{copy.nav.fleet}</button>
             <button type="button" onClick={() => navigate('/partner')}>{copy.nav.partner}</button>
+            <button type="button" onClick={() => navigate('/roles')}>{copy.nav.demo}</button>
             <div className="home-marketing-lang-switch" role="group" aria-label="Language switch">
               <button type="button" className={lang === 'de' ? 'is-active' : ''} onClick={() => setLang('de')}>
                 DE
