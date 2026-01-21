@@ -2651,12 +2651,7 @@ h6 {
   .antares-print-header {
     display: flex;
     padding: 6mm 24px 0;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    background: #ffffff;
-    z-index: 2;
+    margin-bottom: 6mm;
   }
 
   .antares-marketing-page {
@@ -2664,7 +2659,7 @@ h6 {
   }
 
   .antares-hero {
-    margin-top: 22mm;
+    margin-top: 0;
   }
 
   .antares-hero-media {
