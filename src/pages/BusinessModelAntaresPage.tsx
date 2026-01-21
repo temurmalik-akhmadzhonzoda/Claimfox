@@ -256,7 +256,9 @@ function getModelContent(lang: 'de' | 'en') {
           { year: 'Jahr 3', conservative: 'EUR 25–40 Mio.', upside: 'EUR 50 Mio.+' }
         ],
         bullets: ['Broker-Aggregation', 'Eingebettetes Flotten-Onboarding', 'Standardisierte Underwriting-Logik', 'Portfolio-Erneuerungen'],
-        driversLabel: 'Wachstumstreiber'
+        driversLabel: 'Wachstumstreiber',
+        note:
+          'Prämienentwicklung ohne Berücksichtigung des Makler-Onboardings. Portfolio-Erweiterung durch Zugang zu weiteren ca. 145 Branchen allein in DE.'
       },
       economics: {
         title: 'Zielportfolio-Ökonomie',
@@ -477,6 +479,9 @@ export default function BusinessModelAntaresPage() {
                 <li key={item}>{item}</li>
               ))}
             </ul>
+            {content.premiumOutlook.note && (
+              <p className="antares-note">{content.premiumOutlook.note}</p>
+            )}
           </Card>
         </section>
         <section className="antares-section">
@@ -668,6 +673,7 @@ export default function BusinessModelAntaresPage() {
               <li key={item}>{item}</li>
             ))}
           </ul>
+          {content.premiumOutlook.note && <p>{content.premiumOutlook.note}</p>}
         </div>
         <div className="framework-print-section">
           <h2>{content.economics.title}</h2>
