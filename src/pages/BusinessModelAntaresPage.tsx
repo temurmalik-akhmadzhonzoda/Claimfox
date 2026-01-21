@@ -298,6 +298,7 @@ function getModelContent(lang: 'de' | 'en') {
             'Delegiertes Underwriting im vereinbarten Rahmen',
             'Delegierte Schadenbearbeitung für geringwertige Schäden (bei Datenvollständigkeit)',
             'KI getriebene Auswertung von Unternehmens und Risikodaten für die zukünftige Tarifberechnung der Antares Produkte (Real Time)',
+            'Operative Umsetzung, Betrieb und Skalierung',
             'Laufendes Portfoliomonitoring und Reporting'
           ]
         }
