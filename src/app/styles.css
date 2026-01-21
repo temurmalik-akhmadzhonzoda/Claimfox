@@ -1647,6 +1647,15 @@ h6 {
   line-height: 1.7;
 }
 
+.antares-print-header {
+  display: none;
+}
+
+.antares-print-header img {
+  height: 48px;
+  width: auto;
+}
+
 .antares-metric-card {
   display: grid;
   gap: 0.6rem;
@@ -2537,6 +2546,15 @@ h6 {
     display: flex;
   }
 
+  .antares-print-header {
+    display: flex;
+    padding: 6mm 24px 0;
+  }
+
+  .antares-marketing-page {
+    padding-top: 2mm;
+  }
+
   .antares-section,
   .antares-card,
   .antares-hero,
@@ -2547,13 +2565,25 @@ h6 {
   }
 
   .antares-grid,
-  .antares-grid-two,
+  .antares-grid-two {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .antares-grid-three {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .antares-table-row {
     grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .antares-section {
+    padding: 0 20px;
+    gap: 0.9rem;
+  }
+
+  .antares-card {
+    padding: 1.2rem;
   }
 
   .regulatory-framework-page {

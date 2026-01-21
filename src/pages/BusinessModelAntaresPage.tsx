@@ -367,6 +367,9 @@ export default function BusinessModelAntaresPage() {
   return (
     <section className="page insurfox-whitepaper-page antares-marketing-page">
       <div className="insurfox-whitepaper-shell">
+        <div className="antares-print-header">
+          <img src={InsurfoxLogo} alt="Insurfox" />
+        </div>
         <div className="framework-header-row insurfox-whitepaper-header antares-header">
           <div className="antares-header-copy">
             <span className="antares-eyebrow">{content.model}</span>
