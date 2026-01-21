@@ -1649,7 +1649,7 @@ h6 {
 .antares-print-cover img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   display: block;
   background: #ffffff !important;
 }
@@ -2622,8 +2622,14 @@ h6 {
   }
 
   * {
-    background: transparent !important;
     box-shadow: none !important;
+  }
+
+  body,
+  .antares-marketing-page,
+  .antares-marketing-page * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 
   .framework-download {
@@ -2651,8 +2657,9 @@ h6 {
     page-break-after: always;
     break-after: page;
     position: relative;
-    z-index: 5;
+    z-index: 20;
     background: #ffffff !important;
+    overflow: hidden;
   }
 
   .antares-print-header {
@@ -2663,7 +2670,7 @@ h6 {
     left: 0;
     right: 0;
     background: #ffffff !important;
-    z-index: 0;
+    z-index: 10;
   }
 
   .antares-marketing-page {
@@ -2681,6 +2688,12 @@ h6 {
   .antares-section {
     break-inside: auto;
     page-break-inside: auto;
+  }
+
+  .antares-section-head,
+  .antares-section-head h2 {
+    break-after: avoid;
+    page-break-after: avoid;
   }
 
   .antares-card,
