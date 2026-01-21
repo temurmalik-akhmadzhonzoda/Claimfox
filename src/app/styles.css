@@ -1634,7 +1634,7 @@ h6 {
 .antares-print-cover img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .antares-highlight {
@@ -2648,6 +2648,10 @@ h6 {
     padding-top: 22mm;
   }
 
+  .antares-hero-media {
+    display: none;
+  }
+
   .antares-section,
   .antares-card,
   .antares-hero,
@@ -2677,6 +2681,10 @@ h6 {
 
   .antares-card {
     padding: 1.2rem;
+  }
+
+  .antares-hero-card {
+    padding: 1.4rem;
   }
 
   .regulatory-framework-page {
