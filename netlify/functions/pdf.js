@@ -8,27 +8,63 @@ function getRequiredEnv(name) {
   return value
 }
 
-function buildDocUrl(origin, route, lang) {
+function mapRoute(route) {
+  if (route === '/enterprise-leads-intelligence/print/de') {
+    return '/enterprise-leads-print.de.html'
+  }
+  if (route === '/enterprise-leads-intelligence/print/en') {
+    return '/enterprise-leads-print.en.html'
+  }
+  return route
+}
+
+function buildDocUrl(origin, route) {
   const normalizedRoute = route.startsWith('/') ? route : `/${route}`
   const url = new URL(normalizedRoute, origin)
-  url.searchParams.set('print', '1')
-  if (lang) {
-    url.searchParams.set('lang', lang)
-  }
   return url.toString()
 }
 
 exports.handler = async (event) => {
   try {
-    const apiKey = getRequiredEnv('DOCRAPTOR_API_KEY')
-    const siteOrigin = getRequiredEnv('SITE_ORIGIN')
-    const route = event.queryStringParameters?.route || '/business-model-antares-test'
-    const lang = event.queryStringParameters?.lang || 'de'
+    if (event.httpMethod !== 'GET') {
+      return {
+        statusCode: 405,
+        headers: { 'Content-Type': 'application/json; charset=utf-8' },
+        body: JSON.stringify({ error: 'Method Not Allowed' })
+      }
+    }
+
+    const siteOrigin = process.env.SITE_ORIGIN || 'https://claimfox.app'
+    const routeParam = event.queryStringParameters?.route || '/business-model-antares-test'
+    const route = mapRoute(routeParam)
     const filename = event.queryStringParameters?.filename
     const testMode = process.env.DOCRAPTOR_TEST_MODE === 'true'
 
-    const documentUrl = buildDocUrl(siteOrigin, route, lang)
+    const documentUrl = buildDocUrl(siteOrigin, route)
+
+    if (event.queryStringParameters?.debug === '1') {
+      const response = await fetch(documentUrl, { redirect: 'follow' })
+      const contentType = response.headers.get('content-type')
+      const text = await response.text()
+      return {
+        statusCode: 200,
+        headers: { 'Content-Type': 'application/json; charset=utf-8' },
+        body: JSON.stringify({
+          ok: response.ok && contentType && contentType.includes('text/html'),
+          document_url: documentUrl,
+          status: response.status,
+          content_type: contentType,
+          first_300_chars: text.slice(0, 300),
+          redirected: response.url !== documentUrl,
+          final_fetch_url: response.url
+        })
+      }
+    }
+
+    const apiKey = getRequiredEnv('DOCRAPTOR_API_KEY')
     const authToken = Buffer.from(`${apiKey}:`).toString('base64')
+
+    console.log('DocRaptor document_url =', documentUrl)
 
     const response = await fetch(DOCRAPTOR_URL, {
       method: 'POST',
@@ -67,7 +103,7 @@ exports.handler = async (event) => {
       statusCode: 200,
       headers: {
         'Content-Type': 'application/pdf',
-        'Content-Disposition': `attachment; filename="${filename || `insurfox-antares-business-model-${lang}.pdf`}"`
+        'Content-Disposition': `attachment; filename="${filename || 'insurfox-antares-business-model.pdf'}"`
       },
       body: pdfBuffer.toString('base64'),
       isBase64Encoded: true

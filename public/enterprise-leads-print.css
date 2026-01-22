@@ -1,3 +1,4 @@
+/* 1) Page / Reset */
 @page {
   size: A4 landscape;
   margin: 12mm;
@@ -10,11 +11,9 @@
   --ix-border: var(--border, var(--muted, initial));
   --ix-text: var(--text, initial);
   --ix-text-muted: var(--muted, initial);
-
   --ix-primary: var(--insurfox-orange, var(--primary, initial));
   --ix-primary-600: var(--primary-600, var(--ix-primary));
   --ix-primary-100: var(--primary-100, var(--ix-surface-2));
-
   --ix-chart-1: var(--ix-primary);
   --ix-chart-2: var(--ix-primary-600);
 }
@@ -23,21 +22,53 @@
   box-sizing: border-box;
 }
 
+html,
 body {
   margin: 0;
-  font-family: 'Source Sans 3', Arial, sans-serif;
-  color: var(--ix-text);
+  padding: 0;
   background: var(--ix-bg);
+  color: var(--ix-text);
+  font-family: 'Source Sans 3', Arial, sans-serif;
+  font-size: 11px;
+  line-height: 1.45;
 }
 
+/* 2) Typography */
+h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 0 6px;
+  color: var(--ix-primary);
+}
+
+h2 {
+  font-size: 21px;
+  font-weight: 700;
+  margin: 0 0 8px;
+}
+
+.subtitle {
+  font-size: 13px;
+  color: var(--ix-text-muted);
+  margin: 0 0 8px;
+}
+
+.disclaimer {
+  font-size: 11px;
+  color: var(--ix-text-muted);
+  margin: 0 0 14px;
+}
+
+/* 3) Layout containers */
 .deck {
   width: 100%;
 }
 
 .slide {
+  display: block;
+  padding: 2mm 0;
   page-break-after: always;
   break-after: page;
-  padding: 4mm 0;
 }
 
 .slide:last-child {
@@ -45,32 +76,17 @@ body {
   break-after: auto;
 }
 
-h1 {
-  font-size: 28px;
+.section-intro {
+  color: var(--ix-text-muted);
   margin: 0 0 8px;
 }
 
-h2 {
-  font-size: 22px;
-  margin: 0 0 8px;
-}
-
-.subtitle {
-  font-size: 14px;
-  color: var(--ix-text-muted);
-  margin: 0 0 10px;
-}
-
-.disclaimer {
-  font-size: 12px;
-  color: var(--ix-text-muted);
-  margin: 0 0 12px;
-}
-
+/* 4) KPI Cards */
 .kpi-row {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  margin-bottom: 10px;
 }
 
 .card {
@@ -84,14 +100,28 @@ h2 {
 
 .card span {
   display: block;
-  font-size: 11px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
   color: var(--ix-text-muted);
 }
 
 .card strong {
-  font-size: 18px;
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  margin-top: 4px;
 }
 
+.chart-card {
+  border: 1px solid var(--ix-border);
+  border-radius: 12px;
+  padding: 10px 12px;
+  background: var(--ix-surface);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* 5) Tables */
 .table-card {
   border: 1px solid var(--ix-border);
   border-radius: 12px;
@@ -103,14 +133,22 @@ h2 {
 table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 12px;
+  font-size: 11px;
 }
 
 th,
 td {
-  padding: 8px 10px;
+  padding: 7px 10px;
   border-bottom: 1px solid var(--ix-border);
   text-align: left;
+  vertical-align: top;
+}
+
+th {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ix-text-muted);
 }
 
 tbody tr:nth-child(even) {
@@ -131,41 +169,48 @@ tbody tr:nth-child(even) {
   font-size: 10px;
 }
 
+.total-row td {
+  font-weight: 700;
+  background: var(--ix-surface-2);
+}
+
+/* 6) Utilities */
 .bullets {
   margin: 8px 0 0;
   padding-left: 18px;
   color: var(--ix-text-muted);
-  font-size: 12px;
-}
-
-.bars {
-  margin-top: 12px;
-}
-
-.bar {
-  height: 10px;
-  background: var(--ix-surface-2);
-  border-radius: 999px;
-  overflow: hidden;
-  margin-bottom: 8px;
-}
-
-.bar span {
-  display: block;
-  height: 100%;
-  background: var(--ix-chart-1);
+  font-size: 11px;
 }
 
 .footer {
   margin-top: 12px;
   font-size: 11px;
   color: var(--ix-text-muted);
+  display: flex;
+  justify-content: space-between;
 }
 
-table, tr, td, th, .card {
+/* 7) Print rules */
+.card,
+.table-card,
+table,
+tr,
+td,
+th {
   break-inside: avoid;
+  page-break-inside: avoid;
 }
 
 thead {
   display: table-header-group;
+}
+
+/* Footer fallback per slide */
+.slide::after {
+  content: "Business Plan – Part 1 · Confidential";
+  display: block;
+  margin-top: 10px;
+  font-size: 10px;
+  color: var(--ix-text-muted);
+  text-align: right;
 }
