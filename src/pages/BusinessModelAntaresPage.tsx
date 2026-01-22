@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react'
 import Card from '@/components/ui/Card'
 import InsurfoxLogo from '@/assets/logos/Insurfox_Logo_colored_dark.png'
 import AntaresHeroImage from '@/assets/images/Poster-Antares-big.png'
+import AntaresCoverImage from '@/assets/images/Poster-Antares.png'
 import { useI18n } from '@/i18n/I18nContext'
 
 function getModelContent(lang: 'de' | 'en') {
@@ -425,7 +426,7 @@ export default function BusinessModelAntaresPage() {
     <section className="page insurfox-whitepaper-page antares-marketing-page">
       <div className="insurfox-whitepaper-shell">
         <div className="antares-print-cover">
-          <img src={AntaresHeroImage} alt="Insurfox powered by Antares" />
+          <img src={AntaresCoverImage} alt="Insurfox powered by Antares" />
         </div>
         <div className="antares-print-body">
           <div className="antares-print-header">

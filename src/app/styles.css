@@ -2658,12 +2658,15 @@ h6 {
     break-after: page;
     position: relative;
     z-index: 20;
-    background: #ffffff !important;
+    background: transparent !important;
     overflow: hidden;
   }
 
   .antares-print-cover img {
-    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
   }
 
   .antares-print-body {
@@ -2682,9 +2685,9 @@ h6 {
 
   .antares-print-header-cell {
     display: table-cell;
-    padding: 10mm 16mm 6mm;
+    padding: 8mm 14mm 4mm;
     vertical-align: middle;
-    background: #ffffff !important;
+    background: transparent !important;
   }
 
   .antares-print-content {
@@ -2747,21 +2750,21 @@ h6 {
   }
 
   .antares-section {
-    padding: 0 20px;
-    gap: 0.45rem;
+    padding: 0 16px;
+    gap: 0.4rem;
   }
 
   .antares-card {
-    padding: 0.85rem;
+    padding: 0.75rem;
   }
 
   .antares-hero-card {
-    padding: 1rem;
+    padding: 0.9rem;
   }
 
   .antares-highlight {
-    margin: 0 20px;
-    padding: 0.7rem 0.9rem;
+    margin: 0 16px;
+    padding: 0.6rem 0.8rem;
   }
 
   .antares-table-row {
