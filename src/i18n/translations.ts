@@ -1077,6 +1077,10 @@ export const translations: Record<Lang, TranslationTree> = {
           title: 'Business Modell Antares (Test)',
           description: 'Testseite für den PDF-Export des Business Modell Antares.'
         },
+        marketOverviewLogistics: {
+          title: 'Market Overview Logistics',
+          description: 'Investor- und Carrier-grade Marktübersicht für Flotte, Logistik und Fracht.'
+        },
         requirementsCatalog: {
           title: 'Anforderungskatalog',
           description: 'Short Version für die Zusammenarbeit mit Versicherungen auf der Insurfox AI IaaS Plattform.'
@@ -3165,6 +3169,10 @@ export const translations: Record<Lang, TranslationTree> = {
         businessModelAntaresTest: {
           title: 'Business Model Antares (Test)',
           description: 'Test page for the Business Model Antares PDF export.'
+        },
+        marketOverviewLogistics: {
+          title: 'Market Overview Logistics',
+          description: 'Investor and carrier-grade market overview for fleet, logistics, and freight.'
         },
         requirementsCatalog: {
           title: 'Requirements Catalog',

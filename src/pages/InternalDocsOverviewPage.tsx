@@ -12,6 +12,7 @@ type RoleItem = {
     | 'insurfoxWhitepaper'
     | 'businessModelAntares'
     | 'businessModelAntaresTest'
+    | 'marketOverviewLogistics'
     | 'strategicDeepDive'
     | 'requirementsCatalog'
     | 'whitepaper'
@@ -35,6 +36,7 @@ const PRESENTATION_ITEMS: RoleItem[] = [
   { key: 'insurfoxWhitepaper', route: '/insurfox-whitepaper' },
   { key: 'businessModelAntares', route: '/business-model-antares' },
   { key: 'businessModelAntaresTest', route: '/business-model-antares-test' },
+  { key: 'marketOverviewLogistics', route: '/market-overview-logistics' },
   { key: 'strategicDeepDive', route: '/governance/strategic-deep-dive' },
   { key: 'requirementsCatalog', route: '/requirements-catalog' },
   { key: 'whitepaper', route: '/ai-whitepaper' },
