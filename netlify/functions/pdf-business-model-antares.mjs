@@ -39,13 +39,18 @@ export async function handler(event) {
       throw new Error('Chromium executable not found in Netlify runtime.')
     }
 
+    if (typeof chromium.setHeadlessMode === 'function') {
+      chromium.setHeadlessMode(true)
+    }
+    if (typeof chromium.setGraphicsMode === 'function') {
+      chromium.setGraphicsMode(false)
+    }
+
     const launchArgs = [
       ...chromium.args,
       '--disable-dev-shm-usage',
       '--disable-gpu',
-      '--no-sandbox',
-      '--no-zygote',
-      '--single-process'
+      '--no-sandbox'
     ]
 
     const browser = await puppeteer.launch({
