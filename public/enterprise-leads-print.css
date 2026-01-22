@@ -1,4 +1,4 @@
-/* 1) Page / Reset */
+/* 1) Page Setup */
 @page {
   size: A4 landscape;
   margin: 12mm;
@@ -33,33 +33,38 @@ body {
   line-height: 1.45;
 }
 
-/* 2) Typography */
+/* 2) Base Typography */
 h1 {
-  font-size: 32px;
+  font-size: 34px;
   font-weight: 700;
-  margin: 0 0 6px;
+  margin: 0 0 8px;
   color: var(--ix-primary);
 }
 
 h2 {
   font-size: 21px;
   font-weight: 700;
-  margin: 0 0 8px;
+  margin: 0 0 10px;
 }
 
 .subtitle {
   font-size: 13px;
   color: var(--ix-text-muted);
-  margin: 0 0 8px;
+  margin: 0 0 10px;
 }
 
 .disclaimer {
   font-size: 11px;
   color: var(--ix-text-muted);
-  margin: 0 0 14px;
+  margin: 0 0 16px;
 }
 
-/* 3) Layout containers */
+small,
+.note {
+  color: var(--ix-text-muted);
+}
+
+/* 3) Slide Layout */
 .deck {
   width: 100%;
 }
@@ -78,23 +83,29 @@ h2 {
 
 .section-intro {
   color: var(--ix-text-muted);
-  margin: 0 0 8px;
+  margin: 0 0 10px;
 }
 
-/* 4) KPI Cards */
+.accent-line {
+  height: 1px;
+  width: 56px;
+  background: var(--ix-primary);
+  margin: 8px 0 12px;
+}
+
+/* 4) KPI Styling */
 .kpi-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 10px;
+  margin: 0 -6px 4px;
 }
 
-.card {
+.kpi-row .card {
   border: 1px solid var(--ix-border);
-  border-radius: 12px;
+  border-radius: 10px;
   padding: 10px 12px;
   background: var(--ix-surface);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  margin: 0 6px 12px;
   flex: 1 1 180px;
 }
 
@@ -108,26 +119,27 @@ h2 {
 
 .card strong {
   display: block;
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 700;
   margin-top: 4px;
 }
 
-.chart-card {
-  border: 1px solid var(--ix-border);
-  border-radius: 12px;
-  padding: 10px 12px;
-  background: var(--ix-surface);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
-}
-
-/* 5) Tables */
+.chart-card,
 .table-card {
   border: 1px solid var(--ix-border);
-  border-radius: 12px;
+  border-radius: 10px;
   background: var(--ix-surface);
+  padding: 10px 12px;
+}
+
+.table-card {
   padding: 0;
   overflow: hidden;
+}
+
+/* 5) Table Styling */
+.table-wrap {
+  width: 100%;
 }
 
 table {
@@ -149,9 +161,6 @@ th {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--ix-text-muted);
-}
-
-tbody tr:nth-child(even) {
   background: var(--ix-surface-2);
 }
 
@@ -164,8 +173,8 @@ tbody tr:nth-child(even) {
   display: inline-block;
   padding: 2px 6px;
   border-radius: 999px;
-  background: var(--ix-primary-100);
-  color: var(--ix-primary);
+  border: 1px solid var(--ix-border);
+  color: var(--ix-text);
   font-size: 10px;
 }
 
@@ -174,9 +183,9 @@ tbody tr:nth-child(even) {
   background: var(--ix-surface-2);
 }
 
-/* 6) Utilities */
+/* 6) Utility Classes */
 .bullets {
-  margin: 8px 0 0;
+  margin: 10px 0 0;
   padding-left: 18px;
   color: var(--ix-text-muted);
   font-size: 11px;
@@ -184,13 +193,17 @@ tbody tr:nth-child(even) {
 
 .footer {
   margin-top: 12px;
-  font-size: 11px;
+  font-size: 10px;
   color: var(--ix-text-muted);
   display: flex;
   justify-content: space-between;
 }
 
-/* 7) Print rules */
+.muted {
+  color: var(--ix-text-muted);
+}
+
+/* 7) Print Rules */
 .card,
 .table-card,
 table,
@@ -209,7 +222,7 @@ thead {
 .slide::after {
   content: "Business Plan – Part 1 · Confidential";
   display: block;
-  margin-top: 10px;
+  margin-top: 12px;
   font-size: 10px;
   color: var(--ix-text-muted);
   text-align: right;
