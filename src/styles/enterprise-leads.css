@@ -22,6 +22,13 @@
   gap: 0.6rem;
 }
 
+.enterprise-header-title {
+  font-size: 0.9rem;
+  color: var(--ix-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
 .enterprise-header button {
   border: 1px solid var(--ix-border);
   border-radius: 999px;
@@ -41,6 +48,7 @@
   margin: 2.5rem auto;
   display: grid;
   gap: 1.6rem;
+  min-height: 60vh;
 }
 
 .slide-cover h1 {
@@ -78,6 +86,11 @@
   border-radius: var(--ix-radius-lg);
   padding: 1.2rem 1.4rem;
   box-shadow: var(--ix-shadow-soft);
+}
+
+.table-card {
+  padding: 0;
+  overflow: hidden;
 }
 
 .section-intro {

@@ -1,7 +1,13 @@
 export const enterpriseStrings = {
   de: {
-    title: 'Business Plan – Part 1: Market Anchors & Lead Exposure (DE / EEA)',
-    subtitle: 'Market Anchors & Lead Exposure (Germany / EEA)',
+    title: 'Business Plan – Part 1',
+    cover: {
+      title: 'Business Plan – Part 1',
+      subtitle: 'Market Anchors & Lead Exposure (Germany / EEA)'
+    },
+    header: {
+      export: 'PDF exportieren'
+    },
     disclaimer: 'Indicative annual insurance exposure (model-based). Exposure ≠ premium ≠ revenue.',
     kpis: {
       deMarket: 'Germany market (Mid-Case)',
@@ -68,8 +74,14 @@ export const enterpriseStrings = {
     footer: 'contact@insurfox.com'
   },
   en: {
-    title: 'Business Plan – Part 1: Market Anchors & Lead Exposure (DE / EEA)',
-    subtitle: 'Market Anchors & Lead Exposure (Germany / EEA)',
+    title: 'Business Plan – Part 1',
+    cover: {
+      title: 'Business Plan – Part 1',
+      subtitle: 'Market Anchors & Lead Exposure (Germany / EEA)'
+    },
+    header: {
+      export: 'Export PDF'
+    },
     disclaimer: 'Indicative annual insurance exposure (model-based). Exposure ≠ premium ≠ revenue.',
     kpis: {
       deMarket: 'Germany market (Mid-Case)',

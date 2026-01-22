@@ -60,7 +60,7 @@ export default function EnterpriseLeadsPage() {
   return (
     <section className={`page enterprise-plan ${isPrint ? 'is-print' : ''}`}>
       <header className="enterprise-header no-print">
-        <div className="enterprise-header-title">{copy.title}</div>
+        <div className="enterprise-header-title">Business Plan – Part 1</div>
         <div className="enterprise-header-actions">
           <button
             type="button"
@@ -79,15 +79,15 @@ export default function EnterpriseLeadsPage() {
             EN
           </button>
           <button type="button" onClick={exportPdf}>
-            Export PDF
+            {copy.header.export}
           </button>
         </div>
       </header>
 
       <section className="slide slide-cover">
         <div>
-          <h1>{copy.title}</h1>
-          <p className="subtitle">{copy.subtitle}</p>
+          <h1>{copy.cover.title}</h1>
+          <p className="subtitle">{copy.cover.subtitle}</p>
           <p className="disclaimer">{copy.disclaimer}</p>
           <div className="kpi-grid">
             <div className="card">
