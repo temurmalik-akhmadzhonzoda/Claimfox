@@ -11,11 +11,14 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
   const location = useLocation()
   const searchParams = new URLSearchParams(location.search)
   const isPrintMode = searchParams.get('print') === '1'
-  const printAllowedRoutes = new Set(['/business-model-antares'])
+  const printAllowedRoutes = new Set([
+    '/business-model-antares',
+    '/enterprise-leads-intelligence'
+  ])
   const isPrintAllowed = isPrintMode && printAllowedRoutes.has(location.pathname)
 
   if (!isAuthenticated && !isPrintAllowed) {
-    return <Navigate to="/home" replace />
+    return <Navigate to="/login" replace />
   }
 
   return children
