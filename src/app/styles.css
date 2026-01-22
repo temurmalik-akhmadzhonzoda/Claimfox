@@ -2699,13 +2699,22 @@ h6 {
   }
 
   .antares-print-page {
+    break-before: auto;
+    page-break-before: auto;
+  }
+
+  .antares-print-page + .antares-print-page {
     break-before: page;
     page-break-before: always;
   }
 
-  .antares-print-page:first-of-type {
-    break-before: auto;
-    page-break-before: auto;
+  .antares-print-layout > .antares-print-page:last-child {
+    break-after: auto;
+    page-break-after: auto;
+  }
+
+  .antares-print-page:empty {
+    display: none;
   }
 
   .antares-print-page-header {
