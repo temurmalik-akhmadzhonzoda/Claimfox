@@ -1654,6 +1654,14 @@ h6 {
   background: #ffffff !important;
 }
 
+.antares-print-layout {
+  display: none;
+}
+
+.antares-screen-layout {
+  display: block;
+}
+
 .antares-print-spacer {
   display: none;
 }
@@ -2617,7 +2625,8 @@ h6 {
     --print-side: 18mm;
     --print-gap: 6mm;
     --print-section: 8mm;
-    --print-header-height: 28mm;
+    --print-header-height: 20mm;
+    --print-header-gap: 6mm;
   }
 
   html,
@@ -2677,40 +2686,43 @@ h6 {
   }
 
   .antares-print-body {
-    display: table;
-    width: 100%;
-    border-collapse: collapse;
-  }
-
-  .antares-print-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: var(--print-header-height);
-    display: block;
-    z-index: 10;
-    pointer-events: none;
-  }
-
-  .antares-print-header-row {
     display: block;
     width: 100%;
-    height: 100%;
-    padding: 6mm var(--print-side) 0;
+  }
+
+  .antares-print-layout {
+    display: block;
+  }
+
+  .antares-screen-layout {
+    display: none;
+  }
+
+  .antares-print-page {
+    break-before: page;
+    page-break-before: always;
+  }
+
+  .antares-print-page:first-of-type {
+    break-before: auto;
+    page-break-before: auto;
+  }
+
+  .antares-print-page-header {
+    display: flex;
+    align-items: flex-start;
+    padding: var(--print-header-height) var(--print-side) var(--print-header-gap);
     box-sizing: border-box;
   }
 
-  .antares-print-header-cell {
-    display: flex;
-    align-items: flex-start;
-    height: 100%;
-    background: transparent !important;
+  .antares-print-page-header img {
+    height: 38px;
+    width: auto;
+    display: block;
   }
 
-  .antares-print-content {
-    display: block;
-    padding: var(--print-header-height) var(--print-side) 0;
+  .antares-print-page-content {
+    padding: 0 var(--print-side);
     box-sizing: border-box;
   }
 
