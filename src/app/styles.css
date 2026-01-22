@@ -2751,7 +2751,7 @@ h6 {
 
   .antares-section {
     padding: 0 16px;
-    gap: 0.4rem;
+    gap: 0.55rem;
   }
 
   .antares-card {
@@ -2765,6 +2765,10 @@ h6 {
   .antares-highlight {
     margin: 0 16px;
     padding: 0.6rem 0.8rem;
+  }
+
+  .antares-section-head h2 {
+    margin-bottom: 0.3rem;
   }
 
   .antares-table-row {
