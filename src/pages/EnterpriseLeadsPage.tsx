@@ -1,11 +1,12 @@
 import React, { useMemo } from 'react'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 import { markets } from '@/data/markets'
 import { leads } from '@/data/leads'
 import { buildLeadRows } from '@/lib/calc'
 import { formatMoneyCompactEUR, formatMoneyExactEUR, formatPercent } from '@/lib/format'
 import { enterpriseStrings } from '@/i18n/strings'
 import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+import PosterAntares from '@/assets/images/Poster-Antares.png'
 
 type Lang = 'de' | 'en'
 
@@ -22,7 +23,6 @@ function buildDocRaptorUrl(route: string, filename: string) {
 
 export default function EnterpriseLeadsPage() {
   const [searchParams] = useSearchParams()
-  const navigate = useNavigate()
   const lang = getLang(searchParams)
   const isPrint = searchParams.get('print') === '1'
   const locale = lang === 'de' ? 'de-DE' : 'en-GB'
@@ -43,12 +43,6 @@ export default function EnterpriseLeadsPage() {
     { label: 'EEA', value: markets.EU }
   ]
 
-  function setLang(next: Lang) {
-    const params = new URLSearchParams(searchParams)
-    params.set('lang', next)
-    navigate({ search: params.toString() }, { replace: true })
-  }
-
   function exportPdf() {
     const route = lang === 'de'
       ? '/enterprise-leads-intelligence/print/de'
@@ -64,72 +58,61 @@ export default function EnterpriseLeadsPage() {
       <header className="enterprise-header no-print">
         <div className="enterprise-header-title">Business Plan – Part 1</div>
         <div className="enterprise-header-actions">
-          <button
-            type="button"
-            className={lang === 'de' ? 'is-active' : ''}
-            onClick={() => setLang('de')}
-            aria-pressed={lang === 'de'}
-          >
-            DE
-          </button>
-          <button
-            type="button"
-            className={lang === 'en' ? 'is-active' : ''}
-            onClick={() => setLang('en')}
-            aria-pressed={lang === 'en'}
-          >
-            EN
-          </button>
-          <button type="button" onClick={exportPdf}>
+          <button type="button" className="enterprise-download" onClick={exportPdf}>
             {copy.header.export}
           </button>
         </div>
       </header>
 
-      <section className="slide slide-cover">
-        <div>
-          <h1>{copy.cover.title}</h1>
-          <p className="subtitle">{copy.cover.subtitle}</p>
-          <p className="disclaimer">{copy.disclaimer}</p>
-          <div className="kpi-grid">
-            <div className="card">
-              <span>{copy.kpis.deMarket}</span>
-              <strong title={formatMoneyExactEUR(markets.DE, locale)}>
-                {formatMoneyCompactEUR(markets.DE, locale)}
-              </strong>
-            </div>
-            <div className="card">
-              <span>{copy.kpis.euMarket}</span>
-              <strong title={formatMoneyExactEUR(markets.EU, locale)}>
-                {formatMoneyCompactEUR(markets.EU, locale)}
-              </strong>
-            </div>
-            <div className="card">
-              <span>{copy.kpis.leads}</span>
-              <strong>{rows.length}</strong>
-            </div>
-            <div className="card">
-              <span>{copy.kpis.totalExposureEU}</span>
-              <strong title={formatMoneyExactEUR(totals.exposureEU, locale)}>
-                {formatMoneyCompactEUR(totals.exposureEU, locale)}
-              </strong>
+      <section className="slide slide-cover enterprise-section">
+        <div className="enterprise-hero">
+          <div className="enterprise-hero-copy">
+            <h1>{copy.cover.title}</h1>
+            <p className="subtitle">{copy.cover.subtitle}</p>
+            <p className="disclaimer">{copy.disclaimer}</p>
+            <div className="kpi-grid">
+              <div className="card">
+                <span>{copy.kpis.deMarket}</span>
+                <strong title={formatMoneyExactEUR(markets.DE, locale)}>
+                  {formatMoneyCompactEUR(markets.DE, locale)}
+                </strong>
+              </div>
+              <div className="card">
+                <span>{copy.kpis.euMarket}</span>
+                <strong title={formatMoneyExactEUR(markets.EU, locale)}>
+                  {formatMoneyCompactEUR(markets.EU, locale)}
+                </strong>
+              </div>
+              <div className="card">
+                <span>{copy.kpis.leads}</span>
+                <strong>{rows.length}</strong>
+              </div>
+              <div className="card">
+                <span>{copy.kpis.totalExposureEU}</span>
+                <strong title={formatMoneyExactEUR(totals.exposureEU, locale)}>
+                  {formatMoneyCompactEUR(totals.exposureEU, locale)}
+                </strong>
+              </div>
             </div>
           </div>
-          <div className="chart-card">
-            <h3>{copy.charts.marketScale}</h3>
-            <ResponsiveContainer width="100%" height={200}>
-              <BarChart data={marketChart}>
-                <XAxis dataKey="label" />
-                <YAxis hide />
-                <Tooltip formatter={(value: number) => formatMoneyCompactEUR(value, locale)} />
-                <Bar dataKey="value" fill="var(--ix-chart-1)" radius={[8, 8, 0, 0]} />
-              </BarChart>
-            </ResponsiveContainer>
+          <div className="enterprise-hero-media">
+            <img src={PosterAntares} alt="Insurfox Poster" />
           </div>
+        </div>
+        <div className="chart-card enterprise-hero-chart">
+          <h3>{copy.charts.marketScale}</h3>
+          <ResponsiveContainer width="100%" height={200}>
+            <BarChart data={marketChart}>
+              <XAxis dataKey="label" />
+              <YAxis hide />
+              <Tooltip formatter={(value: number) => formatMoneyCompactEUR(value, locale)} />
+              <Bar dataKey="value" fill="var(--ix-chart-1)" radius={[8, 8, 0, 0]} />
+            </BarChart>
+          </ResponsiveContainer>
         </div>
       </section>
 
-      <section className="slide">
+      <section className="slide enterprise-section">
         <h2>{copy.marketAnchors.title}</h2>
         <p className="section-intro">{copy.marketAnchors.intro}</p>
         <div className="card table-card">
@@ -165,7 +148,7 @@ export default function EnterpriseLeadsPage() {
         </ul>
       </section>
 
-      <section className="slide">
+      <section className="slide enterprise-section">
         <h2>{copy.leads.title}</h2>
         <div className="card table-card">
           <table className="enterprise-table">
@@ -221,7 +204,7 @@ export default function EnterpriseLeadsPage() {
         </div>
       </section>
 
-      <section className="slide">
+      <section className="slide enterprise-section">
         <h2>{copy.methodology.title}</h2>
         <ul className="bullets">
           {copy.methodology.bullets.map((item) => (
