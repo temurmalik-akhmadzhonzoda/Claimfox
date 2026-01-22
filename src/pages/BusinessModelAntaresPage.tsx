@@ -392,16 +392,26 @@ export default function BusinessModelAntaresPage() {
   const handlePdfDownload = async () => {
     const downloadLang = resolvedLang === 'en' ? 'en' : 'de'
     const baseUrl = import.meta.env.VITE_PDF_BASE_URL || ''
-    const response = await fetch(`${baseUrl}/api/pdf/business-model-antares?lang=${downloadLang}`)
+    if (!baseUrl) {
+      const anchor = document.createElement('a')
+      anchor.href = `/pdfs/insurfox-antares-business-model-${downloadLang}.pdf`
+      anchor.download = `insurfox-antares-business-model-${downloadLang}.pdf`
+      document.body.appendChild(anchor)
+      anchor.click()
+      anchor.remove()
+      return
+    }
+
+    const response = await fetch(
+      `${baseUrl}/api/pdf/business-model-antares?lang=${downloadLang}`
+    )
     const contentType = response.headers.get('content-type') || ''
     if (!response.ok || !contentType.includes('application/pdf')) {
       const errorText = await response.text().catch(() => '')
       throw new Error(errorText || 'PDF download failed')
     }
     const buffer = await response.arrayBuffer()
-    const url = window.URL.createObjectURL(
-      new Blob([buffer], { type: 'application/pdf' })
-    )
+    const url = window.URL.createObjectURL(new Blob([buffer], { type: 'application/pdf' }))
     const anchor = document.createElement('a')
     anchor.href = url
     anchor.download = `insurfox-antares-business-model-${downloadLang}.pdf`

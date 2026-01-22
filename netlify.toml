@@ -1,20 +1,6 @@
 [build]
   command = "npm run build"
   publish = "dist"
-  functions = "netlify/functions"
-
-[functions]
-  external_node_modules = ["@sparticuz/chromium", "puppeteer-core"]
-  included_files = ["node_modules/@sparticuz/chromium/bin/**"]
-
-[functions."pdf-business-model-antares"]
-  memory = 1024
-  timeout = 60
-
-[[redirects]]
-  from = "/api/pdf/business-model-antares"
-  to = "/.netlify/functions/pdf-business-model-antares"
-  status = 200
 
 [[redirects]]
   from = "/*"

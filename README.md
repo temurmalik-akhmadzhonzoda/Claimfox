@@ -16,15 +16,16 @@
    ```
    Deploy the generated `dist/` folder (already configured for Netlify SPA hosting).
 
-## PDF server
+## PDF server (optional)
 - Dev: `npm run dev` starts Vite + the PDF API on `http://127.0.0.1:3001`.
 - Prod: run `npm run start` to serve the PDF API (and `dist/` if present).
-- Endpoint: `GET /api/pdf/business-model-antares?lang=de|en`
 - Frontend uses `VITE_PDF_BASE_URL` to reach the API (set in `.env.development`).
 
-## Netlify PDF (live)
-- Live uses a Netlify Function at `/.netlify/functions/pdf-business-model-antares`.
-- The public endpoint stays `GET /api/pdf/business-model-antares?lang=de|en` via redirect.
+## Static PDF (live)
+- The build generates static PDFs into `dist/pdfs/`:
+  - `insurfox-antares-business-model-de.pdf`
+  - `insurfox-antares-business-model-en.pdf`
+- Live downloads use `/pdfs/...` directly (no serverless function).
 
 ## CV PDF export
 1. Generate the PDF:
