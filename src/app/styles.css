@@ -2685,13 +2685,14 @@ h6 {
 
   .antares-print-header-cell {
     display: table-cell;
-    padding: 9mm 16mm 6mm;
+    padding: 20mm 20mm 8mm;
     vertical-align: middle;
     background: transparent !important;
   }
 
   .antares-print-content {
     display: table-row-group;
+    padding: 0 20mm;
   }
 
   .antares-marketing-page {
@@ -2754,8 +2755,12 @@ h6 {
   }
 
   .antares-section {
-    padding: 0 20px;
+    padding: 0;
     gap: 0.8rem;
+  }
+
+  .antares-hero {
+    padding: 0;
   }
 
   .antares-hero + .antares-highlight {
@@ -2800,7 +2805,7 @@ h6 {
   }
 
   .antares-highlight {
-    margin: 0 20px;
+    margin: 0;
     padding: 0.85rem 1rem;
   }
 
