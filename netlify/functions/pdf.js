@@ -8,20 +8,16 @@ function getRequiredEnv(name) {
   return value
 }
 
-function mapRoute(route) {
+function resolveDocumentUrl(route) {
+  const origin = process.env.SITE_ORIGIN || 'https://claimfox.app'
+  let mappedRoute = route
   if (route === '/enterprise-leads-intelligence/print/de') {
-    return '/enterprise-leads-print.de.html'
+    mappedRoute = '/enterprise-leads-print.de.html'
+  } else if (route === '/enterprise-leads-intelligence/print/en') {
+    mappedRoute = '/enterprise-leads-print.en.html'
   }
-  if (route === '/enterprise-leads-intelligence/print/en') {
-    return '/enterprise-leads-print.en.html'
-  }
-  return route
-}
-
-function buildDocUrl(origin, route) {
-  const normalizedRoute = route.startsWith('/') ? route : `/${route}`
-  const url = new URL(normalizedRoute, origin)
-  return url.toString()
+  const normalizedRoute = mappedRoute.startsWith('/') ? mappedRoute : `/${mappedRoute}`
+  return new URL(normalizedRoute, origin).toString()
 }
 
 exports.handler = async (event) => {
@@ -34,13 +30,11 @@ exports.handler = async (event) => {
       }
     }
 
-    const siteOrigin = process.env.SITE_ORIGIN || 'https://claimfox.app'
     const routeParam = event.queryStringParameters?.route || '/business-model-antares-test'
-    const route = mapRoute(routeParam)
     const filename = event.queryStringParameters?.filename
     const testMode = process.env.DOCRAPTOR_TEST_MODE === 'true'
 
-    const documentUrl = buildDocUrl(siteOrigin, route)
+    const documentUrl = resolveDocumentUrl(routeParam)
 
     if (event.queryStringParameters?.debug === '1') {
       const response = await fetch(documentUrl, { redirect: 'follow' })
@@ -64,7 +58,7 @@ exports.handler = async (event) => {
     const apiKey = getRequiredEnv('DOCRAPTOR_API_KEY')
     const authToken = Buffer.from(`${apiKey}:`).toString('base64')
 
-    console.log('DocRaptor document_url =', documentUrl)
+    console.log('FINAL DocRaptor document_url =', documentUrl)
 
     const response = await fetch(DOCRAPTOR_URL, {
       method: 'POST',
