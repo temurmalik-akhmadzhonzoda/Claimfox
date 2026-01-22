@@ -2701,6 +2701,8 @@ h6 {
   .antares-print-page {
     break-before: auto;
     page-break-before: auto;
+    break-inside: avoid;
+    page-break-inside: avoid;
   }
 
   .antares-print-page + .antares-print-page {
@@ -2711,6 +2713,10 @@ h6 {
   .antares-print-layout > .antares-print-page:last-child {
     break-after: auto;
     page-break-after: auto;
+  }
+
+  .antares-print-layout {
+    margin: 0;
   }
 
   .antares-print-page:empty {
