@@ -39,18 +39,29 @@ export async function handler(event) {
       throw new Error('Chromium executable not found in Netlify runtime.')
     }
 
+    const launchArgs = [
+      ...chromium.args,
+      '--disable-dev-shm-usage',
+      '--disable-gpu',
+      '--no-sandbox',
+      '--no-zygote',
+      '--single-process'
+    ]
+
     const browser = await puppeteer.launch({
-      args: [...chromium.args, '--disable-dev-shm-usage'],
+      args: launchArgs,
       executablePath,
       headless: chromium.headless,
-      defaultViewport: chromium.defaultViewport
+      defaultViewport: chromium.defaultViewport,
+      ignoreHTTPSErrors: true
     })
 
     let pdfBuffer
     try {
       const page = await browser.newPage()
+      page.setDefaultNavigationTimeout(120000)
       await page.emulateMediaType('print')
-      await page.goto(targetUrl, { waitUntil: ['load', 'networkidle0'], timeout: 60000 })
+      await page.goto(targetUrl, { waitUntil: ['load', 'networkidle2'], timeout: 120000 })
       await page.evaluate(() => document.fonts?.ready)
       pdfBuffer = await page.pdf({
         format: 'A4',
@@ -58,6 +69,23 @@ export async function handler(event) {
         preferCSSPageSize: true,
         margin: { top: '0cm', right: '0cm', bottom: '0cm', left: '0cm' }
       })
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error)
+      if (message.includes('Target closed')) {
+        const retryPage = await browser.newPage()
+        retryPage.setDefaultNavigationTimeout(120000)
+        await retryPage.emulateMediaType('print')
+        await retryPage.goto(targetUrl, { waitUntil: ['load', 'networkidle2'], timeout: 120000 })
+        await retryPage.evaluate(() => document.fonts?.ready)
+        pdfBuffer = await retryPage.pdf({
+          format: 'A4',
+          printBackground: true,
+          preferCSSPageSize: true,
+          margin: { top: '0cm', right: '0cm', bottom: '0cm', left: '0cm' }
+        })
+      } else {
+        throw error
+      }
     } finally {
       await browser.close()
     }
