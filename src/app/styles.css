@@ -2616,7 +2616,7 @@ h6 {
   .antares-marketing-page {
     --print-side: 18mm;
     --print-gap: 6mm;
-    --print-section: 10mm;
+    --print-section: 8mm;
   }
 
   html,
@@ -2691,7 +2691,7 @@ h6 {
 
   .antares-print-header-cell {
     display: table-cell;
-    padding: 20mm var(--print-side) 8mm;
+    padding: 15mm var(--print-side) 8mm;
     vertical-align: middle;
     background: transparent !important;
   }
@@ -2769,10 +2769,6 @@ h6 {
     padding: 0;
   }
 
-  .antares-hero + .antares-highlight {
-    margin-top: 3cm;
-  }
-
   .antares-highlight {
     display: none;
   }
@@ -2786,14 +2782,6 @@ h6 {
   .antares-section-market {
     break-before: avoid;
     page-break-before: avoid;
-  }
-
-  .antares-section-market .antares-section-head {
-    margin-top: 4cm;
-  }
-
-  .antares-section-portfolio .antares-section-head {
-    margin-top: 4cm;
   }
 
   .antares-section-head + .antares-card,
@@ -2810,10 +2798,6 @@ h6 {
     padding: 1.15rem;
   }
 
-  .antares-highlight {
-    margin: 0;
-    padding: 0.9rem 1.05rem;
-  }
 
   .antares-section-head h2 {
     margin-bottom: 4mm;
