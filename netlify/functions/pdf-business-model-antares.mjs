@@ -67,7 +67,7 @@ export async function handler(event) {
       page.setDefaultNavigationTimeout(120000)
       await page.emulateMediaType('print')
       await page.goto(targetUrl, { waitUntil: ['load', 'networkidle2'], timeout: 120000 })
-      await page.waitForTimeout(1000)
+      await new Promise((resolve) => setTimeout(resolve, 1000))
       await page.evaluate(() => document.fonts?.ready)
       pdfBuffer = await page.pdf({
         format: 'A4',
@@ -82,7 +82,7 @@ export async function handler(event) {
         retryPage.setDefaultNavigationTimeout(120000)
         await retryPage.emulateMediaType('print')
         await retryPage.goto(targetUrl, { waitUntil: ['load', 'networkidle2'], timeout: 120000 })
-        await retryPage.waitForTimeout(1000)
+        await new Promise((resolve) => setTimeout(resolve, 1000))
         await retryPage.evaluate(() => document.fonts?.ready)
         pdfBuffer = await retryPage.pdf({
           format: 'A4',
