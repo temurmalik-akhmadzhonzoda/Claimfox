@@ -3,6 +3,10 @@
   publish = "dist"
   functions = "netlify/functions"
 
+[functions]
+  external_node_modules = ["@sparticuz/chromium", "puppeteer-core"]
+  included_files = ["node_modules/@sparticuz/chromium/bin/**"]
+
 [[redirects]]
   from = "/api/pdf/business-model-antares"
   to = "/.netlify/functions/pdf-business-model-antares"
