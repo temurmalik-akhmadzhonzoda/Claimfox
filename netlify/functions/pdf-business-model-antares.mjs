@@ -1,4 +1,6 @@
 import chromium from '@sparticuz/chromium'
+import fs from 'node:fs'
+import path from 'node:path'
 import puppeteer from 'puppeteer-core'
 
 function resolveBaseUrl() {
@@ -22,7 +24,17 @@ export async function handler(event) {
       lang
     )}`
 
-    const executablePath = await chromium.executablePath()
+    const candidateBins = [
+      path.join(process.cwd(), 'node_modules', '@sparticuz', 'chromium', 'bin'),
+      path.join(process.cwd(), 'netlify', 'bin'),
+      path.join(process.cwd(), 'bin')
+    ]
+    const binPath = candidateBins.find((candidate) => fs.existsSync(candidate))
+    if (!binPath) {
+      throw new Error(`Chromium bin directory not found. Tried: ${candidateBins.join(', ')}`)
+    }
+
+    const executablePath = await chromium.executablePath(binPath)
     if (!executablePath) {
       throw new Error('Chromium executable not found in Netlify runtime.')
     }
