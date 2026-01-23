@@ -49,6 +49,9 @@ export default function EnterpriseLeadsPage() {
           <div className="enterprise-hero-copy">
             <h1>{copy.cover.title}</h1>
             <p className="hero-summary">{copy.cover.summary}</p>
+            <div className="enterprise-map">
+              <img src={KarteDeEu} alt={copy.marketImageAlt} />
+            </div>
           </div>
           <div className="enterprise-hero-media">
             <img src={PosterAntares} alt="Insurfox Poster" />
@@ -56,9 +59,6 @@ export default function EnterpriseLeadsPage() {
         </div>
       </section>
 
-      <section className="slide enterprise-section enterprise-market">
-        <img src={KarteDeEu} alt={copy.marketImageAlt} className="enterprise-market-image" />
-      </section>
     </section>
   )
 }

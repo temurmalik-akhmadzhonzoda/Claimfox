@@ -68,7 +68,7 @@
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
     gap: 3rem;
-    align-items: start;
+    align-items: stretch;
   }
 
   .enterprise-hero-copy h1 {
@@ -106,15 +106,15 @@
     border-radius: 0;
   }
 
-  .enterprise-market {
-    padding-top: 0;
+  .enterprise-map {
+    margin-top: auto;
   }
 
-  .enterprise-market-image {
+  .enterprise-map img {
     width: 100%;
     height: auto;
     display: block;
-    border: 1px solid var(--ix-border);
+    border: none;
   }
 
   .enterprise-hero-chart {
