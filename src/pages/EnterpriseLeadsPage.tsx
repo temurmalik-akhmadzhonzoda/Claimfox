@@ -5,6 +5,8 @@ import { useI18n } from '@/i18n/I18nContext'
 import PosterAntares from '@/assets/images/Poster-Antares.png'
 import KarteDeEu from '@/assets/images/karte_de_eu.png'
 import KarteDeEuEn from '@/assets/images/karte_eu_de_englisch.png'
+import LogistikImage from '@/assets/images/logistik.png'
+import BrokersImage from '@/assets/images/brokers.png'
 
 function buildDocRaptorUrl(route: string, filename: string) {
   return `/.netlify/functions/pdf?${new URLSearchParams({ route, filename }).toString()}`
@@ -64,14 +66,29 @@ export default function EnterpriseLeadsPage() {
                 <img src={mapImage} alt={copy.marketImageAlt} />
               </div>
             </div>
-            <div className="enterprise-hero-media">
-              <img src={PosterAntares} alt="Insurfox Poster" />
+            <div className="enterprise-partners">
+              <h2>Insurfox Partner/Verified Leads</h2>
+              <div className="partner-block">
+                <h3>Logistik Industrie</h3>
+                <img src={LogistikImage} alt="Logistik Industrie" />
+              </div>
+              <div className="partner-block">
+                <h3>Makler</h3>
+                <img src={BrokersImage} alt="Makler" />
+              </div>
             </div>
           </div>
         </section>
 
         <section className="slide enterprise-section enterprise-market">
-          <img src={mapImage} alt={copy.marketImageAlt} className="enterprise-market-image" />
+          <div className="enterprise-market-grid">
+            <div className="enterprise-market-poster">
+              <img src={PosterAntares} alt="Insurfox Poster" />
+            </div>
+            <div className="enterprise-market-map">
+              <img src={mapImage} alt={copy.marketImageAlt} />
+            </div>
+          </div>
         </section>
       </div>
 

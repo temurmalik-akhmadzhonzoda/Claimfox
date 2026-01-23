@@ -69,11 +69,15 @@
     overflow: hidden;
     scroll-behavior: smooth;
     width: 100%;
+    height: calc(100vh - var(--header-height));
+    scroll-snap-type: x mandatory;
   }
 
   .enterprise-slides .enterprise-section {
     min-width: 100vw;
     min-height: calc(100vh - var(--header-height));
+    height: 100%;
+    scroll-snap-align: start;
   }
 
   .enterprise-hero {
@@ -81,6 +85,7 @@
     grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
     gap: 3rem;
     align-items: stretch;
+    height: 100%;
   }
 
   .enterprise-hero-copy h1 {
@@ -130,6 +135,65 @@
     border: none;
   }
 
+  .enterprise-partners {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    height: 100%;
+  }
+
+  .enterprise-partners h2 {
+    margin: 0;
+    font-size: 1.4rem;
+    color: var(--ix-text);
+  }
+
+  .partner-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    flex: 1;
+  }
+
+  .partner-block h3 {
+    margin: 0;
+    font-size: 1rem;
+    color: var(--ix-text);
+  }
+
+  .partner-block img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: 1px solid var(--ix-border);
+  }
+
+  .enterprise-market {
+    padding-top: 3rem;
+  }
+
+  .enterprise-market-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: 3rem;
+    height: 100%;
+    align-items: stretch;
+  }
+
+  .enterprise-market-poster,
+  .enterprise-market-map {
+    border: 3px solid var(--blue-dark);
+    overflow: hidden;
+  }
+
+  .enterprise-market-poster img,
+  .enterprise-market-map img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
   .enterprise-market {
     padding-top: 3rem;
   }
@@ -152,9 +216,9 @@
 
   .enterprise-nav-arrow {
     pointer-events: auto;
-    border: 1px solid var(--ix-border);
+    border: 1px solid var(--blue-dark);
     background: var(--ix-surface);
-    color: var(--ix-text-muted);
+    color: var(--blue-dark);
     width: 44px;
     height: 44px;
     border-radius: 999px;
@@ -305,6 +369,10 @@
       gap: 1rem;
       margin: 1.5rem auto 0;
       pointer-events: auto;
+    }
+
+    .enterprise-market-grid {
+      grid-template-columns: 1fr;
     }
   }
 }
