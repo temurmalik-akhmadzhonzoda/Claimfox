@@ -115,107 +115,105 @@ export default function EnterpriseLeadsPage() {
             style={{ transform: `translateX(-${activeIndex * 1122}px)` }}
           >
             <section className="enterprise-page slide-cover enterprise-section">
-              <div className="enterprise-hero">
-                <div className="enterprise-hero-copy">
-                  <h1>{copy.cover.title}</h1>
-                  <p className="hero-summary">{copy.cover.summary}</p>
-                  <div className="enterprise-map">
-                    <img src={mapImage} alt={copy.marketImageAlt} />
+              <div className="enterprise-cover">
+                <div className="enterprise-cover-top">
+                  <div className="enterprise-hero-copy">
+                    <h1>{copy.cover.title}</h1>
+                    <p className="hero-summary">{copy.cover.summary}</p>
+                  </div>
+                  <div className="enterprise-partners">
+                    <img src={industryImage} alt="Logistik Industrie" />
                   </div>
                 </div>
-                <div className="enterprise-partners">
-                  <img src={industryImage} alt="Logistik Industrie" />
+                <div className="enterprise-page-bottom">
+                  <div className="enterprise-grid-5">
+                    <div className="enterprise-table-card">
+                      <h3>Germany — Non-Life Market Composition (selected lines)</h3>
+                      <table>
+                        <thead>
+                          <tr>
+                            <th>Line of Business</th>
+                            <th className="num">Market Volume</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {compositionRows.map((row) => (
+                            <tr key={row.label}>
+                              <td>{row.label}</td>
+                              <td className="num">{row.value}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                    <div className="enterprise-table-card">
+                      <h3>Logistics Stack — Insurance-Relevant Anchors (Germany, indicative volumes)</h3>
+                      <table>
+                        <thead>
+                          <tr>
+                            <th>Insurance Segment</th>
+                            <th className="num">Market Volume</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {stackRows.map((row) => (
+                            <tr key={row.label}>
+                              <td>{row.label}</td>
+                              <td className="num">{row.value}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                    <div className="enterprise-map-card">
+                      <img src={mapImage} alt={copy.marketImageAlt} />
+                    </div>
+                    <div className="enterprise-table-card">
+                      <h3>EEA — Non-Life GWP (Solvency II, 2021)</h3>
+                      <table>
+                        <thead>
+                          <tr>
+                            <th>Line of Business</th>
+                            <th className="num">Market Volume</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr><td>Motor vehicle liability</td><td className="num">€ 68.511 bn</td></tr>
+                          <tr><td>Other motor</td><td className="num">€ 57.203 bn</td></tr>
+                          <tr><td>Property (Fire & other damage)</td><td className="num">€ 101.823 bn</td></tr>
+                          <tr><td>General liability</td><td className="num">€ 42.442 bn</td></tr>
+                          <tr><td>Medical expense</td><td className="num">€ 113.123 bn</td></tr>
+                          <tr className="total-row"><td>Total non-life</td><td className="num">€ 457.220 bn</td></tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div className="enterprise-table-card">
+                      <h3>Europe — P&C Premiums by Main Business Line (2020)</h3>
+                      <table>
+                        <thead>
+                          <tr>
+                            <th>Line of Business</th>
+                            <th className="num">Market Volume</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr><td>Motor</td><td className="num">~€ 149 bn (36%)</td></tr>
+                          <tr><td>Property</td><td className="num">~€ 113 bn (27%)</td></tr>
+                          <tr><td>General liability</td><td className="num">~€ 50 bn (12%)</td></tr>
+                          <tr><td>Other</td><td className="num">~€ 105 bn (25%)</td></tr>
+                          <tr className="total-row"><td>Total P&C</td><td className="num">€ 419 bn (100%)</td></tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
                 </div>
               </div>
             </section>
 
             <section className="enterprise-page enterprise-section enterprise-market">
-              <div className="enterprise-page-top">
+              <div className="enterprise-page-top enterprise-page-full">
                 <div className="enterprise-page-poster">
                   <img src={PosterAntares} alt="Insurfox Poster" />
-                </div>
-                <div className="enterprise-page-spacer" aria-hidden="true" />
-              </div>
-              <div className="enterprise-page-bottom">
-                <div className="enterprise-grid-5">
-                  <div className="enterprise-table-card">
-                    <h3>Germany — Non-Life Market Composition (selected lines)</h3>
-                    <table>
-                      <thead>
-                        <tr>
-                          <th>Line of Business</th>
-                          <th className="num">Market Volume</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {compositionRows.map((row) => (
-                          <tr key={row.label}>
-                            <td>{row.label}</td>
-                            <td className="num">{row.value}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                  <div className="enterprise-table-card">
-                    <h3>Logistics Stack — Insurance-Relevant Anchors (Germany, indicative volumes)</h3>
-                    <table>
-                      <thead>
-                        <tr>
-                          <th>Insurance Segment</th>
-                          <th className="num">Market Volume</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {stackRows.map((row) => (
-                          <tr key={row.label}>
-                            <td>{row.label}</td>
-                            <td className="num">{row.value}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                  <div className="enterprise-map-card">
-                    <img src={mapImage} alt={copy.marketImageAlt} />
-                  </div>
-                  <div className="enterprise-table-card">
-                    <h3>EEA — Non-Life GWP (Solvency II, 2021)</h3>
-                    <table>
-                      <thead>
-                        <tr>
-                          <th>Line of Business</th>
-                          <th className="num">Market Volume</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr><td>Motor vehicle liability</td><td className="num">€ 68.511 bn</td></tr>
-                        <tr><td>Other motor</td><td className="num">€ 57.203 bn</td></tr>
-                        <tr><td>Property (Fire & other damage)</td><td className="num">€ 101.823 bn</td></tr>
-                        <tr><td>General liability</td><td className="num">€ 42.442 bn</td></tr>
-                        <tr><td>Medical expense</td><td className="num">€ 113.123 bn</td></tr>
-                        <tr className="total-row"><td>Total non-life</td><td className="num">€ 457.220 bn</td></tr>
-                      </tbody>
-                    </table>
-                  </div>
-                  <div className="enterprise-table-card">
-                    <h3>Europe — P&C Premiums by Main Business Line (2020)</h3>
-                    <table>
-                      <thead>
-                        <tr>
-                          <th>Line of Business</th>
-                          <th className="num">Market Volume</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr><td>Motor</td><td className="num">~€ 149 bn (36%)</td></tr>
-                        <tr><td>Property</td><td className="num">~€ 113 bn (27%)</td></tr>
-                        <tr><td>General liability</td><td className="num">~€ 50 bn (12%)</td></tr>
-                        <tr><td>Other</td><td className="num">~€ 105 bn (25%)</td></tr>
-                        <tr className="total-row"><td>Total P&C</td><td className="num">€ 419 bn (100%)</td></tr>
-                      </tbody>
-                    </table>
-                  </div>
                 </div>
               </div>
             </section>
