@@ -1,8 +1,8 @@
 export const enterpriseStrings = {
   de: {
-    title: 'Deutscher und europäischer Versicherungsmarkt für gewerbliche Flotten- und Logistikrisiken',
+    title: 'Insurfox / Antares',
     cover: {
-      title: 'Deutscher und europäischer Versicherungsmarkt für gewerbliche Flotten- und Logistikrisiken',
+      title: 'Insurfox / Antares',
       summary:
         'Im Fokus steht ein strukturierter Marktüberblick für gewerbliche Flotten- und Logistikrisiken in Deutschland und der EEA, mit Zielsegmenten in Spedition, Kontrakt- und Speziallogistik sowie Automotive- und Transportflotten. Das modellierte Markt-Exposure beträgt rund 24 Mrd. € in Deutschland und rund 250 Mrd. € in der EEA. Exposure ist ausdrücklich nicht gleich Prämie, Umsatz oder Beitrag. Die Modellierung basiert auf risikorelevanten Treibern wie Fahrzeugbeständen, Transport- und Warenwerten, Einsatzprofilen sowie Schadenfrequenz und -höhe. Ziel ist Transparenz über Risikoprofile als Grundlage für Portfolio-, Kapazitäts- und Zeichnungsentscheidungen in der Zusammenarbeit mit Insurfox.'
     },
@@ -76,9 +76,9 @@ export const enterpriseStrings = {
     marketImageAlt: 'Marktübersicht Deutschland und EEA'
   },
   en: {
-    title: 'German and European insurance market for commercial fleet and logistics risks',
+    title: 'Insurfox / Antares',
     cover: {
-      title: 'German and European insurance market for commercial fleet and logistics risks',
+      title: 'Insurfox / Antares',
       summary:
         'The focus is a structured market overview for commercial fleet and logistics risks in Germany and the EEA, covering freight forwarding, contract and special logistics, and automotive and transport fleets. Modelled market exposure is around €24bn in Germany and around €250bn in the EEA. Exposure is explicitly not premium, revenue or contribution. The model uses risk drivers such as fleet counts, transport and cargo values, operating profiles, and claims frequency and severity. The objective is transparency on risk profiles to support portfolio steering, capacity allocation and underwriting decisions in partnership with Insurfox.'
     },
