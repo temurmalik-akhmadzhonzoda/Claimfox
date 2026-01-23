@@ -96,7 +96,6 @@ export default function EnterpriseLeadsPage() {
       style={{ '--enterprise-header-height': `${headerHeight}px` } as React.CSSProperties}
     >
       <header ref={headerRef} className="enterprise-header no-print">
-        <div className="enterprise-header-title">Insurfox / Antares</div>
         <div className="enterprise-header-actions">
           <button type="button" className="enterprise-download" onClick={exportPdf}>
             {copy.header.export}
