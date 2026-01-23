@@ -75,14 +75,16 @@ export default function EnterpriseLeadsPage() {
     const PAGE_HEIGHT = 793
     const updateScale = () => {
       const currentHeaderHeight = headerRef.current?.offsetHeight ?? 0
+      const appHeaderHeight = document.querySelector<HTMLElement>('.home-marketing-header')?.offsetHeight ?? 0
+      const totalHeaderHeight = currentHeaderHeight + appHeaderHeight
       const availableWidth = window.innerWidth
-      const availableHeight = window.innerHeight - currentHeaderHeight
+      const availableHeight = window.innerHeight - totalHeaderHeight
       const nextScale = Math.min(
         availableWidth / PAGE_WIDTH,
         availableHeight / PAGE_HEIGHT,
         1
       )
-      setHeaderHeight(currentHeaderHeight)
+      setHeaderHeight(totalHeaderHeight)
       setScale(nextScale)
     }
     updateScale()
