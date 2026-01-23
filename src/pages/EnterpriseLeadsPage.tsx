@@ -7,6 +7,8 @@ import KarteDeEu from '@/assets/images/karte_de_eu.png'
 import KarteDeEuEn from '@/assets/images/karte_eu_de_englisch.png'
 import LogistikImage from '@/assets/images/logistik.png'
 import BrokersImage from '@/assets/images/brokers.png'
+import LogistikIndustrieDe from '@/assets/images/logistik_industrie_de.png'
+import LogistikIndustrieEn from '@/assets/images/logistik_industrie_en.png'
 
 function buildDocRaptorUrl(route: string, filename: string) {
   return `/.netlify/functions/pdf?${new URLSearchParams({ route, filename }).toString()}`
@@ -18,6 +20,7 @@ export default function EnterpriseLeadsPage() {
   const isPrint = searchParams.get('print') === '1'
   const copy = enterpriseStrings[lang]
   const mapImage = lang === 'en' ? KarteDeEuEn : KarteDeEu
+  const industryImage = lang === 'en' ? LogistikIndustrieEn : LogistikIndustrieDe
   const slidesRef = useRef<HTMLDivElement>(null)
   const [activeIndex, setActiveIndex] = useState(0)
   const totalSlides = 2
@@ -67,15 +70,7 @@ export default function EnterpriseLeadsPage() {
               </div>
             </div>
             <div className="enterprise-partners">
-              <h2>Insurfox Partner/Verified Leads</h2>
-              <div className="partner-block">
-                <h3>Logistik Industrie</h3>
-                <img src={LogistikImage} alt="Logistik Industrie" />
-              </div>
-              <div className="partner-block">
-                <h3>Makler</h3>
-                <img src={BrokersImage} alt="Makler" />
-              </div>
+              <img src={industryImage} alt="Logistik Industrie" />
             </div>
           </div>
         </section>
