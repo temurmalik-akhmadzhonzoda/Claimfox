@@ -5,8 +5,6 @@ import { useI18n } from '@/i18n/I18nContext'
 import PosterAntares from '@/assets/images/Poster-Antares.png'
 import KarteDeEu from '@/assets/images/karte_de_eu.png'
 import KarteDeEuEn from '@/assets/images/karte_eu_de_englisch.png'
-import LogistikImage from '@/assets/images/logistik.png'
-import BrokersImage from '@/assets/images/brokers.png'
 import LogistikIndustrieDe from '@/assets/images/logistik_industrie_de.png'
 import LogistikIndustrieEn from '@/assets/images/logistik_industrie_en.png'
 
@@ -24,6 +22,22 @@ export default function EnterpriseLeadsPage() {
   const slidesRef = useRef<HTMLDivElement>(null)
   const [activeIndex, setActiveIndex] = useState(0)
   const totalSlides = 2
+  const compositionRows = [
+    { label: 'Motor (Kraftfahrt)', value: '€ 34.015 bn' },
+    { label: 'Property (Sach)', value: '€ 11.306 bn' },
+    { label: 'Liability (Haftpflicht)', value: '€ 8.932 bn' },
+    { label: 'Transport', value: '€ 2.467 bn' },
+    { label: 'Technical Lines', value: '€ 3.044 bn' },
+    { label: 'Cyber', value: '€ 0.330 bn' }
+  ]
+  const stackRows = [
+    { label: 'Fleet Motor', value: '€ 34.015 bn' },
+    { label: 'Cargo', value: '€ 2.467 bn' },
+    { label: 'Liability', value: '€ 8.932 bn' },
+    { label: 'Property', value: '€ 11.306 bn' },
+    { label: 'Technical', value: '€ 3.044 bn' },
+    { label: 'Cyber', value: '€ 0.330 bn' }
+  ]
 
   function exportPdf() {
     const route = lang === 'de'
@@ -71,6 +85,47 @@ export default function EnterpriseLeadsPage() {
             </div>
             <div className="enterprise-partners">
               <img src={industryImage} alt="Logistik Industrie" />
+              <div className="enterprise-table-card">
+                <h3>Germany — Specific Insurance Market Composition (Selected Lines)</h3>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Line of Business</th>
+                      <th className="num">Market Volume</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {compositionRows.map((row) => (
+                      <tr key={row.label}>
+                        <td>{row.label}</td>
+                        <td className="num">{row.value}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <div className="enterprise-table-card">
+                <h3>Logistics Stack — Insurance-Relevant Anchors (Germany, indicative volumes)</h3>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Insurance Segment</th>
+                      <th className="num">Market Volume</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {stackRows.map((row) => (
+                      <tr key={row.label}>
+                        <td>{row.label}</td>
+                        <td className="num">{row.value}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <p className="enterprise-note">
+                Volumes shown represent gross written premium equivalents by line of business in Germany. Figures are indicative and provided for structural market context.
+              </p>
             </div>
           </div>
         </section>
