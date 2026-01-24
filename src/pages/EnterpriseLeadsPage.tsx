@@ -22,7 +22,7 @@ export default function EnterpriseLeadsPage() {
   const slidesRef = useRef<HTMLDivElement>(null)
   const headerRef = useRef<HTMLElement>(null)
   const [activeIndex, setActiveIndex] = useState(0)
-  const totalSlides = isPrint ? 2 : 1
+  const totalSlides = 6
   const [scale, setScale] = useState(1)
   const [headerHeight, setHeaderHeight] = useState(0)
   const compositionRows = [
@@ -119,7 +119,7 @@ export default function EnterpriseLeadsPage() {
               <div className="enterprise-cover">
                 <div className="enterprise-cover-top">
                   <div className="enterprise-hero-copy">
-                    <h1>{copy.cover.title}</h1>
+                    <h1>German and European Markets</h1>
                     <p className="hero-summary">{copy.cover.summary}</p>
                   </div>
                   <div className="enterprise-partners">
@@ -211,15 +211,41 @@ export default function EnterpriseLeadsPage() {
               </div>
             </section>
 
-            {isPrint && (
-              <section className="enterprise-page enterprise-section enterprise-market">
-                <div className="enterprise-page-top enterprise-page-full">
-                  <div className="enterprise-page-poster">
-                    <img src={PosterAntares} alt="Insurfox Poster" />
-                  </div>
+            <section className="enterprise-page enterprise-section enterprise-market">
+              <div className="enterprise-page-top enterprise-page-full">
+                <div className="enterprise-slide-title">
+                  Insurfox Partner and verified Leads
                 </div>
-              </section>
-            )}
+              </div>
+            </section>
+            <section className="enterprise-page enterprise-section enterprise-market">
+              <div className="enterprise-page-top enterprise-page-full">
+                <div className="enterprise-slide-title">
+                  Business model
+                </div>
+              </div>
+            </section>
+            <section className="enterprise-page enterprise-section enterprise-market">
+              <div className="enterprise-page-top enterprise-page-full">
+                <div className="enterprise-slide-title">
+                  Portfolio slide
+                </div>
+              </div>
+            </section>
+            <section className="enterprise-page enterprise-section enterprise-market">
+              <div className="enterprise-page-top enterprise-page-full">
+                <div className="enterprise-slide-title">
+                  Erwartete Prämienentwicklung (GWP)
+                </div>
+              </div>
+            </section>
+            <section className="enterprise-page enterprise-section enterprise-market">
+              <div className="enterprise-page-top enterprise-page-full">
+                <div className="enterprise-slide-title">
+                  Partnership and roles
+                </div>
+              </div>
+            </section>
           </div>
         </div>
       </div>

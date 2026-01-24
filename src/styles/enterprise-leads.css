@@ -70,7 +70,7 @@
 
   .enterprise-slides {
     display: flex;
-    width: calc(var(--page-width) * 2);
+    width: calc(var(--page-width) * 6);
     height: var(--page-height);
     transition: transform 0.6s ease;
   }
@@ -178,6 +178,12 @@
   .enterprise-page-top.enterprise-page-full {
     grid-template-columns: 1fr;
     height: 100%;
+  }
+
+  .enterprise-slide-title {
+    font-size: 34px;
+    font-weight: 600;
+    color: var(--ix-text);
   }
 
   .enterprise-page-poster img {
