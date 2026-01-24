@@ -211,9 +211,6 @@ export default function EnterpriseLeadsPage() {
             <section className="enterprise-page enterprise-section enterprise-market">
               <div className="enterprise-slide-stack">
                 <h1>Insurfox Partner and verified Leads</h1>
-                <div className="enterprise-slide-image">
-                  <img src={industryImage} alt="Logistik Industrie" />
-                </div>
               </div>
             </section>
             <section className="enterprise-page enterprise-section enterprise-market">
