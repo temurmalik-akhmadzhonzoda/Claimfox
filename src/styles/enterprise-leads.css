@@ -515,6 +515,18 @@
     font-size: 10px;
   }
 
+  .enterprise-premium-logo-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+  }
+
+  .enterprise-premium-logo-card img {
+    max-width: 70%;
+    height: auto;
+  }
+
   .enterprise-premium-assumptions {
     border-top: 1px solid var(--ix-border);
     padding-top: 12px;

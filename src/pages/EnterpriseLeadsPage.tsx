@@ -7,6 +7,7 @@ import KarteDeEu from '@/assets/images/karte_de_eu.png'
 import KarteDeEuEn from '@/assets/images/karte_eu_de_englisch.png'
 import LogistikIndustrieDe from '@/assets/images/logistik_industrie_de.png'
 import LogistikIndustrieEn from '@/assets/images/logistik_industrie_en.png'
+import InsurfoxLogo from '@/assets/logos/Insurfox_Logo_colored_dark.png'
 
 function buildDocRaptorUrl(route: string, filename: string) {
   return `/.netlify/functions/pdf?${new URLSearchParams({ route, filename }).toString()}`
@@ -391,6 +392,9 @@ export default function EnterpriseLeadsPage() {
                           <text className="legend-text" x="228" y="158">High (4.0%)</text>
                         </g>
                       </svg>
+                    </div>
+                    <div className="enterprise-table-card enterprise-premium-logo-card">
+                      <img src={InsurfoxLogo} alt="Insurfox" />
                     </div>
                   </div>
                 </div>
