@@ -153,7 +153,15 @@ export default function EnterpriseLeadsPage() {
                     </div>
                   </div>
                   <div className="enterprise-map-card">
-                    <h2>AI-IAAS B2B PLATFORM<br />For Insurance Operations<br />Enterprise-grade. Core-system agnostic.</h2>
+                    <div className="enterprise-map-heading">
+                      <span className="heading-line heading-line-left" aria-hidden="true" />
+                      <div className="heading-text">
+                        <span className="heading-title">AI-IAAS B2B PLATFORM</span>
+                        <span className="heading-subtitle">For Insurance Operations</span>
+                        <span className="heading-note">Enterprise-grade. Core-system agnostic.</span>
+                      </div>
+                      <span className="heading-line heading-line-right" aria-hidden="true" />
+                    </div>
                     <img src={mapImage} alt={copy.marketImageAlt} />
                   </div>
                   <div className="enterprise-table-stack">

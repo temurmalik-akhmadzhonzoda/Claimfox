@@ -233,12 +233,53 @@
     gap: 12px;
   }
 
-  .enterprise-map-card h2 {
-    margin: 0;
-    font-size: 1.1rem;
-    line-height: 1.25;
+  .enterprise-map-heading {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .enterprise-map-heading .heading-text {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
     text-transform: uppercase;
+  }
+
+  .enterprise-map-heading .heading-title {
+    font-size: 1.1rem;
     letter-spacing: 0.06em;
+    color: var(--insurfox-orange, var(--ix-primary));
+    font-weight: 700;
+  }
+
+  .enterprise-map-heading .heading-subtitle {
+    font-size: 1rem;
+    letter-spacing: 0.02em;
+    color: var(--blue-dark, var(--ix-text));
+    font-weight: 600;
+  }
+
+  .enterprise-map-heading .heading-note {
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    color: var(--blue-dark, var(--ix-text));
+    font-weight: 500;
+    text-transform: none;
+  }
+
+  .enterprise-map-heading .heading-line {
+    height: 3px;
+    border-radius: 999px;
+    flex: 1 1 40px;
+  }
+
+  .enterprise-map-heading .heading-line-left {
+    background: var(--insurfox-orange, var(--ix-primary));
+  }
+
+  .enterprise-map-heading .heading-line-right {
+    background: var(--blue-dark, var(--ix-text));
   }
 
   .enterprise-map-card img {
