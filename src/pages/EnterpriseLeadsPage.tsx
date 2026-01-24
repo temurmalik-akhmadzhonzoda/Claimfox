@@ -41,6 +41,82 @@ export default function EnterpriseLeadsPage() {
     { label: 'Technical', value: '€ 3.044 bn' },
     { label: 'Cyber', value: '€ 0.330 bn' }
   ]
+  const premiumContent = {
+    de: {
+      title: 'Premium Corridor from Model-based Exposure',
+      subline: 'Conservative derivation. Exposure ≠ premium ≠ revenue.',
+      kpis: {
+        exposureDe: 'Lead Exposure DE',
+        exposureEea: 'Lead Exposure EEA',
+        corridor: 'Premium factor corridor',
+        base: 'Base case factor'
+      },
+      tableTitle: 'Indicative premium corridor (DE & EEA)',
+      tableColumns: ['Market', 'Low (2.0%)', 'Base (3.0%)', 'High (4.0%)'],
+      marketDe: 'Deutschland',
+      marketEea: 'EEA',
+      assumptionsTitle: 'Assumptions',
+      assumptions: [
+        'Premium factor corridor reflects typical multi-line logistics portfolios.',
+        'Actual premium depends on mix, retention, cycle, deductibles and underwriting.',
+        'This is a sizing corridor, not a revenue forecast.'
+      ],
+      chartDe: 'Germany',
+      chartEea: 'EEA',
+      legend: ['Low', 'Base', 'High']
+    },
+    en: {
+      title: 'Premium corridor from model-based exposure',
+      subline: 'Conservative derivation. Exposure ≠ premium ≠ revenue.',
+      kpis: {
+        exposureDe: 'Lead Exposure DE',
+        exposureEea: 'Lead Exposure EEA',
+        corridor: 'Premium factor corridor',
+        base: 'Base case factor'
+      },
+      tableTitle: 'Indicative premium corridor (DE & EEA)',
+      tableColumns: ['Market', 'Low (2.0%)', 'Base (3.0%)', 'High (4.0%)'],
+      marketDe: 'Germany',
+      marketEea: 'EEA',
+      assumptionsTitle: 'Assumptions',
+      assumptions: [
+        'Premium factor corridor reflects typical multi-line logistics portfolios.',
+        'Actual premium depends on mix, retention, cycle, deductibles and underwriting.',
+        'This is a sizing corridor, not a revenue forecast.'
+      ],
+      chartDe: 'Germany',
+      chartEea: 'EEA',
+      legend: ['Low', 'Base', 'High']
+    }
+  }
+
+  const premiumStrings = premiumContent[lang]
+  const exposureDe = 12.9e9
+  const exposureEea = 133.25e9
+  const lowFactor = 0.02
+  const baseFactor = 0.03
+  const highFactor = 0.04
+
+  const formatMoney = (value: number) => {
+    if (lang === 'de') {
+      if (value >= 1e9) {
+        return `${(value / 1e9).toLocaleString('de-DE', { minimumFractionDigits: 3, maximumFractionDigits: 3 })} Mrd. €`
+      }
+      return `${(value / 1e6).toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} Mio. €`
+    }
+    if (value >= 1e9) {
+      return `€${(value / 1e9).toLocaleString('en-GB', { minimumFractionDigits: 3, maximumFractionDigits: 3 })}bn`
+    }
+    return `€${(value / 1e6).toLocaleString('en-GB', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}m`
+  }
+
+  const formatPercent = (value: number) => {
+    const pct = (value * 100).toLocaleString(lang === 'de' ? 'de-DE' : 'en-GB', {
+      minimumFractionDigits: 1,
+      maximumFractionDigits: 1
+    })
+    return lang === 'de' ? `${pct} %` : `${pct}%`
+  }
 
   function exportPdf() {
     const route = lang === 'de'
@@ -209,8 +285,92 @@ export default function EnterpriseLeadsPage() {
             </section>
 
             <section className="enterprise-page enterprise-section enterprise-market">
-              <div className="enterprise-slide-stack">
-                <h1>Insurfox Partner and verified Leads</h1>
+              <div className="enterprise-premium-slide">
+                <div className="enterprise-premium-header">
+                  <div>
+                    <h1>{premiumStrings.title}</h1>
+                    <p>{premiumStrings.subline}</p>
+                  </div>
+                </div>
+                <div className="enterprise-premium-content">
+                  <div className="enterprise-premium-kpis">
+                    <div className="enterprise-premium-card">
+                      <span>{premiumStrings.kpis.exposureDe}</span>
+                      <strong>{formatMoney(exposureDe)}</strong>
+                    </div>
+                    <div className="enterprise-premium-card">
+                      <span>{premiumStrings.kpis.exposureEea}</span>
+                      <strong>{formatMoney(exposureEea)}</strong>
+                    </div>
+                    <div className="enterprise-premium-card">
+                      <span>{premiumStrings.kpis.corridor}</span>
+                      <strong>{formatPercent(lowFactor)} – {formatPercent(highFactor)}</strong>
+                    </div>
+                    <div className="enterprise-premium-card">
+                      <span>{premiumStrings.kpis.base}</span>
+                      <strong>{formatPercent(baseFactor)}</strong>
+                    </div>
+                  </div>
+                  <div className="enterprise-premium-table">
+                    <h2>{premiumStrings.tableTitle}</h2>
+                    <table>
+                      <thead>
+                        <tr>
+                          {premiumStrings.tableColumns.map((col) => (
+                            <th key={col}>{col}</th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>{premiumStrings.marketDe}</td>
+                          <td className="num">{formatMoney(exposureDe * lowFactor)}</td>
+                          <td className="num">{formatMoney(exposureDe * baseFactor)}</td>
+                          <td className="num">{formatMoney(exposureDe * highFactor)}</td>
+                        </tr>
+                        <tr>
+                          <td>{premiumStrings.marketEea}</td>
+                          <td className="num">{formatMoney(exposureEea * lowFactor)}</td>
+                          <td className="num">{formatMoney(exposureEea * baseFactor)}</td>
+                          <td className="num">{formatMoney(exposureEea * highFactor)}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div className="enterprise-premium-charts">
+                    <div className="enterprise-premium-chart">
+                      <h3>{premiumStrings.chartDe}</h3>
+                      <svg viewBox="0 0 160 120" role="img" aria-label="Germany premium corridor">
+                        <rect className="bar bar-low" x="20" y="70" width="20" height="20" rx="3" />
+                        <rect className="bar bar-base" x="60" y="60" width="20" height="30" rx="3" />
+                        <rect className="bar bar-high" x="100" y="50" width="20" height="40" rx="3" />
+                        <line className="axis" x1="15" y1="90" x2="145" y2="90" />
+                      </svg>
+                    </div>
+                    <div className="enterprise-premium-chart">
+                      <h3>{premiumStrings.chartEea}</h3>
+                      <svg viewBox="0 0 160 120" role="img" aria-label="EEA premium corridor">
+                        <rect className="bar bar-low" x="20" y="60" width="20" height="30" rx="3" />
+                        <rect className="bar bar-base" x="60" y="45" width="20" height="45" rx="3" />
+                        <rect className="bar bar-high" x="100" y="35" width="20" height="55" rx="3" />
+                        <line className="axis" x1="15" y1="90" x2="145" y2="90" />
+                      </svg>
+                    </div>
+                    <div className="enterprise-premium-legend">
+                      {premiumStrings.legend.map((label, index) => (
+                        <div key={label} className={`legend-item legend-${index}`}>{label}</div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <div className="enterprise-premium-assumptions">
+                  <h2>{premiumStrings.assumptionsTitle}</h2>
+                  <ul>
+                    {premiumStrings.assumptions.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </section>
             <section className="enterprise-page enterprise-section enterprise-market">
