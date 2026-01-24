@@ -79,10 +79,11 @@ export default function EnterpriseLeadsPage() {
       const totalHeaderHeight = appHeaderHeight
       const availableWidth = window.innerWidth
       const availableHeight = window.innerHeight - totalHeaderHeight
+      const maxScale = 1.2
       const nextScale = Math.min(
         availableWidth / PAGE_WIDTH,
         availableHeight / PAGE_HEIGHT,
-        1
+        maxScale
       )
       setHeaderHeight(totalHeaderHeight)
       setScale(nextScale)
