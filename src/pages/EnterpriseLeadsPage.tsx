@@ -204,13 +204,13 @@ export default function EnterpriseLeadsPage() {
                     </div>
                   </div>
                 </div>
+                <p className="enterprise-footnote">{copy.cover.summary}</p>
               </div>
             </section>
 
             <section className="enterprise-page enterprise-section enterprise-market">
               <div className="enterprise-slide-stack">
                 <h1>Insurfox Partner and verified Leads</h1>
-                <p className="hero-summary">{copy.cover.summary}</p>
                 <div className="enterprise-slide-image">
                   <img src={industryImage} alt="Logistik Industrie" />
                 </div>

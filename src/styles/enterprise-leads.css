@@ -99,6 +99,13 @@
     margin: 0;
   }
 
+  .enterprise-footnote {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--ix-text-muted);
+  }
+
   .enterprise-cover {
     display: flex;
     flex-direction: column;
