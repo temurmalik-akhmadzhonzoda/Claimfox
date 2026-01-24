@@ -454,7 +454,7 @@
   .enterprise-premium-charts {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
     height: 100%;
   }
 
