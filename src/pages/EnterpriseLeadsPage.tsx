@@ -49,7 +49,11 @@ export default function EnterpriseLeadsPage() {
         exposureDe: 'Lead Exposure DE',
         exposureEea: 'Lead Exposure EEA',
         corridor: 'Premium factor corridor',
-        base: 'Base case factor'
+        base: 'Base case factor',
+        exposureDeValue: '12,900 Mrd. €',
+        exposureEeaValue: '133,250 Mrd. €',
+        corridorValue: '2,0 % – 4,0 %',
+        baseValue: '3,0 %'
       },
       tableTitle: 'Indicative premium corridor (DE & EEA)',
       tableColumns: ['Market', 'Low (2.0%)', 'Base (3.0%)', 'High (4.0%)'],
@@ -72,7 +76,11 @@ export default function EnterpriseLeadsPage() {
         exposureDe: 'Lead Exposure DE',
         exposureEea: 'Lead Exposure EEA',
         corridor: 'Premium factor corridor',
-        base: 'Base case factor'
+        base: 'Base case factor',
+        exposureDeValue: '12,900 Mrd. €',
+        exposureEeaValue: '133,250 Mrd. €',
+        corridorValue: '2,0 % – 4,0 %',
+        baseValue: '3,0 %'
       },
       tableTitle: 'Indicative premium corridor (DE & EEA)',
       tableColumns: ['Market', 'Low (2.0%)', 'Base (3.0%)', 'High (4.0%)'],
@@ -296,19 +304,19 @@ export default function EnterpriseLeadsPage() {
                   <div className="enterprise-premium-kpis">
                     <div className="enterprise-premium-card">
                       <span>{premiumStrings.kpis.exposureDe}</span>
-                      <strong>{formatMoney(exposureDe)}</strong>
+                      <strong>{premiumStrings.kpis.exposureDeValue}</strong>
                     </div>
                     <div className="enterprise-premium-card">
                       <span>{premiumStrings.kpis.exposureEea}</span>
-                      <strong>{formatMoney(exposureEea)}</strong>
+                      <strong>{premiumStrings.kpis.exposureEeaValue}</strong>
                     </div>
                     <div className="enterprise-premium-card">
                       <span>{premiumStrings.kpis.corridor}</span>
-                      <strong>{formatPercent(lowFactor)} – {formatPercent(highFactor)}</strong>
+                      <strong>{premiumStrings.kpis.corridorValue}</strong>
                     </div>
                     <div className="enterprise-premium-card">
                       <span>{premiumStrings.kpis.base}</span>
-                      <strong>{formatPercent(baseFactor)}</strong>
+                      <strong>{premiumStrings.kpis.baseValue}</strong>
                     </div>
                   </div>
                   <div className="enterprise-premium-stack">

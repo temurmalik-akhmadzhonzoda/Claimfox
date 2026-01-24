@@ -436,6 +436,7 @@
     height: 100%;
     object-fit: contain;
     display: block;
+    border: 2px solid #281c65;
   }
 
   .enterprise-premium-charts {
