@@ -54,7 +54,7 @@
   }
 
   .enterprise-stage {
-    height: calc(100vh - var(--enterprise-header-height));
+    height: calc(100dvh - var(--enterprise-header-height));
     display: flex;
     align-items: center;
     justify-content: center;
@@ -67,6 +67,7 @@
     height: var(--page-height);
     transform-origin: center center;
     overflow: hidden;
+    margin: auto;
   }
 
   .enterprise-slides {
