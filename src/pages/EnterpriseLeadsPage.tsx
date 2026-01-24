@@ -157,7 +157,7 @@ export default function EnterpriseLeadsPage() {
                       <span className="heading-line heading-line-left" aria-hidden="true" />
                       <div className="heading-text">
                         <span className="heading-title">AI-IAAS B2B PLATFORM</span>
-                        <span className="heading-subtitle">For Insurance Operations</span>
+                        <span className="heading-subtitle">For Brokers and Insurance Operations</span>
                         <span className="heading-note">Enterprise-grade. Core-system agnostic.</span>
                       </div>
                       <span className="heading-line heading-line-right" aria-hidden="true" />
