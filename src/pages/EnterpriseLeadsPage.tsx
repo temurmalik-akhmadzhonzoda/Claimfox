@@ -353,27 +353,44 @@ export default function EnterpriseLeadsPage() {
                   </div>
                   <div className="enterprise-premium-charts">
                     <div className="enterprise-table-card enterprise-premium-chart">
-                      <h3>{premiumStrings.chartDe}</h3>
-                      <svg viewBox="0 0 160 120" role="img" aria-label="Germany premium corridor">
-                        <rect className="bar bar-low" x="20" y="70" width="20" height="20" rx="3" />
-                        <rect className="bar bar-base" x="60" y="60" width="20" height="30" rx="3" />
-                        <rect className="bar bar-high" x="100" y="50" width="20" height="40" rx="3" />
-                        <line className="axis" x1="15" y1="90" x2="145" y2="90" />
+                      <h3>Germany – Indicative premium corridor</h3>
+                      <svg width="260" height="180" role="img" aria-label="Germany premium corridor">
+                        <line className="axis" x1="20" y1="120" x2="240" y2="120" />
+                        <rect className="bar bar-low" x="40" y="85" width="28" height="35" />
+                        <rect className="bar bar-base" x="116" y="70" width="28" height="50" />
+                        <rect className="bar bar-high" x="192" y="55" width="28" height="65" />
+                        <text className="bar-value" x="54" y="78" textAnchor="middle">258 Mio €</text>
+                        <text className="bar-value" x="130" y="63" textAnchor="middle">387 Mio €</text>
+                        <text className="bar-value" x="206" y="48" textAnchor="middle">516 Mio €</text>
+                        <g className="legend">
+                          <line className="legend-line bar-low" x1="20" y1="155" x2="36" y2="155" />
+                          <text className="legend-text" x="42" y="158">Low (2.0%)</text>
+                          <line className="legend-line bar-base" x1="118" y1="155" x2="134" y2="155" />
+                          <text className="legend-text" x="140" y="158">Base (3.0%)</text>
+                          <line className="legend-line bar-high" x1="206" y1="155" x2="222" y2="155" />
+                          <text className="legend-text" x="228" y="158">High (4.0%)</text>
+                        </g>
                       </svg>
                     </div>
                     <div className="enterprise-table-card enterprise-premium-chart">
-                      <h3>{premiumStrings.chartEea}</h3>
-                      <svg viewBox="0 0 160 120" role="img" aria-label="EEA premium corridor">
-                        <rect className="bar bar-low" x="20" y="60" width="20" height="30" rx="3" />
-                        <rect className="bar bar-base" x="60" y="45" width="20" height="45" rx="3" />
-                        <rect className="bar bar-high" x="100" y="35" width="20" height="55" rx="3" />
-                        <line className="axis" x1="15" y1="90" x2="145" y2="90" />
+                      <h3>EEA – Indicative premium corridor</h3>
+                      <svg width="260" height="180" role="img" aria-label="EEA premium corridor">
+                        <line className="axis" x1="20" y1="120" x2="240" y2="120" />
+                        <rect className="bar bar-low" x="40" y="70" width="28" height="50" />
+                        <rect className="bar bar-base" x="116" y="50" width="28" height="70" />
+                        <rect className="bar bar-high" x="192" y="35" width="28" height="85" />
+                        <text className="bar-value" x="54" y="62" textAnchor="middle">2.7 Mrd €</text>
+                        <text className="bar-value" x="130" y="42" textAnchor="middle">4.0 Mrd €</text>
+                        <text className="bar-value" x="206" y="27" textAnchor="middle">5.3 Mrd €</text>
+                        <g className="legend">
+                          <line className="legend-line bar-low" x1="20" y1="155" x2="36" y2="155" />
+                          <text className="legend-text" x="42" y="158">Low (2.0%)</text>
+                          <line className="legend-line bar-base" x1="118" y1="155" x2="134" y2="155" />
+                          <text className="legend-text" x="140" y="158">Base (3.0%)</text>
+                          <line className="legend-line bar-high" x1="206" y1="155" x2="222" y2="155" />
+                          <text className="legend-text" x="228" y="158">High (4.0%)</text>
+                        </g>
                       </svg>
-                    </div>
-                    <div className="enterprise-premium-legend">
-                      {premiumStrings.legend.map((label, index) => (
-                        <div key={label} className={`legend-item legend-${index}`}>{label}</div>
-                      ))}
                     </div>
                   </div>
                 </div>

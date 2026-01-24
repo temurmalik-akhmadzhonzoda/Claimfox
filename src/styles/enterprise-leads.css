@@ -479,12 +479,19 @@
     fill: var(--ix-primary);
   }
 
+  .enterprise-premium-chart .bar-low {
+    fill: var(--ix-primary);
+    opacity: 0.65;
+  }
+
   .enterprise-premium-chart .bar-base {
     fill: var(--ix-primary-600);
+    opacity: 0.85;
   }
 
   .enterprise-premium-chart .bar-high {
     fill: var(--ix-primary);
+    opacity: 1;
   }
 
   .enterprise-premium-chart .axis {
@@ -492,28 +499,20 @@
     stroke-width: 1;
   }
 
-  .enterprise-premium-legend {
-    display: flex;
-    gap: 10px;
-    font-size: 0.7rem;
-    color: var(--ix-text-muted);
-    margin-top: auto;
-    padding-top: 8px;
-    border-top: 1px solid var(--ix-border);
+  .enterprise-premium-chart .bar-value {
+    fill: var(--ix-text);
+    font-size: 10px;
+    font-weight: 600;
   }
 
-  .enterprise-premium-legend .legend-item::before {
-    content: '';
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    margin-right: 6px;
-    border-radius: 2px;
-    background: var(--ix-primary);
+  .enterprise-premium-chart .legend-line {
+    stroke-width: 3px;
+    stroke: var(--ix-primary);
   }
 
-  .enterprise-premium-legend .legend-1::before {
-    background: var(--ix-primary-600);
+  .enterprise-premium-chart .legend-text {
+    fill: var(--ix-text-muted);
+    font-size: 10px;
   }
 
   .enterprise-premium-assumptions {
