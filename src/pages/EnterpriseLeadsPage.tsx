@@ -113,15 +113,15 @@ export default function EnterpriseLeadsPage() {
                 <h1>German and European Markets</h1>
                 <div className="enterprise-grid-3">
                   <div className="enterprise-table-stack">
-                    <div className="enterprise-table-card">
-                      <h3>Germany — Non-Life Market Composition (selected lines)</h3>
-                      <table>
-                        <thead>
-                          <tr>
-                            <th>Line of Business</th>
-                            <th className="num">Market Volume</th>
-                          </tr>
-                        </thead>
+                  <div className="enterprise-table-card enterprise-table-card-left">
+                    <h3>German Market</h3>
+                    <table>
+                      <thead>
+                        <tr>
+                          <th className="label">Line of Business</th>
+                          <th className="num">Market Volume</th>
+                        </tr>
+                      </thead>
                         <tbody>
                           {compositionRows.map((row) => (
                             <tr key={row.label}>
@@ -132,15 +132,15 @@ export default function EnterpriseLeadsPage() {
                         </tbody>
                       </table>
                     </div>
-                    <div className="enterprise-table-card">
-                      <h3>Logistics Stack — Insurance-Relevant Anchors (Germany, indicative volumes)</h3>
-                      <table>
-                        <thead>
-                          <tr>
-                            <th>Insurance Segment</th>
-                            <th className="num">Market Volume</th>
-                          </tr>
-                        </thead>
+                  <div className="enterprise-table-card enterprise-table-card-left">
+                    <h3>Logistic / Cargo</h3>
+                    <table>
+                      <thead>
+                        <tr>
+                          <th className="label">Insurance Segment</th>
+                          <th className="num">Market Volume</th>
+                        </tr>
+                      </thead>
                         <tbody>
                           {stackRows.map((row) => (
                             <tr key={row.label}>
@@ -165,15 +165,15 @@ export default function EnterpriseLeadsPage() {
                     <img src={mapImage} alt={copy.marketImageAlt} />
                   </div>
                   <div className="enterprise-table-stack">
-                    <div className="enterprise-table-card">
-                      <h3>EEA — Non-Life GWP (Solvency II, 2021)</h3>
-                      <table>
-                        <thead>
-                          <tr>
-                            <th>Line of Business</th>
-                            <th className="num">Market Volume</th>
-                          </tr>
-                        </thead>
+                  <div className="enterprise-table-card enterprise-table-card-right">
+                    <h3>EEA Market - GWP (Solvency II)</h3>
+                    <table>
+                      <thead>
+                        <tr>
+                          <th className="label">Line of Business</th>
+                          <th className="num">Market Volume</th>
+                        </tr>
+                      </thead>
                         <tbody>
                           <tr><td>Motor vehicle liability</td><td className="num">€ 68.511 bn</td></tr>
                           <tr><td>Other motor</td><td className="num">€ 57.203 bn</td></tr>
@@ -184,15 +184,15 @@ export default function EnterpriseLeadsPage() {
                         </tbody>
                       </table>
                     </div>
-                    <div className="enterprise-table-card">
-                      <h3>Europe — P&C Premiums by Main Business Line (2020)</h3>
-                      <table>
-                        <thead>
-                          <tr>
-                            <th>Line of Business</th>
-                            <th className="num">Market Volume</th>
-                          </tr>
-                        </thead>
+                  <div className="enterprise-table-card enterprise-table-card-right">
+                    <h3>EEA - Logistic / Composit</h3>
+                    <table>
+                      <thead>
+                        <tr>
+                          <th className="label">Line of Business</th>
+                          <th className="num">Market Volume</th>
+                        </tr>
+                      </thead>
                         <tbody>
                           <tr><td>Motor</td><td className="num">~€ 149 bn (36%)</td></tr>
                           <tr><td>Property</td><td className="num">~€ 113 bn (27%)</td></tr>
