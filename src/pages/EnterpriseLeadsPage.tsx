@@ -451,32 +451,33 @@ export default function EnterpriseLeadsPage() {
               <div className="bp4-slide">
                 <header className="bp4-header">
                   <h1>Risk, Governance &amp; Delegated Authority Framework</h1>
-                  <p>Carrier-aligned controls: bounded authority, auditable decisions, capital and risk remain with insurer &amp; reinsurers.</p>
+                  <p>Carrier-aligned controls with real-time data validation and AI-assisted decision support. Capital and risk remain with insurer and reinsurers.</p>
                 </header>
                 <div className="bp4-grid">
                   <div className="bp4-column">
                     <section className="bp4-panel">
-                      <div className="bp4-cap">Delegated Authority</div>
+                      <div className="bp4-cap">Delegated Authority &amp; Limits</div>
                       <table className="bp4-table">
                         <tbody>
-                          <tr><td>Underwriting authority</td><td className="num">Delegated (MGA / Coverholder)</td></tr>
-                          <tr><td>Carrier oversight</td><td className="num">Binding guidelines + referrals</td></tr>
+                          <tr><td>Underwriting authority</td><td className="num">Delegated MGA / Coverholder</td></tr>
+                          <tr><td>Carrier oversight</td><td className="num">Binding guidelines, referrals, approvals</td></tr>
                           <tr><td>Per-risk limit</td><td className="num">$150,000</td></tr>
-                          <tr><td>Aggregates</td><td className="num">Daily &amp; regional aggregate limits unchanged</td></tr>
-                          <tr><td>Appetite scope</td><td className="num">Fleet / logistics / cargo (as per binder)</td></tr>
-                          <tr><td>Exceptions</td><td className="num">Referral rules for out-of-appetite risks</td></tr>
+                          <tr><td>Aggregate limits</td><td className="num">Daily and regional aggregates unchanged</td></tr>
+                          <tr><td>Risk appetite</td><td className="num">Fleet, logistics, cargo (as per binder)</td></tr>
+                          <tr><td>Exceptions</td><td className="num">Mandatory referral outside defined thresholds</td></tr>
                         </tbody>
                       </table>
-                      <div className="bp4-callout">Authority is bounded by limits, aggregates, appetite and referral triggers.</div>
+                      <div className="bp4-callout">Delegated authority is explicitly bounded by limits, aggregates, appetite and referral rules.</div>
                     </section>
                     <section className="bp4-panel">
-                      <div className="bp4-cap">Product Mechanics</div>
+                      <div className="bp4-cap">Trigger Mechanics (Realtime, Event-validated)</div>
                       <div className="bp4-micro-grid">
                         <div className="bp4-micro">
-                          <h3>Delay trigger (days)</h3>
+                          <h3>Operational Disruption Trigger (Time-based, Days)</h3>
                           <ul>
-                            <li>Trigger thresholds: 7, 9, 10 days</li>
-                            <li>Payout: 40% at trigger + 3% per additional day up to 100%</li>
+                            <li>Thresholds: 7 / 9 / 10 days</li>
+                            <li>Payout logic: 40% at trigger + 3% per additional day (capped at 100%)</li>
+                            <li>Validation: Verified real-time logistics and fleet event streams</li>
                           </ul>
                           <svg className="bp4-spark" width="180" height="72" viewBox="0 0 180 72" role="img" aria-label="Delay trigger payout curve">
                             <polyline points="8,60 60,60 60,42 108,42 108,28 160,28" fill="none" stroke="var(--ix-text-muted)" strokeWidth="2" />
@@ -488,10 +489,11 @@ export default function EnterpriseLeadsPage() {
                           </svg>
                         </div>
                         <div className="bp4-micro">
-                          <h3>Outage trigger (hours)</h3>
+                          <h3>Service Interruption Trigger (Telemetry-based, Hours)</h3>
                           <ul>
-                            <li>Trigger thresholds: 3h, 6h, 9h, 24h</li>
-                            <li>Payout: 40% at trigger + 6% per incremental</li>
+                            <li>Thresholds: 3h / 6h / 9h / 24h</li>
+                            <li>Payout logic: 40% at trigger + 6% per incremental interval</li>
+                            <li>Validation: System and operational telemetry</li>
                           </ul>
                           <svg className="bp4-spark" width="180" height="72" viewBox="0 0 180 72" role="img" aria-label="Outage trigger payout curve">
                             <polyline points="8,60 44,60 44,44 84,44 84,30 130,30 130,20 168,20" fill="none" stroke="var(--ix-text-muted)" strokeWidth="2" />
@@ -504,27 +506,32 @@ export default function EnterpriseLeadsPage() {
                           </svg>
                         </div>
                       </div>
+                      <p className="bp4-note">Triggers establish eligibility; payout execution remains subject to policy terms and governance controls.</p>
                     </section>
                   </div>
                   <div className="bp4-column">
                     <section className="bp4-panel">
                       <div className="bp4-cap">Governance</div>
                       <ul className="bp4-bullets">
-                        <li>Underwriting governance: rules-based pricing, bounded authority, referral escalations</li>
-                        <li>Risk committee: periodic review of portfolio KPIs, thresholds, and moratorium conditions</li>
-                        <li>Policy wording control: versioned wording + change log</li>
-                        <li>Claims governance: structured claims workflow, payout rules deterministic</li>
+                        <li>Rules-based underwriting and pricing</li>
+                        <li>Deterministic trigger evaluation</li>
+                        <li>Referral escalation outside predefined parameters</li>
+                        <li>Policy wording and pricing version control</li>
+                        <li>Structured claims workflow</li>
+                        <li>Moratorium provisions for extreme events</li>
                       </ul>
-                      <div className="bp4-highlight">Moratorium provisions for extreme events.</div>
                     </section>
                     <section className="bp4-panel">
-                      <div className="bp4-cap">Assurance</div>
+                      <div className="bp4-cap">Realtime Data &amp; AI-assisted Decision Framework</div>
                       <ul className="bp4-bullets">
-                        <li>Risk monitoring: exposure tracking, accumulation views, event flags</li>
-                        <li>Stress testing: scenario analysis performed; exposure assumptions preserved</li>
-                        <li>Data readiness: sample anonymized datasets; full datasets available upon request</li>
-                        <li>Compliance: audit trail for decisions and approvals</li>
+                        <li>Multi-source real-time data ingestion (logistics, fleet, system telemetry)</li>
+                        <li>Time-stamped, immutable event records</li>
+                        <li>Deterministic rule engine for trigger evaluation</li>
+                        <li>Native AI used for decision support and decision templates</li>
+                        <li>Human-in-the-loop for approvals and exceptions</li>
+                        <li>Full audit trail for all trigger and decision events</li>
                       </ul>
+                      <p className="bp4-note">AI provides decision proposals; underwriting authority and final decisions remain governed.</p>
                     </section>
                   </div>
                 </div>
@@ -533,15 +540,15 @@ export default function EnterpriseLeadsPage() {
                   <div className="bp4-footer-card">
                     <div className="bp4-cap">Audit &amp; Reporting Pack</div>
                     <div className="bp4-footer-grid">
-                      <span>Bordereaux (premium, claims, exposure)</span>
-                      <span>Loss ratio &amp; frequency/severity monitoring</span>
-                      <span>Accumulation / aggregation reports</span>
-                      <span>Referral &amp; exception log</span>
-                      <span>Wording &amp; pricing version log</span>
-                      <span>Incident / moratorium actions log</span>
+                      <span>Premium &amp; claims bordereaux</span>
+                      <span>Loss ratio and frequency/severity monitoring</span>
+                      <span>Exposure and accumulation views</span>
+                      <span>Referral and exception logs</span>
+                      <span>Trigger evidence bundles</span>
+                      <span>Moratorium and incident reports</span>
                     </div>
                   </div>
-                  <p>Designed for delegated authority environments; reporting cadence and formats aligned to carrier requirements.</p>
+                  <p>Designed for delegated authority environments with carrier and reinsurer audit requirements.</p>
                 </footer>
               </div>
             </section>

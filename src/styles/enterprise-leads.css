@@ -950,6 +950,13 @@
     color: var(--ix-text-muted);
   }
 
+  .bp4-note {
+    margin: 0;
+    font-size: 0.7rem;
+    color: var(--ix-text-muted);
+    font-style: italic;
+  }
+
   .bp4-spark text {
     fill: var(--ix-text-muted);
     font-size: 9px;
