@@ -3,6 +3,23 @@
     overflow: hidden;
   }
 
+  .enterprise-download-float {
+    position: absolute;
+    top: 12px;
+    right: 24px;
+    z-index: 5;
+  }
+
+  .enterprise-download-float button {
+    border: 1px solid var(--blue-dark);
+    color: var(--blue-dark);
+    background: transparent;
+    padding: 0.5rem 1.1rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    cursor: pointer;
+  }
+
   .enterprise-plan {
     background: linear-gradient(180deg, var(--ix-bg) 0%, var(--ix-surface-2) 100%);
     color: var(--ix-text);
@@ -1054,5 +1071,11 @@
   .enterprise-nav-arrow:disabled {
     opacity: 0.4;
     cursor: default;
+  }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
   }
 }

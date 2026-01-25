@@ -4,6 +4,7 @@
   }
 
   .slide-canvas {
+    position: relative;
     height: calc(var(--vvh, 100vh) - var(--app-header-h, 0px));
     min-height: calc(var(--vvh, 100vh) - var(--app-header-h, 0px));
     padding-top: max(0px, var(--vv-top, 0px));

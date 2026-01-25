@@ -154,6 +154,13 @@ export default function EnterpriseLeadsPage() {
   return (
     <section className={`page enterprise-plan ${isPrint ? 'is-print' : ''}`}>
       <SlideCanvas isPrint={isPrint} className="enterprise-slide-canvas">
+        {!isPrint && (
+          <div className="enterprise-download-float no-print">
+            <button type="button" onClick={exportPdf}>
+              {lang === 'de' ? 'PDF herunterladen' : 'Download PDF'}
+            </button>
+          </div>
+        )}
         <div
           className="enterprise-slides"
           ref={slidesRef}
