@@ -1318,6 +1318,7 @@ body.bcia-deck-route {
     height: 210mm;
     flex: 0 0 auto;
     overflow: hidden;
+    break-inside: avoid;
     break-after: page;
     page-break-after: always;
   }

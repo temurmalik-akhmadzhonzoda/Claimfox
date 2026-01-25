@@ -332,7 +332,7 @@ const governanceContent: Record<Lang, GovernanceCopy> = {
       'Objektive, datenbasierte Auslösung',
       'Delay Triggers (Verspätung, Stillstand, Zeitüberschreitung)',
       'Outage Triggers (Systemausfall, Betriebsunterbrechung)',
-      'Threshold-based escalation'
+      'Schwellenbasierte Eskalation'
     ],
     leftControlsTitle: 'AI-Hinweis',
     leftControls: [
@@ -341,7 +341,7 @@ const governanceContent: Record<Lang, GovernanceCopy> = {
     ],
     centerTitle: 'Governance & Zeichnungsautorität',
     centerRows: [
-      { label: 'Carrier retains', value: 'Finale Zeichnungsautorität; Kapazitäts- und Kapitalsteuerung; Portfolio-Governance' },
+      { label: 'Carrier behält', value: 'Finale Zeichnungsautorität; Kapazitäts- und Kapitalsteuerung; Portfolio-Governance' },
       { label: 'MGA (Insurfox)', value: 'Standardisierte Risikoaufnahme; regelbasierte Underwriting-Logik; Portfolio-Monitoring in Echtzeit; Reporting & Transparenz' }
     ],
     rightTitle: 'Schadensteuerung & Eskalation',
@@ -390,269 +390,237 @@ const governanceContent: Record<Lang, GovernanceCopy> = {
 
 const operatingContent: Record<Lang, OperatingCopy> = {
   de: {
-    title: 'Operating Model & Workflow',
-    subline: 'End-to-end Prozessfluss mit auditierbaren Artefakten und klarer Rollenverteilung.',
+    title: 'Deckungslogik & Trigger-Mechanik (parametrisch)',
+    subline: 'Parametrische Auslösung mit evidenzbasierter Validierung und klaren Payout-Regeln.',
     flowTitle: 'End-to-end operating flow',
-    flowSteps: [
-      'Broker',
-      'Platform Intake',
-      'Validation',
-      'Underwriting Decision Memo (AI + HITL)',
-      'Bind (MGA)',
-      'Policy Admin & Reporting',
-      'Claims (parametrische Evidenz)',
-      'Reinsurer Reporting'
-    ],
-    raciTitle: 'Roles & responsibilities (RACI-lite)',
+    flowSteps: [],
+    raciTitle: 'Operational Disruption (Days)',
     raciRows: [
-      { role: 'Broker', responsibility: 'Einreichung, Datenbereitstellung, Kundenbeziehung' },
-      { role: 'MGA', responsibility: 'Standardisierte Risikoaufnahme, Underwriting-Logik, Reporting' },
-      { role: 'Carrier', responsibility: 'Kapazität, Pricing-Korridor, Governance-Freigaben' },
-      { role: 'Reinsurers', responsibility: 'Kapitaldeckung, Treaty-Reporting, Audit-Rechte' },
-      { role: 'Platform', responsibility: 'Realtime-Daten, Validierung, Evidenzpakete' }
+      { role: 'Schwellen', responsibility: '7 / 9 / 10 Tage' },
+      { role: 'Auszahlung', responsibility: '40 % bei Trigger + 3 %/Tag bis 100 %' },
+      { role: 'Evidenz', responsibility: 'Realtime Logistik-/Fleetdaten, deterministische Regeln' }
     ],
-    artifactsTitle: 'Data & audit artifacts',
+    artifactsTitle: 'Service/System Interruption (Hours)',
     artifacts: [
-      'Evidence Pack (Echtzeitdaten, Zeitstempel, SLA-Checks)',
-      'Decision Log & Referral-Historie',
-      'Bordereaux (Premium, Claims, Exposure)',
-      'Exception Log & Reconciliation'
+      'Schwellen: 3h / 6h / 9h / 24h',
+      'Auszahlung: 40 % + 6 % je Intervall bis 100 %',
+      'Audit Trail mit deterministischen Nachweisen'
     ]
   },
   en: {
-    title: 'Operating Model & Workflow',
-    subline: 'End-to-end flow with auditable artifacts and clear role separation.',
+    title: 'Coverage Logic & Trigger Mechanics (Parametric)',
+    subline: 'Parametric activation with evidence-based validation and clear payout rules.',
     flowTitle: 'End-to-end operating flow',
-    flowSteps: [
-      'Broker',
-      'Platform Intake',
-      'Validation',
-      'Underwriting Decision Memo (AI + HITL)',
-      'Bind (MGA)',
-      'Policy Admin & Reporting',
-      'Claims (parametric evidence)',
-      'Reinsurer Reporting'
-    ],
-    raciTitle: 'Roles & responsibilities (RACI-lite)',
+    flowSteps: [],
+    raciTitle: 'Operational Disruption (Days)',
     raciRows: [
-      { role: 'Broker', responsibility: 'Submission, data provision, client relationship' },
-      { role: 'MGA', responsibility: 'Standardized intake, rules-based underwriting, reporting' },
-      { role: 'Carrier', responsibility: 'Capacity, pricing corridor, governance approvals' },
-      { role: 'Reinsurers', responsibility: 'Capital support, treaty reporting, audit rights' },
-      { role: 'Platform', responsibility: 'Realtime data, validation, evidence packs' }
+      { role: 'Thresholds', responsibility: '7 / 9 / 10 days' },
+      { role: 'Payout', responsibility: '40% at trigger + 3% per day up to 100%' },
+      { role: 'Evidence', responsibility: 'Realtime logistics/fleet data, deterministic rules' }
     ],
-    artifactsTitle: 'Data & audit artifacts',
+    artifactsTitle: 'Service/System Interruption (Hours)',
     artifacts: [
-      'Evidence pack (realtime data, timestamps, SLA checks)',
-      'Decision log & referral history',
-      'Bordereaux (premium, claims, exposure)',
-      'Exception log & reconciliation'
+      'Thresholds: 3h / 6h / 9h / 24h',
+      'Payout: 40% + 6% per interval up to 100%',
+      'Audit trail with deterministic evidence'
     ]
   }
 }
 
 const reinsuranceContent: Record<Lang, ReinsuranceCopy> = {
   de: {
-    title: 'Reinsurance & Capital / Capacity Structure',
-    subline: 'Binder und Treaty-Panel sichern Kapazität; Governance bleibt carrier-aligned.',
-    structureTitle: 'Structure overview',
+    title: 'Risikomanagement & Portfolio-Kontrollen',
+    subline: 'Kontrolliertes Exposure durch Monitoring, Limits und Governance.',
+    structureTitle: 'Kontrollmechanismen',
     structureNotes: [
-      'MGA / Coverholder mit bestehendem Binder',
-      'Carrier stellt Primary Paper',
-      'Reinsurer Panel über Treaty-Struktur',
-      'Regionale Expansion innerhalb definierter Limits'
+      'Moratorium/Extreme Events mit klaren Aktivierungskriterien',
+      'Monitoring von Frequency/Severity, Accumulation, Alerts',
+      'Fraud/Anomaly Detection (Realtime, KI-gestützt, HITL)',
+      'Structured Workflow: Referrals, Exceptions, Versionierung',
+      'Audit Evidence Bundles'
     ],
-    controlTitle: 'Key control points',
+    controlTitle: 'Portfolio-Kontrollen',
     controlRows: [
-      { label: 'Authority limits', value: 'Per-Risiko-Limit $150,000' },
-      { label: 'Pricing corridor', value: 'Genehmigte Tarife & Schwellen' },
-      { label: 'Aggregates', value: 'Tägliche & regionale Limits unverändert' },
-      { label: 'Claims settlement', value: 'Deterministische Regeln + Eskalation' },
-      { label: 'Reporting cadence', value: 'Bordereaux & KPI-Reporting' },
-      { label: 'Audit rights', value: 'Carrier & Reinsurer Zugriff' }
+      { label: 'Moratorium', value: 'Governance-Trigger & Aktivierung' },
+      { label: 'Monitoring', value: 'Frequenz, Schwere, Akkumulation' },
+      { label: 'Anomalien', value: 'Realtime Flags & HITL Review' },
+      { label: 'Workflow', value: 'Referral / Exception / Versionierung' },
+      { label: 'Audit', value: 'Evidenzpakete & Logs' }
     ],
-    callout: 'Carrier-aligned: Governance und Kapitaldisziplin bleiben erhalten.'
+    callout: 'Risikosteuerung bleibt deterministisch und auditierbar.'
   },
   en: {
-    title: 'Reinsurance & Capital / Capacity Structure',
-    subline: 'Binder and treaty panel secure capacity; governance remains carrier-aligned.',
-    structureTitle: 'Structure overview',
+    title: 'Risk Management & Portfolio Controls',
+    subline: 'Controlled exposure through monitoring, limits and governance.',
+    structureTitle: 'Control mechanisms',
     structureNotes: [
-      'MGA / Coverholder with existing binder',
-      'Carrier provides primary paper',
-      'Treaty panel with multiple participants',
-      'Regional expansion within defined limits'
+      'Moratorium / extreme events with activation criteria',
+      'Monitoring of frequency/severity, accumulation, alerts',
+      'Fraud/anomaly detection (realtime, AI-assisted, HITL)',
+      'Structured workflow: referrals, exceptions, versioning',
+      'Audit evidence bundles'
     ],
-    controlTitle: 'Key control points',
+    controlTitle: 'Portfolio controls',
     controlRows: [
-      { label: 'Authority limits', value: 'Per-risk limit $150,000' },
-      { label: 'Pricing corridor', value: 'Approved rates & thresholds' },
-      { label: 'Aggregates', value: 'Daily & regional limits unchanged' },
-      { label: 'Claims settlement', value: 'Deterministic rules + escalation' },
-      { label: 'Reporting cadence', value: 'Bordereaux & KPI reporting' },
-      { label: 'Audit rights', value: 'Carrier & reinsurer access' }
+      { label: 'Moratorium', value: 'Governance triggers & activation' },
+      { label: 'Monitoring', value: 'Frequency, severity, accumulation' },
+      { label: 'Anomalies', value: 'Realtime flags & HITL review' },
+      { label: 'Workflow', value: 'Referral / exception / versioning' },
+      { label: 'Audit', value: 'Evidence bundles & logs' }
     ],
-    callout: 'Carrier-aligned: governance and capital discipline preserved.'
+    callout: 'Risk steering remains deterministic and auditable.'
   }
 }
 
 const techContent: Record<Lang, TechCopy> = {
   de: {
-    title: 'Technology & Realtime Data Architecture',
-    subline: 'Deterministische Trigger, valide Daten und auditierbare Entscheidungsprozesse.',
+    title: 'Pricing, Limits & Delegationsgrenzen',
+    subline: 'Carrier-aligned Pricing-Logik mit klaren Limits und Referral-Regeln.',
     sourcesTitle: 'Realtime data sources',
     sources: [
-      'Telematik / Flotte',
-      'TMS / Logistiksysteme',
-      'System- & Betriebslogs',
-      'Weather / External Signals',
-      'Broker submissions'
+      'Per-Risiko-Limit: $150.000',
+      'Daily/Regional Aggregate Limits: unverändert',
+      'Risk-based Pricing: Corridor/Guidelines, deterministische Regeln'
     ],
-    validationTitle: 'Validation & trigger engine',
+    validationTitle: 'Referral Rules',
     validation: [
-      'Deduplizierung und Zeitstempel-Checks',
-      'SLA- und Schwellenprüfungen',
-      'Anomalie-Flags und Evidenzpakete',
-      'Deterministische Trigger-Berechnung'
+      'Außerhalb definierter Schwellen zwingend Referral',
+      'Governance-Freigabe vor Bindung'
     ],
-    decisionTitle: 'Decision memo & governance',
+    decisionTitle: 'Kapital & Risiko',
     decision: [
-      'AI-Templates mit Empfehlung & Begründung',
-      'HITL-Freigaben und Versionierung',
-      'Audit-Log & Monitoring'
+      'Kapital und Risiko verbleiben beim Carrier/Reinsurance Panel'
     ]
   },
   en: {
-    title: 'Technology & Realtime Data Architecture',
-    subline: 'Deterministic triggers, validated data and auditable decisioning.',
+    title: 'Pricing, Limits & Delegation Boundaries',
+    subline: 'Carrier-aligned pricing logic with clear limits and referral rules.',
     sourcesTitle: 'Realtime data sources',
     sources: [
-      'Telematics / fleet',
-      'TMS / logistics platforms',
-      'System & operational logs',
-      'Weather / external signals',
-      'Broker submissions'
+      'Per-risk limit: $150,000',
+      'Daily/regional aggregate limits unchanged',
+      'Risk-based pricing: corridor/guidelines, deterministic rules'
     ],
-    validationTitle: 'Validation & trigger engine',
+    validationTitle: 'Referral rules',
     validation: [
-      'Deduplication and timestamp checks',
-      'SLA and threshold validation',
-      'Anomaly flags and evidence packs',
-      'Deterministic trigger calculation'
+      'Mandatory referral outside predefined thresholds',
+      'Governance approval before binding'
     ],
-    decisionTitle: 'Decision memo & governance',
+    decisionTitle: 'Capital & risk',
     decision: [
-      'AI templates with recommendation & rationale',
-      'HITL approvals and versioning',
-      'Audit log & monitoring'
+      'Capital and risk remain with the carrier/reinsurance panel'
     ]
   }
 }
 
 const strategicContent: Record<Lang, StrategicCopy> = {
   de: {
-    title: 'Strategic Fit for Carriers',
-    subline: 'Warum das Modell carrier-sicher, skalierbar und prüfbar ist.',
+    title: 'Szenarioanalyse & Stress-Tests',
+    subline: 'Robuste Steuerung unter Stressbedingungen und Governance-Anpassung.',
     quadrant: {
       underwriting: {
-        title: 'Underwriting-Kontrolle',
-        bullets: ['Delegierte Authority begrenzt', 'Pricing-Korridor & Regeln', 'Referral-Workflows']
+        title: 'Major scenarios analyzed',
+        bullets: ['Extreme weather', 'Systemic outage', 'Regional disruption', 'Accumulation spike', 'Fraud spike']
       },
       volatility: {
-        title: 'Volatilitätssteuerung',
-        bullets: ['Parametrische Trigger', 'Moratorium-Regeln', 'Aggregates & Limits']
+        title: 'Stress testing',
+        bullets: ['Exposure assumptions preserved', 'Loss ratio sensitivity', 'Trigger frequency distribution']
       },
       efficiency: {
-        title: 'Operative Effizienz',
-        bullets: ['Automatisierte Evidenz', 'Bordereaux & Reconciliation', 'Audit-ready Prozesse']
+        title: 'Outputs',
+        bullets: ['Accumulation views', 'Severity distribution', 'Event probability bands']
       },
       distribution: {
-        title: 'Skalierbare Distribution',
-        bullets: ['Tier-1 Broker', 'Verifizierte Enterprise Leads', 'Multi-Region ohne Limit-Änderung']
+        title: 'Governance',
+        bullets: ['Findings -> underwriting rules adjustments', 'Version controlled']
       }
     },
-    kpiStrip: ['Capital-light MGA', 'Audit-ready', 'Deterministische Trigger', 'Carrier-aligned Economics']
+    kpiStrip: ['Stress tests performed', 'Exposure preserved', 'Governance adjustments', 'Audit-ready outputs']
   },
   en: {
-    title: 'Strategic Fit for Carriers',
-    subline: 'Why the model is carrier-safe, scalable and auditable.',
+    title: 'Scenario Analysis & Stress Testing',
+    subline: 'Robust control under stress conditions with governed adjustments.',
     quadrant: {
       underwriting: {
-        title: 'Underwriting control',
-        bullets: ['Bounded authority', 'Pricing corridor & rules', 'Referral workflows']
+        title: 'Major scenarios analyzed',
+        bullets: ['Extreme weather', 'Systemic outage', 'Regional disruption', 'Accumulation spike', 'Fraud spike']
       },
       volatility: {
-        title: 'Loss volatility management',
-        bullets: ['Parametric triggers', 'Moratorium provisions', 'Aggregates & limits']
+        title: 'Stress testing',
+        bullets: ['Exposure assumptions preserved', 'Loss ratio sensitivity', 'Trigger frequency distribution']
       },
       efficiency: {
-        title: 'Operational efficiency',
-        bullets: ['Automated evidence', 'Bordereaux & reconciliation', 'Audit-ready processes']
+        title: 'Outputs',
+        bullets: ['Accumulation views', 'Severity distribution', 'Event probability bands']
       },
       distribution: {
-        title: 'Scalable distribution',
-        bullets: ['Tier-1 brokers', 'Verified enterprise leads', 'Multi-region without limit changes']
+        title: 'Governance',
+        bullets: ['Findings → underwriting rule adjustments', 'Version controlled']
       }
     },
-    kpiStrip: ['Capital-light MGA', 'Audit-ready', 'Deterministic triggers', 'Carrier-aligned economics']
+    kpiStrip: ['Stress tests performed', 'Exposure preserved', 'Governance adjustments', 'Audit-ready outputs']
   }
 }
 
 const appendixContent: Record<Lang, AppendixCopy> = {
   de: {
-    title: 'Appendix – Annahmen, Definitionen & Reporting Pack',
-    subline: 'Auditierbare Datengrundlagen und klare Definitionen für Governance & Reporting.',
-    definitionsTitle: 'Definitionen',
+    title: 'Operating Model, Rollen & Audit-/Reporting-Pack',
+    subline: 'Carrier-Checklist Closure mit klarer Rollenverteilung und Audit-Transparenz.',
+    definitionsTitle: 'Antares / Carrier / Rückversicherer',
     definitions: [
-      { term: 'Exposure', meaning: 'Modellierte Risikogröße (≠ Prämie ≠ Umsatz)' },
-      { term: 'Premium', meaning: 'Gebuchte Prämie gemäß Policierung' },
-      { term: 'GWP', meaning: 'Gross Written Premium' },
-      { term: 'Binder', meaning: 'Delegationsvertrag / Zeichnungsrahmen' },
-      { term: 'Treaty panel', meaning: 'Rückversicherer-Panel im Treaty' },
-      { term: 'Bordereaux', meaning: 'Standardisiertes Reporting zu Prämien & Schäden' },
-      { term: 'HITL', meaning: 'Human-in-the-loop Freigaben' }
+      { term: 'Sole risk carrier (Lloyd’s / Lloyd’s Europe)', meaning: 'Risikoträger, Kapitalgeber' },
+      { term: 'Lead underwriting authority', meaning: 'Pricing, Kapazitätssteuerung' },
+      { term: 'Final claims authority', meaning: 'Letzte Entscheidungskompetenz' },
+      { term: 'Portfolio governance cadence', meaning: 'Regelmäßige Review-Struktur' }
     ],
-    assumptionsTitle: 'Assumptions & datasets',
+    assumptionsTitle: 'Insurfox (MGA / Platform Operator)',
     assumptions: [
-      'Auslastung 70 % (Base Case)',
-      'Faktoren & Exposure-Annahmen im Stresstest konserviert',
-      'Sample anonymisierte Datensätze verfügbar',
-      'Volldatensatz auf Anfrage'
+      'Portfolio-Konstruktion & Risikomanagement',
+      'Broker-Onboarding & Distribution',
+      'Policy Issuance, Contract Admin, Renewals/Endorsements',
+      'Delegated Underwriting innerhalb Authority',
+      'Optional delegierte Claims bis EUR 10.000 (vollständige FNOL + Escalation)',
+      'Realtime Datenaggregation & deterministische Entscheidungsbasis',
+      'Native AI Decision Templates (Human-in-the-loop)'
     ],
-    reportingTitle: 'Reporting pack',
+    reportingTitle: 'Audit & Reporting Pack',
     reporting: [
-      'Premium- & Claims-Bordereaux',
-      'Exposure / Aggregation Views',
-      'Referral & Exception Log',
-      'Audit Evidence Pack'
+      'Premium & Claims Bordereaux',
+      'Loss Ratio & Frequency/Severity Monitoring',
+      'Exposure & Accumulation Dashboards',
+      'Referral/Exception Logs',
+      'Trigger Evidence Bundles (immutable/timestamped)',
+      'Moratorium & Incident Reports'
     ]
   },
   en: {
-    title: 'Appendix – Assumptions, Definitions & Reporting Pack',
-    subline: 'Auditable data foundations and clear definitions for governance & reporting.',
-    definitionsTitle: 'Definitions',
+    title: 'Operating Model, Roles & Audit/Reporting Pack',
+    subline: 'Carrier checklist closure with clear role allocation and audit transparency.',
+    definitionsTitle: 'Antares / Carrier / Reinsurer',
     definitions: [
-      { term: 'Exposure', meaning: 'Model-based risk size (≠ premium ≠ revenue)' },
-      { term: 'Premium', meaning: 'Booked premium per policy' },
-      { term: 'GWP', meaning: 'Gross Written Premium' },
-      { term: 'Binder', meaning: 'Delegated authority / underwriting framework' },
-      { term: 'Treaty panel', meaning: 'Reinsurance participants under treaty' },
-      { term: 'Bordereaux', meaning: 'Standardized premium & claims reporting' },
-      { term: 'HITL', meaning: 'Human-in-the-loop approvals' }
+      { term: 'Sole risk carrier (Lloyd’s / Lloyd’s Europe)', meaning: 'Risk carrier, capital provider' },
+      { term: 'Lead underwriting authority', meaning: 'Pricing, capacity steering' },
+      { term: 'Final claims authority', meaning: 'Final decision power' },
+      { term: 'Portfolio governance cadence', meaning: 'Regular review structure' }
     ],
-    assumptionsTitle: 'Assumptions & datasets',
+    assumptionsTitle: 'Insurfox (MGA / Platform Operator)',
     assumptions: [
-      'Utilization 70% (base case)',
-      'Factors & exposure assumptions preserved in stress tests',
-      'Sample anonymized datasets available',
-      'Full dataset on request'
+      'Portfolio construction & risk management',
+      'Broker onboarding & distribution',
+      'Policy issuance, contract admin, renewals/endorsements',
+      'Delegated underwriting within authority',
+      'Optional delegated claims up to EUR 10,000 (complete FNOL + escalation)',
+      'Realtime data aggregation & deterministic decision basis',
+      'Native AI decision templates (human-in-the-loop)'
     ],
-    reportingTitle: 'Reporting pack',
+    reportingTitle: 'Audit & Reporting Pack',
     reporting: [
       'Premium & claims bordereaux',
-      'Exposure / aggregation views',
-      'Referral & exception log',
-      'Audit evidence pack'
+      'Loss ratio & frequency/severity monitoring',
+      'Exposure & accumulation dashboards',
+      'Referral/exception logs',
+      'Trigger evidence bundles (immutable/timestamped)',
+      'Moratorium & incident reports'
     ]
   }
 }
@@ -1099,17 +1067,6 @@ export default function BciaDeckPage() {
             </div>
             <div className="bp5-grid">
               <div className="bp5-panel">
-                <div className="bp5-cap">{operatingStrings.flowTitle}</div>
-                <div className="bp5-flow">
-                  {operatingStrings.flowSteps.map((step, idx) => (
-                    <div key={step} className="bp5-flow-step">
-                      <span>{step}</span>
-                      {idx < operatingStrings.flowSteps.length - 1 && <span className="bp5-flow-arrow">→</span>}
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="bp5-panel">
                 <div className="bp5-cap">{operatingStrings.raciTitle}</div>
                 <table className="bp5-table">
                   <tbody>
@@ -1130,6 +1087,28 @@ export default function BciaDeckPage() {
                   ))}
                 </ul>
               </div>
+              <div className="bp5-panel">
+                <div className="bp5-cap">
+                  {typedLang === 'en'
+                    ? 'Evidence & validation'
+                    : 'Evidenz & Validierung'}
+                </div>
+                <ul className="bp5-list">
+                  {typedLang === 'en' ? (
+                    <>
+                      <li>Realtime logistics / fleet / system data</li>
+                      <li>Deterministic rules with audit trail</li>
+                      <li>Trigger establishes eligibility; payouts subject to policy terms & governance controls</li>
+                    </>
+                  ) : (
+                    <>
+                      <li>Realtime Logistik-/Fleet-/Systemdaten</li>
+                      <li>Deterministische Regeln mit Audit Trail</li>
+                      <li>Trigger begründet Anspruch; Auszahlung gemäß Policierung & Governance</li>
+                    </>
+                  )}
+                </ul>
+              </div>
             </div>
           </div>
         )
@@ -1145,15 +1124,6 @@ export default function BciaDeckPage() {
             <div className="bp6-grid">
               <div className="bp6-panel">
                 <div className="bp6-cap">{reinsuranceStrings.structureTitle}</div>
-                <div className="bp6-diagram">
-                  <div className="bp6-diagram-row">Insureds / Brokers</div>
-                  <div className="bp6-diagram-arrow">↓</div>
-                  <div className="bp6-diagram-row">MGA / Coverholder</div>
-                  <div className="bp6-diagram-arrow">↓</div>
-                  <div className="bp6-diagram-row">Carrier (primary paper)</div>
-                  <div className="bp6-diagram-arrow">↓</div>
-                  <div className="bp6-diagram-row">Treaty panel (reinsurers)</div>
-                </div>
                 <ul className="bp6-list">
                   {reinsuranceStrings.structureNotes.map((item) => (
                     <li key={item}>{item}</li>
@@ -1202,14 +1172,6 @@ export default function BciaDeckPage() {
                     <li key={item}>{item}</li>
                   ))}
                 </ul>
-                <svg width="240" height="120" role="img" aria-label="Realtime validation stack">
-                  <rect className="bp7-stack-box" x="20" y="10" width="200" height="24" />
-                  <rect className="bp7-stack-box" x="20" y="46" width="200" height="24" />
-                  <rect className="bp7-stack-box" x="20" y="82" width="200" height="24" />
-                  <text className="bp7-stack-text" x="30" y="26">Ingestion</text>
-                  <text className="bp7-stack-text" x="30" y="62">Validation</text>
-                  <text className="bp7-stack-text" x="30" y="98">Trigger engine</text>
-                </svg>
               </div>
               <div className="bp7-panel">
                 <div className="bp7-cap">{techStrings.decisionTitle}</div>
