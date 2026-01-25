@@ -359,7 +359,6 @@ const formatMoney = (value: number, lang: Lang) => {
 export default function BciaDeckPage() {
   const { lang } = useI18n()
   const typedLang = (lang === 'en' ? 'en' : 'de') as Lang
-  const isPrintMode = new URLSearchParams(window.location.search).get('print') === '1'
   const [headerHeight, setHeaderHeight] = useState(0)
   const [scale, setScale] = useState(1)
   const stageRef = useRef<HTMLDivElement | null>(null)
@@ -368,17 +367,8 @@ export default function BciaDeckPage() {
 
   useEffect(() => {
     document.body.classList.add('bcia-deck-route')
-    if (isPrintMode) {
-      document.body.classList.add('bcia-print-mode')
-    }
     return () => document.body.classList.remove('bcia-deck-route')
-  }, [isPrintMode])
-
-  useEffect(() => {
-    if (!isPrintMode) return
-    const timer = window.setTimeout(() => window.print(), 300)
-    return () => window.clearTimeout(timer)
-  }, [isPrintMode])
+  }, [])
 
   useLayoutEffect(() => {
     const header = document.querySelector('[data-app-header="true"]') as HTMLElement | null
@@ -812,12 +802,7 @@ export default function BciaDeckPage() {
           type="button"
           className="bcia-print"
           onClick={() => {
-            const url = new URL(window.location.href)
-            url.searchParams.set('print', '1')
-            const win = window.open(url.toString(), '_blank', 'noopener,noreferrer')
-            if (!win) {
-              window.location.href = url.toString()
-            }
+            window.print()
           }}
         >
           {typedLang === 'en' ? 'Print' : 'Drucken'}
