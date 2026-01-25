@@ -766,3 +766,8 @@ body.bcia-print-mode .bcia-page {
     height: 210mm;
   }
 }
+
+@page {
+  size: 297mm 210mm;
+  margin: 0;
+}

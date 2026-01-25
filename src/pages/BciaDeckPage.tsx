@@ -658,7 +658,21 @@ export default function BciaDeckPage() {
         <button
           type="button"
           className="bcia-arrow bcia-arrow-left"
-          onClick={() => goToSlide(activeIndex - 1)}
+          onClick={(event) => {
+            event.preventDefault()
+            event.stopPropagation()
+            goToSlide(activeIndex - 1)
+          }}
+          onMouseDown={(event) => {
+            event.preventDefault()
+            event.stopPropagation()
+            goToSlide(activeIndex - 1)
+          }}
+          onTouchStart={(event) => {
+            event.preventDefault()
+            event.stopPropagation()
+            goToSlide(activeIndex - 1)
+          }}
           aria-label={typedLang === 'en' ? 'Previous slide' : 'Vorherige Folie'}
         >
           &lt;
@@ -685,7 +699,21 @@ export default function BciaDeckPage() {
         <button
           type="button"
           className="bcia-arrow bcia-arrow-right"
-          onClick={() => goToSlide(activeIndex + 1)}
+          onClick={(event) => {
+            event.preventDefault()
+            event.stopPropagation()
+            goToSlide(activeIndex + 1)
+          }}
+          onMouseDown={(event) => {
+            event.preventDefault()
+            event.stopPropagation()
+            goToSlide(activeIndex + 1)
+          }}
+          onTouchStart={(event) => {
+            event.preventDefault()
+            event.stopPropagation()
+            goToSlide(activeIndex + 1)
+          }}
           aria-label={typedLang === 'en' ? 'Next slide' : 'Naechste Folie'}
         >
           &gt;
