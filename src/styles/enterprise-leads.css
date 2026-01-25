@@ -549,6 +549,107 @@
     font-size: 0.8rem;
   }
 
+  .enterprise-program-slide {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    height: 100%;
+    color: var(--ix-text);
+  }
+
+  .enterprise-program-header h1 {
+    margin: 0;
+    font-size: 1.6rem;
+    font-weight: 600;
+  }
+
+  .enterprise-program-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+    flex: 1 1 auto;
+    align-items: start;
+  }
+
+  .enterprise-program-column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: 1px solid var(--ix-border);
+    padding: 14px 16px;
+    background: var(--ix-surface);
+  }
+
+  .enterprise-program-column h2 {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--ix-text);
+  }
+
+  .enterprise-program-column table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8rem;
+  }
+
+  .enterprise-program-column th,
+  .enterprise-program-column td {
+    padding: 6px 4px;
+    border-bottom: 1px solid var(--ix-border);
+    text-align: left;
+  }
+
+  .enterprise-program-column th {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.6rem;
+    color: var(--ix-text-muted);
+  }
+
+  .enterprise-program-column td.num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .program-subtitle {
+    margin: 0;
+    font-size: 0.75rem;
+    color: var(--ix-text-muted);
+  }
+
+  .program-notes p {
+    margin: 0 0 6px;
+    font-size: 0.75rem;
+    color: var(--ix-text-muted);
+  }
+
+  .program-bullets {
+    margin: 0;
+    padding-left: 16px;
+    font-size: 0.78rem;
+    color: var(--ix-text-muted);
+  }
+
+  .program-callout {
+    border: 1px solid var(--ix-border);
+    padding: 10px 12px;
+    font-size: 0.78rem;
+    color: var(--ix-text);
+    background: var(--ix-surface-2);
+  }
+
+  .enterprise-program-footer {
+    border-top: 1px solid var(--ix-border);
+    padding-top: 10px;
+    font-size: 0.75rem;
+    color: var(--ix-text-muted);
+    font-style: italic;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
   .enterprise-map-card img {
     width: 100%;
     height: 100%;
