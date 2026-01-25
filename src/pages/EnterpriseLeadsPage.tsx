@@ -8,8 +8,8 @@ import KarteDeEuEn from '@/assets/images/karte_eu_de_englisch.png'
 import LogistikIndustrieDe from '@/assets/images/logistik_industrie_de.png'
 import LogistikIndustrieEn from '@/assets/images/logistik_industrie_en.png'
 import InsurfoxLogo from '@/assets/logos/Insurfox_Logo_colored_dark.png'
-import SlideCanvas from '@/components/SlideCanvas'
-import '@/styles/slide-canvas.css'
+import SlideStage from '@/components/SlideStage'
+import '@/styles/slide-stage.css'
 
 function buildDocRaptorUrl(route: string, filename: string) {
   return `/.netlify/functions/pdf?${new URLSearchParams({ route, filename }).toString()}`
@@ -153,7 +153,7 @@ export default function EnterpriseLeadsPage() {
 
   return (
     <section className={`page enterprise-plan ${isPrint ? 'is-print' : ''}`}>
-      <SlideCanvas isPrint={isPrint} className="enterprise-slide-canvas">
+      <SlideStage isPrint={isPrint} className="enterprise-slide-canvas">
         {!isPrint && (
           <div className="enterprise-download-float no-print">
             <button type="button" onClick={exportPdf}>
@@ -574,7 +574,7 @@ export default function EnterpriseLeadsPage() {
               </div>
             </section>
         </div>
-      </SlideCanvas>
+      </SlideStage>
 
       <div className="enterprise-nav no-print" aria-hidden="true">
         <button

@@ -10,7 +10,11 @@ export default function FullscreenBgLayout({ showHeader = true }: FullscreenBgLa
   return (
     <div style={{ position: 'relative', minHeight: '100vh', width: '100%', background: '#f7f7f8' }}>
       <div style={{ position: 'relative', zIndex: 1, minHeight: '100vh', width: '100%' }}>
-        {showHeader ? <AppHeader /> : null}
+        {showHeader ? (
+          <div data-app-header="true">
+            <AppHeader />
+          </div>
+        ) : null}
         <div
           style={{
             minHeight: '100vh',
