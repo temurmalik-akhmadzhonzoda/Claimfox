@@ -87,6 +87,61 @@ type GovernanceCopy = {
   assurance: string
 }
 
+type OperatingCopy = {
+  title: string
+  subline: string
+  flowTitle: string
+  flowSteps: string[]
+  raciTitle: string
+  raciRows: { role: string; responsibility: string }[]
+  artifactsTitle: string
+  artifacts: string[]
+}
+
+type ReinsuranceCopy = {
+  title: string
+  subline: string
+  structureTitle: string
+  structureNotes: string[]
+  controlTitle: string
+  controlRows: { label: string; value: string }[]
+  callout: string
+}
+
+type TechCopy = {
+  title: string
+  subline: string
+  sourcesTitle: string
+  sources: string[]
+  validationTitle: string
+  validation: string[]
+  decisionTitle: string
+  decision: string[]
+}
+
+type StrategicCopy = {
+  title: string
+  subline: string
+  quadrant: {
+    underwriting: { title: string; bullets: string[] }
+    volatility: { title: string; bullets: string[] }
+    efficiency: { title: string; bullets: string[] }
+    distribution: { title: string; bullets: string[] }
+  }
+  kpiStrip: string[]
+}
+
+type AppendixCopy = {
+  title: string
+  subline: string
+  definitionsTitle: string
+  definitions: { term: string; meaning: string }[]
+  assumptionsTitle: string
+  assumptions: string[]
+  reportingTitle: string
+  reporting: string[]
+}
+
 const compositionRows = [
   { label: 'Motor (Kraftfahrt)', value: 'EUR 34.015 bn' },
   { label: 'Property (Sach)', value: 'EUR 11.306 bn' },
@@ -268,84 +323,337 @@ const programContent: Record<Lang, ProgramCopy> = {
 
 const governanceContent: Record<Lang, GovernanceCopy> = {
   de: {
-    title: 'Risiko-, Governance- & Delegated-Authority-Framework',
-    subline:
-      'Carrier-konforme Kontrollen: begrenzte Authority, auditierbare Entscheidungen, Kapital und Risiko verbleiben bei Versicherer und Rückversicherern.',
-    leftTitle: 'Delegated Authority Scope',
+    title: 'Risk, Governance & Delegated Authority Framework',
+    subline: 'Carrier-konforme Steuerung auf Basis von Echtzeitdaten',
+    leftTitle: 'Deterministische Trigger & Datenbasis',
     leftItems: [
-      'Underwriting-Authority delegiert an MGA innerhalb der Binder-Regeln',
-      'Tarife/Terms innerhalb genehmigter Pricing-Korridore',
-      'Per-Risiko-Limit: $150,000',
-      'Tages- und regionale Aggregate: unverändert',
-      'Parametrische, ereignisbasierte Produktlogik',
-      'Klare Abgrenzung von Rollen und Verantwortlichkeiten'
+      'Aggregation und Validierung von Echtzeitdaten aus Logistiksystemen, Flotten- und Telematikdaten sowie System- und Betriebsereignissen',
+      'Keine subjektiven Schadenmeldungen',
+      'Objektive, datenbasierte Auslösung',
+      'Delay Triggers (Verspätung, Stillstand, Zeitüberschreitung)',
+      'Outage Triggers (Systemausfall, Betriebsunterbrechung)',
+      'Threshold-based escalation'
     ],
-    leftControlsTitle: 'Controls',
+    leftControlsTitle: 'AI-Hinweis',
     leftControls: [
-      'Regel-Engine & Schwellenwerte',
-      'Threshold-Checks vor Bindung',
-      'Exception-Workflow mit Referral',
-      'Audit-Log für Entscheidungen'
+      'Native KI erzeugt Entscheidungs- und Eskalationsvorlagen',
+      'Keine autonome Schadenentscheidung ohne Regelwerk'
     ],
-    centerTitle: 'Governance & Controls',
+    centerTitle: 'Governance & Zeichnungsautorität',
     centerRows: [
-      { label: 'Datenintegrität', value: 'Realtime-Validierung, Abgleich & Reconciliation' },
-      { label: 'Event-Definition', value: 'Deterministische Schwellen & Evidenzanforderungen' },
-      { label: 'Pricing-Governance', value: 'Korridor, Freigaben, Monitoring' },
-      { label: 'Claims-Governance', value: 'Payout-Regeln, Anti-Fraud, Audit-Trace' },
-      { label: 'Exposure & Aggregation', value: 'Akkumulationsmonitoring, Alerts' },
-      { label: 'Model-Risk-Management', value: 'AI-Templates, HITL-Gates, Versioning' }
+      { label: 'Carrier retains', value: 'Finale Zeichnungsautorität; Kapazitäts- und Kapitalsteuerung; Portfolio-Governance' },
+      { label: 'MGA (Insurfox)', value: 'Standardisierte Risikoaufnahme; regelbasierte Underwriting-Logik; Portfolio-Monitoring in Echtzeit; Reporting & Transparenz' }
     ],
-    rightTitle: 'Realtime Trigger & Evidence Layer',
+    rightTitle: 'Schadensteuerung & Eskalation',
     rightStages: {
-      sources: 'Quellen: Telematik/Fleet, TMS/Logistik, Weather/External, System-Logs',
-      validation: 'Validierung: Deduplizierung, Zeitstempel-Checks, SLA-Checks, Anomaly Flags',
-      engine: 'Trigger-Engine: deterministische Event-Schwellen',
-      memo: 'Decision Memo (AI): Underwriting-Template, Rationale, Empfehlung',
-      outputs: 'Outputs: Reporting Pack, Audit Evidence, Bordereaux, Reinsurer Reporting'
+      sources: 'Parametrische Auslösung auf Datenbasis',
+      validation: 'Vollständig strukturierte digitale FNOL',
+      engine: 'Vordefinierte Eskalationslogik',
+      memo: 'Optional delegierte Schadenkompetenz bis EUR 10.000 (nur bei vollständiger Datenlage)',
+      outputs: 'Automatische Eskalation bei Grenzwertüberschreitung, unvollständigen Datensätzen oder komplexen Schadenmustern'
     },
-    assurance:
-      'Carrier-konforme Governance: klar begrenzte Delegationsrechte, deterministische Trigger, auditierbare Entscheidungen und kontinuierliches Monitoring.'
+    assurance: 'Carrier behält jederzeit die finale Entscheidungsgewalt'
   },
   en: {
     title: 'Risk, Governance & Delegated Authority Framework',
-    subline:
-      'Carrier-aligned controls with real-time validation; capital and risk remain with insurer and reinsurers.',
-    leftTitle: 'Delegated Authority Scope',
+    subline: 'Carrier-aligned control based on real-time data',
+    leftTitle: 'Deterministic Triggers & Data Foundation',
     leftItems: [
-      'Underwriting authority delegated to MGA within binder rules',
-      'Rates/terms within approved pricing corridors',
-      'Per-risk limit: $150,000',
-      'Daily and regional aggregates unchanged',
-      'Parametric, event-based product rules',
-      'Clear separation of roles and responsibilities'
+      'Aggregation and validation of real-time data from logistics systems, fleet/telematics and operational events',
+      'No subjective loss notifications',
+      'Objective, data-driven activation',
+      'Delay Triggers (delay, standstill, time threshold)',
+      'Outage Triggers (system outage, operational interruption)',
+      'Threshold-based escalation'
     ],
-    leftControlsTitle: 'Controls',
+    leftControlsTitle: 'AI note',
     leftControls: [
-      'Rules engine and thresholds',
-      'Threshold checks before binding',
-      'Exception workflow with referral',
-      'Audit log for decisions'
+      'Native AI produces decision and escalation templates',
+      'No autonomous claims decisions without rules'
     ],
-    centerTitle: 'Governance & Controls',
+    centerTitle: 'Governance & Delegated Authority',
     centerRows: [
-      { label: 'Data integrity', value: 'Realtime validation, reconciliation' },
-      { label: 'Event definition', value: 'Deterministic thresholds, evidence requirements' },
-      { label: 'Pricing governance', value: 'Corridor, approvals, monitoring' },
-      { label: 'Claims governance', value: 'Payout rules, anti-fraud, audit trail' },
-      { label: 'Exposure & accumulation', value: 'Aggregation monitoring, alerts' },
-      { label: 'Model risk management', value: 'AI templates, HITL gates, versioning' }
+      { label: 'Carrier retains', value: 'Final underwriting authority; capacity & capital control; portfolio-level governance' },
+      { label: 'MGA (Insurfox)', value: 'Standardized risk intake; rules-based underwriting logic; real-time portfolio monitoring; reporting & transparency' }
     ],
-    rightTitle: 'Realtime Trigger & Evidence Layer',
+    rightTitle: 'Claims Control & Escalation',
     rightStages: {
-      sources: 'Sources: Telematics/Fleet, TMS/Logistics, Weather/External, System logs',
-      validation: 'Validation: dedup, timestamp checks, SLA checks, anomaly flags',
-      engine: 'Trigger engine: deterministic event thresholds',
-      memo: 'Decision memo (AI): underwriting template, rationale, recommendation',
-      outputs: 'Outputs: reporting pack, audit evidence, bordereaux, reinsurer reporting'
+      sources: 'Parametric activation based on data',
+      validation: 'Fully structured digital FNOL',
+      engine: 'Predefined escalation logic',
+      memo: 'Optional delegated authority up to EUR 10,000 (only with complete data)',
+      outputs: 'Automatic escalation for threshold breaches, incomplete data or complex patterns'
     },
-    assurance:
-      'Carrier-aligned governance: bounded delegated authority, deterministic triggers, auditable decisioning and continuous monitoring.'
+    assurance: 'Carrier retains final decision authority at all times'
+  }
+}
+
+const operatingContent: Record<Lang, OperatingCopy> = {
+  de: {
+    title: 'Operating Model & Workflow',
+    subline: 'End-to-end Prozessfluss mit auditierbaren Artefakten und klarer Rollenverteilung.',
+    flowTitle: 'End-to-end operating flow',
+    flowSteps: [
+      'Broker',
+      'Platform Intake',
+      'Validation',
+      'Underwriting Decision Memo (AI + HITL)',
+      'Bind (MGA)',
+      'Policy Admin & Reporting',
+      'Claims (parametrische Evidenz)',
+      'Reinsurer Reporting'
+    ],
+    raciTitle: 'Roles & responsibilities (RACI-lite)',
+    raciRows: [
+      { role: 'Broker', responsibility: 'Einreichung, Datenbereitstellung, Kundenbeziehung' },
+      { role: 'MGA', responsibility: 'Standardisierte Risikoaufnahme, Underwriting-Logik, Reporting' },
+      { role: 'Carrier', responsibility: 'Kapazität, Pricing-Korridor, Governance-Freigaben' },
+      { role: 'Reinsurers', responsibility: 'Kapitaldeckung, Treaty-Reporting, Audit-Rechte' },
+      { role: 'Platform', responsibility: 'Realtime-Daten, Validierung, Evidenzpakete' }
+    ],
+    artifactsTitle: 'Data & audit artifacts',
+    artifacts: [
+      'Evidence Pack (Echtzeitdaten, Zeitstempel, SLA-Checks)',
+      'Decision Log & Referral-Historie',
+      'Bordereaux (Premium, Claims, Exposure)',
+      'Exception Log & Reconciliation'
+    ]
+  },
+  en: {
+    title: 'Operating Model & Workflow',
+    subline: 'End-to-end flow with auditable artifacts and clear role separation.',
+    flowTitle: 'End-to-end operating flow',
+    flowSteps: [
+      'Broker',
+      'Platform Intake',
+      'Validation',
+      'Underwriting Decision Memo (AI + HITL)',
+      'Bind (MGA)',
+      'Policy Admin & Reporting',
+      'Claims (parametric evidence)',
+      'Reinsurer Reporting'
+    ],
+    raciTitle: 'Roles & responsibilities (RACI-lite)',
+    raciRows: [
+      { role: 'Broker', responsibility: 'Submission, data provision, client relationship' },
+      { role: 'MGA', responsibility: 'Standardized intake, rules-based underwriting, reporting' },
+      { role: 'Carrier', responsibility: 'Capacity, pricing corridor, governance approvals' },
+      { role: 'Reinsurers', responsibility: 'Capital support, treaty reporting, audit rights' },
+      { role: 'Platform', responsibility: 'Realtime data, validation, evidence packs' }
+    ],
+    artifactsTitle: 'Data & audit artifacts',
+    artifacts: [
+      'Evidence pack (realtime data, timestamps, SLA checks)',
+      'Decision log & referral history',
+      'Bordereaux (premium, claims, exposure)',
+      'Exception log & reconciliation'
+    ]
+  }
+}
+
+const reinsuranceContent: Record<Lang, ReinsuranceCopy> = {
+  de: {
+    title: 'Reinsurance & Capital / Capacity Structure',
+    subline: 'Binder und Treaty-Panel sichern Kapazität; Governance bleibt carrier-aligned.',
+    structureTitle: 'Structure overview',
+    structureNotes: [
+      'MGA / Coverholder mit bestehendem Binder',
+      'Carrier stellt Primary Paper',
+      'Reinsurer Panel über Treaty-Struktur',
+      'Regionale Expansion innerhalb definierter Limits'
+    ],
+    controlTitle: 'Key control points',
+    controlRows: [
+      { label: 'Authority limits', value: 'Per-Risiko-Limit $150,000' },
+      { label: 'Pricing corridor', value: 'Genehmigte Tarife & Schwellen' },
+      { label: 'Aggregates', value: 'Tägliche & regionale Limits unverändert' },
+      { label: 'Claims settlement', value: 'Deterministische Regeln + Eskalation' },
+      { label: 'Reporting cadence', value: 'Bordereaux & KPI-Reporting' },
+      { label: 'Audit rights', value: 'Carrier & Reinsurer Zugriff' }
+    ],
+    callout: 'Carrier-aligned: Governance und Kapitaldisziplin bleiben erhalten.'
+  },
+  en: {
+    title: 'Reinsurance & Capital / Capacity Structure',
+    subline: 'Binder and treaty panel secure capacity; governance remains carrier-aligned.',
+    structureTitle: 'Structure overview',
+    structureNotes: [
+      'MGA / Coverholder with existing binder',
+      'Carrier provides primary paper',
+      'Treaty panel with multiple participants',
+      'Regional expansion within defined limits'
+    ],
+    controlTitle: 'Key control points',
+    controlRows: [
+      { label: 'Authority limits', value: 'Per-risk limit $150,000' },
+      { label: 'Pricing corridor', value: 'Approved rates & thresholds' },
+      { label: 'Aggregates', value: 'Daily & regional limits unchanged' },
+      { label: 'Claims settlement', value: 'Deterministic rules + escalation' },
+      { label: 'Reporting cadence', value: 'Bordereaux & KPI reporting' },
+      { label: 'Audit rights', value: 'Carrier & reinsurer access' }
+    ],
+    callout: 'Carrier-aligned: governance and capital discipline preserved.'
+  }
+}
+
+const techContent: Record<Lang, TechCopy> = {
+  de: {
+    title: 'Technology & Realtime Data Architecture',
+    subline: 'Deterministische Trigger, valide Daten und auditierbare Entscheidungsprozesse.',
+    sourcesTitle: 'Realtime data sources',
+    sources: [
+      'Telematik / Flotte',
+      'TMS / Logistiksysteme',
+      'System- & Betriebslogs',
+      'Weather / External Signals',
+      'Broker submissions'
+    ],
+    validationTitle: 'Validation & trigger engine',
+    validation: [
+      'Deduplizierung und Zeitstempel-Checks',
+      'SLA- und Schwellenprüfungen',
+      'Anomalie-Flags und Evidenzpakete',
+      'Deterministische Trigger-Berechnung'
+    ],
+    decisionTitle: 'Decision memo & governance',
+    decision: [
+      'AI-Templates mit Empfehlung & Begründung',
+      'HITL-Freigaben und Versionierung',
+      'Audit-Log & Monitoring'
+    ]
+  },
+  en: {
+    title: 'Technology & Realtime Data Architecture',
+    subline: 'Deterministic triggers, validated data and auditable decisioning.',
+    sourcesTitle: 'Realtime data sources',
+    sources: [
+      'Telematics / fleet',
+      'TMS / logistics platforms',
+      'System & operational logs',
+      'Weather / external signals',
+      'Broker submissions'
+    ],
+    validationTitle: 'Validation & trigger engine',
+    validation: [
+      'Deduplication and timestamp checks',
+      'SLA and threshold validation',
+      'Anomaly flags and evidence packs',
+      'Deterministic trigger calculation'
+    ],
+    decisionTitle: 'Decision memo & governance',
+    decision: [
+      'AI templates with recommendation & rationale',
+      'HITL approvals and versioning',
+      'Audit log & monitoring'
+    ]
+  }
+}
+
+const strategicContent: Record<Lang, StrategicCopy> = {
+  de: {
+    title: 'Strategic Fit for Carriers',
+    subline: 'Warum das Modell carrier-sicher, skalierbar und prüfbar ist.',
+    quadrant: {
+      underwriting: {
+        title: 'Underwriting-Kontrolle',
+        bullets: ['Delegierte Authority begrenzt', 'Pricing-Korridor & Regeln', 'Referral-Workflows']
+      },
+      volatility: {
+        title: 'Volatilitätssteuerung',
+        bullets: ['Parametrische Trigger', 'Moratorium-Regeln', 'Aggregates & Limits']
+      },
+      efficiency: {
+        title: 'Operative Effizienz',
+        bullets: ['Automatisierte Evidenz', 'Bordereaux & Reconciliation', 'Audit-ready Prozesse']
+      },
+      distribution: {
+        title: 'Skalierbare Distribution',
+        bullets: ['Tier-1 Broker', 'Verifizierte Enterprise Leads', 'Multi-Region ohne Limit-Änderung']
+      }
+    },
+    kpiStrip: ['Capital-light MGA', 'Audit-ready', 'Deterministische Trigger', 'Carrier-aligned Economics']
+  },
+  en: {
+    title: 'Strategic Fit for Carriers',
+    subline: 'Why the model is carrier-safe, scalable and auditable.',
+    quadrant: {
+      underwriting: {
+        title: 'Underwriting control',
+        bullets: ['Bounded authority', 'Pricing corridor & rules', 'Referral workflows']
+      },
+      volatility: {
+        title: 'Loss volatility management',
+        bullets: ['Parametric triggers', 'Moratorium provisions', 'Aggregates & limits']
+      },
+      efficiency: {
+        title: 'Operational efficiency',
+        bullets: ['Automated evidence', 'Bordereaux & reconciliation', 'Audit-ready processes']
+      },
+      distribution: {
+        title: 'Scalable distribution',
+        bullets: ['Tier-1 brokers', 'Verified enterprise leads', 'Multi-region without limit changes']
+      }
+    },
+    kpiStrip: ['Capital-light MGA', 'Audit-ready', 'Deterministic triggers', 'Carrier-aligned economics']
+  }
+}
+
+const appendixContent: Record<Lang, AppendixCopy> = {
+  de: {
+    title: 'Appendix – Annahmen, Definitionen & Reporting Pack',
+    subline: 'Auditierbare Datengrundlagen und klare Definitionen für Governance & Reporting.',
+    definitionsTitle: 'Definitionen',
+    definitions: [
+      { term: 'Exposure', meaning: 'Modellierte Risikogröße (≠ Prämie ≠ Umsatz)' },
+      { term: 'Premium', meaning: 'Gebuchte Prämie gemäß Policierung' },
+      { term: 'GWP', meaning: 'Gross Written Premium' },
+      { term: 'Binder', meaning: 'Delegationsvertrag / Zeichnungsrahmen' },
+      { term: 'Treaty panel', meaning: 'Rückversicherer-Panel im Treaty' },
+      { term: 'Bordereaux', meaning: 'Standardisiertes Reporting zu Prämien & Schäden' },
+      { term: 'HITL', meaning: 'Human-in-the-loop Freigaben' }
+    ],
+    assumptionsTitle: 'Assumptions & datasets',
+    assumptions: [
+      'Auslastung 70 % (Base Case)',
+      'Faktoren & Exposure-Annahmen im Stresstest konserviert',
+      'Sample anonymisierte Datensätze verfügbar',
+      'Volldatensatz auf Anfrage'
+    ],
+    reportingTitle: 'Reporting pack',
+    reporting: [
+      'Premium- & Claims-Bordereaux',
+      'Exposure / Aggregation Views',
+      'Referral & Exception Log',
+      'Audit Evidence Pack'
+    ]
+  },
+  en: {
+    title: 'Appendix – Assumptions, Definitions & Reporting Pack',
+    subline: 'Auditable data foundations and clear definitions for governance & reporting.',
+    definitionsTitle: 'Definitions',
+    definitions: [
+      { term: 'Exposure', meaning: 'Model-based risk size (≠ premium ≠ revenue)' },
+      { term: 'Premium', meaning: 'Booked premium per policy' },
+      { term: 'GWP', meaning: 'Gross Written Premium' },
+      { term: 'Binder', meaning: 'Delegated authority / underwriting framework' },
+      { term: 'Treaty panel', meaning: 'Reinsurance participants under treaty' },
+      { term: 'Bordereaux', meaning: 'Standardized premium & claims reporting' },
+      { term: 'HITL', meaning: 'Human-in-the-loop approvals' }
+    ],
+    assumptionsTitle: 'Assumptions & datasets',
+    assumptions: [
+      'Utilization 70% (base case)',
+      'Factors & exposure assumptions preserved in stress tests',
+      'Sample anonymized datasets available',
+      'Full dataset on request'
+    ],
+    reportingTitle: 'Reporting pack',
+    reporting: [
+      'Premium & claims bordereaux',
+      'Exposure / aggregation views',
+      'Referral & exception log',
+      'Audit evidence pack'
+    ]
   }
 }
 
@@ -430,6 +738,11 @@ export default function BciaDeckPage() {
     const slide1 = slide1Labels[typedLang]
     const programStrings = programContent[typedLang]
     const governanceStrings = governanceContent[typedLang]
+    const operatingStrings = operatingContent[typedLang]
+    const reinsuranceStrings = reinsuranceContent[typedLang]
+    const techStrings = techContent[typedLang]
+    const strategicStrings = strategicContent[typedLang]
+    const appendixStrings = appendixContent[typedLang]
     const industryImage = typedLang === 'en' ? LogistikIndustrieEn : LogistikIndustrieDe
     const exposureDe = 12.9e9
     const exposureEea = 133.25e9
@@ -753,33 +1066,250 @@ export default function BciaDeckPage() {
                     ))}
                   </tbody>
                 </table>
+                <div className="bp4-highlight">
+                  {typedLang === 'en'
+                    ? 'No balance sheet risk retained by the MGA'
+                    : 'Kein Bilanzrisiko beim MGA'}
+                </div>
               </div>
               <div className="bp4-panel">
                 <div className="bp4-cap">{governanceStrings.rightTitle}</div>
-                <div className="bp4-diagram">
-                  <svg width="260" height="180" role="img" aria-label={governanceStrings.rightTitle}>
-                    <rect className="bp4-diagram-box" x="10" y="10" width="240" height="160" />
-                    <line className="bp4-diagram-line" x1="30" y1="45" x2="230" y2="45" />
-                    <line className="bp4-diagram-line" x1="30" y1="80" x2="230" y2="80" />
-                    <line className="bp4-diagram-line" x1="30" y1="115" x2="230" y2="115" />
-                    <line className="bp4-diagram-line" x1="30" y1="150" x2="230" y2="150" />
-                    <text className="bp4-diagram-text" x="32" y="38">Sources</text>
-                    <text className="bp4-diagram-text" x="32" y="73">Validation</text>
-                    <text className="bp4-diagram-text" x="32" y="108">Trigger Engine</text>
-                    <text className="bp4-diagram-text" x="32" y="143">Decision Memo (AI)</text>
-                    <text className="bp4-diagram-text" x="32" y="168">Outputs</text>
-                  </svg>
-                  <div className="bp4-diagram-notes">
-                    <p>{governanceStrings.rightStages.sources}</p>
-                    <p>{governanceStrings.rightStages.validation}</p>
-                    <p>{governanceStrings.rightStages.engine}</p>
-                    <p>{governanceStrings.rightStages.memo}</p>
-                    <p>{governanceStrings.rightStages.outputs}</p>
-                  </div>
+                <div className="bp4-list-block">
+                  <ul className="bp4-list">
+                    <li>{governanceStrings.rightStages.sources}</li>
+                    <li>{governanceStrings.rightStages.validation}</li>
+                    <li>{governanceStrings.rightStages.engine}</li>
+                    <li>{governanceStrings.rightStages.memo}</li>
+                    <li>{governanceStrings.rightStages.outputs}</li>
+                  </ul>
                 </div>
               </div>
             </div>
             <div className="bp4-assurance">{governanceStrings.assurance}</div>
+          </div>
+        )
+      },
+      {
+        key: 'operating',
+        node: (
+          <div className="bp5-slide">
+            <div className="bp5-header">
+              <h1>{operatingStrings.title}</h1>
+              <p>{operatingStrings.subline}</p>
+            </div>
+            <div className="bp5-grid">
+              <div className="bp5-panel">
+                <div className="bp5-cap">{operatingStrings.flowTitle}</div>
+                <div className="bp5-flow">
+                  {operatingStrings.flowSteps.map((step, idx) => (
+                    <div key={step} className="bp5-flow-step">
+                      <span>{step}</span>
+                      {idx < operatingStrings.flowSteps.length - 1 && <span className="bp5-flow-arrow">→</span>}
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="bp5-panel">
+                <div className="bp5-cap">{operatingStrings.raciTitle}</div>
+                <table className="bp5-table">
+                  <tbody>
+                    {operatingStrings.raciRows.map((row) => (
+                      <tr key={row.role}>
+                        <td className="bp5-role">{row.role}</td>
+                        <td className="bp5-value">{row.responsibility}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <div className="bp5-panel">
+                <div className="bp5-cap">{operatingStrings.artifactsTitle}</div>
+                <ul className="bp5-list">
+                  {operatingStrings.artifacts.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        )
+      },
+      {
+        key: 'reinsurance',
+        node: (
+          <div className="bp6-slide">
+            <div className="bp6-header">
+              <h1>{reinsuranceStrings.title}</h1>
+              <p>{reinsuranceStrings.subline}</p>
+            </div>
+            <div className="bp6-grid">
+              <div className="bp6-panel">
+                <div className="bp6-cap">{reinsuranceStrings.structureTitle}</div>
+                <div className="bp6-diagram">
+                  <div className="bp6-diagram-row">Insureds / Brokers</div>
+                  <div className="bp6-diagram-arrow">↓</div>
+                  <div className="bp6-diagram-row">MGA / Coverholder</div>
+                  <div className="bp6-diagram-arrow">↓</div>
+                  <div className="bp6-diagram-row">Carrier (primary paper)</div>
+                  <div className="bp6-diagram-arrow">↓</div>
+                  <div className="bp6-diagram-row">Treaty panel (reinsurers)</div>
+                </div>
+                <ul className="bp6-list">
+                  {reinsuranceStrings.structureNotes.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+              <div className="bp6-panel">
+                <div className="bp6-cap">{reinsuranceStrings.controlTitle}</div>
+                <table className="bp6-table">
+                  <tbody>
+                    {reinsuranceStrings.controlRows.map((row) => (
+                      <tr key={row.label}>
+                        <td>{row.label}</td>
+                        <td className="bp6-value">{row.value}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                <div className="bp6-callout">{reinsuranceStrings.callout}</div>
+              </div>
+            </div>
+          </div>
+        )
+      },
+      {
+        key: 'tech',
+        node: (
+          <div className="bp7-slide">
+            <div className="bp7-header">
+              <h1>{techStrings.title}</h1>
+              <p>{techStrings.subline}</p>
+            </div>
+            <div className="bp7-grid">
+              <div className="bp7-panel">
+                <div className="bp7-cap">{techStrings.sourcesTitle}</div>
+                <ul className="bp7-list">
+                  {techStrings.sources.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+              <div className="bp7-panel">
+                <div className="bp7-cap">{techStrings.validationTitle}</div>
+                <ul className="bp7-list">
+                  {techStrings.validation.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+                <svg width="240" height="120" role="img" aria-label="Realtime validation stack">
+                  <rect className="bp7-stack-box" x="20" y="10" width="200" height="24" />
+                  <rect className="bp7-stack-box" x="20" y="46" width="200" height="24" />
+                  <rect className="bp7-stack-box" x="20" y="82" width="200" height="24" />
+                  <text className="bp7-stack-text" x="30" y="26">Ingestion</text>
+                  <text className="bp7-stack-text" x="30" y="62">Validation</text>
+                  <text className="bp7-stack-text" x="30" y="98">Trigger engine</text>
+                </svg>
+              </div>
+              <div className="bp7-panel">
+                <div className="bp7-cap">{techStrings.decisionTitle}</div>
+                <ul className="bp7-list">
+                  {techStrings.decision.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        )
+      },
+      {
+        key: 'strategic',
+        node: (
+          <div className="bp8-slide">
+            <div className="bp8-header">
+              <h1>{strategicStrings.title}</h1>
+              <p>{strategicStrings.subline}</p>
+            </div>
+            <div className="bp8-grid">
+              <div className="bp8-panel">
+                <div className="bp8-cap">{strategicStrings.quadrant.underwriting.title}</div>
+                <ul className="bp8-list">
+                  {strategicStrings.quadrant.underwriting.bullets.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+              <div className="bp8-panel">
+                <div className="bp8-cap">{strategicStrings.quadrant.volatility.title}</div>
+                <ul className="bp8-list">
+                  {strategicStrings.quadrant.volatility.bullets.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+              <div className="bp8-panel">
+                <div className="bp8-cap">{strategicStrings.quadrant.efficiency.title}</div>
+                <ul className="bp8-list">
+                  {strategicStrings.quadrant.efficiency.bullets.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+              <div className="bp8-panel">
+                <div className="bp8-cap">{strategicStrings.quadrant.distribution.title}</div>
+                <ul className="bp8-list">
+                  {strategicStrings.quadrant.distribution.bullets.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            <div className="bp8-strip">
+              {strategicStrings.kpiStrip.map((item) => (
+                <span key={item}>{item}</span>
+              ))}
+            </div>
+          </div>
+        )
+      },
+      {
+        key: 'appendix',
+        node: (
+          <div className="bp9-slide">
+            <div className="bp9-header">
+              <h1>{appendixStrings.title}</h1>
+              <p>{appendixStrings.subline}</p>
+            </div>
+            <div className="bp9-grid">
+              <div className="bp9-panel">
+                <div className="bp9-cap">{appendixStrings.definitionsTitle}</div>
+                <table className="bp9-table">
+                  <tbody>
+                    {appendixStrings.definitions.map((row) => (
+                      <tr key={row.term}>
+                        <td className="bp9-term">{row.term}</td>
+                        <td className="bp9-value">{row.meaning}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <div className="bp9-panel">
+                <div className="bp9-cap">{appendixStrings.assumptionsTitle}</div>
+                <ul className="bp9-list">
+                  {appendixStrings.assumptions.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+                <div className="bp9-cap bp9-cap-secondary">{appendixStrings.reportingTitle}</div>
+                <ul className="bp9-list">
+                  {appendixStrings.reporting.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </div>
         )
       }
