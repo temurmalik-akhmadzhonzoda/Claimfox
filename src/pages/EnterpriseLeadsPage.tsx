@@ -448,10 +448,101 @@ export default function EnterpriseLeadsPage() {
               </div>
             </section>
             <section className="enterprise-page enterprise-section enterprise-market">
-              <div className="enterprise-page-top enterprise-page-full">
-                <div className="enterprise-slide-title">
-                  Portfolio slide
+              <div className="bp4-slide">
+                <header className="bp4-header">
+                  <h1>Risk, Governance &amp; Delegated Authority Framework</h1>
+                  <p>Carrier-aligned controls: bounded authority, auditable decisions, capital and risk remain with insurer &amp; reinsurers.</p>
+                </header>
+                <div className="bp4-grid">
+                  <div className="bp4-column">
+                    <section className="bp4-panel">
+                      <div className="bp4-cap">Delegated Authority</div>
+                      <table className="bp4-table">
+                        <tbody>
+                          <tr><td>Underwriting authority</td><td className="num">Delegated (MGA / Coverholder)</td></tr>
+                          <tr><td>Carrier oversight</td><td className="num">Binding guidelines + referrals</td></tr>
+                          <tr><td>Per-risk limit</td><td className="num">$150,000</td></tr>
+                          <tr><td>Aggregates</td><td className="num">Daily &amp; regional aggregate limits unchanged</td></tr>
+                          <tr><td>Appetite scope</td><td className="num">Fleet / logistics / cargo (as per binder)</td></tr>
+                          <tr><td>Exceptions</td><td className="num">Referral rules for out-of-appetite risks</td></tr>
+                        </tbody>
+                      </table>
+                      <div className="bp4-callout">Authority is bounded by limits, aggregates, appetite and referral triggers.</div>
+                    </section>
+                    <section className="bp4-panel">
+                      <div className="bp4-cap">Product Mechanics</div>
+                      <div className="bp4-micro-grid">
+                        <div className="bp4-micro">
+                          <h3>Delay trigger (days)</h3>
+                          <ul>
+                            <li>Trigger thresholds: 7, 9, 10 days</li>
+                            <li>Payout: 40% at trigger + 3% per additional day up to 100%</li>
+                          </ul>
+                          <svg className="bp4-spark" width="180" height="72" viewBox="0 0 180 72" role="img" aria-label="Delay trigger payout curve">
+                            <polyline points="8,60 60,60 60,42 108,42 108,28 160,28" fill="none" stroke="var(--ix-text-muted)" strokeWidth="2" />
+                            <circle cx="60" cy="42" r="3" fill="var(--ix-primary)" />
+                            <circle cx="108" cy="28" r="3" fill="var(--ix-primary)" />
+                            <text x="8" y="68">7d</text>
+                            <text x="58" y="34">9d</text>
+                            <text x="106" y="22">10d+</text>
+                          </svg>
+                        </div>
+                        <div className="bp4-micro">
+                          <h3>Outage trigger (hours)</h3>
+                          <ul>
+                            <li>Trigger thresholds: 3h, 6h, 9h, 24h</li>
+                            <li>Payout: 40% at trigger + 6% per incremental</li>
+                          </ul>
+                          <svg className="bp4-spark" width="180" height="72" viewBox="0 0 180 72" role="img" aria-label="Outage trigger payout curve">
+                            <polyline points="8,60 44,60 44,44 84,44 84,30 130,30 130,20 168,20" fill="none" stroke="var(--ix-text-muted)" strokeWidth="2" />
+                            <circle cx="44" cy="44" r="3" fill="var(--ix-primary)" />
+                            <circle cx="84" cy="30" r="3" fill="var(--ix-primary)" />
+                            <circle cx="130" cy="20" r="3" fill="var(--ix-primary)" />
+                            <text x="8" y="68">3h</text>
+                            <text x="40" y="38">6h</text>
+                            <text x="80" y="24">9h</text>
+                          </svg>
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                  <div className="bp4-column">
+                    <section className="bp4-panel">
+                      <div className="bp4-cap">Governance</div>
+                      <ul className="bp4-bullets">
+                        <li>Underwriting governance: rules-based pricing, bounded authority, referral escalations</li>
+                        <li>Risk committee: periodic review of portfolio KPIs, thresholds, and moratorium conditions</li>
+                        <li>Policy wording control: versioned wording + change log</li>
+                        <li>Claims governance: structured claims workflow, payout rules deterministic</li>
+                      </ul>
+                      <div className="bp4-highlight">Moratorium provisions for extreme events.</div>
+                    </section>
+                    <section className="bp4-panel">
+                      <div className="bp4-cap">Assurance</div>
+                      <ul className="bp4-bullets">
+                        <li>Risk monitoring: exposure tracking, accumulation views, event flags</li>
+                        <li>Stress testing: scenario analysis performed; exposure assumptions preserved</li>
+                        <li>Data readiness: sample anonymized datasets; full datasets available upon request</li>
+                        <li>Compliance: audit trail for decisions and approvals</li>
+                      </ul>
+                    </section>
+                  </div>
                 </div>
+                <footer className="bp4-footer">
+                  <div className="bp4-footer-rule" aria-hidden="true" />
+                  <div className="bp4-footer-card">
+                    <div className="bp4-cap">Audit &amp; Reporting Pack</div>
+                    <div className="bp4-footer-grid">
+                      <span>Bordereaux (premium, claims, exposure)</span>
+                      <span>Loss ratio &amp; frequency/severity monitoring</span>
+                      <span>Accumulation / aggregation reports</span>
+                      <span>Referral &amp; exception log</span>
+                      <span>Wording &amp; pricing version log</span>
+                      <span>Incident / moratorium actions log</span>
+                    </div>
+                  </div>
+                  <p>Designed for delegated authority environments; reporting cadence and formats aligned to carrier requirements.</p>
+                </footer>
               </div>
             </section>
             <section className="enterprise-page enterprise-section enterprise-market">
