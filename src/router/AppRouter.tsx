@@ -59,7 +59,6 @@ import LandingToolsPage from '@/pages/LandingToolsPage'
 import InternalDocsOverviewPage from '@/pages/InternalDocsOverviewPage'
 import BusinessModelAntaresPage from '@/pages/BusinessModelAntaresPage'
 import MarketOverviewPage from '@/pages/MarketOverviewPage'
-import EnterpriseLeadsPage from '@/pages/EnterpriseLeadsPage'
 import PremiumCorridorPage from '@/pages/PremiumCorridorPage'
 import BciaDeckPage from '@/pages/BciaDeckPage'
 
@@ -127,7 +126,6 @@ export default function AppRouter() {
         <Route path="/business-model-antares" element={<BusinessModelAntaresPage />} />
         <Route path="/business-model-antares-test" element={<BusinessModelAntaresPage />} />
         <Route path="/market-overview-logistics" element={<MarketOverviewPage />} />
-        <Route path="/enterprise-leads-intelligence" element={<EnterpriseLeadsPage />} />
         <Route path="/bcia" element={<BciaDeckPage />} />
         <Route path="/premium-corridor" element={<PremiumCorridorPage />} />
         <Route path="/setup" element={<SetupPage />} />

@@ -2,10 +2,6 @@ import React, { useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import '@/styles/premium-corridor.css'
 
-function buildDocRaptorUrl(route: string, filename: string) {
-  return `/.netlify/functions/pdf?${new URLSearchParams({ route, filename }).toString()}`
-}
-
 function formatMoney(value: number, lang: 'de' | 'en') {
   if (value >= 1e9) {
     const bn = value / 1e9
@@ -105,13 +101,7 @@ export default function PremiumCorridorPage() {
   ), [lang])
 
   function exportPdf() {
-    const route = lang === 'de'
-      ? '/premium-corridor/print/de'
-      : '/premium-corridor/print/en'
-    const filename = lang === 'de'
-      ? 'insurfox-premium-corridor-de.pdf'
-      : 'insurfox-premium-corridor-en.pdf'
-    window.location.href = buildDocRaptorUrl(route, filename)
+    window.print()
   }
 
   const maxEea = exposureEea * highFactor

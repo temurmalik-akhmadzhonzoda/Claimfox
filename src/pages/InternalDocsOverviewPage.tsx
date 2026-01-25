@@ -13,7 +13,6 @@ type RoleItem = {
     | 'businessModelAntares'
     | 'businessModelAntaresTest'
     | 'marketOverviewLogistics'
-    | 'enterpriseLeadIntelligence'
     | 'strategicDeepDive'
     | 'requirementsCatalog'
     | 'whitepaper'
@@ -38,7 +37,6 @@ const PRESENTATION_ITEMS: RoleItem[] = [
   { key: 'businessModelAntares', route: '/business-model-antares' },
   { key: 'businessModelAntaresTest', route: '/business-model-antares-test' },
   { key: 'marketOverviewLogistics', route: '/market-overview-logistics' },
-  { key: 'enterpriseLeadIntelligence', route: '/enterprise-leads-intelligence' },
   { key: 'strategicDeepDive', route: '/governance/strategic-deep-dive' },
   { key: 'requirementsCatalog', route: '/requirements-catalog' },
   { key: 'whitepaper', route: '/ai-whitepaper' },

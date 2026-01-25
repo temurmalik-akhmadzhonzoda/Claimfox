@@ -1,45 +1,126 @@
 import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import { useI18n } from '@/i18n/I18nContext'
+import { enterpriseStrings } from '@/i18n/strings'
+import KarteDeEu from '@/assets/images/karte_de_eu.png'
+import KarteDeEuEn from '@/assets/images/karte_eu_de_englisch.png'
+import LogistikIndustrieDe from '@/assets/images/logistik_industrie_de.png'
+import LogistikIndustrieEn from '@/assets/images/logistik_industrie_en.png'
+import InsurfoxLogo from '@/assets/logos/Insurfox_Logo_colored_dark.png'
 import '@/styles/bcia-deck.css'
 
 type Lang = 'de' | 'en'
 
-type SlideContent = {
+type Slide = {
+  key: string
+  node: React.ReactNode
+}
+
+type CorridorCopy = {
   title: string
-  subline?: string
+  subline: string
+  kpis: {
+    exposureDe: string
+    exposureEea: string
+    corridor: string
+    base: string
+    exposureDeValue: string
+    exposureEeaValue: string
+    corridorValue: string
+    baseValue: string
+  }
+  tableTitle: string
+  tableColumns: string[]
+  marketDe: string
+  marketEea: string
+  assumptionsTitle: string
+  assumptions: string[]
 }
 
-type MarketRow = {
-  region: string
-  market: string
-  definition: string
-  note: string
+const compositionRows = [
+  { label: 'Motor (Kraftfahrt)', value: 'EUR 34.015 bn' },
+  { label: 'Property (Sach)', value: 'EUR 11.306 bn' },
+  { label: 'Liability (Haftpflicht)', value: 'EUR 8.932 bn' },
+  { label: 'Transport', value: 'EUR 2.467 bn' },
+  { label: 'Technical Lines', value: 'EUR 3.044 bn' },
+  { label: 'Cyber', value: 'EUR 0.330 bn' }
+]
+
+const stackRows = [
+  { label: 'Fleet Motor', value: 'EUR 34.015 bn' },
+  { label: 'Cargo', value: 'EUR 2.467 bn' },
+  { label: 'Liability', value: 'EUR 8.932 bn' },
+  { label: 'Property', value: 'EUR 11.306 bn' },
+  { label: 'Technical', value: 'EUR 3.044 bn' },
+  { label: 'Cyber', value: 'EUR 0.330 bn' }
+]
+
+const premiumContent: Record<Lang, CorridorCopy> = {
+  de: {
+    title: 'Premium Corridor from Model-based Exposure',
+    subline: 'Conservative derivation. Exposure != Praemie != Umsatz.',
+    kpis: {
+      exposureDe: 'Lead Exposure DE',
+      exposureEea: 'Lead Exposure EEA',
+      corridor: 'Premium factor corridor',
+      base: 'Base case factor',
+      exposureDeValue: '12,900 Mrd. EUR',
+      exposureEeaValue: '133,250 Mrd. EUR',
+      corridorValue: '2,0 % - 4,0 %',
+      baseValue: '3,0 %'
+    },
+    tableTitle: 'Indicative premium corridor (DE & EEA)',
+    tableColumns: ['Market', 'Low (2.0%)', 'Base (3.0%)', 'High (4.0%)'],
+    marketDe: 'Deutschland',
+    marketEea: 'EEA',
+    assumptionsTitle: 'Assumptions',
+    assumptions: [
+      'Premium factor corridor reflects typical multi-line logistics portfolios.',
+      'Actual premium depends on mix, retention, cycle, deductibles and underwriting.',
+      'This is a sizing corridor, not a revenue forecast.'
+    ]
+  },
+  en: {
+    title: 'Premium corridor from model-based exposure',
+    subline: 'Conservative derivation. Exposure != premium != revenue.',
+    kpis: {
+      exposureDe: 'Lead Exposure DE',
+      exposureEea: 'Lead Exposure EEA',
+      corridor: 'Premium factor corridor',
+      base: 'Base case factor',
+      exposureDeValue: '12,900 Mrd. EUR',
+      exposureEeaValue: '133,250 Mrd. EUR',
+      corridorValue: '2,0 % - 4,0 %',
+      baseValue: '3,0 %'
+    },
+    tableTitle: 'Indicative premium corridor (DE & EEA)',
+    tableColumns: ['Market', 'Low (2.0%)', 'Base (3.0%)', 'High (4.0%)'],
+    marketDe: 'Germany',
+    marketEea: 'EEA',
+    assumptionsTitle: 'Assumptions',
+    assumptions: [
+      'Premium factor corridor reflects typical multi-line logistics portfolios.',
+      'Actual premium depends on mix, retention, cycle, deductibles and underwriting.',
+      'This is a sizing corridor, not a revenue forecast.'
+    ]
+  }
 }
 
-type CorridorRow = {
-  label: string
-  de: string
-  eea: string
-}
-
-function useLang(): Lang {
-  const search = new URLSearchParams(window.location.search)
-  return search.get('lang') === 'en' ? 'en' : 'de'
+const formatMoney = (value: number, lang: Lang) => {
+  if (lang === 'de') {
+    return `${(value / 1e9).toLocaleString('de-DE', { minimumFractionDigits: 3, maximumFractionDigits: 3 })} Mrd. EUR`
+  }
+  return `EUR ${(value / 1e9).toLocaleString('en-GB', { minimumFractionDigits: 3, maximumFractionDigits: 3 })}bn`
 }
 
 export default function BciaDeckPage() {
-  const [lang, setLang] = useState<Lang>(() => useLang())
+  const { lang } = useI18n()
+  const typedLang = (lang === 'en' ? 'en' : 'de') as Lang
   const [headerHeight, setHeaderHeight] = useState(0)
   const [scale, setScale] = useState(1)
   const stageRef = useRef<HTMLDivElement | null>(null)
   const sliderRef = useRef<HTMLDivElement | null>(null)
   const slideRefs = useRef<Array<HTMLDivElement | null>>([])
   const [activeIndex, setActiveIndex] = useState(0)
-
-  useEffect(() => {
-    const onPopState = () => setLang(useLang())
-    window.addEventListener('popstate', onPopState)
-    return () => window.removeEventListener('popstate', onPopState)
-  }, [])
 
   useEffect(() => {
     document.body.classList.add('bcia-deck-route')
@@ -68,8 +149,8 @@ export default function BciaDeckPage() {
       if (!stage) return
       const stageWidth = stage.clientWidth
       const stageHeight = stage.clientHeight
-      const slideWidth = 1400
-      const slideHeight = 990
+      const slideWidth = 1122
+      const slideHeight = 793
       const nextScale = Math.min(stageWidth / slideWidth, stageHeight / slideHeight, 1)
       setScale(Number.isFinite(nextScale) ? nextScale : 1)
     }
@@ -108,197 +189,301 @@ export default function BciaDeckPage() {
     setActiveIndex(nextIndex)
   }
 
-  const slides = useMemo(() => {
-    const shared = {
-      note: lang === 'en' ? 'Exposure != premium != revenue' : 'Exposure != Praemie != Umsatz'
-    }
+  const slides = useMemo<Slide[]>(() => {
+    const copy = enterpriseStrings[typedLang]
+    const mapImage = typedLang === 'en' ? KarteDeEuEn : KarteDeEu
+    const premiumStrings = premiumContent[typedLang]
+    const industryImage = typedLang === 'en' ? LogistikIndustrieEn : LogistikIndustrieDe
+    const exposureDe = 12.9e9
+    const exposureEea = 133.25e9
 
-    const slide1: SlideContent & { kpis: Array<{ label: string; value: string }>; rows: MarketRow[] } = {
-      title: lang === 'en' ? 'German and European Markets' : 'Deutscher und europaeischer Markt',
-      subline: shared.note,
-      kpis: [
-        { label: lang === 'en' ? 'Germany market' : 'Deutschland Markt', value: lang === 'en' ? 'EUR 24 bn' : '24 Mrd. EUR' },
-        { label: lang === 'en' ? 'EEA market' : 'EEA Markt', value: lang === 'en' ? 'EUR 250 bn' : '250 Mrd. EUR' },
-        { label: lang === 'en' ? 'Focus' : 'Fokus', value: lang === 'en' ? 'Fleet & Logistics' : 'Flotte & Logistik' },
-        { label: lang === 'en' ? 'Method' : 'Methode', value: lang === 'en' ? 'Exposure model' : 'Exposure-Modell' }
-      ],
-      rows: [
-        {
-          region: lang === 'en' ? 'Germany (DE)' : 'Deutschland (DE)',
-          market: lang === 'en' ? 'EUR 24 bn' : '24 Mrd. EUR',
-          definition: lang === 'en' ? 'Commercial fleet & logistics exposure' : 'Gewerbliche Flotten- & Logistikexposure',
-          note: lang === 'en' ? 'Model-based anchor' : 'Modellierter Anker'
-        },
-        {
-          region: lang === 'en' ? 'EEA' : 'EEA',
-          market: lang === 'en' ? 'EUR 250 bn' : '250 Mrd. EUR',
-          definition: lang === 'en' ? 'Expanded exposure baseline' : 'Erweitertes Exposure-Baseline',
-          note: lang === 'en' ? 'Mid-case sizing' : 'Mid-Case Sizing'
-        }
-      ]
-    }
-
-    const slide2: SlideContent & {
-      kpis: Array<{ label: string; value: string }>
-      rows: CorridorRow[]
-      assumptions: string
-    } = {
-      title: lang === 'en' ? 'Premium corridor from model-based exposure' : 'Premium Corridor from Model-based Exposure',
-      subline: lang === 'en'
-        ? 'Conservative derivation. Exposure != premium != revenue.'
-        : 'Conservative derivation. Exposure != Praemie != Umsatz.',
-      kpis: [
-        { label: lang === 'en' ? 'Lead exposure DE' : 'Lead Exposure DE', value: lang === 'en' ? 'EUR 12.9 bn' : '12,9 Mrd. EUR' },
-        { label: lang === 'en' ? 'Lead exposure EEA' : 'Lead Exposure EEA', value: lang === 'en' ? 'EUR 133.25 bn' : '133,25 Mrd. EUR' },
-        { label: lang === 'en' ? 'Premium factor corridor' : 'Premium factor corridor', value: '2.0% - 4.0%' },
-        { label: lang === 'en' ? 'Base case factor' : 'Base case factor', value: '3.0%' }
-      ],
-      rows: [
-        { label: lang === 'en' ? 'Low (2.0%)' : 'Low (2,0%)', de: lang === 'en' ? 'EUR 0.258 bn' : '0,258 Mrd. EUR', eea: lang === 'en' ? 'EUR 2.665 bn' : '2,665 Mrd. EUR' },
-        { label: lang === 'en' ? 'Base (3.0%)' : 'Base (3,0%)', de: lang === 'en' ? 'EUR 0.387 bn' : '0,387 Mrd. EUR', eea: lang === 'en' ? 'EUR 3.998 bn' : '3,998 Mrd. EUR' },
-        { label: lang === 'en' ? 'High (4.0%)' : 'High (4,0%)', de: lang === 'en' ? 'EUR 0.516 bn' : '0,516 Mrd. EUR', eea: lang === 'en' ? 'EUR 5.330 bn' : '5,330 Mrd. EUR' }
-      ],
-      assumptions: lang === 'en'
-        ? 'Premium factor corridor reflects typical multi-line logistics portfolios, actual premium depends on mix, retention, cycle, deductibles and underwriting, sizing corridor only.'
-        : 'Premium factor corridor reflects typical multi-line logistics portfolios, actual premium depends on mix, retention, cycle, deductibles and underwriting, sizing corridor only.'
-    }
-
-    const slide3: SlideContent & {
-      gwpRows: Array<{ year: string; value: string }>
-      economicsRows: Array<{ label: string; value: string }>
-      quality: string[]
-      takeaway: string
-      footer: string
-    } = {
-      title: lang === 'en' ? 'Program Economics & Revenue Mechanics (MGA View)' : 'Program Economics & Revenue Mechanics (MGA View)',
-      subline: lang === 'en'
-        ? 'Indicative economics (70% utilization). Carrier-aligned. Exposure != premium != revenue.'
-        : 'Indicative economics (70% utilization). Carrier-aligned. Exposure != Praemie != Umsatz.',
-      gwpRows: [
-        { year: 'Y1', value: '$9.1M' },
-        { year: 'Y2', value: '$19.8M' },
-        { year: 'Y3', value: '$21.1M' },
-        { year: 'Y4', value: '$50.9M' },
-        { year: 'Y5', value: '$102.8M' }
-      ],
-      economicsRows: [
-        { label: lang === 'en' ? 'Base commission' : 'Base commission', value: '29.5%' },
-        { label: lang === 'en' ? 'Performance bonus' : 'Performance bonus', value: 'up to 9.5%' },
-        { label: lang === 'en' ? 'Total commission potential' : 'Total commission potential', value: 'up to 39.0%' },
-        { label: lang === 'en' ? 'Target loss ratio' : 'Target loss ratio', value: '< 27.5%' }
-      ],
-      quality: [
-        lang === 'en' ? 'Enterprise fleet, logistics & cargo insureds' : 'Enterprise fleet, logistics & cargo insureds',
-        lang === 'en' ? 'Tier-1 broker distribution' : 'Tier-1 broker distribution',
-        lang === 'en' ? 'Trigger-based, parametric structures' : 'Trigger-based, parametric structures',
-        lang === 'en' ? 'Per-risk limit: $150,000' : 'Per-risk limit: $150,000',
-        lang === 'en' ? 'Stable frequency / low severity profile' : 'Stable frequency / low severity profile'
-      ],
-      takeaway: lang === 'en'
-        ? 'High-margin MGA economics with controlled downside risk.'
-        : 'High-margin MGA economics with controlled downside risk.',
-      footer: lang === 'en'
-        ? 'Economics are carrier-aligned: underwriting authority is delegated, capital and risk remain with the insurer and reinsurance panel.'
-        : 'Economics are carrier-aligned: underwriting authority is delegated, capital and risk remain with the insurer and reinsurance panel.'
-    }
-
-    const slide4: SlideContent & {
-      leftTitle: string
-      leftBlocks: Array<{ title: string; lines: string[] }>
-      centerTitle: string
-      centerBlocks: Array<{ title: string; lines: string[] }>
-      rightTitle: string
-      rightLines: string[]
-      footer: string
-    } = {
-      title: lang === 'en' ? 'Risk, Governance & Delegated Authority Framework' : 'Risk, Governance & Delegated Authority Framework',
-      subline: lang === 'en'
-        ? 'Deterministic triggers, real-time monitoring and carrier-aligned control structures'
-        : 'Deterministic triggers, real-time monitoring and carrier-aligned control structures',
-      leftTitle: lang === 'en' ? 'Deterministic Risk Triggers' : 'Deterministic Risk Triggers',
-      leftBlocks: [
-        {
-          title: lang === 'en' ? 'Delay triggers' : 'Delay triggers',
-          lines: [
-            lang === 'en'
-              ? 'Shipment delay beyond contractual thresholds (7 / 9 / 10 days)'
-              : 'Shipment delay beyond contractual thresholds (7 / 9 / 10 days)',
-            lang === 'en' ? 'Port congestion or cross-border transit delays' : 'Port congestion or cross-border transit delays',
-            lang === 'en' ? 'Validated by multiple independent data sources' : 'Validated by multiple independent data sources'
-          ]
-        },
-        {
-          title: lang === 'en' ? 'Outage triggers' : 'Outage triggers',
-          lines: [
-            lang === 'en' ? 'Platform outages (3h / 6h / 9h / 24h)' : 'Platform outages (3h / 6h / 9h / 24h)',
-            lang === 'en' ? 'Fleet or operational system unavailability' : 'Fleet or operational system unavailability',
-            lang === 'en' ? 'Continuous telemetry and system monitoring' : 'Continuous telemetry and system monitoring'
-          ]
-        }
-      ],
-      centerTitle: lang === 'en' ? 'Real-Time Monitoring & Governance Layer' : 'Real-Time Monitoring & Governance Layer',
-      centerBlocks: [
-        {
-          title: lang === 'en' ? 'Data aggregation' : 'Data aggregation',
-          lines: [
-            lang === 'en' ? 'Logistics systems, fleet telemetry, transport platforms' : 'Logistics systems, fleet telemetry, transport platforms',
-            lang === 'en' ? 'External system signals' : 'External system signals'
-          ]
-        },
-        {
-          title: lang === 'en' ? 'AI-assisted decision framework' : 'AI-assisted decision framework',
-          lines: [
-            lang === 'en' ? 'Detects trigger conditions' : 'Detects trigger conditions',
-            lang === 'en' ? 'Prepares structured decision templates' : 'Prepares structured decision templates',
-            lang === 'en' ? 'Flags anomalies and edge cases' : 'Flags anomalies and edge cases'
-          ]
-        }
-      ],
-      rightTitle: lang === 'en' ? 'Delegated Authority & Carrier Control' : 'Delegated Authority & Carrier Control',
-      rightLines: [
-        lang === 'en' ? 'Delegated underwriting authority limited to pre-approved terms' : 'Delegated underwriting authority limited to pre-approved terms',
-        lang === 'en' ? 'Carrier retains capital at risk and ultimate risk ownership' : 'Carrier retains capital at risk and ultimate risk ownership',
-        lang === 'en' ? 'Oversight via reporting and governance access' : 'Oversight via reporting and governance access',
-        lang === 'en' ? 'No balance sheet risk at MGA level' : 'No balance sheet risk at MGA level',
-        lang === 'en' ? 'No discretionary claim handling' : 'No discretionary claim handling',
-        lang === 'en' ? 'No deviation from approved trigger logic' : 'No deviation from approved trigger logic'
-      ],
-      footer: lang === 'en'
-        ? 'All triggers, payouts and authority levels are contractually defined and subject to continuous monitoring and audit.'
-        : 'All triggers, payouts and authority levels are contractually defined and subject to continuous monitoring and audit.'
-    }
-
-    return [slide1, slide2, slide3, slide4]
-  }, [lang])
-
-  const updateLang = (next: Lang) => {
-    const params = new URLSearchParams(window.location.search)
-    params.set('lang', next)
-    window.history.replaceState({}, '', `${window.location.pathname}?${params.toString()}`)
-    setLang(next)
-  }
+    return [
+      {
+        key: 'markets',
+        node: (
+          <div className="enterprise-grid-only">
+            <h1>{typedLang === 'en' ? 'German and European Markets' : 'Deutscher und europaeischer Markt'}</h1>
+            <div className="enterprise-grid-3">
+              <div className="enterprise-table-stack">
+                <div className="enterprise-table-card enterprise-table-card-left">
+                  <h3>German Market</h3>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th className="label">Line of Business</th>
+                        <th className="num">Market Volume</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {compositionRows.map((row) => (
+                        <tr key={row.label}>
+                          <td>{row.label}</td>
+                          <td className="num">{row.value}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                <div className="enterprise-table-card enterprise-table-card-left">
+                  <h3>Germany - Logistic / Cargo</h3>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th className="label">Insurance Segment</th>
+                        <th className="num">Market Volume</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {stackRows.map((row) => (
+                        <tr key={row.label}>
+                          <td>{row.label}</td>
+                          <td className="num">{row.value}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div className="enterprise-map-card">
+                <div className="enterprise-map-heading">
+                  <span className="heading-line heading-line-left" aria-hidden="true" />
+                  <div className="heading-text">
+                    <span className="heading-title">AI-IAAS B2B PLATFORM</span>
+                    <span className="heading-subtitle">For Brokers and Insurance Operations</span>
+                    <span className="heading-note">Enterprise-grade. Core-system agnostic.</span>
+                  </div>
+                  <span className="heading-line heading-line-right" aria-hidden="true" />
+                </div>
+                <img src={mapImage} alt={copy.marketImageAlt} />
+              </div>
+              <div className="enterprise-table-stack">
+                <div className="enterprise-table-card">
+                  <h3>EEA Market - GWP (Solvency II)</h3>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th className="label">Line of Business</th>
+                        <th className="num">Market Volume</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr><td>Motor vehicle liability</td><td className="num">EUR 68.511 bn</td></tr>
+                      <tr><td>Other motor</td><td className="num">EUR 57.203 bn</td></tr>
+                      <tr><td>Property (Fire &amp; other damage)</td><td className="num">EUR 101.823 bn</td></tr>
+                      <tr><td>General liability</td><td className="num">EUR 42.442 bn</td></tr>
+                      <tr><td>Medical expense</td><td className="num">EUR 113.123 bn</td></tr>
+                      <tr className="total-row"><td>Total non-life</td><td className="num">EUR 457.220 bn</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div className="enterprise-table-card">
+                  <h3>EEA - Logistic / Cargo</h3>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th className="label">Line of Business</th>
+                        <th className="num">Market Volume</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr><td>Motor</td><td className="num">~EUR 149 bn (36%)</td></tr>
+                      <tr><td>Property</td><td className="num">~EUR 113 bn (27%)</td></tr>
+                      <tr><td>General liability</td><td className="num">~EUR 50 bn (12%)</td></tr>
+                      <tr><td>Other</td><td className="num">~EUR 105 bn (25%)</td></tr>
+                      <tr className="total-row"><td>Total P&amp;C</td><td className="num">EUR 419 bn (100%)</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <p className="enterprise-footnote">{copy.cover.summary}</p>
+          </div>
+        )
+      },
+      {
+        key: 'premium',
+        node: (
+          <div className="enterprise-premium-slide">
+            <div className="enterprise-premium-header">
+              <h1>{premiumStrings.title}</h1>
+              <p>{premiumStrings.subline}</p>
+            </div>
+            <div className="enterprise-premium-content">
+              <div className="enterprise-premium-kpis">
+                <div className="enterprise-premium-card"><span>{premiumStrings.kpis.exposureDe}</span><strong>{premiumStrings.kpis.exposureDeValue}</strong></div>
+                <div className="enterprise-premium-card"><span>{premiumStrings.kpis.exposureEea}</span><strong>{premiumStrings.kpis.exposureEeaValue}</strong></div>
+                <div className="enterprise-premium-card"><span>{premiumStrings.kpis.corridor}</span><strong>{premiumStrings.kpis.corridorValue}</strong></div>
+                <div className="enterprise-premium-card"><span>{premiumStrings.kpis.base}</span><strong>{premiumStrings.kpis.baseValue}</strong></div>
+              </div>
+              <div className="enterprise-premium-stack">
+                <div className="enterprise-table-card enterprise-premium-table">
+                  <h3>{premiumStrings.tableTitle}</h3>
+                  <table>
+                    <thead>
+                      <tr>
+                        {premiumStrings.tableColumns.map((col) => (
+                          <th key={col}>{col}</th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>{premiumStrings.marketDe}</td>
+                        <td className="num">{formatMoney(exposureDe * 0.02, typedLang)}</td>
+                        <td className="num">{formatMoney(exposureDe * 0.03, typedLang)}</td>
+                        <td className="num">{formatMoney(exposureDe * 0.04, typedLang)}</td>
+                      </tr>
+                      <tr>
+                        <td>{premiumStrings.marketEea}</td>
+                        <td className="num">{formatMoney(exposureEea * 0.02, typedLang)}</td>
+                        <td className="num">{formatMoney(exposureEea * 0.03, typedLang)}</td>
+                        <td className="num">{formatMoney(exposureEea * 0.04, typedLang)}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div className="enterprise-premium-image">
+                  <h3 className="enterprise-premium-image-title">Partners and verified leads</h3>
+                  <img src={industryImage} alt="Partners and verified leads" />
+                </div>
+              </div>
+              <div className="enterprise-premium-charts">
+                <div className="enterprise-table-card enterprise-premium-chart">
+                  <h3>Germany - Indicative premium corridor</h3>
+                  <svg width="260" height="180" role="img" aria-label="Germany premium corridor">
+                    <line className="axis" x1="20" y1="120" x2="240" y2="120" />
+                    <rect className="bar bar-low" x="40" y="85" width="28" height="35" />
+                    <rect className="bar bar-base" x="116" y="70" width="28" height="50" />
+                    <rect className="bar bar-high" x="192" y="55" width="28" height="65" />
+                    <text className="bar-value" x="54" y="78" textAnchor="middle">258 Mio EUR</text>
+                    <text className="bar-value" x="130" y="63" textAnchor="middle">387 Mio EUR</text>
+                    <text className="bar-value" x="206" y="48" textAnchor="middle">516 Mio EUR</text>
+                    <g className="legend">
+                      <line className="legend-line bar-low" x1="20" y1="155" x2="36" y2="155" />
+                      <text className="legend-text" x="42" y="158">Low (2.0%)</text>
+                      <line className="legend-line bar-base" x1="118" y1="155" x2="134" y2="155" />
+                      <text className="legend-text" x="140" y="158">Base (3.0%)</text>
+                      <line className="legend-line bar-high" x1="206" y1="155" x2="222" y2="155" />
+                      <text className="legend-text" x="228" y="158">High (4.0%)</text>
+                    </g>
+                  </svg>
+                </div>
+                <div className="enterprise-table-card enterprise-premium-chart">
+                  <h3>EEA - Indicative premium corridor</h3>
+                  <svg width="260" height="180" role="img" aria-label="EEA premium corridor">
+                    <line className="axis" x1="20" y1="120" x2="240" y2="120" />
+                    <rect className="bar bar-low" x="40" y="70" width="28" height="50" />
+                    <rect className="bar bar-base" x="116" y="50" width="28" height="70" />
+                    <rect className="bar bar-high" x="192" y="35" width="28" height="85" />
+                    <text className="bar-value" x="54" y="62" textAnchor="middle">2.7 Mrd EUR</text>
+                    <text className="bar-value" x="130" y="42" textAnchor="middle">4.0 Mrd EUR</text>
+                    <text className="bar-value" x="206" y="27" textAnchor="middle">5.3 Mrd EUR</text>
+                    <g className="legend">
+                      <line className="legend-line bar-low" x1="20" y1="155" x2="36" y2="155" />
+                      <text className="legend-text" x="42" y="158">Low (2.0%)</text>
+                      <line className="legend-line bar-base" x1="118" y1="155" x2="134" y2="155" />
+                      <text className="legend-text" x="140" y="158">Base (3.0%)</text>
+                      <line className="legend-line bar-high" x1="206" y1="155" x2="222" y2="155" />
+                      <text className="legend-text" x="228" y="158">High (4.0%)</text>
+                    </g>
+                  </svg>
+                </div>
+                <div className="enterprise-table-card enterprise-premium-logo-card">
+                  <img src={InsurfoxLogo} alt="Insurfox" />
+                </div>
+              </div>
+            </div>
+            <div className="enterprise-premium-assumptions">
+              <h2>{premiumStrings.assumptionsTitle}</h2>
+              <ul>
+                {premiumStrings.assumptions.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        )
+      },
+      {
+        key: 'program',
+        node: (
+          <div className="bp3-slide">
+            <div className="bp3-header">
+              <h1>Program Economics &amp; Revenue Mechanics (MGA View)</h1>
+              <p>Indicative economics (70% utilization). Carrier-aligned. Exposure != premium != revenue.</p>
+            </div>
+            <div className="bp3-grid">
+              <div className="bp3-panel">
+                <div className="bp3-cap">Projected Gross Written Premium</div>
+                <div className="bp3-subtitle">(70% utilization, conservative base case)</div>
+                <table className="bp3-table">
+                  <thead>
+                    <tr>
+                      <th>Year</th>
+                      <th className="num">GWP (USD)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Y1</td><td className="num">$9.1M</td></tr>
+                    <tr><td>Y2</td><td className="num">$19.8M</td></tr>
+                    <tr><td>Y3</td><td className="num">$21.1M</td></tr>
+                    <tr><td>Y4</td><td className="num">$50.9M</td></tr>
+                    <tr><td className="bp3-strong">Y5</td><td className="num bp3-strong">$102.8M</td></tr>
+                  </tbody>
+                </table>
+                <div className="bp3-notes">
+                  <p>Based on verified enterprise leads</p>
+                  <p>Broker-led distribution</p>
+                  <p>Regional expansion without change to underwriting limits</p>
+                </div>
+              </div>
+              <div className="bp3-panel">
+                <div className="bp3-cap">MGA Economics</div>
+                <table className="bp3-table">
+                  <tbody>
+                    <tr><td>Base commission</td><td className="num">29.5%</td></tr>
+                    <tr><td>Performance bonus</td><td className="num">up to 9.5%</td></tr>
+                    <tr><td className="bp3-strong">Total commission potential</td><td className="num bp3-strong">up to 39.0%</td></tr>
+                    <tr><td className="bp3-strong">Target loss ratio</td><td className="num bp3-strong">&lt; 27.5%</td></tr>
+                  </tbody>
+                </table>
+                <ul className="bp3-bullets">
+                  <li>Capital-light MGA model</li>
+                  <li>No balance sheet risk retained</li>
+                  <li>Incentives aligned with portfolio performance</li>
+                  <li>Linear scalability with premium growth</li>
+                </ul>
+              </div>
+              <div className="bp3-panel">
+                <div className="bp3-cap">Portfolio Quality Signals</div>
+                <ul className="bp3-bullets">
+                  <li>Enterprise fleet, logistics &amp; cargo insureds</li>
+                  <li>Tier-1 broker distribution</li>
+                  <li>Trigger-based, parametric structures</li>
+                  <li>Per-risk limit: $150,000</li>
+                  <li>Stable frequency / low severity profile</li>
+                </ul>
+                <div className="bp3-callout">High-margin MGA economics with controlled downside risk.</div>
+              </div>
+            </div>
+            <div className="bp3-footer">
+              <div className="bp3-footer-rule" aria-hidden="true" />
+              <div className="bp3-footer-text">
+                <span>Economics are carrier-aligned: underwriting authority is delegated,</span>
+                <span>capital and risk remain with the insurer and reinsurance panel.</span>
+              </div>
+            </div>
+          </div>
+        )
+      }
+    ]
+  }, [typedLang])
 
   return (
-    <div className="bcia-page" style={{ '--bcia-header-h': `${headerHeight}px` } as React.CSSProperties}>
+    <section className="bcia-deck" style={{ '--bcia-header-h': `${headerHeight}px` } as React.CSSProperties}>
       <div className="bcia-toolbar">
-        <div className="bcia-language">
-          <button
-            type="button"
-            className={lang === 'de' ? 'is-active' : ''}
-            onClick={() => updateLang('de')}
-          >
-            DE
-          </button>
-          <button
-            type="button"
-            className={lang === 'en' ? 'is-active' : ''}
-            onClick={() => updateLang('en')}
-          >
-            EN
-          </button>
-        </div>
         <button type="button" className="bcia-print" onClick={() => window.print()}>
-          {lang === 'en' ? 'Print' : 'Drucken'}
+          {typedLang === 'en' ? 'Print' : 'Drucken'}
         </button>
       </div>
       <div className="bcia-stage" ref={stageRef}>
@@ -306,256 +491,23 @@ export default function BciaDeckPage() {
           type="button"
           className="bcia-arrow bcia-arrow-left"
           onClick={() => goToSlide(activeIndex - 1)}
-          aria-label={lang === 'en' ? 'Previous slide' : 'Vorherige Folie'}
+          aria-label={typedLang === 'en' ? 'Previous slide' : 'Vorherige Folie'}
         >
           &lt;
         </button>
         <div className="bcia-slider" ref={sliderRef}>
           {slides.map((slide, index) => (
             <div
-              key={slide.title}
+              key={slide.key}
               className="bcia-slide"
               ref={(node) => {
                 slideRefs.current[index] = node
               }}
             >
-              <div
-                className="bcia-slideCanvas"
-                style={{ transform: `scale(${scale})` }}
-              >
-                {index === 0 && (
-                  <section className="bcia-slideContent">
-                    <header className="bcia-slideHeader">
-                      <h1>{slide.title}</h1>
-                      <p>{slide.subline}</p>
-                    </header>
-                    <div className="bcia-kpiRow">
-                      {(slide as typeof slides[0]).kpis.map((kpi) => (
-                        <div key={kpi.label} className="bcia-kpiCard">
-                          <span>{kpi.label}</span>
-                          <strong>{kpi.value}</strong>
-                        </div>
-                      ))}
-                    </div>
-                    <div className="bcia-tableCard">
-                      <table>
-                        <thead>
-                          <tr>
-                            <th>{lang === 'en' ? 'Region' : 'Region'}</th>
-                            <th>{lang === 'en' ? 'Market (Mid-case)' : 'Markt (Mid-Case)'}</th>
-                            <th>{lang === 'en' ? 'Definition' : 'Definition'}</th>
-                            <th>{lang === 'en' ? 'Note' : 'Hinweis'}</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {(slide as typeof slides[0]).rows.map((row) => (
-                            <tr key={row.region}>
-                              <td>{row.region}</td>
-                              <td className="is-num">{row.market}</td>
-                              <td>{row.definition}</td>
-                              <td>{row.note}</td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
-                  </section>
-                )}
-                {index === 1 && (
-                  <section className="bcia-slideContent">
-                    <header className="bcia-slideHeader">
-                      <h1>{slide.title}</h1>
-                      <p>{slide.subline}</p>
-                    </header>
-                    <div className="bcia-grid-three">
-                      <div className="bcia-stack">
-                        {(slide as typeof slides[1]).kpis.map((kpi) => (
-                          <div key={kpi.label} className="bcia-kpiCard">
-                            <span>{kpi.label}</span>
-                            <strong>{kpi.value}</strong>
-                          </div>
-                        ))}
-                      </div>
-                      <div className="bcia-tableCard">
-                        <table>
-                          <thead>
-                            <tr>
-                              <th>{lang === 'en' ? 'Scenario' : 'Szenario'}</th>
-                              <th>{lang === 'en' ? 'Germany' : 'Deutschland'}</th>
-                              <th>{lang === 'en' ? 'EEA' : 'EEA'}</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {(slide as typeof slides[1]).rows.map((row) => (
-                              <tr key={row.label}>
-                                <td>{row.label}</td>
-                                <td className="is-num">{row.de}</td>
-                                <td className="is-num">{row.eea}</td>
-                              </tr>
-                            ))}
-                          </tbody>
-                        </table>
-                      </div>
-                      <div className="bcia-chartStack">
-                        <div className="bcia-chartCard">
-                          <h3>{lang === 'en' ? 'Germany - Indicative premium corridor' : 'Germany - Indicative premium corridor'}</h3>
-                          <svg width="300" height="180" role="img" aria-label="Germany premium corridor">
-                            <line x1="24" y1="150" x2="276" y2="150" stroke="var(--muted)" strokeWidth="1" />
-                            <rect x="45" y="88" width="40" height="62" fill="var(--insurfox-orange)" opacity="0.45" />
-                            <rect x="120" y="64" width="40" height="86" fill="var(--insurfox-orange)" opacity="0.75" />
-                            <rect x="195" y="40" width="40" height="110" fill="var(--insurfox-orange)" />
-                            <text x="65" y="78" textAnchor="middle" fontSize="11" fill="var(--text)">258</text>
-                            <text x="140" y="54" textAnchor="middle" fontSize="11" fill="var(--text)">387</text>
-                            <text x="215" y="30" textAnchor="middle" fontSize="11" fill="var(--text)">516</text>
-                            <text x="65" y="168" textAnchor="middle" fontSize="10" fill="var(--muted)">Low</text>
-                            <text x="140" y="168" textAnchor="middle" fontSize="10" fill="var(--muted)">Base</text>
-                            <text x="215" y="168" textAnchor="middle" fontSize="10" fill="var(--muted)">High</text>
-                          </svg>
-                          <div className="bcia-legend">
-                            <span><span className="swatch low"></span>Low</span>
-                            <span><span className="swatch base"></span>Base</span>
-                            <span><span className="swatch high"></span>High</span>
-                          </div>
-                        </div>
-                        <div className="bcia-chartCard">
-                          <h3>{lang === 'en' ? 'EEA - Indicative premium corridor' : 'EEA - Indicative premium corridor'}</h3>
-                          <svg width="300" height="180" role="img" aria-label="EEA premium corridor">
-                            <line x1="24" y1="150" x2="276" y2="150" stroke="var(--muted)" strokeWidth="1" />
-                            <rect x="45" y="100" width="40" height="50" fill="var(--insurfox-orange)" opacity="0.45" />
-                            <rect x="120" y="72" width="40" height="78" fill="var(--insurfox-orange)" opacity="0.75" />
-                            <rect x="195" y="40" width="40" height="110" fill="var(--insurfox-orange)" />
-                            <text x="65" y="90" textAnchor="middle" fontSize="11" fill="var(--text)">2.7</text>
-                            <text x="140" y="62" textAnchor="middle" fontSize="11" fill="var(--text)">4.0</text>
-                            <text x="215" y="30" textAnchor="middle" fontSize="11" fill="var(--text)">5.3</text>
-                            <text x="65" y="168" textAnchor="middle" fontSize="10" fill="var(--muted)">Low</text>
-                            <text x="140" y="168" textAnchor="middle" fontSize="10" fill="var(--muted)">Base</text>
-                            <text x="215" y="168" textAnchor="middle" fontSize="10" fill="var(--muted)">High</text>
-                          </svg>
-                          <div className="bcia-legend">
-                            <span><span className="swatch low"></span>Low</span>
-                            <span><span className="swatch base"></span>Base</span>
-                            <span><span className="swatch high"></span>High</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <p className="bcia-assumptions">{(slide as typeof slides[1]).assumptions}</p>
-                  </section>
-                )}
-                {index === 2 && (
-                  <section className="bcia-slideContent">
-                    <header className="bcia-slideHeader">
-                      <h1>{slide.title}</h1>
-                      <p>{slide.subline}</p>
-                    </header>
-                    <div className="bcia-grid-three">
-                      <div className="bcia-tableCard">
-                        <h3>{lang === 'en' ? 'Projected Gross Written Premium' : 'Projected Gross Written Premium'}</h3>
-                        <p className="bcia-muted">(70% utilization, conservative base case)</p>
-                        <table>
-                          <thead>
-                            <tr>
-                              <th>Year</th>
-                              <th className="is-num">GWP (USD)</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {(slide as typeof slides[2]).gwpRows.map((row) => (
-                              <tr key={row.year}>
-                                <td>{row.year}</td>
-                                <td className="is-num">{row.value}</td>
-                              </tr>
-                            ))}
-                          </tbody>
-                        </table>
-                        <p className="bcia-muted">Based on verified enterprise leads, broker-led distribution, regional expansion without change to underwriting limits</p>
-                      </div>
-                      <div className="bcia-tableCard">
-                        <h3>{lang === 'en' ? 'MGA Economics' : 'MGA Economics'}</h3>
-                        <table>
-                          <tbody>
-                            {(slide as typeof slides[2]).economicsRows.map((row) => (
-                              <tr key={row.label}>
-                                <td>{row.label}</td>
-                                <td className="is-num">{row.value}</td>
-                              </tr>
-                            ))}
-                          </tbody>
-                        </table>
-                        <ul className="bcia-list">
-                          <li>Capital-light MGA model</li>
-                          <li>No balance sheet risk retained</li>
-                          <li>Incentives aligned with portfolio performance</li>
-                          <li>Linear scalability with premium growth</li>
-                        </ul>
-                      </div>
-                      <div className="bcia-tableCard">
-                        <h3>{lang === 'en' ? 'Portfolio Quality Signals' : 'Portfolio Quality Signals'}</h3>
-                        <ul className="bcia-list">
-                          {(slide as typeof slides[2]).quality.map((item) => (
-                            <li key={item}>{item}</li>
-                          ))}
-                        </ul>
-                        <div className="bcia-callout">
-                          {(slide as typeof slides[2]).takeaway}
-                        </div>
-                      </div>
-                    </div>
-                    <div className="bcia-footer">
-                      {(slide as typeof slides[2]).footer}
-                    </div>
-                  </section>
-                )}
-                {index === 3 && (
-                  <section className="bcia-slideContent">
-                    <header className="bcia-slideHeader">
-                      <h1>{slide.title}</h1>
-                      <p>{slide.subline}</p>
-                    </header>
-                    <div className="bcia-grid-three">
-                      <div className="bcia-tableCard">
-                        <h3>{(slide as typeof slides[3]).leftTitle}</h3>
-                        {(slide as typeof slides[3]).leftBlocks.map((block) => (
-                          <div key={block.title} className="bcia-block">
-                            <span className="bcia-blockTitle">{block.title}</span>
-                            <ul className="bcia-list">
-                              {block.lines.map((line) => (
-                                <li key={line}>{line}</li>
-                              ))}
-                            </ul>
-                          </div>
-                        ))}
-                        <p className="bcia-muted">Triggers are binary, objective and non-discretionary.</p>
-                      </div>
-                      <div className="bcia-tableCard">
-                        <h3>{(slide as typeof slides[3]).centerTitle}</h3>
-                        {(slide as typeof slides[3]).centerBlocks.map((block) => (
-                          <div key={block.title} className="bcia-block">
-                            <span className="bcia-blockTitle">{block.title}</span>
-                            <ul className="bcia-list">
-                              {block.lines.map((line) => (
-                                <li key={line}>{line}</li>
-                              ))}
-                            </ul>
-                          </div>
-                        ))}
-                        <div className="bcia-callout">Human-in-the-loop governance with full audit trail.</div>
-                      </div>
-                      <div className="bcia-tableCard">
-                        <h3>{(slide as typeof slides[3]).rightTitle}</h3>
-                        <ul className="bcia-list">
-                          {(slide as typeof slides[3]).rightLines.map((line) => (
-                            <li key={line}>{line}</li>
-                          ))}
-                        </ul>
-                        <div className="bcia-callout">Carrier-aligned governance with controlled downside and full transparency.</div>
-                      </div>
-                    </div>
-                    <div className="bcia-footer">
-                      {(slide as typeof slides[3]).footer}
-                    </div>
-                  </section>
-                )}
+              <div className="bcia-canvas" style={{ transform: `scale(${scale})` }}>
+                <div className="bcia-page">
+                  {slide.node}
+                </div>
               </div>
             </div>
           ))}
@@ -564,11 +516,11 @@ export default function BciaDeckPage() {
           type="button"
           className="bcia-arrow bcia-arrow-right"
           onClick={() => goToSlide(activeIndex + 1)}
-          aria-label={lang === 'en' ? 'Next slide' : 'Naechste Folie'}
+          aria-label={typedLang === 'en' ? 'Next slide' : 'Naechste Folie'}
         >
           &gt;
         </button>
       </div>
-    </div>
+    </section>
   )
 }

@@ -1,31 +1,6 @@
 [build]
   command = "npm run build"
   publish = "dist"
-  functions = "netlify/functions"
-
-[functions]
-  directory = "netlify/functions"
-  node_bundler = "esbuild"
-
-[[redirects]]
-  from = "/enterprise-leads-intelligence/print/de"
-  to = "/enterprise-leads-print.de.html"
-  status = 200
-
-[[redirects]]
-  from = "/enterprise-leads-intelligence/print/en"
-  to = "/enterprise-leads-print.en.html"
-  status = 200
-
-[[redirects]]
-  from = "/premium-corridor/print/de"
-  to = "/premium-corridor-print.de.html"
-  status = 200
-
-[[redirects]]
-  from = "/premium-corridor/print/en"
-  to = "/premium-corridor-print.en.html"
-  status = 200
 
 [[redirects]]
   from = "/*"
