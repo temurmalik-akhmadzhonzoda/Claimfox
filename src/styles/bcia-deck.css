@@ -43,16 +43,22 @@
 .bcia-slider {
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
   position: relative;
   max-width: 100%;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.bcia-slider::-webkit-scrollbar {
+  display: none;
 }
 
 .bcia-track {
   display: flex;
   width: 100%;
   height: 100%;
-  transition: transform 0.45s ease;
 }
 
 .bcia-slide {
@@ -60,6 +66,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  scroll-snap-align: start;
 }
 
 .bcia-canvas {
@@ -100,6 +107,18 @@
 
 body.bcia-deck-route {
   overflow: hidden;
+}
+
+.printDeck {
+  display: none;
+}
+
+.bcia-index {
+  position: absolute;
+  bottom: 8px;
+  right: 16px;
+  font-size: 0.7rem;
+  color: var(--ix-text-muted);
 }
 
 /* Slide 1 styles */
@@ -1273,7 +1292,7 @@ body.bcia-deck-route {
 @media print {
   @page {
     size: A4 landscape;
-    margin: 0;
+    margin: 10mm;
   }
 
   html,
@@ -1291,7 +1310,9 @@ body.bcia-deck-route {
 
   [data-app-header="true"],
   .bcia-toolbar,
-  .bcia-arrow {
+  .bcia-arrow,
+  .bcia-index,
+  .screenDeck {
     display: none !important;
   }
 
@@ -1301,46 +1322,36 @@ body.bcia-deck-route {
     display: block;
   }
 
-  .bcia-stage,
-  .bcia-slider {
-    height: auto;
-    overflow: visible;
+  .printDeck {
+    display: block !important;
   }
 
-  .bcia-track {
-    transform: none !important;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .bcia-slide {
+  .printSlide {
     width: 297mm;
     height: 210mm;
-    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
     break-inside: avoid;
     break-after: page;
     page-break-after: always;
   }
 
-  .bcia-slide:last-child {
+  .printSlide:last-child {
     break-after: auto;
     page-break-after: auto;
   }
 
-  .bcia-canvas,
-  .bcia-page {
-    width: 297mm;
-    height: 210mm;
-    transform: none !important;
-  }
-
-  .bcia-page {
-    padding: 8mm;
+  .printSlideInner {
+    width: 277mm;
+    height: 190mm;
+    display: flex;
+    flex-direction: column;
   }
 }
 
 @page {
   size: A4 landscape;
-  margin: 0;
+  margin: 10mm;
 }

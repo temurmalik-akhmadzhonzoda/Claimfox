@@ -638,8 +638,11 @@ export default function BciaDeckPage() {
   const [headerHeight, setHeaderHeight] = useState(0)
   const [scale, setScale] = useState(1)
   const stageRef = useRef<HTMLDivElement | null>(null)
+  const viewportRef = useRef<HTMLDivElement | null>(null)
   const slideRefs = useRef<Array<HTMLDivElement | null>>([])
   const [activeIndex, setActiveIndex] = useState(0)
+  const scrollRaf = useRef<number | null>(null)
+  const isProgrammatic = useRef(false)
 
   useEffect(() => {
     document.body.classList.add('bcia-deck-route')
@@ -1280,12 +1283,41 @@ export default function BciaDeckPage() {
 
   const totalSlides = slides.length
 
-  const goToSlide = useCallback((index: number) => {
-    setActiveIndex((current) => {
-      const nextIndex = Math.max(0, Math.min(index, totalSlides - 1))
-      return nextIndex === current ? current : nextIndex
-    })
+  const scrollToIndex = useCallback((index: number) => {
+    const nextIndex = Math.max(0, Math.min(index, totalSlides - 1))
+    const target = slideRefs.current[nextIndex]
+    const viewport = viewportRef.current
+    if (!viewport || !target) {
+      setActiveIndex(nextIndex)
+      return
+    }
+    isProgrammatic.current = true
+    target.scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' })
+    window.setTimeout(() => {
+      isProgrammatic.current = false
+      setActiveIndex(nextIndex)
+    }, 350)
   }, [totalSlides])
+
+  const goToSlide = useCallback((index: number) => {
+    scrollToIndex(index)
+  }, [scrollToIndex])
+
+  useEffect(() => {
+    const viewport = viewportRef.current
+    if (!viewport) return
+    const onScroll = () => {
+      if (scrollRaf.current) return
+      scrollRaf.current = window.requestAnimationFrame(() => {
+        scrollRaf.current = null
+        if (isProgrammatic.current) return
+        const nextIndex = Math.round(viewport.scrollLeft / viewport.clientWidth)
+        setActiveIndex((current) => (current === nextIndex ? current : nextIndex))
+      })
+    }
+    viewport.addEventListener('scroll', onScroll, { passive: true })
+    return () => viewport.removeEventListener('scroll', onScroll)
+  }, [])
 
   return (
     <section className="bcia-deck" style={{ '--bcia-header-h': `${headerHeight}px` } as React.CSSProperties}>
@@ -1300,7 +1332,7 @@ export default function BciaDeckPage() {
           {typedLang === 'en' ? 'Print' : 'Drucken'}
         </button>
       </div>
-      <div className="bcia-stage" ref={stageRef}>
+      <div className="bcia-stage screenDeck" ref={stageRef}>
         <button
           type="button"
           className="bcia-arrow bcia-arrow-left"
@@ -1309,22 +1341,12 @@ export default function BciaDeckPage() {
             event.stopPropagation()
             goToSlide(activeIndex - 1)
           }}
-          onMouseDown={(event) => {
-            event.preventDefault()
-            event.stopPropagation()
-            goToSlide(activeIndex - 1)
-          }}
-          onTouchStart={(event) => {
-            event.preventDefault()
-            event.stopPropagation()
-            goToSlide(activeIndex - 1)
-          }}
           aria-label={typedLang === 'en' ? 'Previous slide' : 'Vorherige Folie'}
         >
           &lt;
         </button>
-        <div className="bcia-slider">
-          <div className="bcia-track" style={{ transform: `translateX(-${activeIndex * 100}%)` }}>
+        <div className="bcia-slider" ref={viewportRef}>
+          <div className="bcia-track">
             {slides.map((slide, index) => (
               <div
                 key={slide.key}
@@ -1350,20 +1372,20 @@ export default function BciaDeckPage() {
             event.stopPropagation()
             goToSlide(activeIndex + 1)
           }}
-          onMouseDown={(event) => {
-            event.preventDefault()
-            event.stopPropagation()
-            goToSlide(activeIndex + 1)
-          }}
-          onTouchStart={(event) => {
-            event.preventDefault()
-            event.stopPropagation()
-            goToSlide(activeIndex + 1)
-          }}
           aria-label={typedLang === 'en' ? 'Next slide' : 'Naechste Folie'}
         >
           &gt;
         </button>
+        <div className="bcia-index">{activeIndex + 1} / {slides.length}</div>
+      </div>
+      <div className="printDeck">
+        {slides.map((slide) => (
+          <div key={slide.key} className="printSlide">
+            <div className="printSlideInner">
+              {slide.node}
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   )
