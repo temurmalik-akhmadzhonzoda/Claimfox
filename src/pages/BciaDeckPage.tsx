@@ -36,6 +36,37 @@ type CorridorCopy = {
   assumptions: string[]
 }
 
+type Slide1Labels = {
+  title: string
+  leftTitle: string
+  leftSubtitle: string
+  rightTitle: string
+  rightSubtitle: string
+  lineOfBusiness: string
+  insuranceSegment: string
+  marketVolume: string
+  headingTitle: string
+  headingSubtitle: string
+  headingNote: string
+}
+
+type ProgramCopy = {
+  title: string
+  subline: string
+  gwpTitle: string
+  gwpSubtitle: string
+  yearLabel: string
+  gwpLabel: string
+  gwpNotes: string[]
+  mgaTitle: string
+  mgaRows: { label: string; value: string; strong?: boolean }[]
+  mgaBullets: string[]
+  qualityTitle: string
+  qualityBullets: string[]
+  callout: string
+  footer: string[]
+}
+
 const compositionRows = [
   { label: 'Motor (Kraftfahrt)', value: 'EUR 34.015 bn' },
   { label: 'Property (Sach)', value: 'EUR 11.306 bn' },
@@ -56,32 +87,32 @@ const stackRows = [
 
 const premiumContent: Record<Lang, CorridorCopy> = {
   de: {
-    title: 'Premium Corridor from Model-based Exposure',
-    subline: 'Conservative derivation. Exposure != Praemie != Umsatz.',
+    title: 'Prämienkorridor aus modellbasiertem Exposure',
+    subline: 'Konservative Ableitung. Exposure ≠ Prämie ≠ Umsatz.',
     kpis: {
-      exposureDe: 'Lead Exposure DE',
-      exposureEea: 'Lead Exposure EEA',
-      corridor: 'Premium factor corridor',
-      base: 'Base case factor',
+      exposureDe: 'Lead-Exposure DE',
+      exposureEea: 'Lead-Exposure EEA',
+      corridor: 'Prämienfaktor-Korridor',
+      base: 'Basisfaktor',
       exposureDeValue: '12,900 Mrd. EUR',
       exposureEeaValue: '133,250 Mrd. EUR',
-      corridorValue: '2,0 % - 4,0 %',
+      corridorValue: '2,0 % – 4,0 %',
       baseValue: '3,0 %'
     },
-    tableTitle: 'Indicative premium corridor (DE & EEA)',
-    tableColumns: ['Market', 'Low (2.0%)', 'Base (3.0%)', 'High (4.0%)'],
+    tableTitle: 'Indikativer Prämienkorridor (DE & EEA)',
+    tableColumns: ['Markt', 'Niedrig (2,0%)', 'Basis (3,0%)', 'Hoch (4,0%)'],
     marketDe: 'Deutschland',
     marketEea: 'EEA',
-    assumptionsTitle: 'Assumptions',
+    assumptionsTitle: 'Annahmen',
     assumptions: [
-      'Premium factor corridor reflects typical multi-line logistics portfolios.',
-      'Actual premium depends on mix, retention, cycle, deductibles and underwriting.',
-      'This is a sizing corridor, not a revenue forecast.'
+      'Prämienfaktor-Korridor basiert auf typischen Multi-Line-Logistikportfolios.',
+      'Tatsächliche Prämien hängen von Mix, Retention, Zyklus, Selbstbehalten und Underwriting ab.',
+      'Dies ist ein Größenkorridor, keine Umsatzprognose.'
     ]
   },
   en: {
     title: 'Premium corridor from model-based exposure',
-    subline: 'Conservative derivation. Exposure != premium != revenue.',
+    subline: 'Conservative derivation. Exposure ≠ premium ≠ revenue.',
     kpis: {
       exposureDe: 'Lead Exposure DE',
       exposureEea: 'Lead Exposure EEA',
@@ -89,7 +120,7 @@ const premiumContent: Record<Lang, CorridorCopy> = {
       base: 'Base case factor',
       exposureDeValue: '12,900 Mrd. EUR',
       exposureEeaValue: '133,250 Mrd. EUR',
-      corridorValue: '2,0 % - 4,0 %',
+      corridorValue: '2,0 % – 4,0 %',
       baseValue: '3,0 %'
     },
     tableTitle: 'Indicative premium corridor (DE & EEA)',
@@ -101,6 +132,116 @@ const premiumContent: Record<Lang, CorridorCopy> = {
       'Premium factor corridor reflects typical multi-line logistics portfolios.',
       'Actual premium depends on mix, retention, cycle, deductibles and underwriting.',
       'This is a sizing corridor, not a revenue forecast.'
+    ]
+  }
+}
+
+const slide1Labels: Record<Lang, Slide1Labels> = {
+  de: {
+    title: 'Deutscher und europäischer Markt',
+    leftTitle: 'Deutscher Markt',
+    leftSubtitle: 'Deutschland – Logistik / Cargo',
+    rightTitle: 'EEA Markt – GWP (Solvency II)',
+    rightSubtitle: 'EEA – Logistik / Cargo',
+    lineOfBusiness: 'Sparte',
+    insuranceSegment: 'Versicherungssegment',
+    marketVolume: 'Marktvolumen',
+    headingTitle: 'AI-IAAS B2B PLATTFORM',
+    headingSubtitle: 'Für Makler und Versicherungsoperationen',
+    headingNote: 'Enterprise-grade. Core-system agnostic.'
+  },
+  en: {
+    title: 'German and European Markets',
+    leftTitle: 'German Market',
+    leftSubtitle: 'Germany – Logistic / Cargo',
+    rightTitle: 'EEA Market – GWP (Solvency II)',
+    rightSubtitle: 'EEA – Logistic / Cargo',
+    lineOfBusiness: 'Line of Business',
+    insuranceSegment: 'Insurance Segment',
+    marketVolume: 'Market Volume',
+    headingTitle: 'AI-IAAS B2B PLATFORM',
+    headingSubtitle: 'For Brokers and Insurance Operations',
+    headingNote: 'Enterprise-grade. Core-system agnostic.'
+  }
+}
+
+const programContent: Record<Lang, ProgramCopy> = {
+  de: {
+    title: 'Programmökonomie & Erlösmechanik (MGA-Sicht)',
+    subline: 'Indikative Ökonomie (70 % Auslastung). Carrier-aligned. Exposure ≠ Prämie ≠ Umsatz.',
+    gwpTitle: 'Projizierte Bruttobeiträge (GWP)',
+    gwpSubtitle: '(70 % Auslastung, konservativer Base Case)',
+    yearLabel: 'Jahr',
+    gwpLabel: 'GWP (USD)',
+    gwpNotes: [
+      'Basierend auf verifizierten Enterprise Leads',
+      'Broker-getriebene Distribution',
+      'Regionale Expansion ohne Änderung der Zeichnungslimits'
+    ],
+    mgaTitle: 'MGA-Ökonomie',
+    mgaRows: [
+      { label: 'Basisprovision', value: '29,5%' },
+      { label: 'Performance-Bonus', value: 'bis zu 9,5%' },
+      { label: 'Gesamtprovisionspotenzial', value: 'bis zu 39,0%', strong: true },
+      { label: 'Ziel-Schadenquote', value: '< 27,5%', strong: true }
+    ],
+    mgaBullets: [
+      'Kapitalleichtes MGA-Modell',
+      'Kein Bilanzrisiko',
+      'Anreize auf Portfolio-Performance ausgerichtet',
+      'Lineare Skalierung mit Prämienwachstum'
+    ],
+    qualityTitle: 'Portfolio-Qualitätsindikatoren',
+    qualityBullets: [
+      'Enterprise-Flotten, Logistik- & Cargo-Versicherte',
+      'Tier-1 Broker-Distribution',
+      'Trigger-basierte, parametrische Strukturen',
+      'Per-Risiko-Limit: $150,000',
+      'Stabile Frequenz / geringe Schwere'
+    ],
+    callout: 'Hochmargige MGA-Ökonomie mit kontrolliertem Downside-Risiko.',
+    footer: [
+      'Ökonomie carrier-aligned: Zeichnungsbefugnis delegiert,',
+      'Kapital und Risiko verbleiben beim Versicherer und Rückversicherungs-Panel.'
+    ]
+  },
+  en: {
+    title: 'Program Economics & Revenue Mechanics (MGA View)',
+    subline: 'Indicative economics (70% utilization). Carrier-aligned. Exposure ≠ premium ≠ revenue.',
+    gwpTitle: 'Projected Gross Written Premium',
+    gwpSubtitle: '(70% utilization, conservative base case)',
+    yearLabel: 'Year',
+    gwpLabel: 'GWP (USD)',
+    gwpNotes: [
+      'Based on verified enterprise leads',
+      'Broker-led distribution',
+      'Regional expansion without change to underwriting limits'
+    ],
+    mgaTitle: 'MGA Economics',
+    mgaRows: [
+      { label: 'Base commission', value: '29.5%' },
+      { label: 'Performance bonus', value: 'up to 9.5%' },
+      { label: 'Total commission potential', value: 'up to 39.0%', strong: true },
+      { label: 'Target loss ratio', value: '< 27.5%', strong: true }
+    ],
+    mgaBullets: [
+      'Capital-light MGA model',
+      'No balance sheet risk retained',
+      'Incentives aligned with portfolio performance',
+      'Linear scalability with premium growth'
+    ],
+    qualityTitle: 'Portfolio Quality Signals',
+    qualityBullets: [
+      'Enterprise fleet, logistics & cargo insureds',
+      'Tier-1 broker distribution',
+      'Trigger-based, parametric structures',
+      'Per-risk limit: $150,000',
+      'Stable frequency / low severity profile'
+    ],
+    callout: 'High-margin MGA economics with controlled downside risk.',
+    footer: [
+      'Economics are carrier-aligned: underwriting authority is delegated,',
+      'capital and risk remain with the insurer and reinsurance panel.'
     ]
   }
 }
@@ -193,6 +334,8 @@ export default function BciaDeckPage() {
     const copy = enterpriseStrings[typedLang]
     const mapImage = typedLang === 'en' ? KarteDeEuEn : KarteDeEu
     const premiumStrings = premiumContent[typedLang]
+    const slide1 = slide1Labels[typedLang]
+    const programStrings = programContent[typedLang]
     const industryImage = typedLang === 'en' ? LogistikIndustrieEn : LogistikIndustrieDe
     const exposureDe = 12.9e9
     const exposureEea = 133.25e9
@@ -202,16 +345,16 @@ export default function BciaDeckPage() {
         key: 'markets',
         node: (
           <div className="enterprise-grid-only">
-            <h1>{typedLang === 'en' ? 'German and European Markets' : 'Deutscher und europaeischer Markt'}</h1>
+            <h1>{slide1.title}</h1>
             <div className="enterprise-grid-3">
               <div className="enterprise-table-stack">
                 <div className="enterprise-table-card enterprise-table-card-left">
-                  <h3>German Market</h3>
+                  <h3>{slide1.leftTitle}</h3>
                   <table>
                     <thead>
                       <tr>
-                        <th className="label">Line of Business</th>
-                        <th className="num">Market Volume</th>
+                        <th className="label">{slide1.lineOfBusiness}</th>
+                        <th className="num">{slide1.marketVolume}</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -225,12 +368,12 @@ export default function BciaDeckPage() {
                   </table>
                 </div>
                 <div className="enterprise-table-card enterprise-table-card-left">
-                  <h3>Germany - Logistic / Cargo</h3>
+                  <h3>{slide1.leftSubtitle}</h3>
                   <table>
                     <thead>
                       <tr>
-                        <th className="label">Insurance Segment</th>
-                        <th className="num">Market Volume</th>
+                        <th className="label">{slide1.insuranceSegment}</th>
+                        <th className="num">{slide1.marketVolume}</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -248,9 +391,9 @@ export default function BciaDeckPage() {
                 <div className="enterprise-map-heading">
                   <span className="heading-line heading-line-left" aria-hidden="true" />
                   <div className="heading-text">
-                    <span className="heading-title">AI-IAAS B2B PLATFORM</span>
-                    <span className="heading-subtitle">For Brokers and Insurance Operations</span>
-                    <span className="heading-note">Enterprise-grade. Core-system agnostic.</span>
+                    <span className="heading-title">{slide1.headingTitle}</span>
+                    <span className="heading-subtitle">{slide1.headingSubtitle}</span>
+                    <span className="heading-note">{slide1.headingNote}</span>
                   </div>
                   <span className="heading-line heading-line-right" aria-hidden="true" />
                 </div>
@@ -258,12 +401,12 @@ export default function BciaDeckPage() {
               </div>
               <div className="enterprise-table-stack">
                 <div className="enterprise-table-card">
-                  <h3>EEA Market - GWP (Solvency II)</h3>
+                  <h3>{slide1.rightTitle}</h3>
                   <table>
                     <thead>
                       <tr>
-                        <th className="label">Line of Business</th>
-                        <th className="num">Market Volume</th>
+                        <th className="label">{slide1.lineOfBusiness}</th>
+                        <th className="num">{slide1.marketVolume}</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -277,12 +420,12 @@ export default function BciaDeckPage() {
                   </table>
                 </div>
                 <div className="enterprise-table-card">
-                  <h3>EEA - Logistic / Cargo</h3>
+                  <h3>{slide1.rightSubtitle}</h3>
                   <table>
                     <thead>
                       <tr>
-                        <th className="label">Line of Business</th>
-                        <th className="num">Market Volume</th>
+                        <th className="label">{slide1.lineOfBusiness}</th>
+                        <th className="num">{slide1.marketVolume}</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -315,9 +458,9 @@ export default function BciaDeckPage() {
                 <div className="enterprise-premium-card"><span>{premiumStrings.kpis.corridor}</span><strong>{premiumStrings.kpis.corridorValue}</strong></div>
                 <div className="enterprise-premium-card"><span>{premiumStrings.kpis.base}</span><strong>{premiumStrings.kpis.baseValue}</strong></div>
               </div>
-              <div className="enterprise-premium-stack">
-                <div className="enterprise-table-card enterprise-premium-table">
-                  <h3>{premiumStrings.tableTitle}</h3>
+            <div className="enterprise-premium-stack">
+              <div className="enterprise-table-card enterprise-premium-table">
+                <h3>{premiumStrings.tableTitle}</h3>
                   <table>
                     <thead>
                       <tr>
@@ -341,12 +484,17 @@ export default function BciaDeckPage() {
                       </tr>
                     </tbody>
                   </table>
-                </div>
-                <div className="enterprise-premium-image">
-                  <h3 className="enterprise-premium-image-title">Partners and verified leads</h3>
-                  <img src={industryImage} alt="Partners and verified leads" />
-                </div>
               </div>
+              <div className="enterprise-premium-image">
+                <h3 className="enterprise-premium-image-title">
+                  {typedLang === 'en' ? 'Partners and verified leads' : 'Partner und verifizierte Leads'}
+                </h3>
+                <img
+                  src={industryImage}
+                  alt={typedLang === 'en' ? 'Partners and verified leads' : 'Partner und verifizierte Leads'}
+                />
+              </div>
+            </div>
               <div className="enterprise-premium-charts">
                 <div className="enterprise-table-card enterprise-premium-chart">
                   <h3>Germany - Indicative premium corridor</h3>
@@ -409,18 +557,18 @@ export default function BciaDeckPage() {
         node: (
           <div className="bp3-slide">
             <div className="bp3-header">
-              <h1>Program Economics &amp; Revenue Mechanics (MGA View)</h1>
-              <p>Indicative economics (70% utilization). Carrier-aligned. Exposure != premium != revenue.</p>
+              <h1>{programStrings.title}</h1>
+              <p>{programStrings.subline}</p>
             </div>
             <div className="bp3-grid">
               <div className="bp3-panel">
-                <div className="bp3-cap">Projected Gross Written Premium</div>
-                <div className="bp3-subtitle">(70% utilization, conservative base case)</div>
+                <div className="bp3-cap">{programStrings.gwpTitle}</div>
+                <div className="bp3-subtitle">{programStrings.gwpSubtitle}</div>
                 <table className="bp3-table">
                   <thead>
                     <tr>
-                      <th>Year</th>
-                      <th className="num">GWP (USD)</th>
+                      <th>{programStrings.yearLabel}</th>
+                      <th className="num">{programStrings.gwpLabel}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -432,45 +580,45 @@ export default function BciaDeckPage() {
                   </tbody>
                 </table>
                 <div className="bp3-notes">
-                  <p>Based on verified enterprise leads</p>
-                  <p>Broker-led distribution</p>
-                  <p>Regional expansion without change to underwriting limits</p>
+                  {programStrings.gwpNotes.map((note) => (
+                    <p key={note}>{note}</p>
+                  ))}
                 </div>
               </div>
               <div className="bp3-panel">
-                <div className="bp3-cap">MGA Economics</div>
+                <div className="bp3-cap">{programStrings.mgaTitle}</div>
                 <table className="bp3-table">
                   <tbody>
-                    <tr><td>Base commission</td><td className="num">29.5%</td></tr>
-                    <tr><td>Performance bonus</td><td className="num">up to 9.5%</td></tr>
-                    <tr><td className="bp3-strong">Total commission potential</td><td className="num bp3-strong">up to 39.0%</td></tr>
-                    <tr><td className="bp3-strong">Target loss ratio</td><td className="num bp3-strong">&lt; 27.5%</td></tr>
+                    {programStrings.mgaRows.map((row) => (
+                      <tr key={row.label}>
+                        <td className={row.strong ? 'bp3-strong' : undefined}>{row.label}</td>
+                        <td className={`num${row.strong ? ' bp3-strong' : ''}`}>{row.value}</td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
                 <ul className="bp3-bullets">
-                  <li>Capital-light MGA model</li>
-                  <li>No balance sheet risk retained</li>
-                  <li>Incentives aligned with portfolio performance</li>
-                  <li>Linear scalability with premium growth</li>
+                  {programStrings.mgaBullets.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
                 </ul>
               </div>
               <div className="bp3-panel">
-                <div className="bp3-cap">Portfolio Quality Signals</div>
+                <div className="bp3-cap">{programStrings.qualityTitle}</div>
                 <ul className="bp3-bullets">
-                  <li>Enterprise fleet, logistics &amp; cargo insureds</li>
-                  <li>Tier-1 broker distribution</li>
-                  <li>Trigger-based, parametric structures</li>
-                  <li>Per-risk limit: $150,000</li>
-                  <li>Stable frequency / low severity profile</li>
+                  {programStrings.qualityBullets.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
                 </ul>
-                <div className="bp3-callout">High-margin MGA economics with controlled downside risk.</div>
+                <div className="bp3-callout">{programStrings.callout}</div>
               </div>
             </div>
             <div className="bp3-footer">
               <div className="bp3-footer-rule" aria-hidden="true" />
               <div className="bp3-footer-text">
-                <span>Economics are carrier-aligned: underwriting authority is delegated,</span>
-                <span>capital and risk remain with the insurer and reinsurance panel.</span>
+                {programStrings.footer.map((line) => (
+                  <span key={line}>{line}</span>
+                ))}
               </div>
             </div>
           </div>
