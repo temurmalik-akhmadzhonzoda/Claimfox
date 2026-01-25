@@ -93,6 +93,55 @@ body.bcia-deck-route {
   overflow: hidden;
 }
 
+body.bcia-print-mode {
+  overflow: visible;
+}
+
+body.bcia-print-mode [data-app-header="true"] {
+  display: none;
+}
+
+body.bcia-print-mode .bcia-toolbar,
+body.bcia-print-mode .bcia-arrow {
+  display: none;
+}
+
+body.bcia-print-mode .bcia-stage,
+body.bcia-print-mode .bcia-slider {
+  height: auto;
+  overflow: visible;
+}
+
+body.bcia-print-mode .bcia-track {
+  transform: none !important;
+  flex-direction: column;
+  align-items: center;
+}
+
+body.bcia-print-mode .bcia-slide {
+  width: 297mm;
+  height: 210mm;
+  flex: 0 0 auto;
+  break-after: page;
+  page-break-after: always;
+}
+
+body.bcia-print-mode .bcia-slide:last-child {
+  break-after: auto;
+  page-break-after: auto;
+}
+
+body.bcia-print-mode .bcia-canvas,
+body.bcia-print-mode .bcia-page {
+  width: 297mm;
+  height: 210mm;
+  transform: none !important;
+}
+
+body.bcia-print-mode .bcia-page {
+  padding: 8mm;
+}
+
 /* Slide 1 styles */
 .bcia-deck .enterprise-grid-only {
   display: flex;
