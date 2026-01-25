@@ -1,7 +1,6 @@
-@media screen {
-  body.enterprise-fullscreen {
-    overflow: hidden;
-  }
+body.enterprise-fullscreen {
+  overflow: hidden;
+}
 
   .enterprise-download-float {
     position: absolute;
@@ -1072,7 +1071,6 @@
     opacity: 0.4;
     cursor: default;
   }
-}
 
 @media print {
   .no-print {

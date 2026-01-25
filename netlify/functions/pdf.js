@@ -18,13 +18,15 @@ exports.handler = async (event) => {
       }
     }
 
-    const deck = event.queryStringParameters?.deck || 'enterprise-leads'
     const lang = event.queryStringParameters?.lang === 'en' ? 'en' : 'de'
+    const routeParam = event.queryStringParameters?.route
     const filename = event.queryStringParameters?.filename
     const testMode = process.env.DOCRAPTOR_TEST_MODE === 'true'
 
     const origin = process.env.SITE_ORIGIN || 'https://claimfox.app'
-    const documentUrl = new URL(`/${deck}-print.${lang}.html`, origin).toString()
+    const route = routeParam || `/enterprise-leads-print.${lang}.html`
+    const normalizedRoute = route.startsWith('/') ? route : `/${route}`
+    const documentUrl = new URL(normalizedRoute, origin).toString()
 
     if (event.queryStringParameters?.debug === '1') {
       const response = await fetch(documentUrl, { redirect: 'follow' })

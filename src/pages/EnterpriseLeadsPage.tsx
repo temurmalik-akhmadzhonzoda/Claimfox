@@ -2,15 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { useI18n } from '@/i18n/I18nContext'
 import SlideStage from '@/components/SlideStage'
-import { Slide1Markets, Slide2Premium, Slide3Program, Slide4Governance } from '@/components/slides/BusinessPlanSlides'
+import Slide1Market from '@/features/enterprise-leads/slides/Slide1Market'
+import Slide2PremiumCorridor from '@/features/enterprise-leads/slides/Slide2PremiumCorridor'
+import Slide3ProgramEconomics from '@/features/enterprise-leads/slides/Slide3ProgramEconomics'
+import Slide4RiskGovernance from '@/features/enterprise-leads/slides/Slide4RiskGovernance'
 import '@/styles/slide-stage.css'
-import '@/styles/enterprise-leads.css'
+import '@/styles/enterprise-leads-slides.css'
 
 const SLIDE_WIDTH = 1122
-
-function buildDocRaptorUrl(deck: string, filename: string, lang: string) {
-  return `/.netlify/functions/pdf?${new URLSearchParams({ deck, filename, lang }).toString()}`
-}
 
 export default function EnterpriseLeadsPage() {
   const [searchParams] = useSearchParams()
@@ -18,10 +17,10 @@ export default function EnterpriseLeadsPage() {
   const isPrint = searchParams.get('print') === '1'
   const [activeIndex, setActiveIndex] = useState(0)
   const slides = [
-    { key: 'markets', node: <Slide1Markets lang={lang} /> },
-    { key: 'premium', node: <Slide2Premium lang={lang} /> },
-    { key: 'program', node: <Slide3Program /> },
-    { key: 'governance', node: <Slide4Governance /> }
+    { key: 'markets', node: <Slide1Market lang={lang} /> },
+    { key: 'premium', node: <Slide2PremiumCorridor lang={lang} /> },
+    { key: 'program', node: <Slide3ProgramEconomics /> },
+    { key: 'governance', node: <Slide4RiskGovernance /> }
   ]
   const totalSlides = slides.length
 
@@ -29,7 +28,8 @@ export default function EnterpriseLeadsPage() {
     const filename = lang === 'de'
       ? 'insurfox-business-plan-part1-de.pdf'
       : 'insurfox-business-plan-part1-en.pdf'
-    const url = buildDocRaptorUrl('enterprise-leads', filename, lang)
+    const route = `/enterprise-leads-print.${lang}.html`
+    const url = `/.netlify/functions/pdf?${new URLSearchParams({ route, filename, lang }).toString()}`
     const popup = window.open(url, '_blank', 'noopener,noreferrer')
     if (!popup) {
       window.location.href = url
