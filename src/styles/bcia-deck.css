@@ -1291,16 +1291,16 @@ body.bcia-deck-route {
 
 @media print {
   @page {
-    size: A4 landscape;
-    margin: 10mm;
+    size: 297mm 210mm !important;
+    margin: 0 !important;
   }
 
   html,
   body {
     margin: 0;
     padding: 0;
-    width: 297mm;
-    height: 210mm;
+    width: 297mm !important;
+    height: 210mm !important;
   }
 
   body {
@@ -1327,8 +1327,8 @@ body.bcia-deck-route {
   }
 
   .printSlide {
-    width: 297mm;
-    height: 210mm;
+    width: 297mm !important;
+    height: 210mm !important;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1344,14 +1344,14 @@ body.bcia-deck-route {
   }
 
   .printSlideInner {
-    width: 277mm;
-    height: 190mm;
+    width: 277mm !important;
+    height: 190mm !important;
     display: flex;
     flex-direction: column;
   }
 }
 
 @page {
-  size: A4 landscape;
-  margin: 10mm;
+  size: 297mm 210mm !important;
+  margin: 0 !important;
 }
