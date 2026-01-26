@@ -1579,6 +1579,97 @@ export default function BciaDeckPage() {
         )
       },
       {
+        key: 'operating',
+        node: (
+          <div className="bp5-slide">
+            <div className="bp5-header">
+              <h1>{operatingStrings.title}</h1>
+              <p>{operatingStrings.subline}</p>
+            </div>
+            <div className="bp5-grid">
+              <div className="bp5-panel">
+                <div className="bp5-cap">{operatingStrings.raciTitle}</div>
+                <table className="bp5-table">
+                  <tbody>
+                    {operatingStrings.raciRows.map((row) => (
+                      <tr key={row.role}>
+                        <td className="bp5-role">{row.role}</td>
+                        <td className="bp5-value">{row.responsibility}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <div className="bp5-panel">
+                <div className="bp5-cap">{operatingStrings.artifactsTitle}</div>
+                <ul className="bp5-list">
+                  {operatingStrings.artifacts.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+              <div className="bp5-panel">
+                <div className="bp5-cap">
+                  {typedLang === 'en'
+                    ? 'Evidence & validation'
+                    : 'Evidenz & Validierung'}
+                </div>
+                <ul className="bp5-list">
+                  {typedLang === 'en' ? (
+                    <>
+                      <li>Realtime logistics / fleet / system data</li>
+                      <li>Deterministic rules with audit trail</li>
+                      <li>Trigger establishes eligibility; payouts subject to policy terms & governance controls</li>
+                    </>
+                  ) : (
+                    <>
+                      <li>Realtime Logistik-/Fleet-/Systemdaten</li>
+                      <li>Deterministische Regeln mit Audit Trail</li>
+                      <li>Trigger begründet Anspruch; Auszahlung gemäß Policierung & Governance</li>
+                    </>
+                  )}
+                </ul>
+              </div>
+            </div>
+          </div>
+        )
+      },
+      {
+        key: 'reinsurance',
+        node: (
+          <div className="bp6-slide">
+            <div className="bp6-header">
+              <h1>{reinsuranceStrings.title}</h1>
+              <p>{reinsuranceStrings.subline}</p>
+            </div>
+            <div className="bp6-grid">
+              <div className="bp6-panel">
+                <div className="bp6-cap">{reinsuranceStrings.structureTitle}</div>
+                <ul className="bp6-list">
+                  {reinsuranceStrings.structureNotes.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+              <div className="bp6-panel">
+                <div className="bp6-cap">{reinsuranceStrings.controlTitle}</div>
+                <table className="bp6-table">
+                  <tbody>
+                    {reinsuranceStrings.controlRows.map((row) => (
+                      <tr key={row.label}>
+                        <td>{row.label}</td>
+                        <td className="bp6-value">{row.value}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                <div className="bp6-callout">{reinsuranceStrings.callout}</div>
+              </div>
+            </div>
+          </div>
+        )
+      },
+      {
         key: 'program',
         node: (
           <div className="bp3-slide">
@@ -1705,97 +1796,6 @@ export default function BciaDeckPage() {
               </div>
             </div>
             <div className="bp4-assurance">{governanceStrings.assurance}</div>
-          </div>
-        )
-      },
-      {
-        key: 'operating',
-        node: (
-          <div className="bp5-slide">
-            <div className="bp5-header">
-              <h1>{operatingStrings.title}</h1>
-              <p>{operatingStrings.subline}</p>
-            </div>
-            <div className="bp5-grid">
-              <div className="bp5-panel">
-                <div className="bp5-cap">{operatingStrings.raciTitle}</div>
-                <table className="bp5-table">
-                  <tbody>
-                    {operatingStrings.raciRows.map((row) => (
-                      <tr key={row.role}>
-                        <td className="bp5-role">{row.role}</td>
-                        <td className="bp5-value">{row.responsibility}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-              <div className="bp5-panel">
-                <div className="bp5-cap">{operatingStrings.artifactsTitle}</div>
-                <ul className="bp5-list">
-                  {operatingStrings.artifacts.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </div>
-              <div className="bp5-panel">
-                <div className="bp5-cap">
-                  {typedLang === 'en'
-                    ? 'Evidence & validation'
-                    : 'Evidenz & Validierung'}
-                </div>
-                <ul className="bp5-list">
-                  {typedLang === 'en' ? (
-                    <>
-                      <li>Realtime logistics / fleet / system data</li>
-                      <li>Deterministic rules with audit trail</li>
-                      <li>Trigger establishes eligibility; payouts subject to policy terms & governance controls</li>
-                    </>
-                  ) : (
-                    <>
-                      <li>Realtime Logistik-/Fleet-/Systemdaten</li>
-                      <li>Deterministische Regeln mit Audit Trail</li>
-                      <li>Trigger begründet Anspruch; Auszahlung gemäß Policierung & Governance</li>
-                    </>
-                  )}
-                </ul>
-              </div>
-            </div>
-          </div>
-        )
-      },
-      {
-        key: 'reinsurance',
-        node: (
-          <div className="bp6-slide">
-            <div className="bp6-header">
-              <h1>{reinsuranceStrings.title}</h1>
-              <p>{reinsuranceStrings.subline}</p>
-            </div>
-            <div className="bp6-grid">
-              <div className="bp6-panel">
-                <div className="bp6-cap">{reinsuranceStrings.structureTitle}</div>
-                <ul className="bp6-list">
-                  {reinsuranceStrings.structureNotes.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </div>
-              <div className="bp6-panel">
-                <div className="bp6-cap">{reinsuranceStrings.controlTitle}</div>
-                <table className="bp6-table">
-                  <tbody>
-                    {reinsuranceStrings.controlRows.map((row) => (
-                      <tr key={row.label}>
-                        <td>{row.label}</td>
-                        <td className="bp6-value">{row.value}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-                <div className="bp6-callout">{reinsuranceStrings.callout}</div>
-              </div>
-            </div>
           </div>
         )
       },
