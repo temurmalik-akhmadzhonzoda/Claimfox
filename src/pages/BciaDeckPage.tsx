@@ -1241,130 +1241,6 @@ export default function BciaDeckPage() {
         )
       },
       {
-        key: 'coverage-overview',
-        node: (
-          <div className="bp2cov-slide" id="slide-coverage-overview">
-            <div className="bp2cov-header">
-              <h1>{coverageStrings.title}</h1>
-              <p>{coverageStrings.subtitle}</p>
-            </div>
-            <div className="bp2cov-grid">
-              <div className="bp2cov-panel">
-                <div className="bp2cov-cap">{coverageStrings.leftTitle}</div>
-                <table className="bp2cov-table">
-                  <tbody>
-                    <tr>
-                      <td>{coverageStrings.thresholdsLabel}</td>
-                      <td className="bp2cov-num">{coverageStrings.leftThresholds}</td>
-                    </tr>
-                    <tr>
-                      <td>{coverageStrings.payoutLabel}</td>
-                      <td className="bp2cov-num">{coverageStrings.leftPayout}</td>
-                    </tr>
-                  </tbody>
-                </table>
-                <div className="bp2cov-chart">
-                  <svg width="260" height="160" viewBox="0 0 260 160" role="img" aria-label="Operational disruption payout curve">
-                    <line x1="20" y1="130" x2="240" y2="130" className="bp2cov-axis" />
-                    <line x1="20" y1="30" x2="240" y2="30" className="bp2cov-capline" />
-                    <rect x="40" y="90" width="36" height="40" className="bp2cov-bar bp2cov-bar-low" />
-                    <rect x="112" y="70" width="36" height="60" className="bp2cov-bar bp2cov-bar-base" />
-                    <rect x="184" y="50" width="36" height="80" className="bp2cov-bar bp2cov-bar-high" />
-                    <text x="58" y="84" textAnchor="middle" className="bp2cov-bar-label">40%</text>
-                    <text x="130" y="64" textAnchor="middle" className="bp2cov-bar-label">58%</text>
-                    <text x="202" y="44" textAnchor="middle" className="bp2cov-bar-label">76%</text>
-                    <g className="bp2cov-legend">
-                      <line x1="24" y1="150" x2="40" y2="150" className="bp2cov-legend-line bp2cov-bar-low" />
-                      <text x="46" y="153">{coverageStrings.legendLow}</text>
-                      <line x1="96" y1="150" x2="112" y2="150" className="bp2cov-legend-line bp2cov-bar-base" />
-                      <text x="118" y="153">{coverageStrings.legendBase}</text>
-                      <line x1="176" y1="150" x2="192" y2="150" className="bp2cov-legend-line bp2cov-bar-high" />
-                      <text x="198" y="153">{coverageStrings.legendHigh}</text>
-                    </g>
-                  </svg>
-                </div>
-                <p className="bp2cov-evidence">{coverageStrings.leftEvidence}</p>
-              </div>
-              <div className="bp2cov-panel">
-                <div className="bp2cov-cap">{coverageStrings.rightTitle}</div>
-                <table className="bp2cov-table">
-                  <tbody>
-                    <tr>
-                      <td>{coverageStrings.thresholdsLabel}</td>
-                      <td className="bp2cov-num">{coverageStrings.rightThresholds}</td>
-                    </tr>
-                    <tr>
-                      <td>{coverageStrings.payoutLabel}</td>
-                      <td className="bp2cov-num">{coverageStrings.rightPayout}</td>
-                    </tr>
-                  </tbody>
-                </table>
-                <div className="bp2cov-chart">
-                  <svg width="260" height="160" viewBox="0 0 260 160" role="img" aria-label="Service interruption payout curve">
-                    <line x1="20" y1="130" x2="240" y2="130" className="bp2cov-axis" />
-                    <line x1="20" y1="30" x2="240" y2="30" className="bp2cov-capline" />
-                    <rect x="40" y="90" width="36" height="40" className="bp2cov-bar bp2cov-bar-low" />
-                    <rect x="112" y="66" width="36" height="64" className="bp2cov-bar bp2cov-bar-base" />
-                    <rect x="184" y="46" width="36" height="84" className="bp2cov-bar bp2cov-bar-high" />
-                    <text x="58" y="84" textAnchor="middle" className="bp2cov-bar-label">40%</text>
-                    <text x="130" y="60" textAnchor="middle" className="bp2cov-bar-label">64%</text>
-                    <text x="202" y="40" textAnchor="middle" className="bp2cov-bar-label">88%</text>
-                    <g className="bp2cov-legend">
-                      <line x1="24" y1="150" x2="40" y2="150" className="bp2cov-legend-line bp2cov-bar-low" />
-                      <text x="46" y="153">{coverageStrings.legendLow}</text>
-                      <line x1="96" y1="150" x2="112" y2="150" className="bp2cov-legend-line bp2cov-bar-base" />
-                      <text x="118" y="153">{coverageStrings.legendBase}</text>
-                      <line x1="176" y1="150" x2="192" y2="150" className="bp2cov-legend-line bp2cov-bar-high" />
-                      <text x="198" y="153">{coverageStrings.legendHigh}</text>
-                    </g>
-                  </svg>
-                </div>
-                <p className="bp2cov-evidence">{coverageStrings.rightEvidence}</p>
-              </div>
-            </div>
-            <div className="bp2cov-guardrails">{coverageStrings.guardrails}</div>
-          </div>
-        )
-      },
-      {
-        key: 'risk-management',
-        node: (
-          <div className="bp2risk-slide" id="slide-risk-management-framework">
-            <div className="bp2risk-header">
-              <h1>{riskStrings.title}</h1>
-              <p>{riskStrings.subtitle}</p>
-            </div>
-            <div className="bp2risk-grid">
-              <div className="bp2risk-panel">
-                <div className="bp2risk-cap">{riskStrings.leftTitle}</div>
-                <ul className="bp2risk-list">
-                  {riskStrings.leftBullets.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </div>
-              <div className="bp2risk-panel">
-                <div className="bp2risk-cap">{riskStrings.middleTitle}</div>
-                <ul className="bp2risk-list">
-                  {riskStrings.middleBullets.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </div>
-              <div className="bp2risk-panel">
-                <div className="bp2risk-cap">{riskStrings.rightTitle}</div>
-                <ul className="bp2risk-list">
-                  {riskStrings.rightBullets.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-            <div className="bp2risk-guardrails">{riskStrings.guardrails}</div>
-          </div>
-        )
-      },
-      {
         key: 'markets',
         node: (
           <div className="enterprise-grid-only">
@@ -1575,6 +1451,130 @@ export default function BciaDeckPage() {
                 ))}
               </ul>
             </div>
+          </div>
+        )
+      },
+      {
+        key: 'coverage-overview',
+        node: (
+          <div className="bp2cov-slide" id="slide-coverage-overview">
+            <div className="bp2cov-header">
+              <h1>{coverageStrings.title}</h1>
+              <p>{coverageStrings.subtitle}</p>
+            </div>
+            <div className="bp2cov-grid">
+              <div className="bp2cov-panel">
+                <div className="bp2cov-cap">{coverageStrings.leftTitle}</div>
+                <table className="bp2cov-table">
+                  <tbody>
+                    <tr>
+                      <td>{coverageStrings.thresholdsLabel}</td>
+                      <td className="bp2cov-num">{coverageStrings.leftThresholds}</td>
+                    </tr>
+                    <tr>
+                      <td>{coverageStrings.payoutLabel}</td>
+                      <td className="bp2cov-num">{coverageStrings.leftPayout}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div className="bp2cov-chart">
+                  <svg width="260" height="160" viewBox="0 0 260 160" role="img" aria-label="Operational disruption payout curve">
+                    <line x1="20" y1="130" x2="240" y2="130" className="bp2cov-axis" />
+                    <line x1="20" y1="30" x2="240" y2="30" className="bp2cov-capline" />
+                    <rect x="40" y="90" width="36" height="40" className="bp2cov-bar bp2cov-bar-low" />
+                    <rect x="112" y="70" width="36" height="60" className="bp2cov-bar bp2cov-bar-base" />
+                    <rect x="184" y="50" width="36" height="80" className="bp2cov-bar bp2cov-bar-high" />
+                    <text x="58" y="84" textAnchor="middle" className="bp2cov-bar-label">40%</text>
+                    <text x="130" y="64" textAnchor="middle" className="bp2cov-bar-label">58%</text>
+                    <text x="202" y="44" textAnchor="middle" className="bp2cov-bar-label">76%</text>
+                    <g className="bp2cov-legend">
+                      <line x1="24" y1="150" x2="40" y2="150" className="bp2cov-legend-line bp2cov-bar-low" />
+                      <text x="46" y="153">{coverageStrings.legendLow}</text>
+                      <line x1="96" y1="150" x2="112" y2="150" className="bp2cov-legend-line bp2cov-bar-base" />
+                      <text x="118" y="153">{coverageStrings.legendBase}</text>
+                      <line x1="176" y1="150" x2="192" y2="150" className="bp2cov-legend-line bp2cov-bar-high" />
+                      <text x="198" y="153">{coverageStrings.legendHigh}</text>
+                    </g>
+                  </svg>
+                </div>
+                <p className="bp2cov-evidence">{coverageStrings.leftEvidence}</p>
+              </div>
+              <div className="bp2cov-panel">
+                <div className="bp2cov-cap">{coverageStrings.rightTitle}</div>
+                <table className="bp2cov-table">
+                  <tbody>
+                    <tr>
+                      <td>{coverageStrings.thresholdsLabel}</td>
+                      <td className="bp2cov-num">{coverageStrings.rightThresholds}</td>
+                    </tr>
+                    <tr>
+                      <td>{coverageStrings.payoutLabel}</td>
+                      <td className="bp2cov-num">{coverageStrings.rightPayout}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div className="bp2cov-chart">
+                  <svg width="260" height="160" viewBox="0 0 260 160" role="img" aria-label="Service interruption payout curve">
+                    <line x1="20" y1="130" x2="240" y2="130" className="bp2cov-axis" />
+                    <line x1="20" y1="30" x2="240" y2="30" className="bp2cov-capline" />
+                    <rect x="40" y="90" width="36" height="40" className="bp2cov-bar bp2cov-bar-low" />
+                    <rect x="112" y="66" width="36" height="64" className="bp2cov-bar bp2cov-bar-base" />
+                    <rect x="184" y="46" width="36" height="84" className="bp2cov-bar bp2cov-bar-high" />
+                    <text x="58" y="84" textAnchor="middle" className="bp2cov-bar-label">40%</text>
+                    <text x="130" y="60" textAnchor="middle" className="bp2cov-bar-label">64%</text>
+                    <text x="202" y="40" textAnchor="middle" className="bp2cov-bar-label">88%</text>
+                    <g className="bp2cov-legend">
+                      <line x1="24" y1="150" x2="40" y2="150" className="bp2cov-legend-line bp2cov-bar-low" />
+                      <text x="46" y="153">{coverageStrings.legendLow}</text>
+                      <line x1="96" y1="150" x2="112" y2="150" className="bp2cov-legend-line bp2cov-bar-base" />
+                      <text x="118" y="153">{coverageStrings.legendBase}</text>
+                      <line x1="176" y1="150" x2="192" y2="150" className="bp2cov-legend-line bp2cov-bar-high" />
+                      <text x="198" y="153">{coverageStrings.legendHigh}</text>
+                    </g>
+                  </svg>
+                </div>
+                <p className="bp2cov-evidence">{coverageStrings.rightEvidence}</p>
+              </div>
+            </div>
+            <div className="bp2cov-guardrails">{coverageStrings.guardrails}</div>
+          </div>
+        )
+      },
+      {
+        key: 'risk-management',
+        node: (
+          <div className="bp2risk-slide" id="slide-risk-management-framework">
+            <div className="bp2risk-header">
+              <h1>{riskStrings.title}</h1>
+              <p>{riskStrings.subtitle}</p>
+            </div>
+            <div className="bp2risk-grid">
+              <div className="bp2risk-panel">
+                <div className="bp2risk-cap">{riskStrings.leftTitle}</div>
+                <ul className="bp2risk-list">
+                  {riskStrings.leftBullets.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+              <div className="bp2risk-panel">
+                <div className="bp2risk-cap">{riskStrings.middleTitle}</div>
+                <ul className="bp2risk-list">
+                  {riskStrings.middleBullets.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+              <div className="bp2risk-panel">
+                <div className="bp2risk-cap">{riskStrings.rightTitle}</div>
+                <ul className="bp2risk-list">
+                  {riskStrings.rightBullets.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            <div className="bp2risk-guardrails">{riskStrings.guardrails}</div>
           </div>
         )
       },
