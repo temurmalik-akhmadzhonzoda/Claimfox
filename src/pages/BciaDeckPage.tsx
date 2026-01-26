@@ -1273,7 +1273,7 @@ export default function BciaDeckPage() {
           ],
           nextStepsTitle: 'Nächste Schritte',
           nextSteps: ['Zieljurisdiktion bestätigen', 'Limit-/Aggregatplan festlegen', 'Data-Room-Zugriff', 'Binder-Execution']
-        }
+        };
     const tocStrings = {
       title: 'BCIA Program Overview — Inhaltsverzeichnis',
       subtitle: 'Carrier-aligned Program Setup, Marktmodellierung, Coverage, Pricing & Governance',
@@ -1301,7 +1301,6 @@ export default function BciaDeckPage() {
         },
         {
           label: 'D — Pricing, Limits & Validation',
-          sections: [
           items: [
             { label: 'Pricing & Risk Limits', index: 7 },
             { label: 'Scenario Analysis', index: 8 },
