@@ -4,7 +4,7 @@ export const enterpriseStrings = {
     cover: {
       title: 'Insurfox / Antares',
       summary:
-        'Im Fokus steht ein strukturierter Marktüberblick für gewerbliche Flotten- und Logistikrisiken in Deutschland und der EEA, mit Zielsegmenten in Spedition, Kontrakt- und Speziallogistik sowie Automotive- und Transportflotten. Das modellierte Markt-Exposure beträgt rund 24 Mrd. € in Deutschland und rund 250 Mrd. € in der EEA. Exposure ist ausdrücklich nicht gleich Prämie, Umsatz oder Beitrag. Die Modellierung basiert auf risikorelevanten Treibern wie Fahrzeugbeständen, Transport- und Warenwerten, Einsatzprofilen sowie Schadenfrequenz und -höhe. Ziel ist Transparenz über Risikoprofile als Grundlage für Portfolio-, Kapazitäts- und Zeichnungsentscheidungen in der Zusammenarbeit mit Insurfox.'
+        'Der Fokus liegt auf einem strukturierten Exposure-Überblick für gewerbliche Flotten- und Logistikrisiken in Deutschland und der EEA. Das Modell quantifiziert adressierbares Risiko auf Basis risikorelevanter Treiber wie Fahrzeugbestand, Transport- und Warenwerte sowie Einsatzprofile. Das ausgewiesene Exposure ist ausdrücklich keine Prämien- oder Umsatzgröße, sondern dient als Grundlage für Portfolio-, Kapazitäts- und Zeichnungsentscheidungen.'
     },
     header: {
       export: 'PDF exportieren'
@@ -80,7 +80,7 @@ export const enterpriseStrings = {
     cover: {
       title: 'Insurfox / Antares',
       summary:
-        'The focus is a structured market overview for commercial fleet and logistics risks in Germany and the EEA, covering freight forwarding, contract and special logistics, and automotive and transport fleets. Modelled market exposure is around €24bn in Germany and around €250bn in the EEA. Exposure is explicitly not premium, revenue or contribution. The model uses risk drivers such as fleet counts, transport and cargo values, operating profiles, and claims frequency and severity. The objective is transparency on risk profiles to support portfolio steering, capacity allocation and underwriting decisions in partnership with Insurfox.'
+        'The analysis provides a structured view on addressable exposure for commercial fleet and logistics risks across Germany and the EEA. Exposure is modeled based on risk-relevant drivers such as vehicle counts, transported values and operational profiles. Figures shown do not represent premium or revenue, but support portfolio construction, capacity planning and underwriting decisions.'
     },
     header: {
       export: 'Export PDF'

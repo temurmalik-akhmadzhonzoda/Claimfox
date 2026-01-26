@@ -275,30 +275,30 @@ const premiumContent: Record<Lang, CorridorCopy> = {
 
 const slide1Labels: Record<Lang, Slide1Labels> = {
   de: {
-    title: 'Deutscher und europäischer Markt',
-    leftTitle: 'Deutscher Markt',
+    title: 'Marktumfeld & adressiertes Exposure (Deutschland & EEA)',
+    leftTitle: 'Deutschland – relevante Versicherungssparten (Exposure-Sicht)',
     leftSubtitle: 'Deutschland – Logistik / Cargo',
-    rightTitle: 'EEA Markt – GWP (Solvency II)',
+    rightTitle: 'EEA – Referenzvolumen (GWP, Solvency-II-Kontext)',
     rightSubtitle: 'EEA – Logistik / Cargo',
     lineOfBusiness: 'Sparte',
     insuranceSegment: 'Versicherungssegment',
     marketVolume: 'Marktvolumen',
-    headingTitle: 'AI-IAAS B2B PLATTFORM',
-    headingSubtitle: 'Für Makler und Versicherungsoperationen',
-    headingNote: 'Enterprise-grade. Core-system agnostic.'
+    headingTitle: 'Exposure-basierte Marktmodellierung',
+    headingSubtitle: 'keine Prämien- oder Umsatzprojektion',
+    headingNote: ''
   },
   en: {
-    title: 'German and European Markets',
-    leftTitle: 'German Market',
-    leftSubtitle: 'Germany – Logistic / Cargo',
-    rightTitle: 'EEA Market – GWP (Solvency II)',
-    rightSubtitle: 'EEA – Logistic / Cargo',
+    title: 'Market Environment & Addressable Exposure (Germany & EEA)',
+    leftTitle: 'Germany – relevant lines of business (exposure view)',
+    leftSubtitle: 'Germany – Logistics / Cargo',
+    rightTitle: 'EEA – reference volume (GWP, Solvency II context)',
+    rightSubtitle: 'EEA – Logistics / Cargo',
     lineOfBusiness: 'Line of Business',
     insuranceSegment: 'Insurance Segment',
     marketVolume: 'Market Volume',
-    headingTitle: 'AI-IAAS B2B PLATFORM',
-    headingSubtitle: 'For Brokers and Insurance Operations',
-    headingNote: 'Enterprise-grade. Core-system agnostic.'
+    headingTitle: 'Exposure-based market modeling',
+    headingSubtitle: 'not a premium or revenue forecast',
+    headingNote: ''
   }
 }
 
