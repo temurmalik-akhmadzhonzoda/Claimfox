@@ -334,15 +334,13 @@ const slide1Labels: Record<Lang, Slide1Labels> = {
 const programContent: Record<Lang, ProgramCopy> = {
   de: {
     title: 'Programmökonomie & Erlösmechanik (MGA-Sicht)',
-    subline: 'Indikative Ökonomie (70 % Auslastung). Carrier-aligned. Exposure ≠ Prämie ≠ Umsatz.',
-    gwpTitle: 'Projizierte Bruttobeiträge (GWP)',
-    gwpSubtitle: '(70 % Auslastung, konservativer Base Case)',
+    subline: 'Indikative Ökonomie bei 70 % Auslastung. Carrier-aligned. Exposure ≠ Prämie ≠ Umsatz.',
+    gwpTitle: 'Projizierte Bruttoprämien (GWP)',
+    gwpSubtitle: '70 % Auslastung, konservativer Base Case',
     yearLabel: 'Jahr',
     gwpLabel: 'GWP (USD)',
     gwpNotes: [
-      'Basierend auf verifizierten Enterprise Leads',
-      'Broker-getriebene Distribution',
-      'Regionale Expansion ohne Änderung der Zeichnungslimits'
+      'Basierend auf verifizierten Enterprise-Leads, broker-getriebener Distribution und regionaler Expansion ohne Anpassung der Zeichnungslimits.'
     ],
     mgaTitle: 'MGA-Ökonomie',
     mgaRows: [
@@ -354,34 +352,32 @@ const programContent: Record<Lang, ProgramCopy> = {
     mgaBullets: [
       'Kapitalleichtes MGA-Modell',
       'Kein Bilanzrisiko',
-      'Anreize auf Portfolio-Performance ausgerichtet',
+      'Anreize strikt an Portfolio-Performance gekoppelt',
       'Lineare Skalierung mit Prämienwachstum'
     ],
     qualityTitle: 'Portfolio-Qualitätsindikatoren',
     qualityBullets: [
       'Enterprise-Flotten, Logistik- & Cargo-Versicherte',
-      'Tier-1 Broker-Distribution',
+      'Tier-1-Broker-Distribution',
       'Trigger-basierte, parametrische Strukturen',
-      'Per-Risiko-Limit: $150,000',
-      'Stabile Frequenz / geringe Schwere'
+      'Per-Risk-Limit: 150.000 USD',
+      'Stabile Frequenz / geringe Schadenhöhe'
     ],
     callout: 'Hochmargige MGA-Ökonomie mit kontrolliertem Downside-Risiko.',
     footer: [
-      'Ökonomie carrier-aligned: Zeichnungsbefugnis delegiert,',
-      'Kapital und Risiko verbleiben beim Versicherer und Rückversicherungs-Panel.'
+      'Die Ökonomie ist carrier-aligned: Zeichnungsbefugnis ist delegiert,',
+      'Kapital und Risiko verbleiben beim Versicherer und Rückversicherungspanel.'
     ]
   },
   en: {
-    title: 'Program Economics & Revenue Mechanics (MGA View)',
-    subline: 'Indicative economics (70% utilization). Carrier-aligned. Exposure ≠ premium ≠ revenue.',
-    gwpTitle: 'Projected Gross Written Premium',
-    gwpSubtitle: '(70% utilization, conservative base case)',
+    title: 'Program economics & revenue mechanics (MGA view)',
+    subline: 'Indicative economics at 70% utilization. Carrier-aligned. Exposure ≠ premium ≠ revenue.',
+    gwpTitle: 'Projected gross written premium (GWP)',
+    gwpSubtitle: '70% utilization, conservative base case',
     yearLabel: 'Year',
     gwpLabel: 'GWP (USD)',
     gwpNotes: [
-      'Based on verified enterprise leads',
-      'Broker-led distribution',
-      'Regional expansion without change to underwriting limits'
+      'Based on verified enterprise leads, broker-led distribution and regional expansion without changes to underwriting limits.'
     ],
     mgaTitle: 'MGA Economics',
     mgaRows: [
@@ -393,21 +389,21 @@ const programContent: Record<Lang, ProgramCopy> = {
     mgaBullets: [
       'Capital-light MGA model',
       'No balance sheet risk retained',
-      'Incentives aligned with portfolio performance',
+      'Incentives strictly aligned with portfolio performance',
       'Linear scalability with premium growth'
     ],
-    qualityTitle: 'Portfolio Quality Signals',
+    qualityTitle: 'Portfolio quality signals',
     qualityBullets: [
       'Enterprise fleet, logistics & cargo insureds',
       'Tier-1 broker distribution',
       'Trigger-based, parametric structures',
-      'Per-risk limit: $150,000',
+      'Per-risk limit: USD 150,000',
       'Stable frequency / low severity profile'
     ],
     callout: 'High-margin MGA economics with controlled downside risk.',
     footer: [
       'Economics are carrier-aligned: underwriting authority is delegated,',
-      'capital and risk remain with the insurer and reinsurance panel.'
+      'while capital and risk remain with the insurer and reinsurance panel.'
     ]
   }
 }
@@ -963,21 +959,21 @@ const riskManagementContent: Record<Lang, RiskManagementCopy> = {
   de: {
     title: 'Risikomanagement-Framework',
     subtitle: 'Portfoliokontrollen, Monitoring und Governance bei Extremereignissen',
-    leftTitle: 'Extreme Event Moratorium',
+    leftTitle: 'Extremereignis-Moratorium',
     leftBullets: [
       'Definierte Moratoriumsregelungen für Extremereignisse',
       'Temporäre Aussetzung oder Anpassung der Trigger-Berechtigung',
-      'Aktivierung auf Basis vordefinierter Kriterien und Governance-Freigabe',
+      'Aktivierung auf Basis vordefinierter Kriterien und formaler Governance-Freigabe',
       'Sicherstellung von Portfoliostabilität und Kapitalschutz'
     ],
-    middleTitle: 'Risk Monitoring',
+    middleTitle: 'Risikomonitoring',
     middleBullets: [
       'Laufendes Monitoring von Frequenz und Schadenhöhe',
-      'Analyse von Kumulationen und Konzentrationen',
+      'Analyse von Kumulationen und Risikokonzentrationen',
       'Überwachung von Trigger-Häufigkeit und Auszahlungsmustern',
       'Frühwarnindikatoren und Schwellenwert-Alerts'
     ],
-    rightTitle: 'Structured Governance',
+    rightTitle: 'Strukturierte Governance',
     rightBullets: [
       'Klare Eskalations- und Referral-Regeln',
       'Human-in-the-loop Entscheidungsfreigaben',
@@ -985,34 +981,34 @@ const riskManagementContent: Record<Lang, RiskManagementCopy> = {
       'Vollständiger Audit-Trail für Entscheidungen und Ausnahmen'
     ],
     guardrails:
-      'Das Risikomanagement ist darauf ausgelegt, die Portfoliointegrität zu schützen, Kapital zu sichern und Transparenz über Underwriting, Trigger und Auszahlungen zu gewährleisten.'
+      'Das Risikomanagement ist darauf ausgelegt, die Portfoliointegrität zu schützen, Kapital zu sichern und vollständige Transparenz über Underwriting, Trigger und Auszahlungen zu gewährleisten.'
   },
   en: {
-    title: 'Risk Management Framework',
-    subtitle: 'Portfolio controls, monitoring and extreme event governance',
-    leftTitle: 'Extreme Event Moratorium',
+    title: 'Risk management framework',
+    subtitle: 'Portfolio controls, monitoring and governance for extreme events',
+    leftTitle: 'Extreme event moratorium',
     leftBullets: [
       'Defined moratorium provisions for extreme events',
       'Temporary suspension or adjustment of trigger eligibility',
-      'Activation based on predefined criteria and governance approval',
-      'Ensures portfolio stability and capital protection'
+      'Activation based on predefined criteria and formal governance approval',
+      'Protection of portfolio stability and capital adequacy'
     ],
-    middleTitle: 'Risk Monitoring',
+    middleTitle: 'Risk monitoring',
     middleBullets: [
       'Continuous monitoring of frequency and severity',
-      'Accumulation and concentration analysis',
+      'Accumulation and risk concentration analysis',
       'Trigger frequency and payout pattern tracking',
       'Early-warning indicators and threshold alerts'
     ],
-    rightTitle: 'Structured Governance',
+    rightTitle: 'Structured governance',
     rightBullets: [
       'Clear escalation and referral rules',
-      'Human-in-the-loop decision checkpoints',
+      'Human-in-the-loop decision approvals',
       'Version-controlled underwriting and pricing rules',
-      'Full audit trail for decisions and exceptions'
+      'Complete audit trail for decisions and exceptions'
     ],
     guardrails:
-      'Risk management is designed to protect portfolio integrity, preserve capital and ensure transparency across underwriting, triggers and payouts.'
+      'The risk management framework is designed to protect portfolio integrity, preserve capital and ensure full transparency across underwriting, triggers and payouts.'
   }
 }
 
