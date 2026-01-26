@@ -30,8 +30,19 @@ type CorridorCopy = {
   }
   tableTitle: string
   tableColumns: string[]
-  marketDe: string
-  marketEea: string
+  scenarioLabels: {
+    low: string
+    base: string
+    high: string
+  }
+  chartTitleDe: string
+  chartTitleEea: string
+  legend: {
+    low: string
+    base: string
+    high: string
+  }
+  partnersTitle: string
   assumptionsTitle: string
   assumptions: string[]
 }
@@ -224,51 +235,69 @@ const stackRows = [
 
 const premiumContent: Record<Lang, CorridorCopy> = {
   de: {
-    title: 'Prämienkorridor aus modellbasiertem Exposure',
-    subline: 'Konservative Ableitung. Exposure ≠ Prämie ≠ Umsatz.',
+    title: 'Indikativer Prämienkorridor aus modellbasiertem Exposure',
+    subline: 'Konservative Ableitung: Exposure ≠ Prämie ≠ Umsatz',
     kpis: {
-      exposureDe: 'Lead-Exposure DE',
-      exposureEea: 'Lead-Exposure EEA',
+      exposureDe: 'Adressierbares Lead-Exposure (DE)',
+      exposureEea: 'Adressierbares Lead-Exposure (EEA)',
       corridor: 'Prämienfaktor-Korridor',
-      base: 'Basisfaktor',
+      base: 'Basisannahme (Mid-Case)',
       exposureDeValue: '12,900 Mrd. EUR',
       exposureEeaValue: '133,250 Mrd. EUR',
       corridorValue: '2,0 % – 4,0 %',
       baseValue: '3,0 %'
     },
     tableTitle: 'Indikativer Prämienkorridor (DE & EEA)',
-    tableColumns: ['Markt', 'Niedrig (2,0%)', 'Basis (3,0%)', 'Hoch (4,0%)'],
-    marketDe: 'Deutschland',
-    marketEea: 'EEA',
-    assumptionsTitle: 'Annahmen',
+    tableColumns: ['Szenario', 'Deutschland', 'EEA'],
+    scenarioLabels: {
+      low: 'Niedrig (2,0 %)',
+      base: 'Basis (3,0 %)',
+      high: 'Hoch (4,0 %)'
+    },
+    chartTitleDe: 'Deutschland – indikativer Prämienkorridor',
+    chartTitleEea: 'EEA – indikativer Prämienkorridor',
+    legend: {
+      low: 'Niedrig',
+      base: 'Basis',
+      high: 'Hoch'
+    },
+    partnersTitle: 'Partner & verifizierte Leads',
+    assumptionsTitle: 'Hinweis',
     assumptions: [
-      'Prämienfaktor-Korridor basiert auf typischen Multi-Line-Logistikportfolios.',
-      'Tatsächliche Prämien hängen von Mix, Retention, Zyklus, Selbstbehalten und Underwriting ab.',
-      'Dies ist ein Größenkorridor, keine Umsatzprognose.'
+      'Der ausgewiesene Prämienkorridor dient ausschließlich der Größenordnung. Die tatsächliche Prämie hängt von Portfolio-Mix, Retention, Laufzeit, Selbstbehalten und Underwriting-Parametern ab. Die Darstellung stellt keine Umsatz- oder Ergebnisprognose dar.'
     ]
   },
   en: {
-    title: 'Premium corridor from model-based exposure',
-    subline: 'Conservative derivation. Exposure ≠ premium ≠ revenue.',
+    title: 'Indicative premium corridor derived from modeled exposure',
+    subline: 'Conservative derivation: exposure ≠ premium ≠ revenue',
     kpis: {
-      exposureDe: 'Lead Exposure DE',
-      exposureEea: 'Lead Exposure EEA',
+      exposureDe: 'Addressable lead exposure (DE)',
+      exposureEea: 'Addressable lead exposure (EEA)',
       corridor: 'Premium factor corridor',
-      base: 'Base case factor',
+      base: 'Base case assumption (mid-case)',
       exposureDeValue: '12,900 Mrd. EUR',
       exposureEeaValue: '133,250 Mrd. EUR',
       corridorValue: '2,0 % – 4,0 %',
       baseValue: '3,0 %'
     },
     tableTitle: 'Indicative premium corridor (DE & EEA)',
-    tableColumns: ['Market', 'Low (2.0%)', 'Base (3.0%)', 'High (4.0%)'],
-    marketDe: 'Germany',
-    marketEea: 'EEA',
-    assumptionsTitle: 'Assumptions',
+    tableColumns: ['Scenario', 'Germany', 'EEA'],
+    scenarioLabels: {
+      low: 'Low (2.0%)',
+      base: 'Base (3.0%)',
+      high: 'High (4.0%)'
+    },
+    chartTitleDe: 'Germany – indicative premium corridor',
+    chartTitleEea: 'EEA – indicative premium corridor',
+    legend: {
+      low: 'Low',
+      base: 'Base',
+      high: 'High'
+    },
+    partnersTitle: 'Partners & verified leads',
+    assumptionsTitle: 'Note',
     assumptions: [
-      'Premium factor corridor reflects typical multi-line logistics portfolios.',
-      'Actual premium depends on mix, retention, cycle, deductibles and underwriting.',
-      'This is a sizing corridor, not a revenue forecast.'
+      'The premium corridor shown is indicative only. Actual premium depends on portfolio mix, retention, policy term, deductibles and underwriting parameters. This view does not represent a revenue or earnings forecast.'
     ]
   }
 }
@@ -1469,15 +1498,18 @@ export default function BciaDeckPage() {
                     </thead>
                     <tbody>
                       <tr>
-                        <td>{premiumStrings.marketDe}</td>
+                        <td>{premiumStrings.scenarioLabels.low}</td>
                         <td className="num">{formatMoney(exposureDe * 0.02, typedLang)}</td>
-                        <td className="num">{formatMoney(exposureDe * 0.03, typedLang)}</td>
-                        <td className="num">{formatMoney(exposureDe * 0.04, typedLang)}</td>
+                        <td className="num">{formatMoney(exposureEea * 0.02, typedLang)}</td>
                       </tr>
                       <tr>
-                        <td>{premiumStrings.marketEea}</td>
-                        <td className="num">{formatMoney(exposureEea * 0.02, typedLang)}</td>
+                        <td>{premiumStrings.scenarioLabels.base}</td>
+                        <td className="num">{formatMoney(exposureDe * 0.03, typedLang)}</td>
                         <td className="num">{formatMoney(exposureEea * 0.03, typedLang)}</td>
+                      </tr>
+                      <tr>
+                        <td>{premiumStrings.scenarioLabels.high}</td>
+                        <td className="num">{formatMoney(exposureDe * 0.04, typedLang)}</td>
                         <td className="num">{formatMoney(exposureEea * 0.04, typedLang)}</td>
                       </tr>
                     </tbody>
@@ -1485,18 +1517,18 @@ export default function BciaDeckPage() {
               </div>
               <div className="enterprise-premium-image">
                 <h3 className="enterprise-premium-image-title">
-                  {typedLang === 'en' ? 'Partners and verified leads' : 'Partner und verifizierte Leads'}
+                  {premiumStrings.partnersTitle}
                 </h3>
                 <img
                   src={industryImage}
-                  alt={typedLang === 'en' ? 'Partners and verified leads' : 'Partner und verifizierte Leads'}
+                  alt={premiumStrings.partnersTitle}
                 />
               </div>
             </div>
               <div className="enterprise-premium-charts">
                 <div className="enterprise-table-card enterprise-premium-chart">
-                  <h3>Germany - Indicative premium corridor</h3>
-                  <svg width="260" height="180" role="img" aria-label="Germany premium corridor">
+                  <h3>{premiumStrings.chartTitleDe}</h3>
+                  <svg width="260" height="180" role="img" aria-label={premiumStrings.chartTitleDe}>
                     <line className="axis" x1="20" y1="120" x2="240" y2="120" />
                     <rect className="bar bar-low" x="40" y="85" width="28" height="35" />
                     <rect className="bar bar-base" x="116" y="70" width="28" height="50" />
@@ -1506,17 +1538,17 @@ export default function BciaDeckPage() {
                     <text className="bar-value" x="206" y="48" textAnchor="middle">516 Mio EUR</text>
                     <g className="legend">
                       <line className="legend-line bar-low" x1="20" y1="155" x2="36" y2="155" />
-                      <text className="legend-text" x="42" y="158">Low (2.0%)</text>
+                      <text className="legend-text" x="42" y="158">{premiumStrings.legend.low}</text>
                       <line className="legend-line bar-base" x1="118" y1="155" x2="134" y2="155" />
-                      <text className="legend-text" x="140" y="158">Base (3.0%)</text>
+                      <text className="legend-text" x="140" y="158">{premiumStrings.legend.base}</text>
                       <line className="legend-line bar-high" x1="206" y1="155" x2="222" y2="155" />
-                      <text className="legend-text" x="228" y="158">High (4.0%)</text>
+                      <text className="legend-text" x="228" y="158">{premiumStrings.legend.high}</text>
                     </g>
                   </svg>
                 </div>
                 <div className="enterprise-table-card enterprise-premium-chart">
-                  <h3>EEA - Indicative premium corridor</h3>
-                  <svg width="260" height="180" role="img" aria-label="EEA premium corridor">
+                  <h3>{premiumStrings.chartTitleEea}</h3>
+                  <svg width="260" height="180" role="img" aria-label={premiumStrings.chartTitleEea}>
                     <line className="axis" x1="20" y1="120" x2="240" y2="120" />
                     <rect className="bar bar-low" x="40" y="70" width="28" height="50" />
                     <rect className="bar bar-base" x="116" y="50" width="28" height="70" />
@@ -1526,11 +1558,11 @@ export default function BciaDeckPage() {
                     <text className="bar-value" x="206" y="27" textAnchor="middle">5.3 Mrd EUR</text>
                     <g className="legend">
                       <line className="legend-line bar-low" x1="20" y1="155" x2="36" y2="155" />
-                      <text className="legend-text" x="42" y="158">Low (2.0%)</text>
+                      <text className="legend-text" x="42" y="158">{premiumStrings.legend.low}</text>
                       <line className="legend-line bar-base" x1="118" y1="155" x2="134" y2="155" />
-                      <text className="legend-text" x="140" y="158">Base (3.0%)</text>
+                      <text className="legend-text" x="140" y="158">{premiumStrings.legend.base}</text>
                       <line className="legend-line bar-high" x1="206" y1="155" x2="222" y2="155" />
-                      <text className="legend-text" x="228" y="158">High (4.0%)</text>
+                      <text className="legend-text" x="228" y="158">{premiumStrings.legend.high}</text>
                     </g>
                   </svg>
                 </div>
