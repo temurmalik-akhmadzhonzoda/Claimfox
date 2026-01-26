@@ -173,6 +173,25 @@ type StrategyEconomicsCopy = {
   footnote: string
 }
 
+type CoverageCopy = {
+  title: string
+  subtitle: string
+  leftTitle: string
+  rightTitle: string
+  thresholdsLabel: string
+  payoutLabel: string
+  leftThresholds: string
+  rightThresholds: string
+  leftPayout: string
+  rightPayout: string
+  leftEvidence: string
+  rightEvidence: string
+  legendLow: string
+  legendBase: string
+  legendHigh: string
+  guardrails: string
+}
+
 const compositionRows = [
   { label: 'Motor (Kraftfahrt)', value: 'EUR 34.015 bn' },
   { label: 'Property (Sach)', value: 'EUR 11.306 bn' },
@@ -858,6 +877,47 @@ const strategyEconomicsContent: Record<Lang, StrategyEconomicsCopy> = {
   }
 }
 
+const coverageContent: Record<Lang, CoverageCopy> = {
+  de: {
+    title: 'Coverage Overview — Trigger- & Auszahlungslogik',
+    subtitle: 'Parametrische Struktur mit deterministischen Schwellenwerten und gedeckelten Auszahlungskurven',
+    leftTitle: 'Operational Disruption (Days)',
+    rightTitle: 'Service Interruption (Hours)',
+    thresholdsLabel: 'Schwellenwerte',
+    payoutLabel: 'Auszahlungslogik',
+    leftThresholds: '7 / 9 / 10 Tage',
+    rightThresholds: '3 h / 6 h / 9 h / 24 h',
+    leftPayout: '40 % bei Trigger + 3 % je zusätzlichem Tag bis 100 %',
+    rightPayout: '40 % bei Trigger + 6 % je Intervall bis 100 %',
+    leftEvidence: 'Anspruchsvoraussetzung basiert auf validierten operativen Ereignisnachweisen.',
+    rightEvidence: 'Anspruchsvoraussetzung basiert auf validierten Service-Availability-Nachweisen.',
+    legendLow: 'Low',
+    legendBase: 'Base',
+    legendHigh: 'High',
+    guardrails:
+      'Die Trigger-Schwellenwerte definieren die Anspruchsvoraussetzung. Auszahlungen erfolgen gemäß Policenbedingungen, Governance-Kontrollen und anwendbaren Limits.'
+  },
+  en: {
+    title: 'Coverage Overview — Triggers & Payout Mechanics',
+    subtitle: 'Parametric structure with deterministic thresholds and capped payout curves',
+    leftTitle: 'Operational Disruption (Days)',
+    rightTitle: 'Service Interruption (Hours)',
+    thresholdsLabel: 'Thresholds',
+    payoutLabel: 'Payout rule',
+    leftThresholds: '7 / 9 / 10 days',
+    rightThresholds: '3h / 6h / 9h / 24h',
+    leftPayout: '40% at trigger + 3% per additional day up to 100%',
+    rightPayout: '40% at trigger + 6% per incremental step up to 100%',
+    leftEvidence: 'Eligibility determined by validated operational event evidence.',
+    rightEvidence: 'Eligibility determined by validated service availability evidence.',
+    legendLow: 'Low',
+    legendBase: 'Base',
+    legendHigh: 'High',
+    guardrails:
+      'Trigger thresholds define eligibility. Payouts are subject to policy terms, governance controls and applicable limits.'
+  }
+}
+
 const formatMoney = (value: number, lang: Lang) => {
   if (lang === 'de') {
     return `${(value / 1e9).toLocaleString('de-DE', { minimumFractionDigits: 3, maximumFractionDigits: 3 })} Mrd. EUR`
@@ -950,6 +1010,7 @@ export default function BciaDeckPage() {
     const appendixStrings = appendixContent[typedLang]
     const introStrings = programIntroContent[typedLang]
     const strategyStrings = strategyEconomicsContent[typedLang]
+    const coverageStrings = coverageContent[typedLang]
     const industryImage = typedLang === 'en' ? LogistikIndustrieEn : LogistikIndustrieDe
     const exposureDe = 12.9e9
     const exposureEea = 133.25e9
@@ -1081,6 +1142,92 @@ export default function BciaDeckPage() {
               </div>
             </div>
             <div className="bp1-footnote">{strategyStrings.footnote}</div>
+          </div>
+        )
+      },
+      {
+        key: 'coverage-overview',
+        node: (
+          <div className="bp2cov-slide" id="slide-coverage-overview">
+            <div className="bp2cov-header">
+              <h1>{coverageStrings.title}</h1>
+              <p>{coverageStrings.subtitle}</p>
+            </div>
+            <div className="bp2cov-grid">
+              <div className="bp2cov-panel">
+                <div className="bp2cov-cap">{coverageStrings.leftTitle}</div>
+                <table className="bp2cov-table">
+                  <tbody>
+                    <tr>
+                      <td>{coverageStrings.thresholdsLabel}</td>
+                      <td className="bp2cov-num">{coverageStrings.leftThresholds}</td>
+                    </tr>
+                    <tr>
+                      <td>{coverageStrings.payoutLabel}</td>
+                      <td className="bp2cov-num">{coverageStrings.leftPayout}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div className="bp2cov-chart">
+                  <svg width="260" height="160" viewBox="0 0 260 160" role="img" aria-label="Operational disruption payout curve">
+                    <line x1="20" y1="130" x2="240" y2="130" className="bp2cov-axis" />
+                    <line x1="20" y1="30" x2="240" y2="30" className="bp2cov-capline" />
+                    <rect x="40" y="90" width="36" height="40" className="bp2cov-bar bp2cov-bar-low" />
+                    <rect x="112" y="70" width="36" height="60" className="bp2cov-bar bp2cov-bar-base" />
+                    <rect x="184" y="50" width="36" height="80" className="bp2cov-bar bp2cov-bar-high" />
+                    <text x="58" y="84" textAnchor="middle" className="bp2cov-bar-label">40%</text>
+                    <text x="130" y="64" textAnchor="middle" className="bp2cov-bar-label">58%</text>
+                    <text x="202" y="44" textAnchor="middle" className="bp2cov-bar-label">76%</text>
+                    <g className="bp2cov-legend">
+                      <line x1="24" y1="150" x2="40" y2="150" className="bp2cov-legend-line bp2cov-bar-low" />
+                      <text x="46" y="153">{coverageStrings.legendLow}</text>
+                      <line x1="96" y1="150" x2="112" y2="150" className="bp2cov-legend-line bp2cov-bar-base" />
+                      <text x="118" y="153">{coverageStrings.legendBase}</text>
+                      <line x1="176" y1="150" x2="192" y2="150" className="bp2cov-legend-line bp2cov-bar-high" />
+                      <text x="198" y="153">{coverageStrings.legendHigh}</text>
+                    </g>
+                  </svg>
+                </div>
+                <p className="bp2cov-evidence">{coverageStrings.leftEvidence}</p>
+              </div>
+              <div className="bp2cov-panel">
+                <div className="bp2cov-cap">{coverageStrings.rightTitle}</div>
+                <table className="bp2cov-table">
+                  <tbody>
+                    <tr>
+                      <td>{coverageStrings.thresholdsLabel}</td>
+                      <td className="bp2cov-num">{coverageStrings.rightThresholds}</td>
+                    </tr>
+                    <tr>
+                      <td>{coverageStrings.payoutLabel}</td>
+                      <td className="bp2cov-num">{coverageStrings.rightPayout}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div className="bp2cov-chart">
+                  <svg width="260" height="160" viewBox="0 0 260 160" role="img" aria-label="Service interruption payout curve">
+                    <line x1="20" y1="130" x2="240" y2="130" className="bp2cov-axis" />
+                    <line x1="20" y1="30" x2="240" y2="30" className="bp2cov-capline" />
+                    <rect x="40" y="90" width="36" height="40" className="bp2cov-bar bp2cov-bar-low" />
+                    <rect x="112" y="66" width="36" height="64" className="bp2cov-bar bp2cov-bar-base" />
+                    <rect x="184" y="46" width="36" height="84" className="bp2cov-bar bp2cov-bar-high" />
+                    <text x="58" y="84" textAnchor="middle" className="bp2cov-bar-label">40%</text>
+                    <text x="130" y="60" textAnchor="middle" className="bp2cov-bar-label">64%</text>
+                    <text x="202" y="40" textAnchor="middle" className="bp2cov-bar-label">88%</text>
+                    <g className="bp2cov-legend">
+                      <line x1="24" y1="150" x2="40" y2="150" className="bp2cov-legend-line bp2cov-bar-low" />
+                      <text x="46" y="153">{coverageStrings.legendLow}</text>
+                      <line x1="96" y1="150" x2="112" y2="150" className="bp2cov-legend-line bp2cov-bar-base" />
+                      <text x="118" y="153">{coverageStrings.legendBase}</text>
+                      <line x1="176" y1="150" x2="192" y2="150" className="bp2cov-legend-line bp2cov-bar-high" />
+                      <text x="198" y="153">{coverageStrings.legendHigh}</text>
+                    </g>
+                  </svg>
+                </div>
+                <p className="bp2cov-evidence">{coverageStrings.rightEvidence}</p>
+              </div>
+            </div>
+            <div className="bp2cov-guardrails">{coverageStrings.guardrails}</div>
           </div>
         )
       },
