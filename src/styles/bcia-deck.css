@@ -1694,6 +1694,73 @@ body.bcia-deck-route {
   color: var(--ix-text-muted);
 }
 
+.bcia-deck .bp2risk-slide {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.bcia-deck .bp2risk-header h1 {
+  font-size: 1.5rem;
+  margin: 0;
+  color: var(--ix-text);
+}
+
+.bcia-deck .bp2risk-header p {
+  margin: 6px 0 0;
+  color: var(--ix-text-muted);
+  font-size: 0.9rem;
+}
+
+.bcia-deck .bp2risk-grid {
+  display: flex;
+  gap: 16px;
+}
+
+.bcia-deck .bp2risk-panel {
+  flex: 1;
+  border: 1px solid var(--ix-border);
+  padding: 14px 16px;
+  position: relative;
+}
+
+.bcia-deck .bp2risk-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--ix-primary);
+}
+
+.bcia-deck .bp2risk-cap {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.7rem;
+  color: var(--ix-text-muted);
+  margin-bottom: 10px;
+}
+
+.bcia-deck .bp2risk-list {
+  margin: 0;
+  padding-left: 16px;
+  color: var(--ix-text);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.bcia-deck .bp2risk-list li + li {
+  margin-top: 6px;
+}
+
+.bcia-deck .bp2risk-guardrails {
+  border: 1px solid var(--ix-border);
+  padding: 10px 12px;
+  font-size: 0.78rem;
+  color: var(--ix-text-muted);
+}
+
 @media print {
   @page {
     size: A4 landscape !important;

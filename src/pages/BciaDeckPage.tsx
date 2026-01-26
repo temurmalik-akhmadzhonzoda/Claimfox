@@ -192,6 +192,18 @@ type CoverageCopy = {
   guardrails: string
 }
 
+type RiskManagementCopy = {
+  title: string
+  subtitle: string
+  leftTitle: string
+  leftBullets: string[]
+  middleTitle: string
+  middleBullets: string[]
+  rightTitle: string
+  rightBullets: string[]
+  guardrails: string
+}
+
 const compositionRows = [
   { label: 'Motor (Kraftfahrt)', value: 'EUR 34.015 bn' },
   { label: 'Property (Sach)', value: 'EUR 11.306 bn' },
@@ -918,6 +930,63 @@ const coverageContent: Record<Lang, CoverageCopy> = {
   }
 }
 
+const riskManagementContent: Record<Lang, RiskManagementCopy> = {
+  de: {
+    title: 'Risikomanagement-Framework',
+    subtitle: 'Portfoliokontrollen, Monitoring und Governance bei Extremereignissen',
+    leftTitle: 'Extreme Event Moratorium',
+    leftBullets: [
+      'Definierte Moratoriumsregelungen für Extremereignisse',
+      'Temporäre Aussetzung oder Anpassung der Trigger-Berechtigung',
+      'Aktivierung auf Basis vordefinierter Kriterien und Governance-Freigabe',
+      'Sicherstellung von Portfoliostabilität und Kapitalschutz'
+    ],
+    middleTitle: 'Risk Monitoring',
+    middleBullets: [
+      'Laufendes Monitoring von Frequenz und Schadenhöhe',
+      'Analyse von Kumulationen und Konzentrationen',
+      'Überwachung von Trigger-Häufigkeit und Auszahlungsmustern',
+      'Frühwarnindikatoren und Schwellenwert-Alerts'
+    ],
+    rightTitle: 'Structured Governance',
+    rightBullets: [
+      'Klare Eskalations- und Referral-Regeln',
+      'Human-in-the-loop Entscheidungsfreigaben',
+      'Versionskontrollierte Underwriting- und Pricing-Regeln',
+      'Vollständiger Audit-Trail für Entscheidungen und Ausnahmen'
+    ],
+    guardrails:
+      'Das Risikomanagement ist darauf ausgelegt, die Portfoliointegrität zu schützen, Kapital zu sichern und Transparenz über Underwriting, Trigger und Auszahlungen zu gewährleisten.'
+  },
+  en: {
+    title: 'Risk Management Framework',
+    subtitle: 'Portfolio controls, monitoring and extreme event governance',
+    leftTitle: 'Extreme Event Moratorium',
+    leftBullets: [
+      'Defined moratorium provisions for extreme events',
+      'Temporary suspension or adjustment of trigger eligibility',
+      'Activation based on predefined criteria and governance approval',
+      'Ensures portfolio stability and capital protection'
+    ],
+    middleTitle: 'Risk Monitoring',
+    middleBullets: [
+      'Continuous monitoring of frequency and severity',
+      'Accumulation and concentration analysis',
+      'Trigger frequency and payout pattern tracking',
+      'Early-warning indicators and threshold alerts'
+    ],
+    rightTitle: 'Structured Governance',
+    rightBullets: [
+      'Clear escalation and referral rules',
+      'Human-in-the-loop decision checkpoints',
+      'Version-controlled underwriting and pricing rules',
+      'Full audit trail for decisions and exceptions'
+    ],
+    guardrails:
+      'Risk management is designed to protect portfolio integrity, preserve capital and ensure transparency across underwriting, triggers and payouts.'
+  }
+}
+
 const formatMoney = (value: number, lang: Lang) => {
   if (lang === 'de') {
     return `${(value / 1e9).toLocaleString('de-DE', { minimumFractionDigits: 3, maximumFractionDigits: 3 })} Mrd. EUR`
@@ -1011,6 +1080,7 @@ export default function BciaDeckPage() {
     const introStrings = programIntroContent[typedLang]
     const strategyStrings = strategyEconomicsContent[typedLang]
     const coverageStrings = coverageContent[typedLang]
+    const riskStrings = riskManagementContent[typedLang]
     const industryImage = typedLang === 'en' ? LogistikIndustrieEn : LogistikIndustrieDe
     const exposureDe = 12.9e9
     const exposureEea = 133.25e9
@@ -1228,6 +1298,44 @@ export default function BciaDeckPage() {
               </div>
             </div>
             <div className="bp2cov-guardrails">{coverageStrings.guardrails}</div>
+          </div>
+        )
+      },
+      {
+        key: 'risk-management',
+        node: (
+          <div className="bp2risk-slide" id="slide-risk-management-framework">
+            <div className="bp2risk-header">
+              <h1>{riskStrings.title}</h1>
+              <p>{riskStrings.subtitle}</p>
+            </div>
+            <div className="bp2risk-grid">
+              <div className="bp2risk-panel">
+                <div className="bp2risk-cap">{riskStrings.leftTitle}</div>
+                <ul className="bp2risk-list">
+                  {riskStrings.leftBullets.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+              <div className="bp2risk-panel">
+                <div className="bp2risk-cap">{riskStrings.middleTitle}</div>
+                <ul className="bp2risk-list">
+                  {riskStrings.middleBullets.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+              <div className="bp2risk-panel">
+                <div className="bp2risk-cap">{riskStrings.rightTitle}</div>
+                <ul className="bp2risk-list">
+                  {riskStrings.rightBullets.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            <div className="bp2risk-guardrails">{riskStrings.guardrails}</div>
           </div>
         )
       },
