@@ -1319,32 +1319,26 @@ export default function BciaDeckPage() {
               <h1>{tocStrings.title}</h1>
               <p>{tocStrings.subtitle}</p>
             </div>
-            <div className="bp3-grid">
+            <div className="bcia-toc">
               {tocStrings.sections.map((section) => (
-                <div key={section.label} className="bp3-panel">
-                  <div className="bp3-cap">{section.label}</div>
-                  <ul className="bp3-bullets">
+                <div key={section.label} className="bcia-toc-section">
+                  <div className="bcia-toc-label">{section.label}</div>
+                  <div className="bcia-toc-divider" aria-hidden="true" />
+                  <div className="bcia-toc-rows">
                     {section.items.map((item) => (
-                      <li key={item.label}>
+                      <div key={item.label} className="bcia-toc-row">
                         <button
                           type="button"
                           className="bcia-toc-link"
                           onClick={() => jumpToSlide(item.index)}
-                          style={{
-                            background: 'none',
-                            border: 'none',
-                            padding: 0,
-                            color: 'inherit',
-                            font: 'inherit',
-                            textAlign: 'left',
-                            cursor: 'pointer'
-                          }}
                         >
-                          {item.label}
+                          <span className="bcia-toc-num">{item.index}</span>
+                          <span className="bcia-toc-title">{item.label}</span>
+                          <span className="bcia-toc-arrow" aria-hidden="true">→</span>
                         </button>
-                      </li>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 </div>
               ))}
             </div>

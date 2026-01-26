@@ -557,6 +557,81 @@ body.bcia-deck-route {
   margin-top: 10px;
 }
 
+.bcia-deck .bcia-toc {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  flex: 1 1 auto;
+  margin-top: 12px;
+}
+
+.bcia-deck .bcia-toc-section {
+  border: 1px solid var(--ix-border);
+  padding: 12px 14px;
+  background: var(--ix-surface);
+}
+
+.bcia-deck .bcia-toc-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ix-text-muted);
+  font-weight: 600;
+}
+
+.bcia-deck .bcia-toc-divider {
+  height: 1px;
+  background: var(--ix-border);
+  margin: 8px 0 10px;
+}
+
+.bcia-deck .bcia-toc-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.bcia-deck .bcia-toc-row {
+  display: block;
+}
+
+.bcia-deck .bcia-toc-link {
+  display: grid;
+  grid-template-columns: 28px 1fr 20px;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+  padding: 6px 2px;
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.bcia-deck .bcia-toc-num {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: var(--ix-text-muted);
+}
+
+.bcia-deck .bcia-toc-title {
+  font-weight: 600;
+  color: var(--ix-text);
+}
+
+.bcia-deck .bcia-toc-arrow {
+  text-align: right;
+  color: var(--ix-text-muted);
+}
+
+@media screen {
+  .bcia-deck .bcia-toc-link:hover .bcia-toc-title {
+    color: var(--ix-primary);
+  }
+}
+
 .bcia-deck .bp3-panel {
   position: relative;
   border: 1px solid var(--ix-border);
