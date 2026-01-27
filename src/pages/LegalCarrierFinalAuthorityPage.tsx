@@ -264,42 +264,48 @@ export default function LegalCarrierFinalAuthorityPage() {
         </div>
 
         <div className="uw-grid uw-split">
-          <Card title={copy.table.title} variant="glass" className="uw-card" style={{ overflowX: 'auto' }}>
-            <table className="uw-table" aria-label="Carrier legal decision inbox">
-              <thead>
-                <tr>
-                  <th>{copy.table.id}</th>
-                  <th>{copy.table.type}</th>
-                  <th>{copy.table.trigger}</th>
-                  <th>{copy.table.severity}</th>
-                  <th>{copy.table.sla}</th>
-                  <th>{copy.table.recommendation}</th>
-                  <th>{copy.table.status}</th>
-                </tr>
-              </thead>
-              <tbody>
-                {cases.map((item) => (
-                  <tr key={item.id} onClick={() => setSelectedId(item.id)} className={item.id === selectedId ? 'uw-row-active' : undefined} style={{ cursor: 'pointer' }}>
-                    <td>{item.id}</td>
-                    <td>{item.type}</td>
-                    <td>{item.trigger}</td>
-                    <td>{item.severity}</td>
-                    <td>{formatSla(item.slaDue, lang)}</td>
-                    <td>{item.recommendation}</td>
-                    <td>{item.status}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <Card variant="glass" className="uw-card">
+            <div className="uw-card-body" style={{ gap: '0.75rem' }}>
+              <strong>{copy.table.title}</strong>
+              <div style={{ overflowX: 'auto' }}>
+                <table className="uw-table" aria-label="Carrier legal decision inbox">
+                  <thead>
+                    <tr>
+                      <th>{copy.table.id}</th>
+                      <th>{copy.table.type}</th>
+                      <th>{copy.table.trigger}</th>
+                      <th>{copy.table.severity}</th>
+                      <th>{copy.table.sla}</th>
+                      <th>{copy.table.recommendation}</th>
+                      <th>{copy.table.status}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {cases.map((item) => (
+                      <tr key={item.id} onClick={() => setSelectedId(item.id)} className={item.id === selectedId ? 'uw-row-active' : undefined} style={{ cursor: 'pointer' }}>
+                        <td>{item.id}</td>
+                        <td>{item.type}</td>
+                        <td>{item.trigger}</td>
+                        <td>{item.severity}</td>
+                        <td>{formatSla(item.slaDue, lang)}</td>
+                        <td>{item.recommendation}</td>
+                        <td>{item.status}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </Card>
 
-          <Card title={copy.snapshot.title} variant="glass" className="uw-card">
+          <Card variant="glass" className="uw-card">
             <div className="uw-card-body" style={{ gap: '0.75rem' }}>
-              <div>
+              <strong>{copy.snapshot.title}</strong>
+              <div className="uw-panel">
                 <strong>{selected.id}</strong>
                 <div className="uw-muted">{selected.summary}</div>
               </div>
-              <div>
+              <div className="uw-panel">
                 <div className="uw-muted">{copy.snapshot.risks}</div>
                 <ul style={{ margin: '0.3rem 0 0', paddingLeft: '1rem', color: '#475569' }}>
                   {selected.keyRisks.map((risk) => (
@@ -307,7 +313,7 @@ export default function LegalCarrierFinalAuthorityPage() {
                   ))}
                 </ul>
               </div>
-              <div>
+              <div className="uw-panel">
                 <div className="uw-muted">{copy.snapshot.rules}</div>
                 <ul style={{ margin: '0.3rem 0 0', paddingLeft: '1rem', color: '#475569' }}>
                   {selected.applicableRules.map((rule) => (
@@ -319,7 +325,7 @@ export default function LegalCarrierFinalAuthorityPage() {
                 <strong>{copy.snapshot.aiTitle}</strong>
                 <div className="uw-muted" style={{ marginTop: '0.4rem' }}>{selected.recommendation}</div>
               </div>
-              <div>
+              <div className="uw-panel">
                 <div className="uw-muted">{copy.snapshot.templates}</div>
                 <div className="uw-actions">
                   <Button variant="secondary" onClick={() => {}}>{copy.actions.approve}</Button>
