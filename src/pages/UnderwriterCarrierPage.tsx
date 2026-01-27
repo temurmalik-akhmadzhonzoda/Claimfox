@@ -39,7 +39,7 @@ const MiniSparkline = ({ data }: { data: number[] }) => {
     .join(' ')
   return (
     <svg className="uw-chart" width="100%" height="40" viewBox="0 0 100 30" aria-hidden>
-      <polyline fill="none" stroke="#1d4ed8" strokeWidth="2" points={points} />
+      <polyline fill="none" stroke="var(--ix-primary)" strokeWidth="2" points={points} />
     </svg>
   )
 }
@@ -47,8 +47,8 @@ const MiniSparkline = ({ data }: { data: number[] }) => {
 const AggregationGauge = ({ value, label }: { value: number; label: string }) => (
   <div style={{ display: 'grid', gap: '0.35rem' }}>
     <div className="uw-muted">{label}</div>
-    <div style={{ background: '#e2e8f0', borderRadius: '999px', height: '10px', overflow: 'hidden' }}>
-      <div style={{ width: `${value}%`, background: value > 80 ? '#dc2626' : '#2563eb', height: '100%' }} />
+    <div style={{ background: 'var(--ix-border)', borderRadius: '999px', height: '10px', overflow: 'hidden' }}>
+      <div style={{ width: `${value}%`, background: value > 80 ? 'var(--ix-danger)' : 'var(--ix-primary)', height: '100%' }} />
     </div>
     <div style={{ fontSize: '0.85rem', color: '#0f172a' }}>{value}%</div>
   </div>

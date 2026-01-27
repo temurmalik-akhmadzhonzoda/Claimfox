@@ -39,7 +39,7 @@ const MiniSparkline = ({ data }: { data: number[] }) => {
     .join(' ')
   return (
     <svg className="uw-chart" width="100%" height="40" viewBox="0 0 100 30" aria-hidden>
-      <polyline fill="none" stroke="#1d4ed8" strokeWidth="2" points={points} />
+      <polyline fill="none" stroke="var(--ix-primary)" strokeWidth="2" points={points} />
     </svg>
   )
 }
@@ -50,12 +50,12 @@ const CorridorChart = ({ corridor, label }: { corridor: CaseItem['pricingCorrido
   const suggestedX = ((corridor.suggested - corridor.min) / range) * 100
   return (
     <svg className="uw-chart" width="100%" height="50" viewBox="0 0 100 50" aria-label={label}>
-      <rect x="5" y="20" width="90" height="10" fill="#e2e8f0" rx="5" />
-      <rect x="5" y="20" width="90" height="10" fill="#c7d2fe" rx="5" opacity="0.65" />
-      <line x1={5 + targetX * 0.9} y1="15" x2={5 + targetX * 0.9} y2="35" stroke="#1d4ed8" strokeWidth="2" />
-      <circle cx={5 + suggestedX * 0.9} cy="25" r="4" fill="#0f172a" />
-      <text x="5" y="12" fontSize="6" fill="#64748b">{corridor.min.toFixed(0)}</text>
-      <text x="85" y="12" fontSize="6" fill="#64748b">{corridor.max.toFixed(0)}</text>
+      <rect x="5" y="20" width="90" height="10" fill="var(--ix-border)" rx="5" />
+      <rect x="5" y="20" width="90" height="10" fill="var(--ix-primary-100)" rx="5" opacity="0.7" />
+      <line x1={5 + targetX * 0.9} y1="15" x2={5 + targetX * 0.9} y2="35" stroke="var(--ix-primary)" strokeWidth="2" />
+      <circle cx={5 + suggestedX * 0.9} cy="25" r="4" fill="var(--ix-primary)" />
+      <text x="5" y="12" fontSize="6" fill="var(--ix-text-muted)">{corridor.min.toFixed(0)}</text>
+      <text x="85" y="12" fontSize="6" fill="var(--ix-text-muted)">{corridor.max.toFixed(0)}</text>
     </svg>
   )
 }

@@ -1,10 +1,10 @@
 .uw-page {
   min-height: 100vh;
   width: 100%;
-  color: #0e0d1c;
+  color: var(--ix-text);
   background:
-    radial-gradient(circle at 8% 0%, rgba(212, 56, 13, 0.08), transparent 40%),
-    linear-gradient(180deg, #f8f9fb 0%, #edf1f6 100%);
+    radial-gradient(circle at 8% 0%, rgba(212, 56, 13, 0.06), transparent 45%),
+    var(--ix-bg);
 }
 
 .uw-container {
@@ -24,7 +24,7 @@
 .uw-section-title {
   margin: 0;
   font-size: clamp(1.2rem, 2.6vw, 1.6rem);
-  color: #0f172a;
+  color: var(--ix-text);
   letter-spacing: -0.015em;
 }
 
@@ -56,16 +56,29 @@
 }
 
 .uw-card {
-  background: rgba(255, 255, 255, 0.98) !important;
-  border: 1px solid rgba(148, 163, 184, 0.25) !important;
-  border-radius: 24px !important;
-  box-shadow: 0 22px 60px rgba(15, 23, 42, 0.08) !important;
+  position: relative;
+  background: var(--ix-surface) !important;
+  border: 1px solid var(--ix-border) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 14px 16px !important;
 }
 
 .uw-card h2 {
-  color: #d4380d !important;
-  font-size: 1.15rem !important;
-  letter-spacing: -0.01em;
+  color: var(--ix-primary) !important;
+  font-size: 0.82rem !important;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.uw-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 2px;
+  width: 100%;
+  background: var(--ix-primary);
 }
 
 .uw-card-body {
@@ -76,8 +89,8 @@
 }
 
 .uw-muted {
-  color: #64748b;
-  font-size: 0.9rem;
+  color: var(--ix-text-muted);
+  font-size: 0.82rem;
 }
 
 .uw-chart {
@@ -93,8 +106,8 @@
 }
 
 .uw-footnote {
-  color: #64748b;
-  font-size: 0.9rem;
+  color: var(--ix-text-muted);
+  font-size: 0.82rem;
 }
 
 .uw-table {
@@ -105,39 +118,40 @@
 
 .uw-table th {
   text-align: left;
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: #64748b;
-  padding: 0.65rem 0.45rem;
-  border-bottom: 1px solid #e2e8f0;
+  color: var(--ix-text-muted);
+  padding: 0.55rem 0.45rem;
+  border-bottom: 1px solid var(--ix-border);
 }
 
 .uw-table td {
-  padding: 0.65rem 0.45rem;
-  border-bottom: 1px solid #f1f5f9;
-  color: #0f172a;
+  padding: 0.55rem 0.45rem;
+  border-bottom: 1px solid var(--ix-border);
+  color: var(--ix-text);
 }
 
 .uw-row-active {
-  background: #eef2ff;
+  background: var(--ix-surface-2);
 }
 
 .uw-badge {
   display: inline-flex;
   align-items: center;
   padding: 0.15rem 0.5rem;
-  border-radius: 999px;
+  border-radius: 0;
   font-size: 0.75rem;
-  background: rgba(15, 23, 42, 0.08);
-  color: #0f172a;
+  background: var(--ix-surface-2);
+  color: var(--ix-text);
+  border: 1px solid var(--ix-border);
 }
 
 .uw-panel {
-  border: 1px solid #e2e8f0;
-  border-radius: 16px;
+  border: 1px solid var(--ix-border);
+  border-radius: 0;
   padding: 0.75rem;
-  background: #f9fafb;
+  background: var(--ix-surface);
 }
 
 .uw-actions {
@@ -146,6 +160,6 @@
 }
 
 .uw-disclaimer {
-  color: #64748b;
-  font-size: 0.85rem;
+  color: var(--ix-text-muted);
+  font-size: 0.8rem;
 }
