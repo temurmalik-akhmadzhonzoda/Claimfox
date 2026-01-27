@@ -38,7 +38,7 @@ const MiniSparkline = ({ data }: { data: number[] }) => {
     })
     .join(' ')
   return (
-    <svg width="100%" height="40" viewBox="0 0 100 30" aria-hidden>
+    <svg className="uw-chart" width="100%" height="40" viewBox="0 0 100 30" aria-hidden>
       <polyline fill="none" stroke="#1d4ed8" strokeWidth="2" points={points} />
     </svg>
   )
@@ -49,7 +49,7 @@ const CorridorChart = ({ corridor, label }: { corridor: CaseItem['pricingCorrido
   const targetX = ((corridor.target - corridor.min) / range) * 100
   const suggestedX = ((corridor.suggested - corridor.min) / range) * 100
   return (
-    <svg width="100%" height="50" viewBox="0 0 100 50" aria-label={label}>
+    <svg className="uw-chart" width="100%" height="50" viewBox="0 0 100 50" aria-label={label}>
       <rect x="5" y="20" width="90" height="10" fill="#e2e8f0" rx="5" />
       <rect x="5" y="20" width="90" height="10" fill="#c7d2fe" rx="5" opacity="0.65" />
       <line x1={5 + targetX * 0.9} y1="15" x2={5 + targetX * 0.9} y2="35" stroke="#1d4ed8" strokeWidth="2" />
@@ -198,12 +198,12 @@ export default function UnderwriterSeniorPage() {
 
       <div className="uw-container">
         <div className="uw-grid uw-kpi">
-          <Card title={copy.kpi.open} variant="glass" className="uw-card"><strong>{kpis.open}</strong><MiniSparkline data={[12, 14, 11, 15, 16]} /></Card>
-          <Card title={copy.kpi.overrides} variant="glass" className="uw-card"><strong>{kpis.overrides}</strong><MiniSparkline data={[2, 3, 4, 5, 6]} /></Card>
-          <Card title={copy.kpi.referralRate} variant="glass" className="uw-card"><strong>{kpis.referralRate}</strong><MiniSparkline data={[18, 21, 19, 24, 24]} /></Card>
-          <Card title={copy.kpi.alerts} variant="glass" className="uw-card"><strong>{kpis.alerts}</strong><MiniSparkline data={[3, 4, 4, 5, 5]} /></Card>
-          <Card title={copy.kpi.evidence} variant="glass" className="uw-card"><strong>{kpis.evidence}</strong><MiniSparkline data={[82, 84, 86, 88, 90]} /></Card>
-          <Card title={copy.kpi.authority} variant="glass" className="uw-card"><strong>{kpis.authority}</strong><MiniSparkline data={[68, 70, 72, 74, 74]} /></Card>
+          <Card title={copy.kpi.open} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.open}</strong><MiniSparkline data={[12, 14, 11, 15, 16]} /></div></Card>
+          <Card title={copy.kpi.overrides} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.overrides}</strong><MiniSparkline data={[2, 3, 4, 5, 6]} /></div></Card>
+          <Card title={copy.kpi.referralRate} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.referralRate}</strong><MiniSparkline data={[18, 21, 19, 24, 24]} /></div></Card>
+          <Card title={copy.kpi.alerts} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.alerts}</strong><MiniSparkline data={[3, 4, 4, 5, 5]} /></div></Card>
+          <Card title={copy.kpi.evidence} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.evidence}</strong><MiniSparkline data={[82, 84, 86, 88, 90]} /></div></Card>
+          <Card title={copy.kpi.authority} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.authority}</strong><MiniSparkline data={[68, 70, 72, 74, 74]} /></div></Card>
         </div>
 
         <div className="uw-grid uw-split">
@@ -245,7 +245,7 @@ export default function UnderwriterSeniorPage() {
                 <strong>{selected.id}</strong>
                 <div className="uw-muted">{selected.account} · {copy.products[selected.productKey]}</div>
               </div>
-              <div>
+              <div className="uw-chart-block">
                 <div className="uw-muted">{copy.corridorLabel}</div>
                 <CorridorChart corridor={selected.pricingCorridor} label={copy.corridorLabel} />
               </div>
@@ -266,9 +266,9 @@ export default function UnderwriterSeniorPage() {
                 <label className="uw-muted">{copy.overrideReason}</label>
                 <select value={overrideReason} onChange={(event) => setOverrideReason(event.target.value)} style={{ padding: '0.5rem', borderRadius: '8px', borderColor: '#cbd5f5' }}>
                   <option value="">{copy.overridePlaceholder}</option>
-                  <option value="data">Data integrity exception</option>
-                  <option value="governance">Governance escalation</option>
-                  <option value="strategic">Strategic carrier exception</option>
+                  <option value="data">{lang === 'en' ? 'Data integrity exception' : 'Datenintegritäts-Exception'}</option>
+                  <option value="governance">{lang === 'en' ? 'Governance escalation' : 'Governance-Eskalation'}</option>
+                  <option value="strategic">{lang === 'en' ? 'Strategic carrier exception' : 'Strategische Carrier-Exception'}</option>
                 </select>
                 <label className="uw-muted">{copy.overrideNotes}</label>
                 <textarea

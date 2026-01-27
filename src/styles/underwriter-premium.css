@@ -68,9 +68,28 @@
   letter-spacing: -0.01em;
 }
 
+.uw-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  height: 100%;
+}
+
 .uw-muted {
   color: #64748b;
   font-size: 0.9rem;
+}
+
+.uw-chart {
+  display: block;
+  width: 100%;
+  max-width: 260px;
+  margin: 0 auto;
+}
+
+.uw-chart-block {
+  display: grid;
+  gap: 0.5rem;
 }
 
 .uw-footnote {

@@ -42,7 +42,7 @@ const MiniSparkline = ({ data }: { data: number[] }) => {
     })
     .join(' ')
   return (
-    <svg width="100%" height="40" viewBox="0 0 100 30" aria-hidden>
+    <svg className="uw-chart" width="100%" height="40" viewBox="0 0 100 30" aria-hidden>
       <polyline fill="none" stroke="#1d4ed8" strokeWidth="2" points={points} />
     </svg>
   )
@@ -53,7 +53,7 @@ const CorridorChart = ({ corridor, label }: { corridor: CaseItem['pricingCorrido
   const targetX = ((corridor.target - corridor.min) / range) * 100
   const suggestedX = ((corridor.suggested - corridor.min) / range) * 100
   return (
-    <svg width="100%" height="50" viewBox="0 0 100 50" aria-label={label}>
+    <svg className="uw-chart" width="100%" height="50" viewBox="0 0 100 50" aria-label={label}>
       <rect x="5" y="20" width="90" height="10" fill="#e2e8f0" rx="5" />
       <rect x="5" y="20" width="90" height="10" fill="#c7d2fe" rx="5" opacity="0.65" />
       <line x1={5 + targetX * 0.9} y1="15" x2={5 + targetX * 0.9} y2="35" stroke="#1d4ed8" strokeWidth="2" />
@@ -201,12 +201,12 @@ export default function UnderwriterJuniorPage() {
 
       <div className="uw-container">
         <div className="uw-grid uw-kpi">
-          <Card title={copy.kpi.open} variant="glass" className="uw-card"><strong>{kpis.open}</strong><MiniSparkline data={[10, 12, 11, 14, 13]} /></Card>
-          <Card title={copy.kpi.avg} variant="glass" className="uw-card"><strong>{kpis.avg}</strong><MiniSparkline data={[2.4, 2.1, 1.9, 1.8, 1.8]} /></Card>
-          <Card title={copy.kpi.due} variant="glass" className="uw-card"><strong>{kpis.due}</strong><MiniSparkline data={[3, 2, 4, 3, 3]} /></Card>
-          <Card title={copy.kpi.referrals} variant="glass" className="uw-card"><strong>{kpis.referrals}</strong><MiniSparkline data={[1, 2, 2, 3, 2]} /></Card>
-          <Card title={copy.kpi.evidence} variant="glass" className="uw-card"><strong>{kpis.evidence}</strong><MiniSparkline data={[70, 76, 81, 78, 82]} /></Card>
-          <Card title={copy.kpi.corridor} variant="glass" className="uw-card"><strong>{kpis.corridor}</strong><MiniSparkline data={[82, 84, 79, 86, 88]} /></Card>
+          <Card title={copy.kpi.open} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.open}</strong><MiniSparkline data={[10, 12, 11, 14, 13]} /></div></Card>
+          <Card title={copy.kpi.avg} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.avg}</strong><MiniSparkline data={[2.4, 2.1, 1.9, 1.8, 1.8]} /></div></Card>
+          <Card title={copy.kpi.due} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.due}</strong><MiniSparkline data={[3, 2, 4, 3, 3]} /></div></Card>
+          <Card title={copy.kpi.referrals} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.referrals}</strong><MiniSparkline data={[1, 2, 2, 3, 2]} /></div></Card>
+          <Card title={copy.kpi.evidence} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.evidence}</strong><MiniSparkline data={[70, 76, 81, 78, 82]} /></div></Card>
+          <Card title={copy.kpi.corridor} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.corridor}</strong><MiniSparkline data={[82, 84, 79, 86, 88]} /></div></Card>
         </div>
 
         <div className="uw-grid uw-split">
@@ -246,7 +246,7 @@ export default function UnderwriterJuniorPage() {
                 <strong>{selected.id}</strong>
                 <div className="uw-muted">{selected.account} · {copy.products[selected.productKey]}</div>
               </div>
-              <div>
+              <div className="uw-chart-block">
                 <div className="uw-muted">{copy.corridorLabel}</div>
                 <CorridorChart corridor={selected.pricingCorridor} label={copy.corridorLabel} />
               </div>

@@ -38,7 +38,7 @@ const MiniSparkline = ({ data }: { data: number[] }) => {
     })
     .join(' ')
   return (
-    <svg width="100%" height="40" viewBox="0 0 100 30" aria-hidden>
+    <svg className="uw-chart" width="100%" height="40" viewBox="0 0 100 30" aria-hidden>
       <polyline fill="none" stroke="#1d4ed8" strokeWidth="2" points={points} />
     </svg>
   )
@@ -172,11 +172,11 @@ export default function UnderwriterCarrierPage() {
 
       <div className="uw-container">
         <div className="uw-grid uw-kpi">
-          <Card title={copy.kpi.approvals} variant="glass" className="uw-card"><strong>{kpis.approvals}</strong><MiniSparkline data={[5, 6, 7, 6, 7]} /></Card>
-          <Card title={copy.kpi.decisionTime} variant="glass" className="uw-card"><strong>{kpis.decisionTime}</strong><MiniSparkline data={[2.6, 2.4, 2.2, 2.1, 2.1]} /></Card>
-          <Card title={copy.kpi.escalations} variant="glass" className="uw-card"><strong>{kpis.escalations}</strong><MiniSparkline data={[4, 5, 6, 6, 7]} /></Card>
-          <Card title={copy.kpi.capacity} variant="glass" className="uw-card"><strong>{kpis.capacity}</strong><MiniSparkline data={[68, 70, 72, 76, 78]} /></Card>
-          <Card title={copy.kpi.exceptions} variant="glass" className="uw-card"><strong>{kpis.exceptions}</strong><MiniSparkline data={[2, 3, 4, 3, 4]} /></Card>
+          <Card title={copy.kpi.approvals} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.approvals}</strong><MiniSparkline data={[5, 6, 7, 6, 7]} /></div></Card>
+          <Card title={copy.kpi.decisionTime} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.decisionTime}</strong><MiniSparkline data={[2.6, 2.4, 2.2, 2.1, 2.1]} /></div></Card>
+          <Card title={copy.kpi.escalations} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.escalations}</strong><MiniSparkline data={[4, 5, 6, 6, 7]} /></div></Card>
+          <Card title={copy.kpi.capacity} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.capacity}</strong><MiniSparkline data={[68, 70, 72, 76, 78]} /></div></Card>
+          <Card title={copy.kpi.exceptions} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.exceptions}</strong><MiniSparkline data={[2, 3, 4, 3, 4]} /></div></Card>
         </div>
 
         <div className="uw-grid uw-split">
@@ -216,14 +216,14 @@ export default function UnderwriterCarrierPage() {
                 <strong>{selected.id}</strong>
                 <div className="uw-muted">{selected.account} · {copy.products[selected.productKey]}</div>
               </div>
-              <div>
+              <div className="uw-chart-block">
                 <strong>{copy.evidenceTitle}</strong>
                 <span className="uw-badge" style={{ background: selected.evidenceReady ? 'rgba(22,163,74,0.15)' : 'rgba(249,115,22,0.15)', color: selected.evidenceReady ? '#15803d' : '#c2410c' }}>
-                  {selected.evidenceReady ? 'Audit-ready' : 'Pending evidence'}
+                  {selected.evidenceReady ? (lang === 'en' ? 'Audit-ready' : 'Audit-ready') : (lang === 'en' ? 'Pending evidence' : 'Evidenz offen')}
                 </span>
-                <ul style={{ margin: '0.5rem 0 0', paddingLeft: '1.1rem', color: '#475569', lineHeight: 1.5 }}>
-                  {copy.evidenceItems.map((item) => (
-                    <li key={item}>{item}</li>
+              <ul style={{ margin: '0.5rem 0 0', paddingLeft: '1.1rem', color: '#475569', lineHeight: 1.5 }}>
+                {copy.evidenceItems.map((item) => (
+                  <li key={item}>{item}</li>
                   ))}
                 </ul>
               </div>
@@ -247,7 +247,7 @@ export default function UnderwriterCarrierPage() {
 
         <div className="uw-grid uw-triplet">
           <Card title={copy.portfolioTitle} variant="glass" className="uw-card">
-            <div style={{ display: 'grid', gap: '0.75rem' }}>
+            <div className="uw-chart-block">
               <AggregationGauge value={82} label={copy.aggregationLabel} />
               <ul style={{ margin: 0, paddingLeft: '1.1rem', color: '#475569', lineHeight: 1.55 }}>
                 {copy.portfolioItems.map((item) => (
@@ -256,14 +256,18 @@ export default function UnderwriterCarrierPage() {
               </ul>
             </div>
           </Card>
-          <Card title="Exposure trend" variant="glass" className="uw-card">
-            <MiniSparkline data={[12, 10, 14, 11, 9, 8]} />
-            <div className="uw-muted">12 → 8 (6 months)</div>
+          <Card title={lang === 'en' ? 'Exposure trend' : 'Exposure-Trend'} variant="glass" className="uw-card">
+            <div className="uw-card-body">
+              <MiniSparkline data={[12, 10, 14, 11, 9, 8]} />
+              <div className="uw-muted">{lang === 'en' ? '12 → 8 (6 months)' : '12 → 8 (6 Monate)'}</div>
+            </div>
           </Card>
-          <Card title="Escalation monitor" variant="glass" className="uw-card">
-            <div className="uw-muted">Tail clusters flagged: 3</div>
-            <div className="uw-muted">Aggregation alerts: 5</div>
-            <div className="uw-muted">Exceptions open: 2</div>
+          <Card title={lang === 'en' ? 'Escalation monitor' : 'Eskalationsmonitor'} variant="glass" className="uw-card">
+            <div className="uw-card-body">
+              <div className="uw-muted">{lang === 'en' ? 'Tail clusters flagged: 3' : 'Tail-Cluster markiert: 3'}</div>
+              <div className="uw-muted">{lang === 'en' ? 'Aggregation alerts: 5' : 'Aggregation Alerts: 5'}</div>
+              <div className="uw-muted">{lang === 'en' ? 'Exceptions open: 2' : 'Exceptions offen: 2'}</div>
+            </div>
           </Card>
         </div>
       </div>

@@ -32,7 +32,7 @@ const MiniSparkline = ({ data }: { data: number[] }) => {
     })
     .join(' ')
   return (
-    <svg width="100%" height="40" viewBox="0 0 100 30" aria-hidden>
+    <svg className="uw-chart" width="100%" height="40" viewBox="0 0 100 30" aria-hidden>
       <polyline fill="none" stroke="#1d4ed8" strokeWidth="2" points={points} />
     </svg>
   )
@@ -187,11 +187,11 @@ export default function UnderwriterCompliancePage() {
 
       <div className="uw-container">
         <div className="uw-grid uw-kpi">
-          <Card title={copy.kpi.decisions} variant="glass" className="uw-card"><strong>{kpis.decisions}</strong><MiniSparkline data={[410, 430, 452, 488, 512]} /></Card>
-          <Card title={copy.kpi.missingEvidence} variant="glass" className="uw-card"><strong>{kpis.missingEvidence}</strong><MiniSparkline data={[12, 10, 9, 11, 8]} /></Card>
-          <Card title={copy.kpi.overrides} variant="glass" className="uw-card"><strong>{kpis.overrides}</strong><MiniSparkline data={[0, 0, 0, 0, 0]} /></Card>
-          <Card title={copy.kpi.breaches} variant="glass" className="uw-card"><strong>{kpis.breaches}</strong><MiniSparkline data={[4, 3, 3, 2, 3]} /></Card>
-          <Card title={copy.kpi.ruleChanges} variant="glass" className="uw-card"><strong>{kpis.ruleChanges}</strong><MiniSparkline data={[1, 1, 2, 2, 2]} /></Card>
+          <Card title={copy.kpi.decisions} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.decisions}</strong><MiniSparkline data={[410, 430, 452, 488, 512]} /></div></Card>
+          <Card title={copy.kpi.missingEvidence} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.missingEvidence}</strong><MiniSparkline data={[12, 10, 9, 11, 8]} /></div></Card>
+          <Card title={copy.kpi.overrides} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.overrides}</strong><MiniSparkline data={[0, 0, 0, 0, 0]} /></div></Card>
+          <Card title={copy.kpi.breaches} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.breaches}</strong><MiniSparkline data={[4, 3, 3, 2, 3]} /></div></Card>
+          <Card title={copy.kpi.ruleChanges} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.ruleChanges}</strong><MiniSparkline data={[1, 1, 2, 2, 2]} /></div></Card>
         </div>
 
         <Card title={copy.auditTitle} variant="glass" className="uw-card" style={{ overflowX: 'auto' }}>
@@ -300,7 +300,7 @@ export default function UnderwriterCompliancePage() {
         </div>
 
         <Card title={copy.referralTitle} variant="glass" className="uw-card">
-          <div style={{ display: 'grid', gap: '0.75rem' }}>
+          <div className="uw-chart-block">
             <div><strong>{copy.referralItems.traceability}</strong><div className="uw-muted">{copy.referralItems.traceabilityNote}</div></div>
             <div><strong>{copy.referralItems.sampling}</strong><div className="uw-muted">{copy.referralItems.samplingNote}</div></div>
             <AggregationGauge value={96} label={copy.aggregationLabel} />
