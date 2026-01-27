@@ -95,6 +95,12 @@ export default function LegalCarrierFinalAuthorityPage() {
           recommendation: 'Recommended action',
           status: 'Status'
         },
+        filters: {
+          status: 'Status filter',
+          sort: 'Sort by',
+          sortSla: 'SLA due'
+        },
+        statusAll: 'All',
         snapshot: {
           title: 'Decision snapshot',
           summary: 'Consolidated recommendation',
@@ -151,6 +157,12 @@ export default function LegalCarrierFinalAuthorityPage() {
           recommendation: 'Empfohlene Aktion',
           status: 'Status'
         },
+        filters: {
+          status: 'Statusfilter',
+          sort: 'Sortieren nach',
+          sortSla: 'SLA fällig'
+        },
+        statusAll: 'Alle',
         snapshot: {
           title: 'Decision Snapshot',
           summary: 'Konsolidierte Empfehlung',
@@ -292,8 +304,24 @@ export default function LegalCarrierFinalAuthorityPage() {
 
         <div className="uw-grid uw-split">
           <Card variant="glass" className="uw-card">
-            <div className="uw-card-body" style={{ gap: '0.75rem' }}>
-              <strong>{copy.table.title}</strong>
+            <div className="uw-card-body" style={{ gap: 0 }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.75rem', flexWrap: 'wrap' }}>
+                <strong>{copy.table.title}</strong>
+                <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                  <label className="uw-muted">
+                    {copy.filters.status}
+                    <select aria-label={copy.filters.status} defaultValue="all" style={{ marginLeft: '0.5rem' }}>
+                      <option value="all">{copy.statusAll}</option>
+                    </select>
+                  </label>
+                  <label className="uw-muted">
+                    {copy.filters.sort}
+                    <select aria-label={copy.filters.sort} defaultValue="sla" style={{ marginLeft: '0.5rem' }}>
+                      <option value="sla">{copy.filters.sortSla}</option>
+                    </select>
+                  </label>
+                </div>
+              </div>
               <div style={{ overflowX: 'auto' }}>
                 <table className="uw-table" aria-label="Carrier legal decision inbox">
                   <thead>
