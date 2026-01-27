@@ -1032,6 +1032,18 @@ export const translations: Record<Lang, TranslationTree> = {
           description: 'Sachbearbeiter-Cockpit für schnelle Entscheidungen, Freigaben, Partnersteuerung und AI-Hinweise.',
           cta: 'Öffnen'
         },
+        underwriter: {
+          title: 'Underwriter',
+          description: 'Portfolio-Steuerung, Underwriting-Korridore und klare Referral-Logik im Carrier-Framework.'
+        },
+        legal: {
+          title: 'Legal',
+          description: 'Binder-Wordings, Delegated-Authority-Umfang und Compliance-Kontrollen nach Carrier-Standards.'
+        },
+        finance: {
+          title: 'Finance',
+          description: 'Kapital-Effizienz, KPI-Transparenz und disziplinierte Portfolio-Ökonomie.'
+        },
         claimProcess: {
           title: 'Schadenmeldung',
           description: 'Demo-Chatbot mit Standortabfrage, automatischem Zeitstempel und strukturierter Erfassung.',
@@ -3124,6 +3136,18 @@ export const translations: Record<Lang, TranslationTree> = {
           title: 'Claims Manager',
           description: 'Claims handler cockpit for fast decisions, approvals, partner orchestration and AI insights.',
           cta: 'Open'
+        },
+        underwriter: {
+          title: 'Underwriter',
+          description: 'Portfolio steering, underwriting corridors and clear referral logic within the carrier framework.'
+        },
+        legal: {
+          title: 'Legal',
+          description: 'Binder wording, delegated authority scope, and compliance controls aligned to carrier standards.'
+        },
+        finance: {
+          title: 'Finance',
+          description: 'Capital efficiency, KPI transparency and disciplined portfolio economics.'
         },
         claimProcess: {
           title: 'Claims Process',

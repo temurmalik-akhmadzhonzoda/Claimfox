@@ -32,6 +32,9 @@ import FleetLandingPage from '@/pages/FleetLandingPage'
 import PartnerLandingPage from '@/pages/PartnerLandingPage'
 import LogisticsAppPage from '@/pages/LogisticsAppPage'
 import MvpPage from '@/pages/MvpPage'
+import UnderwriterRolePage from '@/pages/UnderwriterRolePage'
+import LegalRolePage from '@/pages/LegalRolePage'
+import FinanceRolePage from '@/pages/FinanceRolePage'
 import PolicyPurchasePage from '@/pages/PolicyPurchasePage'
 import MyProfilePage from '@/pages/MyProfilePage'
 import ProfilePersonalPage from '@/pages/ProfilePersonalPage'
@@ -79,6 +82,9 @@ export default function AppRouter() {
       </Route>
       <Route element={<ProtectedRoute><FullscreenBgLayout showHeader /></ProtectedRoute>}>
         <Route path="/roles" element={<RolesPage />} />
+        <Route path="/roles/underwriter" element={<UnderwriterRolePage />} />
+        <Route path="/roles/legal" element={<LegalRolePage />} />
+        <Route path="/roles/finance" element={<FinanceRolePage />} />
         <Route path="/registration" element={<RegistrationPage />} />
         <Route path="/broker-portal" element={<BrokerPortalLandingPage />} />
         <Route path="/marketing" element={<MarketingLandingPage />} />

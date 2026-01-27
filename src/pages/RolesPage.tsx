@@ -36,12 +36,18 @@ type RoleItem = {
     | 'setup'
     | 'landingSitemap'
     | 'landingTools'
+    | 'underwriter'
+    | 'legal'
+    | 'finance'
   route?: string
   ctaKey?: string
 }
 
 const OVERVIEW_ITEMS: RoleItem[] = [
   { key: 'claims', route: '/claim-manager', ctaKey: 'roles.cards.claims.cta' },
+  { key: 'underwriter', route: '/roles/underwriter' },
+  { key: 'legal', route: '/roles/legal' },
+  { key: 'finance', route: '/roles/finance' },
   { key: 'partner', route: '/partner-management-overview' },
   { key: 'reporting', route: '/marketing' },
   { key: 'logistics', route: '/logistics', ctaKey: 'roles.cards.logistics.cta' },
@@ -151,7 +157,9 @@ export default function RolesPage() {
           <div className="roles-subsection">
             <h3>{t('roles.overviewGroups.insurance')}</h3>
             <div className="roles-grid">
-              {['claims', 'partner'].map((key) => renderCard(OVERVIEW_ITEMS.find((item) => item.key === key)!))}
+              {['underwriter', 'legal', 'finance', 'claims', 'partner'].map((key) => (
+                renderCard(OVERVIEW_ITEMS.find((item) => item.key === key)!)
+              ))}
             </div>
           </div>
           <div className="roles-subsection">
