@@ -125,6 +125,13 @@
 .uw-kpi .uw-card-body {
   min-height: 104px;
   padding-bottom: 6px;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+.uw-kpi .uw-card-body strong {
+  line-height: 1.1;
 }
 
 .uw-muted {
