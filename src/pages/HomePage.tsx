@@ -40,7 +40,7 @@ export default function HomePage() {
     valueBody:
       lang === 'en'
         ? 'Insurfox is neither a broker nor a carrier. The platform provides AI-native infrastructure where risk ownership, underwriting authority and technology remain strictly separated.'
-        : 'Insurfox ist weder Broker noch Versicherer. Die Plattform stellt eine AI-native Infrastruktur bereit, in der Risikohoheit, Zeichnungsautorität und Technologie strikt getrennt bleiben.',
+        : 'Die Insurfox IaaS Plattform stellt eine AI-native Infrastruktur bereit, in der Risikohoheit, Zeichnungsautorität und Technologie strikt getrennt bleiben.',
     valueCards: [
       {
         title: lang === 'en' ? 'Carriers' : 'Versicherer (Carrier)',
