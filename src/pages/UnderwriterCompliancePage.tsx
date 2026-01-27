@@ -24,13 +24,13 @@ type ExceptionItem = {
 
 const MiniBars = ({ data }: { data: number[] }) => {
   const max = Math.max(...data)
-  const barWidth = 7
-  const gap = 4
+  const barWidth = 6
+  const gap = 3
   const totalWidth = data.length * barWidth + (data.length - 1) * gap
   const startX = (100 - totalWidth) / 2
   return (
     <svg className="uw-chart" width="100%" height="40" viewBox="0 0 100 30" aria-hidden>
-      <line x1="8" y1="26" x2="92" y2="26" stroke="var(--ix-border)" strokeWidth="1" />
+      <line x1="12" y1="26" x2="88" y2="26" stroke="var(--ix-border)" strokeWidth="1" />
       {data.map((value, index) => {
         const height = (value / max) * 20
         const x = startX + index * (barWidth + gap)
@@ -42,7 +42,7 @@ const MiniBars = ({ data }: { data: number[] }) => {
             y={y}
             width={barWidth}
             height={height}
-            fill={index === data.length - 1 ? 'var(--ix-primary)' : 'var(--ix-primary-100)'}
+            fill={index === data.length - 1 ? 'var(--insurfox-orange)' : 'var(--blue-dark)'}
           />
         )
       })}
