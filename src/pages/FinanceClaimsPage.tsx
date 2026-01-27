@@ -734,7 +734,6 @@ export default function FinanceClaimsPage() {
           <Card title={copy.kpi.reserves} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.reserves}</strong><MiniBars data={[4, 5, 6, 5, 6]} /></div></Card>
           <Card title={copy.kpi.largeLoss} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.largeLoss}</strong><MiniBars data={[2, 3, 3, 4, 3]} /></div></Card>
           <Card title={copy.kpi.leakage} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.leakage}</strong><MiniBars data={[1, 2, 2, 3, 2]} /></div></Card>
-          <Card title={copy.kpi.cycle} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.cycle}</strong><MiniBars data={[2.8, 2.6, 2.5, 2.4, 2.3]} /></div></Card>
           <Card title={copy.kpi.sla} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.slaRisk}</strong><MiniBars data={[2, 3, 3, 4, 3]} /></div></Card>
         </div>
 

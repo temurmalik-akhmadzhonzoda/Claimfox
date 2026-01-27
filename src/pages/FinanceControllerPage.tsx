@@ -732,7 +732,6 @@ export default function FinanceControllerPage() {
           <Card title={copy.kpi.reconciliations} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.reconciliations}</strong><MiniBars data={[6, 7, 8, 7, 9]} /></div></Card>
           <Card title={copy.kpi.journals} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.journals}</strong><MiniBars data={[5, 6, 7, 6, 7]} /></div></Card>
           <Card title={copy.kpi.suspense} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.suspense}</strong><MiniBars data={[1.2, 1.1, 1.0, 0.9, 0.8]} /></div></Card>
-          <Card title={copy.kpi.interco} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.interco}</strong><MiniBars data={[3, 4, 3, 5, 4]} /></div></Card>
           <Card title={copy.kpi.reporting} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.reporting}</strong><MiniBars data={[2, 3, 4, 4, 5]} /></div></Card>
           <Card title={copy.kpi.sla} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.slaBreaches}</strong><MiniBars data={[1, 2, 2, 3, 2]} /></div></Card>
         </div>

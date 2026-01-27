@@ -800,8 +800,6 @@ export default function FinanceAnalystPage() {
           <Card title={copy.kpi.expense} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.expense}</strong><MiniBars data={[28, 27, 29, 30, 28]} /></div></Card>
           <Card title={copy.kpi.open} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.open}</strong><MiniBars data={[6, 8, 7, 9, 8]} /></div></Card>
           <Card title={copy.kpi.sla} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.slaRisk}</strong><MiniBars data={[2, 3, 3, 4, 3]} /></div></Card>
-          <Card title={copy.kpi.exceptions} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.exceptions}</strong><MiniBars data={[3, 4, 5, 4, 5]} /></div></Card>
-          <Card title={copy.kpi.recoveries} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.recoveries}</strong><MiniBars data={[4, 5, 6, 5, 6]} /></div></Card>
         </div>
 
         <div className="uw-grid uw-split">

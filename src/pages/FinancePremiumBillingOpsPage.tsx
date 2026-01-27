@@ -735,7 +735,6 @@ export default function FinancePremiumBillingOpsPage() {
           <Card title={copy.kpi.dueToday} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.dueToday}</strong><MiniBars data={[4, 5, 6, 5, 6]} /></div></Card>
           <Card title={copy.kpi.pastDue} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.pastDueAmount}</strong><MiniBars data={[9, 10, 12, 11, 13]} /></div></Card>
           <Card title={copy.kpi.dso} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.dso}</strong><MiniBars data={[38, 36, 35, 34, 33]} /></div></Card>
-          <Card title={copy.kpi.promises} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.promises}</strong><MiniBars data={[6, 7, 8, 7, 8]} /></div></Card>
           <Card title={copy.kpi.disputes} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.disputes}</strong><MiniBars data={[3, 4, 4, 5, 4]} /></div></Card>
           <Card title={copy.kpi.cash} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.cash}</strong><MiniBars data={[14, 15, 16, 15, 17]} /></div></Card>
           <Card title={copy.kpi.sla} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.breaches}</strong><MiniBars data={[2, 3, 3, 2, 3]} /></div></Card>

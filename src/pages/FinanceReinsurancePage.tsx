@@ -983,7 +983,6 @@ export default function FinanceReinsurancePage() {
         <div className="uw-grid uw-kpi">
           <Card title={copy.kpi.ceded} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.ceded}</strong><MiniBars data={[18, 20, 21, 22, 23]} /></div></Card>
           <Card title={copy.kpi.bordDue} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.bordDue}</strong><MiniBars data={[5, 6, 7, 6, 7]} /></div></Card>
-          <Card title={copy.kpi.bordLate} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.bordLate}</strong><MiniBars data={[2, 3, 3, 4, 3]} /></div></Card>
           <Card title={copy.kpi.recoveries} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.recoveries}</strong><MiniBars data={[4, 5, 6, 5, 6]} /></div></Card>
           <Card title={copy.kpi.sla} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.slaRisk}</strong><MiniBars data={[3, 4, 4, 5, 4]} /></div></Card>
           <Card title={copy.kpi.exceptions} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.exceptions}</strong><MiniBars data={[3, 4, 5, 4, 5]} /></div></Card>
