@@ -32,18 +32,27 @@ const formatSla = (iso: string, lang: string) => {
   return formatter.format(date)
 }
 
-const MiniSparkline = ({ data }: { data: number[] }) => {
+const MiniBars = ({ data }: { data: number[] }) => {
   const max = Math.max(...data)
-  const points = data
-    .map((value, index) => {
-      const x = (index / (data.length - 1)) * 100
-      const y = 30 - (value / max) * 30
-      return `${x},${y}`
-    })
-    .join(' ')
+  const barWidth = 8
+  const gap = 4
   return (
     <svg className="uw-chart" width="100%" height="40" viewBox="0 0 100 30" aria-hidden>
-      <polyline fill="none" stroke="var(--ix-primary)" strokeWidth="2" points={points} />
+      {data.map((value, index) => {
+        const height = (value / max) * 24
+        const x = index * (barWidth + gap)
+        const y = 28 - height
+        return (
+          <rect
+            key={value + index}
+            x={x}
+            y={y}
+            width={barWidth}
+            height={height}
+            fill={index === data.length - 1 ? 'var(--ix-primary)' : 'var(--ix-primary-100)'}
+          />
+        )
+      })}
     </svg>
   )
 }
@@ -201,12 +210,12 @@ export default function UnderwriterJuniorPage() {
 
       <div className="uw-container">
         <div className="uw-grid uw-kpi">
-          <Card title={copy.kpi.open} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.open}</strong><MiniSparkline data={[10, 12, 11, 14, 13]} /></div></Card>
-          <Card title={copy.kpi.avg} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.avg}</strong><MiniSparkline data={[2.4, 2.1, 1.9, 1.8, 1.8]} /></div></Card>
-          <Card title={copy.kpi.due} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.due}</strong><MiniSparkline data={[3, 2, 4, 3, 3]} /></div></Card>
-          <Card title={copy.kpi.referrals} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.referrals}</strong><MiniSparkline data={[1, 2, 2, 3, 2]} /></div></Card>
-          <Card title={copy.kpi.evidence} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.evidence}</strong><MiniSparkline data={[70, 76, 81, 78, 82]} /></div></Card>
-          <Card title={copy.kpi.corridor} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.corridor}</strong><MiniSparkline data={[82, 84, 79, 86, 88]} /></div></Card>
+          <Card title={copy.kpi.open} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.open}</strong><MiniBars data={[10, 12, 11, 14, 13]} /></div></Card>
+          <Card title={copy.kpi.avg} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.avg}</strong><MiniBars data={[2.4, 2.1, 1.9, 1.8, 1.8]} /></div></Card>
+          <Card title={copy.kpi.due} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.due}</strong><MiniBars data={[3, 2, 4, 3, 3]} /></div></Card>
+          <Card title={copy.kpi.referrals} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.referrals}</strong><MiniBars data={[1, 2, 2, 3, 2]} /></div></Card>
+          <Card title={copy.kpi.evidence} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.evidence}</strong><MiniBars data={[70, 76, 81, 78, 82]} /></div></Card>
+          <Card title={copy.kpi.corridor} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.corridor}</strong><MiniBars data={[82, 84, 79, 86, 88]} /></div></Card>
         </div>
 
         <div className="uw-grid uw-split">

@@ -22,18 +22,27 @@ type ExceptionItem = {
   ownerKey: 'uw_governance' | 'carrier_ops' | 'compliance'
 }
 
-const MiniSparkline = ({ data }: { data: number[] }) => {
+const MiniBars = ({ data }: { data: number[] }) => {
   const max = Math.max(...data)
-  const points = data
-    .map((value, index) => {
-      const x = (index / (data.length - 1)) * 100
-      const y = 30 - (value / max) * 30
-      return `${x},${y}`
-    })
-    .join(' ')
+  const barWidth = 8
+  const gap = 4
   return (
     <svg className="uw-chart" width="100%" height="40" viewBox="0 0 100 30" aria-hidden>
-      <polyline fill="none" stroke="var(--ix-primary)" strokeWidth="2" points={points} />
+      {data.map((value, index) => {
+        const height = (value / max) * 24
+        const x = index * (barWidth + gap)
+        const y = 28 - height
+        return (
+          <rect
+            key={value + index}
+            x={x}
+            y={y}
+            width={barWidth}
+            height={height}
+            fill={index === data.length - 1 ? 'var(--ix-primary)' : 'var(--ix-primary-100)'}
+          />
+        )
+      })}
     </svg>
   )
 }
@@ -187,11 +196,11 @@ export default function UnderwriterCompliancePage() {
 
       <div className="uw-container">
         <div className="uw-grid uw-kpi">
-          <Card title={copy.kpi.decisions} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.decisions}</strong><MiniSparkline data={[410, 430, 452, 488, 512]} /></div></Card>
-          <Card title={copy.kpi.missingEvidence} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.missingEvidence}</strong><MiniSparkline data={[12, 10, 9, 11, 8]} /></div></Card>
-          <Card title={copy.kpi.overrides} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.overrides}</strong><MiniSparkline data={[0, 0, 0, 0, 0]} /></div></Card>
-          <Card title={copy.kpi.breaches} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.breaches}</strong><MiniSparkline data={[4, 3, 3, 2, 3]} /></div></Card>
-          <Card title={copy.kpi.ruleChanges} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.ruleChanges}</strong><MiniSparkline data={[1, 1, 2, 2, 2]} /></div></Card>
+          <Card title={copy.kpi.decisions} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.decisions}</strong><MiniBars data={[410, 430, 452, 488, 512]} /></div></Card>
+          <Card title={copy.kpi.missingEvidence} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.missingEvidence}</strong><MiniBars data={[12, 10, 9, 11, 8]} /></div></Card>
+          <Card title={copy.kpi.overrides} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.overrides}</strong><MiniBars data={[0, 0, 0, 0, 0]} /></div></Card>
+          <Card title={copy.kpi.breaches} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.breaches}</strong><MiniBars data={[4, 3, 3, 2, 3]} /></div></Card>
+          <Card title={copy.kpi.ruleChanges} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.ruleChanges}</strong><MiniBars data={[1, 1, 2, 2, 2]} /></div></Card>
         </div>
 
         <Card title={copy.auditTitle} variant="glass" className="uw-card" style={{ overflowX: 'auto' }}>

@@ -28,18 +28,27 @@ const formatSla = (iso: string, lang: string) => {
   return formatter.format(date)
 }
 
-const MiniSparkline = ({ data }: { data: number[] }) => {
+const MiniBars = ({ data }: { data: number[] }) => {
   const max = Math.max(...data)
-  const points = data
-    .map((value, index) => {
-      const x = (index / (data.length - 1)) * 100
-      const y = 30 - (value / max) * 30
-      return `${x},${y}`
-    })
-    .join(' ')
+  const barWidth = 8
+  const gap = 4
   return (
     <svg className="uw-chart" width="100%" height="40" viewBox="0 0 100 30" aria-hidden>
-      <polyline fill="none" stroke="var(--ix-primary)" strokeWidth="2" points={points} />
+      {data.map((value, index) => {
+        const height = (value / max) * 24
+        const x = index * (barWidth + gap)
+        const y = 28 - height
+        return (
+          <rect
+            key={value + index}
+            x={x}
+            y={y}
+            width={barWidth}
+            height={height}
+            fill={index === data.length - 1 ? 'var(--ix-primary)' : 'var(--ix-primary-100)'}
+          />
+        )
+      })}
     </svg>
   )
 }
@@ -172,11 +181,11 @@ export default function UnderwriterCarrierPage() {
 
       <div className="uw-container">
         <div className="uw-grid uw-kpi">
-          <Card title={copy.kpi.approvals} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.approvals}</strong><MiniSparkline data={[5, 6, 7, 6, 7]} /></div></Card>
-          <Card title={copy.kpi.decisionTime} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.decisionTime}</strong><MiniSparkline data={[2.6, 2.4, 2.2, 2.1, 2.1]} /></div></Card>
-          <Card title={copy.kpi.escalations} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.escalations}</strong><MiniSparkline data={[4, 5, 6, 6, 7]} /></div></Card>
-          <Card title={copy.kpi.capacity} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.capacity}</strong><MiniSparkline data={[68, 70, 72, 76, 78]} /></div></Card>
-          <Card title={copy.kpi.exceptions} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.exceptions}</strong><MiniSparkline data={[2, 3, 4, 3, 4]} /></div></Card>
+          <Card title={copy.kpi.approvals} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.approvals}</strong><MiniBars data={[5, 6, 7, 6, 7]} /></div></Card>
+          <Card title={copy.kpi.decisionTime} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.decisionTime}</strong><MiniBars data={[2.6, 2.4, 2.2, 2.1, 2.1]} /></div></Card>
+          <Card title={copy.kpi.escalations} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.escalations}</strong><MiniBars data={[4, 5, 6, 6, 7]} /></div></Card>
+          <Card title={copy.kpi.capacity} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.capacity}</strong><MiniBars data={[68, 70, 72, 76, 78]} /></div></Card>
+          <Card title={copy.kpi.exceptions} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.exceptions}</strong><MiniBars data={[2, 3, 4, 3, 4]} /></div></Card>
         </div>
 
         <div className="uw-grid uw-split">
@@ -258,7 +267,7 @@ export default function UnderwriterCarrierPage() {
           </Card>
           <Card title={lang === 'en' ? 'Exposure trend' : 'Exposure-Trend'} variant="glass" className="uw-card">
             <div className="uw-card-body">
-              <MiniSparkline data={[12, 10, 14, 11, 9, 8]} />
+              <MiniBars data={[12, 10, 14, 11, 9, 8]} />
               <div className="uw-muted">{lang === 'en' ? '12 → 8 (6 months)' : '12 → 8 (6 Monate)'}</div>
             </div>
           </Card>
