@@ -113,7 +113,7 @@
 }
 
 .uw-kpi .uw-card-body {
-  min-height: 92px;
+  min-height: 104px;
   padding-bottom: 6px;
 }
 
@@ -125,7 +125,7 @@
 .uw-chart {
   display: block;
   width: 100%;
-  max-width: 120px;
+  max-width: 100%;
   margin: 6px auto 0;
   flex-shrink: 0;
 }
@@ -144,6 +144,7 @@
   width: 100%;
   border-collapse: collapse;
   min-width: 540px;
+  table-layout: fixed;
 }
 
 .uw-table th {
@@ -154,12 +155,14 @@
   color: var(--ix-text-muted);
   padding: 0.55rem 0.45rem;
   border-bottom: 1px solid var(--ix-border);
+  overflow-wrap: anywhere;
 }
 
 .uw-table td {
   padding: 0.55rem 0.45rem;
   border-bottom: 1px solid var(--ix-border);
   color: var(--ix-text);
+  overflow-wrap: anywhere;
 }
 
 .uw-row-active {
