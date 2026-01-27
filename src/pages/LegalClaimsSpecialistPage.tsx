@@ -248,7 +248,6 @@ export default function LegalClaimsSpecialistPage() {
       >
         <div className="roles-hero-inner">
           <Header title={copy.title} subtitle={copy.subtitle} subtitleColor="rgba(255,255,255,0.82)" />
-          <div className="uw-footnote" style={{ color: 'rgba(255,255,255,0.7)' }}>{copy.lastUpdated}</div>
         </div>
       </div>
 

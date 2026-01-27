@@ -784,15 +784,6 @@ export default function FinanceAnalystPage() {
       </div>
 
       <div className="uw-container">
-        <div className="uw-panel" style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap' }}>
-          <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-            {copy.badges.map((badge) => (
-              <span key={badge} className="uw-badge">{badge}</span>
-            ))}
-          </div>
-          <span className="uw-muted">{copy.lastUpdated}</span>
-        </div>
-
         <div className="uw-grid uw-kpi">
           <Card title={copy.kpi.premium} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.premium}</strong><MiniBars data={[18, 20, 22, 24, 26]} /></div></Card>
           <Card title={copy.kpi.claims} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.claims}</strong><MiniBars data={[12, 14, 16, 15, 17]} /></div></Card>

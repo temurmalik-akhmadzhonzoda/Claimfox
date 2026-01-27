@@ -732,15 +732,6 @@ export default function FinanceCfoFinalAuthorityPage() {
       </div>
 
       <div className="uw-container">
-        <div className="uw-panel" style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap' }}>
-          <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-            {copy.badges.map((badge) => (
-              <span key={badge} className="uw-badge">{badge}</span>
-            ))}
-          </div>
-          <span className="uw-muted">{copy.lastUpdated}</span>
-        </div>
-
         <div className="uw-grid uw-kpi">
           <Card title={copy.kpi.pending} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.pending}</strong><MiniBars data={[3, 4, 5, 4, 5]} /></div></Card>
           <Card title={copy.kpi.capital} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.capital}</strong><MiniBars data={[70, 72, 74, 73, 75]} /></div></Card>

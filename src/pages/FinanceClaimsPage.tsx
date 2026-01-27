@@ -719,15 +719,6 @@ export default function FinanceClaimsPage() {
       </div>
 
       <div className="uw-container">
-        <div className="uw-panel" style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap' }}>
-          <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-            {copy.badges.map((badge) => (
-              <span key={badge} className="uw-badge">{badge}</span>
-            ))}
-          </div>
-          <span className="uw-muted">{copy.lastUpdated}</span>
-        </div>
-
         <div className="uw-grid uw-kpi">
           <Card title={copy.kpi.paid} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.paid}</strong><MiniBars data={[8, 9, 11, 10, 12]} /></div></Card>
           <Card title={copy.kpi.approvals} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.approvals}</strong><MiniBars data={[5, 6, 7, 6, 7]} /></div></Card>

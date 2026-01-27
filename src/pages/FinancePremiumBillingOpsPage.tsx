@@ -722,15 +722,6 @@ export default function FinancePremiumBillingOpsPage() {
       </div>
 
       <div className="uw-container">
-        <div className="uw-panel" style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap' }}>
-          <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-            {copy.badges.map((badge) => (
-              <span key={badge} className="uw-badge">{badge}</span>
-            ))}
-          </div>
-          <span className="uw-muted">{copy.lastUpdated}</span>
-        </div>
-
         <div className="uw-grid uw-kpi">
           <Card title={copy.kpi.dueToday} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.dueToday}</strong><MiniBars data={[4, 5, 6, 5, 6]} /></div></Card>
           <Card title={copy.kpi.pastDue} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.pastDueAmount}</strong><MiniBars data={[9, 10, 12, 11, 13]} /></div></Card>

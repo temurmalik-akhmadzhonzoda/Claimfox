@@ -971,15 +971,6 @@ export default function FinanceReinsurancePage() {
       </div>
 
       <div className="uw-container">
-        <div className="uw-panel" style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap' }}>
-          <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-            {copy.badges.map((badge) => (
-              <span key={badge} className="uw-badge">{badge}</span>
-            ))}
-          </div>
-          <span className="uw-muted">{copy.lastUpdated}</span>
-        </div>
-
         <div className="uw-grid uw-kpi">
           <Card title={copy.kpi.ceded} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.ceded}</strong><MiniBars data={[18, 20, 21, 22, 23]} /></div></Card>
           <Card title={copy.kpi.bordDue} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.bordDue}</strong><MiniBars data={[5, 6, 7, 6, 7]} /></div></Card>

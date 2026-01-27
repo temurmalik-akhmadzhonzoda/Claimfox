@@ -718,15 +718,6 @@ export default function FinanceControllerPage() {
       </div>
 
       <div className="uw-container">
-        <div className="uw-panel" style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap' }}>
-          <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-            {copy.badges.map((badge) => (
-              <span key={badge} className="uw-badge">{badge}</span>
-            ))}
-          </div>
-          <span className="uw-muted">{copy.lastUpdated}</span>
-        </div>
-
         <div className="uw-grid uw-kpi">
           <Card title={copy.kpi.close} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.close}</strong><MiniBars data={[62, 66, 70, 74, 78]} /></div></Card>
           <Card title={copy.kpi.reconciliations} variant="glass" className="uw-card"><div className="uw-card-body"><strong>{kpis.reconciliations}</strong><MiniBars data={[6, 7, 8, 7, 9]} /></div></Card>
