@@ -41,6 +41,12 @@ import LegalRegulatoryCompliancePage from '@/pages/LegalRegulatoryCompliancePage
 import LegalLitigationManagerPage from '@/pages/LegalLitigationManagerPage'
 import LegalCarrierFinalAuthorityPage from '@/pages/LegalCarrierFinalAuthorityPage'
 import FinanceRolePage from '@/pages/FinanceRolePage'
+import FinanceAnalystPage from '@/pages/FinanceAnalystPage'
+import FinancePremiumBillingOpsPage from '@/pages/FinancePremiumBillingOpsPage'
+import FinanceClaimsPage from '@/pages/FinanceClaimsPage'
+import FinanceReinsurancePage from '@/pages/FinanceReinsurancePage'
+import FinanceControllerPage from '@/pages/FinanceControllerPage'
+import FinanceCfoFinalAuthorityPage from '@/pages/FinanceCfoFinalAuthorityPage'
 import UnderwriterReportingPage from '@/pages/UnderwriterReportingPage'
 import UnderwriterJuniorPage from '@/pages/UnderwriterJuniorPage'
 import UnderwriterSeniorPage from '@/pages/UnderwriterSeniorPage'
@@ -109,6 +115,12 @@ export default function AppRouter() {
         <Route path="/roles/legal/litigation-manager" element={<LegalLitigationManagerPage />} />
         <Route path="/roles/legal/carrier-final-authority" element={<LegalCarrierFinalAuthorityPage />} />
         <Route path="/roles/finance" element={<FinanceRolePage />} />
+        <Route path="/roles/finance/analyst" element={<FinanceAnalystPage />} />
+        <Route path="/roles/finance/premium-billing" element={<FinancePremiumBillingOpsPage />} />
+        <Route path="/roles/finance/claims" element={<FinanceClaimsPage />} />
+        <Route path="/roles/finance/reinsurance" element={<FinanceReinsurancePage />} />
+        <Route path="/roles/finance/controller" element={<FinanceControllerPage />} />
+        <Route path="/roles/finance/cfo-final-authority" element={<FinanceCfoFinalAuthorityPage />} />
         <Route path="/registration" element={<RegistrationPage />} />
         <Route path="/broker-portal" element={<BrokerPortalLandingPage />} />
         <Route path="/marketing" element={<MarketingLandingPage />} />
