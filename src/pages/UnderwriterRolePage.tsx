@@ -4,6 +4,7 @@ import Header from '@/components/ui/Header'
 import { useI18n } from '@/i18n/I18nContext'
 import HeroBlockBackground from '@/assets/images/hero_block_1.png'
 import { useNavigate } from 'react-router-dom'
+import '@/styles/underwriter-premium.css'
 
 export default function UnderwriterRolePage() {
   const { lang } = useI18n()
@@ -94,7 +95,7 @@ export default function UnderwriterRolePage() {
       }
 
   return (
-    <section style={{ minHeight: '100vh', width: '100%', color: '#0e0d1c' }}>
+    <section className="uw-page">
       <div
         className="roles-hero"
         style={{
@@ -109,19 +110,10 @@ export default function UnderwriterRolePage() {
           />
         </div>
       </div>
-      <div
-        style={{
-          width: '100%',
-          maxWidth: 1200,
-          margin: '0 auto',
-          padding: '32px 1.25rem 4rem',
-          display: 'grid',
-          gap: '1.25rem'
-        }}
-      >
-        <div style={{ display: 'grid', gap: '1rem' }}>
-          <h2 style={{ margin: 0, fontSize: '1.35rem', color: '#0e0d1c' }}>{copy.rolesTitle}</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.25rem' }}>
+      <div className="uw-container">
+        <div className="uw-section">
+          <h2 className="uw-section-title">{copy.rolesTitle}</h2>
+          <div className="uw-grid uw-cards">
             {copy.roles.map((role) => (
               <Card
                 key={role.title}
@@ -129,6 +121,7 @@ export default function UnderwriterRolePage() {
                 variant="glass"
                 interactive
                 onClick={() => navigate(role.route)}
+                className="uw-card"
                 style={{ display: 'flex', flexDirection: 'column', minHeight: '170px' }}
               >
                 <p style={{ margin: 0, color: '#475569', lineHeight: 1.5 }}>{role.body}</p>
@@ -136,12 +129,13 @@ export default function UnderwriterRolePage() {
             ))}
           </div>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.25rem' }}>
+        <div className="uw-grid uw-triplet">
           {copy.sections.map((section) => (
             <Card
               key={section.title}
               title={section.title}
               variant="glass"
+              className="uw-card"
               style={{ display: 'flex', flexDirection: 'column', minHeight: '180px' }}
             >
               <ul style={{ margin: 0, paddingLeft: '1.1rem', color: '#475569', lineHeight: 1.55 }}>
