@@ -33,6 +33,10 @@
   gap: 1.25rem;
 }
 
+.uw-grid > * {
+  min-width: 0;
+}
+
 .uw-kpi {
   grid-template-columns: repeat(6, minmax(0, 1fr));
 }
@@ -79,13 +83,18 @@
   box-shadow: none !important;
   padding: 14px 16px !important;
   overflow: hidden;
+  min-width: 0;
 }
 
 .uw-kpi .uw-card {
   min-height: 120px;
 }
 
-.uw-card h2 {
+.uw-card .ui-card__header {
+  margin-bottom: 0.75rem;
+}
+
+.uw-card .ui-card__title {
   color: var(--ix-primary) !important;
   font-size: 0.82rem !important;
   letter-spacing: 0.08em;
@@ -110,6 +119,7 @@
   min-height: 76px;
   height: 100%;
   align-items: flex-start;
+  min-width: 0;
 }
 
 .uw-kpi .uw-card-body {
@@ -128,6 +138,10 @@
   max-width: 100%;
   margin: 6px auto 0;
   flex-shrink: 0;
+}
+
+.uw-card svg {
+  max-width: 100%;
 }
 
 .uw-chart-block {

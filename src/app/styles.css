@@ -47,6 +47,47 @@ h6 {
   color: var(--insurfox-orange);
 }
 
+.ui-card {
+  background-color: #ffffff;
+  border: 1px solid #ececec;
+  border-radius: 20px;
+  padding: 1.75rem;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+  color: #0e0d1c;
+  width: 100%;
+}
+
+.ui-card--glass {
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(6px);
+}
+
+.ui-card--interactive {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ui-card--interactive:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.12);
+}
+
+.ui-card__header {
+  margin-bottom: 1.5rem;
+}
+
+.ui-card__title {
+  margin: 0;
+  font-size: 1.3rem;
+  color: var(--insurfox-orange);
+}
+
+.ui-card__subtitle {
+  margin-top: 0.35rem;
+  margin-bottom: 0;
+  color: #65748b;
+}
+
 .app-shell {
   min-height: 100vh;
   display: flex;
