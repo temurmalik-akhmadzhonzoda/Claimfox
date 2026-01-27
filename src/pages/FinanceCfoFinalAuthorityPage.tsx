@@ -100,6 +100,22 @@ const MiniBars = ({ data }: { data: number[] }) => {
   )
 }
 
+const CorridorChart = ({ corridor, label }: { corridor: { min: number; target: number; max: number; suggested: number }; label: string }) => {
+  const range = corridor.max - corridor.min
+  const targetX = ((corridor.target - corridor.min) / range) * 100
+  const suggestedX = ((corridor.suggested - corridor.min) / range) * 100
+  return (
+    <svg className="uw-chart" width="100%" height="50" viewBox="0 0 100 50" aria-label={label}>
+      <rect x="5" y="20" width="90" height="10" fill="var(--ix-border)" rx="5" />
+      <rect x="5" y="20" width="90" height="10" fill="var(--ix-primary-100)" rx="5" opacity="0.7" />
+      <line x1={5 + targetX * 0.9} y1="15" x2={5 + targetX * 0.9} y2="35" stroke="var(--ix-primary)" strokeWidth="2" />
+      <circle cx={5 + suggestedX * 0.9} cy="25" r="4" fill="var(--ix-primary)" />
+      <text x="5" y="12" fontSize="6" fill="var(--ix-text-muted)">{corridor.min.toFixed(0)}</text>
+      <text x="85" y="12" fontSize="6" fill="var(--ix-text-muted)">{corridor.max.toFixed(0)}</text>
+    </svg>
+  )
+}
+
 const statusLabel = (status: DecisionCase['status'], lang: string) => {
   const mapEn: Record<DecisionCase['status'], string> = {
     open: 'Open',
@@ -186,26 +202,23 @@ export default function FinanceCfoFinalAuthorityPage() {
         },
         snapshot: {
           title: 'Decision snapshot',
-          summary: 'Final approval summary',
-          aiTitle: 'AI-generated decision template — requires human review',
-          aiItems: ['Summarize authority breaches', 'Validate SoD exceptions', 'Recommend approval conditions'],
-          templates: 'Decision templates',
-          conditions: 'Approval conditions',
+          corridorLabel: 'Pricing corridor',
+          aiTitle: 'AI decision templates — senior review required',
+          aiTemplates: ['Approve within corridor', 'Refer for aggregation review', 'Decline due to tail clustering'],
+          aiNote: 'Templates are suggestions and require governance sign-off.',
+          overrideTitle: 'Override controls',
+          overrideReason: 'Override reason',
+          overridePlaceholder: 'Select reason',
+          overrideNotes: 'Override rationale',
+          overrideNotesPlaceholder: 'Provide a concise governance rationale',
           authorityNote: 'Carrier retains final approval authority at all times.',
           scopeNote: 'FoS / product-class scope note (informational, not legal advice).',
           amountLabel: 'Amount',
-          statusLabel: 'Status',
-          conditionsPlaceholder: 'Conditions for approval',
-          noteLabel: 'Internal note',
-          notePlaceholder: 'Add internal note'
+          statusLabel: 'Status'
         },
         actions: {
-          approve: 'Final approve',
-          conditions: 'Approve with conditions',
-          reject: 'Decline',
-          evidence: 'Request evidence',
-          escalate: 'Escalate',
-          noteKey: 'evidence_partial'
+          apply: 'Apply override',
+          refer: 'Refer to carrier'
         },
         slaPanel: {
           title: 'SLA & controls',
@@ -287,26 +300,23 @@ export default function FinanceCfoFinalAuthorityPage() {
         },
         snapshot: {
           title: 'Decision Snapshot',
-          summary: 'Final Approval Summary',
-          aiTitle: 'AI-Decision-Template — Human Review erforderlich',
-          aiItems: ['Authority Breaches zusammenfassen', 'SoD-Exceptions prüfen', 'Freigabe-Auflagen empfehlen'],
-          templates: 'Entscheidungsvorlagen',
-          conditions: 'Freigabe-Auflagen',
+          corridorLabel: 'Pricing Corridor',
+          aiTitle: 'AI Decision Templates — Senior Review erforderlich',
+          aiTemplates: ['Approve innerhalb Korridor', 'Referral für Aggregationsreview', 'Decline wegen Tail-Clustering'],
+          aiNote: 'Vorlagen sind Vorschläge und erfordern Governance-Sign-off.',
+          overrideTitle: 'Override-Kontrollen',
+          overrideReason: 'Override-Grund',
+          overridePlaceholder: 'Grund wählen',
+          overrideNotes: 'Override-Begründung',
+          overrideNotesPlaceholder: 'Kurze Governance-Begründung erfassen',
           authorityNote: 'Carrier behält jederzeit die finale Freigabehoheit.',
           scopeNote: 'FoS / Product-Class Scope Hinweis (nur informativ, keine Rechtsberatung).',
           amountLabel: 'Betrag',
-          statusLabel: 'Status',
-          conditionsPlaceholder: 'Auflagen für die Freigabe',
-          noteLabel: 'Interne Notiz',
-          notePlaceholder: 'Interne Notiz hinzufügen'
+          statusLabel: 'Status'
         },
         actions: {
-          approve: 'Final freigeben',
-          conditions: 'Freigabe mit Auflagen',
-          reject: 'Ablehnen',
-          evidence: 'Evidenz anfordern',
-          escalate: 'Eskalieren',
-          noteKey: 'evidence_partial'
+          apply: 'Override anwenden',
+          refer: 'An Carrier verweisen'
         },
         slaPanel: {
           title: 'SLA & Kontrollen',
@@ -676,9 +686,9 @@ export default function FinanceCfoFinalAuthorityPage() {
   const [statusFilter, setStatusFilter] = React.useState<'all' | DecisionCase['status']>('all')
   const [sortKey, setSortKey] = React.useState<'amount' | 'sla' | 'risk'>('sla')
   const [selectedId, setSelectedId] = React.useState(cases[0]?.id)
-  const [decisionTemplate, setDecisionTemplate] = React.useState<'approve' | 'approve_with_conditions' | 'reject'>('approve')
-  const [note, setNote] = React.useState('')
-  const [conditions, setConditions] = React.useState('')
+  const [overrideReason, setOverrideReason] = React.useState('')
+  const [overrideNotes, setOverrideNotes] = React.useState('')
+  const canApply = overrideReason.trim().length > 0 && overrideNotes.trim().length > 0
 
   const filteredCases = React.useMemo(() => {
     const base = statusFilter === 'all' ? cases : cases.filter((item) => item.status === statusFilter)
@@ -817,75 +827,51 @@ export default function FinanceCfoFinalAuthorityPage() {
           <Card variant="glass" className="uw-card">
             <div className="uw-card-body" style={{ gap: '0.75rem' }}>
               <strong>{copy.snapshot.title}</strong>
-              <div className="uw-panel">
-                <div className="uw-panel-title">{copy.snapshot.summary}</div>
-                <strong>{selected?.portfolio}</strong>
-                <span className="uw-muted">{selected?.counterparty}</span>
+              <div>
+                <strong>{selected?.id}</strong>
+                <div className="uw-muted">{selected?.portfolio} · {selected?.counterparty}</div>
               </div>
-              <div className="uw-panel">
-                <div className="uw-panel-title">{copy.snapshot.amountLabel}</div>
-                <strong>{formatMoney(selected?.amountMinor || 0, lang)}</strong>
-                <span className="uw-muted">{formatDate(selected?.dueAt || '', lang)}</span>
-              </div>
-              <div className="uw-panel">
-                <div className="uw-panel-title">{copy.snapshot.statusLabel}</div>
-                <strong>{statusLabel(selected?.status || 'open', lang)}</strong>
-                <span className="uw-muted">{selected ? riskLabel(selected.riskTier, lang) : ''}</span>
+              <div className="uw-chart-block">
+                <div className="uw-muted">{copy.snapshot.corridorLabel}</div>
+                <CorridorChart corridor={{ min: 20, target: 24, max: 30, suggested: 26 }} label={copy.snapshot.corridorLabel} />
               </div>
               <div className="uw-panel">
                 <strong>{copy.snapshot.aiTitle}</strong>
-                <ul style={{ margin: '0.4rem 0 0', paddingLeft: '1.1rem' }}>
-                  {copy.snapshot.aiItems.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </div>
-              <div className="uw-panel">
-                <strong>{copy.snapshot.templates}</strong>
-                <div style={{ display: 'grid', gap: '0.5rem', marginTop: '0.4rem' }}>
-                  {(['approve', 'approve_with_conditions', 'reject'] as const).map((value) => (
-                    <label key={value} style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-                      <input
-                        type="radio"
-                        name="decisionTemplate"
-                        value={value}
-                        checked={decisionTemplate === value}
-                        onChange={() => setDecisionTemplate(value)}
-                      />
-                      <span>{copy.actions[value]}</span>
+                <div style={{ display: 'grid', gap: '0.4rem', marginTop: '0.5rem' }}>
+                  {copy.snapshot.aiTemplates.map((item) => (
+                    <label key={item} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                      <input type="radio" name="template" />
+                      <span>{item}</span>
                     </label>
                   ))}
                 </div>
+                <div className="uw-muted" style={{ marginTop: '0.5rem' }}>{copy.snapshot.aiNote}</div>
               </div>
-              <div className="uw-panel">
-                <strong>{copy.snapshot.conditions}</strong>
+              <div className="uw-panel" style={{ display: 'grid', gap: '0.5rem' }}>
+                <strong>{copy.snapshot.overrideTitle}</strong>
+                <label className="uw-muted">{copy.snapshot.overrideReason}</label>
+                <select value={overrideReason} onChange={(event) => setOverrideReason(event.target.value)} style={{ padding: '0.5rem', borderRadius: '8px', borderColor: '#cbd5f5' }}>
+                  <option value="">{copy.snapshot.overridePlaceholder}</option>
+                  <option value="data">{lang === 'en' ? 'Data integrity exception' : 'Datenintegritäts-Exception'}</option>
+                  <option value="governance">{lang === 'en' ? 'Governance escalation' : 'Governance-Eskalation'}</option>
+                  <option value="strategic">{lang === 'en' ? 'Strategic carrier exception' : 'Strategische Carrier-Exception'}</option>
+                </select>
+                <label className="uw-muted">{copy.snapshot.overrideNotes}</label>
                 <textarea
-                  aria-label={copy.snapshot.conditions}
-                  placeholder={copy.snapshot.conditionsPlaceholder}
-                  value={conditions}
-                  onChange={(event) => setConditions(event.target.value)}
+                  value={overrideNotes}
+                  onChange={(event) => setOverrideNotes(event.target.value)}
                   rows={3}
+                  placeholder={copy.snapshot.overrideNotesPlaceholder}
+                  style={{ padding: '0.5rem', borderRadius: '8px', borderColor: '#cbd5f5' }}
                 />
-              </div>
-              <div className="uw-panel">
-                <strong>{copy.snapshot.noteLabel}</strong>
-                <textarea
-                  aria-label={copy.snapshot.noteLabel}
-                  placeholder={copy.snapshot.notePlaceholder}
-                  value={note}
-                  onChange={(event) => setNote(event.target.value)}
-                  rows={2}
-                />
+                <div className="uw-actions">
+                  <Button disabled={!canApply} onClick={() => {}}>{copy.actions.apply}</Button>
+                  <Button variant="secondary" onClick={() => {}}>{copy.actions.refer}</Button>
+                </div>
               </div>
               <div className="uw-panel">
                 <strong>{copy.snapshot.authorityNote}</strong>
                 <p className="uw-muted" style={{ marginTop: '0.4rem' }}>{copy.snapshot.scopeNote}</p>
-              </div>
-              <div className="uw-actions">
-                <Button onClick={() => {}}>{copy.actions.approve}</Button>
-                <Button variant="secondary" onClick={() => {}}>{copy.actions.conditions}</Button>
-                <Button variant="secondary" onClick={() => {}}>{copy.actions.reject}</Button>
-                <Button variant="secondary" onClick={() => {}}>{copy.actions.note}</Button>
               </div>
             </div>
           </Card>
