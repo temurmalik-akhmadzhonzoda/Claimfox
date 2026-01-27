@@ -79,6 +79,10 @@
   margin-bottom: 0.75rem;
 }
 
+.uw-table-card .ui-card__header {
+  margin-bottom: 0;
+}
+
 .uw-card .ui-card__title {
   color: var(--ix-primary) !important;
   font-size: 0.82rem !important;
@@ -119,6 +123,11 @@
   height: 100%;
   align-items: flex-start;
   min-width: 0;
+}
+
+.uw-table-card .uw-card-body {
+  gap: 0;
+  justify-content: flex-start;
 }
 
 .uw-kpi .uw-card-body {

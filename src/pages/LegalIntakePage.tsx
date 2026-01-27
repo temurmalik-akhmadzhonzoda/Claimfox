@@ -301,8 +301,8 @@ export default function LegalIntakePage() {
         </div>
 
         <div className="uw-grid uw-split">
-          <Card variant="glass" className="uw-card">
-            <div className="uw-card-body" style={{ gap: 0 }}>
+          <Card variant="glass" className="uw-card uw-table-card">
+            <div className="uw-card-body" style={{ gap: 0, justifyContent: 'flex-start' }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.75rem', flexWrap: 'wrap' }}>
                 <strong>{copy.table.title}</strong>
                 <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
