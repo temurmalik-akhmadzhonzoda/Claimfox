@@ -1288,7 +1288,7 @@ export default function BciaDeckPage() {
         };
     const tocStrings = typedLang === 'en'
       ? {
-          title: 'BCIA Program Overview — Table of contents',
+          title: 'Program Overview — Table of contents',
           subtitle: 'Carrier-aligned program setup, market modeling, coverage, pricing & governance',
           sections: [
             {
@@ -1323,7 +1323,7 @@ export default function BciaDeckPage() {
           ]
         }
       : {
-          title: 'BCIA Program Overview — Inhaltsverzeichnis',
+          title: 'Program Overview — Inhaltsverzeichnis',
           subtitle: 'Carrier-aligned Program Setup, Marktmodellierung, Coverage, Pricing & Governance',
           sections: [
             {
