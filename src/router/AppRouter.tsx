@@ -34,6 +34,12 @@ import LogisticsAppPage from '@/pages/LogisticsAppPage'
 import MvpPage from '@/pages/MvpPage'
 import UnderwriterRolePage from '@/pages/UnderwriterRolePage'
 import LegalRolePage from '@/pages/LegalRolePage'
+import LegalIntakePage from '@/pages/LegalIntakePage'
+import LegalClaimsSpecialistPage from '@/pages/LegalClaimsSpecialistPage'
+import LegalProductDistributionPage from '@/pages/LegalProductDistributionPage'
+import LegalRegulatoryCompliancePage from '@/pages/LegalRegulatoryCompliancePage'
+import LegalLitigationManagerPage from '@/pages/LegalLitigationManagerPage'
+import LegalCarrierFinalAuthorityPage from '@/pages/LegalCarrierFinalAuthorityPage'
 import FinanceRolePage from '@/pages/FinanceRolePage'
 import UnderwriterReportingPage from '@/pages/UnderwriterReportingPage'
 import UnderwriterJuniorPage from '@/pages/UnderwriterJuniorPage'
@@ -96,6 +102,12 @@ export default function AppRouter() {
         <Route path="/roles" element={<RolesPage />} />
         <Route path="/roles/underwriter" element={<UnderwriterRolePage />} />
         <Route path="/roles/legal" element={<LegalRolePage />} />
+        <Route path="/roles/legal/intake" element={<LegalIntakePage />} />
+        <Route path="/roles/legal/claims-specialist" element={<LegalClaimsSpecialistPage />} />
+        <Route path="/roles/legal/product-distribution" element={<LegalProductDistributionPage />} />
+        <Route path="/roles/legal/regulatory-compliance" element={<LegalRegulatoryCompliancePage />} />
+        <Route path="/roles/legal/litigation-manager" element={<LegalLitigationManagerPage />} />
+        <Route path="/roles/legal/carrier-final-authority" element={<LegalCarrierFinalAuthorityPage />} />
         <Route path="/roles/finance" element={<FinanceRolePage />} />
         <Route path="/registration" element={<RegistrationPage />} />
         <Route path="/broker-portal" element={<BrokerPortalLandingPage />} />
