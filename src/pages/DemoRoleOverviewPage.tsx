@@ -129,6 +129,43 @@ export default function DemoRoleOverviewPage() {
 
   const config = roles[roleId]
   const showContext = roleId === 'underwriter'
+  const underwriterContext = showContext
+    ? [
+        {
+          label: 'Junior Underwriter',
+          decision: 'Risiken im Korridor freigeben.',
+          accountability: 'Evidenzqualität und SLA-Einhaltung.',
+          selected: true
+        },
+        {
+          label: 'Senior Underwriter',
+          decision: 'Overrides mit Governance-Freigabe.',
+          accountability: 'Portfolio-Impact und Eskalationslogik.'
+        },
+        {
+          label: 'Carrier Authority',
+          decision: 'finale Kapazitäts- und Limitfreigaben.',
+          accountability: 'Risikotragung und regulatorische Konformität.'
+        },
+        {
+          label: 'Compliance',
+          decision: 'Regel- und Audit-Integrität prüfen.',
+          accountability: 'Audit-Trail und Governance-Disziplin.'
+        },
+        {
+          label: 'Underwriter Reporting',
+          decision: 'Portfolio- und Referral-Transparenz steuern.',
+          accountability: 'Entscheidungsqualität und Reporting-Standards.'
+        }
+      ]
+    : []
+  const underwriterDescriptions = showContext
+    ? underwriterContext.reduce<Record<string, { decision: string; accountability: string }>>((acc, role) => {
+        const key = role.label.toLowerCase().replace(/\s+/g, '-')
+        acc[key] = { decision: role.decision, accountability: role.accountability }
+        return acc
+      }, {})
+    : {}
 
   return (
     <section className="uw-page">
@@ -145,11 +182,25 @@ export default function DemoRoleOverviewPage() {
         />
 
         {showContext && (
-          <Card variant="glass" className="uw-card">
-            <div className="uw-card-body" style={{ gap: '0.35rem' }}>
-              <strong>Role context</strong>
-              <span className="uw-muted">
-                Fokus auf Portfolio-Entscheidungen, klare Referral-Logik und Governance-konforme Overrides.
+          <Card variant="glass" className="uw-card" style={{ padding: '8px 10px' }}>
+            <div className="uw-card-body" style={{ gap: '0.45rem' }}>
+              <strong style={{ fontSize: '0.9rem' }}>Role context</strong>
+              {underwriterContext.map((role) => (
+                <div key={role.label} style={{ display: 'grid', gap: '0.08rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                    <strong style={{ fontSize: '0.88rem' }}>{role.label}</strong>
+                    {role.selected && (
+                      <span style={{ fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--ix-text-muted)' }}>
+                        Selected
+                      </span>
+                    )}
+                  </div>
+                  <span style={{ fontSize: '0.85rem' }}>Decides on {role.decision}</span>
+                  <span style={{ fontSize: '0.85rem' }}>Accountable for {role.accountability}</span>
+                </div>
+              ))}
+              <span className="uw-muted" style={{ fontSize: '0.82rem' }}>
+                This role decides on Risiken im Korridor freigeben and is accountable for Evidenzqualität und SLA-Einhaltung.
               </span>
             </div>
           </Card>
@@ -165,6 +216,10 @@ export default function DemoRoleOverviewPage() {
             const helperText = isCompact
               ? (isEn ? 'Demo' : 'Demo')
               : (isEn ? 'Start the guided demo flow (no data captured).' : 'Starte den geführten Demo-Flow (keine Datenerfassung).')
+            const descriptionKey = isCompact
+              ? subrole.label.toLowerCase().replace(/\s+/g, '-')
+              : ''
+            const description = isCompact ? underwriterDescriptions[descriptionKey] : undefined
             return (
               <Card
                 key={subrole.route}
@@ -184,9 +239,19 @@ export default function DemoRoleOverviewPage() {
                   }}
                 >
                   {isCompact && (
-                    <div style={{ display: 'grid', gap: '0.1rem', minWidth: 0 }}>
+                    <div style={{ display: 'grid', gap: '0.15rem', minWidth: 0 }}>
                       <strong style={{ fontSize: '0.9rem' }}>{subrole.label}</strong>
                       <span style={{ fontSize: '0.72rem', color: 'var(--ix-text-muted)' }}>{helperText}</span>
+                      {description && (
+                        <span style={{ fontSize: '0.72rem', color: 'var(--ix-text)' }}>
+                          Decides on {description.decision}
+                        </span>
+                      )}
+                      {description && (
+                        <span style={{ fontSize: '0.72rem', color: 'var(--ix-text-muted)' }}>
+                          Accountable for {description.accountability}
+                        </span>
+                      )}
                     </div>
                   )}
                   {!isCompact && (

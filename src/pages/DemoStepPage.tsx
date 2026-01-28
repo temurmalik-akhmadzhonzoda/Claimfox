@@ -425,7 +425,7 @@ export default function DemoStepPage() {
           </Card>
         </div>
 
-        {stepNumber === 1 && (
+        {stepNumber === 1 && roleKey === '' && (
           <div className="uw-section">
             <h2 className="uw-section-title">Role context</h2>
             <div className="uw-grid uw-cards">
