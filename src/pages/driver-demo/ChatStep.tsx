@@ -9,18 +9,14 @@ type ChatMessage = {
 
 type ChatStepProps = {
   chatLog: ChatMessage[]
-  onQuickReply: (reply: string) => void
   queuedResponse: boolean
 }
 
 export default function ChatStep({
   chatLog,
-  onQuickReply,
   queuedResponse
 }: ChatStepProps) {
   const [isOpen, setIsOpen] = useState(true)
-
-  const replies = ['Book repair', 'Prefer payout', 'Need a call']
 
   return (
     <>
@@ -50,26 +46,6 @@ export default function ChatStep({
             >
               {message.text}
             </div>
-          ))}
-        </div>
-      </Card>
-
-      <Card variant="glass" className="demo-card">
-        <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-          {replies.map((reply) => (
-            <button
-              key={reply}
-              type="button"
-              onClick={() => onQuickReply(reply)}
-              style={{
-                padding: '0.5rem 0.75rem',
-                border: '1px solid var(--ix-border)',
-                background: 'transparent',
-                cursor: 'pointer'
-              }}
-            >
-              {reply}
-            </button>
           ))}
         </div>
       </Card>

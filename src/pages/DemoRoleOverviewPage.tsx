@@ -8,6 +8,7 @@ import { useI18n } from '@/i18n/I18nContext'
 type SubRole = {
   label: string
   route: string
+  demoKey?: string
 }
 
 type RoleConfig = {
@@ -28,11 +29,11 @@ export default function DemoRoleOverviewPage() {
       title: t('roles.cards.underwriter.title'),
       subtitle: isEn ? 'Underwriting subroles' : 'Underwriter Unterrollen',
       subroles: [
-        { label: 'Junior Underwriter', route: '/roles/underwriter/junior' },
-        { label: 'Senior Underwriter', route: '/roles/underwriter/senior' },
-        { label: 'Carrier UW', route: '/roles/underwriter/carrier' },
-        { label: 'Compliance', route: '/roles/underwriter/compliance' },
-        { label: isEn ? 'Underwriter Reporting' : 'Underwriter Reporting', route: '/roles/underwriter/reporting' }
+        { label: 'Junior Underwriter', route: '/roles/underwriter/junior', demoKey: 'uw-junior' },
+        { label: 'Senior Underwriter', route: '/roles/underwriter/senior', demoKey: 'uw-senior' },
+        { label: 'Carrier UW', route: '/roles/underwriter/carrier', demoKey: 'uw-carrier' },
+        { label: 'Compliance', route: '/roles/underwriter/compliance', demoKey: 'uw-compliance' },
+        { label: isEn ? 'Underwriter Reporting' : 'Underwriter Reporting', route: '/roles/underwriter/reporting', demoKey: 'uw-reporting' }
       ]
     },
     legal: {
@@ -145,7 +146,7 @@ export default function DemoRoleOverviewPage() {
         <div className="uw-grid uw-cards">
           {config.subroles.map((subrole) => {
             const isCompact = roleId === 'underwriter'
-            const targetRoute = '/demo/step/1'
+            const targetRoute = subrole.demoKey ? `/demo/step/1?role=${subrole.demoKey}` : '/demo/step/1'
             const helperText = isCompact
               ? (isEn ? 'Demo' : 'Demo')
               : (isEn ? 'Start the guided demo flow (no data captured).' : 'Starte den geführten Demo-Flow (keine Datenerfassung).')

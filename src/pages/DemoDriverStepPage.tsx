@@ -57,36 +57,37 @@ const INITIAL_CHAT = [
   { id: 'm2', from: 'insurer' as const, text: 'Thanks. Please confirm location and if vehicle is drivable.' },
   { id: 'm3', from: 'driver' as const, text: 'Vehicle drivable, location Munich.' },
   { id: 'm4', from: 'insurer' as const, text: 'We assigned handler. Next step: repair partner or payout options.' },
-  { id: 'm5', from: 'insurer' as const, text: 'Would you like a repair appointment?' }
+  { id: 'm5', from: 'insurer' as const, text: 'Would you like a repair appointment?' },
+  { id: 'm6', from: 'driver' as const, text: 'Prefer payout.' }
 ]
 
 const createInitialState = (): DriverDemoState => ({
   authMethod: 'email',
-  contact: '',
-  password: '',
-  agreed: false,
+  contact: 'alex.driver@demo.insurfox',
+  password: 'demo',
+  agreed: true,
   accountCreated: false,
   profile: {
-    fullName: '',
-    dob: '',
-    licensePlate: '',
-    vehicleType: '',
-    policyNumber: '',
-    insurer: ''
+    fullName: 'Alex Driver',
+    dob: '12 Apr 1993',
+    licensePlate: 'M-IF 421',
+    vehicleType: 'Car',
+    policyNumber: 'PL-204889',
+    insurer: 'Atlas Insurance'
   },
   profileSkipped: false,
   claim: {
-    claimType: '',
-    when: '',
-    location: '',
-    injured: '',
-    description: '',
+    claimType: 'Accident',
+    when: 'Today',
+    location: 'Munich',
+    injured: 'No',
+    description: 'Rear-end collision at traffic light.',
     claimId: 'CLM-10421'
   },
   uploads: {
-    photos: false,
-    report: false,
-    license: false
+    photos: true,
+    report: true,
+    license: true
   },
   chatLog: INITIAL_CHAT
 })
@@ -98,7 +99,6 @@ export default function DemoDriverStepPage() {
   const [registerSuccess, setRegisterSuccess] = useState(false)
   const [profileSaved, setProfileSaved] = useState(false)
   const [claimSubmitted, setClaimSubmitted] = useState(false)
-  const [lastUpload, setLastUpload] = useState<string | null>(null)
   const [queuedResponse, setQueuedResponse] = useState(false)
 
   const stepIndex = useMemo(
@@ -110,8 +110,7 @@ export default function DemoDriverStepPage() {
     setRegisterSuccess(false)
     setProfileSaved(false)
     setClaimSubmitted(false)
-    setQueuedResponse(false)
-    setLastUpload(null)
+    setQueuedResponse(stepId === 'chat')
   }, [stepId])
 
   if (stepIndex === -1) {
@@ -134,7 +133,6 @@ export default function DemoDriverStepPage() {
     setProfileSaved(false)
     setClaimSubmitted(false)
     setQueuedResponse(false)
-    setLastUpload(null)
   }
 
   const handleRegister = () => {
@@ -155,12 +153,6 @@ export default function DemoDriverStepPage() {
     }, 600)
   }
 
-  const handleProfileSkip = () => {
-    resetTransient()
-    setState((prev) => ({ ...prev, profileSkipped: true }))
-    navigate('/demo-driver/step/claim')
-  }
-
   const handleClaim = () => {
     resetTransient()
     setClaimSubmitted(true)
@@ -179,17 +171,6 @@ export default function DemoDriverStepPage() {
   const handleUploadNext = () => {
     resetTransient()
     navigate('/demo-driver/step/chat')
-  }
-
-  const handleQuickReply = (reply: string) => {
-    setQueuedResponse(true)
-    setState((prev) => ({
-      ...prev,
-      chatLog: [
-        ...prev.chatLog,
-        { id: `reply-${prev.chatLog.length + 1}`, from: 'driver', text: reply }
-      ]
-    }))
   }
 
   const handleFinish = () => {
@@ -236,10 +217,6 @@ export default function DemoDriverStepPage() {
           password={state.password}
           agreed={state.agreed}
           showSuccess={registerSuccess}
-          onAuthMethodChange={(method) => setState((prev) => ({ ...prev, authMethod: method }))}
-          onContactChange={(value) => setState((prev) => ({ ...prev, contact: value }))}
-          onPasswordChange={(value) => setState((prev) => ({ ...prev, password: value }))}
-          onAgreedChange={(value) => setState((prev) => ({ ...prev, agreed: value }))}
         />
       )}
 
@@ -247,8 +224,6 @@ export default function DemoDriverStepPage() {
         <ProfileStep
           profile={state.profile}
           showSaved={profileSaved}
-          onProfileChange={(updates) => setState((prev) => ({ ...prev, profile: { ...prev.profile, ...updates } }))}
-          onSkip={handleProfileSkip}
         />
       )}
 
@@ -256,19 +231,12 @@ export default function DemoDriverStepPage() {
         <ClaimStep
           claim={state.claim}
           showSubmitted={claimSubmitted}
-          onClaimChange={(updates) => setState((prev) => ({ ...prev, claim: { ...prev.claim, ...updates } }))}
         />
       )}
 
       {currentStep === 'upload' && (
         <UploadStep
           uploads={state.uploads}
-          lastUpload={lastUpload}
-          onUploadChange={(updates) => {
-            const label = updates.photos ? 'Photos of damage' : updates.report ? 'Police report' : 'Driver license'
-            setLastUpload(label)
-            setState((prev) => ({ ...prev, uploads: { ...prev.uploads, ...updates } }))
-          }}
         />
       )}
 
@@ -276,7 +244,6 @@ export default function DemoDriverStepPage() {
         <ChatStep
           chatLog={state.chatLog}
           queuedResponse={queuedResponse}
-          onQuickReply={handleQuickReply}
         />
       )}
 

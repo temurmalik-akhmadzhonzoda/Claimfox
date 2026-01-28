@@ -4,13 +4,9 @@ import Card from '@/components/ui/Card'
 type RegisterStepProps = {
   authMethod: 'email' | 'phone'
   contact: string
+  showSuccess: boolean
   password: string
   agreed: boolean
-  showSuccess: boolean
-  onAuthMethodChange: (method: 'email' | 'phone') => void
-  onContactChange: (value: string) => void
-  onPasswordChange: (value: string) => void
-  onAgreedChange: (value: boolean) => void
 }
 
 export default function RegisterStep({
@@ -18,17 +14,14 @@ export default function RegisterStep({
   contact,
   password,
   agreed,
-  showSuccess,
-  onAuthMethodChange,
-  onContactChange,
-  onPasswordChange,
-  onAgreedChange
+  showSuccess
 }: RegisterStepProps) {
   const placeholder = authMethod === 'email' ? 'Email address' : 'Phone number'
+  const contactValue = contact || (authMethod === 'phone' ? '+49 170 555 210' : 'alex.driver@demo.insurfox')
 
   return (
     <>
-      <Card title="Create account" subtitle="Pick your preferred sign-in method." variant="glass" className="demo-card">
+      <Card title="Create account" subtitle="Demo details are prefilled." variant="glass" className="demo-card">
         <div className="demo-badge-row">
           {['No login required (demo)', 'Mobile-first'].map((badge) => (
             <span key={badge} className="demo-badge">{badge}</span>
@@ -36,47 +29,17 @@ export default function RegisterStep({
         </div>
       </Card>
 
-      <Card variant="glass" className="demo-card">
-        <div style={{ display: 'flex', gap: '0.5rem' }}>
-          {(['email', 'phone'] as const).map((method) => (
-            <button
-              key={method}
-              type="button"
-              onClick={() => onAuthMethodChange(method)}
-              style={{
-                flex: 1,
-                padding: '0.6rem',
-                border: `1px solid ${authMethod === method ? 'var(--ix-primary)' : 'var(--ix-border)'}`,
-                background: 'transparent',
-                fontWeight: 600,
-                cursor: 'pointer'
-              }}
-            >
-              Continue with {method}
-            </button>
-          ))}
+      <Card title="Sign-in method" subtitle="Email" variant="glass" className="demo-card">
+        <div className="uw-card-body" style={{ gap: '0.35rem' }}>
+          <strong>{authMethod === 'phone' ? 'Phone' : 'Email'}</strong>
         </div>
       </Card>
 
-      <Card title="Details" subtitle="Just two fields to get started." variant="glass" className="demo-card">
-        <div style={{ display: 'grid', gap: '0.6rem' }}>
-          <input
-            value={contact}
-            onChange={(event) => onContactChange(event.target.value)}
-            placeholder={placeholder}
-            style={{ padding: '0.6rem', border: '1px solid var(--ix-border)' }}
-          />
-          <input
-            value={password}
-            onChange={(event) => onPasswordChange(event.target.value)}
-            placeholder="Password (optional)"
-            type="password"
-            style={{ padding: '0.6rem', border: '1px solid var(--ix-border)' }}
-          />
-          <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.9rem' }}>
-            <input type="checkbox" checked={agreed} onChange={(event) => onAgreedChange(event.target.checked)} />
-            I agree (demo)
-          </label>
+      <Card title="Details" subtitle="Auto-filled for demo." variant="glass" className="demo-card">
+        <div style={{ display: 'grid', gap: '0.35rem' }}>
+          <div><strong>{placeholder}</strong>: {contactValue}</div>
+          <div><strong>Password</strong>: {password ? '••••••••' : '••••••••'}</div>
+          <div><strong>Consent</strong>: {agreed ? 'Granted' : 'Granted (demo)'}</div>
         </div>
       </Card>
 

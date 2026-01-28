@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import Card from '@/components/ui/Card'
 import ClaimsfoxIcon from '@/assets/logos/Claimsfox_icon.png'
 
@@ -14,7 +14,6 @@ type ClaimData = {
 type ClaimStepProps = {
   claim: ClaimData
   showSubmitted: boolean
-  onClaimChange: (updates: Partial<ClaimData>) => void
 }
 
 const layoutStyles = `
@@ -66,54 +65,21 @@ type Message = {
 
 export default function ClaimStep({
   claim,
-  showSubmitted,
-  onClaimChange
+  showSubmitted
 }: ClaimStepProps) {
   const messagesRef = useRef<HTMLDivElement | null>(null)
-  const [step, setStep] = useState<'type' | 'when' | 'where' | 'injury' | 'done'>('type')
-  const [messages, setMessages] = useState<Message[]>([
+  const messages: Message[] = [
     { id: 'm-1', author: 'bot', text: 'Let’s capture the incident in a few clicks.' },
-    { id: 'm-2', author: 'bot', text: 'What happened?' }
-  ])
-
-  const actions = useMemo(() => {
-    if (step === 'type') return ['Accident', 'Theft', 'Glass', 'Other']
-    if (step === 'when') return ['Today', 'Yesterday', 'Last week']
-    if (step === 'where') return ['Munich', 'Hamburg', 'Other city']
-    if (step === 'injury') return ['Yes', 'No']
-    return []
-  }, [step])
-
-  function appendMessage(author: Message['author'], text: string) {
-    setMessages((prev) => [...prev, { id: `m-${prev.length + 1}`, author, text }])
-  }
-
-  function handleChoice(choice: string) {
-    appendMessage('user', choice)
-    if (step === 'type') {
-      onClaimChange({ claimType: choice })
-      appendMessage('bot', 'When did it happen?')
-      setStep('when')
-      return
-    }
-    if (step === 'when') {
-      onClaimChange({ when: choice })
-      appendMessage('bot', 'Where did it happen?')
-      setStep('where')
-      return
-    }
-    if (step === 'where') {
-      onClaimChange({ location: choice })
-      appendMessage('bot', 'Is anyone injured?')
-      setStep('injury')
-      return
-    }
-    if (step === 'injury') {
-      onClaimChange({ injured: choice })
-      appendMessage('bot', 'Thanks. You can start the claim now.')
-      setStep('done')
-    }
-  }
+    { id: 'm-2', author: 'bot', text: 'What happened?' },
+    { id: 'm-3', author: 'user', text: claim.claimType || 'Accident' },
+    { id: 'm-4', author: 'bot', text: 'When did it happen?' },
+    { id: 'm-5', author: 'user', text: claim.when || 'Today' },
+    { id: 'm-6', author: 'bot', text: 'Where did it happen?' },
+    { id: 'm-7', author: 'user', text: claim.location || 'Munich' },
+    { id: 'm-8', author: 'bot', text: 'Is anyone injured?' },
+    { id: 'm-9', author: 'user', text: claim.injured || 'No' },
+    { id: 'm-10', author: 'bot', text: 'Thanks. You can start the claim now.' }
+  ]
 
   return (
     <>
@@ -157,26 +123,7 @@ export default function ClaimStep({
                 )
               })}
             </div>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.6rem' }}>
-              {actions.map((action) => (
-                <button
-                  key={action}
-                  type="button"
-                  onClick={() => handleChoice(action)}
-                  style={{
-                    padding: '0.5rem 0.75rem',
-                    border: `1px solid ${action === claim.claimType || action === claim.when || action === claim.location || action === claim.injured ? 'var(--ix-primary)' : 'var(--ix-border)'}`,
-                    background: 'transparent',
-                    cursor: 'pointer'
-                  }}
-                >
-                  {action}
-                </button>
-              ))}
-              {step === 'done' && (
-                <span className="demo-progress">Ready to submit the claim.</span>
-              )}
-            </div>
+            <span className="demo-progress">Ready to submit the claim.</span>
           </div>
         </div>
       </Card>
