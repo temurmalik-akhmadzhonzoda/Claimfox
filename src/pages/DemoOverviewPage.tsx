@@ -21,6 +21,7 @@ export default function DemoOverviewPage() {
     {
       title: t('roles.overviewGroups.fleet'),
       items: [
+        { label: 'Fahrer', roleId: 'driver-demo' },
         { label: t('roles.cards.reporting.title'), roleId: 'reporting' },
         { label: t('roles.cards.fleetManagement.title'), roleId: 'fleet-management' }
       ]
@@ -44,16 +45,27 @@ export default function DemoOverviewPage() {
     <section className="uw-page">
       <div className="uw-container">
         <div className="uw-section">
-          <h2 className="uw-section-title">{t('roles.sections.overview')}</h2>
+          <h2 className="uw-section-title" style={{ color: '#281c65' }}>{t('roles.sections.overview')}</h2>
           <div className="uw-grid uw-cards">
             {overviewGroups.map((group) => (
-              <Card key={group.title} title={group.title} variant="glass" className="uw-card">
+              <Card
+                key={group.title}
+                title={<span style={{ color: '#281c65' }}>{group.title}</span>}
+                variant="glass"
+                className="uw-card"
+              >
                 <div className="uw-card-body" style={{ gap: '0.35rem' }}>
                   {group.items.map((role) => (
                     <button
                       key={role.roleId}
                       type="button"
-                      onClick={() => navigate(`/demo/role/${role.roleId}`)}
+                      onClick={() => {
+                        if (role.roleId === 'driver-demo') {
+                          navigate('/demo-driver')
+                          return
+                        }
+                        navigate(`/demo/role/${role.roleId}`)
+                      }}
                       style={{
                         background: 'none',
                         border: 'none',

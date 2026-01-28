@@ -146,6 +146,9 @@ export default function DemoRoleOverviewPage() {
           {config.subroles.map((subrole) => {
             const isCompact = roleId === 'underwriter'
             const targetRoute = '/demo/step/1'
+            const helperText = isCompact
+              ? (isEn ? 'Demo' : 'Demo')
+              : (isEn ? 'Start the guided demo flow (no data captured).' : 'Starte den geführten Demo-Flow (keine Datenerfassung).')
             return (
               <Card
                 key={subrole.route}
@@ -164,7 +167,15 @@ export default function DemoRoleOverviewPage() {
                     width: '100%'
                   }}
                 >
-                  {isCompact && <strong style={{ fontSize: '0.9rem' }}>{subrole.label}</strong>}
+                  {isCompact && (
+                    <div style={{ display: 'grid', gap: '0.1rem' }}>
+                      <strong style={{ fontSize: '0.9rem' }}>{subrole.label}</strong>
+                      <span style={{ fontSize: '0.72rem', color: 'var(--ix-text-muted)' }}>{helperText}</span>
+                    </div>
+                  )}
+                  {!isCompact && (
+                    <span style={{ fontSize: '0.85rem', color: 'var(--ix-text-muted)' }}>{helperText}</span>
+                  )}
                   <Button
                     onClick={() => navigate(targetRoute)}
                     disableHover
