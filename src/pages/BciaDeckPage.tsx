@@ -10,7 +10,7 @@ import '@/styles/bcia-deck.css'
 
 type Lang = 'de' | 'en'
 
-type Slide = {
+export type BciaSlide = {
   key: string
   node: React.ReactNode
 }
@@ -1019,7 +1019,23 @@ const formatMoney = (value: number, lang: Lang) => {
   return `EUR ${(value / 1e9).toLocaleString('en-GB', { minimumFractionDigits: 3, maximumFractionDigits: 3 })}bn`
 }
 
-export default function BciaDeckPage() {
+type BciaDeckPageProps = {
+  includeKeys?: string[]
+  prependSlides?: BciaSlide[]
+  initialIndex?: number
+  showPrint?: boolean
+  showPrintButton?: boolean
+  showIndex?: boolean
+}
+
+export default function BciaDeckPage({
+  includeKeys,
+  prependSlides = [],
+  initialIndex = 0,
+  showPrint = true,
+  showPrintButton = true,
+  showIndex = true
+}: BciaDeckPageProps) {
   const { lang } = useI18n()
   const typedLang = (lang === 'en' ? 'en' : 'de') as Lang
   const [headerHeight, setHeaderHeight] = useState(0)
@@ -1028,6 +1044,7 @@ export default function BciaDeckPage() {
   const viewportRef = useRef<HTMLDivElement | null>(null)
   const slideRefs = useRef<Array<HTMLDivElement | null>>([])
   const [activeIndex, setActiveIndex] = useState(0)
+  const initialApplied = useRef(false)
   const scrollRaf = useRef<number | null>(null)
   const programmaticTimer = useRef<number | null>(null)
   const isProgrammatic = useRef(false)
@@ -1107,7 +1124,7 @@ export default function BciaDeckPage() {
     }, 450)
   }, [])
 
-  const slides = useMemo<Slide[]>(() => {
+  const slides = useMemo<BciaSlide[]>(() => {
     const copy = enterpriseStrings[typedLang]
     const mapImage = typedLang === 'en' ? KarteDeEuEn : KarteDeEu
     const premiumStrings = premiumContent[typedLang]
@@ -1358,7 +1375,7 @@ export default function BciaDeckPage() {
           ]
         }
 
-    return [
+    const baseSlides: BciaSlide[] = [
       {
         key: 'toc',
         node: (
@@ -2013,7 +2030,13 @@ export default function BciaDeckPage() {
         )
       }
     ]
-  }, [typedLang, jumpToSlide])
+
+    const filteredSlides = includeKeys
+      ? baseSlides.filter((slide) => includeKeys.includes(slide.key))
+      : baseSlides
+
+    return prependSlides.length ? [...prependSlides, ...filteredSlides] : filteredSlides
+  }, [typedLang, jumpToSlide, includeKeys, prependSlides])
 
   const totalSlides = slides.length
 
@@ -2043,6 +2066,16 @@ export default function BciaDeckPage() {
   }, [scrollToIndex])
 
   useEffect(() => {
+    if (initialApplied.current || totalSlides === 0) return
+    initialApplied.current = true
+    const clamped = Math.max(0, Math.min(initialIndex, totalSlides - 1))
+    if (clamped !== 0) {
+      goToSlide(clamped)
+      setActiveIndex(clamped)
+    }
+  }, [initialIndex, totalSlides, goToSlide])
+
+  useEffect(() => {
     const viewport = viewportRef.current
     if (!viewport) return
     const onScroll = () => {
@@ -2060,17 +2093,19 @@ export default function BciaDeckPage() {
 
   return (
     <section className="bcia-deck" style={{ '--bcia-header-h': `${headerHeight}px` } as React.CSSProperties}>
-      <div className="bcia-toolbar">
-        <button
-          type="button"
-          className="bcia-print"
-          onClick={() => {
-            window.print()
-          }}
-        >
-          {typedLang === 'en' ? 'Print' : 'Drucken'}
-        </button>
-      </div>
+      {showPrintButton && (
+        <div className="bcia-toolbar">
+          <button
+            type="button"
+            className="bcia-print"
+            onClick={() => {
+              window.print()
+            }}
+          >
+            {typedLang === 'en' ? 'Print' : 'Drucken'}
+          </button>
+        </div>
+      )}
       <div className="bcia-stage screenDeck" ref={stageRef}>
         <button
           type="button"
@@ -2115,17 +2150,19 @@ export default function BciaDeckPage() {
         >
           &gt;
         </button>
-        <div className="bcia-index">{activeIndex + 1} / {slides.length}</div>
+        {showIndex && <div className="bcia-index">{activeIndex + 1} / {slides.length}</div>}
       </div>
-      <div className="printDeck">
-        {slides.map((slide) => (
-          <div key={slide.key} className="printSlide">
-            <div className="printSlideInner">
-              {slide.node}
+      {showPrint && (
+        <div className="printDeck">
+          {slides.map((slide) => (
+            <div key={slide.key} className="printSlide">
+              <div className="printSlideInner">
+                {slide.node}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </section>
   )
 }

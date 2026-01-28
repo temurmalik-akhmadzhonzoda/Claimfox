@@ -81,6 +81,7 @@ import BusinessModelAntaresPage from '@/pages/BusinessModelAntaresPage'
 import MarketOverviewPage from '@/pages/MarketOverviewPage'
 import PremiumCorridorPage from '@/pages/PremiumCorridorPage'
 import BciaDeckPage from '@/pages/BciaDeckPage'
+import InsurfoxIaaSPage from '@/pages/InsurfoxIaaSPage'
 
 function NotFoundRedirect() {
   const { isAuthenticated } = useAuth()
@@ -175,6 +176,7 @@ export default function AppRouter() {
         <Route path="/business-model-antares-test" element={<BusinessModelAntaresPage />} />
         <Route path="/market-overview-logistics" element={<MarketOverviewPage />} />
         <Route path="/bcia" element={<BciaDeckPage />} />
+        <Route path="/insurfox-iaas" element={<InsurfoxIaaSPage />} />
         <Route path="/premium-corridor" element={<PremiumCorridorPage />} />
         <Route path="/setup" element={<SetupPage />} />
         <Route path="/storyblok-test" element={<StoryblokTestPage />} />
