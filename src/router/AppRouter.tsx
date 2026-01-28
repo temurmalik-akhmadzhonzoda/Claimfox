@@ -84,6 +84,8 @@ import BciaDeckPage from '@/pages/BciaDeckPage'
 import InsurfoxIaaSPage from '@/pages/InsurfoxIaaSPage'
 import DemoOverviewPage from '@/pages/DemoOverviewPage'
 import DemoStepPage from '@/pages/DemoStepPage'
+import DemoDriverOverviewPage from '@/pages/DemoDriverOverviewPage'
+import DemoDriverStepPage from '@/pages/DemoDriverStepPage'
 
 function NotFoundRedirect() {
   const { isAuthenticated } = useAuth()
@@ -104,6 +106,8 @@ export default function AppRouter() {
         <Route path="/roles/underwriter/carrier" element={<UnderwriterCarrierPage />} />
         <Route path="/roles/underwriter/compliance" element={<UnderwriterCompliancePage />} />
         <Route path="/insurfox-iaas" element={<InsurfoxIaaSPage />} />
+        <Route path="/demo-driver" element={<DemoDriverOverviewPage />} />
+        <Route path="/demo-driver/step/:stepId" element={<DemoDriverStepPage />} />
       </Route>
       <Route element={<ProtectedRoute><FullscreenBgLayout showHeader={false} /></ProtectedRoute>}>
         <Route path="/home" element={<HomePage />} />
