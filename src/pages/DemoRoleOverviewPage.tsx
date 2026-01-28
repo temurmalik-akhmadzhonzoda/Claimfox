@@ -182,34 +182,27 @@ export default function DemoRoleOverviewPage() {
         />
 
         {showContext && (
-          <Card variant="glass" className="uw-card" style={{ padding: '8px 10px' }}>
-            <div className="uw-card-body" style={{ gap: '0.45rem' }}>
-              <strong style={{ fontSize: '0.9rem' }}>Role context</strong>
+          <Card variant="glass" className="uw-card">
+            <div className="uw-card-body">
+              <strong>Role context</strong>
               {underwriterContext.map((role) => (
-                <div key={role.label} style={{ display: 'grid', gap: '0.08rem' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                    <strong style={{ fontSize: '0.88rem' }}>{role.label}</strong>
-                    {role.selected && (
-                      <span style={{ fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--ix-text-muted)' }}>
-                        Selected
-                      </span>
-                    )}
+                <div key={role.label} className="uw-panel">
+                  <div className="uw-actions">
+                    <strong>{role.label}</strong>
+                    {role.selected && <span className="uw-badge">Selected</span>}
                   </div>
-                  <span style={{ fontSize: '0.85rem' }}>Decides on {role.decision}</span>
-                  <span style={{ fontSize: '0.85rem' }}>Accountable for {role.accountability}</span>
+                  <div>Decides on {role.decision}</div>
+                  <div className="uw-muted">Accountable for {role.accountability}</div>
                 </div>
               ))}
-              <span className="uw-muted" style={{ fontSize: '0.82rem' }}>
+              <div className="uw-muted">
                 This role decides on Risiken im Korridor freigeben and is accountable for Evidenzqualität und SLA-Einhaltung.
-              </span>
+              </div>
             </div>
           </Card>
         )}
 
-        <div
-          className="uw-grid uw-cards"
-          style={roleId === 'underwriter' ? { gridTemplateColumns: 'repeat(5, minmax(0, 1fr))', gap: '0.6rem' } : undefined}
-        >
+        <div className={`uw-grid ${roleId === 'underwriter' ? 'uw-kpi' : 'uw-cards'}`}>
           {config.subroles.map((subrole) => {
             const isCompact = roleId === 'underwriter'
             const targetRoute = subrole.demoKey ? `/demo/step/1?role=${subrole.demoKey}` : '/demo/step/1'
@@ -226,48 +219,20 @@ export default function DemoRoleOverviewPage() {
                 title={isCompact ? undefined : subrole.label}
                 variant="glass"
                 className="uw-card"
-                style={isCompact ? { minHeight: '56px', padding: '8px 10px' } : undefined}
               >
-                <div
-                  className="uw-card-body"
-                  style={{
-                    gap: isCompact ? '0.4rem' : '0.35rem',
-                    flexDirection: isCompact ? 'row' : 'column',
-                    alignItems: isCompact ? 'center' : 'flex-start',
-                    justifyContent: isCompact ? 'space-between' : 'flex-start',
-                    width: '100%'
-                  }}
-                >
+                <div className="uw-card-body">
                   {isCompact && (
-                    <div style={{ display: 'grid', gap: '0.15rem', minWidth: 0 }}>
-                      <strong style={{ fontSize: '0.9rem' }}>{subrole.label}</strong>
-                      <span style={{ fontSize: '0.72rem', color: 'var(--ix-text-muted)' }}>{helperText}</span>
-                      {description && (
-                        <span style={{ fontSize: '0.72rem', color: 'var(--ix-text)' }}>
-                          Decides on {description.decision}
-                        </span>
-                      )}
-                      {description && (
-                        <span style={{ fontSize: '0.72rem', color: 'var(--ix-text-muted)' }}>
-                          Accountable for {description.accountability}
-                        </span>
-                      )}
-                    </div>
+                    <>
+                      <strong>{subrole.label}</strong>
+                      <span className="uw-muted">{helperText}</span>
+                      {description && <div>Decides on {description.decision}</div>}
+                      {description && <div className="uw-muted">Accountable for {description.accountability}</div>}
+                    </>
                   )}
-                  {!isCompact && (
-                    <span style={{ fontSize: '0.85rem', color: 'var(--ix-text-muted)' }}>{helperText}</span>
-                  )}
+                  {!isCompact && <span className="uw-muted">{helperText}</span>}
                   <Button
                     onClick={() => navigate(targetRoute)}
                     disableHover
-                    style={{
-                      background: '#281c65',
-                      color: '#fff',
-                      padding: isCompact ? '0.2rem 0.6rem' : '0.4rem 0.9rem',
-                      fontSize: isCompact ? '0.75rem' : '0.9rem',
-                      boxShadow: 'none',
-                      flexShrink: 0
-                    }}
                   >
                     Demo starten
                   </Button>

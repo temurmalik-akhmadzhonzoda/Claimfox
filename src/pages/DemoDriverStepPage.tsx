@@ -1,14 +1,9 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useMemo } from 'react'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
-import MobileShell from '@/pages/driver-demo/MobileShell'
-import RegisterStep from '@/pages/driver-demo/RegisterStep'
-import ProfileStep from '@/pages/driver-demo/ProfileStep'
-import ClaimStep from '@/pages/driver-demo/ClaimStep'
-import UploadStep from '@/pages/driver-demo/UploadStep'
-import ChatStep from '@/pages/driver-demo/ChatStep'
-import SummaryStep from '@/pages/driver-demo/SummaryStep'
+import Header from '@/components/ui/Header'
+import Card from '@/components/ui/Card'
+import Button from '@/components/ui/Button'
 import '@/styles/underwriter-premium.css'
-import '@/styles/driver-demo.css'
 
 type DriverDemoState = {
   authMethod: 'email' | 'phone'
@@ -95,23 +90,12 @@ const createInitialState = (): DriverDemoState => ({
 export default function DemoDriverStepPage() {
   const { stepId } = useParams()
   const navigate = useNavigate()
-  const [state, setState] = useState<DriverDemoState>(createInitialState)
-  const [registerSuccess, setRegisterSuccess] = useState(false)
-  const [profileSaved, setProfileSaved] = useState(false)
-  const [claimSubmitted, setClaimSubmitted] = useState(false)
-  const [queuedResponse, setQueuedResponse] = useState(false)
+  const state = createInitialState()
 
   const stepIndex = useMemo(
     () => STEP_IDS.findIndex((step) => step === stepId),
     [stepId]
   )
-
-  useEffect(() => {
-    setRegisterSuccess(false)
-    setProfileSaved(false)
-    setClaimSubmitted(false)
-    setQueuedResponse(stepId === 'chat')
-  }, [stepId])
 
   if (stepIndex === -1) {
     return <Navigate to="/demo-driver" replace />
@@ -128,133 +112,207 @@ export default function DemoDriverStepPage() {
     navigate(`/demo-driver/step/${STEP_IDS[stepIndex - 1]}`)
   }
 
-  const resetTransient = () => {
-    setRegisterSuccess(false)
-    setProfileSaved(false)
-    setClaimSubmitted(false)
-    setQueuedResponse(false)
-  }
-
-  const handleRegister = () => {
-    resetTransient()
-    setRegisterSuccess(true)
-    setState((prev) => ({ ...prev, accountCreated: true }))
-    window.setTimeout(() => {
-      navigate('/demo-driver/step/profile')
-    }, 600)
-  }
-
-  const handleProfileSave = () => {
-    resetTransient()
-    setProfileSaved(true)
-    setState((prev) => ({ ...prev, profileSkipped: false }))
-    window.setTimeout(() => {
-      navigate('/demo-driver/step/claim')
-    }, 600)
-  }
-
-  const handleClaim = () => {
-    resetTransient()
-    setClaimSubmitted(true)
-    setState((prev) => ({
-      ...prev,
-      claim: {
-        ...prev.claim,
-        claimId: prev.claim.claimId || 'CLM-10421'
-      }
-    }))
-    window.setTimeout(() => {
-      navigate('/demo-driver/step/upload')
-    }, 600)
-  }
-
-  const handleUploadNext = () => {
-    resetTransient()
-    navigate('/demo-driver/step/chat')
-  }
-
-  const handleFinish = () => {
-    resetTransient()
-    navigate('/demo-driver/step/summary')
-  }
-
-  const handleRestart = () => {
-    resetTransient()
-    setState(createInitialState())
-    navigate('/demo-driver/step/register')
-  }
-
-  const primaryAction = (() => {
-    switch (currentStep) {
-      case 'register':
-        return { label: 'Create account (demo)', onClick: handleRegister }
-      case 'profile':
-        return { label: 'Save profile (demo)', onClick: handleProfileSave }
-      case 'claim':
-        return { label: 'Start claim (demo)', onClick: handleClaim }
-      case 'upload':
-        return { label: 'Continue to chat', onClick: handleUploadNext }
-      case 'chat':
-        return { label: 'Finish demo', onClick: handleFinish }
-      case 'summary':
-        return { label: 'Restart driver demo', onClick: handleRestart }
-      default:
-        return { label: 'Continue', onClick: handleFinish }
+  const goNext = () => {
+    if (stepIndex >= STEP_IDS.length - 1) {
+      navigate('/demo-driver')
+      return
     }
-  })()
+    navigate(`/demo-driver/step/${STEP_IDS[stepIndex + 1]}`)
+  }
+
+  const stepContent = {
+    register: {
+      inboxRows: [
+        { item: 'Email', value: state.contact },
+        { item: 'Password', value: '••••••••' },
+        { item: 'Consent', value: 'Granted (demo)' }
+      ],
+      snapshot: [
+        { label: 'Account', value: 'Created (demo)' },
+        { label: 'Login', value: 'Not required' }
+      ]
+    },
+    profile: {
+      inboxRows: [
+        { item: 'Full name', value: state.profile.fullName },
+        { item: 'Date of birth', value: state.profile.dob },
+        { item: 'License plate', value: state.profile.licensePlate },
+        { item: 'Vehicle type', value: state.profile.vehicleType }
+      ],
+      snapshot: [
+        { label: 'Policy number', value: state.profile.policyNumber },
+        { label: 'Insurer', value: state.profile.insurer }
+      ]
+    },
+    claim: {
+      inboxRows: [
+        { item: 'Incident type', value: state.claim.claimType },
+        { item: 'When', value: state.claim.when },
+        { item: 'Where', value: state.claim.location },
+        { item: 'Injured', value: state.claim.injured }
+      ],
+      snapshot: [
+        { label: 'Claim ID', value: state.claim.claimId },
+        { label: 'SLA', value: '24h initial response' }
+      ]
+    },
+    upload: {
+      inboxRows: [
+        { item: 'Damage photos', value: 'Uploaded (demo)' },
+        { item: 'Police report', value: 'Uploaded (demo)' },
+        { item: 'Driver license', value: 'Uploaded (demo)' }
+      ],
+      snapshot: [
+        { label: 'Encryption', value: 'Active' },
+        { label: 'Claim file', value: 'Updated' }
+      ]
+    },
+    chat: {
+      inboxRows: state.chatLog.map((item) => ({ item: item.from === 'driver' ? 'Driver' : 'Insurer', value: item.text })),
+      snapshot: [
+        { label: 'Handler', value: 'Assigned' },
+        { label: 'Status', value: 'HITL' }
+      ]
+    },
+    summary: {
+      inboxRows: [
+        { item: 'Account created', value: 'Yes' },
+        { item: 'Profile saved', value: 'Yes' },
+        { item: 'Claim reported', value: state.claim.claimId },
+        { item: 'Evidence attached', value: 'Yes' },
+        { item: 'Chat log', value: 'Recorded' }
+      ],
+      snapshot: [
+        { label: 'Outcome', value: 'Audit-ready' },
+        { label: 'Next step', value: 'Repair or payout' }
+      ]
+    }
+  }[currentStep]
 
   return (
-    <MobileShell
-      title={STEP_TITLES[currentStep]}
-      stepLabel={stepLabel}
-      onBack={goBack}
-      primaryAction={primaryAction}
-    >
-      {currentStep === 'register' && (
-        <RegisterStep
-          authMethod={state.authMethod}
-          contact={state.contact}
-          password={state.password}
-          agreed={state.agreed}
-          showSuccess={registerSuccess}
+    <section className="uw-page">
+      <div className="uw-container">
+        <Header
+          title={STEP_TITLES[currentStep]}
+          subtitle="Driver journey demo — prefilled, no manual input."
+          subtitleColor="#65748b"
+          actions={(
+            <div className="uw-actions">
+              <Button onClick={goBack} variant="secondary" disableHover>
+                Back
+              </Button>
+              <Button onClick={goNext} disableHover>
+                {currentStep === 'summary' ? 'Finish demo' : 'Next'}
+              </Button>
+            </div>
+          )}
         />
-      )}
 
-      {currentStep === 'profile' && (
-        <ProfileStep
-          profile={state.profile}
-          showSaved={profileSaved}
-        />
-      )}
+        <div className="uw-grid uw-kpi">
+          <Card title="Progress" variant="glass" className="uw-card">
+            <div className="uw-card-body">
+              <strong>{stepLabel}</strong>
+              <span className="uw-muted">Driver journey</span>
+            </div>
+          </Card>
+          <Card title="Driver" variant="glass" className="uw-card">
+            <div className="uw-card-body">
+              <strong>{state.profile.fullName}</strong>
+              <span className="uw-muted">{state.profile.licensePlate}</span>
+            </div>
+          </Card>
+          <Card title="Claim ID" variant="glass" className="uw-card">
+            <div className="uw-card-body">
+              <strong>{state.claim.claimId}</strong>
+              <span className="uw-muted">FNOL</span>
+            </div>
+          </Card>
+          <Card title="Channel" variant="glass" className="uw-card">
+            <div className="uw-card-body">
+              <strong>Chat</strong>
+              <span className="uw-muted">HITL support</span>
+            </div>
+          </Card>
+          <Card title="SLA" variant="glass" className="uw-card">
+            <div className="uw-card-body">
+              <strong>24h</strong>
+              <span className="uw-muted">Initial response</span>
+            </div>
+          </Card>
+          <Card title="Status" variant="glass" className="uw-card">
+            <div className="uw-card-body">
+              <strong>Demo</strong>
+              <span className="uw-muted">Prefilled</span>
+            </div>
+          </Card>
+        </div>
 
-      {currentStep === 'claim' && (
-        <ClaimStep
-          claim={state.claim}
-          showSubmitted={claimSubmitted}
-        />
-      )}
+        <div className="uw-grid uw-split">
+          <Card title="Step details" variant="glass" className="uw-card">
+            <div className="uw-card-body">
+              <table className="uw-table">
+                <thead>
+                  <tr>
+                    <th>Item</th>
+                    <th>Value</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {stepContent.inboxRows.map((row) => (
+                    <tr key={`${row.item}-${row.value}`}>
+                      <td>{row.item}</td>
+                      <td>{row.value}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </Card>
+          <Card title="Snapshot" variant="glass" className="uw-card">
+            <div className="uw-card-body">
+              {stepContent.snapshot.map((item) => (
+                <div key={item.label}>
+                  <strong>{item.label}</strong>
+                  <div className="uw-muted">{item.value}</div>
+                </div>
+              ))}
+            </div>
+          </Card>
+        </div>
 
-      {currentStep === 'upload' && (
-        <UploadStep
-          uploads={state.uploads}
-        />
-      )}
+        <div className="uw-grid uw-triplet">
+          <Card title="AI & HITL" variant="glass" className="uw-card">
+            <div className="uw-card-body">
+              <div className="uw-panel">AI suggestion — requires human review</div>
+              <div>AI supports triage, humans approve outcomes.</div>
+            </div>
+          </Card>
+          <Card title="Governance" variant="glass" className="uw-card">
+            <div className="uw-card-body">
+              <div>Audit trail across all steps.</div>
+              <div className="uw-muted">Carrier oversight preserved.</div>
+            </div>
+          </Card>
+          <Card title="SLA & service" variant="glass" className="uw-card">
+            <div className="uw-card-body">
+              <div>Initial response within 24h.</div>
+              <div className="uw-muted">Escalation if SLA risk.</div>
+            </div>
+          </Card>
+        </div>
 
-      {currentStep === 'chat' && (
-        <ChatStep
-          chatLog={state.chatLog}
-          queuedResponse={queuedResponse}
-        />
-      )}
+        <Card title="Audit & logs" variant="glass" className="uw-card">
+          <div className="uw-card-body">
+            <div>Step viewed: {STEP_TITLES[currentStep]}</div>
+            <div>Data captured: demo only</div>
+            <div>HITL checkpoint confirmed</div>
+          </div>
+        </Card>
 
-      {currentStep === 'summary' && (
-        <SummaryStep
-          profileSkipped={state.profileSkipped}
-          claimId={state.claim.claimId}
-          uploadsComplete={state.uploads.photos && state.uploads.report && state.uploads.license}
-          onRestart={handleRestart}
-        />
-      )}
-    </MobileShell>
+        <div className="uw-disclaimer">
+          Demo data only. AI suggestion — requires human review.
+        </div>
+      </div>
+    </section>
   )
 }

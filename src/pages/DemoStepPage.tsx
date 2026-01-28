@@ -304,7 +304,6 @@ export default function DemoStepPage() {
   const stepNumber = Number.isFinite(parsedStep) ? parsedStep : 1
 
   const [selectedRoleId, setSelectedRoleId] = useState<string | null>(null)
-  const [decisionMessage, setDecisionMessage] = useState<string | null>(null)
 
   const roleKey = useMemo(() => {
     const params = new URLSearchParams(location.search)
@@ -350,9 +349,6 @@ export default function DemoStepPage() {
     }
   }, [roleKey])
 
-  useEffect(() => {
-    setDecisionMessage(null)
-  }, [stepNumber])
 
   const selectedRole = useMemo(
     () => roleOptions.find((role) => role.id === selectedRoleId) ?? null,
@@ -361,13 +357,6 @@ export default function DemoStepPage() {
 
   if (!Number.isFinite(stepNumber) || stepNumber < 1 || stepNumber > TOTAL_STEPS) {
     return <Navigate to="/demo" replace />
-  }
-
-  const progressPercent = Math.round((stepNumber / TOTAL_STEPS) * 100)
-
-  const handleRoleSelect = (roleId: string) => {
-    setSelectedRoleId(roleId)
-    window.localStorage.setItem(ROLE_STORAGE_KEY, roleId)
   }
 
   const handleNext = () => {
@@ -386,6 +375,11 @@ export default function DemoStepPage() {
     navigate(`/demo/step/${stepNumber - 1}`)
   }
 
+  const progressLabel = `Step ${stepNumber} of ${TOTAL_STEPS}`
+  const roleLabel = selectedRole?.label ?? 'Role not set'
+  const decisionFocus = selectedRole?.decision ?? 'Decision focus not set'
+  const accountability = selectedRole?.accountability ?? 'Accountability not set'
+
   return (
     <section className="uw-page">
       <div className="uw-container">
@@ -394,7 +388,7 @@ export default function DemoStepPage() {
           subtitle={flowCopy.subtitle}
           subtitleColor="#65748b"
           actions={(
-            <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+            <div className="uw-actions">
               <Button onClick={handleBack} variant="secondary" disableHover>
                 Back
               </Button>
@@ -405,207 +399,122 @@ export default function DemoStepPage() {
           )}
         />
 
-        <div className="uw-grid uw-split">
-          <Card variant="glass" className="uw-card">
-            <div className="uw-card-body" style={{ gap: '0.75rem' }}>
-              <div style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-                Step {stepNumber} of {TOTAL_STEPS}
-              </div>
-              <div style={{ width: '100%', height: '6px', background: 'var(--ix-border)' }}>
-                <div style={{ width: `${progressPercent}%`, height: '100%', background: 'var(--ix-primary)' }} />
-              </div>
+        <div className="uw-grid uw-kpi">
+          <Card title="Progress" variant="glass" className="uw-card">
+            <div className="uw-card-body">
+              <strong>{progressLabel}</strong>
+              <span className="uw-muted">Guided demo flow</span>
             </div>
           </Card>
-          <Card variant="glass" className="uw-card">
-            <div className="uw-card-body" style={{ gap: '0.5rem' }}>
-              <div style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Current role</div>
-              <strong>{selectedRole ? selectedRole.label : 'Not selected yet'}</strong>
-              <span className="uw-muted">Pick a role to personalize the decision flow.</span>
+          <Card title="Role" variant="glass" className="uw-card">
+            <div className="uw-card-body">
+              <strong>{roleLabel}</strong>
+              <span className="uw-muted">Decision owner</span>
+            </div>
+          </Card>
+          <Card title="Decision focus" variant="glass" className="uw-card">
+            <div className="uw-card-body">
+              <strong>{decisionFocus}</strong>
+              <span className="uw-muted">Operational priority</span>
+            </div>
+          </Card>
+          <Card title="AI confidence" variant="glass" className="uw-card">
+            <div className="uw-card-body">
+              <strong>{flowCopy.aiRecommendation.confidence}</strong>
+              <span className="uw-muted">HITL required</span>
+            </div>
+          </Card>
+          <Card title="SLA impact" variant="glass" className="uw-card">
+            <div className="uw-card-body">
+              <strong>{flowCopy.governance.sla}</strong>
+              <span className="uw-muted">Time remaining</span>
+            </div>
+          </Card>
+          <Card title="Accountability" variant="glass" className="uw-card">
+            <div className="uw-card-body">
+              <strong>{accountability}</strong>
+              <span className="uw-muted">Governance owner</span>
             </div>
           </Card>
         </div>
 
-        {stepNumber === 1 && roleKey === '' && (
-          <div className="uw-section">
-            <h2 className="uw-section-title">Role context</h2>
-            <div className="uw-grid uw-cards">
-              {roleOptions.map((role) => {
-                const isSelected = role.id === selectedRoleId
-                return (
-                  <Card
-                    key={role.id}
-                    title={role.label}
-                    subtitle={`Decides on ${role.decision}.`}
-                    variant="glass"
-                    className="uw-card"
-                    interactive
-                    onClick={() => handleRoleSelect(role.id)}
-                    style={isSelected ? { borderColor: 'var(--ix-primary)', boxShadow: '0 0 0 2px rgba(212,56,13,0.2)' } : undefined}
-                  >
-                    <div className="uw-card-body">
-                      <span className="uw-muted">Accountable for {role.accountability}.</span>
-                      {isSelected && (
-                        <span style={{ color: 'var(--ix-primary)', fontWeight: 700 }}>Selected</span>
-                      )}
-                    </div>
-                  </Card>
-                )
-              })}
-            </div>
-            {selectedRole && (
-              <Card variant="glass" className="uw-card">
-                <div className="uw-card-body">
-                  <strong>
-                    This role decides on {selectedRole.decision} and is accountable for {selectedRole.accountability}.
-                  </strong>
-                </div>
-              </Card>
-            )}
-          </div>
-        )}
-
-        {stepNumber === 2 && (
-          <div className="uw-section">
-            <h2 className="uw-section-title">Decision inbox</h2>
-            <div className="uw-grid uw-kpi">
-              {flowCopy.kpis.map((kpi) => (
-                <Card key={kpi.label} title={kpi.label} variant="glass" className="uw-card">
-                  <div className="uw-card-body">
-                    <strong>{kpi.value}</strong>
-                    {kpi.note && <span className="uw-muted">{kpi.note}</span>}
-                  </div>
-                </Card>
-              ))}
-            </div>
-            <div className="uw-grid uw-cards">
-              {flowCopy.inboxCases.map((item) => (
-                <Card key={item.id} title={item.id} subtitle={item.type} variant="glass" className="uw-card">
-                  <div className="uw-card-body" style={{ gap: '0.35rem' }}>
-                    <span><strong>Risk:</strong> {item.risk}</span>
-                    <span><strong>SLA:</strong> {item.sla}</span>
-                    <span><strong>AI flag:</strong> {item.flag}</span>
-                  </div>
-                </Card>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {stepNumber === 3 && (
-          <div className="uw-section">
-            <h2 className="uw-section-title">AI insight</h2>
-            <div className="uw-grid uw-split">
-              <Card title="Recommended action" subtitle={flowCopy.aiRecommendation.action} variant="glass" className="uw-card">
-                <div className="uw-card-body" style={{ gap: '0.75rem' }}>
-                  <div><strong>Confidence:</strong> {flowCopy.aiRecommendation.confidence}</div>
-                  <div>
-                    <strong>Key risk drivers</strong>
-                    <ul style={{ margin: '0.35rem 0 0 1rem' }}>
-                      {flowCopy.aiRecommendation.drivers.map((driver) => (
-                        <li key={driver}>{driver}</li>
-                      ))}
-                    </ul>
-                  </div>
-                  <Button variant="secondary" disableHover>View rationale</Button>
-                </div>
-              </Card>
-              <Card title="AI guardrails" subtitle="Human review required" variant="glass" className="uw-card">
-                <div className="uw-card-body" style={{ gap: '0.75rem' }}>
-                  <span style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Badges</span>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-                    {['Human review required', 'Explainable', 'Carrier-aligned'].map((badge) => (
-                      <span
-                        key={badge}
-                        style={{
-                          fontSize: '0.72rem',
-                          letterSpacing: '0.05em',
-                          textTransform: 'uppercase',
-                          padding: '0.25rem 0.5rem',
-                          border: '1px solid var(--ix-border)',
-                          color: 'var(--ix-text-muted)'
-                        }}
-                      >
-                        {badge}
-                      </span>
-                    ))}
-                  </div>
-                  <span className="uw-muted">AI suggests options, humans stay accountable.</span>
-                </div>
-              </Card>
-            </div>
-          </div>
-        )}
-
-        {stepNumber === 4 && (
-          <div className="uw-section">
-            <h2 className="uw-section-title">Decision and governance</h2>
-            <div className="uw-grid uw-split">
-              <Card title="Decision options" subtitle="Choose the action that fits authority and risk" variant="glass" className="uw-card">
-                <div className="uw-card-body" style={{ gap: '0.75rem' }}>
-                  {[
-                    'Approve',
-                    'Approve with conditions',
-                    'Escalate',
-                    'Reject'
-                  ].map((label) => (
-                    <Button
-                      key={label}
-                      variant={label === 'Approve' ? 'primary' : 'secondary'}
-                      disableHover
-                      onClick={() => setDecisionMessage('Decision recorded (demo).')}
-                      style={{ width: '100%', justifyContent: 'center' }}
-                    >
-                      {label}
-                    </Button>
+        <div className="uw-grid uw-split">
+          <Card title="Decision inbox" variant="glass" className="uw-card">
+            <div className="uw-card-body">
+              <table className="uw-table">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Type</th>
+                    <th>Risk</th>
+                    <th>SLA</th>
+                    <th>AI flag</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {flowCopy.inboxCases.map((item) => (
+                    <tr key={item.id}>
+                      <td>{item.id}</td>
+                      <td>{item.type}</td>
+                      <td>{item.risk}</td>
+                      <td>{item.sla}</td>
+                      <td>{item.flag}</td>
+                    </tr>
                   ))}
-                  {decisionMessage && (
-                    <span style={{ color: 'var(--ix-primary)', fontWeight: 700 }}>{decisionMessage}</span>
-                  )}
-                </div>
-              </Card>
-              <Card title="Governance snapshot" subtitle="Always visible before you decide" variant="glass" className="uw-card">
-                <div className="uw-card-body" style={{ gap: '0.5rem' }}>
-                  <span><strong>Required approvals:</strong> {flowCopy.governance.approvals}</span>
-                  <span><strong>Authority level:</strong> {flowCopy.governance.authority}</span>
-                  <span><strong>Policy version:</strong> {flowCopy.governance.policy}</span>
-                  <span><strong>SLA impact:</strong> {flowCopy.governance.sla}</span>
-                </div>
-              </Card>
+                </tbody>
+              </table>
             </div>
-          </div>
-        )}
+          </Card>
+          <Card title="Decision snapshot" variant="glass" className="uw-card">
+            <div className="uw-card-body">
+              <strong>Recommended action</strong>
+              <div>{flowCopy.aiRecommendation.action}</div>
+              <div className="uw-muted">Required approvals: {flowCopy.governance.approvals}</div>
+              <div className="uw-muted">Authority level: {flowCopy.governance.authority}</div>
+              <div className="uw-muted">Policy version: {flowCopy.governance.policy}</div>
+            </div>
+          </Card>
+        </div>
 
-        {stepNumber === 5 && (
-          <div className="uw-section">
-            <h2 className="uw-section-title">Audit and value</h2>
-            <div className="uw-grid uw-split">
-              <Card title="Audit timeline" subtitle="Every decision is traceable" variant="glass" className="uw-card">
-                <div className="uw-card-body" style={{ gap: '0.5rem' }}>
-                  {flowCopy.auditTimeline.map((entry) => (
-                    <span key={entry}>{entry}</span>
-                  ))}
-                </div>
-              </Card>
-              <Card title="Why this matters" subtitle="Outcome you can trust" variant="glass" className="uw-card">
-                <div className="uw-card-body">
-                  <ul style={{ margin: '0.35rem 0 0 1rem' }}>
-                    {flowCopy.whyMatters.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                  <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                    <Button onClick={() => navigate('/demo')} variant="secondary" disableHover>
-                      Restart Demo
-                    </Button>
-                    <Button onClick={() => navigate('/roles')} disableHover>
-                      Explore Roles
-                    </Button>
-                  </div>
-                </div>
-              </Card>
+        <div className="uw-grid uw-triplet">
+          <Card title="AI suggestion" variant="glass" className="uw-card">
+            <div className="uw-card-body">
+              <div className="uw-panel">AI suggestion — requires human review</div>
+              <div>{flowCopy.aiRecommendation.action}</div>
+              <ul>
+                {flowCopy.aiRecommendation.drivers.map((driver) => (
+                  <li key={driver}>{driver}</li>
+                ))}
+              </ul>
             </div>
+          </Card>
+          <Card title="Governance" variant="glass" className="uw-card">
+            <div className="uw-card-body">
+              <div>Approvals: {flowCopy.governance.approvals}</div>
+              <div>Authority: {flowCopy.governance.authority}</div>
+              <div>Policy: {flowCopy.governance.policy}</div>
+            </div>
+          </Card>
+          <Card title="SLA & escalation" variant="glass" className="uw-card">
+            <div className="uw-card-body">
+              <div>SLA impact: {flowCopy.governance.sla}</div>
+              <div className="uw-muted">Escalate if SLA is breached</div>
+              <div className="uw-muted">HITL checkpoint required</div>
+            </div>
+          </Card>
+        </div>
+
+        <Card title="Audit & logs" variant="glass" className="uw-card">
+          <div className="uw-card-body">
+            {flowCopy.auditTimeline.map((entry) => (
+              <div key={entry}>{entry}</div>
+            ))}
           </div>
-        )}
+        </Card>
+
+        <div className="uw-disclaimer">
+          Demo data. AI suggestion — requires human review. HITL: AI suggests, humans decide.
+        </div>
       </div>
     </section>
   )

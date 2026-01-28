@@ -1,6 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import Card from '@/components/ui/Card'
+import Button from '@/components/ui/Button'
 import { useI18n } from '@/i18n/I18nContext'
 
 export default function DemoOverviewPage() {
@@ -45,40 +46,34 @@ export default function DemoOverviewPage() {
     <section className="uw-page">
       <div className="uw-container">
         <div className="uw-section">
-          <h2 className="uw-section-title" style={{ color: '#281c65' }}>{t('roles.sections.overview')}</h2>
+          <h2 className="uw-section-title">{t('roles.sections.overview')}</h2>
           <div className="uw-grid uw-cards">
             {overviewGroups.map((group) => (
               <Card
                 key={group.title}
-                title={<span style={{ color: '#281c65' }}>{group.title}</span>}
+                title={group.title}
                 variant="glass"
                 className="uw-card"
               >
-                <div className="uw-card-body" style={{ gap: '0.35rem' }}>
-                  {group.items.map((role) => (
-                    <button
-                      key={role.roleId}
-                      type="button"
-                      onClick={() => {
-                        if (role.roleId === 'driver-demo') {
-                          navigate('/demo-driver')
-                          return
-                        }
-                        navigate(`/demo/role/${role.roleId}`)
-                      }}
-                      style={{
-                        background: 'none',
-                        border: 'none',
-                        padding: 0,
-                        color: 'var(--ix-primary)',
-                        fontWeight: 600,
-                        cursor: 'pointer',
-                        textAlign: 'left'
-                      }}
-                    >
-                      {role.label}
-                    </button>
-                  ))}
+                <div className="uw-card-body">
+                  <div className="uw-actions">
+                    {group.items.map((role) => (
+                      <Button
+                        key={role.roleId}
+                        variant="secondary"
+                        disableHover
+                        onClick={() => {
+                          if (role.roleId === 'driver-demo') {
+                            navigate('/demo-driver')
+                            return
+                          }
+                          navigate(`/demo/role/${role.roleId}`)
+                        }}
+                      >
+                        {role.label}
+                      </Button>
+                    ))}
+                  </div>
                 </div>
               </Card>
             ))}
