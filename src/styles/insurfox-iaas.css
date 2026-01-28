@@ -3,7 +3,7 @@
   height: 100%;
   background: #ffffff;
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
 }
 
@@ -16,9 +16,10 @@
 }
 
 .insurfox-iaas-image {
-  width: min(74vw, 960px);
+  width: 100%;
   height: auto;
-  max-height: 70vh;
+  max-width: none;
+  max-height: 100%;
   object-fit: contain;
 }
 
@@ -41,8 +42,7 @@
 
 @media (max-width: 980px) {
   .insurfox-iaas-image {
-    width: min(82vw, 820px);
-    max-height: 64vh;
+    max-height: 100%;
   }
 
   .insurfox-iaas-card {
@@ -56,8 +56,7 @@
 
 @media (max-width: 640px) {
   .insurfox-iaas-image {
-    width: 88vw;
-    max-height: 58vh;
+    max-height: 100%;
   }
 
   .insurfox-iaas-card {
@@ -67,4 +66,14 @@
   .insurfox-iaas-card img {
     height: 34px;
   }
+}
+
+.bcia-deck .insurfox-iaas-slide {
+  width: calc(100% + 32px);
+  margin: 0 -16px;
+}
+
+.bcia-deck .insurfox-iaas-stage {
+  place-items: start center;
+  align-content: start;
 }
