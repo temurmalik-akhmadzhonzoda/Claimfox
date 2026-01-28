@@ -82,6 +82,8 @@ import MarketOverviewPage from '@/pages/MarketOverviewPage'
 import PremiumCorridorPage from '@/pages/PremiumCorridorPage'
 import BciaDeckPage from '@/pages/BciaDeckPage'
 import InsurfoxIaaSPage from '@/pages/InsurfoxIaaSPage'
+import DemoOverviewPage from '@/pages/DemoOverviewPage'
+import DemoStepPage from '@/pages/DemoStepPage'
 
 function NotFoundRedirect() {
   const { isAuthenticated } = useAuth()
@@ -107,6 +109,8 @@ export default function AppRouter() {
         <Route path="/home" element={<HomePage />} />
       </Route>
       <Route element={<ProtectedRoute><FullscreenBgLayout showHeader /></ProtectedRoute>}>
+        <Route path="/demo" element={<DemoOverviewPage />} />
+        <Route path="/demo/step/:stepId" element={<DemoStepPage />} />
         <Route path="/roles" element={<RolesPage />} />
         <Route path="/roles/underwriter" element={<UnderwriterRolePage />} />
         <Route path="/roles/legal" element={<LegalRolePage />} />

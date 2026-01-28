@@ -28,7 +28,7 @@ export default function AppHeader() {
     { label: t('header.nav.logistics'), route: '/logistics' },
     { label: t('header.nav.fleet'), route: '/fleet' },
     { label: t('header.nav.partner'), route: '/partner' },
-    { label: t('header.nav.demo'), route: '/roles' }
+    { label: t('header.nav.demo'), route: '/demo' }
   ]
 
   useEffect(() => {
