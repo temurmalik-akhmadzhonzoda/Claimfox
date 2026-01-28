@@ -106,12 +106,18 @@ export default function DemoRoleOverviewPage() {
         { label: isEn ? 'Logistics App' : 'Logistik App', route: '/logistics-app' }
       ]
     },
-    broker: {
+    'broker-crm': {
       title: t('roles.brokerPortal'),
-      subtitle: isEn ? 'Broker subroles' : 'Makler Unterrollen',
+      subtitle: isEn ? 'Broker CRM subroles' : 'Broker CRM Unterrollen',
       subroles: [
-        { label: isEn ? 'Broker Portal' : 'Maklerportal', route: '/broker-portal' },
-        { label: isEn ? 'Broker CRM' : 'Makler CRM', route: '/broker-crm' }
+        { label: t('roles.brokerPortal'), route: '/broker-crm' }
+      ]
+    },
+    'broker-admin': {
+      title: t('roles.cards.brokerAdmin.title'),
+      subtitle: isEn ? 'Broker administration subroles' : 'Broker Verwaltung Unterrollen',
+      subroles: [
+        { label: t('roles.cards.brokerAdmin.title'), route: '/broker-admin' }
       ]
     }
   }
@@ -137,20 +143,44 @@ export default function DemoRoleOverviewPage() {
         />
 
         <div className="uw-grid uw-cards">
-          {config.subroles.map((subrole) => (
-            <Card
-              key={subrole.route}
-              title={subrole.label}
-              variant="glass"
-              className="uw-card"
-            >
-              <div className="uw-card-body" style={{ gap: '0.75rem' }}>
-                <Button onClick={() => navigate(subrole.route)} disableHover>
-                  Demo starten
-                </Button>
-              </div>
-            </Card>
-          ))}
+          {config.subroles.map((subrole) => {
+            const isCompact = roleId === 'underwriter'
+            return (
+              <Card
+                key={subrole.route}
+                title={isCompact ? undefined : subrole.label}
+                variant="glass"
+                className="uw-card"
+                style={isCompact ? { minHeight: '72px', padding: '10px 12px' } : undefined}
+              >
+                <div
+                  className="uw-card-body"
+                  style={{
+                    gap: isCompact ? '0.5rem' : '0.35rem',
+                    flexDirection: isCompact ? 'row' : 'column',
+                    alignItems: isCompact ? 'center' : 'flex-start',
+                    justifyContent: isCompact ? 'space-between' : 'flex-start',
+                    width: '100%'
+                  }}
+                >
+                  {isCompact && <strong>{subrole.label}</strong>}
+                  <Button
+                    onClick={() => navigate(subrole.route)}
+                    disableHover
+                    style={{
+                      background: 'var(--blue-dark)',
+                      color: '#fff',
+                      padding: isCompact ? '0.3rem 0.75rem' : '0.4rem 0.9rem',
+                      fontSize: isCompact ? '0.8rem' : '0.9rem',
+                      boxShadow: 'none'
+                    }}
+                  >
+                    Demo starten
+                  </Button>
+                </div>
+              </Card>
+            )
+          })}
         </div>
       </div>
     </section>

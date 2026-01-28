@@ -993,7 +993,7 @@ export const translations: Record<Lang, TranslationTree> = {
       startJourney: 'Starten',
       registrationCardTitle: 'Registrierung',
       registrationCardSubtitle: 'Starte die neue, KI-gestützte Journey und melde Partner oder Kund:innen komfortabel an.',
-      brokerPortal: 'Maklerportal',
+      brokerPortal: 'Makler CRM',
       sections: {
         overview: 'Rollenübersicht',
         processes: 'Prozesse',
@@ -1117,6 +1117,10 @@ export const translations: Record<Lang, TranslationTree> = {
           title: 'Partner Manager',
           description: 'Pflege Kontakte zu Gutachtern, Werkstätten und Dienstleistern.'
         },
+        brokerPortal: {
+          title: 'Broker CRM',
+          description: 'CRM- und Backoffice-Workspace für Maklerportfolios und Kundenbeziehungen.'
+        },
         featureTree: {
           title: 'Feature Tree',
           description: 'Funktionsübersicht für Claims, Partnernetzwerke und Workflows.',
@@ -1159,6 +1163,10 @@ export const translations: Record<Lang, TranslationTree> = {
           title: 'Spedition / Logistik',
           description: 'Transporte, Routen, Versicherungen und Schäden zentral steuern – mit Echtzeit-Status und KI-Alerts.',
           cta: 'Ansehen'
+        },
+        brokerAdmin: {
+          title: 'Broker Administration',
+          description: 'Verwaltungsdashboard für Makler mit Bestands-, Team- und Compliance-Übersicht.'
         }
       }
     },
@@ -1528,7 +1536,7 @@ export const translations: Record<Lang, TranslationTree> = {
         },
         5: {
           title: 'Gesamtarchitektur (High Level)',
-          body: 'INSURFOX IaaS verbindet Versicherer, Broker Portal, Core Engine und Native KI Layer.<br/>Keine externen KI-Systeme, keine Datenweitergabe.'
+          body: 'INSURFOX IaaS verbindet Versicherer, Broker CRM, Core Engine und Native KI Layer.<br/>Keine externen KI-Systeme, keine Datenweitergabe.'
         },
         6: {
           title: 'Was „Native KI“ bei Insurfox bedeutet',
@@ -2907,12 +2915,12 @@ export const translations: Record<Lang, TranslationTree> = {
       }
     },
     brokerPortal: {
-      title: 'IaaS Maklerportal'
+      title: 'IaaS Makler CRM'
     },
     brokerLanding: {
-      title: 'Maklerportal',
+      title: 'Makler CRM',
       login: 'Login',
-      heroHeadline: 'Insurfox IaaS Maklerportal',
+      heroHeadline: 'Insurfox IaaS Makler CRM',
       heroSubline: 'Digitale Front- und Backend-Lösungen für Maklerhäuser, MGAs und Coverholder in Europa.',
       valueLine1: 'Backoffice & CRM speziell für mittelständische Makler und Industrieversicherungen.',
       valueLine2: 'Ausschreibungs- und Tenderplattform für komplexe Industrieprogramme.',
@@ -3098,7 +3106,7 @@ export const translations: Record<Lang, TranslationTree> = {
       startJourney: 'Start journey',
       registrationCardTitle: 'Registration',
       registrationCardSubtitle: 'Launch the guided, AI-supported journey to onboard partners or customers with ease.',
-      brokerPortal: 'Broker Portal',
+      brokerPortal: 'Broker CRM',
       sections: {
         overview: 'Role overview',
         processes: 'Processes',
@@ -3260,10 +3268,18 @@ export const translations: Record<Lang, TranslationTree> = {
           title: 'Marketing',
           description: 'Showcase the Insurfox platform for sales and stakeholders.'
         },
+        brokerPortal: {
+          title: 'Broker CRM',
+          description: 'CRM and back-office workspace for broker portfolios and client relationships.'
+        },
         logistics: {
           title: 'Logistics',
           description: 'Manage transports, routes, coverage and incidents with real-time status and AI alerts.',
           cta: 'View'
+        },
+        brokerAdmin: {
+          title: 'Broker Administration',
+          description: 'Admin dashboard for brokers with portfolio, team, and compliance oversight.'
         }
       }
     },
@@ -5012,12 +5028,12 @@ export const translations: Record<Lang, TranslationTree> = {
       }
     },
     brokerPortal: {
-      title: 'IaaS Broker Portal'
+      title: 'IaaS Broker CRM'
     },
     brokerLanding: {
-      title: 'Broker Portal',
+      title: 'Broker CRM',
       login: 'Login',
-      heroHeadline: 'Insurfox IaaS Broker Portal',
+      heroHeadline: 'Insurfox IaaS Broker CRM',
       heroSubline: 'Digital front- and back-office operations for European brokers, MGAs, and coverholders.',
       valueLine1: 'Back-office & CRM tailored to mid-sized commercial brokers.',
       valueLine2: 'Tender and placement platform for complex industrial programs.',

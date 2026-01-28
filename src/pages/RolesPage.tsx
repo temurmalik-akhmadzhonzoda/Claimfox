@@ -19,6 +19,7 @@ type RoleItem = {
     | 'whitepaper'
     | 'intern'
     | 'brokerPortal'
+    | 'brokerAdmin'
     | 'aiOnboarding'
     | 'onboarding'
     | 'identification'
@@ -52,7 +53,8 @@ const OVERVIEW_ITEMS: RoleItem[] = [
   { key: 'reporting', route: '/marketing' },
   { key: 'logistics', route: '/logistics', ctaKey: 'roles.cards.logistics.cta' },
   { key: 'fleetManagement', route: '/fleet-management' },
-  { key: 'brokerPortal', route: '/broker-portal' }
+  { key: 'brokerPortal', route: '/broker-crm' },
+  { key: 'brokerAdmin', route: '/broker-admin' }
 ]
 
 const PROCESS_ITEMS: RoleItem[] = [
@@ -177,7 +179,7 @@ export default function RolesPage() {
           <div className="roles-subsection">
             <h3>{t('roles.overviewGroups.broker')}</h3>
             <div className="roles-grid">
-              {['brokerPortal'].map((key) => renderCard(OVERVIEW_ITEMS.find((item) => item.key === key)!))}
+              {['brokerPortal', 'brokerAdmin'].map((key) => renderCard(OVERVIEW_ITEMS.find((item) => item.key === key)!))}
             </div>
           </div>
         </div>

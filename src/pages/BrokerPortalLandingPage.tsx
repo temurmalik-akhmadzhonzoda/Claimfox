@@ -298,7 +298,7 @@ export default function BrokerPortalLandingPage() {
               >
                 <img
                   src={BrokerPortalHeroImage}
-                  alt="Maklerportal"
+                  alt="Makler CRM"
                   style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
                 />
               </div>
@@ -482,7 +482,7 @@ export default function BrokerPortalLandingPage() {
             ×
           </button>
           <div className="hero-image-modal__content">
-            <img src={BrokerPortalHeroImage} alt="Maklerportal" />
+            <img src={BrokerPortalHeroImage} alt="Makler CRM" />
           </div>
         </div>
       )}

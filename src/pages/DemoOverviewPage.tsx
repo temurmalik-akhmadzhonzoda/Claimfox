@@ -34,7 +34,8 @@ export default function DemoOverviewPage() {
     {
       title: t('roles.overviewGroups.broker'),
       items: [
-        { label: t('roles.brokerPortal'), roleId: 'broker' }
+        { label: t('roles.brokerPortal'), roleId: 'broker-crm' },
+        { label: t('roles.cards.brokerAdmin.title'), roleId: 'broker-admin' }
       ]
     }
   ]
@@ -46,9 +47,8 @@ export default function DemoOverviewPage() {
           <h2 className="uw-section-title">{t('roles.sections.overview')}</h2>
           <div className="uw-grid uw-cards">
             {overviewGroups.map((group) => (
-              <Card key={group.title} variant="glass" className="uw-card">
-                <div className="uw-card-body" style={{ gap: '0.5rem' }}>
-                  <strong>{group.title}</strong>
+              <Card key={group.title} title={group.title} variant="glass" className="uw-card">
+                <div className="uw-card-body" style={{ gap: '0.35rem' }}>
                   {group.items.map((role) => (
                     <button
                       key={role.roleId}
