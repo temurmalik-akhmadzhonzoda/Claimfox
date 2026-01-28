@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 import BciaDeckPage, { type BciaSlide } from '@/pages/BciaDeckPage'
-import InsuranceProcesses from '@/assets/images/insurance_processes.png'
+import Startslide from '@/assets/images/startslide.png'
 import InsurfoxLogo from '@/assets/logos/Insurfox_Logo_colored_dark.png'
 import '@/styles/insurfox-iaas.css'
 
@@ -12,8 +12,8 @@ export default function InsurfoxIaaSPage() {
         <div className="insurfox-iaas-stage">
           <img
             className="insurfox-iaas-image"
-            src={InsuranceProcesses}
-            alt="Insurance processes"
+            src={Startslide}
+            alt="Insurfox overview"
           />
           <div className="insurfox-iaas-card">
             <img src={InsurfoxLogo} alt="Insurfox" />
@@ -29,6 +29,7 @@ export default function InsurfoxIaaSPage() {
       prependSlides={[introSlide]}
       showPrint={false}
       showPrintButton={false}
+      scaleFactor={0.9}
     />
   )
 }

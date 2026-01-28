@@ -1026,6 +1026,7 @@ type BciaDeckPageProps = {
   showPrint?: boolean
   showPrintButton?: boolean
   showIndex?: boolean
+  scaleFactor?: number
 }
 
 export default function BciaDeckPage({
@@ -1034,7 +1035,8 @@ export default function BciaDeckPage({
   initialIndex = 0,
   showPrint = true,
   showPrintButton = true,
-  showIndex = true
+  showIndex = true,
+  scaleFactor = 1
 }: BciaDeckPageProps) {
   const { lang } = useI18n()
   const typedLang = (lang === 'en' ? 'en' : 'de') as Lang
@@ -1052,7 +1054,7 @@ export default function BciaDeckPage({
   useEffect(() => {
     document.body.classList.add('bcia-deck-route')
     return () => document.body.classList.remove('bcia-deck-route')
-  }, [])
+  }, [scaleFactor])
 
   useLayoutEffect(() => {
     const header = document.querySelector('[data-app-header="true"]') as HTMLElement | null
@@ -1078,7 +1080,7 @@ export default function BciaDeckPage({
       const stageHeight = stage.clientHeight
       const slideWidth = 1122
       const slideHeight = 793
-      const nextScale = Math.min(stageWidth / slideWidth, stageHeight / slideHeight, 1)
+      const nextScale = Math.min(stageWidth / slideWidth, stageHeight / slideHeight, 1) * scaleFactor
       setScale(Number.isFinite(nextScale) ? nextScale : 1)
     }
 
