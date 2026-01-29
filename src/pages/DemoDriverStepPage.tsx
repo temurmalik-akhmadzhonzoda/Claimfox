@@ -1,32 +1,50 @@
-import React, { useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import '@/styles/demo-shell.css'
 
 type StepId = 'register' | 'onboarding' | 'profile' | 'identification' | 'quote' | 'purchase' | 'claims' | 'chat'
 
-type DemoState = {
+type DriverDemoState = {
+  accountCreated: boolean
+  onboardingComplete: boolean
+  profileConfirmed: boolean
   verified: boolean
   quoteReady: boolean
   policyActive: boolean
   claimSubmitted: boolean
   handlerAssigned: boolean
   slaRunning: boolean
+  incidentSelected: boolean
+  locationCaptured: boolean
+  timestampCaptured: boolean
+  claimTimestamp: string
 }
 
-type AuditEntry = { id: string; label: string; time: string }
+type AuditEntry = { ts: string; message: string }
 
-type SnapshotBadge = { label: string; active: boolean; tone: 'green' | 'blue' | 'orange' | 'indigo' | 'red' }
+type AnimDoneMap = Record<string, boolean>
 
 type ChatMessage = { id: string; from: 'driver' | 'insurer'; text: string }
 
-const stateKey = 'driverDemoState'
-const auditKey = 'driverDemoAudit'
-const chatKey = 'driverDemoChat'
+type SnapshotBadge = { label: string; active: boolean; tone: 'green' | 'blue' | 'orange' | 'indigo' | 'red' }
+
+type PhoneFieldProps = {
+  label: string
+  value: string
+  isTyping?: boolean
+  isDone?: boolean
+}
+
+const DEMO_DRIVER_STATE = 'DEMO_DRIVER_STATE'
+const DEMO_DRIVER_AUDIT = 'DEMO_DRIVER_AUDIT'
+const DEMO_DRIVER_ANIM_DONE = 'DEMO_DRIVER_ANIM_DONE'
+const DEMO_DRIVER_CHAT = 'DEMO_DRIVER_CHAT'
 
 const demoDefaults = {
   email: 'alex.driver@demo.insurfox',
   driver: 'Alex Driver',
-  vehicle: 'M-IF 421 · Car',
+  vehicle: 'M-IF 421',
+  vehicleType: 'Car',
   policyNumber: 'PL-204889',
   insurer: 'Atlas Insurance',
   claimId: 'CLM-10421',
@@ -51,13 +69,20 @@ const INITIAL_CHAT: ChatMessage[] = [
   { id: 'c4', from: 'insurer', text: 'Got it. A handler will review. Do you prefer repair or payout?' }
 ]
 
-const defaultState: DemoState = {
+const defaultState: DriverDemoState = {
+  accountCreated: false,
+  onboardingComplete: false,
+  profileConfirmed: false,
   verified: false,
   quoteReady: false,
   policyActive: false,
   claimSubmitted: false,
   handlerAssigned: false,
-  slaRunning: false
+  slaRunning: false,
+  incidentSelected: false,
+  locationCaptured: false,
+  timestampCaptured: false,
+  claimTimestamp: ''
 }
 
 const safeParse = <T,>(value: string | null, fallback: T): T => {
@@ -69,50 +94,128 @@ const safeParse = <T,>(value: string | null, fallback: T): T => {
   }
 }
 
-const readDemoState = (): DemoState => safeParse(sessionStorage.getItem(stateKey), defaultState)
-const writeDemoState = (next: DemoState) => sessionStorage.setItem(stateKey, JSON.stringify(next))
-const resetDemoState = () => sessionStorage.removeItem(stateKey)
+const readDemoState = (): DriverDemoState => safeParse(sessionStorage.getItem(DEMO_DRIVER_STATE), defaultState)
+const writeDemoState = (next: DriverDemoState) => sessionStorage.setItem(DEMO_DRIVER_STATE, JSON.stringify(next))
 
-const readAudit = (): AuditEntry[] => safeParse(sessionStorage.getItem(auditKey), [])
-const appendAudit = (label: string) => {
-  const now = new Date()
-  const time = now.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' })
-  const next = [{ id: `${Date.now()}-${Math.random()}`, label, time }, ...readAudit()]
-  sessionStorage.setItem(auditKey, JSON.stringify(next))
+const readAudit = (): AuditEntry[] => safeParse(sessionStorage.getItem(DEMO_DRIVER_AUDIT), [])
+const appendAudit = (message: string) => {
+  const ts = new Date().toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' })
+  const next = [{ ts, message }, ...readAudit()]
+  sessionStorage.setItem(DEMO_DRIVER_AUDIT, JSON.stringify(next))
 }
-const clearAudit = () => sessionStorage.removeItem(auditKey)
+const clearAudit = () => sessionStorage.removeItem(DEMO_DRIVER_AUDIT)
 
-const readChat = (): ChatMessage[] => safeParse(sessionStorage.getItem(chatKey), INITIAL_CHAT)
-const writeChat = (messages: ChatMessage[]) => sessionStorage.setItem(chatKey, JSON.stringify(messages))
+const readAnimDone = (): AnimDoneMap => safeParse(sessionStorage.getItem(DEMO_DRIVER_ANIM_DONE), {})
+const setAnimDone = (stepId: StepId, done = true) => {
+  const next = { ...readAnimDone(), [stepId]: done }
+  sessionStorage.setItem(DEMO_DRIVER_ANIM_DONE, JSON.stringify(next))
+}
+
+const readChat = (): ChatMessage[] => safeParse(sessionStorage.getItem(DEMO_DRIVER_CHAT), INITIAL_CHAT)
+const writeChat = (messages: ChatMessage[]) => sessionStorage.setItem(DEMO_DRIVER_CHAT, JSON.stringify(messages))
+
+const delay = (ms: number) => new Promise<void>((resolve) => window.setTimeout(resolve, ms))
+
+const useTypewriter = (text: string, enabled: boolean, speedMs = 24) => {
+  const [out, setOut] = useState(enabled ? '' : text)
+  const [done, setDone] = useState(!enabled)
+
+  useEffect(() => {
+    if (!enabled) {
+      setOut(text)
+      setDone(true)
+      return
+    }
+
+    let index = 0
+    setOut('')
+    setDone(false)
+    const interval = window.setInterval(() => {
+      index += 1
+      setOut(text.slice(0, index))
+      if (index >= text.length) {
+        window.clearInterval(interval)
+        setDone(true)
+      }
+    }, speedMs)
+
+    return () => window.clearInterval(interval)
+  }, [text, enabled, speedMs])
+
+  return { out, done }
+}
+
+const useSequence = (enabled: boolean, steps: Array<() => Promise<void>>) => {
+  const [running, setRunning] = useState(false)
+  const [finished, setFinished] = useState(!enabled)
+
+  useEffect(() => {
+    let active = true
+
+    if (!enabled) {
+      setRunning(false)
+      setFinished(true)
+      return () => {
+        active = false
+      }
+    }
+
+    const run = async () => {
+      setRunning(true)
+      for (const step of steps) {
+        if (!active) return
+        await step()
+      }
+      if (!active) return
+      setRunning(false)
+      setFinished(true)
+    }
+
+    run()
+
+    return () => {
+      active = false
+    }
+  }, [enabled, steps])
+
+  return { running, finished }
+}
+
+const PhoneField = ({ label, value, isTyping, isDone }: PhoneFieldProps) => (
+  <div className={isDone ? 'demo-fade-in' : undefined}>
+    <div className="text-muted">{label}</div>
+    <div className={isTyping ? 'typing-cursor fill-anim' : undefined}>{value}</div>
+  </div>
+)
 
 export default function DemoDriverStepPage() {
   const { stepId } = useParams()
   const navigate = useNavigate()
 
-  const stepIndex = useMemo(
-    () => STEP_META.findIndex((step) => step.id === stepId),
-    [stepId]
-  )
+  const stepIndex = useMemo(() => STEP_META.findIndex((step) => step.id === stepId), [stepId])
 
   if (stepIndex === -1) {
     return <Navigate to="/demo-driver" replace />
   }
 
   const step = STEP_META[stepIndex]
-  const [demoState, setDemoState] = useState<DemoState>(() => readDemoState())
+  const animDoneMap = readAnimDone()
+  const shouldAnimate = !animDoneMap[step.id]
+
+  const [demoState, setDemoState] = useState<DriverDemoState>(() => readDemoState())
   const [auditLog, setAuditLog] = useState<AuditEntry[]>(() => readAudit())
   const [chatLog, setChatLog] = useState<ChatMessage[]>(() => readChat())
   const [adminOpen, setAdminOpen] = useState(false)
 
-  const persistState = (next: DemoState) => {
+  const updateState = useCallback((next: DriverDemoState) => {
     setDemoState(next)
     writeDemoState(next)
-  }
+  }, [])
 
-  const pushAudit = (label: string) => {
-    appendAudit(label)
+  const logAudit = useCallback((message: string) => {
+    appendAudit(message)
     setAuditLog(readAudit())
-  }
+  }, [])
 
   const goBack = () => {
     if (stepIndex === 0) {
@@ -134,15 +237,14 @@ export default function DemoDriverStepPage() {
     navigate(`/demo-driver/step/${target}`)
   }
 
-  const addChatMessage = (text: string) => {
-    const nextMessages = [
-      ...chatLog,
-      { id: `c${chatLog.length + 1}`, from: 'driver', text },
-      { id: `c${chatLog.length + 2}`, from: 'insurer', text: 'Handler response queued (demo).' }
-    ]
-    setChatLog(nextMessages)
-    writeChat(nextMessages)
-    pushAudit('Driver sent quick reply')
+  const resetAll = () => {
+    sessionStorage.removeItem(DEMO_DRIVER_STATE)
+    clearAudit()
+    sessionStorage.removeItem(DEMO_DRIVER_ANIM_DONE)
+    sessionStorage.removeItem(DEMO_DRIVER_CHAT)
+    setDemoState(defaultState)
+    setAuditLog([])
+    setChatLog(INITIAL_CHAT)
   }
 
   const snapshotBadges: SnapshotBadge[] = [
@@ -165,6 +267,256 @@ export default function DemoDriverStepPage() {
     chat: ['AI drafts responses', 'Human handler approves', 'Audit trail stored']
   }
 
+  const registerTyping = useTypewriter(demoDefaults.email, shouldAnimate && step.id === 'register', 28)
+  const registerReady = !shouldAnimate || registerTyping.done
+
+  useEffect(() => {
+    if (step.id === 'register' && shouldAnimate && registerTyping.done) {
+      setAnimDone('register')
+    }
+  }, [step.id, shouldAnimate, registerTyping.done])
+
+  const [onboardingStage, setOnboardingStage] = useState(shouldAnimate && step.id === 'onboarding' ? 0 : 3)
+  const onboardingSteps = useMemo(() => [
+    async () => {
+      setOnboardingStage(1)
+      await delay(280)
+    },
+    async () => {
+      setOnboardingStage(2)
+      await delay(280)
+    },
+    async () => {
+      setOnboardingStage(3)
+      await delay(200)
+    }
+  ], [])
+  const onboardingSequence = useSequence(shouldAnimate && step.id === 'onboarding', onboardingSteps)
+  const onboardingReady = !shouldAnimate || onboardingSequence.finished
+
+  useEffect(() => {
+    if (step.id === 'onboarding' && shouldAnimate && onboardingSequence.finished) {
+      setAnimDone('onboarding')
+    }
+  }, [step.id, shouldAnimate, onboardingSequence.finished])
+
+  type ProfileKey = 'name' | 'dob' | 'plate' | 'vehicle' | 'policy' | 'insurer' | 'done'
+  const [profileKey, setProfileKey] = useState<ProfileKey>(shouldAnimate && step.id === 'profile' ? 'name' : 'done')
+  const profileName = useTypewriter('Alex Driver', shouldAnimate && step.id === 'profile' && profileKey === 'name', 22)
+  const profileDob = useTypewriter('12 Apr 1993', shouldAnimate && step.id === 'profile' && profileKey === 'dob', 22)
+  const profilePlate = useTypewriter('M-IF 421', shouldAnimate && step.id === 'profile' && profileKey === 'plate', 22)
+  const profileVehicle = useTypewriter('Car', shouldAnimate && step.id === 'profile' && profileKey === 'vehicle', 22)
+  const profilePolicy = useTypewriter(demoDefaults.policyNumber, shouldAnimate && step.id === 'profile' && profileKey === 'policy', 22)
+  const profileInsurer = useTypewriter(demoDefaults.insurer, shouldAnimate && step.id === 'profile' && profileKey === 'insurer', 22)
+
+  useEffect(() => {
+    if (step.id !== 'profile' || !shouldAnimate) return
+    if (profileKey === 'name' && profileName.done) setProfileKey('dob')
+    if (profileKey === 'dob' && profileDob.done) setProfileKey('plate')
+    if (profileKey === 'plate' && profilePlate.done) setProfileKey('vehicle')
+    if (profileKey === 'vehicle' && profileVehicle.done) setProfileKey('policy')
+    if (profileKey === 'policy' && profilePolicy.done) setProfileKey('insurer')
+    if (profileKey === 'insurer' && profileInsurer.done) setProfileKey('done')
+  }, [step.id, shouldAnimate, profileKey, profileName.done, profileDob.done, profilePlate.done, profileVehicle.done, profilePolicy.done, profileInsurer.done])
+
+  const profileReady = !shouldAnimate || profileKey === 'done'
+
+  useEffect(() => {
+    if (step.id === 'profile' && shouldAnimate && profileKey === 'done') {
+      setAnimDone('profile')
+    }
+  }, [step.id, shouldAnimate, profileKey])
+
+  type IdKey = 'id' | 'selfie' | 'confidence' | 'done'
+  const [idKey, setIdKey] = useState<IdKey>(shouldAnimate && step.id === 'identification' ? 'id' : 'done')
+  const idStatus = useTypewriter('ID scanned (demo)', shouldAnimate && step.id === 'identification' && idKey === 'id', 22)
+  const selfieStatus = useTypewriter('Selfie matched (demo)', shouldAnimate && step.id === 'identification' && idKey === 'selfie', 22)
+  const confidenceStatus = useTypewriter('Match confidence: 96%', shouldAnimate && step.id === 'identification' && idKey === 'confidence', 22)
+
+  useEffect(() => {
+    if (step.id !== 'identification' || !shouldAnimate) return
+    if (idKey === 'id' && idStatus.done) setIdKey('selfie')
+    if (idKey === 'selfie' && selfieStatus.done) setIdKey('confidence')
+    if (idKey === 'confidence' && confidenceStatus.done) setIdKey('done')
+  }, [step.id, shouldAnimate, idKey, idStatus.done, selfieStatus.done, confidenceStatus.done])
+
+  const identificationReady = !shouldAnimate || idKey === 'done'
+
+  useEffect(() => {
+    if (step.id === 'identification' && shouldAnimate && idKey === 'done') {
+      setAnimDone('identification')
+    }
+  }, [step.id, shouldAnimate, idKey])
+
+  const [quoteStage, setQuoteStage] = useState(shouldAnimate && step.id === 'quote' ? 0 : 3)
+  const quoteCoverage = useTypewriter('Carrier liability + vehicle', shouldAnimate && step.id === 'quote' && quoteStage >= 3, 22)
+  const quotePremium = useTypewriter('€ 129 / month', shouldAnimate && step.id === 'quote' && quoteStage >= 3 && quoteCoverage.done, 22)
+
+  const quoteSteps = useMemo(() => [
+    async () => {
+      setQuoteStage(1)
+      await delay(220)
+    },
+    async () => {
+      setQuoteStage(2)
+      await delay(220)
+    },
+    async () => {
+      setQuoteStage(3)
+      await delay(220)
+    }
+  ], [])
+  const quoteSequence = useSequence(shouldAnimate && step.id === 'quote', quoteSteps)
+
+  const quoteReady = !shouldAnimate || (quoteSequence.finished && quotePremium.done)
+
+  useEffect(() => {
+    if (step.id === 'quote' && shouldAnimate && quoteSequence.finished && quotePremium.done) {
+      setAnimDone('quote')
+    }
+  }, [step.id, shouldAnimate, quoteSequence.finished, quotePremium.done])
+
+  type PurchaseKey = 'payment' | 'billing' | 'total' | 'done'
+  const [purchaseKey, setPurchaseKey] = useState<PurchaseKey>(shouldAnimate && step.id === 'purchase' ? 'payment' : 'done')
+  const paymentMethod = useTypewriter('Visa •••• 2048', shouldAnimate && step.id === 'purchase' && purchaseKey === 'payment', 22)
+  const billingCycle = useTypewriter('Monthly', shouldAnimate && step.id === 'purchase' && purchaseKey === 'billing', 22)
+  const purchaseTotal = useTypewriter('€ 129 / month', shouldAnimate && step.id === 'purchase' && purchaseKey === 'total', 22)
+
+  useEffect(() => {
+    if (step.id !== 'purchase' || !shouldAnimate) return
+    if (purchaseKey === 'payment' && paymentMethod.done) setPurchaseKey('billing')
+    if (purchaseKey === 'billing' && billingCycle.done) setPurchaseKey('total')
+    if (purchaseKey === 'total' && purchaseTotal.done) setPurchaseKey('done')
+  }, [step.id, shouldAnimate, purchaseKey, paymentMethod.done, billingCycle.done, purchaseTotal.done])
+
+  const purchaseReady = !shouldAnimate || purchaseKey === 'done'
+
+  useEffect(() => {
+    if (step.id === 'purchase' && shouldAnimate && purchaseKey === 'done') {
+      setAnimDone('purchase')
+    }
+  }, [step.id, shouldAnimate, purchaseKey])
+
+  const [claimIncidentChoice, setClaimIncidentChoice] = useState<'Accident' | 'Theft' | 'Glass' | null>(demoState.incidentSelected ? 'Accident' : null)
+  const [incidentTyping, setIncidentTyping] = useState(false)
+  const [locationTyping, setLocationTyping] = useState(false)
+
+  const incidentText = !claimIncidentChoice
+    ? 'Select incident'
+    : claimIncidentChoice === 'Theft'
+      ? 'Vehicle theft'
+      : claimIncidentChoice === 'Glass'
+        ? 'Glass damage'
+        : 'Rear-end collision'
+
+  const descriptionText = !claimIncidentChoice
+    ? 'Tap incident chip to fill'
+    : claimIncidentChoice === 'Theft'
+      ? 'Vehicle missing from parking area.'
+      : claimIncidentChoice === 'Glass'
+        ? 'Front windshield cracked during drive.'
+        : 'Rear-end collision at traffic light.'
+
+  const incidentTyped = useTypewriter(incidentText, shouldAnimate && step.id === 'claims' && incidentTyping, 22)
+  const descriptionTyped = useTypewriter(descriptionText, shouldAnimate && step.id === 'claims' && incidentTyping && incidentTyped.done, 22)
+
+  const locationTyped = useTypewriter(demoDefaults.location, shouldAnimate && step.id === 'claims' && locationTyping, 22)
+  const timestampTyped = useTypewriter(demoState.claimTimestamp || '29 Jan 2026, 08:42', shouldAnimate && step.id === 'claims' && locationTyping && locationTyped.done, 22)
+
+  const locationValue = shouldAnimate
+    ? (locationTyping ? locationTyped.out : (demoState.locationCaptured ? demoDefaults.location : 'Tap capture location'))
+    : (demoState.locationCaptured ? demoDefaults.location : 'Tap capture location')
+
+  const timestampValue = shouldAnimate
+    ? (locationTyping ? timestampTyped.out : (demoState.claimTimestamp || 'Tap to capture time'))
+    : (demoState.claimTimestamp || 'Tap to capture time')
+
+  useEffect(() => {
+    if (step.id !== 'claims' || !shouldAnimate) return
+    if (incidentTyping && incidentTyped.done && descriptionTyped.done) {
+      setIncidentTyping(false)
+    }
+  }, [step.id, shouldAnimate, incidentTyping, incidentTyped.done, descriptionTyped.done])
+
+  useEffect(() => {
+    if (step.id !== 'claims' || !shouldAnimate) return
+    if (locationTyping && locationTyped.done && timestampTyped.done) {
+      setLocationTyping(false)
+    }
+  }, [step.id, shouldAnimate, locationTyping, locationTyped.done, timestampTyped.done])
+
+  const claimsReady = !shouldAnimate
+    ? (demoState.incidentSelected && demoState.locationCaptured && demoState.timestampCaptured)
+    : (incidentTyped.done && descriptionTyped.done && locationTyped.done && timestampTyped.done)
+
+  useEffect(() => {
+    if (step.id === 'claims' && shouldAnimate && claimsReady) {
+      setAnimDone('claims')
+    }
+  }, [step.id, shouldAnimate, claimsReady])
+
+  const [chatVisible, setChatVisible] = useState(shouldAnimate && step.id === 'chat' ? 0 : chatLog.length)
+
+  useEffect(() => {
+    if (step.id !== 'chat' || !shouldAnimate) return
+    let active = true
+    const run = async () => {
+      for (let i = 0; i < INITIAL_CHAT.length; i += 1) {
+        if (!active) return
+        setChatVisible(i + 1)
+        await delay(500 + i * 120)
+      }
+    }
+    run()
+    return () => { active = false }
+  }, [step.id, shouldAnimate])
+
+  const chatReady = !shouldAnimate || chatVisible >= INITIAL_CHAT.length
+
+  useEffect(() => {
+    if (step.id === 'chat' && shouldAnimate && chatReady) {
+      setAnimDone('chat')
+    }
+  }, [step.id, shouldAnimate, chatReady])
+
+  const addChatMessage = async (text: string) => {
+    const driverMessage: ChatMessage = { id: `c${Date.now()}`, from: 'driver', text }
+    const insurerMessage: ChatMessage = { id: `c${Date.now()}-r`, from: 'insurer', text: 'Handler response queued (demo).' }
+    const next = [...chatLog, driverMessage]
+    setChatLog(next)
+    writeChat(next)
+    await delay(420)
+    const nextWithReply = [...next, insurerMessage]
+    setChatLog(nextWithReply)
+    writeChat(nextWithReply)
+    logAudit('Driver sent quick reply')
+  }
+
+  const handleIncidentClick = (choice: 'Accident' | 'Theft' | 'Glass') => {
+    setClaimIncidentChoice(choice)
+    setIncidentTyping(true)
+    updateState({
+      ...demoState,
+      incidentSelected: true
+    })
+  }
+
+  const handleLocationClick = () => {
+    const timestamp = new Date().toLocaleDateString('de-DE', { day: '2-digit', month: 'short', year: 'numeric' })
+    const time = new Date().toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' })
+    const fullStamp = `${timestamp}, ${time}`
+
+    updateState({
+      ...demoState,
+      locationCaptured: true,
+      timestampCaptured: true,
+      claimTimestamp: fullStamp
+    })
+
+    if (!shouldAnimate) return
+    setLocationTyping(true)
+  }
+
   const stepCards: Record<StepId, React.ReactNode> = {
     register: (
       <>
@@ -174,10 +526,7 @@ export default function DemoDriverStepPage() {
             <div className="hint">1-tap registration</div>
           </div>
           <div className="phone-card-body">
-            <div>
-              <div className="text-muted">Email</div>
-              <strong>{demoDefaults.email}</strong>
-            </div>
+            <PhoneField label="Email" value={registerTyping.out} isTyping={!registerTyping.done && shouldAnimate} isDone={registerTyping.done} />
             <div className="d-flex flex-wrap gap-2">
               <span className="badge bg-blue-lt text-blue">Auto-verified</span>
               <span className="badge bg-green-lt text-green">Consent stored</span>
@@ -188,12 +537,15 @@ export default function DemoDriverStepPage() {
           <button
             type="button"
             className="btn btn-primary"
+            disabled={!registerReady}
             onClick={() => {
-              pushAudit('Email captured')
+              updateState({ ...demoState, accountCreated: true })
+              logAudit('Registration started (email captured)')
+              setAnimDone('register')
               goNext()
             }}
           >
-            Confirm email
+            Continue
           </button>
         </div>
       </>
@@ -203,15 +555,18 @@ export default function DemoDriverStepPage() {
         <div className="phone-card">
           <div className="phone-card-header">
             <div className="title">Onboarding wizard</div>
-            <div className="hint">55% complete</div>
+            <div className="hint">Progressive setup</div>
           </div>
           <div className="phone-card-body">
             <div className="progress">
-              <div className="progress-bar bg-indigo" style={{ width: '55%' }} />
+              <div className="progress-bar bg-indigo" style={{ width: `${30 + onboardingStage * 20}%` }} />
             </div>
             <div className="d-flex flex-wrap gap-2">
-              {['Account', 'Vehicle', 'Coverage', 'Support'].map((item, index) => (
-                <span key={item} className={`badge ${index < 2 ? 'bg-green-lt text-green' : 'bg-blue-lt text-blue'}`}>
+              {['Basics', 'Vehicle', 'Consent'].map((item, index) => (
+                <span
+                  key={item}
+                  className={`badge ${onboardingStage > index ? 'bg-green-lt text-green demo-fade-in' : 'bg-blue-lt text-blue'}`}
+                >
                   {item}
                 </span>
               ))}
@@ -222,12 +577,15 @@ export default function DemoDriverStepPage() {
           <button
             type="button"
             className="btn btn-primary"
+            disabled={!onboardingReady}
             onClick={() => {
-              pushAudit('Onboarding wizard completed')
+              updateState({ ...demoState, onboardingComplete: true })
+              logAudit('Onboarding completed (wizard)')
+              setAnimDone('onboarding')
               goNext()
             }}
           >
-            Continue onboarding
+            Complete onboarding
           </button>
         </div>
       </>
@@ -237,29 +595,26 @@ export default function DemoDriverStepPage() {
         <div className="phone-card">
           <div className="phone-card-header">
             <div className="title">Profile overview</div>
-            <div className="hint">Prefilled</div>
+            <div className="hint">Auto-filled</div>
           </div>
           <div className="phone-card-body">
-            <div>
-              <div className="text-muted">Driver</div>
-              <strong>{demoDefaults.driver}</strong>
-            </div>
-            <div>
-              <div className="text-muted">Company</div>
-              <strong>Insurfox Fleet GmbH</strong>
-            </div>
-            <div>
-              <div className="text-muted">Vehicle</div>
-              <strong>{demoDefaults.vehicle}</strong>
-            </div>
+            <PhoneField label="Full name" value={profileName.out} isTyping={profileKey === 'name' && shouldAnimate} isDone={profileName.done} />
+            <PhoneField label="DOB" value={profileDob.out} isTyping={profileKey === 'dob' && shouldAnimate} isDone={profileDob.done} />
+            <PhoneField label="Plate" value={profilePlate.out} isTyping={profileKey === 'plate' && shouldAnimate} isDone={profilePlate.done} />
+            <PhoneField label="Vehicle" value={profileVehicle.out} isTyping={profileKey === 'vehicle' && shouldAnimate} isDone={profileVehicle.done} />
+            <PhoneField label="Policy" value={profilePolicy.out} isTyping={profileKey === 'policy' && shouldAnimate} isDone={profilePolicy.done} />
+            <PhoneField label="Insurer" value={profileInsurer.out} isTyping={profileKey === 'insurer' && shouldAnimate} isDone={profileInsurer.done} />
           </div>
         </div>
         <div className="phone-cta-row">
           <button
             type="button"
             className="btn btn-primary"
+            disabled={!profileReady}
             onClick={() => {
-              pushAudit('Profile confirmed')
+              updateState({ ...demoState, profileConfirmed: true })
+              logAudit('Profile confirmed')
+              setAnimDone('profile')
               goNext()
             }}
           >
@@ -276,32 +631,20 @@ export default function DemoDriverStepPage() {
             <div className="hint">ID + selfie match</div>
           </div>
           <div className="phone-card-body">
-            <div className="d-flex align-items-center justify-content-between">
-              <div>
-                <div className="text-muted">ID document</div>
-                <strong>German ID · OCR matched</strong>
-              </div>
-              <span className="badge bg-blue-lt text-blue">Captured</span>
-            </div>
-            <div className="d-flex align-items-center justify-content-between">
-              <div>
-                <div className="text-muted">Selfie match</div>
-                <strong>{demoState.verified ? 'Match verified' : 'Pending review'}</strong>
-              </div>
-              <span className={`badge ${demoState.verified ? 'bg-green-lt text-green' : 'bg-yellow-lt text-yellow'}`}>
-                {demoState.verified ? 'Verified' : 'Pending'}
-              </span>
-            </div>
+            <PhoneField label="ID status" value={idStatus.out} isTyping={idKey === 'id' && shouldAnimate} isDone={idStatus.done} />
+            <PhoneField label="Selfie" value={selfieStatus.out} isTyping={idKey === 'selfie' && shouldAnimate} isDone={selfieStatus.done} />
+            <PhoneField label="Confidence" value={confidenceStatus.out} isTyping={idKey === 'confidence' && shouldAnimate} isDone={confidenceStatus.done} />
           </div>
         </div>
         <div className="phone-cta-row">
           <button
             type="button"
             className="btn btn-primary"
+            disabled={!identificationReady}
             onClick={() => {
-              const next = { ...demoState, verified: true }
-              persistState(next)
-              pushAudit('Identity verified')
+              updateState({ ...demoState, verified: true })
+              logAudit('Identity verified (ID + selfie match)')
+              setAnimDone('identification')
               goNext()
             }}
           >
@@ -315,28 +658,32 @@ export default function DemoDriverStepPage() {
         <div className="phone-card">
           <div className="phone-card-header">
             <div className="title">Quote builder</div>
-            <div className="hint">Carrier liability</div>
+            <div className="hint">Liability + vehicles</div>
           </div>
           <div className="phone-card-body">
             <div className="d-flex flex-wrap gap-2">
-              {['Carrier liability', '3 vehicles', 'EU coverage'].map((item) => (
-                <span key={item} className="badge bg-indigo-lt text-indigo">{item}</span>
+              {['Liability', 'Vehicle', 'Summary'].map((item, index) => (
+                <span
+                  key={item}
+                  className={`badge ${quoteStage > index ? 'bg-green-lt text-green demo-fade-in' : 'bg-blue-lt text-blue'}`}
+                >
+                  {item}
+                </span>
               ))}
             </div>
-            <div>
-              <div className="text-muted">Estimated premium</div>
-              <strong>€ 1,420 / month</strong>
-            </div>
+            <PhoneField label="Coverage" value={quoteCoverage.out} isTyping={!quoteCoverage.done && shouldAnimate && quoteStage >= 3} isDone={quoteCoverage.done} />
+            <PhoneField label="Premium" value={quotePremium.out} isTyping={!quotePremium.done && shouldAnimate && quoteStage >= 3} isDone={quotePremium.done} />
           </div>
         </div>
         <div className="phone-cta-row">
           <button
             type="button"
             className="btn btn-primary"
+            disabled={!quoteReady}
             onClick={() => {
-              const next = { ...demoState, quoteReady: true }
-              persistState(next)
-              pushAudit('Quote generated')
+              updateState({ ...demoState, quoteReady: true })
+              logAudit('Quote generated (liability + vehicle)')
+              setAnimDone('quote')
               goNext()
             }}
           >
@@ -350,31 +697,23 @@ export default function DemoDriverStepPage() {
         <div className="phone-card">
           <div className="phone-card-header">
             <div className="title">Checkout</div>
-            <div className="hint">Policy binding</div>
+            <div className="hint">Payment ready</div>
           </div>
           <div className="phone-card-body">
-            <div className="d-flex align-items-center justify-content-between">
-              <span>Policy</span>
-              <strong>{demoDefaults.policyNumber}</strong>
-            </div>
-            <div className="d-flex align-items-center justify-content-between">
-              <span>Payment method</span>
-              <strong>SEPA</strong>
-            </div>
-            <div className="d-flex align-items-center justify-content-between">
-              <span>Total</span>
-              <strong>€ 1,420 / month</strong>
-            </div>
+            <PhoneField label="Payment method" value={paymentMethod.out} isTyping={purchaseKey === 'payment' && shouldAnimate} isDone={paymentMethod.done} />
+            <PhoneField label="Billing" value={billingCycle.out} isTyping={purchaseKey === 'billing' && shouldAnimate} isDone={billingCycle.done} />
+            <PhoneField label="Total" value={purchaseTotal.out} isTyping={purchaseKey === 'total' && shouldAnimate} isDone={purchaseTotal.done} />
           </div>
         </div>
         <div className="phone-cta-row">
           <button
             type="button"
             className="btn btn-primary"
+            disabled={!purchaseReady}
             onClick={() => {
-              const next = { ...demoState, policyActive: true }
-              persistState(next)
-              pushAudit('Policy activated')
+              updateState({ ...demoState, policyActive: true })
+              logAudit('Policy purchased and activated')
+              setAnimDone('purchase')
               goNext()
             }}
           >
@@ -392,27 +731,60 @@ export default function DemoDriverStepPage() {
           </div>
           <div className="phone-card-body">
             <div className="d-flex flex-wrap gap-2">
-              <span className="badge bg-blue-lt text-blue">Location: {demoDefaults.location}</span>
-              <span className="badge bg-indigo-lt text-indigo">Time: 29 Jan 2026, 08:42</span>
+              {['Accident', 'Theft', 'Glass'].map((item) => (
+                <button
+                  key={item}
+                  type="button"
+                  className={`btn btn-sm ${claimIncidentChoice === item ? 'btn-primary' : 'btn-outline-primary'}`}
+                  onClick={() => handleIncidentClick(item as 'Accident' | 'Theft' | 'Glass')}
+                >
+                  {item}
+                </button>
+              ))}
+              <button
+                type="button"
+                className={`btn btn-sm ${demoState.locationCaptured ? 'btn-success' : 'btn-outline-primary'}`}
+                onClick={handleLocationClick}
+              >
+                Capture location
+              </button>
             </div>
-            <div>
-              <div className="text-muted">Incident</div>
-              <strong>Rear-end collision</strong>
-            </div>
-            <div>
-              <div className="text-muted">Driver status</div>
-              <strong>No injuries</strong>
-            </div>
+            <PhoneField
+              label="Incident type"
+              value={shouldAnimate ? incidentTyped.out : incidentText}
+              isTyping={incidentTyping && shouldAnimate && !incidentTyped.done}
+              isDone={!shouldAnimate || incidentTyped.done}
+            />
+            <PhoneField
+              label="Description"
+              value={shouldAnimate ? descriptionTyped.out : descriptionText}
+              isTyping={incidentTyping && shouldAnimate && incidentTyped.done && !descriptionTyped.done}
+              isDone={!shouldAnimate || descriptionTyped.done}
+            />
+            <PhoneField
+              label="Location"
+              value={locationValue}
+              isTyping={locationTyping && shouldAnimate && !locationTyped.done}
+              isDone={!shouldAnimate || locationTyped.done}
+            />
+            <PhoneField
+              label="Timestamp"
+              value={timestampValue}
+              isTyping={locationTyping && shouldAnimate && locationTyped.done && !timestampTyped.done}
+              isDone={!shouldAnimate || timestampTyped.done}
+            />
           </div>
         </div>
         <div className="phone-cta-row">
           <button
             type="button"
             className="btn btn-primary"
+            disabled={!claimsReady}
             onClick={() => {
-              const next = { ...demoState, claimSubmitted: true, slaRunning: true }
-              persistState(next)
-              pushAudit('FNOL submitted')
+              updateState({ ...demoState, claimSubmitted: true, slaRunning: true })
+              logAudit(`FNOL submitted (${demoDefaults.claimId})`)
+              logAudit('SLA started (24h initial response)')
+              setAnimDone('claims')
               goNext()
             }}
           >
@@ -430,7 +802,7 @@ export default function DemoDriverStepPage() {
           </div>
           <div className="phone-card-body">
             <div className="phone-chat">
-              {chatLog.map((msg) => (
+              {(shouldAnimate ? INITIAL_CHAT.slice(0, chatVisible) : chatLog).map((msg) => (
                 <div key={msg.id} className={`phone-bubble ${msg.from === 'driver' ? 'driver' : 'insurer'}`}>
                   {msg.text}
                 </div>
@@ -449,21 +821,22 @@ export default function DemoDriverStepPage() {
           <button
             type="button"
             className="btn btn-primary"
+            disabled={!chatReady}
             onClick={() => {
-              const next = { ...demoState, handlerAssigned: true }
-              persistState(next)
-              pushAudit('Handler assigned')
+              updateState({ ...demoState, handlerAssigned: true })
+              logAudit('Handler assigned (HITL)')
+              setAnimDone('chat')
               goNext()
             }}
           >
-            Finish demo
+            Assign handler
           </button>
         </div>
       </>
     )
   }
 
-  const auditDisplay = auditLog.length === 0 ? [{ id: 'seed', label: 'No events yet', time: '—' }] : auditLog
+  const auditDisplay = auditLog.length === 0 ? [{ ts: '—', message: 'No events yet' }] : auditLog
 
   return (
     <div className="page">
@@ -483,6 +856,9 @@ export default function DemoDriverStepPage() {
                   </button>
                   <button type="button" className="btn btn-primary" onClick={goNext}>
                     {stepIndex === STEP_META.length - 1 ? 'Finish demo' : 'Next'}
+                  </button>
+                  <button type="button" className="btn btn-outline-primary" onClick={resetAll}>
+                    Reset
                   </button>
                 </div>
               </div>
@@ -558,19 +934,23 @@ export default function DemoDriverStepPage() {
                   <div className="card-header">
                     <div className="d-flex align-items-center justify-content-between w-100">
                       <h3 className="card-title mb-0">Audit log</h3>
-                      <button type="button" className="btn btn-sm btn-outline-primary" onClick={() => {
-                        clearAudit()
-                        setAuditLog([])
-                      }}>
+                      <button
+                        type="button"
+                        className="btn btn-sm btn-outline-primary"
+                        onClick={() => {
+                          clearAudit()
+                          setAuditLog([])
+                        }}
+                      >
                         Clear
                       </button>
                     </div>
                   </div>
                   <div className="card-body d-grid gap-2">
-                    {auditDisplay.map((entry) => (
-                      <div key={entry.id} className="d-flex align-items-center justify-content-between">
-                        <span>{entry.label}</span>
-                        <span className="text-muted">{entry.time}</span>
+                    {auditDisplay.map((entry, index) => (
+                      <div key={`${entry.ts}-${index}`} className="d-flex align-items-center justify-content-between">
+                        <span>{entry.message}</span>
+                        <span className="text-muted">{entry.ts}</span>
                       </div>
                     ))}
                   </div>
