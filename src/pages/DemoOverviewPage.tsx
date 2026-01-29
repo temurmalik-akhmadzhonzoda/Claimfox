@@ -5,12 +5,17 @@ import UnderwriterIcon from '@/assets/images/underwriter.png'
 import LegalIcon from '@/assets/images/legal.png'
 import InsuranceIcon from '@/assets/images/insurance_icon.png'
 import FleetIcon from '@/assets/images/flotte.png'
+import LogisticsIcon from '@/assets/images/logistic_icon.png'
+import BrokerIcon from '@/assets/images/broker_icon.png'
 
 export default function DemoOverviewPage() {
   const navigate = useNavigate()
   const { t } = useI18n()
   const [underwriterOpen, setUnderwriterOpen] = useState(false)
   const [legalOpen, setLegalOpen] = useState(false)
+  const [financeOpen, setFinanceOpen] = useState(false)
+  const [claimsOpen, setClaimsOpen] = useState(false)
+  const [partnerOpen, setPartnerOpen] = useState(false)
 
   const groupMeta = [
     { key: 'insurance', iconBg: 'bg-indigo-lt', accent: 'bg-indigo-lt' },
@@ -80,11 +85,15 @@ export default function DemoOverviewPage() {
                   <div className="card h-100">
                     <div className="card-header d-flex align-items-center justify-content-between">
                       <div className="d-flex align-items-center gap-2">
-                        <span className={group.key === 'insurance' || group.key === 'fleet' ? 'd-inline-flex align-items-center me-2' : `avatar avatar-sm ${meta?.iconBg ?? 'bg-indigo-lt'}`}>
+                        <span className={group.key === 'insurance' || group.key === 'fleet' || group.key === 'logistics' || group.key === 'broker' ? 'd-inline-flex align-items-center me-2' : `avatar avatar-sm ${meta?.iconBg ?? 'bg-indigo-lt'}`}>
                           {group.key === 'insurance' ? (
                             <img src={InsuranceIcon} alt="" style={{ width: 48, height: 48, objectFit: 'contain' }} />
                           ) : group.key === 'fleet' ? (
                             <img src={FleetIcon} alt="" style={{ width: 48, height: 48, objectFit: 'contain' }} />
+                          ) : group.key === 'logistics' ? (
+                            <img src={LogisticsIcon} alt="" style={{ width: 48, height: 48, objectFit: 'contain' }} />
+                          ) : group.key === 'broker' ? (
+                            <img src={BrokerIcon} alt="" style={{ width: 48, height: 48, objectFit: 'contain' }} />
                           ) : (
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                               {group.key === 'fleet' && (
@@ -117,7 +126,7 @@ export default function DemoOverviewPage() {
                           <div className="text-muted fs-4">Roles</div>
                         </div>
                       </div>
-                      {group.key !== 'insurance' && group.key !== 'fleet' && (
+                      {group.key !== 'insurance' && group.key !== 'fleet' && group.key !== 'logistics' && group.key !== 'broker' && (
                         <span className={`badge ${meta?.accent ?? 'bg-indigo-lt'}`}>
                           {group.items.length} roles
                         </span>
@@ -187,6 +196,140 @@ export default function DemoOverviewPage() {
                                   {[
                                     { label: 'Legal Counsel', to: '/demo-legal/counsel/step/intake' },
                                     { label: 'Claims Legal', to: '/demo-legal/claims/step/intake' },
+                                  ].map((item) => (
+                                    <button
+                                      key={item.label}
+                                      type="button"
+                                      className="list-group-item list-group-item-action d-flex align-items-center justify-content-between ps-5"
+                                      onClick={() => navigate(item.to)}
+                                    >
+                                      <span className="fw-semibold">{item.label}</span>
+                                      <span className="badge bg-blue-lt text-blue">Demo</span>
+                                    </button>
+                                  ))}
+                                </div>
+                              )}
+                            </React.Fragment>
+                          )
+                        }
+
+                        if (role.roleId === 'finance') {
+                          return (
+                            <React.Fragment key={role.roleId}>
+                              <button
+                                type="button"
+                                className="list-group-item list-group-item-action d-flex align-items-center justify-content-between"
+                                onClick={() => setFinanceOpen((prev) => !prev)}
+                              >
+                                <span className="d-flex align-items-center gap-2">
+                                  <span className="avatar avatar-xs bg-blue-lt text-blue">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                                      <path d="M12 5v14" />
+                                      <path d="M5 12h14" />
+                                    </svg>
+                                  </span>
+                                  <span className="fw-semibold">{role.label}</span>
+                                </span>
+                                <span className="text-blue" style={{ fontSize: '1rem', lineHeight: 1 }}>{financeOpen ? '▲' : '▼'}</span>
+                              </button>
+                              {financeOpen && (
+                                <div className="list-group list-group-flush">
+                                  {[
+                                    { label: 'Finance Analyst', to: '/roles/finance/analyst' },
+                                    { label: 'Premium & Billing Operations', to: '/roles/finance/premium-billing' },
+                                    { label: 'Claims Finance', to: '/roles/finance/claims' },
+                                    { label: 'Reinsurance Finance', to: '/roles/finance/reinsurance' },
+                                    { label: 'Financial Controller', to: '/roles/finance/controller' },
+                                    { label: 'CFO / Carrier Finance Final Authority', to: '/roles/finance/cfo-final-authority' },
+                                  ].map((item) => (
+                                    <button
+                                      key={item.label}
+                                      type="button"
+                                      className="list-group-item list-group-item-action d-flex align-items-center justify-content-between ps-5"
+                                      onClick={() => navigate(item.to)}
+                                    >
+                                      <span className="fw-semibold">{item.label}</span>
+                                      <span className="badge bg-blue-lt text-blue">Demo</span>
+                                    </button>
+                                  ))}
+                                </div>
+                              )}
+                            </React.Fragment>
+                          )
+                        }
+
+                        if (role.roleId === 'claims') {
+                          return (
+                            <React.Fragment key={role.roleId}>
+                              <button
+                                type="button"
+                                className="list-group-item list-group-item-action d-flex align-items-center justify-content-between"
+                                onClick={() => setClaimsOpen((prev) => !prev)}
+                              >
+                                <span className="d-flex align-items-center gap-2">
+                                  <span className="avatar avatar-xs bg-blue-lt text-blue">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                                      <path d="M12 5v14" />
+                                      <path d="M5 12h14" />
+                                    </svg>
+                                  </span>
+                                  <span className="fw-semibold">{role.label}</span>
+                                </span>
+                                <span className="text-blue" style={{ fontSize: '1rem', lineHeight: 1 }}>{claimsOpen ? '▲' : '▼'}</span>
+                              </button>
+                              {claimsOpen && (
+                                <div className="list-group list-group-flush">
+                                  {[
+                                    { label: 'Claim Manager Overview', to: '/claim-manager' },
+                                    { label: 'Claim Manager App', to: '/claim-manager-app' },
+                                    { label: 'Claim Case', to: '/claim-manager-case' },
+                                    { label: 'Claim Intake (Chatbot)', to: '/claim-process' },
+                                  ].map((item) => (
+                                    <button
+                                      key={item.label}
+                                      type="button"
+                                      className="list-group-item list-group-item-action d-flex align-items-center justify-content-between ps-5"
+                                      onClick={() => navigate(item.to)}
+                                    >
+                                      <span className="fw-semibold">{item.label}</span>
+                                      <span className="badge bg-blue-lt text-blue">Demo</span>
+                                    </button>
+                                  ))}
+                                </div>
+                              )}
+                            </React.Fragment>
+                          )
+                        }
+
+                        if (role.roleId === 'partner') {
+                          return (
+                            <React.Fragment key={role.roleId}>
+                              <button
+                                type="button"
+                                className="list-group-item list-group-item-action d-flex align-items-center justify-content-between"
+                                onClick={() => setPartnerOpen((prev) => !prev)}
+                              >
+                                <span className="d-flex align-items-center gap-2">
+                                  <span className="avatar avatar-xs bg-blue-lt text-blue">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                                      <path d="M12 5v14" />
+                                      <path d="M5 12h14" />
+                                    </svg>
+                                  </span>
+                                  <span className="fw-semibold">{role.label}</span>
+                                </span>
+                                <span className="text-blue" style={{ fontSize: '1rem', lineHeight: 1 }}>{partnerOpen ? '▲' : '▼'}</span>
+                              </button>
+                              {partnerOpen && (
+                                <div className="list-group list-group-flush">
+                                  {[
+                                    { label: 'Partner Overview', to: '/partner-management-overview' },
+                                    { label: 'Partner Management', to: '/partner-management' },
+                                    { label: 'Assistance', to: '/partner-management-assistance' },
+                                    { label: 'Rental', to: '/partner-management-rental' },
+                                    { label: 'Surveyors', to: '/partner-management-surveyors' },
+                                    { label: 'Major Loss', to: '/partner-management-major-loss' },
+                                    { label: 'Parts', to: '/partner-management-parts' },
                                   ].map((item) => (
                                     <button
                                       key={item.label}
