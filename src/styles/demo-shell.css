@@ -263,6 +263,8 @@
   padding: 1rem;
   gap: 1rem;
   align-items: start;
+  --mock-width: 344px;
+  --mock-height: 720px;
 }
 
 /* LEFT column: keep phone centered and stable */
@@ -273,8 +275,8 @@
 
 /* iPhone-like aspect ratio (portrait) + locked sizing */
 .phone-shell {
-  width: 344px;                 /* stable width so layout doesn't jump */
-  height: 720px;                /* stable height */
+  width: var(--mock-width);                 /* stable width so layout doesn't jump */
+  height: var(--mock-height);               /* stable height */
   max-width: 40vw;              /* prevent exploding on wide screens */
   max-height: calc(100vh - 220px); /* keep inside viewport under header */
   aspect-ratio: 71.5 / 149.6;
@@ -289,12 +291,20 @@
     height: 665px;
     max-height: calc(100vh - 200px);
   }
+  .demo-shell {
+    --mock-width: 318px;
+    --mock-height: 665px;
+  }
 }
 @media (max-height: 740px) {
   .phone-shell {
     width: 292px;
     height: 610px;
     max-height: calc(100vh - 180px);
+  }
+  .demo-shell {
+    --mock-width: 292px;
+    --mock-height: 610px;
   }
 }
 
@@ -311,6 +321,16 @@
 .phone-statusbar {
   padding: 12px 14px 8px;
   font-size: 0.72rem;
+}
+.phone-logo {
+  display: flex;
+  justify-content: center;
+  padding: 4px 12px 2px;
+}
+.phone-logo img {
+  height: 16px;
+  width: auto;
+  display: block;
 }
 .phone-appbar {
   padding: 10px 14px 12px;
@@ -366,58 +386,70 @@
   top: 1rem;
   padding-left: 1rem;
   border-left: 3px solid var(--insurfox-blue, #2563eb); /* Insurfox blue */
-  max-height: 720px;
-  overflow: auto;
+  height: var(--mock-height);
+  max-height: var(--mock-height);
+  overflow: hidden;
 }
 
 /* admin container – one single block */
 .demo-admin-inner {
   display: grid;
   gap: 0.75rem;
+  height: 100%;
 }
 
 .admin-panel {
-  border: 1px solid rgba(15, 23, 42, 0.12);
+  border: none;
   border-radius: 0 !important;
   box-shadow: none !important;
-  background: #ffffff;
-  padding: 0.6rem;
+  background: transparent;
+  padding: 0.4rem 0.2rem;
+  height: 100%;
+  overflow: hidden;
 }
 
 /* compact admin typography so it fits */
 .admin-panel h4 {
-  font-size: 0.8rem;
-  margin: 0 0 0.4rem 0;
+  font-size: 0.74rem;
+  margin: 0 0 0.3rem 0;
 }
 .admin-panel ul {
   margin: 0;
-  padding-left: 1rem;
+  padding-left: 0.9rem;
 }
 .admin-panel li {
-  font-size: 0.74rem;
-  line-height: 1.2;
-  margin-bottom: 0.2rem;
+  font-size: 0.7rem;
+  line-height: 1.15;
+  margin-bottom: 0.18rem;
 }
 
 /* compact navigation */
 .admin-panel .list-group-item {
-  padding: 0.35rem 0.45rem !important;
+  padding: 0.28rem 0.4rem !important;
   border-radius: 0 !important;
-  font-size: 0.74rem;
+  font-size: 0.7rem;
+  border: none !important;
+  background: transparent;
 }
 .admin-panel .badge {
-  font-size: 0.66rem;
-  padding: 0.15rem 0.35rem;
+  font-size: 0.62rem;
+  padding: 0.12rem 0.3rem;
   border-radius: 0 !important;
+}
+.admin-panel .list-group {
+  border: none;
+}
+.admin-panel hr {
+  display: none;
 }
 
 /* compact audit log */
 .admin-audit-item {
-  font-size: 0.74rem;
-  line-height: 1.15;
+  font-size: 0.7rem;
+  line-height: 1.1;
 }
 .admin-audit-item .ts {
-  font-size: 0.66rem;
+  font-size: 0.62rem;
   color: var(--tblr-muted, #667085);
 }
 .admin-audit-item .msg {
@@ -436,7 +468,14 @@
     border-top: 3px solid var(--insurfox-blue, #2563eb);
     padding-top: 0.75rem;
     margin-top: 0.75rem;
+    height: auto;
     max-height: none;
+    overflow: visible;
+  }
+  .demo-admin-inner,
+  .admin-panel {
+    height: auto;
+    overflow: visible;
   }
   .phone-shell {
     max-width: 92vw;
@@ -445,11 +484,32 @@
 
 @media (max-height: 820px) {
   .demo-admin {
-    max-height: 680px;
+    height: var(--mock-height);
+    max-height: var(--mock-height);
   }
 }
 @media (max-height: 740px) {
   .demo-admin {
-    max-height: 640px;
+    height: var(--mock-height);
+    max-height: var(--mock-height);
   }
+}
+
+/* Step status icons */
+.step-status {
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #fff;
+}
+.step-status.done {
+  background: #22c55e;
+}
+.step-status.todo {
+  background: #ef4444;
 }

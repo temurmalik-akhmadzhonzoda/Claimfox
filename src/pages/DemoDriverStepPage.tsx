@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import '@/styles/demo-shell.css'
 import IphoneMock from '@/assets/images/iphonemock.png'
+import InsurfoxLogo from '@/assets/logos/Insurfox_Logo_colored_dark.png'
 
 type StepId = 'register' | 'onboarding' | 'profile' | 'identification' | 'quote' | 'purchase' | 'claims' | 'chat'
 
@@ -845,6 +846,16 @@ export default function DemoDriverStepPage() {
   const currentStep = step.id
   const audit = auditLog
   const snapshot = snapshotBadges.map((badge) => ({ label: badge.label, on: badge.active }))
+  const stepStatus: Record<StepId, boolean> = {
+    register: demoState.accountCreated,
+    onboarding: demoState.onboardingComplete,
+    profile: demoState.profileConfirmed,
+    identification: demoState.verified,
+    quote: demoState.quoteReady,
+    purchase: demoState.policyActive,
+    claims: demoState.claimSubmitted,
+    chat: demoState.handlerAssigned,
+  }
 
   return (
     <div className="page">
@@ -870,6 +881,9 @@ export default function DemoDriverStepPage() {
                   <div className="phone-statusbar">
                     <span>09:41</span>
                     <span>LTE · 88%</span>
+                  </div>
+                  <div className="phone-logo">
+                    <img src={InsurfoxLogo} alt="Insurfox" />
                   </div>
                   <div className="phone-appbar">
                     <div className="phone-appbar-title">
@@ -904,7 +918,9 @@ export default function DemoDriverStepPage() {
                         onClick={() => handleJump(s)}
                       >
                         <span>{STEP_TITLES[s]}</span>
-                        <span className="badge bg-blue-lt">{s}</span>
+                        <span className={`step-status ${stepStatus[s] ? 'done' : 'todo'}`} aria-hidden="true">
+                          {stepStatus[s] ? '✓' : '×'}
+                        </span>
                       </button>
                     ))}
                   </div>
