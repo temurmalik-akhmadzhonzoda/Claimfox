@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import logoDark from '@/assets/logos/Insurfox_Logo_colored_dark.png'
+import logoDark from '@/assets/logos/Dark_blink.svg'
 import Button from '@/components/ui/Button'
 import { useI18n } from '@/i18n/I18nContext'
 import { useAuth } from '@/features/auth/AuthContext'
