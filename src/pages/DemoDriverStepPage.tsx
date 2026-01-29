@@ -189,7 +189,7 @@ const useSequence = (enabled: boolean, steps: Array<() => Promise<void>>) => {
 const PhoneField = ({ label, value, isTyping, isDone }: PhoneFieldProps) => (
   <div className={isDone ? 'demo-fade-in' : undefined}>
     <div className="text-muted">{label}</div>
-    <div className={isTyping ? 'typing-cursor fill-anim' : undefined}>{value}</div>
+    <div className={`${isTyping ? 'typing-cursor fill-anim' : ''} fw-semibold text-dark`}>{value}</div>
   </div>
 )
 
@@ -541,7 +541,7 @@ export default function DemoDriverStepPage() {
         <div className="phone-cta-row">
           <button
             type="button"
-            className="btn btn-primary"
+            className="btn btn-primary btn-sm"
             disabled={!registerReady}
             onClick={() => {
               updateState({ ...demoState, accountCreated: true })
@@ -581,7 +581,7 @@ export default function DemoDriverStepPage() {
         <div className="phone-cta-row">
           <button
             type="button"
-            className="btn btn-primary"
+            className="btn btn-primary btn-sm"
             disabled={!onboardingReady}
             onClick={() => {
               updateState({ ...demoState, onboardingComplete: true })
@@ -614,7 +614,7 @@ export default function DemoDriverStepPage() {
         <div className="phone-cta-row">
           <button
             type="button"
-            className="btn btn-primary"
+            className="btn btn-primary btn-sm"
             disabled={!profileReady}
             onClick={() => {
               updateState({ ...demoState, profileConfirmed: true })
@@ -644,7 +644,7 @@ export default function DemoDriverStepPage() {
         <div className="phone-cta-row">
           <button
             type="button"
-            className="btn btn-primary"
+            className="btn btn-primary btn-sm"
             disabled={!identificationReady}
             onClick={() => {
               updateState({ ...demoState, verified: true })
@@ -683,7 +683,7 @@ export default function DemoDriverStepPage() {
         <div className="phone-cta-row">
           <button
             type="button"
-            className="btn btn-primary"
+            className="btn btn-primary btn-sm"
             disabled={!quoteReady}
             onClick={() => {
               updateState({ ...demoState, quoteReady: true })
@@ -713,7 +713,7 @@ export default function DemoDriverStepPage() {
         <div className="phone-cta-row">
           <button
             type="button"
-            className="btn btn-primary"
+            className="btn btn-primary btn-sm"
             disabled={!purchaseReady}
             onClick={() => {
               updateState({ ...demoState, policyActive: true })
@@ -783,7 +783,7 @@ export default function DemoDriverStepPage() {
         <div className="phone-cta-row">
           <button
             type="button"
-            className="btn btn-primary"
+            className="btn btn-primary btn-sm"
             disabled={!claimsReady}
             onClick={() => {
               updateState({ ...demoState, claimSubmitted: true, slaRunning: true })
@@ -825,7 +825,7 @@ export default function DemoDriverStepPage() {
         <div className="phone-cta-row">
           <button
             type="button"
-            className="btn btn-primary"
+            className="btn btn-primary btn-sm"
             disabled={!chatReady}
             onClick={() => {
               updateState({ ...demoState, handlerAssigned: true })
