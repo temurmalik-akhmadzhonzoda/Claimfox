@@ -61,16 +61,6 @@ export default function DemoOverviewPage() {
                 <div className="page-pretitle">Overview</div>
                 <h2 className="page-title">{t('roles.sections.overview')}</h2>
               </div>
-              <div className="col-auto ms-auto">
-                <div className="btn-list">
-                  <button type="button" className="btn btn-primary" onClick={() => navigate('/demo/step/1')}>
-                    Start guided demo
-                  </button>
-                  <button type="button" className="btn btn-outline-primary" onClick={() => navigate('/demo-driver')}>
-                    Driver journey
-                  </button>
-                </div>
-              </div>
             </div>
           </div>
         </div>
