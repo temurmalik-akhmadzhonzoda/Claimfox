@@ -199,6 +199,7 @@ export default function DemoOverviewPage() {
                                   {[
                                     { label: 'Legal Counsel', to: '/demo-legal/counsel/step/intake' },
                                     { label: 'Claims Legal', to: '/demo-legal/claims/step/intake' },
+                                    { label: 'Regulatory Legal', to: '/demo-legal/regulatory/step/intake' },
                                   ].map((item) => (
                                     <button
                                       key={item.label}

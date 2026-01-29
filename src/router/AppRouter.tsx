@@ -100,6 +100,8 @@ import DemoLegalCounselPage from '@/pages/demo-legal/DemoLegalCounselPage'
 import DemoLegalCounselStepPage from '@/pages/demo-legal/DemoLegalCounselStepPage'
 import DemoLegalClaimsPage from '@/pages/demo-legal/DemoLegalClaimsPage'
 import DemoLegalClaimsStepPage from '@/pages/demo-legal/DemoLegalClaimsStepPage'
+import DemoRegulatoryLegalPage from '@/pages/demo-legal/DemoRegulatoryLegalPage'
+import DemoRegulatoryLegalStepPage from '@/pages/demo-legal/DemoRegulatoryLegalStepPage'
 
 function NotFoundRedirect() {
   const { isAuthenticated } = useAuth()
@@ -134,6 +136,8 @@ export default function AppRouter() {
         <Route path="/demo-legal/counsel/step/:stepId" element={<DemoLegalCounselStepPage />} />
         <Route path="/demo-legal/claims" element={<DemoLegalClaimsPage />} />
         <Route path="/demo-legal/claims/step/:stepId" element={<DemoLegalClaimsStepPage />} />
+        <Route path="/demo-legal/regulatory" element={<DemoRegulatoryLegalPage />} />
+        <Route path="/demo-legal/regulatory/step/:stepId" element={<DemoRegulatoryLegalStepPage />} />
       </Route>
       <Route element={<ProtectedRoute><FullscreenBgLayout showHeader={false} /></ProtectedRoute>}>
         <Route path="/home" element={<HomePage />} />
