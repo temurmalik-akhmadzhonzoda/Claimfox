@@ -129,11 +129,11 @@ export default function DemoOverviewPage() {
                               >
                                 <span className="d-flex align-items-center gap-2">
                                   <span className="d-inline-flex align-items-center">
-                                    <img src={UnderwriterIcon} alt="" style={{ width: 28, height: 28, objectFit: 'contain' }} />
+                                  <img src={UnderwriterIcon} alt="" style={{ width: 42, height: 42, objectFit: 'contain' }} />
                                   </span>
                                   <span className="fw-semibold">{role.label}</span>
                                 </span>
-                                <span className="badge bg-blue-lt text-blue">{underwriterOpen ? 'Hide' : 'Show'}</span>
+                                <span className="text-blue" style={{ fontSize: '1rem', lineHeight: 1 }}>{underwriterOpen ? '▲' : '▼'}</span>
                               </button>
                               {underwriterOpen && (
                                 <div className="list-group list-group-flush">
