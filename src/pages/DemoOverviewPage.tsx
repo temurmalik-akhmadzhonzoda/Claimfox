@@ -80,11 +80,11 @@ export default function DemoOverviewPage() {
                   <div className="card h-100">
                     <div className="card-header d-flex align-items-center justify-content-between">
                       <div className="d-flex align-items-center gap-2">
-                        <span className={group.key === 'insurance' || group.key === 'fleet' ? 'd-inline-flex align-items-center' : `avatar avatar-sm ${meta?.iconBg ?? 'bg-indigo-lt'}`}>
+                        <span className={group.key === 'insurance' || group.key === 'fleet' ? 'd-inline-flex align-items-center me-2' : `avatar avatar-sm ${meta?.iconBg ?? 'bg-indigo-lt'}`}>
                           {group.key === 'insurance' ? (
-                            <img src={InsuranceIcon} alt="" style={{ width: 24, height: 24, objectFit: 'contain' }} />
+                            <img src={InsuranceIcon} alt="" style={{ width: 48, height: 48, objectFit: 'contain' }} />
                           ) : group.key === 'fleet' ? (
-                            <img src={FleetIcon} alt="" style={{ width: 24, height: 24, objectFit: 'contain' }} />
+                            <img src={FleetIcon} alt="" style={{ width: 48, height: 48, objectFit: 'contain' }} />
                           ) : (
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                               {group.key === 'fleet' && (
