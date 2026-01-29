@@ -856,19 +856,6 @@ export default function DemoDriverStepPage() {
                 <h2 className="page-title">{step.label}</h2>
                 <div className="text-muted">{step.subtitle}</div>
               </div>
-              <div className="col-auto ms-auto">
-                <div className="btn-list">
-                  <button type="button" className="btn btn-outline-primary" onClick={goBack}>
-                    Back
-                  </button>
-                  <button type="button" className="btn btn-primary" onClick={goNext}>
-                    {stepIndex === STEP_META.length - 1 ? 'Finish demo' : 'Next'}
-                  </button>
-                  <button type="button" className="btn btn-outline-primary" onClick={resetAll}>
-                    Reset
-                  </button>
-                </div>
-              </div>
             </div>
           </div>
         </div>

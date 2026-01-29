@@ -351,6 +351,8 @@
   top: 1rem;
   padding-left: 1rem;
   border-left: 3px solid var(--insurfox-blue, #2563eb); /* Insurfox blue */
+  max-height: 50vh;
+  overflow: auto;
 }
 
 /* admin container – one single block */
