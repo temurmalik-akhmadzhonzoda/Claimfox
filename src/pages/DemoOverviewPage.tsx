@@ -149,9 +149,9 @@ export default function DemoOverviewPage() {
                                 className="list-group-item list-group-item-action d-flex align-items-center justify-content-between"
                                 onClick={() => setUnderwriterOpen((prev) => !prev)}
                               >
-                                <span className="d-flex align-items-center gap-2">
+                                <span className="d-flex align-items-center gap-2 flex-grow-1 text-start">
                                   <span className="d-inline-flex align-items-center">
-                                  <img src={UnderwriterIcon} alt="" style={{ width: 42, height: 42, objectFit: 'contain' }} />
+                                  <img src={UnderwriterIcon} alt="" style={{ width: 32, height: 32, objectFit: 'contain' }} />
                                   </span>
                                   <span className="fw-semibold">{role.label}</span>
                                 </span>
@@ -172,7 +172,7 @@ export default function DemoOverviewPage() {
                                       className="list-group-item list-group-item-action d-flex align-items-center justify-content-between ps-5"
                                       onClick={() => navigate(item.to)}
                                     >
-                                      <span className="d-flex align-items-center gap-2">
+                                      <span className="d-flex align-items-center gap-2 flex-grow-1 text-start">
                                         {item.label === 'Fahrer' && (
                                           <img src={DriverIcon} alt="" style={{ width: 22, height: 22, objectFit: 'contain' }} />
                                         )}
@@ -195,7 +195,7 @@ export default function DemoOverviewPage() {
                                 className="list-group-item list-group-item-action d-flex align-items-center justify-content-between"
                                 onClick={() => setLegalOpen((prev) => !prev)}
                               >
-                                <span className="d-flex align-items-center gap-2">
+                                <span className="d-flex align-items-center gap-2 flex-grow-1 text-start">
                                   <span className="d-inline-flex align-items-center">
                                     <img src={LegalIcon} alt="" style={{ width: 28, height: 28, objectFit: 'contain' }} />
                                   </span>
@@ -217,7 +217,7 @@ export default function DemoOverviewPage() {
                                       className="list-group-item list-group-item-action d-flex align-items-center justify-content-between ps-5"
                                       onClick={() => navigate(item.to)}
                                     >
-                                      <span className="fw-semibold">{item.label}</span>
+                                      <span className="fw-semibold flex-grow-1 text-start">{item.label}</span>
                                       <span className="badge bg-blue-lt text-blue">Demo</span>
                                     </button>
                                   ))}
@@ -235,7 +235,7 @@ export default function DemoOverviewPage() {
                                 className="list-group-item list-group-item-action d-flex align-items-center justify-content-between"
                                 onClick={() => setFinanceOpen((prev) => !prev)}
                               >
-                                <span className="d-flex align-items-center gap-2">
+                                <span className="d-flex align-items-center gap-2 flex-grow-1 text-start">
                                   <span className="d-inline-flex align-items-center">
                                     <img src={FinanceIcon} alt="" style={{ width: 32, height: 32, objectFit: 'contain' }} />
                                   </span>
@@ -259,7 +259,7 @@ export default function DemoOverviewPage() {
                                       className="list-group-item list-group-item-action d-flex align-items-center justify-content-between ps-5"
                                       onClick={() => navigate(item.to)}
                                     >
-                                      <span className="fw-semibold">{item.label}</span>
+                                      <span className="fw-semibold flex-grow-1 text-start">{item.label}</span>
                                       <span className="badge bg-blue-lt text-blue">Demo</span>
                                     </button>
                                   ))}
@@ -277,7 +277,7 @@ export default function DemoOverviewPage() {
                                 className="list-group-item list-group-item-action d-flex align-items-center justify-content-between"
                                 onClick={() => setClaimsOpen((prev) => !prev)}
                               >
-                                <span className="d-flex align-items-center gap-2">
+                                <span className="d-flex align-items-center gap-2 flex-grow-1 text-start">
                                   <span className="d-inline-flex align-items-center">
                                     <img src={ClaimIcon} alt="" style={{ width: 32, height: 32, objectFit: 'contain' }} />
                                   </span>
@@ -298,7 +298,7 @@ export default function DemoOverviewPage() {
                                       className="list-group-item list-group-item-action d-flex align-items-center justify-content-between ps-5"
                                       onClick={() => navigate(item.to)}
                                     >
-                                      <span className="fw-semibold">{item.label}</span>
+                                      <span className="fw-semibold flex-grow-1 text-start">{item.label}</span>
                                       <span className="badge bg-blue-lt text-blue">Demo</span>
                                     </button>
                                   ))}
@@ -316,7 +316,7 @@ export default function DemoOverviewPage() {
                                 className="list-group-item list-group-item-action d-flex align-items-center justify-content-between"
                                 onClick={() => setPartnerOpen((prev) => !prev)}
                               >
-                                <span className="d-flex align-items-center gap-2">
+                                <span className="d-flex align-items-center gap-2 flex-grow-1 text-start">
                                   <span className="d-inline-flex align-items-center">
                                     <img src={PartnerIcon} alt="" style={{ width: 32, height: 32, objectFit: 'contain' }} />
                                   </span>
@@ -341,7 +341,7 @@ export default function DemoOverviewPage() {
                                       className="list-group-item list-group-item-action d-flex align-items-center justify-content-between ps-5"
                                       onClick={() => navigate(item.to)}
                                     >
-                                      <span className="fw-semibold">{item.label}</span>
+                                      <span className="fw-semibold flex-grow-1 text-start">{item.label}</span>
                                       <span className="badge bg-blue-lt text-blue">Demo</span>
                                     </button>
                                   ))}
@@ -366,7 +366,7 @@ export default function DemoOverviewPage() {
                                       <path d="M5 12h14" />
                                     </svg>
                                   </span>
-                                  <span className="fw-semibold">{role.label}</span>
+                          <span className="fw-semibold flex-grow-1 text-start">{role.label}</span>
                                 </span>
                                 <span className="text-blue" style={{ fontSize: '1rem', lineHeight: 1 }}>{fleetOpen ? '▲' : '▼'}</span>
                               </button>
