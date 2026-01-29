@@ -90,6 +90,8 @@ import DemoDriverOverviewPage from '@/pages/DemoDriverOverviewPage'
 import DemoDriverStepPage from '@/pages/DemoDriverStepPage'
 import DemoJuniorUnderwriterPage from '@/pages/demo-underwriter/DemoJuniorUnderwriterPage'
 import DemoJuniorUnderwriterStepPage from '@/pages/demo-underwriter/DemoJuniorUnderwriterStepPage'
+import DemoSeniorUnderwriterPage from '@/pages/demo-underwriter/DemoSeniorUnderwriterPage'
+import DemoSeniorUnderwriterStepPage from '@/pages/demo-underwriter/DemoSeniorUnderwriterStepPage'
 
 function NotFoundRedirect() {
   const { isAuthenticated } = useAuth()
@@ -114,6 +116,8 @@ export default function AppRouter() {
         <Route path="/demo-driver/step/:stepId" element={<DemoDriverStepPage />} />
         <Route path="/demo-underwriter/junior" element={<DemoJuniorUnderwriterPage />} />
         <Route path="/demo-underwriter/junior/step/:stepId" element={<DemoJuniorUnderwriterStepPage />} />
+        <Route path="/demo-underwriter/senior" element={<DemoSeniorUnderwriterPage />} />
+        <Route path="/demo-underwriter/senior/step/:stepId" element={<DemoSeniorUnderwriterStepPage />} />
       </Route>
       <Route element={<ProtectedRoute><FullscreenBgLayout showHeader={false} /></ProtectedRoute>}>
         <Route path="/home" element={<HomePage />} />
