@@ -248,6 +248,8 @@ export default function DemoRoleOverviewPage() {
                   ? '/demo-underwriter/junior/step/intake'
                   : subrole.demoKey === 'uw-senior'
                     ? '/demo-underwriter/senior/step/intake'
+                    : subrole.demoKey === 'uw-carrier'
+                      ? '/demo-underwriter/carrier/step/handover'
                     : subrole.demoKey
                       ? `/demo/step/1?role=${subrole.demoKey}`
                       : '/demo/step/1'

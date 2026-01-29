@@ -92,6 +92,8 @@ import DemoJuniorUnderwriterPage from '@/pages/demo-underwriter/DemoJuniorUnderw
 import DemoJuniorUnderwriterStepPage from '@/pages/demo-underwriter/DemoJuniorUnderwriterStepPage'
 import DemoSeniorUnderwriterPage from '@/pages/demo-underwriter/DemoSeniorUnderwriterPage'
 import DemoSeniorUnderwriterStepPage from '@/pages/demo-underwriter/DemoSeniorUnderwriterStepPage'
+import DemoCarrierAuthorityPage from '@/pages/demo-underwriter/DemoCarrierAuthorityPage'
+import DemoCarrierAuthorityStepPage from '@/pages/demo-underwriter/DemoCarrierAuthorityStepPage'
 
 function NotFoundRedirect() {
   const { isAuthenticated } = useAuth()
@@ -118,6 +120,8 @@ export default function AppRouter() {
         <Route path="/demo-underwriter/junior/step/:stepId" element={<DemoJuniorUnderwriterStepPage />} />
         <Route path="/demo-underwriter/senior" element={<DemoSeniorUnderwriterPage />} />
         <Route path="/demo-underwriter/senior/step/:stepId" element={<DemoSeniorUnderwriterStepPage />} />
+        <Route path="/demo-underwriter/carrier" element={<DemoCarrierAuthorityPage />} />
+        <Route path="/demo-underwriter/carrier/step/:stepId" element={<DemoCarrierAuthorityStepPage />} />
       </Route>
       <Route element={<ProtectedRoute><FullscreenBgLayout showHeader={false} /></ProtectedRoute>}>
         <Route path="/home" element={<HomePage />} />

@@ -22,6 +22,7 @@ export default function DemoOverviewPage() {
         { label: t('roles.cards.underwriter.title'), roleId: 'underwriter' },
         { label: 'Junior Underwriter Demo', roleId: 'underwriter-junior-demo' },
         { label: 'Senior Underwriter Demo', roleId: 'underwriter-senior-demo' },
+        { label: 'Carrier Authority', roleId: 'underwriter-carrier-demo' },
         { label: t('roles.cards.legal.title'), roleId: 'legal' },
         { label: t('roles.cards.finance.title'), roleId: 'finance' },
         { label: t('roles.cards.claims.title'), roleId: 'claims' },
@@ -135,6 +136,10 @@ export default function DemoOverviewPage() {
                             }
                             if (role.roleId === 'underwriter-senior-demo') {
                               navigate('/demo-underwriter/senior/step/intake')
+                              return
+                            }
+                            if (role.roleId === 'underwriter-carrier-demo') {
+                              navigate('/demo-underwriter/carrier/step/handover')
                               return
                             }
                             navigate(`/demo/role/${role.roleId}`)
