@@ -246,9 +246,11 @@ export default function DemoRoleOverviewPage() {
               {config.subroles.map((subrole, index) => {
                 const targetRoute = subrole.demoKey === 'uw-junior'
                   ? '/demo-underwriter/junior/step/intake'
-                  : subrole.demoKey
-                    ? `/demo/step/1?role=${subrole.demoKey}`
-                    : '/demo/step/1'
+                  : subrole.demoKey === 'uw-senior'
+                    ? '/demo-underwriter/senior/step/intake'
+                    : subrole.demoKey
+                      ? `/demo/step/1?role=${subrole.demoKey}`
+                      : '/demo/step/1'
                 const descriptionKey = showContext
                   ? subrole.label.toLowerCase().replace(/\s+/g, '-')
                   : ''
