@@ -67,7 +67,7 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  background: var(--tblr-bg-surface, #fff);
+  background: transparent;
   z-index: 1;
 }
 
