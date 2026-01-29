@@ -122,7 +122,7 @@ const writeChat = (messages: ChatMessage[]) => sessionStorage.setItem(DEMO_DRIVE
 
 const delay = (ms: number) => new Promise<void>((resolve) => window.setTimeout(resolve, ms))
 
-const useTypewriter = (text: string, enabled: boolean, speedMs = 24) => {
+const useTypewriter = (text: string, enabled: boolean, speedMs = 36) => {
   const [out, setOut] = useState(enabled ? '' : text)
   const [done, setDone] = useState(!enabled)
 
@@ -273,7 +273,7 @@ export default function DemoDriverStepPage() {
     chat: ['AI drafts responses', 'Human handler approves', 'Audit trail stored']
   }
 
-  const registerTyping = useTypewriter(demoDefaults.email, shouldAnimate && step.id === 'register', 28)
+  const registerTyping = useTypewriter(demoDefaults.email, shouldAnimate && step.id === 'register', 42)
   const registerReady = !shouldAnimate || registerTyping.done
 
   useEffect(() => {
@@ -308,12 +308,12 @@ export default function DemoDriverStepPage() {
 
   type ProfileKey = 'name' | 'dob' | 'plate' | 'vehicle' | 'policy' | 'insurer' | 'done'
   const [profileKey, setProfileKey] = useState<ProfileKey>(shouldAnimate && step.id === 'profile' ? 'name' : 'done')
-  const profileName = useTypewriter('Alex Driver', shouldAnimate && step.id === 'profile' && profileKey === 'name', 22)
-  const profileDob = useTypewriter('12 Apr 1993', shouldAnimate && step.id === 'profile' && profileKey === 'dob', 22)
-  const profilePlate = useTypewriter('M-IF 421', shouldAnimate && step.id === 'profile' && profileKey === 'plate', 22)
-  const profileVehicle = useTypewriter('Car', shouldAnimate && step.id === 'profile' && profileKey === 'vehicle', 22)
-  const profilePolicy = useTypewriter(demoDefaults.policyNumber, shouldAnimate && step.id === 'profile' && profileKey === 'policy', 22)
-  const profileInsurer = useTypewriter(demoDefaults.insurer, shouldAnimate && step.id === 'profile' && profileKey === 'insurer', 22)
+  const profileName = useTypewriter('Alex Driver', shouldAnimate && step.id === 'profile' && profileKey === 'name', 33)
+  const profileDob = useTypewriter('12 Apr 1993', shouldAnimate && step.id === 'profile' && profileKey === 'dob', 33)
+  const profilePlate = useTypewriter('M-IF 421', shouldAnimate && step.id === 'profile' && profileKey === 'plate', 33)
+  const profileVehicle = useTypewriter('Car', shouldAnimate && step.id === 'profile' && profileKey === 'vehicle', 33)
+  const profilePolicy = useTypewriter(demoDefaults.policyNumber, shouldAnimate && step.id === 'profile' && profileKey === 'policy', 33)
+  const profileInsurer = useTypewriter(demoDefaults.insurer, shouldAnimate && step.id === 'profile' && profileKey === 'insurer', 33)
 
   useEffect(() => {
     if (step.id !== 'profile' || !shouldAnimate) return
@@ -335,9 +335,9 @@ export default function DemoDriverStepPage() {
 
   type IdKey = 'id' | 'selfie' | 'confidence' | 'done'
   const [idKey, setIdKey] = useState<IdKey>(shouldAnimate && step.id === 'identification' ? 'id' : 'done')
-  const idStatus = useTypewriter('ID scanned (demo)', shouldAnimate && step.id === 'identification' && idKey === 'id', 22)
-  const selfieStatus = useTypewriter('Selfie matched (demo)', shouldAnimate && step.id === 'identification' && idKey === 'selfie', 22)
-  const confidenceStatus = useTypewriter('Match confidence: 96%', shouldAnimate && step.id === 'identification' && idKey === 'confidence', 22)
+  const idStatus = useTypewriter('ID scanned (demo)', shouldAnimate && step.id === 'identification' && idKey === 'id', 33)
+  const selfieStatus = useTypewriter('Selfie matched (demo)', shouldAnimate && step.id === 'identification' && idKey === 'selfie', 33)
+  const confidenceStatus = useTypewriter('Match confidence: 96%', shouldAnimate && step.id === 'identification' && idKey === 'confidence', 33)
 
   useEffect(() => {
     if (step.id !== 'identification' || !shouldAnimate) return
@@ -355,8 +355,8 @@ export default function DemoDriverStepPage() {
   }, [step.id, shouldAnimate, idKey])
 
   const [quoteStage, setQuoteStage] = useState(shouldAnimate && step.id === 'quote' ? 0 : 3)
-  const quoteCoverage = useTypewriter('Carrier liability + vehicle', shouldAnimate && step.id === 'quote' && quoteStage >= 3, 22)
-  const quotePremium = useTypewriter('€ 129 / month', shouldAnimate && step.id === 'quote' && quoteStage >= 3 && quoteCoverage.done, 22)
+  const quoteCoverage = useTypewriter('Carrier liability + vehicle', shouldAnimate && step.id === 'quote' && quoteStage >= 3, 33)
+  const quotePremium = useTypewriter('€ 129 / month', shouldAnimate && step.id === 'quote' && quoteStage >= 3 && quoteCoverage.done, 33)
 
   const quoteSteps = useMemo(() => [
     async () => {
@@ -384,9 +384,9 @@ export default function DemoDriverStepPage() {
 
   type PurchaseKey = 'payment' | 'billing' | 'total' | 'done'
   const [purchaseKey, setPurchaseKey] = useState<PurchaseKey>(shouldAnimate && step.id === 'purchase' ? 'payment' : 'done')
-  const paymentMethod = useTypewriter('Visa •••• 2048', shouldAnimate && step.id === 'purchase' && purchaseKey === 'payment', 22)
-  const billingCycle = useTypewriter('Monthly', shouldAnimate && step.id === 'purchase' && purchaseKey === 'billing', 22)
-  const purchaseTotal = useTypewriter('€ 129 / month', shouldAnimate && step.id === 'purchase' && purchaseKey === 'total', 22)
+  const paymentMethod = useTypewriter('Visa •••• 2048', shouldAnimate && step.id === 'purchase' && purchaseKey === 'payment', 33)
+  const billingCycle = useTypewriter('Monthly', shouldAnimate && step.id === 'purchase' && purchaseKey === 'billing', 33)
+  const purchaseTotal = useTypewriter('€ 129 / month', shouldAnimate && step.id === 'purchase' && purchaseKey === 'total', 33)
 
   useEffect(() => {
     if (step.id !== 'purchase' || !shouldAnimate) return
@@ -423,11 +423,11 @@ export default function DemoDriverStepPage() {
         ? 'Front windshield cracked during drive.'
         : 'Rear-end collision at traffic light.'
 
-  const incidentTyped = useTypewriter(incidentText, shouldAnimate && step.id === 'claims' && incidentTyping, 22)
-  const descriptionTyped = useTypewriter(descriptionText, shouldAnimate && step.id === 'claims' && incidentTyping && incidentTyped.done, 22)
+  const incidentTyped = useTypewriter(incidentText, shouldAnimate && step.id === 'claims' && incidentTyping, 33)
+  const descriptionTyped = useTypewriter(descriptionText, shouldAnimate && step.id === 'claims' && incidentTyping && incidentTyped.done, 33)
 
-  const locationTyped = useTypewriter(demoDefaults.location, shouldAnimate && step.id === 'claims' && locationTyping, 22)
-  const timestampTyped = useTypewriter(demoState.claimTimestamp || '29 Jan 2026, 08:42', shouldAnimate && step.id === 'claims' && locationTyping && locationTyped.done, 22)
+  const locationTyped = useTypewriter(demoDefaults.location, shouldAnimate && step.id === 'claims' && locationTyping, 33)
+  const timestampTyped = useTypewriter(demoState.claimTimestamp || '29 Jan 2026, 08:42', shouldAnimate && step.id === 'claims' && locationTyping && locationTyped.done, 33)
 
   const locationValue = shouldAnimate
     ? (locationTyping ? locationTyped.out : (demoState.locationCaptured ? demoDefaults.location : 'Tap capture location'))
