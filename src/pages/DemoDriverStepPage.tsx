@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import '@/styles/demo-shell.css'
+import IphoneMock from '@/assets/images/iphonemock.png'
 
 type StepId = 'register' | 'onboarding' | 'profile' | 'identification' | 'quote' | 'purchase' | 'claims' | 'chat'
 
@@ -863,19 +864,21 @@ export default function DemoDriverStepPage() {
         <div className="page-body">
           <div className="demo-shell">
             <div className="demo-driver">
-              <div className="phone-frame">
-                <div className="phone-statusbar">
-                  <span>09:41</span>
-                  <span>LTE · 88%</span>
-                </div>
-                <div className="phone-appbar">
-                  <div className="phone-appbar-title">
-                    <strong>{step.label}</strong>
-                    <span>{step.subtitle}</span>
+              <div className="phone-shell" style={{ backgroundImage: `url(${IphoneMock})` }}>
+                <div className="phone-frame">
+                  <div className="phone-statusbar">
+                    <span>09:41</span>
+                    <span>LTE · 88%</span>
                   </div>
-                  <span className="badge bg-blue-lt text-blue">{stepIndex + 1}/8</span>
+                  <div className="phone-appbar">
+                    <div className="phone-appbar-title">
+                      <strong>{step.label}</strong>
+                      <span>{step.subtitle}</span>
+                    </div>
+                    <span className="badge bg-blue-lt text-blue">{stepIndex + 1}/8</span>
+                  </div>
+                  <div className="phone-body">{stepCards[step.id]}</div>
                 </div>
-                <div className="phone-body">{stepCards[step.id]}</div>
               </div>
             </div>
 
