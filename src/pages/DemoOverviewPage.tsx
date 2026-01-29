@@ -331,13 +331,13 @@ export default function DemoOverviewPage() {
                               {partnerOpen && (
                                 <div className="list-group list-group-flush">
                                   {[
-                                    { label: 'Partner Overview', to: '/partner-management-overview' },
-                                    { label: 'Partner Management', to: '/partner-management' },
-                                    { label: 'Assistance', to: '/partner-management-assistance' },
-                                    { label: 'Rental', to: '/partner-management-rental' },
-                                    { label: 'Surveyors', to: '/partner-management-surveyors' },
-                                    { label: 'Major Loss', to: '/partner-management-major-loss' },
-                                    { label: 'Parts', to: '/partner-management-parts' },
+                                    { label: 'Partner Overview', to: '/demo-partners/overview/step/intake' },
+                                    { label: 'Partner Management', to: '/demo-partners/management/step/intake' },
+                                    { label: 'Assistance', to: '/demo-partners/assistance/step/intake' },
+                                    { label: 'Rental', to: '/demo-partners/rental/step/intake' },
+                                    { label: 'Surveyors', to: '/demo-partners/surveyors/step/intake' },
+                                    { label: 'Major Loss', to: '/demo-partners/major-loss/step/intake' },
+                                    { label: 'Parts', to: '/demo-partners/parts/step/intake' },
                                   ].map((item) => (
                                     <button
                                       key={item.label}

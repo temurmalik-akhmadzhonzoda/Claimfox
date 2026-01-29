@@ -1114,7 +1114,7 @@ export const translations: Record<Lang, TranslationTree> = {
           description: 'Technologie- und Tool-Übersicht der Landing Page.'
         },
         partner: {
-          title: 'Partner Manager',
+          title: 'Partner Networks',
           description: 'Pflege Kontakte zu Gutachtern, Werkstätten und Dienstleistern.'
         },
         brokerPortal: {
@@ -3227,7 +3227,7 @@ export const translations: Record<Lang, TranslationTree> = {
           description: 'Technology and tooling overview of the landing page.'
         },
         partner: {
-          title: 'Partner Manager',
+          title: 'Partner Networks',
           description: 'Nurture relationships with assessors, workshops, and service partners.'
         },
         featureTree: {

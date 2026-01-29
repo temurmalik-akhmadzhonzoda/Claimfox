@@ -74,13 +74,13 @@ export default function DemoRoleOverviewPage() {
       title: t('roles.cards.partner.title'),
       subtitle: isEn ? 'Partner subroles' : 'Partner Unterrollen',
       subroles: [
-        { label: isEn ? 'Partner Overview' : 'Partner Übersicht', route: '/partner-management-overview' },
-        { label: isEn ? 'Partner Management' : 'Partner Management', route: '/partner-management' },
-        { label: isEn ? 'Assistance' : 'Assistance', route: '/partner-management-assistance' },
-        { label: isEn ? 'Rental' : 'Rental', route: '/partner-management-rental' },
-        { label: isEn ? 'Surveyors' : 'Surveyors', route: '/partner-management-surveyors' },
-        { label: isEn ? 'Major Loss' : 'Major Loss', route: '/partner-management-major-loss' },
-        { label: isEn ? 'Parts' : 'Parts', route: '/partner-management-parts' }
+        { label: isEn ? 'Partner Overview' : 'Partner Übersicht', route: '/demo-partners/overview/step/intake' },
+        { label: isEn ? 'Partner Management' : 'Partner Management', route: '/demo-partners/management/step/intake' },
+        { label: isEn ? 'Assistance' : 'Assistance', route: '/demo-partners/assistance/step/intake' },
+        { label: isEn ? 'Rental' : 'Rental', route: '/demo-partners/rental/step/intake' },
+        { label: isEn ? 'Surveyors' : 'Surveyors', route: '/demo-partners/surveyors/step/intake' },
+        { label: isEn ? 'Major Loss' : 'Major Loss', route: '/demo-partners/major-loss/step/intake' },
+        { label: isEn ? 'Parts' : 'Parts', route: '/demo-partners/parts/step/intake' }
       ]
     },
     reporting: {

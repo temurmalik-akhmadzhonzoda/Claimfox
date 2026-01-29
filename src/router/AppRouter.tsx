@@ -116,6 +116,20 @@ import DemoClaimsHandlerPage from '@/pages/demo-claims/DemoClaimsHandlerPage'
 import DemoClaimsHandlerStepPage from '@/pages/demo-claims/DemoClaimsHandlerStepPage'
 import DemoRegressPage from '@/pages/demo-claims/DemoRegressPage'
 import DemoRegressStepPage from '@/pages/demo-claims/DemoRegressStepPage'
+import DemoPartnerOverviewPage from '@/pages/demo-partners/DemoPartnerOverviewPage'
+import DemoPartnerOverviewStepPage from '@/pages/demo-partners/DemoPartnerOverviewStepPage'
+import DemoPartnerManagementPage from '@/pages/demo-partners/DemoPartnerManagementPage'
+import DemoPartnerManagementStepPage from '@/pages/demo-partners/DemoPartnerManagementStepPage'
+import DemoPartnerAssistancePage from '@/pages/demo-partners/DemoPartnerAssistancePage'
+import DemoPartnerAssistanceStepPage from '@/pages/demo-partners/DemoPartnerAssistanceStepPage'
+import DemoPartnerRentalPage from '@/pages/demo-partners/DemoPartnerRentalPage'
+import DemoPartnerRentalStepPage from '@/pages/demo-partners/DemoPartnerRentalStepPage'
+import DemoPartnerSurveyorsPage from '@/pages/demo-partners/DemoPartnerSurveyorsPage'
+import DemoPartnerSurveyorsStepPage from '@/pages/demo-partners/DemoPartnerSurveyorsStepPage'
+import DemoPartnerMajorLossPage from '@/pages/demo-partners/DemoPartnerMajorLossPage'
+import DemoPartnerMajorLossStepPage from '@/pages/demo-partners/DemoPartnerMajorLossStepPage'
+import DemoPartnerPartsPage from '@/pages/demo-partners/DemoPartnerPartsPage'
+import DemoPartnerPartsStepPage from '@/pages/demo-partners/DemoPartnerPartsStepPage'
 
 function NotFoundRedirect() {
   const { isAuthenticated } = useAuth()
@@ -172,6 +186,20 @@ export default function AppRouter() {
         <Route path="/demo-claims/handler/step/:stepId" element={<DemoClaimsHandlerStepPage />} />
         <Route path="/demo-claims/regress" element={<DemoRegressPage />} />
         <Route path="/demo-claims/regress/step/:stepId" element={<DemoRegressStepPage />} />
+        <Route path="/demo-partners/overview" element={<DemoPartnerOverviewPage />} />
+        <Route path="/demo-partners/overview/step/:stepId" element={<DemoPartnerOverviewStepPage />} />
+        <Route path="/demo-partners/management" element={<DemoPartnerManagementPage />} />
+        <Route path="/demo-partners/management/step/:stepId" element={<DemoPartnerManagementStepPage />} />
+        <Route path="/demo-partners/assistance" element={<DemoPartnerAssistancePage />} />
+        <Route path="/demo-partners/assistance/step/:stepId" element={<DemoPartnerAssistanceStepPage />} />
+        <Route path="/demo-partners/rental" element={<DemoPartnerRentalPage />} />
+        <Route path="/demo-partners/rental/step/:stepId" element={<DemoPartnerRentalStepPage />} />
+        <Route path="/demo-partners/surveyors" element={<DemoPartnerSurveyorsPage />} />
+        <Route path="/demo-partners/surveyors/step/:stepId" element={<DemoPartnerSurveyorsStepPage />} />
+        <Route path="/demo-partners/major-loss" element={<DemoPartnerMajorLossPage />} />
+        <Route path="/demo-partners/major-loss/step/:stepId" element={<DemoPartnerMajorLossStepPage />} />
+        <Route path="/demo-partners/parts" element={<DemoPartnerPartsPage />} />
+        <Route path="/demo-partners/parts/step/:stepId" element={<DemoPartnerPartsStepPage />} />
       </Route>
       <Route element={<ProtectedRoute><FullscreenBgLayout showHeader={false} /></ProtectedRoute>}>
         <Route path="/home" element={<HomePage />} />
