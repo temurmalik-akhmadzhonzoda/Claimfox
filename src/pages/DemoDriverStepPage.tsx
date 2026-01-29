@@ -864,7 +864,8 @@ export default function DemoDriverStepPage() {
         <div className="page-body">
           <div className="demo-shell">
             <div className="demo-driver">
-              <div className="phone-shell" style={{ backgroundImage: `url(${IphoneMock})` }}>
+              <div className="phone-shell">
+                <img src={IphoneMock} alt="" className="phone-mock" aria-hidden="true" />
                 <div className="phone-frame">
                   <div className="phone-statusbar">
                     <span>09:41</span>
