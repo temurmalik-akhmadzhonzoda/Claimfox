@@ -1,0 +1,211 @@
+/* === Demo Shell (Driver Surface + Admin Window) === */
+.demo-shell {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.25rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 420px;
+  gap: 1.25rem;
+  align-items: start;
+}
+
+@media (max-width: 1100px) {
+  .demo-shell {
+    grid-template-columns: minmax(0, 1fr) 380px;
+  }
+}
+
+@media (max-width: 960px) {
+  .demo-shell {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* LEFT column: center the phone */
+.demo-driver {
+  display: grid;
+  place-items: start center;
+}
+
+/* === Phone Frame === */
+.phone-frame {
+  width: 380px;
+  max-width: 92vw;
+  border-radius: 32px;
+  border: 1px solid var(--tblr-border-color, rgba(98, 105, 118, 0.18));
+  background: var(--tblr-bg-surface, #fff);
+  box-shadow: 0 18px 50px rgba(15, 23, 42, 0.14);
+  overflow: hidden;
+  position: relative;
+}
+
+.phone-frame::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 128px;
+  height: 22px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.08);
+}
+
+.phone-statusbar {
+  padding: 14px 16px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  color: var(--tblr-muted, #667085);
+}
+
+.phone-appbar {
+  padding: 12px 16px 14px;
+  border-top: 1px solid rgba(15, 23, 42, 0.06);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  background: rgba(248, 250, 252, 0.75);
+  backdrop-filter: blur(8px);
+}
+
+.phone-appbar-title {
+  display: grid;
+  gap: 0.15rem;
+  min-width: 0;
+}
+.phone-appbar-title strong {
+  font-size: 0.95rem;
+  line-height: 1.15;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.phone-appbar-title span {
+  font-size: 0.78rem;
+  color: var(--tblr-muted, #667085);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.phone-body {
+  padding: 14px 14px 18px;
+  display: grid;
+  gap: 0.9rem;
+  background: radial-gradient(circle at 20% 0%, rgba(99, 102, 241, 0.12), transparent 45%),
+    radial-gradient(circle at 90% 10%, rgba(34, 197, 94, 0.10), transparent 40%),
+    var(--tblr-bg-surface, #fff);
+}
+
+/* inside phone cards */
+.phone-card {
+  border: 1px solid rgba(15, 23, 42, 0.10);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.10);
+  overflow: hidden;
+}
+
+.phone-card-header {
+  padding: 12px 12px 10px;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+.phone-card-header .title {
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+.phone-card-header .hint {
+  font-size: 0.75rem;
+  color: var(--tblr-muted, #667085);
+}
+
+.phone-card-body {
+  padding: 12px;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.phone-cta-row {
+  display: grid;
+  gap: 0.6rem;
+}
+.phone-cta-row .btn {
+  width: 100%;
+}
+
+/* Chat bubbles inside phone */
+.phone-chat {
+  display: grid;
+  gap: 0.5rem;
+}
+.phone-bubble {
+  max-width: 86%;
+  padding: 0.55rem 0.7rem;
+  border-radius: 16px;
+  border: 1px solid rgba(15, 23, 42, 0.10);
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
+  line-height: 1.35;
+  font-size: 0.88rem;
+}
+.phone-bubble.driver {
+  justify-self: end;
+  background: rgba(99, 102, 241, 0.12);
+}
+.phone-bubble.insurer {
+  justify-self: start;
+  background: rgba(15, 23, 42, 0.04);
+}
+.phone-quick-replies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.phone-chip {
+  border-radius: 999px;
+  padding: 0.35rem 0.6rem;
+  font-size: 0.78rem;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  background: rgba(248, 250, 252, 0.92);
+  cursor: pointer;
+}
+
+/* RIGHT column: sticky admin window */
+.demo-admin {
+  position: sticky;
+  top: 1rem;
+  display: grid;
+  gap: 1rem;
+}
+
+@media (max-width: 960px) {
+  .demo-admin {
+    position: static;
+  }
+}
+
+/* Mobile collapse helper */
+.admin-collapse {
+  display: none;
+}
+@media (max-width: 960px) {
+  .admin-collapse {
+    display: block;
+  }
+  .demo-admin-inner {
+    display: none;
+  }
+  .admin-collapse[aria-expanded="true"] + .demo-admin-inner {
+    display: grid;
+    gap: 1rem;
+    margin-top: 0.75rem;
+  }
+}
