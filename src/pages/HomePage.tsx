@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import Button from '@/components/ui/Button'
-import InsurfoxLogo from '@/assets/logos/Insurfox_Logo_colored_dark.png'
+import InsurfoxLogo from '@/assets/logos/Dark_blink.svg'
 import HomeHeroBackground from '@/assets/images/Home1.png'
 import HomeHeroCardImage from '@/assets/images/iaas_home.png'
 import ProductImage from '@/assets/images/Produkt1.png'

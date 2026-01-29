@@ -5,7 +5,7 @@ import Card from '@/components/ui/Card'
 import Header from '@/components/ui/Header'
 import { useAuth } from '@/features/auth/AuthContext'
 import { useI18n } from '@/i18n/I18nContext'
-import InsurfoxLogoDark from '@/assets/logos/Insurfox_Logo_colored_dark.png'
+import InsurfoxLogoDark from '@/assets/logos/Dark_blink.svg'
 
 export default function LoginPage() {
   const [username, setUsername] = useState('')
