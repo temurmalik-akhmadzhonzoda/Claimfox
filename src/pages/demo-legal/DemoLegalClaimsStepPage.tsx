@@ -120,6 +120,7 @@ export default function DemoLegalClaimsStepPage() {
     { label: `Settlement: ${state.settlementRange}`, ok: state.settlementRange !== 'none' },
     { label: 'Locked', ok: state.decisionLocked },
   ]
+  const auditItems = readAudit()
 
   const canGoNext = (() => {
     if (stepId === 'intake') return true
@@ -430,16 +431,16 @@ export default function DemoLegalClaimsStepPage() {
                   <div style={{ borderTop: '1px solid rgba(15,23,42,0.10)', paddingTop: '0.6rem' }}>
                     <h4>Audit log</h4>
                     <div className="uw-audit">
-                      {(() => {
-                        const items = readAudit()
-                        if (!items.length) return <div className="uw-admin-small">No entries yet.</div>
-                        return items.slice(0, 8).map((it) => (
+                      {auditItems.length === 0 ? (
+                        <div className="uw-admin-small">No entries yet.</div>
+                      ) : (
+                        auditItems.slice(0, 8).map((it) => (
                           <div className="uw-audit-item" key={it.ts}>
                             <div className="ts">{fmt(it.ts)}</div>
                             <div className="msg">{it.message}</div>
                           </div>
-                        ))}
-                      })()}
+                        ))
+                      )}
                     </div>
                   </div>
                 </div>
