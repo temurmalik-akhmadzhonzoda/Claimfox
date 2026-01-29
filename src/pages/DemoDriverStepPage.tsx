@@ -787,6 +787,21 @@ export default function DemoDriverStepPage() {
             className="btn btn-primary btn-sm"
             disabled={!claimsReady}
             onClick={() => {
+              const fnolChat: ChatMessage[] = [
+                {
+                  id: `fnol-${Date.now()}`,
+                  from: 'insurer',
+                  text: 'We received your claim. A handler is assigned to your case.',
+                },
+                {
+                  id: `fnol-${Date.now()}-2`,
+                  from: 'insurer',
+                  text: 'Please upload the police report and any additional photos.',
+                },
+              ]
+              const nextChat = [...chatLog, ...fnolChat]
+              setChatLog(nextChat)
+              writeChat(nextChat)
               updateState({ ...demoState, claimSubmitted: true, slaRunning: true })
               logAudit(`FNOL submitted (${demoDefaults.claimId})`)
               logAudit('SLA started (24h initial response)')
@@ -892,6 +907,15 @@ export default function DemoDriverStepPage() {
                   <li>Auto-approves low risk signup</li>
                   <li>No decision without human override</li>
                 </ul>
+                <h4>Audit log</h4>
+                <div className="admin-audit">
+                  {staticAudit.map((a, idx) => (
+                    <div key={`${a.ts}-${idx}`} className="admin-audit-item">
+                      <div className="ts">{a.ts}</div>
+                      <div className="msg">{a.message}</div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </aside>
 
