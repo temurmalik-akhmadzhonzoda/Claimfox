@@ -265,6 +265,7 @@
   align-items: start;
   --mock-width: 344px;
   --mock-height: 720px;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
 }
 
 /* LEFT column: keep phone centered and stable */
@@ -325,10 +326,10 @@
 .phone-logo {
   display: flex;
   justify-content: center;
-  padding: 4px 12px 2px;
+  padding: 0 12px 2px;
 }
 .phone-logo img {
-  height: 16px;
+  height: 32px;
   width: auto;
   display: block;
 }
@@ -377,25 +378,25 @@
   border-radius: 12px;
 }
 
-/* RIGHT column: separator line + single admin block (no rounded corners) */
-.demo-shell {
-  grid-template-columns: minmax(0, 1fr) 420px;
-}
-.demo-admin {
+/* Admin blocks left/right */
+.demo-admin-left,
+.demo-admin-right {
   position: sticky;
   top: 1rem;
-  padding-left: 1rem;
-  border-left: 3px solid var(--insurfox-blue, #2563eb); /* Insurfox blue */
   height: var(--mock-height);
   max-height: var(--mock-height);
   overflow: hidden;
+  display: flex;
 }
-
-/* admin container – one single block */
-.demo-admin-inner {
-  display: grid;
-  gap: 0.75rem;
-  height: 100%;
+.demo-admin-left {
+  justify-content: flex-end;
+  padding-right: 1rem;
+  border-right: 3px solid var(--insurfox-blue, #2563eb);
+}
+.demo-admin-right {
+  justify-content: flex-start;
+  padding-left: 1rem;
+  border-left: 3px solid var(--insurfox-blue, #2563eb);
 }
 
 .admin-panel {
@@ -403,37 +404,38 @@
   border-radius: 0 !important;
   box-shadow: none !important;
   background: transparent;
-  padding: 0.4rem 0.2rem;
+  padding: 0.2rem 0.1rem;
   height: 100%;
   overflow: hidden;
+  width: 100%;
 }
 
 /* compact admin typography so it fits */
 .admin-panel h4 {
-  font-size: 0.74rem;
-  margin: 0 0 0.3rem 0;
+  font-size: 0.7rem;
+  margin: 0 0 0.25rem 0;
 }
 .admin-panel ul {
   margin: 0;
   padding-left: 0.9rem;
 }
 .admin-panel li {
-  font-size: 0.7rem;
-  line-height: 1.15;
-  margin-bottom: 0.18rem;
+  font-size: 0.66rem;
+  line-height: 1.1;
+  margin-bottom: 0.14rem;
 }
 
 /* compact navigation */
 .admin-panel .list-group-item {
-  padding: 0.28rem 0.4rem !important;
+  padding: 0.22rem 0.35rem !important;
   border-radius: 0 !important;
-  font-size: 0.7rem;
+  font-size: 0.66rem;
   border: none !important;
   background: transparent;
 }
 .admin-panel .badge {
-  font-size: 0.62rem;
-  padding: 0.12rem 0.3rem;
+  font-size: 0.6rem;
+  padding: 0.1rem 0.26rem;
   border-radius: 0 !important;
 }
 .admin-panel .list-group {
@@ -445,11 +447,11 @@
 
 /* compact audit log */
 .admin-audit-item {
-  font-size: 0.7rem;
-  line-height: 1.1;
+  font-size: 0.64rem;
+  line-height: 1.05;
 }
 .admin-audit-item .ts {
-  font-size: 0.62rem;
+  font-size: 0.58rem;
   color: var(--tblr-muted, #667085);
 }
 .admin-audit-item .msg {
@@ -461,10 +463,13 @@
   .demo-shell {
     grid-template-columns: 1fr;
   }
-  .demo-admin {
+  .demo-admin-left,
+  .demo-admin-right {
     position: static;
     padding-left: 0;
+    padding-right: 0;
     border-left: none;
+    border-right: none;
     border-top: 3px solid var(--insurfox-blue, #2563eb);
     padding-top: 0.75rem;
     margin-top: 0.75rem;
@@ -472,7 +477,6 @@
     max-height: none;
     overflow: visible;
   }
-  .demo-admin-inner,
   .admin-panel {
     height: auto;
     overflow: visible;
@@ -483,13 +487,15 @@
 }
 
 @media (max-height: 820px) {
-  .demo-admin {
+  .demo-admin-left,
+  .demo-admin-right {
     height: var(--mock-height);
     max-height: var(--mock-height);
   }
 }
 @media (max-height: 740px) {
-  .demo-admin {
+  .demo-admin-left,
+  .demo-admin-right {
     height: var(--mock-height);
     max-height: var(--mock-height);
   }

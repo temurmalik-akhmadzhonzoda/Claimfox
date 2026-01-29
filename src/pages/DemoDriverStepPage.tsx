@@ -212,7 +212,6 @@ export default function DemoDriverStepPage() {
   const [demoState, setDemoState] = useState<DriverDemoState>(() => readDemoState())
   const [auditLog, setAuditLog] = useState<AuditEntry[]>(() => readAudit())
   const [chatLog, setChatLog] = useState<ChatMessage[]>(() => readChat())
-  const [adminOpen, setAdminOpen] = useState(false)
 
   const updateState = useCallback((next: DriverDemoState) => {
     setDemoState(next)
@@ -844,7 +843,6 @@ export default function DemoDriverStepPage() {
   }
 
   const currentStep = step.id
-  const audit = auditLog
   const snapshot = snapshotBadges.map((badge) => ({ label: badge.label, on: badge.active }))
   const stepStatus: Record<StepId, boolean> = {
     register: demoState.accountCreated,
@@ -856,6 +854,18 @@ export default function DemoDriverStepPage() {
     claims: demoState.claimSubmitted,
     chat: demoState.handlerAssigned,
   }
+
+  const staticAudit = [
+    { ts: '29.1.2026, 14:55:51', message: 'Policy purchased and activated' },
+    { ts: '29.1.2026, 14:55:50', message: 'Quote generated (liability + vehicle)' },
+    { ts: '29.1.2026, 14:55:48', message: 'Identity verified (ID + selfie match)' },
+    { ts: '29.1.2026, 14:55:47', message: 'Profile confirmed' },
+    { ts: '29.1.2026, 14:55:46', message: 'Onboarding completed (wizard)' },
+    { ts: '29.1.2026, 14:55:45', message: 'Registration started (email captured)' },
+    { ts: '29.1.2026, 14:41:38', message: 'Registration started (email captured)' },
+    { ts: '29.1.2026, 14:29:25', message: 'Policy purchased and activated' },
+    { ts: '29.1.2026, 14:29:24', message: 'Quote generated (liability + vehicle)' },
+  ]
 
   return (
     <div className="page">
@@ -874,6 +884,17 @@ export default function DemoDriverStepPage() {
 
         <div className="page-body">
           <div className="demo-shell">
+            <aside className="demo-admin-left">
+              <div className="admin-panel">
+                <h4>AI & HITL</h4>
+                <ul>
+                  <li>AI checks domain risk score</li>
+                  <li>Auto-approves low risk signup</li>
+                  <li>No decision without human override</li>
+                </ul>
+              </div>
+            </aside>
+
             <div className="demo-driver">
               <div className="phone-shell">
                 <img src={IphoneMock} alt="" className="phone-mock" aria-hidden="true" />
@@ -897,72 +918,28 @@ export default function DemoDriverStepPage() {
               </div>
             </div>
 
-            <aside className="demo-admin">
-              <button
-                type="button"
-                className="btn btn-outline-primary admin-collapse"
-                aria-expanded={adminOpen}
-                onClick={() => setAdminOpen((prev) => !prev)}
-              >
-                {adminOpen ? 'Hide admin view' : 'Show admin view'}
-              </button>
-              <div className="demo-admin-inner">
-                <div className="admin-panel">
-                  <h4>Step navigation</h4>
-                  <div className="list-group">
-                    {STEP_IDS.map((s) => (
-                      <button
-                        key={s}
-                        type="button"
-                        className={`list-group-item list-group-item-action d-flex align-items-center justify-content-between ${s === currentStep ? 'active' : ''}`}
-                        onClick={() => handleJump(s)}
-                      >
-                        <span>{STEP_TITLES[s]}</span>
-                        <span className={`step-status ${stepStatus[s] ? 'done' : 'todo'}`} aria-hidden="true">
-                          {stepStatus[s] ? '✓' : '×'}
-                        </span>
-                      </button>
-                    ))}
-                  </div>
-
-                  <hr style={{ margin: '0.75rem 0' }} />
-
-                  <h4>AI & HITL</h4>
-                  <ul>
-                    {hitlBullets[currentStep].map((b) => (
-                      <li key={b}>{b}</li>
-                    ))}
-                  </ul>
-
-                  <hr style={{ margin: '0.75rem 0' }} />
-
-                  <h4>Audit log</h4>
-                  <div style={{ display: 'grid', gap: 8 }}>
-                    {audit.slice(0, 10).map((a, idx) => (
-                      <div key={`${a.ts}-${idx}`} className="admin-audit-item">
-                        <div className="ts">{new Date(a.ts).toLocaleString()}</div>
-                        <div className="msg">{a.message}</div>
-                      </div>
-                    ))}
-                    {audit.length === 0 && <div className="text-muted">No entries yet.</div>}
-                  </div>
-
-                  <hr style={{ margin: '0.75rem 0' }} />
-
-                  <h4>Snapshot</h4>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-                    {snapshot.map((s) => (
-                      <span key={s.label} className={`badge ${s.on ? 'bg-success-lt' : 'bg-secondary-lt'}`}>
-                        {s.label}
+            <aside className="demo-admin-right">
+              <div className="admin-panel">
+                <h4>Step navigation</h4>
+                <div className="list-group">
+                  {STEP_IDS.map((s) => (
+                    <div key={s} className="list-group-item d-flex align-items-center justify-content-between">
+                      <span>{STEP_TITLES[s]}</span>
+                      <span className={`step-status ${stepStatus[s] ? 'done' : 'todo'}`} aria-hidden="true">
+                        {stepStatus[s] ? '✓' : '×'}
                       </span>
-                    ))}
-                  </div>
+                    </div>
+                  ))}
+                </div>
 
-                  <hr style={{ margin: '0.75rem 0' }} />
-
-                  <div style={{ fontSize: '0.78rem', color: 'var(--tblr-muted, #667085)' }}>
-                    Demo data only. AI suggestions require human review.
-                  </div>
+                <h4>Audit log</h4>
+                <div className="admin-audit">
+                  {staticAudit.map((a, idx) => (
+                    <div key={`${a.ts}-${idx}`} className="admin-audit-item">
+                      <div className="ts">{a.ts}</div>
+                      <div className="msg">{a.message}</div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </aside>
