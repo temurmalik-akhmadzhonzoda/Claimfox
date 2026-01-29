@@ -4,9 +4,11 @@ import { useI18n } from '@/i18n/I18nContext'
 import UnderwriterIcon from '@/assets/images/underwriter.png'
 import LegalIcon from '@/assets/images/legal.png'
 import InsuranceIcon from '@/assets/images/insurance_icon.png'
+import ClaimIcon from '@/assets/images/claim.png'
 import FleetIcon from '@/assets/images/flotte.png'
 import LogisticsIcon from '@/assets/images/logistic_icon.png'
 import BrokerIcon from '@/assets/images/broker_icon.png'
+import PartnerIcon from '@/assets/images/partner_icon.png'
 import FinanceIcon from '@/assets/images/finance.png'
 import DriverIcon from '@/assets/images/driver.png'
 
@@ -276,11 +278,8 @@ export default function DemoOverviewPage() {
                                 onClick={() => setClaimsOpen((prev) => !prev)}
                               >
                                 <span className="d-flex align-items-center gap-2">
-                                  <span className="avatar avatar-xs bg-blue-lt text-blue">
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                                      <path d="M12 5v14" />
-                                      <path d="M5 12h14" />
-                                    </svg>
+                                  <span className="d-inline-flex align-items-center">
+                                    <img src={ClaimIcon} alt="" style={{ width: 32, height: 32, objectFit: 'contain' }} />
                                   </span>
                                   <span className="fw-semibold">{role.label}</span>
                                 </span>
@@ -318,11 +317,8 @@ export default function DemoOverviewPage() {
                                 onClick={() => setPartnerOpen((prev) => !prev)}
                               >
                                 <span className="d-flex align-items-center gap-2">
-                                  <span className="avatar avatar-xs bg-blue-lt text-blue">
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                                      <path d="M12 5v14" />
-                                      <path d="M5 12h14" />
-                                    </svg>
+                                  <span className="d-inline-flex align-items-center">
+                                    <img src={PartnerIcon} alt="" style={{ width: 32, height: 32, objectFit: 'contain' }} />
                                   </span>
                                   <span className="fw-semibold">{role.label}</span>
                                 </span>
