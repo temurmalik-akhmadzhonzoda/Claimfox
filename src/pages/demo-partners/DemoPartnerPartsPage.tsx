@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import '@/styles/demo-shell.css'
 import { appendAudit, resetKeys, writeJson } from './_partnerStorage'
+import { useI18n } from '@/features/i18n/I18nProvider'
 
 const KEY_STATE = 'DEMO_PARTNER_PARTS_STATE'
 const KEY_AUDIT = 'DEMO_PARTNER_PARTS_AUDIT'
@@ -28,11 +29,12 @@ function defaultState(): PartsState {
 
 export default function DemoPartnerPartsPage() {
   const nav = useNavigate()
+  const { tr } = useI18n()
 
   useEffect(() => {
     resetKeys([KEY_STATE, KEY_AUDIT])
     writeJson(KEY_STATE, defaultState())
-    appendAudit(KEY_AUDIT, 'Demo started (state reset)')
+    appendAudit(KEY_AUDIT, tr('Demo started (state reset)', 'Demo gestartet (Status zurückgesetzt)'))
   }, [])
 
   return (
@@ -42,19 +44,19 @@ export default function DemoPartnerPartsPage() {
           <div className="container-xl">
             <div className="row g-2 align-items-center">
               <div className="col">
-                <div className="page-pretitle">PARTNER DEMO</div>
-                <h2 className="page-title">Parts – Sourcing & Quote</h2>
-                <div className="text-muted">Click-only · Sourcing & SLA checks</div>
+                <div className="page-pretitle">{tr('PARTNER DEMO', 'PARTNER DEMO')}</div>
+                <h2 className="page-title">{tr('Parts – Sourcing & Quote', 'Teile – Beschaffung & Angebot')}</h2>
+                <div className="text-muted">{tr('Click-only · Sourcing & SLA checks', 'Nur Klicks · Beschaffung & SLA-Prüfungen')}</div>
               </div>
               <div className="col-auto ms-auto d-print-none">
                 <div className="btn-list">
                   <button className="btn btn-outline-secondary" onClick={() => {
                     resetKeys([KEY_STATE, KEY_AUDIT])
                     writeJson(KEY_STATE, defaultState())
-                    appendAudit(KEY_AUDIT, 'Demo reset (manual)')
-                  }}>Reset</button>
+                    appendAudit(KEY_AUDIT, tr('Demo reset (manual)', 'Demo zurückgesetzt (manuell)'))
+                  }}>{tr('Reset', 'Zurücksetzen')}</button>
                   <button className="btn btn-primary" onClick={() => nav('/demo-partners/parts/step/intake')}>
-                    Start parts flow
+                    {tr('Start parts flow', 'Teile-Flow starten')}
                   </button>
                 </div>
               </div>
@@ -68,19 +70,19 @@ export default function DemoPartnerPartsPage() {
                 <div className="card">
                   <div className="card-header">
                     <div>
-                      <div className="text-muted">What you will review</div>
-                      <h3 className="card-title">5 steps · sourcing → close</h3>
+                      <div className="text-muted">{tr('What you will review', 'Was Sie prüfen')}</div>
+                      <h3 className="card-title">{tr('5 steps · sourcing → close', '5 Schritte · Beschaffung → Abschluss')}</h3>
                     </div>
                   </div>
                   <div className="card-body">
-                    <div className="text-muted">Case</div>
-                    <div className="fw-semibold">CLM-10421 · Parts request</div>
+                    <div className="text-muted">{tr('Case', 'Fall')}</div>
+                    <div className="fw-semibold">{tr('CLM-10421 · Parts request', 'CLM-10421 · Teileanfrage')}</div>
                     <div className="mt-3 d-grid gap-2">
                       <button className="btn btn-primary" onClick={() => nav('/demo-partners/parts/step/intake')}>
-                        Start at step 1 (intake)
+                        {tr('Start at step 1 (intake)', 'Start bei Schritt 1 (Intake)')}
                       </button>
                       <button className="btn btn-outline-secondary" onClick={() => nav('/demo')}>
-                        Back to demo overview
+                        {tr('Back to demo overview', 'Zurück zur Demo-Übersicht')}
                       </button>
                     </div>
                   </div>
@@ -88,9 +90,9 @@ export default function DemoPartnerPartsPage() {
               </div>
               <div className="finance-admin">
                 <div className="admin-panel">
-                  <h4>Parts – Accountability</h4>
-                  <div>Decides: sourcing + quote + SLA</div>
-                  <div>Accountable: cost & time</div>
+                  <h4>{tr('Parts – Accountability', 'Teile – Verantwortung')}</h4>
+                  <div>{tr('Decides: sourcing + quote + SLA', 'Entscheidet: Beschaffung + Angebot + SLA')}</div>
+                  <div>{tr('Accountable: cost & time', 'Verantwortlich: Kosten & Zeit')}</div>
                 </div>
               </div>
             </div>

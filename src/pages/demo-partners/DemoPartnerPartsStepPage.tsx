@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import '@/styles/demo-shell.css'
 import { appendAudit, readAudit, readJson, writeJson } from './_partnerStorage'
+import { useI18n } from '@/features/i18n/I18nProvider'
 
 const KEY_STATE = 'DEMO_PARTNER_PARTS_STATE'
 const KEY_AUDIT = 'DEMO_PARTNER_PARTS_AUDIT'
@@ -19,14 +20,6 @@ type PartsState = {
 
 const PARTNERS = ['PartsDirect', 'OEM Hub', 'Aftermarket Pro']
 
-const STEPS: { id: StepId; title: string; subtitle: string }[] = [
-  { id: 'intake', title: 'Intake', subtitle: 'Select parts network' },
-  { id: 'sourcing', title: 'Sourcing', subtitle: 'Select partner & mode' },
-  { id: 'quote', title: 'Quote', subtitle: 'Request quote' },
-  { id: 'sla-kpi', title: 'SLA/KPI', subtitle: 'Confirm checks' },
-  { id: 'close', title: 'Close', subtitle: 'Close parts order' }
-]
-
 function defaultState(): PartsState {
   return {
     selectedPartner: '',
@@ -40,8 +33,16 @@ function defaultState(): PartsState {
 
 export default function DemoPartnerPartsStepPage() {
   const nav = useNavigate()
+  const { tr } = useI18n()
   const { stepId } = useParams<{ stepId: StepId }>()
-  const current = useMemo(() => STEPS.find((s) => s.id === stepId), [stepId])
+  const steps = useMemo(() => ([
+    { id: 'intake', title: tr('Intake', 'Intake'), subtitle: tr('Select parts network', 'Teile-Netzwerk wählen') },
+    { id: 'sourcing', title: tr('Sourcing', 'Beschaffung'), subtitle: tr('Select partner & mode', 'Partner & Modus wählen') },
+    { id: 'quote', title: tr('Quote', 'Angebot'), subtitle: tr('Request quote', 'Angebot anfordern') },
+    { id: 'sla-kpi', title: tr('SLA/KPI', 'SLA/KPI'), subtitle: tr('Confirm checks', 'Prüfungen bestätigen') },
+    { id: 'close', title: tr('Close', 'Abschluss'), subtitle: tr('Close parts order', 'Teileauftrag schließen') }
+  ] as { id: StepId; title: string; subtitle: string }[]), [tr])
+  const current = useMemo(() => steps.find((s) => s.id === stepId), [stepId, steps])
   const [state, setState] = useState<PartsState>(() => readJson(KEY_STATE, defaultState()))
 
   useEffect(() => {
@@ -59,12 +60,25 @@ export default function DemoPartnerPartsStepPage() {
   }
 
   const audit = readAudit(KEY_AUDIT)
+  function sourcingLabel(mode: PartsState['sourcingMode']) {
+    if (mode === 'oem') return tr('Sourcing OEM', 'Beschaffung OEM')
+    if (mode === 'aftermarket') return tr('Sourcing Aftermarket', 'Beschaffung Aftermarket')
+    if (mode === 'mixed') return tr('Sourcing Mixed', 'Beschaffung gemischt')
+    return tr('Sourcing unset', 'Beschaffung offen')
+  }
+
+  function quoteLabel(status: PartsState['quoteStatus']) {
+    if (status === 'requested') return tr('Quote requested', 'Angebot angefragt')
+    if (status === 'received') return tr('Quote received', 'Angebot erhalten')
+    return tr('Quote pending', 'Angebot ausstehend')
+  }
+
   const snapshot = [
-    { label: state.selectedPartner || 'Partner unset', ok: !!state.selectedPartner },
-    { label: `Sourcing ${state.sourcingMode}`, ok: state.sourcingMode !== 'none' },
-    { label: `Quote ${state.quoteStatus}`, ok: state.quoteStatus === 'received' },
-    { label: state.slaChecked ? 'SLA checked' : 'SLA not checked', ok: state.slaChecked },
-    { label: state.closed ? 'Closed' : 'Open', ok: state.closed }
+    { label: state.selectedPartner || tr('Partner unset', 'Partner offen'), ok: !!state.selectedPartner },
+    { label: sourcingLabel(state.sourcingMode), ok: state.sourcingMode !== 'none' },
+    { label: quoteLabel(state.quoteStatus), ok: state.quoteStatus === 'received' },
+    { label: state.slaChecked ? tr('SLA checked', 'SLA geprüft') : tr('SLA not checked', 'SLA nicht geprüft'), ok: state.slaChecked },
+    { label: state.closed ? tr('Closed', 'Abgeschlossen') : tr('Open', 'Offen'), ok: state.closed }
   ]
 
   return (
@@ -74,14 +88,14 @@ export default function DemoPartnerPartsStepPage() {
           <div className="container-xl">
             <div className="row g-2 align-items-center">
               <div className="col">
-                <div className="page-pretitle">PARTNER DEMO</div>
+                <div className="page-pretitle">{tr('PARTNER DEMO', 'PARTNER DEMO')}</div>
                 <h2 className="page-title">{current.title}</h2>
                 <div className="text-muted">{current.subtitle}</div>
               </div>
               <div className="col-auto ms-auto d-print-none">
                 <div className="btn-list">
                   <button className="btn btn-outline-secondary" onClick={() => nav('/demo-partners/parts')}>
-                    Restart
+                    {tr('Restart', 'Neu starten')}
                   </button>
                 </div>
               </div>
@@ -95,43 +109,45 @@ export default function DemoPartnerPartsStepPage() {
                 <div className="card">
                   <div className="card-header">
                     <div>
-                      <div className="text-muted">Step {STEPS.findIndex((s) => s.id === stepId) + 1}/{STEPS.length}</div>
+                      <div className="text-muted">
+                        {tr('Step', 'Schritt')} {steps.findIndex((s) => s.id === stepId) + 1}/{steps.length}
+                      </div>
                       <h3 className="card-title mb-0">{current.title}</h3>
                     </div>
                   </div>
                   <div className="card-body">
-                    <div className="text-muted">Case</div>
-                    <div className="fw-semibold">CLM-10421 · Parts request</div>
+                    <div className="text-muted">{tr('Case', 'Fall')}</div>
+                    <div className="fw-semibold">{tr('CLM-10421 · Parts request', 'CLM-10421 · Teileanfrage')}</div>
 
                     {stepId === 'intake' && (
                       <>
-                        <div className="card mt-3"><div className="card-body"><div className="fw-semibold">AI note</div><div className="text-muted">Select network before sourcing mode.</div></div></div>
+                        <div className="card mt-3"><div className="card-body"><div className="fw-semibold">{tr('AI note', 'AI Hinweis')}</div><div className="text-muted">{tr('Select network before sourcing mode.', 'Netzwerk vor Beschaffungsmodus wählen.')}</div></div></div>
                         <div className="mt-3 d-grid gap-2">
                           <button className="btn btn-primary" onClick={() => {
-                            appendAudit(KEY_AUDIT, 'Parts intake started')
+                            appendAudit(KEY_AUDIT, tr('Parts intake started', 'Teile-Intake gestartet'))
                             nav('/demo-partners/parts/step/sourcing')
-                          }}>Select parts network</button>
+                          }}>{tr('Select parts network', 'Teile-Netzwerk wählen')}</button>
                         </div>
                       </>
                     )}
 
                     {stepId === 'sourcing' && (
                       <>
-                        <div className="card mt-3"><div className="card-body"><div className="fw-semibold">AI recommendation</div><div className="text-muted">OEM for warranty, aftermarket for cost control.</div></div></div>
+                        <div className="card mt-3"><div className="card-body"><div className="fw-semibold">{tr('AI recommendation', 'AI Empfehlung')}</div><div className="text-muted">{tr('OEM for warranty, aftermarket for cost control.', 'OEM für Garantie, Aftermarket zur Kostenkontrolle.')}</div></div></div>
                         <div className="mt-3 d-grid gap-2">
                           {PARTNERS.map((p) => (
                             <button key={p} className="btn btn-primary" onClick={() => {
-                              appendAudit(KEY_AUDIT, `Partner selected: ${p}`)
+                              appendAudit(KEY_AUDIT, tr(`Partner selected: ${p}`, `Partner gewählt: ${p}`))
                               setPartial({ selectedPartner: p })
                             }}>{p}</button>
                           ))}
                           {[
-                            { label: 'Sourcing: OEM', value: 'oem' },
-                            { label: 'Sourcing: Aftermarket', value: 'aftermarket' },
-                            { label: 'Sourcing: Mixed', value: 'mixed' }
+                            { label: tr('Sourcing: OEM', 'Beschaffung: OEM'), value: 'oem' },
+                            { label: tr('Sourcing: Aftermarket', 'Beschaffung: Aftermarket'), value: 'aftermarket' },
+                            { label: tr('Sourcing: Mixed', 'Beschaffung: gemischt'), value: 'mixed' }
                           ].map((opt) => (
                             <button key={opt.value} className="btn btn-outline-secondary" onClick={() => {
-                              appendAudit(KEY_AUDIT, `Sourcing mode: ${opt.value}`)
+                              appendAudit(KEY_AUDIT, tr(`Sourcing mode: ${opt.value}`, `Beschaffungsmodus: ${opt.value}`))
                               setPartial({ sourcingMode: opt.value as PartsState['sourcingMode'] })
                               nav('/demo-partners/parts/step/quote')
                             }}>{opt.label}</button>
@@ -142,48 +158,48 @@ export default function DemoPartnerPartsStepPage() {
 
                     {stepId === 'quote' && (
                       <>
-                        <div className="card mt-3"><div className="card-body"><div className="fw-semibold">AI note</div><div className="text-muted">Request quote before order.</div></div></div>
+                        <div className="card mt-3"><div className="card-body"><div className="fw-semibold">{tr('AI note', 'AI Hinweis')}</div><div className="text-muted">{tr('Request quote before order.', 'Vor Bestellung Angebot anfordern.')}</div></div></div>
                         <div className="mt-3 d-grid gap-2">
                           <button className="btn btn-primary" onClick={() => {
-                            appendAudit(KEY_AUDIT, 'Quote requested')
+                            appendAudit(KEY_AUDIT, tr('Quote requested', 'Angebot angefragt'))
                             setPartial({ quoteStatus: 'requested', chatTemplate: 'request-quote' })
-                          }}>Request quote</button>
+                          }}>{tr('Request quote', 'Angebot anfordern')}</button>
                           <button className="btn btn-outline-secondary" onClick={() => {
-                            appendAudit(KEY_AUDIT, 'Quote received')
+                            appendAudit(KEY_AUDIT, tr('Quote received', 'Angebot erhalten'))
                             setPartial({ quoteStatus: 'received' })
                             nav('/demo-partners/parts/step/sla-kpi')
-                          }}>Receive quote</button>
+                          }}>{tr('Receive quote', 'Angebot erhalten')}</button>
                         </div>
                       </>
                     )}
 
                     {stepId === 'sla-kpi' && (
                       <>
-                        <div className="card mt-3"><div className="card-body"><div className="fw-semibold">AI note</div><div className="text-muted">Confirm SLA/KPI before order.</div></div></div>
+                        <div className="card mt-3"><div className="card-body"><div className="fw-semibold">{tr('AI note', 'AI Hinweis')}</div><div className="text-muted">{tr('Confirm SLA/KPI before order.', 'SLA/KPI vor Bestellung bestätigen.')}</div></div></div>
                         <div className="mt-3 d-grid gap-2">
                           <button className="btn btn-primary" onClick={() => {
-                            appendAudit(KEY_AUDIT, 'SLA checked')
+                            appendAudit(KEY_AUDIT, tr('SLA checked', 'SLA geprüft'))
                             setPartial({ slaChecked: true })
-                          }}>Confirm SLA check</button>
+                          }}>{tr('Confirm SLA check', 'SLA-Prüfung bestätigen')}</button>
                           <button className="btn btn-outline-secondary" onClick={() => {
-                            appendAudit(KEY_AUDIT, 'KPI checked')
+                            appendAudit(KEY_AUDIT, tr('KPI checked', 'KPI geprüft'))
                             nav('/demo-partners/parts/step/close')
-                          }}>Confirm KPI check</button>
+                          }}>{tr('Confirm KPI check', 'KPI-Prüfung bestätigen')}</button>
                         </div>
                       </>
                     )}
 
                     {stepId === 'close' && (
                       <>
-                        <div className="card mt-3"><div className="card-body"><div className="fw-semibold">AI note</div><div className="text-muted">Close once order placed.</div></div></div>
+                        <div className="card mt-3"><div className="card-body"><div className="fw-semibold">{tr('AI note', 'AI Hinweis')}</div><div className="text-muted">{tr('Close once order placed.', 'Schließen, sobald Auftrag ausgelöst ist.')}</div></div></div>
                         <div className="mt-3 d-grid gap-2">
                           <button className="btn btn-primary" onClick={() => {
-                            appendAudit(KEY_AUDIT, 'Order confirmed')
+                            appendAudit(KEY_AUDIT, tr('Order confirmed', 'Auftrag bestätigt'))
                             setPartial({ closed: true })
                             nav('/demo-partners/parts')
-                          }}>Confirm order placed</button>
+                          }}>{tr('Confirm order placed', 'Auftrag bestätigt')}</button>
                           <button className="btn btn-outline-secondary" onClick={() => nav('/demo-partners/parts')}>
-                            Restart demo
+                            {tr('Restart demo', 'Demo neu starten')}
                           </button>
                         </div>
                       </>
@@ -194,9 +210,9 @@ export default function DemoPartnerPartsStepPage() {
 
               <div className="finance-admin">
                 <div className="admin-panel">
-                  <h4>Step navigation</h4>
+                  <h4>{tr('Step navigation', 'Schritt-Navigation')}</h4>
                   <div className="list-group">
-                    {STEPS.map((s) => (
+                    {steps.map((s) => (
                       <button key={s.id} className={`list-group-item list-group-item-action d-flex align-items-center justify-content-between ${s.id === stepId ? 'active' : ''}`} onClick={() => nav(`/demo-partners/parts/step/${s.id}`)} type="button">
                         <span>{s.title}</span>
                         <span className="badge bg-blue-lt">{s.id}</span>
@@ -204,11 +220,11 @@ export default function DemoPartnerPartsStepPage() {
                     ))}
                   </div>
                   <hr />
-                  <h4>AI & Accountability</h4>
-                  <div>Decides: sourcing + quote + SLA</div>
-                  <div>Accountable: cost & time</div>
+                  <h4>{tr('AI & Accountability', 'KI & Verantwortung')}</h4>
+                  <div>{tr('Decides: sourcing + quote + SLA', 'Entscheidet: Beschaffung + Angebot + SLA')}</div>
+                  <div>{tr('Accountable: cost & time', 'Verantwortlich: Kosten & Zeit')}</div>
                   <hr />
-                  <h4>Snapshot</h4>
+                  <h4>{tr('Snapshot', 'Snapshot')}</h4>
                   <div className="d-flex flex-wrap gap-2">
                     {snapshot.map((s) => (
                       <span key={s.label} className={`badge ${s.ok ? 'bg-green-lt' : 'bg-secondary-lt'}`}>
@@ -217,9 +233,9 @@ export default function DemoPartnerPartsStepPage() {
                     ))}
                   </div>
                   <hr />
-                  <h4>Audit log</h4>
+                  <h4>{tr('Audit log', 'Audit-Log')}</h4>
                   <div className="admin-audit">
-                    {audit.length === 0 && <div className="text-muted">No entries yet.</div>}
+                    {audit.length === 0 && <div className="text-muted">{tr('No entries yet.', 'Noch keine Einträge.')}</div>}
                     {audit.slice(0, 8).map((a) => (
                       <div key={`${a.ts}-${a.message}`} className="admin-audit-item">
                         <div className="ts">{a.ts}</div>
