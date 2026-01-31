@@ -268,10 +268,7 @@ export default function HomePage() {
             <h2>{copy.productTitle}</h2>
             <p>{copy.productBody}</p>
             <div className="home-product-actions">
-              <Button onClick={() => navigate('/get-quote')}>{copy.ctaQuote}</Button>
-              <Button variant="secondary" onClick={() => navigate('/insurfox-whitepaper')}>
-                {copy.ctaWhitepaper}
-              </Button>
+              <div />
             </div>
           </div>
           <div className="home-product-media">
