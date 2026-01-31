@@ -218,7 +218,7 @@ export default function InsuranceLandingPage() {
             <p>{copy.heroBody}</p>
             <Button
               onClick={() => go('/insurance-dashboard')}
-              className="home-marketing-login"
+              className="home-marketing-login home-hero-cta"
               style={{ padding: '0.55rem 1.2rem', width: 'fit-content' }}
               disableHover
             >
@@ -242,6 +242,16 @@ export default function InsuranceLandingPage() {
         </div>
         <span className="home-hero-accent" aria-hidden />
       </section>
+      <div className="insurance-hero-cta-row">
+        <Button
+          onClick={() => go('/insurance-dashboard')}
+          className="home-marketing-login"
+          style={{ padding: '0.55rem 1.2rem', width: 'fit-content' }}
+          disableHover
+        >
+          {copy.heroCta}
+        </Button>
+      </div>
 
       <section className="home-product">
         <div className="home-product-card">
