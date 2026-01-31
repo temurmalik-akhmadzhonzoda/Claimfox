@@ -27,6 +27,7 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
       '/insurance-dashboard',
       '/claim-manager',
       '/claim-manager-app',
+      '/claim-manager-case',
       '/partner-management',
       '/partner-management-overview'
     ]
