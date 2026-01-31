@@ -9,7 +9,9 @@ export default function InsuranceDashboardPage() {
 
   const copy = {
     headerKicker: lang === 'en' ? 'Insurance dashboard' : 'Versicherungs-Dashboard',
-    headerTitle: lang === 'en' ? 'Overview by department' : 'Ubersicht nach Abteilungen',
+    headerTitle: lang === 'en'
+      ? 'Overview by department (AI analysis and decision templates)'
+      : 'Ubersicht nach Abteilungen (KI-Analyse und Entscheidungsvorlagen)',
     headerBody: lang === 'en'
       ? 'Operational views grouped by responsibility.'
       : 'Operative Ansichten nach Verantwortungsbereichen.',

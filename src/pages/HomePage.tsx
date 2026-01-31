@@ -15,6 +15,7 @@ export default function HomePage() {
   const { lang, setLang } = useI18n()
   const { isAuthenticated, logout, user } = useAuth()
   const [isHeroPreviewOpen, setIsHeroPreviewOpen] = React.useState(false)
+  const [isMobileNavOpen, setIsMobileNavOpen] = React.useState(false)
 
   const copy = {
     nav: {
@@ -41,7 +42,7 @@ export default function HomePage() {
       : 'Klare Trennung von Risiko, Distribution und Technologie. Geringere operative Komplexität. Kontrollierte Skalierung über Programme und Märkte.',
     valueCards: [
       {
-        title: lang === 'en' ? 'Power any application' : 'Anwendungen anbinden',
+        title: lang === 'en' ? 'API first technology' : 'API-first Technologie',
         body: lang === 'en'
           ? 'API-first integration into existing stacks. Reusable services across carriers and brokers.'
           : 'API-first Integration in bestehende Systemlandschaften. Wiederverwendbare Services über Carrier und Makler.'
@@ -177,14 +178,6 @@ export default function HomePage() {
                 <button type="button" onClick={() => navigate('/demo')}>{copy.nav.demo}</button>
               </>
             )}
-            <div className="home-marketing-lang-switch" role="group" aria-label="Language switch">
-              <button type="button" className={lang === 'de' ? 'is-active' : ''} onClick={() => setLang('de')}>
-                DE
-              </button>
-              <button type="button" className={lang === 'en' ? 'is-active' : ''} onClick={() => setLang('en')}>
-                EN
-              </button>
-            </div>
             <Button
               onClick={() => {
                 if (isAuthenticated) {
@@ -204,12 +197,51 @@ export default function HomePage() {
               </svg>
               <span className="home-marketing-login-text">{isAuthenticated ? copy.nav.logout : copy.nav.login}</span>
             </Button>
-            <button type="button" className="home-marketing-menu" aria-label="Menü öffnen">
+            <div className="home-marketing-lang-switch" role="group" aria-label="Language switch">
+              <button type="button" className={lang === 'de' ? 'is-active' : ''} onClick={() => setLang('de')}>
+                DE
+              </button>
+              <button type="button" className={lang === 'en' ? 'is-active' : ''} onClick={() => setLang('en')}>
+                EN
+              </button>
+            </div>
+            <button
+              type="button"
+              className="home-marketing-menu home-marketing-menu-trigger"
+              aria-label="Menü öffnen"
+              onClick={() => setIsMobileNavOpen((prev) => !prev)}
+            >
               <span />
               <span />
               <span />
             </button>
           </nav>
+          {isMobileNavOpen && (
+            <div className="home-marketing-mobile-panel" role="dialog" aria-label="Navigation">
+              <button type="button" onClick={() => { navigate('/insurance'); setIsMobileNavOpen(false) }}>
+                {copy.nav.insurance}
+              </button>
+              {user?.mode !== 'insurance-only' && (
+                <>
+                  <button type="button" onClick={() => { navigate('/broker-portal'); setIsMobileNavOpen(false) }}>
+                    {copy.nav.broker}
+                  </button>
+                  <button type="button" onClick={() => { navigate('/logistics'); setIsMobileNavOpen(false) }}>
+                    {copy.nav.logistics}
+                  </button>
+                  <button type="button" onClick={() => { navigate('/fleet'); setIsMobileNavOpen(false) }}>
+                    {copy.nav.fleet}
+                  </button>
+                  <button type="button" onClick={() => { navigate('/partner'); setIsMobileNavOpen(false) }}>
+                    {copy.nav.partner}
+                  </button>
+                  <button type="button" onClick={() => { navigate('/demo'); setIsMobileNavOpen(false) }}>
+                    {copy.nav.demo}
+                  </button>
+                </>
+              )}
+            </div>
+          )}
         </div>
       </header>
 
@@ -222,7 +254,17 @@ export default function HomePage() {
             <p>{copy.heroContext}</p>
           </div>
           <div className="home-hero-card" aria-label="Insurfox Logo" style={{ background: 'transparent', boxShadow: 'none', border: 'none' }}>
-            <img src={InsurfoxLogoLight} alt="Insurfox" style={{ width: '100%', height: '100%', objectFit: 'contain', transform: 'scale(1.5)' }} />
+            <img
+              src={InsurfoxLogoLight}
+              alt="Insurfox"
+              style={{
+                width: 'clamp(200px, 28vw, 360px)',
+                height: 'auto',
+                objectFit: 'contain',
+                transform: 'translateX(-72px)',
+                transformOrigin: 'right center'
+              }}
+            />
           </div>
         </div>
         <span className="home-hero-accent" aria-hidden />
