@@ -21,7 +21,13 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
   }
 
   if (isAuthenticated && user?.mode === 'insurance-only') {
-    const allowedPrefixes = ['/home', '/insurance', '/insurance-dashboard']
+    const allowedPrefixes = [
+      '/home',
+      '/insurance',
+      '/insurance-dashboard',
+      '/claim-manager-app',
+      '/partner-management-overview'
+    ]
     const isAllowed = allowedPrefixes.some((prefix) => (
       location.pathname === prefix || location.pathname.startsWith(`${prefix}/`)
     ))
