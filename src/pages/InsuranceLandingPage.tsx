@@ -2,8 +2,8 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useI18n } from '@/i18n/I18nContext'
 import HomeHeroBackground from '@/assets/images/Home1.png'
-import InsuranceHeroImage from '@/assets/images/insurance_processes.png'
 import AiInsuranceProcessImage from '@/assets/images/ai_insurance_process.png'
+import InsuranceAiImage from '@/assets/images/insurance_ai.png'
 import InsurfoxLogoLight from '@/assets/logos/insurfox-logo-light.png'
 
 export default function InsuranceLandingPage() {
@@ -235,6 +235,33 @@ export default function InsuranceLandingPage() {
         </div>
       </section>
 
+      <section className="home-product">
+        <div className="home-product-card">
+          <div>
+            <span className="home-product-kicker">{lang === 'en' ? 'Process' : 'Prozess'}</span>
+            <h2>{copy.visualTitle}</h2>
+            <ul style={{ margin: 0, paddingLeft: '1.1rem', color: '#475569', lineHeight: 1.6 }}>
+              {copy.visualBullets.map((bullet) => (
+                <li key={bullet}>{bullet}</li>
+              ))}
+            </ul>
+          </div>
+          <div className="home-product-media" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '1rem' }}>
+            <button
+              type="button"
+              className="home-hero-card"
+              onClick={() => setIsAiPreviewOpen(true)}
+              aria-label="Open AI process preview"
+            >
+              <img src={AiInsuranceProcessImage} alt="AI insurance process" />
+            </button>
+            <div className="home-hero-card" aria-label="Insurance AI" style={{ cursor: 'default' }}>
+              <img src={InsuranceAiImage} alt="Insurance AI" />
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="home-value">
         <div className="home-section-header">
           <h2>{copy.underwritingTitle}</h2>
@@ -315,30 +342,6 @@ export default function InsuranceLandingPage() {
                 <li key={bullet}>{bullet}</li>
               ))}
             </ul>
-          </div>
-        </div>
-      </section>
-
-      <section className="home-product">
-        <div className="home-product-card">
-          <div>
-            <span className="home-product-kicker">{lang === 'en' ? 'Process' : 'Prozess'}</span>
-            <h2>{copy.visualTitle}</h2>
-            <ul style={{ margin: 0, paddingLeft: '1.1rem', color: '#475569', lineHeight: 1.6 }}>
-              {copy.visualBullets.map((bullet) => (
-                <li key={bullet}>{bullet}</li>
-              ))}
-            </ul>
-          </div>
-          <div className="home-product-media">
-            <button
-              type="button"
-              className="home-hero-card"
-              onClick={() => setIsAiPreviewOpen(true)}
-              aria-label="Open AI process preview"
-            >
-              <img src={AiInsuranceProcessImage} alt="AI insurance process" />
-            </button>
           </div>
         </div>
       </section>
