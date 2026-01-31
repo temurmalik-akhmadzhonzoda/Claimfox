@@ -656,6 +656,12 @@ a {
     display: none !important;
   }
 
+  .home-hero .home-hero-cta {
+    display: inline-flex !important;
+    position: relative;
+    z-index: 2;
+  }
+
   .home-marketing-lang-switch {
     display: none;
   }
@@ -688,7 +694,7 @@ a {
 
   .home-mobile-bottom-bar button {
     border: none;
-    background: var(--insurfox-blue, #2563eb);
+    background: #2e0881;
     color: #ffffff;
     border-radius: 999px;
     padding: 0.45rem 0.9rem;
