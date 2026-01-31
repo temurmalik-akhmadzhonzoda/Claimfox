@@ -653,7 +653,7 @@ a {
   }
 
   .home-marketing-login {
-    display: none;
+    display: none !important;
   }
 
   .home-marketing-lang-switch {
