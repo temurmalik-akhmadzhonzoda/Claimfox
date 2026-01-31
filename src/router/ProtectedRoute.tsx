@@ -25,7 +25,9 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
       '/home',
       '/insurance',
       '/insurance-dashboard',
+      '/claim-manager',
       '/claim-manager-app',
+      '/partner-management',
       '/partner-management-overview'
     ]
     const isAllowed = allowedPrefixes.some((prefix) => (
