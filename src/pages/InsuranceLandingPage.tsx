@@ -4,6 +4,7 @@ import { useI18n } from '@/i18n/I18nContext'
 import HomeHeroBackground from '@/assets/images/Home1.png'
 import InsuranceHeroImage from '@/assets/images/insurance_processes.png'
 import AiInsuranceProcessImage from '@/assets/images/ai_insurance_process.png'
+import InsurfoxLogoLight from '@/assets/logos/insurfox-logo-light.png'
 
 export default function InsuranceLandingPage() {
   const { lang } = useI18n()
@@ -208,9 +209,13 @@ export default function InsuranceLandingPage() {
             <p>{copy.heroBody}</p>
             <p>{copy.heroContext}</p>
           </div>
-          <button type="button" className="home-hero-card" onClick={() => setIsHeroPreviewOpen(true)} aria-label="Open insurance preview">
-            <img src={InsuranceHeroImage} alt="Insurance processes" />
-          </button>
+          <div className="home-hero-card" aria-label="Insurfox Logo" style={{ background: 'transparent', boxShadow: 'none', border: 'none' }}>
+            <img
+              src={InsurfoxLogoLight}
+              alt="Insurfox"
+              style={{ width: '100%', height: '100%', objectFit: 'contain', transform: 'scale(1.5) translateX(-120px)', transformOrigin: 'center' }}
+            />
+          </div>
         </div>
         <span className="home-hero-accent" aria-hidden />
       </section>
@@ -373,17 +378,6 @@ export default function InsuranceLandingPage() {
           </div>
         </div>
       </section>
-
-      {isHeroPreviewOpen && (
-        <div className="hero-image-modal" role="dialog" aria-modal="true">
-          <button type="button" className="hero-image-modal__close" onClick={() => setIsHeroPreviewOpen(false)} aria-label="Close">
-            ×
-          </button>
-          <div className="hero-image-modal__content">
-            <img src={InsuranceHeroImage} alt="Insurance processes" />
-          </div>
-        </div>
-      )}
 
       {isAiPreviewOpen && (
         <div className="hero-image-modal" role="dialog" aria-modal="true">
