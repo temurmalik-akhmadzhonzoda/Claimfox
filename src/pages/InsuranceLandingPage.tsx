@@ -12,240 +12,371 @@ export default function InsuranceLandingPage() {
   const [isAiPreviewOpen, setIsAiPreviewOpen] = React.useState(false)
 
   const copy = {
-    title: lang === 'en' ? 'Insurance Processes, End-to-End.' : 'Versicherungsprozesse – Ende zu Ende.',
-    subtitle:
-      lang === 'en'
-        ? 'Standardized underwriting, claims, partner workflows, and audit-ready governance in one platform.'
-        : 'Standardisiertes Underwriting, Claims, Partnerprozesse und audit-fähige Governance in einer Plattform.',
-    sections: [
+    heroKicker: lang === 'en' ? 'Insurfox AI IaaS' : 'Insurfox AI IaaS',
+    heroTitle: lang === 'en' ? 'AI for insurance decision processes' : 'KI für Versicherungs-Entscheidungsprozesse',
+    heroBody: lang === 'en'
+      ? 'AI supports structuring, prioritization and evidence preparation. Decisions remain with the carrier, with human review.'
+      : 'KI unterstützt Strukturierung, Priorisierung und Evidenzaufbereitung. Entscheidungen bleiben beim Carrier, mit menschlicher Prüfung.',
+    heroContext: lang === 'en' ? 'Underwriting • Claims • Governance' : 'Underwriting • Schaden • Governance',
+    lifecycleTitle: lang === 'en' ? 'Decision lifecycle, end-to-end' : 'Entscheidungs-Lifecycle – Ende zu Ende',
+    lifecycleBody: lang === 'en'
+      ? 'Standardized steps make decisions repeatable and controlled across partners and markets.'
+      : 'Standardisierte Schritte machen Entscheidungen wiederholbar und kontrollierbar über Partner und Märkte.',
+    lifecycleCards: [
       {
-        title: lang === 'en' ? 'Product & Policy' : 'Produkt & Police',
-        body:
-          lang === 'en'
-            ? 'Unified product setup, policy issuance, and renewals with transparent controls.'
-            : 'Einheitliche Produktlogik, Policierung und Verlängerungen mit klaren Kontrollen.'
+        title: lang === 'en' ? 'Intake & validation' : 'Intake & Validierung',
+        body: lang === 'en'
+          ? 'Structured case intake with rule checks and initial data quality gates.'
+          : 'Strukturierter Fall-Intake mit Regelprüfungen und Datenqualitäts-Gates.'
       },
       {
-        title: lang === 'en' ? 'Claims & Decisions' : 'Schaden & Entscheidungen',
-        body:
-          lang === 'en'
-            ? 'AI-supported triage, cost approvals, and partner orchestration with human oversight.'
-            : 'KI-gestützte Triage, Kostenfreigaben und Partnersteuerung mit Human-in-the-Loop.'
+        title: lang === 'en' ? 'Assessment & recommendation' : 'Bewertung & Empfehlung',
+        body: lang === 'en'
+          ? 'Decision packs summarize risk, options and rationale for review.'
+          : 'Decision Packs fassen Risiko, Optionen und Begründung für die Prüfung zusammen.'
       },
       {
-        title: lang === 'en' ? 'Governance & Audit' : 'Governance & Audit',
-        body:
-          lang === 'en'
-            ? 'Full traceability across models, data access, and decision workflows.'
-            : 'Vollständige Nachvollziehbarkeit von Modellen, Datenzugriffen und Entscheidungswegen.'
+        title: lang === 'en' ? 'Decision & controls' : 'Entscheidung & Kontrollen',
+        body: lang === 'en'
+          ? 'Human decisions follow limits, thresholds and escalation rules.'
+          : 'Menschliche Entscheidungen folgen Limits, Schwellen und Eskalationsregeln.'
+      },
+      {
+        title: lang === 'en' ? 'Audit & monitoring' : 'Audit & Monitoring',
+        body: lang === 'en'
+          ? 'Every decision is recorded with evidence and versioned logic.'
+          : 'Jede Entscheidung wird mit Evidenz und versionierter Logik dokumentiert.'
+      }
+    ],
+    underwritingTitle: lang === 'en' ? 'Underwriting decision support' : 'Underwriting-Entscheidungsunterstützung',
+    underwritingBody: lang === 'en'
+      ? 'Decision packs provide structured inputs, outputs and controls for underwriting.'
+      : 'Decision Packs liefern strukturierte Inputs, Outputs und Kontrollen für Underwriting.',
+    underwritingPacks: [
+      {
+        title: lang === 'en' ? 'Risk & exposure snapshot' : 'Risiko- & Exposure-Snapshot',
+        bullets: lang === 'en'
+          ? ['Inputs: exposure, loss history, corridor fit', 'Output: risk snapshot with drivers', 'Control: corridor thresholds and limits']
+          : ['Input: Exposure, Schadenshistorie, Korridor-Fit', 'Output: Risiko-Snapshot mit Treibern', 'Control: Korridor-Schwellen und Limits']
+      },
+      {
+        title: lang === 'en' ? 'Pricing and terms suggestion' : 'Preis- und Konditionen-Vorschlag',
+        bullets: lang === 'en'
+          ? ['Inputs: pricing rules and benchmarks', 'Output: terms within authority', 'Control: approval limits and overrides']
+          : ['Input: Pricing-Regeln und Benchmarks', 'Output: Konditionen innerhalb der Autorität', 'Control: Freigabegrenzen und Overrides']
+      },
+      {
+        title: lang === 'en' ? 'Document & evidence pack' : 'Dokumenten- & Evidenzpaket',
+        bullets: lang === 'en'
+          ? ['Inputs: required documents and checks', 'Output: completeness score', 'Control: mandatory evidence gates']
+          : ['Input: erforderliche Dokumente und Checks', 'Output: Vollständigkeits-Score', 'Control: Pflicht-Evidenz-Gates']
+      },
+      {
+        title: lang === 'en' ? 'Referral & escalation routing' : 'Referral- & Eskalationsrouting',
+        bullets: lang === 'en'
+          ? ['Inputs: triggers and exception signals', 'Output: routing to authority', 'Control: escalation policy']
+          : ['Input: Trigger und Ausnahme-Signale', 'Output: Routing zur Autorität', 'Control: Eskalations-Policy']
+      }
+    ],
+    claimsTitle: lang === 'en' ? 'Claims decision support' : 'Schaden-Entscheidungsunterstützung',
+    claimsBody: lang === 'en'
+      ? 'Decision packs align claims handling with controls and consistent escalation.'
+      : 'Decision Packs richten die Schadenbearbeitung an Kontrollen und konsistenter Eskalation aus.',
+    claimsPacks: [
+      {
+        title: lang === 'en' ? 'Triage and severity banding' : 'Triage und Schweregrad',
+        bullets: lang === 'en'
+          ? ['Inputs: FNOL, severity signals', 'Output: triage band', 'Control: escalation thresholds']
+          : ['Input: FNOL, Schwere-Signale', 'Output: Triage-Band', 'Control: Eskalationsschwellen']
+      },
+      {
+        title: lang === 'en' ? 'Coverage check & policy context' : 'Deckungsprüfung & Policenkontext',
+        bullets: lang === 'en'
+          ? ['Inputs: policy terms, exclusions', 'Output: coverage position', 'Control: mandatory review paths']
+          : ['Input: Policenbedingungen, Ausschlüsse', 'Output: Deckungsposition', 'Control: Pflicht-Review-Pfade']
+      },
+      {
+        title: lang === 'en' ? 'Reserve and cost-approval' : 'Reserve- und Kostenfreigabe',
+        bullets: lang === 'en'
+          ? ['Inputs: estimates and benchmarks', 'Output: reserve recommendation', 'Control: approval limits']
+          : ['Input: Schätzungen und Benchmarks', 'Output: Reserve-Empfehlung', 'Control: Freigabegrenzen']
+      },
+      {
+        title: lang === 'en' ? 'Partner orchestration & next actions' : 'Partner-Orchestrierung & Next Actions',
+        bullets: lang === 'en'
+          ? ['Inputs: partner availability and SLA', 'Output: action plan', 'Control: SLA and KPI gates']
+          : ['Input: Partnerverfügbarkeit und SLA', 'Output: Maßnahmenplan', 'Control: SLA- und KPI-Gates']
+      }
+    ],
+    governanceTitle: lang === 'en' ? 'Governance and control' : 'Governance und Kontrolle',
+    governanceBody: lang === 'en'
+      ? 'Decision packs make governance explicit and auditable.'
+      : 'Decision Packs machen Governance explizit und auditierbar.',
+    governancePacks: [
+      {
+        title: lang === 'en' ? 'Audit trail and decision record' : 'Audit-Trail und Entscheidungsnachweis',
+        bullets: lang === 'en'
+          ? ['Inputs: decision steps and evidence', 'Output: auditable record', 'Control: mandatory logging']
+          : ['Input: Entscheidungssteps und Evidenz', 'Output: auditierbarer Nachweis', 'Control: Pflicht-Logging']
+      },
+      {
+        title: lang === 'en' ? 'Rule/model versioning' : 'Regel-/Modellversionierung',
+        bullets: lang === 'en'
+          ? ['Inputs: policy and model versions', 'Output: change log', 'Control: approval workflow']
+          : ['Input: Policy- und Modellversionen', 'Output: Änderungslog', 'Control: Freigabe-Workflow']
+      },
+      {
+        title: lang === 'en' ? 'Access and mandate controls' : 'Zugriff- und Mandatskontrollen',
+        bullets: lang === 'en'
+          ? ['Inputs: roles and mandates', 'Output: access scope', 'Control: segregation of duties']
+          : ['Input: Rollen und Mandate', 'Output: Zugriffsumfang', 'Control: Trennung von Aufgaben']
+      },
+      {
+        title: lang === 'en' ? 'Portfolio signals and exceptions' : 'Portfolio-Signale und Ausnahmen',
+        bullets: lang === 'en'
+          ? ['Inputs: portfolio KPIs', 'Output: exception flags', 'Control: escalation routing']
+          : ['Input: Portfolio-KPIs', 'Output: Ausnahme-Flags', 'Control: Eskalationsrouting']
+      }
+    ],
+    aiDoesTitle: lang === 'en' ? 'AI supports' : 'KI unterstützt',
+    aiDoesBullets: lang === 'en'
+      ? ['Case structuring', 'Prioritization', 'Evidence preparation', 'Recommendation drafting', 'Consistency checks']
+      : ['Fallstrukturierung', 'Priorisierung', 'Evidenzaufbereitung', 'Empfehlungsentwürfe', 'Konsistenzprüfungen'],
+    aiDoesNotTitle: lang === 'en' ? 'AI does not' : 'KI tut nicht',
+    aiDoesNotBullets: lang === 'en'
+      ? ['Approve or bind automatically', 'Override carrier authority', 'Decide without evidence', 'Bypass controls', 'Obscure rationale']
+      : ['Autonom genehmigen oder binden', 'Carrier-Autorität überschreiben', 'Ohne Evidenz entscheiden', 'Kontrollen umgehen', 'Begründung verschleiern'],
+    visualTitle: lang === 'en' ? 'From data to a decision record' : 'Von Daten zum Entscheidungsnachweis',
+    visualBullets: lang === 'en'
+      ? ['Inputs and events arrive', 'AI drafts a decision pack with rationale', 'Human decision creates an auditable record']
+      : ['Inputs und Ereignisse treffen ein', 'KI erstellt Decision Pack mit Begründung', 'Menschliche Entscheidung erzeugt Audit-Nachweis'],
+    rolesTitle: lang === 'en' ? 'Operational views' : 'Operative Ansichten',
+    rolesBody: lang === 'en'
+      ? 'Open role-based views with controlled workflows and approvals.'
+      : 'Öffnen Sie rollenbasierte Ansichten mit kontrollierten Workflows und Freigaben.',
+    roleCards: [
+      {
+        title: lang === 'en' ? 'Claims Manager' : 'Schadenmanager',
+        body: lang === 'en' ? 'Claims routing and escalation oversight.' : 'Steuerung von Schadenrouting und Eskalation.',
+        route: '/claim-manager'
+      },
+      {
+        title: lang === 'en' ? 'Partner Management' : 'Partner Management',
+        body: lang === 'en' ? 'Partner networks and communication workflows.' : 'Partnernetzwerke und Kommunikations-Workflows.',
+        route: '/partner-management-overview'
+      }
+    ],
+    controlsTitle: lang === 'en' ? 'Decision controls built in' : 'Entscheidungskontrollen integriert',
+    controlsBody: lang === 'en'
+      ? 'Controls enforce consistent execution and traceability across the lifecycle.'
+      : 'Kontrollen sichern konsistente Ausführung und Nachvollziehbarkeit über den Lifecycle.',
+    controlsItems: [
+      {
+        title: lang === 'en' ? 'Role-based access' : 'Rollenbasierter Zugriff',
+        body: lang === 'en'
+          ? 'Segregation of duties and clear mandates.'
+          : 'Trennung von Aufgaben und klare Mandate.'
+      },
+      {
+        title: lang === 'en' ? 'Limits and thresholds' : 'Limits und Schwellen',
+        body: lang === 'en'
+          ? 'Defined guardrails with escalation paths.'
+          : 'Definierte Guardrails mit Eskalationspfaden.'
+      },
+      {
+        title: lang === 'en' ? 'Versioning and change management' : 'Versionierung und Change Management',
+        body: lang === 'en'
+          ? 'Controlled updates for rules and models.'
+          : 'Kontrollierte Änderungen an Regeln und Modellen.'
+      },
+      {
+        title: lang === 'en' ? 'Evidence and audit trail' : 'Evidenz und Audit-Trail',
+        body: lang === 'en'
+          ? 'Complete decision records with evidence links.'
+          : 'Vollständige Entscheidungsnachweise mit Evidenzbezug.'
       }
     ]
   }
 
-  const roleCards = [
-    {
-      title: lang === 'en' ? 'Claims Manager' : 'Schadenmanager',
-      body: lang === 'en' ? 'Overview of open claims with AI-supported workflows.' : 'Übersicht offener Schadenfälle mit KI-gestützten Workflows.',
-      route: '/claim-manager'
-    },
-    {
-      title: lang === 'en' ? 'Partner Management' : 'Partner Management',
-      body: lang === 'en' ? 'Partner networks and live communication per claim.' : 'Partnernetzwerke und Live-Kommunikation je Schadenfall.',
-      route: '/partner-management-overview'
-    }
-  ]
-
-  const aiBlock = {
-    title: lang === 'en' ? 'Native AI' : 'Native AI',
-    body:
-      lang === 'en'
-        ? 'AI-supported underwriting, claims and governance workflows within a controlled insurance platform.'
-        : 'KI-gestütztes Underwriting, Schadenprozesse und Governance-Workflows in einer kontrollierten Versicherungsplattform.'
-  }
-
   return (
-    <section
-      style={{
-        minHeight: '100vh',
-        width: '100%',
-        padding: '0 clamp(1rem, 4vw, 3rem) 4rem',
-        color: '#0f172a'
-      }}
-    >
-      <div style={{ width: '100%', maxWidth: 1220, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
-        <div
-          style={{
-            position: 'relative',
-            backgroundImage: `url(${HomeHeroBackground})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            padding: '3.5rem clamp(1.5rem, 4vw, 3.25rem)',
-            color: '#ffffff',
-            boxShadow: '0 30px 70px rgba(11, 28, 108, 0.25)',
-            width: '100vw',
-            marginLeft: 'calc(50% - 50vw)'
-          }}
-        >
-          <div
-            style={{
-              width: '100%',
-              maxWidth: 1220,
-              margin: '0 auto',
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-              gap: '2.5rem',
-              alignItems: 'center'
-            }}
-          >
-            <div style={{ textAlign: 'left' }}>
-              <p style={{ margin: 0, letterSpacing: '0.32em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.72)' }}>
-                Insurfox AI IaaS
-              </p>
-              <h1 style={{ margin: '0.75rem 0 0', fontSize: 'clamp(2.8rem, 5vw, 3.8rem)', fontWeight: 700, color: 'var(--insurfox-orange)', lineHeight: 1.1 }}>
-                {copy.title}
-              </h1>
-              <p style={{ marginTop: '1rem', maxWidth: '720px', color: 'rgba(255,255,255,0.82)', fontSize: '1.2rem' }}>
-                {copy.subtitle}
-              </p>
-            </div>
-            <div
-              style={{
-                background: '#ffffff',
-                borderRadius: '24px',
-                padding: '1.5rem',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                boxShadow: '0 30px 70px rgba(11, 28, 108, 0.25)',
-                border: '1px solid rgba(148, 163, 184, 0.2)',
-                aspectRatio: '1 / 1',
-                maxWidth: '420px',
-                width: '100%',
-                justifySelf: 'end',
-                cursor: 'pointer'
-              }}
-              onClick={() => setIsHeroPreviewOpen(true)}
-              role="button"
-              aria-label="Bildvorschau öffnen"
-            >
-              <img src={InsuranceHeroImage} alt="Insurance processes" style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }} />
-            </div>
+    <main className="home-marketing">
+      <section className="home-hero" style={{ backgroundImage: `url(${HomeHeroBackground})` }}>
+        <div className="home-hero-inner">
+          <div className="home-hero-content">
+            <span className="home-hero-kicker">{copy.heroKicker}</span>
+            <h1>{copy.heroTitle}</h1>
+            <p>{copy.heroBody}</p>
+            <p>{copy.heroContext}</p>
           </div>
-          <span style={{ position: 'absolute', left: 0, bottom: 0, width: 260, height: 4, background: '#d4380d' }} />
+          <button type="button" className="home-hero-card" onClick={() => setIsHeroPreviewOpen(true)} aria-label="Open insurance preview">
+            <img src={InsuranceHeroImage} alt="Insurance processes" />
+          </button>
         </div>
+        <span className="home-hero-accent" aria-hidden />
+      </section>
 
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-            gap: '1.5rem'
-          }}
-        >
-          {copy.sections.map((section) => (
-            <div
-              key={section.title}
-              style={{
-                background: '#ffffff',
-                borderRadius: '20px',
-                padding: '1.5rem',
-                border: '1px solid rgba(148, 163, 184, 0.16)',
-                boxShadow: '0 16px 32px rgba(15, 23, 42, 0.08)'
-              }}
-            >
-              <h3 style={{ margin: '0 0 0.5rem', color: 'var(--insurfox-orange)' }}>{section.title}</h3>
-              <p style={{ margin: 0, color: '#475569', lineHeight: 1.55 }}>{section.body}</p>
+      <section className="home-value">
+        <div className="home-section-header">
+          <h2>{copy.lifecycleTitle}</h2>
+          <p>{copy.lifecycleBody}</p>
+        </div>
+        <div className="home-value-grid">
+          {copy.lifecycleCards.map((card) => (
+            <div key={card.title} className="home-value-card">
+              <h3>{card.title}</h3>
+              <p>{card.body}</p>
             </div>
           ))}
         </div>
+      </section>
 
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'minmax(0, 1.1fr) minmax(0, 0.9fr)',
-            gap: '1.5rem',
-            alignItems: 'center'
-          }}
-        >
-          <div
-            style={{
-              background: '#ffffff',
-              borderRadius: '20px',
-              padding: '1.75rem',
-              border: '1px solid rgba(148, 163, 184, 0.16)',
-              boxShadow: '0 16px 32px rgba(15, 23, 42, 0.08)'
-            }}
-          >
-            <h2 style={{ margin: '0 0 0.75rem', color: 'var(--insurfox-orange)' }}>{aiBlock.title}</h2>
-            <p style={{ margin: 0, color: '#475569', lineHeight: 1.6 }}>{aiBlock.body}</p>
-          </div>
-          <button
-            type="button"
-            onClick={() => setIsAiPreviewOpen(true)}
-            style={{
-              background: '#ffffff',
-              borderRadius: '24px',
-              padding: '1.5rem',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              boxShadow: '0 30px 70px rgba(11, 28, 108, 0.25)',
-              border: '1px solid rgba(148, 163, 184, 0.2)',
-              cursor: 'pointer'
-            }}
-            aria-label="AI Insurance Bildvorschau öffnen"
-          >
-            <img
-              src={AiInsuranceProcessImage}
-              alt="AI Insurance Process"
-              style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
-            />
-          </button>
+      <section className="home-value">
+        <div className="home-section-header">
+          <h2>{copy.underwritingTitle}</h2>
+          <p>{copy.underwritingBody}</p>
         </div>
+        <div className="home-value-grid">
+          {copy.underwritingPacks.map((pack) => (
+            <div key={pack.title} className="home-value-card">
+              <h3>{pack.title}</h3>
+              <ul style={{ margin: 0, paddingLeft: '1.1rem', color: '#475569', lineHeight: 1.5 }}>
+                {pack.bullets.map((bullet) => (
+                  <li key={bullet}>{bullet}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </section>
 
-        <div style={{ display: 'grid', gap: '1.5rem' }}>
-          <div>
-            <h2 style={{ margin: '0 0 0.5rem', color: 'var(--insurfox-orange)' }}>
-              {lang === 'en' ? 'Insurance roles' : 'Versicherungsrollen'}
-            </h2>
-            <p style={{ margin: 0, color: '#475569' }}>
-              {lang === 'en'
-                ? 'Open key insurance views and partner workflows.'
-                : 'Öffnen Sie zentrale Versicherungsansichten und Partnerprozesse.'}
-            </p>
+      <section className="home-value">
+        <div className="home-section-header">
+          <h2>{copy.claimsTitle}</h2>
+          <p>{copy.claimsBody}</p>
+        </div>
+        <div className="home-value-grid">
+          {copy.claimsPacks.map((pack) => (
+            <div key={pack.title} className="home-value-card">
+              <h3>{pack.title}</h3>
+              <ul style={{ margin: 0, paddingLeft: '1.1rem', color: '#475569', lineHeight: 1.5 }}>
+                {pack.bullets.map((bullet) => (
+                  <li key={bullet}>{bullet}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+        <div className="home-section-header">
+          <p>{copy.claimsFooter}</p>
+        </div>
+      </section>
+
+      <section className="home-value">
+        <div className="home-section-header">
+          <h2>{copy.governanceTitle}</h2>
+          <p>{copy.governanceBody}</p>
+        </div>
+        <div className="home-value-grid">
+          {copy.governancePacks.map((pack) => (
+            <div key={pack.title} className="home-value-card">
+              <h3>{pack.title}</h3>
+              <ul style={{ margin: 0, paddingLeft: '1.1rem', color: '#475569', lineHeight: 1.5 }}>
+                {pack.bullets.map((bullet) => (
+                  <li key={bullet}>{bullet}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="home-value">
+        <div className="home-section-header">
+          <h2>{lang === 'en' ? 'What AI does—and what it does not do' : 'Was KI tut – und was nicht'}</h2>
+        </div>
+        <div className="home-value-grid">
+          <div className="home-value-card">
+            <h3>{copy.aiDoesTitle}</h3>
+            <ul style={{ margin: 0, paddingLeft: '1.1rem', color: '#475569', lineHeight: 1.5 }}>
+              {copy.aiDoesBullets.map((bullet) => (
+                <li key={bullet}>{bullet}</li>
+              ))}
+            </ul>
           </div>
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-              gap: '1.5rem'
-            }}
-          >
-            {roleCards.map((card) => (
-              <button
-                key={card.title}
-                type="button"
-                onClick={() => navigate(card.route)}
-                style={{
-                  textAlign: 'left',
-                  background: '#ffffff',
-                  borderRadius: '20px',
-                  padding: '1.5rem',
-                  border: '1px solid rgba(148, 163, 184, 0.16)',
-                  boxShadow: '0 16px 32px rgba(15, 23, 42, 0.08)',
-                  cursor: 'pointer'
-                }}
-              >
-                <h3 style={{ margin: '0 0 0.5rem', color: 'var(--insurfox-orange)' }}>{card.title}</h3>
-                <p style={{ margin: 0, color: '#475569', lineHeight: 1.55 }}>{card.body}</p>
-              </button>
+          <div className="home-value-card">
+            <h3>{copy.aiDoesNotTitle}</h3>
+            <ul style={{ margin: 0, paddingLeft: '1.1rem', color: '#475569', lineHeight: 1.5 }}>
+              {copy.aiDoesNotBullets.map((bullet) => (
+                <li key={bullet}>{bullet}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section className="home-product">
+        <div className="home-product-card">
+          <div>
+            <span className="home-product-kicker">{lang === 'en' ? 'Process' : 'Prozess'}</span>
+            <h2>{copy.visualTitle}</h2>
+            <ul style={{ margin: 0, paddingLeft: '1.1rem', color: '#475569', lineHeight: 1.6 }}>
+              {copy.visualBullets.map((bullet) => (
+                <li key={bullet}>{bullet}</li>
+              ))}
+            </ul>
+          </div>
+          <div className="home-product-media">
+            <button
+              type="button"
+              className="home-hero-card"
+              onClick={() => setIsAiPreviewOpen(true)}
+              aria-label="Open AI process preview"
+            >
+              <img src={AiInsuranceProcessImage} alt="AI insurance process" />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section className="home-value">
+        <div className="home-section-header">
+          <h2>{copy.rolesTitle}</h2>
+          <p>{copy.rolesBody}</p>
+        </div>
+        <div className="home-value-grid">
+          {copy.roleCards.map((card) => (
+            <button
+              key={card.title}
+              type="button"
+              className="home-value-card"
+              onClick={() => navigate(card.route)}
+              style={{ textAlign: 'left' }}
+            >
+              <h3>{card.title}</h3>
+              <p>{card.body}</p>
+            </button>
+          ))}
+        </div>
+      </section>
+
+      <section className="home-trust">
+        <div className="home-trust-card">
+          <h2>{copy.controlsTitle}</h2>
+          <p>{copy.controlsBody}</p>
+          <div className="home-trust-grid">
+            {copy.controlsItems.map((item) => (
+              <div key={item.title}>
+                <strong>{item.title}</strong>
+                <span>{item.body}</span>
+              </div>
             ))}
           </div>
         </div>
-      </div>
+      </section>
 
       {isHeroPreviewOpen && (
         <div className="hero-image-modal" role="dialog" aria-modal="true">
-          <button type="button" className="hero-image-modal__close" onClick={() => setIsHeroPreviewOpen(false)} aria-label="Schließen">
+          <button type="button" className="hero-image-modal__close" onClick={() => setIsHeroPreviewOpen(false)} aria-label="Close">
             ×
           </button>
           <div className="hero-image-modal__content">
@@ -256,14 +387,14 @@ export default function InsuranceLandingPage() {
 
       {isAiPreviewOpen && (
         <div className="hero-image-modal" role="dialog" aria-modal="true">
-          <button type="button" className="hero-image-modal__close" onClick={() => setIsAiPreviewOpen(false)} aria-label="Schließen">
+          <button type="button" className="hero-image-modal__close" onClick={() => setIsAiPreviewOpen(false)} aria-label="Close">
             ×
           </button>
           <div className="hero-image-modal__content">
-            <img src={AiInsuranceProcessImage} alt="AI Insurance Process" />
+            <img src={AiInsuranceProcessImage} alt="AI insurance process" />
           </div>
         </div>
       )}
-    </section>
+    </main>
   )
 }
