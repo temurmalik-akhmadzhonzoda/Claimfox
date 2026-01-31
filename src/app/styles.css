@@ -662,6 +662,14 @@ a {
     z-index: 2;
   }
 
+  .home-hero-content {
+    gap: 0.9rem;
+  }
+
+  .home-hero-content p {
+    margin: 0.35rem 0 0;
+  }
+
   .home-marketing-lang-switch {
     display: none;
   }
