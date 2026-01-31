@@ -71,7 +71,7 @@ export default function HomePage() {
       : 'KI unterstützt Strukturierung und Priorisierung. Keine autonomen Entscheidungen. Verantwortung bleibt bei Carriern.',
     servicesCards: [
       {
-        title: lang === 'en' ? 'Product Library' : 'Product Library',
+        title: lang === 'en' ? 'Product Catalog' : 'Product Catalog',
         body: lang === 'en'
           ? 'Standardized products and variants with controlled release.'
           : 'Standardisierte Produkte und Varianten mit kontrollierter Freigabe.'
@@ -83,7 +83,7 @@ export default function HomePage() {
           : 'Underwriting, Schaden und Governance als wiederholbare Services.'
       },
       {
-        title: lang === 'en' ? 'Non-Insurance Services' : 'Non-Insurance Services',
+        title: lang === 'en' ? 'Partner Services' : 'Partner Services',
         body: lang === 'en'
           ? 'Partner orchestration, documents and communication.'
           : 'Partner-Orchestrierung, Dokumente und Kommunikation.'
