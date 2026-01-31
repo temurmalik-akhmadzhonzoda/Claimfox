@@ -1,6 +1,7 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 import AppHeader from '@/components/layout/AppHeader'
+import MobileBottomBar from '@/components/layout/MobileBottomBar'
 
 export default function ProtectedLayout() {
   return (
@@ -9,6 +10,7 @@ export default function ProtectedLayout() {
       <main className="app-main">
         <Outlet />
       </main>
+      <MobileBottomBar />
     </div>
   )
 }

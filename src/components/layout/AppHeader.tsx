@@ -83,73 +83,58 @@ export default function AppHeader() {
   }, [])
 
   return (
-    <>
-      <header className="home-marketing-header" ref={headerRef}>
-        <div className="home-marketing-header-inner">
-          <button type="button" onClick={() => go('/home')} className="home-marketing-logo-button" aria-label="Insurfox Home">
-            <img src={logoDark} alt="Insurfox" className="home-marketing-logo" />
+    <header className="home-marketing-header" ref={headerRef}>
+      <div className="home-marketing-header-inner">
+        <button type="button" onClick={() => go('/home')} className="home-marketing-logo-button" aria-label="Insurfox Home">
+          <img src={logoDark} alt="Insurfox" className="home-marketing-logo" />
+        </button>
+        <nav className="home-marketing-nav">
+          {navItems.map((item) => (
+            <button key={item.route} type="button" onClick={() => go(item.route)}>
+              {item.label}
+            </button>
+          ))}
+          <div className="home-marketing-lang-switch" role="group" aria-label="Language switch">
+            <button type="button" className={lang === 'de' ? 'is-active' : ''} onClick={() => setLang('de')}>
+              DE
+            </button>
+            <button type="button" className={lang === 'en' ? 'is-active' : ''} onClick={() => setLang('en')}>
+              EN
+            </button>
+          </div>
+          <Button
+            onClick={handleAuthClick}
+            className="home-marketing-login"
+            style={{ padding: '0.5rem 1.1rem' }}
+            disableHover
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="8" r="4" />
+              <path d="M4 20c1.8-3.5 5-6 8-6s6.2 2.5 8 6" />
+            </svg>
+            <span className="home-marketing-login-text">{authLabel}</span>
+          </Button>
+          <button
+            type="button"
+            className="home-marketing-menu home-marketing-menu-trigger"
+            aria-label="Menü öffnen"
+            onClick={() => setIsMobileNavOpen((prev) => !prev)}
+          >
+            <span />
+            <span />
+            <span />
           </button>
-          <nav className="home-marketing-nav">
+        </nav>
+        {isMobileNavOpen && (
+          <div className="home-marketing-mobile-panel" role="dialog" aria-label="Navigation">
             {navItems.map((item) => (
-              <button key={item.route} type="button" onClick={() => go(item.route)}>
+              <button key={item.route} type="button" onClick={() => { go(item.route); setIsMobileNavOpen(false) }}>
                 {item.label}
               </button>
             ))}
-            <div className="home-marketing-lang-switch" role="group" aria-label="Language switch">
-              <button type="button" className={lang === 'de' ? 'is-active' : ''} onClick={() => setLang('de')}>
-                DE
-              </button>
-              <button type="button" className={lang === 'en' ? 'is-active' : ''} onClick={() => setLang('en')}>
-                EN
-              </button>
-            </div>
-            <Button
-              onClick={handleAuthClick}
-              className="home-marketing-login"
-              style={{ padding: '0.5rem 1.1rem' }}
-              disableHover
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="8" r="4" />
-                <path d="M4 20c1.8-3.5 5-6 8-6s6.2 2.5 8 6" />
-              </svg>
-              <span className="home-marketing-login-text">{authLabel}</span>
-            </Button>
-            <button
-              type="button"
-              className="home-marketing-menu home-marketing-menu-trigger"
-              aria-label="Menü öffnen"
-              onClick={() => setIsMobileNavOpen((prev) => !prev)}
-            >
-              <span />
-              <span />
-              <span />
-            </button>
-          </nav>
-          {isMobileNavOpen && (
-            <div className="home-marketing-mobile-panel" role="dialog" aria-label="Navigation">
-              {navItems.map((item) => (
-                <button key={item.route} type="button" onClick={() => { go(item.route); setIsMobileNavOpen(false) }}>
-                  {item.label}
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
-      </header>
-      <nav className="home-mobile-bottom-bar" aria-label="Mobile shortcuts">
-        <button type="button" onClick={handleAuthClick}>
-          {authLabel}
-        </button>
-        <div className="home-marketing-lang-switch" role="group" aria-label="Language switch mobile">
-          <button type="button" className={lang === 'de' ? 'is-active' : ''} onClick={() => setLang('de')}>
-            DE
-          </button>
-          <button type="button" className={lang === 'en' ? 'is-active' : ''} onClick={() => setLang('en')}>
-            EN
-          </button>
-        </div>
-      </nav>
-    </>
+          </div>
+        )}
+      </div>
+    </header>
   )
 }

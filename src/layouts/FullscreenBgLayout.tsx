@@ -1,6 +1,7 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 import AppHeader from '@/components/layout/AppHeader'
+import MobileBottomBar from '@/components/layout/MobileBottomBar'
 
 type FullscreenBgLayoutProps = {
   showHeader?: boolean
@@ -23,6 +24,7 @@ export default function FullscreenBgLayout({ showHeader = true }: FullscreenBgLa
         >
           <Outlet />
         </div>
+        <MobileBottomBar />
       </div>
     </div>
   )
