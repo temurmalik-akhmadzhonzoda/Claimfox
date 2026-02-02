@@ -161,7 +161,9 @@ export default function LogisticsDashboardPage() {
           gap: '1.5rem'
         }}
       >
-        <Header title={copy.title} subtitle={copy.subtitle} subtitleColor={GLASS_SUBTLE} titleColor="#D4380D" />
+        <div style={{ marginTop: '1.5rem' }}>
+          <Header title={copy.title} subtitle={copy.subtitle} subtitleColor={GLASS_SUBTLE} titleColor="#D4380D" />
+        </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem' }}>
           {kpis.map((item) => (
@@ -291,14 +293,14 @@ export default function LogisticsDashboardPage() {
               `}
             </style>
             <div className="logistics-table">
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '0.75rem', fontSize: '0.85rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.8fr 0.9fr 0.8fr 0.9fr 0.6fr 1fr 1fr', gap: '0.75rem', fontSize: '0.85rem' }}>
                 {copy.columns.map((col) => (
                   <strong key={col} style={{ color: GLASS_SUBTLE }}>{col}</strong>
                 ))}
                 <span />
               </div>
               {filteredRecords.map((record) => (
-                <div key={record.id} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '0.75rem', alignItems: 'center' }}>
+                <div key={record.id} style={{ display: 'grid', gridTemplateColumns: '1fr 1.8fr 0.9fr 0.8fr 0.9fr 0.6fr 1fr 1fr', gap: '0.75rem', alignItems: 'center' }}>
                   <strong>{record.reference}</strong>
                   <span style={{ color: GLASS_SUBTLE }}>{record.lane}</span>
                   <span style={{ color: GLASS_SUBTLE }}>{record.status}</span>
