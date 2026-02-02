@@ -50,6 +50,14 @@ export default function BrokerAdminPage() {
     {
       label: lang === 'en' ? 'Active mandates' : 'Aktive Mandate',
       value: '12'
+    },
+    {
+      label: lang === 'en' ? 'Premium in force' : 'Praemienbestand',
+      value: 'EUR 6.3M'
+    },
+    {
+      label: lang === 'en' ? 'At risk' : 'Erhoeht',
+      value: '7'
     }
   ]
 
@@ -165,7 +173,15 @@ export default function BrokerAdminPage() {
       <div className="uw-container">
         <Header title={copy.title} subtitle={copy.subtitle} subtitleColor="#65748b" />
 
-        <div className="uw-grid uw-kpi">
+        <style>
+          {`
+            .broker-admin-kpis { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 0.9rem; }
+            @media (max-width: 900px) {
+              .broker-admin-kpis { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+            }
+          `}
+        </style>
+        <div className="uw-grid uw-kpi broker-admin-kpis">
           {kpis.map((item) => (
             <Card key={item.label} title={item.label} variant="glass" className="uw-card">
               <div className="uw-card-body">
@@ -186,9 +202,11 @@ export default function BrokerAdminPage() {
                   .broker-admin-filters.is-open { display: grid; }
                 }
                 .broker-admin-chip-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-                .broker-admin-chip { border-radius: 999px; }
+                .broker-admin-chip { border-radius: 999px; font-size: 0.72rem; padding: 0.25rem 0.6rem; }
+                .broker-admin-quick-row { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: 0.4rem; }
+                .broker-admin-chip-row { gap: 0.7rem; margin-top: 0.6rem; }
                 @media (max-width: 900px) {
-                  .broker-admin-chip-row { gap: 0.4rem; }
+                  .broker-admin-chip-row { gap: 0.5rem; }
                 }
               `}
             </style>
@@ -241,7 +259,7 @@ export default function BrokerAdminPage() {
                 </select>
               </div>
             </div>
-            <div className={`broker-admin-filters ${filtersOpen ? 'is-open' : ''}`} style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+            <div className={`broker-admin-filters broker-admin-quick-row ${filtersOpen ? 'is-open' : ''}`}>
               <span className="uw-muted" style={{ marginRight: '0.5rem' }}>{copy.quickLabel}</span>
               {copy.quickOptions.map((option) => (
                 <button
@@ -285,12 +303,12 @@ export default function BrokerAdminPage() {
             <style>
               {`
                 .broker-admin-table { display: grid; gap: 0.75rem; }
-                .broker-admin-cards { display: none; gap: 0.75rem; }
+                .broker-admin-cards { display: none; gap: 1.1rem; }
                 @media (max-width: 900px) {
                   .broker-admin-table { display: none; }
                   .broker-admin-cards { display: grid; }
-                  .broker-admin-cards .uw-card { padding: 0.9rem; }
-                  .broker-admin-cards .uw-card-body { gap: 0.45rem; }
+                  .broker-admin-cards .uw-card { padding: 1.1rem; }
+                  .broker-admin-cards .uw-card-body { gap: 0.6rem; }
                   .broker-admin-cards .badge { font-size: 0.68rem; }
                 }
               `}
