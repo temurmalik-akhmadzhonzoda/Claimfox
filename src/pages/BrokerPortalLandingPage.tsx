@@ -189,27 +189,6 @@ export default function BrokerPortalLandingPage() {
       >
       <div
         style={{
-          position: 'absolute',
-          top: '16px',
-          right: '3vw',
-          zIndex: 2
-        }}
-      >
-        <Button
-          onClick={() => navigate('/broker-crm')}
-          style={{
-            background: '#D4380D',
-            color: '#ffffff',
-            border: '1px solid #D4380D',
-            paddingInline: '1.75rem',
-            fontWeight: 700
-          }}
-        >
-          {t('brokerLanding.login')}
-        </Button>
-      </div>
-      <div
-        style={{
           position: 'relative',
           zIndex: 1,
           width: '100%',
@@ -275,6 +254,32 @@ export default function BrokerPortalLandingPage() {
                 >
                   {t('brokerLanding.heroSubline')}
                 </p>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', marginTop: '1.5rem' }}>
+                  <Button
+                    onClick={() => navigate('/broker-crm')}
+                    style={{
+                      background: '#D4380D',
+                      color: '#ffffff',
+                      border: '1px solid #D4380D',
+                      paddingInline: '1.75rem',
+                      fontWeight: 700
+                    }}
+                  >
+                    {lang === 'en' ? 'CRM dashboard' : 'CRM-Dashboard'}
+                  </Button>
+                  <Button
+                    onClick={() => navigate('/broker-admin')}
+                    style={{
+                      background: '#ffffff',
+                      color: '#D4380D',
+                      border: '1px solid #D4380D',
+                      paddingInline: '1.75rem',
+                      fontWeight: 700
+                    }}
+                  >
+                    {lang === 'en' ? 'Admin dashboard' : 'Admin-Dashboard'}
+                  </Button>
+                </div>
               </div>
               <div
                 style={{
