@@ -759,10 +759,22 @@ export default function BrokerAdminCustomerPage() {
     { label: mapLabel('Renewal', 'Renewal', lang), value: customer.renewal }
   ]
 
+  const GLASS_TEXT = '#0e0d1c'
+  const GLASS_SUBTLE = '#64748b'
+
   return (
-    <section className="uw-page">
-      <div className="uw-container">
-        <Header title={copy.title} subtitle={copy.subtitle} subtitleColor="#65748b" />
+    <section className="page" style={{ gap: '1.5rem' }}>
+      <div
+        style={{
+          width: '100%',
+          maxWidth: '1200px',
+          margin: '0 auto',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '1.5rem'
+        }}
+      >
+        <Header title={copy.title} subtitle={copy.subtitle} subtitleColor={GLASS_SUBTLE} titleColor={GLASS_TEXT} />
 
         <div style={{ marginBottom: '1.5rem' }}>
           <button
@@ -776,70 +788,83 @@ export default function BrokerAdminCustomerPage() {
 
         <style>
           {`
-            .broker-admin-detail-kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.9rem; margin-bottom: 1.6rem; }
-            @media (max-width: 900px) {
-              .broker-admin-detail-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-            }
+            .broker-admin-detail-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; }
             .broker-admin-detail-section { margin-bottom: 1.6rem; }
           `}
         </style>
-        <div className="uw-grid uw-kpi broker-admin-detail-kpis">
+        <div className="broker-admin-detail-kpis">
           {kpis.map((item) => (
-            <Card key={item.label} title={item.label} variant="glass" className="uw-card">
-              <div className="uw-card-body">
-                <strong style={{ fontSize: '1.4rem' }}>{translateValue(item.value, lang)}</strong>
+            <Card key={item.label} variant="glass">
+              <p style={{ margin: 0, color: GLASS_TEXT, fontSize: '0.95rem' }}>{item.label}</p>
+              <div style={{ marginTop: '0.5rem', fontSize: '2rem', fontWeight: 700, color: GLASS_TEXT }}>
+                {translateValue(item.value, lang)}
               </div>
             </Card>
           ))}
         </div>
 
-        <div className="uw-grid uw-split broker-admin-detail-section">
-          <Card title={copy.overviewTitle} variant="glass" className="uw-card">
-            <div className="uw-card-body" style={{ gap: '0.75rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1rem' }} className="broker-admin-detail-section">
+          <Card title={copy.overviewTitle} variant="glass">
+            <div style={{ display: 'grid', gap: '0.6rem' }}>
               {copy.overviewItems.map((item) => (
-                <div key={item.label} style={{ display: 'flex', justifyContent: 'space-between', gap: '0.75rem' }}>
-                  <span>{item.label}</span>
-                  <strong>{translateValue(item.value, lang)}</strong>
+                <div
+                  key={item.label}
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'minmax(140px, 220px) minmax(0, 1fr)',
+                    gap: '1.25rem',
+                    alignItems: 'center'
+                  }}
+                >
+                  <span style={{ color: GLASS_SUBTLE }}>{item.label}</span>
+                  <strong style={{ textAlign: 'left', color: GLASS_TEXT }}>{translateValue(item.value, lang)}</strong>
                 </div>
               ))}
             </div>
           </Card>
-          <Card title={copy.contactTitle} variant="glass" className="uw-card">
-            <div className="uw-card-body" style={{ gap: '0.75rem' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', gap: '0.75rem' }}>
-                <span>{mapLabel('Primary contact', 'Hauptansprechpartner', lang)}</span>
-                <strong>{customer.primaryContact}</strong>
+          <Card title={copy.contactTitle} variant="glass">
+            <div style={{ display: 'grid', gap: '0.6rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'minmax(140px, 220px) minmax(0, 1fr)', gap: '1.25rem', alignItems: 'center' }}>
+                <span style={{ color: GLASS_SUBTLE }}>{mapLabel('Primary contact', 'Hauptansprechpartner', lang)}</span>
+                <strong style={{ textAlign: 'left', color: GLASS_TEXT }}>{customer.primaryContact}</strong>
               </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', gap: '0.75rem' }}>
-                <span>Email</span>
-                <strong>{customer.email}</strong>
+              <div style={{ display: 'grid', gridTemplateColumns: 'minmax(140px, 220px) minmax(0, 1fr)', gap: '1.25rem', alignItems: 'center' }}>
+                <span style={{ color: GLASS_SUBTLE }}>Email</span>
+                <strong style={{ textAlign: 'left', color: GLASS_TEXT }}>{customer.email}</strong>
               </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', gap: '0.75rem' }}>
-                <span>{mapLabel('Phone', 'Telefon', lang)}</span>
-                <strong>{customer.phone}</strong>
+              <div style={{ display: 'grid', gridTemplateColumns: 'minmax(140px, 220px) minmax(0, 1fr)', gap: '1.25rem', alignItems: 'center' }}>
+                <span style={{ color: GLASS_SUBTLE }}>{mapLabel('Phone', 'Telefon', lang)}</span>
+                <strong style={{ textAlign: 'left', color: GLASS_TEXT }}>{customer.phone}</strong>
               </div>
             </div>
           </Card>
         </div>
 
-        <div className="uw-grid uw-split broker-admin-detail-section">
-          <Card title={copy.policiesTitle} variant="glass" className="uw-card">
-            <div className="uw-card-body" style={{ gap: '0.75rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1rem' }} className="broker-admin-detail-section">
+          <Card title={copy.policiesTitle} variant="glass">
+            <div style={{ display: 'grid', gap: '0.75rem' }}>
               {customer.policies.map((policy) => (
                 <div key={policy.policy} style={{ display: 'grid', gap: '0.35rem' }}>
                   <button
                     type="button"
                     className="btn btn-outline-secondary btn-sm"
                     onClick={() => setExpandedPolicy(expandedPolicy === policy.policy ? null : policy.policy)}
-                    style={{ textAlign: 'left', display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: '0.75rem' }}
+                    style={{
+                      textAlign: 'left',
+                      display: 'grid',
+                      gridTemplateColumns: '1.2fr 1fr 1fr 0.8fr',
+                      gap: '0.75rem',
+                      width: '100%',
+                      padding: '0.6rem 0.75rem'
+                    }}
                   >
-                    <strong>{policy.line}</strong>
-                    <span className="uw-muted">{policy.policy}</span>
-                    <span className="uw-muted">{policy.limit}</span>
-                    <span className="uw-muted">{translateValue(policy.status, lang)}</span>
+                    <strong style={{ color: GLASS_TEXT }}>{policy.line}</strong>
+                    <span style={{ color: GLASS_SUBTLE }}>{policy.policy}</span>
+                    <span style={{ color: GLASS_SUBTLE }}>{policy.limit}</span>
+                    <span style={{ color: GLASS_SUBTLE }}>{translateValue(policy.status, lang)}</span>
                   </button>
                   {expandedPolicy === policy.policy && (
-                    <div className="uw-muted" style={{ paddingLeft: '0.5rem' }}>
+                    <div style={{ paddingLeft: '0.5rem', color: GLASS_SUBTLE }}>
                       {policyDetailText(policy.line, lang)}
                     </div>
                   )}
@@ -847,23 +872,30 @@ export default function BrokerAdminCustomerPage() {
               ))}
             </div>
           </Card>
-          <Card title={copy.claimsTitle} variant="glass" className="uw-card">
-            <div className="uw-card-body" style={{ gap: '0.75rem' }}>
+          <Card title={copy.claimsTitle} variant="glass">
+            <div style={{ display: 'grid', gap: '0.75rem' }}>
               {customer.claims.map((claim) => (
                 <div key={claim.claim} style={{ display: 'grid', gap: '0.35rem' }}>
                   <button
                     type="button"
                     className="btn btn-outline-secondary btn-sm"
                     onClick={() => setExpandedClaim(expandedClaim === claim.claim ? null : claim.claim)}
-                    style={{ textAlign: 'left', display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: '0.75rem' }}
+                    style={{
+                      textAlign: 'left',
+                      display: 'grid',
+                      gridTemplateColumns: '1.1fr 1fr 1fr 0.9fr',
+                      gap: '0.75rem',
+                      width: '100%',
+                      padding: '0.6rem 0.75rem'
+                    }}
                   >
-                    <strong>{claim.claim}</strong>
-                    <span className="uw-muted">{claim.type}</span>
-                    <span className="uw-muted">{translateValue(claim.status, lang)}</span>
-                    <span className="uw-muted">{claim.reserve}</span>
+                    <strong style={{ color: GLASS_TEXT }}>{claim.claim}</strong>
+                    <span style={{ color: GLASS_SUBTLE }}>{claim.type}</span>
+                    <span style={{ color: GLASS_SUBTLE }}>{translateValue(claim.status, lang)}</span>
+                    <span style={{ color: GLASS_SUBTLE }}>{claim.reserve}</span>
                   </button>
                   {expandedClaim === claim.claim && (
-                    <div className="uw-muted" style={{ paddingLeft: '0.5rem' }}>
+                    <div style={{ paddingLeft: '0.5rem', color: GLASS_SUBTLE }}>
                       {claimDetailText(claim.type, claim.status, lang)}
                     </div>
                   )}
@@ -873,23 +905,23 @@ export default function BrokerAdminCustomerPage() {
           </Card>
         </div>
 
-        <div className="uw-grid uw-split broker-admin-detail-section">
-          <Card title={copy.billingTitle} variant="glass" className="uw-card">
-            <div className="uw-card-body" style={{ gap: '0.75rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1rem' }} className="broker-admin-detail-section">
+          <Card title={copy.billingTitle} variant="glass">
+            <div style={{ display: 'grid', gap: '0.6rem' }}>
               {customer.billing.map((item) => (
-                <div key={item.item} style={{ display: 'flex', justifyContent: 'space-between', gap: '0.75rem' }}>
-                  <span>{translateLabel(item.item, lang)}</span>
-                  <strong>{item.value}</strong>
+                <div key={item.item} style={{ display: 'grid', gridTemplateColumns: 'minmax(140px, 220px) minmax(0, 1fr)', gap: '1.25rem', alignItems: 'center' }}>
+                  <span style={{ color: GLASS_SUBTLE }}>{translateLabel(item.item, lang)}</span>
+                  <strong style={{ textAlign: 'left', color: GLASS_TEXT }}>{item.value}</strong>
                 </div>
               ))}
             </div>
           </Card>
-          <Card title={copy.complianceTitle} variant="glass" className="uw-card">
-            <div className="uw-card-body" style={{ gap: '0.75rem' }}>
+          <Card title={copy.complianceTitle} variant="glass">
+            <div style={{ display: 'grid', gap: '0.6rem' }}>
               {customer.compliance.map((item) => (
-                <div key={item.item} style={{ display: 'flex', justifyContent: 'space-between', gap: '0.75rem' }}>
-                  <span>{translateLabel(item.item, lang)}</span>
-                  <strong>{translateValue(item.value, lang)}</strong>
+                <div key={item.item} style={{ display: 'grid', gridTemplateColumns: 'minmax(140px, 220px) minmax(0, 1fr)', gap: '1.25rem', alignItems: 'center' }}>
+                  <span style={{ color: GLASS_SUBTLE }}>{translateLabel(item.item, lang)}</span>
+                  <strong style={{ textAlign: 'left', color: GLASS_TEXT }}>{translateValue(item.value, lang)}</strong>
                 </div>
               ))}
             </div>

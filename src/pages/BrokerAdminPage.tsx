@@ -168,31 +168,40 @@ export default function BrokerAdminPage() {
         chipLabel: 'Filter-Chips'
       }
 
-  return (
-    <section className="uw-page">
-      <div className="uw-container">
-        <Header title={copy.title} subtitle={copy.subtitle} subtitleColor="#65748b" />
+  const GLASS_TEXT = '#0e0d1c'
+  const GLASS_SUBTLE = '#64748b'
 
-        <style>
-          {`
-            .broker-admin-kpis { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 0.9rem; }
-            @media (max-width: 900px) {
-              .broker-admin-kpis { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-            }
-          `}
-        </style>
-        <div className="uw-grid uw-kpi broker-admin-kpis" style={{ marginBottom: '1.6rem' }}>
+  return (
+    <section className="page" style={{ gap: '1.5rem' }}>
+      <div
+        style={{
+          width: '100%',
+          maxWidth: '1200px',
+          margin: '0 auto',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '1.5rem'
+        }}
+      >
+        <Header title={copy.title} subtitle={copy.subtitle} subtitleColor={GLASS_SUBTLE} titleColor={GLASS_TEXT} />
+
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+            gap: '1rem'
+          }}
+        >
           {kpis.map((item) => (
-            <Card key={item.label} title={item.label} variant="glass" className="uw-card">
-              <div className="uw-card-body">
-                <strong style={{ fontSize: '1.4rem' }}>{item.value}</strong>
-              </div>
+            <Card key={item.label} variant="glass">
+              <p style={{ margin: 0, color: GLASS_TEXT, fontSize: '0.95rem' }}>{item.label}</p>
+              <div style={{ marginTop: '0.5rem', fontSize: '2rem', fontWeight: 700, color: GLASS_TEXT }}>{item.value}</div>
             </Card>
           ))}
         </div>
 
-        <Card title={copy.filtersTitle} variant="glass" className="uw-card" style={{ marginBottom: '1.6rem' }}>
-          <div className="uw-card-body" style={{ gap: '0.75rem' }}>
+        <Card title={copy.filtersTitle} variant="glass">
+          <div style={{ display: 'grid', gap: '0.9rem' }}>
             <style>
               {`
                 .broker-admin-filters-toggle { display: none; }
@@ -260,7 +269,7 @@ export default function BrokerAdminPage() {
               </div>
             </div>
             <div className={`broker-admin-filters broker-admin-quick-row ${filtersOpen ? 'is-open' : ''}`}>
-              <span className="uw-muted" style={{ marginRight: '0.5rem' }}>{copy.quickLabel}</span>
+              <span style={{ marginRight: '0.5rem', color: GLASS_SUBTLE, fontSize: '0.85rem' }}>{copy.quickLabel}</span>
               {copy.quickOptions.map((option) => (
                 <button
                   key={option.value}
@@ -273,7 +282,7 @@ export default function BrokerAdminPage() {
               ))}
             </div>
             <div className="broker-admin-chip-row">
-              <span className="uw-muted" style={{ marginRight: '0.5rem' }}>{copy.chipLabel}</span>
+              <span style={{ marginRight: '0.5rem', color: GLASS_SUBTLE, fontSize: '0.85rem' }}>{copy.chipLabel}</span>
               {copy.statusOptions.map((option) => (
                 <button
                   key={option.value}
@@ -298,8 +307,8 @@ export default function BrokerAdminPage() {
           </div>
         </Card>
 
-        <Card title={lang === 'en' ? 'Customer records' : 'Kundendaten'} variant="glass" className="uw-card">
-          <div className="uw-card-body" style={{ gap: '0.75rem' }}>
+        <Card title={lang === 'en' ? 'Customer records' : 'Kundendaten'} variant="glass">
+          <div style={{ display: 'grid', gap: '0.75rem' }}>
             <style>
               {`
                 .broker-admin-table { display: grid; gap: 0.75rem; }
@@ -316,7 +325,7 @@ export default function BrokerAdminPage() {
             <div className="broker-admin-table">
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '0.75rem', fontSize: '0.85rem' }}>
                 {copy.columns.map((col) => (
-                  <strong key={col} className="uw-muted">{col}</strong>
+                  <strong key={col} style={{ color: GLASS_SUBTLE }}>{col}</strong>
                 ))}
                 <span />
               </div>
@@ -324,11 +333,11 @@ export default function BrokerAdminPage() {
               {filteredCustomers.map((customer) => (
                 <div key={customer.id} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '0.75rem', alignItems: 'center' }}>
                   <strong>{customer.name}</strong>
-                  <span className="uw-muted">{customer.region}</span>
-                  <span className="uw-muted">{translateStatus(customer.status, lang)}</span>
-                  <span className="uw-muted">{customer.premium}</span>
-                  <span className="uw-muted">{customer.renewal}</span>
-                  <span className="uw-muted">{customer.openClaims}</span>
+                  <span style={{ color: GLASS_SUBTLE }}>{customer.region}</span>
+                  <span style={{ color: GLASS_SUBTLE }}>{translateStatus(customer.status, lang)}</span>
+                  <span style={{ color: GLASS_SUBTLE }}>{customer.premium}</span>
+                  <span style={{ color: GLASS_SUBTLE }}>{customer.renewal}</span>
+                  <span style={{ color: GLASS_SUBTLE }}>{customer.openClaims}</span>
                   <button
                     type="button"
                     className="btn btn-outline-primary btn-sm"
@@ -344,7 +353,7 @@ export default function BrokerAdminPage() {
               {filteredCustomers.map((customer) => (
                 <Card key={customer.id} title={customer.name} variant="glass" className="uw-card">
                   <div className="uw-card-body" style={{ gap: '0.5rem' }}>
-                    <div className="uw-muted">{customer.region}</div>
+                    <div style={{ color: GLASS_SUBTLE }}>{customer.region}</div>
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
                       <span className="badge bg-blue-lt">{translateStatus(customer.status, lang)}</span>
                       <span className="badge bg-azure-lt">{customer.premium}</span>
