@@ -1,105 +1,173 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import Card from '@/components/ui/Card'
 import Header from '@/components/ui/Header'
 import { useI18n } from '@/i18n/I18nContext'
+import { brokerAdminCustomers } from '@/pages/BrokerAdminCustomerPage'
+
+function translateStatus(value: string, lang: string) {
+  const map: Record<string, { en: string; de: string }> = {
+    Active: { en: 'Active', de: 'Aktiv' },
+    Open: { en: 'Open', de: 'Offen' },
+    Closed: { en: 'Closed', de: 'Geschlossen' }
+  }
+  const entry = map[value]
+  if (!entry) return value
+  return lang === 'en' ? entry.en : entry.de
+}
 
 export default function BrokerAdminPage() {
   const { lang } = useI18n()
+  const navigate = useNavigate()
+  const [search, setSearch] = React.useState('')
+  const [sortKey, setSortKey] = React.useState('renewal')
+  const [statusFilter, setStatusFilter] = React.useState('all')
+  const [quickFilter, setQuickFilter] = React.useState('all')
+  const [filtersOpen, setFiltersOpen] = React.useState(false)
+
+  const now = new Date('2026-02-02T00:00:00Z')
+  const renewalsNext60 = brokerAdminCustomers.filter((customer) => {
+    const date = new Date(`${customer.renewal}T00:00:00Z`)
+    const diffDays = (date.getTime() - now.getTime()) / (1000 * 60 * 60 * 24)
+    return diffDays >= 0 && diffDays <= 60
+  }).length
+
+  const openClaimsTotal = brokerAdminCustomers.reduce((sum, customer) => sum + customer.openClaims, 0)
+
+  const kpis = [
+    {
+      label: lang === 'en' ? 'Accounts' : 'Accounts',
+      value: String(brokerAdminCustomers.length)
+    },
+    {
+      label: lang === 'en' ? 'Open claims' : 'Offene Schaeden',
+      value: String(openClaimsTotal)
+    },
+    {
+      label: lang === 'en' ? 'Renewals (60d)' : 'Renewals (60T)',
+      value: String(renewalsNext60)
+    },
+    {
+      label: lang === 'en' ? 'Active mandates' : 'Aktive Mandate',
+      value: '12'
+    }
+  ]
+
+  function parsePremium(value: string) {
+    const normalized = value.replace(/[^0-9.kKmM]/g, '')
+    const number = parseFloat(normalized.replace(/[kKmM]$/, '')) || 0
+    if (normalized.toLowerCase().endsWith('m')) return number * 1_000_000
+    if (normalized.toLowerCase().endsWith('k')) return number * 1_000
+    return number
+  }
+
+  const filteredCustomers = brokerAdminCustomers
+    .filter((customer) => {
+      const query = search.trim().toLowerCase()
+      if (!query) return true
+      return (
+        customer.name.toLowerCase().includes(query) ||
+        customer.policies.some((policy) => policy.policy.toLowerCase().includes(query))
+      )
+    })
+    .filter((customer) => {
+      if (statusFilter === 'active') return customer.status === 'Active'
+      if (statusFilter === 'risk') {
+        const renewalDate = new Date(`${customer.renewal}T00:00:00Z`)
+        const diffDays = (renewalDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24)
+        return customer.openClaims >= 3 || (diffDays >= 0 && diffDays <= 60)
+      }
+      return true
+    })
+    .filter((customer) => {
+      if (quickFilter === 'renewal') {
+        const renewalDate = new Date(`${customer.renewal}T00:00:00Z`)
+        const diffDays = (renewalDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24)
+        return diffDays >= 0 && diffDays <= 60
+      }
+      if (quickFilter === 'openClaims') return customer.openClaims > 0
+      if (quickFilter === 'noOpenClaims') return customer.openClaims === 0
+      return true
+    })
+    .sort((a, b) => {
+      if (sortKey === 'openClaims') return b.openClaims - a.openClaims
+      if (sortKey === 'premium') return parsePremium(b.premium) - parsePremium(a.premium)
+      if (sortKey === 'renewal') {
+        const aDate = new Date(`${a.renewal}T00:00:00Z`).getTime()
+        const bDate = new Date(`${b.renewal}T00:00:00Z`).getTime()
+        return aDate - bDate
+      }
+      return 0
+    })
 
   const copy = lang === 'en'
     ? {
         title: 'Broker Administration',
-        subtitle: 'Admin view over portfolio, team access, and compliance.',
-        kpis: [
-          { title: 'Active accounts', value: '142' },
-          { title: 'Open tasks', value: '18' },
-          { title: 'Compliance alerts', value: '4' },
-          { title: 'Premium in force', value: '€ 12.4M' },
-          { title: 'Renewals due', value: '9' },
-          { title: 'Pending approvals', value: '6' }
+        subtitle: 'Customer list with portfolio overview and access to detail records.',
+        columns: ['Customer', 'Region', 'Status', 'Premium', 'Renewal', 'Open claims'],
+        action: 'Open record',
+        filtersTitle: 'Filters',
+        filtersToggle: 'Show filters',
+        filtersToggleClose: 'Hide filters',
+        searchPlaceholder: 'Search customer or policy',
+        sortLabel: 'Sort by',
+        sortOptions: [
+          { label: 'Renewal date', value: 'renewal' },
+          { label: 'Open claims', value: 'openClaims' },
+          { label: 'Premium', value: 'premium' }
         ],
-        taskQueueTitle: 'Task queue',
-        complianceTitle: 'Compliance snapshot',
-        accessTitle: 'Team access',
-        portfolioTitle: 'Portfolio overview',
-        accessRows: [
-          { name: 'Anna Klein', role: 'Admin', lastLogin: 'Today, 09:12' },
-          { name: 'Lukas Weber', role: 'Operations', lastLogin: 'Yesterday, 18:45' },
-          { name: 'Maja Roth', role: 'Compliance', lastLogin: 'Yesterday, 10:03' },
-          { name: 'Jonas Blum', role: 'Broker Manager', lastLogin: '2 days ago' }
+        statusLabel: 'Status',
+        statusOptions: [
+          { label: 'All', value: 'all' },
+          { label: 'Active', value: 'active' },
+          { label: 'At risk', value: 'risk' }
         ],
-        taskQueue: [
-          { title: 'Approve renewal: Atlas Logistics', status: 'Due today' },
-          { title: 'Review claim escalation: CLM-20841', status: '2h left' },
-          { title: 'Update broker license docs', status: 'Tomorrow' },
-          { title: 'Portfolio exception: FleetSecure', status: '48h' }
+        quickLabel: 'Quick filters',
+        quickOptions: [
+          { label: 'Renewal <= 60 days', value: 'renewal' },
+          { label: 'Open claims', value: 'openClaims' },
+          { label: 'No open claims', value: 'noOpenClaims' }
         ],
-        complianceItems: [
-          { label: 'Delegated authority docs', value: 'Up to date' },
-          { label: 'AML / KYC checks', value: '92%' },
-          { label: 'Audit readiness', value: 'Green' },
-          { label: 'Escalations pending', value: '3' }
-        ],
-        portfolioItems: [
-          { label: 'Top lines', value: 'Fleet, Cargo, Liability, Cyber' },
-          { label: 'Loss ratio', value: '62% (target 65%)' },
-          { label: 'Retention risk', value: '8 accounts flagged' },
-          { label: 'Next renewal window', value: '14 days' }
-        ]
+        chipLabel: 'Filter chips'
       }
     : {
         title: 'Broker Administration',
-        subtitle: 'Administrative Übersicht über Portfolio, Teamzugriffe und Compliance.',
-        kpis: [
-          { title: 'Aktive Accounts', value: '142' },
-          { title: 'Offene Tasks', value: '18' },
-          { title: 'Compliance Alerts', value: '4' },
-          { title: 'Prämienbestand', value: '€ 12,4 Mio' },
-          { title: 'Fällige Renewals', value: '9' },
-          { title: 'Offene Freigaben', value: '6' }
+        subtitle: 'Kundenliste mit Portfolio-Uebersicht und Zugriff auf Detaildaten.',
+        columns: ['Kunde', 'Region', 'Status', 'Praemien', 'Renewal', 'Offene Schaeden'],
+        action: 'Datensatz oeffnen',
+        filtersTitle: 'Filter',
+        filtersToggle: 'Filter anzeigen',
+        filtersToggleClose: 'Filter ausblenden',
+        searchPlaceholder: 'Kunde oder Police suchen',
+        sortLabel: 'Sortieren nach',
+        sortOptions: [
+          { label: 'Renewal Datum', value: 'renewal' },
+          { label: 'Offene Schaeden', value: 'openClaims' },
+          { label: 'Praemien', value: 'premium' }
         ],
-        taskQueueTitle: 'Task-Queue',
-        complianceTitle: 'Compliance Snapshot',
-        accessTitle: 'Teamzugriffe',
-        portfolioTitle: 'Portfolio-Übersicht',
-        accessRows: [
-          { name: 'Anna Klein', role: 'Admin', lastLogin: 'Heute, 09:12' },
-          { name: 'Lukas Weber', role: 'Operations', lastLogin: 'Gestern, 18:45' },
-          { name: 'Maja Roth', role: 'Compliance', lastLogin: 'Gestern, 10:03' },
-          { name: 'Jonas Blum', role: 'Broker Manager', lastLogin: 'Vor 2 Tagen' }
+        statusLabel: 'Status',
+        statusOptions: [
+          { label: 'Alle', value: 'all' },
+          { label: 'Aktiv', value: 'active' },
+          { label: 'Erhoeht', value: 'risk' }
         ],
-        taskQueue: [
-          { title: 'Renewal freigeben: Atlas Logistics', status: 'Heute fällig' },
-          { title: 'Schaden-Eskalation prüfen: CLM-20841', status: '2h verbleiben' },
-          { title: 'Maklerlizenz-Dokumente aktualisieren', status: 'Morgen' },
-          { title: 'Portfolio-Exception: FleetSecure', status: '48h' }
+        quickLabel: 'Schnellfilter',
+        quickOptions: [
+          { label: 'Renewal <= 60 Tage', value: 'renewal' },
+          { label: 'Offene Schaeden', value: 'openClaims' },
+          { label: 'Keine offenen Schaeden', value: 'noOpenClaims' }
         ],
-        complianceItems: [
-          { label: 'Delegated Authority Dokumente', value: 'Aktuell' },
-          { label: 'AML / KYC Checks', value: '92%' },
-          { label: 'Audit Readiness', value: 'Grün' },
-          { label: 'Eskalationen offen', value: '3' }
-        ],
-        portfolioItems: [
-          { label: 'Top-Sparten', value: 'Fleet, Cargo, Liability, Cyber' },
-          { label: 'Loss Ratio', value: '62% (Ziel 65%)' },
-          { label: 'Retention-Risiko', value: '8 Accounts markiert' },
-          { label: 'Nächstes Renewal-Fenster', value: '14 Tage' }
-        ]
+        chipLabel: 'Filter-Chips'
       }
 
   return (
     <section className="uw-page">
       <div className="uw-container">
-        <Header
-          title={copy.title}
-          subtitle={copy.subtitle}
-          subtitleColor="#65748b"
-        />
+        <Header title={copy.title} subtitle={copy.subtitle} subtitleColor="#65748b" />
 
         <div className="uw-grid uw-kpi">
-          {copy.kpis.map((item) => (
-            <Card key={item.title} title={item.title} variant="glass" className="uw-card">
+          {kpis.map((item) => (
+            <Card key={item.label} title={item.label} variant="glass" className="uw-card">
               <div className="uw-card-body">
                 <strong style={{ fontSize: '1.4rem' }}>{item.value}</strong>
               </div>
@@ -107,52 +175,179 @@ export default function BrokerAdminPage() {
           ))}
         </div>
 
-        <div className="uw-grid uw-split">
-          <Card title={copy.taskQueueTitle} variant="glass" className="uw-card">
-            <div className="uw-card-body" style={{ gap: '0.75rem' }}>
-              {copy.taskQueue.map((task) => (
-                <div key={task.title} style={{ display: 'flex', justifyContent: 'space-between', gap: '0.75rem' }}>
-                  <span>{task.title}</span>
-                  <span className="uw-muted">{task.status}</span>
-                </div>
+        <Card title={copy.filtersTitle} variant="glass" className="uw-card">
+          <div className="uw-card-body" style={{ gap: '0.75rem' }}>
+            <style>
+              {`
+                .broker-admin-filters-toggle { display: none; }
+                @media (max-width: 900px) {
+                  .broker-admin-filters-toggle { display: inline-flex; }
+                  .broker-admin-filters { display: none; }
+                  .broker-admin-filters.is-open { display: grid; }
+                }
+                .broker-admin-chip-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+                .broker-admin-chip { border-radius: 999px; }
+                @media (max-width: 900px) {
+                  .broker-admin-chip-row { gap: 0.4rem; }
+                }
+              `}
+            </style>
+            <button
+              type="button"
+              className="btn btn-outline-primary btn-sm broker-admin-filters-toggle"
+              onClick={() => setFiltersOpen((prev) => !prev)}
+            >
+              {filtersOpen ? copy.filtersToggleClose : copy.filtersToggle}
+            </button>
+            <div
+              className={`broker-admin-filters ${filtersOpen ? 'is-open' : ''}`}
+              style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '0.75rem' }}
+            >
+              <div style={{ display: 'grid', gap: '0.35rem' }}>
+                <label className="uw-muted" htmlFor="broker-admin-search">{copy.searchPlaceholder}</label>
+                <input
+                  id="broker-admin-search"
+                  type="text"
+                  placeholder={copy.searchPlaceholder}
+                  className="form-control"
+                  value={search}
+                  onChange={(event) => setSearch(event.target.value)}
+                />
+              </div>
+              <div style={{ display: 'grid', gap: '0.35rem' }}>
+                <label className="uw-muted" htmlFor="broker-admin-sort">{copy.sortLabel}</label>
+                <select
+                  id="broker-admin-sort"
+                  className="form-select"
+                  value={sortKey}
+                  onChange={(event) => setSortKey(event.target.value)}
+                >
+                  {copy.sortOptions.map((option) => (
+                    <option key={option.value} value={option.value}>{option.label}</option>
+                  ))}
+                </select>
+              </div>
+              <div style={{ display: 'grid', gap: '0.35rem' }}>
+                <label className="uw-muted" htmlFor="broker-admin-status">{copy.statusLabel}</label>
+                <select
+                  id="broker-admin-status"
+                  className="form-select"
+                  value={statusFilter}
+                  onChange={(event) => setStatusFilter(event.target.value)}
+                >
+                  {copy.statusOptions.map((option) => (
+                    <option key={option.value} value={option.value}>{option.label}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+            <div className={`broker-admin-filters ${filtersOpen ? 'is-open' : ''}`} style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+              <span className="uw-muted" style={{ marginRight: '0.5rem' }}>{copy.quickLabel}</span>
+              {copy.quickOptions.map((option) => (
+                <button
+                  key={option.value}
+                  type="button"
+                  className={`btn btn-sm broker-admin-chip ${quickFilter === option.value ? 'btn-primary' : 'btn-outline-secondary'}`}
+                  onClick={() => setQuickFilter(quickFilter === option.value ? 'all' : option.value)}
+                >
+                  {option.label}
+                </button>
               ))}
             </div>
-          </Card>
-          <Card title={copy.complianceTitle} variant="glass" className="uw-card">
-            <div className="uw-card-body" style={{ gap: '0.75rem' }}>
-              {copy.complianceItems.map((item) => (
-                <div key={item.label} style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <span>{item.label}</span>
-                  <strong>{item.value}</strong>
-                </div>
+            <div className="broker-admin-chip-row">
+              <span className="uw-muted" style={{ marginRight: '0.5rem' }}>{copy.chipLabel}</span>
+              {copy.statusOptions.map((option) => (
+                <button
+                  key={option.value}
+                  type="button"
+                  className={`btn btn-sm broker-admin-chip ${statusFilter === option.value ? 'btn-primary' : 'btn-outline-secondary'}`}
+                  onClick={() => setStatusFilter(option.value)}
+                >
+                  {option.label}
+                </button>
+              ))}
+              {copy.sortOptions.map((option) => (
+                <button
+                  key={option.value}
+                  type="button"
+                  className={`btn btn-sm broker-admin-chip ${sortKey === option.value ? 'btn-primary' : 'btn-outline-secondary'}`}
+                  onClick={() => setSortKey(option.value)}
+                >
+                  {option.label}
+                </button>
               ))}
             </div>
-          </Card>
-        </div>
+          </div>
+        </Card>
 
-        <div className="uw-grid uw-split">
-          <Card title={copy.accessTitle} variant="glass" className="uw-card">
-            <div className="uw-card-body" style={{ gap: '0.75rem' }}>
-              {copy.accessRows.map((row) => (
-                <div key={row.name} style={{ display: 'grid', gridTemplateColumns: '1.1fr 1fr 1fr', gap: '0.75rem' }}>
-                  <strong>{row.name}</strong>
-                  <span className="uw-muted">{row.role}</span>
-                  <span className="uw-muted">{row.lastLogin}</span>
+        <Card title={lang === 'en' ? 'Customer records' : 'Kundendaten'} variant="glass" className="uw-card">
+          <div className="uw-card-body" style={{ gap: '0.75rem' }}>
+            <style>
+              {`
+                .broker-admin-table { display: grid; gap: 0.75rem; }
+                .broker-admin-cards { display: none; gap: 0.75rem; }
+                @media (max-width: 900px) {
+                  .broker-admin-table { display: none; }
+                  .broker-admin-cards { display: grid; }
+                  .broker-admin-cards .uw-card { padding: 0.9rem; }
+                  .broker-admin-cards .uw-card-body { gap: 0.45rem; }
+                  .broker-admin-cards .badge { font-size: 0.68rem; }
+                }
+              `}
+            </style>
+            <div className="broker-admin-table">
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '0.75rem', fontSize: '0.85rem' }}>
+                {copy.columns.map((col) => (
+                  <strong key={col} className="uw-muted">{col}</strong>
+                ))}
+                <span />
+              </div>
+
+              {filteredCustomers.map((customer) => (
+                <div key={customer.id} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '0.75rem', alignItems: 'center' }}>
+                  <strong>{customer.name}</strong>
+                  <span className="uw-muted">{customer.region}</span>
+                  <span className="uw-muted">{translateStatus(customer.status, lang)}</span>
+                  <span className="uw-muted">{customer.premium}</span>
+                  <span className="uw-muted">{customer.renewal}</span>
+                  <span className="uw-muted">{customer.openClaims}</span>
+                  <button
+                    type="button"
+                    className="btn btn-outline-primary btn-sm"
+                    onClick={() => navigate(`/broker-admin/customer/${customer.id}`)}
+                  >
+                    {copy.action}
+                  </button>
                 </div>
               ))}
             </div>
-          </Card>
-          <Card title={copy.portfolioTitle} variant="glass" className="uw-card">
-            <div className="uw-card-body" style={{ gap: '0.75rem' }}>
-              {copy.portfolioItems.map((item) => (
-                <div key={item.label}>
-                  <strong>{item.label}</strong>
-                  <div className="uw-muted">{item.value}</div>
-                </div>
+
+            <div className="broker-admin-cards">
+              {filteredCustomers.map((customer) => (
+                <Card key={customer.id} title={customer.name} variant="glass" className="uw-card">
+                  <div className="uw-card-body" style={{ gap: '0.5rem' }}>
+                    <div className="uw-muted">{customer.region}</div>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+                      <span className="badge bg-blue-lt">{translateStatus(customer.status, lang)}</span>
+                      <span className="badge bg-azure-lt">{customer.premium}</span>
+                      <span className="badge bg-orange-lt">{customer.renewal}</span>
+                      <span className="badge bg-teal-lt">
+                        {lang === 'en' ? 'Open claims' : 'Offene Schaeden'}: {customer.openClaims}
+                      </span>
+                    </div>
+                    <button
+                      type="button"
+                      className="btn btn-primary btn-sm"
+                      onClick={() => navigate(`/broker-admin/customer/${customer.id}`)}
+                    >
+                      {copy.action}
+                    </button>
+                  </div>
+                </Card>
               ))}
             </div>
-          </Card>
-        </div>
+          </div>
+        </Card>
       </div>
     </section>
   )

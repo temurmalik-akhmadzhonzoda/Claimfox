@@ -6,6 +6,7 @@ import RegistrationPage from '@/pages/RegistrationPage'
 import RolesPage from '@/pages/RolesPage'
 import BrokerPortalLandingPage from '@/pages/BrokerPortalLandingPage'
 import BrokerAdminPage from '@/pages/BrokerAdminPage'
+import BrokerAdminCustomerPage from '@/pages/BrokerAdminCustomerPage'
 import ProtectedRoute from '@/router/ProtectedRoute'
 import FullscreenBgLayout from '@/layouts/FullscreenBgLayout'
 import { useAuth } from '@/features/auth/AuthContext'
@@ -234,6 +235,7 @@ export default function AppRouter() {
         <Route path="/marketing" element={<MarketingLandingPage />} />
         <Route path="/broker-crm" element={<BrokerCrmPage />} />
         <Route path="/broker-admin" element={<BrokerAdminPage />} />
+        <Route path="/broker-admin/customer/:customerId" element={<BrokerAdminCustomerPage />} />
         <Route path="/fleet-reporting" element={<FleetReportingPage />} />
         <Route path="/fleet-management" element={<FleetManagementPage />} />
         <Route path="/claim-manager" element={<ClaimManagerMarketingPage />} />

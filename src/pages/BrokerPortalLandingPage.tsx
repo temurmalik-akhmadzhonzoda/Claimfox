@@ -270,8 +270,8 @@ export default function BrokerPortalLandingPage() {
                   <Button
                     onClick={() => navigate('/broker-admin')}
                     style={{
-                      background: '#ffffff',
-                      color: '#D4380D',
+                      background: '#D4380D',
+                      color: '#ffffff',
                       border: '1px solid #D4380D',
                       paddingInline: '1.75rem',
                       fontWeight: 700
