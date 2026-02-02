@@ -58,7 +58,7 @@ const previewBars = [68, 92, 78, 84, 73, 96]
 const PREVIEW_VALUE_KEYS = ['eta', 'temp', 'customs'] as const
 
 export default function LogisticsLandingPage() {
-  const { t } = useI18n()
+  const { t, lang } = useI18n()
   const navigate = useNavigate()
   const [isHeroPreviewOpen, setIsHeroPreviewOpen] = React.useState(false)
 
@@ -119,6 +119,21 @@ export default function LogisticsLandingPage() {
               <p style={{ marginTop: '1rem', maxWidth: '720px', color: 'rgba(255,255,255,0.82)', fontSize: '1.2rem' }}>
                 {t('logisticsLanding.subtitle')}
               </p>
+              <div style={{ marginTop: '1.4rem', display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                <Button
+                  onClick={() => navigate('/logistics-dashboard')}
+                  style={{
+                    background: '#D4380D',
+                    color: '#ffffff',
+                    border: '1px solid #D4380D',
+                    paddingInline: '1.75rem',
+                    fontWeight: 700
+                  }}
+                  disableHover
+                >
+                  {lang === 'en' ? 'Open dashboard' : 'Dashboard oeffnen'}
+                </Button>
+              </div>
             </div>
             <div
               style={{

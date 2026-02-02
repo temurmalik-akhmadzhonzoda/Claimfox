@@ -29,6 +29,8 @@ import PartnerManagementPartsPage from '@/pages/PartnerManagementPartsPage'
 import FeatureTreePage from '@/pages/FeatureTreePage'
 import GetQuotePage from '@/pages/GetQuotePage'
 import LogisticsLandingPage from '@/pages/LogisticsLandingPage'
+import LogisticsDashboardPage from '@/pages/LogisticsDashboardPage'
+import LogisticsRecordPage from '@/pages/LogisticsRecordPage'
 import InsuranceLandingPage from '@/pages/InsuranceLandingPage'
 import InsuranceDashboardPage from '@/pages/InsuranceDashboardPage'
 import UnderwritingSubmissionsPage from '@/pages/insurance-dashboard/UnderwritingSubmissionsPage'
@@ -253,6 +255,8 @@ export default function AppRouter() {
         <Route path="/feature-tree" element={<FeatureTreePage />} />
         <Route path="/get-quote" element={<GetQuotePage />} />
         <Route path="/logistics" element={<LogisticsLandingPage />} />
+        <Route path="/logistics-dashboard" element={<LogisticsDashboardPage />} />
+        <Route path="/logistics-dashboard/record/:recordId" element={<LogisticsRecordPage />} />
         <Route path="/insurance" element={<InsuranceLandingPage />} />
         <Route path="/insurance-dashboard" element={<InsuranceDashboardPage />} />
         <Route path="/insurance-dashboard/underwriting/submissions" element={<UnderwritingSubmissionsPage />} />
