@@ -5,7 +5,8 @@ import UnderwriterIcon from '@/assets/images/underwriter.png'
 import LegalIcon from '@/assets/images/legal.png'
 import InsuranceIcon from '@/assets/images/insurance_icon.png'
 import ClaimIcon from '@/assets/images/claim.png'
-import FleetIcon from '@/assets/images/fleetmgmnt.png'
+import FleetIcon from '@/assets/images/flotte.png'
+import FleetMgmtIcon from '@/assets/images/fleetmgmnt.png'
 import LogisticsIcon from '@/assets/images/logistic_icon.png'
 import BrokerIcon from '@/assets/images/broker_icon.png'
 import PartnerIcon from '@/assets/images/partner_icon.png'
@@ -47,7 +48,7 @@ export default function DemoOverviewPage() {
       key: 'fleet',
       title: t('roles.overviewGroups.fleet'),
       items: [
-        { label: t('roles.cards.reporting.title'), roleId: 'reporting' }
+        { label: 'Fleet Manager', roleId: 'reporting' }
       ]
     },
     {
@@ -61,7 +62,7 @@ export default function DemoOverviewPage() {
       key: 'broker',
       title: t('roles.overviewGroups.broker'),
       items: [
-        { label: t('roles.brokerPortal'), roleId: 'broker-crm' }
+        { label: 'Broker', roleId: 'broker-crm' }
       ]
     }
   ]
@@ -383,6 +384,9 @@ export default function DemoOverviewPage() {
                                       onClick={() => navigate(item.to)}
                                     >
                                       <span className="d-flex align-items-center gap-2 flex-grow-1 text-start">
+                                        {(item.label === 'Fleet Manager' || item.label.startsWith('Fleetmanager')) && (
+                                          <img src={FleetMgmtIcon} alt="" style={{ width: 22, height: 22, objectFit: 'contain' }} />
+                                        )}
                                         {item.label === 'Fahrer' && (
                                           <img src={DriverIcon} alt="" style={{ width: 22, height: 22, objectFit: 'contain' }} />
                                         )}
@@ -459,7 +463,7 @@ export default function DemoOverviewPage() {
                               {brokerOpen && (
                                 <div className="list-group list-group-flush">
                                   {[
-                                    { label: 'Broker CRM', to: '/broker-crm' },
+                                    { label: 'Broker', to: '/broker-crm' },
                                     { label: 'Broker Administration', to: '/broker-admin' },
                                   ].map((item) => (
                                     <button
