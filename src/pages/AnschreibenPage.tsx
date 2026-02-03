@@ -3,7 +3,7 @@ import Header from '@/components/ui/Header'
 import Card from '@/components/ui/Card'
 import Button from '@/components/ui/Button'
 import CvAuthGate from '@/components/CvAuthGate'
-import profileImage from '@/assets/images/rm.png'
+import profileImage from '@/assets/images/profilbild.png'
 
 export default function AnschreibenPage() {
   return (
@@ -11,7 +11,7 @@ export default function AnschreibenPage() {
       <section className="page cv-page">
         <div className="cv-shell">
           <div className="cv-header">
-            <Header title="Anschreiben" subtitle="Ralf Mitterbauer" subtitleColor="#65748b" />
+            <Header title="Application" subtitle="Ralf Mitterbauer" subtitleColor="#65748b" />
             <Button className="cv-download" onClick={() => window.print()}>
               PDF herunterladen
             </Button>
@@ -19,58 +19,61 @@ export default function AnschreibenPage() {
 
           <div className="cv-hero">
             <div className="cv-hero-left">
-              <h2>IT Product Owner | Produktmanager Software &amp; Plattformen</h2>
-              <p>Uhlandstraße 11 · 31162 Bad Salzdetfuth (Region Hannover)</p>
-              <p>Telefon: +49 (0)151 22644067 · E-Mail: ralf.mitterbauer@t-online.de</p>
+              <h2>Senior Technical Product Manager | Platform &amp; Workflow Orchestration</h2>
+              <p>Bad Salzdetfuth (Region Hannover), Germany</p>
+              <p>Phone: +49 (0)151 22644067 · Email: ralf.mitterbauer@t-online.de</p>
               <p>LinkedIn: www.linkedin.com/in/ralf-mitterbauer-6a9a319/</p>
             </div>
             <Card className="cv-profile-card">
               <img className="cv-profile-image" src={profileImage} alt="Ralf Mitterbauer" />
               <div>
-                <strong>Bewerbung</strong>
-                <p>Product Owner Partner Neuausrichtung · HDI AG</p>
+                <strong>Application</strong>
+                <p>Senior Technical Product Manager – Platform &amp; Workflow Orchestration</p>
               </div>
             </Card>
           </div>
 
           <Card className="cv-card">
-            <h3>Anschreiben</h3>
-            <p>Bewerbung als Product Owner Partner Neuausrichtung</p>
-            <p>HDI AG – Standort Hannover</p>
-            <p>Sehr geehrte Damen und Herren,</p>
+            <h3>Application</h3>
+            <p>Application for Senior Technical Product Manager – Platform &amp; Workflow Orchestration</p>
+            <p>Dear Hiring Team,</p>
             <p>
-              die ausgeschriebene Position als Product Owner Partner Neuausrichtung bei der HDI AG spricht mich sehr an, da sie meine
-              langjährige Erfahrung in der strategischen Weiterentwicklung zentraler Plattform- und Partnersysteme mit meiner fundierten
-              Branchenkenntnis im Versicherungsumfeld ideal verbindet.
+              I am writing to express my interest in the Senior Technical Product Manager – Platform &amp; Workflow Orchestration role. The
+              position strongly resonates with my background in owning and evolving mission-critical, horizontal platforms that coordinate
+              complex workflows across multiple services, stakeholders, and regulatory constraints.
             </p>
             <p>
-              In meiner aktuellen Rolle als Product Owner bei der Insurfox GmbH verantworte ich die Weiterentwicklung eines zentralen
-              Plattform- und Partnersystems im Schadenumfeld. Zu meinen Aufgaben zählen die Gestaltung der Produktvision, die Verantwortung
-              strategischer Roadmaps sowie die Erstellung, Priorisierung und transparente Kommunikation des Product Backlogs. Dabei agiere
-              ich als zentrale Schnittstelle zwischen Fachbereichen, IT, agilen Teams und externen Dienstleistern und begleite die
-              kontinuierliche Weiterentwicklung der Plattform- und Anwendungslandschaft in Richtung modularer, skalierbarer Lösungen.
+              In my current role as Product Owner / Technical Product Manager at Insurfox, I take end-to-end ownership of a central,
+              revenue-generating platform within the insurance domain. This platform coordinates complex workflows across intake, validation,
+              decision logic, partner interaction, and communication. My responsibilities include defining the product vision and roadmap,
+              owning and prioritizing the backlog, and translating business, operational, and compliance requirements into robust, reusable
+              platform capabilities. I work closely with senior engineers and architects to ensure scalability, reliability, and long-term
+              maintainability while managing dependencies across multiple domains.
             </p>
             <p>
-              Ergänzend bringe ich umfangreiche Management- und Führungserfahrung im Versicherungsumfeld mit: Als Service Manager der
-              Nobilas GmbH (Akzo Nobel) war ich für die Schadensteuerung sowie die strategische und operative Zusammenarbeit mit namhaften
-              Versicherungskonzernen verantwortlich. In dieser Funktion steuerte ich ein bundesweites Werkstatt- und Partnernetzwerk und trug
-              Führungsverantwortung für über 50 Mitarbeitende. Diese Erfahrung hat mein Verständnis für Partnerprozesse, Steuerungslogiken und
-              die Interessen unterschiedlicher Stakeholder nachhaltig geprägt und bildet eine wertvolle Grundlage für die Neuausrichtung
-              zentraler Partnersysteme.
+              Beyond my current role, my career has consistently focused on orchestration, coordination, and platform ownership in complex
+              environments. Earlier, as Service Manager at Nobilas (Akzo Nobel), I was responsible for steering nationwide partner networks
+              in the insurance claims ecosystem. I coordinated end-to-end workflows across insurers, service partners, and internal teams and
+              held leadership responsibility for more than 50 employees. This experience deeply shaped my systems-oriented mindset and my
+              understanding of how platform decisions directly impact operational efficiency, partner performance, and customer outcomes.
             </p>
             <p>
-              Meine berufliche Laufbahn ist geprägt von der Arbeit an komplexen Transformations- und Neuausrichtungsprojekten, in denen ich
-              unterschiedliche Perspektiven zusammenführe, Teams in variierenden Führungsstilen moderiere und gemeinsam tragfähige Lösungen
-              entwickle. Eine proaktive, analytische und lösungsorientierte Arbeitsweise sowie ein hoher Anspruch an Qualität, Transparenz und
-              Zusammenarbeit zeichnen mich dabei aus.
+              What particularly attracts me to this role is the focus on an already live, business-critical orchestration layer where the
+              challenge lies not in validation, but in improving performance, reliability, scalability, and economic efficiency under growing
+              complexity. I am comfortable operating in environments where workflows are revenue-critical, highly interconnected, and subject
+              to regulatory requirements, and where product decisions must balance technical integrity with business impact.
             </p>
             <p>
-              Die strategische Bedeutung des zentralen Partnersystems für die HDI Deutschland sowie die Möglichkeit, dessen zukunftsorientierte
-              Weiterentwicklung aktiv mitzugestalten, motivieren mich sehr. Gern bringe ich meine Erfahrung, meine strukturierte Arbeitsweise
-              und meine ausgeprägte Schnittstellen- und Führungskompetenz am Standort Hannover ein.
+              I see the orchestration platform not as a technical abstraction, but as a product in its own right: one that enables
+              consistency, quality, and speed across multiple services while protecting long-term platform health. I enjoy working at this
+              horizontal layer, aligning product, engineering, operations, and compliance, and taking clear ownership when trade-offs are
+              required.
             </p>
-            <p>Über eine Einladung zu einem persönlichen Gespräch freue ich mich sehr.</p>
-            <p>Mit freundlichen Grüßen</p>
+            <p>
+              I would welcome the opportunity to discuss how my experience in platform ownership, workflow coordination, and cross-functional
+              leadership can contribute to the continued evolution of your orchestration platform. Thank you for your time and consideration.
+            </p>
+            <p>Kind regards,</p>
             <p>Ralf Mitterbauer</p>
           </Card>
         </div>
@@ -79,57 +82,59 @@ export default function AnschreibenPage() {
           <div className="cv-print-header">
             <div>
               <h1>Ralf Mitterbauer</h1>
-              <h2>IT Product Owner | Produktmanager Software &amp; Plattformen</h2>
+              <h2>Senior Technical Product Manager | Platform &amp; Workflow Orchestration</h2>
             </div>
             <div className="cv-print-photo">
               <img src={profileImage} alt="Ralf Mitterbauer" />
             </div>
           </div>
           <div className="cv-print-contact">
-            <p>Uhlandstraße 11</p>
-            <p>31162 Bad Salzdetfuth (Region Hannover)</p>
-            <p>Telefon: +49 (0)151 22644067</p>
-            <p>E-Mail: ralf.mitterbauer@t-online.de</p>
+            <p>Bad Salzdetfuth (Region Hannover), Germany</p>
+            <p>Phone: +49 (0)151 22644067</p>
+            <p>Email: ralf.mitterbauer@t-online.de</p>
             <p>LinkedIn: www.linkedin.com/in/ralf-mitterbauer-6a9a319/</p>
           </div>
 
-          <h3>Anschreiben</h3>
-          <p>Bewerbung als Product Owner Partner Neuausrichtung</p>
-          <p>HDI AG – Standort Hannover</p>
-          <p>Sehr geehrte Damen und Herren,</p>
+          <h3>Application</h3>
+          <p>Application for Senior Technical Product Manager – Platform &amp; Workflow Orchestration</p>
+          <p>Dear Hiring Team,</p>
           <p>
-            die ausgeschriebene Position als Product Owner Partner Neuausrichtung bei der HDI AG spricht mich sehr an, da sie meine
-            langjährige Erfahrung in der strategischen Weiterentwicklung zentraler Plattform- und Partnersysteme mit meiner fundierten
-            Branchenkenntnis im Versicherungsumfeld ideal verbindet.
+            I am writing to express my interest in the Senior Technical Product Manager – Platform &amp; Workflow Orchestration role. The
+            position strongly resonates with my background in owning and evolving mission-critical, horizontal platforms that coordinate
+            complex workflows across multiple services, stakeholders, and regulatory constraints.
           </p>
           <p>
-            In meiner aktuellen Rolle als Product Owner bei der Insurfox GmbH verantworte ich die Weiterentwicklung eines zentralen
-            Plattform- und Partnersystems im Schadenumfeld. Zu meinen Aufgaben zählen die Gestaltung der Produktvision, die Verantwortung
-            strategischer Roadmaps sowie die Erstellung, Priorisierung und transparente Kommunikation des Product Backlogs. Dabei agiere
-            ich als zentrale Schnittstelle zwischen Fachbereichen, IT, agilen Teams und externen Dienstleistern und begleite die
-            kontinuierliche Weiterentwicklung der Plattform- und Anwendungslandschaft in Richtung modularer, skalierbarer Lösungen.
+            In my current role as Product Owner / Technical Product Manager at Insurfox, I take end-to-end ownership of a central,
+            revenue-generating platform within the insurance domain. This platform coordinates complex workflows across intake, validation,
+            decision logic, partner interaction, and communication. My responsibilities include defining the product vision and roadmap,
+            owning and prioritizing the backlog, and translating business, operational, and compliance requirements into robust, reusable
+            platform capabilities. I work closely with senior engineers and architects to ensure scalability, reliability, and long-term
+            maintainability while managing dependencies across multiple domains.
           </p>
           <p>
-            Ergänzend bringe ich umfangreiche Management- und Führungserfahrung im Versicherungsumfeld mit: Als Service Manager der
-            Nobilas GmbH (Akzo Nobel) war ich für die Schadensteuerung sowie die strategische und operative Zusammenarbeit mit namhaften
-            Versicherungskonzernen verantwortlich. In dieser Funktion steuerte ich ein bundesweites Werkstatt- und Partnernetzwerk und trug
-            Führungsverantwortung für über 50 Mitarbeitende. Diese Erfahrung hat mein Verständnis für Partnerprozesse, Steuerungslogiken und
-            die Interessen unterschiedlicher Stakeholder nachhaltig geprägt und bildet eine wertvolle Grundlage für die Neuausrichtung
-            zentraler Partnersysteme.
+            Beyond my current role, my career has consistently focused on orchestration, coordination, and platform ownership in complex
+            environments. Earlier, as Service Manager at Nobilas (Akzo Nobel), I was responsible for steering nationwide partner networks
+            in the insurance claims ecosystem. I coordinated end-to-end workflows across insurers, service partners, and internal teams and
+            held leadership responsibility for more than 50 employees. This experience deeply shaped my systems-oriented mindset and my
+            understanding of how platform decisions directly impact operational efficiency, partner performance, and customer outcomes.
           </p>
           <p>
-            Meine berufliche Laufbahn ist geprägt von der Arbeit an komplexen Transformations- und Neuausrichtungsprojekten, in denen ich
-            unterschiedliche Perspektiven zusammenführe, Teams in variierenden Führungsstilen moderiere und gemeinsam tragfähige Lösungen
-            entwickle. Eine proaktive, analytische und lösungsorientierte Arbeitsweise sowie ein hoher Anspruch an Qualität, Transparenz und
-            Zusammenarbeit zeichnen mich dabei aus.
+            What particularly attracts me to this role is the focus on an already live, business-critical orchestration layer where the
+            challenge lies not in validation, but in improving performance, reliability, scalability, and economic efficiency under growing
+            complexity. I am comfortable operating in environments where workflows are revenue-critical, highly interconnected, and subject
+            to regulatory requirements, and where product decisions must balance technical integrity with business impact.
           </p>
           <p>
-            Die strategische Bedeutung des zentralen Partnersystems für die HDI Deutschland sowie die Möglichkeit, dessen zukunftsorientierte
-            Weiterentwicklung aktiv mitzugestalten, motivieren mich sehr. Gern bringe ich meine Erfahrung, meine strukturierte Arbeitsweise
-            und meine ausgeprägte Schnittstellen- und Führungskompetenz am Standort Hannover ein.
+            I see the orchestration platform not as a technical abstraction, but as a product in its own right: one that enables
+            consistency, quality, and speed across multiple services while protecting long-term platform health. I enjoy working at this
+            horizontal layer, aligning product, engineering, operations, and compliance, and taking clear ownership when trade-offs are
+            required.
           </p>
-          <p>Über eine Einladung zu einem persönlichen Gespräch freue ich mich sehr.</p>
-          <p>Mit freundlichen Grüßen</p>
+          <p>
+            I would welcome the opportunity to discuss how my experience in platform ownership, workflow coordination, and cross-functional
+            leadership can contribute to the continued evolution of your orchestration platform. Thank you for your time and consideration.
+          </p>
+          <p>Kind regards,</p>
           <p>Ralf Mitterbauer</p>
         </div>
       </section>
