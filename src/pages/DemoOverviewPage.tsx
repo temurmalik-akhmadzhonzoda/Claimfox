@@ -47,9 +47,7 @@ export default function DemoOverviewPage() {
       key: 'fleet',
       title: t('roles.overviewGroups.fleet'),
       items: [
-        { label: 'Fahrer', roleId: 'driver-demo' },
-        { label: t('roles.cards.reporting.title'), roleId: 'reporting' },
-        { label: t('roles.cards.fleetManagement.title'), roleId: 'fleet-management' }
+        { label: t('roles.cards.reporting.title'), roleId: 'reporting' }
       ]
     },
     {
@@ -63,8 +61,7 @@ export default function DemoOverviewPage() {
       key: 'broker',
       title: t('roles.overviewGroups.broker'),
       items: [
-        { label: t('roles.brokerPortal'), roleId: 'broker-crm' },
-        { label: t('roles.cards.brokerAdmin.title'), roleId: 'broker-admin' }
+        { label: t('roles.brokerPortal'), roleId: 'broker-crm' }
       ]
     }
   ]
