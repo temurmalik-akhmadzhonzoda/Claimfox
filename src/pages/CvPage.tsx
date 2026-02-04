@@ -15,6 +15,12 @@ export default function CvPage() {
   }, [printMode])
 
   useEffect(() => {
+    if (typeof document === 'undefined') return
+    document.body.classList.add('cv-route')
+    return () => document.body.classList.remove('cv-route')
+  }, [])
+
+  useEffect(() => {
     function handleAfterPrint() {
       setPrintMode('cv')
     }

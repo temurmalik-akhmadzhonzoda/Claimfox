@@ -2514,16 +2514,20 @@ a {
 }
 
 @media print {
-  @page {
+  @page cv {
     size: A4 portrait;
     margin: 16mm 18mm 18mm 18mm;
   }
 
-  html,
-  body {
+  body.cv-route {
     background: #ffffff !important;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
+  }
+
+  body.cv-route {
+    width: 210mm;
+    height: 297mm;
   }
 
   .cv-page {
@@ -2534,6 +2538,12 @@ a {
   header,
   .cv-download {
     display: none !important;
+  }
+
+  .cv-print,
+  .cv-print-combined,
+  .cv-print-cover {
+    page: cv;
   }
 
   .cv-print {
