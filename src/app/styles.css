@@ -2519,6 +2519,17 @@ a {
     margin: 16mm 18mm 18mm 18mm;
   }
 
+  html,
+  body {
+    background: #ffffff !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .cv-page {
+    background: #ffffff !important;
+  }
+
   .cv-shell,
   header,
   .cv-download {
