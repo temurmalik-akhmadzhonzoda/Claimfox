@@ -2407,6 +2407,23 @@ a {
   white-space: nowrap;
 }
 
+.cv-letter p {
+  margin: 0.75rem 0;
+  line-height: 1.7;
+}
+
+.cv-letter h3 {
+  margin: 1.4rem 0 0.6rem;
+}
+
+.cv-letter h3:first-of-type {
+  margin-top: 0;
+}
+
+.cv-letter-heading {
+  margin: 1.2rem 0 0.6rem;
+}
+
 .cv-hero {
   display: grid;
   grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
@@ -2621,7 +2638,7 @@ a {
   }
 
   .cv-print h3 {
-    margin: 0.5rem 0 0.25rem;
+    margin: 0.6rem 0 0.3rem;
     font-size: 1.05rem;
     color: #1f2a5f;
   }

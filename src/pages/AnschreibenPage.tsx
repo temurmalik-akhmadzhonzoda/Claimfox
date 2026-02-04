@@ -19,23 +19,29 @@ export default function AnschreibenPage() {
 
           <div className="cv-hero">
             <div className="cv-hero-left">
-              <h2>Senior Technical Product Manager | Platform &amp; Workflow Orchestration</h2>
+              <h2>Senior Technical Product Manager – Platform &amp; Workflow Orchestration</h2>
               <p>Bad Salzdetfuth (Region Hannover), Germany</p>
-              <p>Phone: +49 (0)151 22644067 · Email: ralf.mitterbauer@t-online.de</p>
+              <p>Phone: +49 (0)151 22644067</p>
+              <p>Email: ralf.mitterbauer@t-online.de</p>
               <p>LinkedIn: www.linkedin.com/in/ralf-mitterbauer-6a9a319/</p>
+              <p>Remote (Germany)</p>
             </div>
             <Card className="cv-profile-card">
               <img className="cv-profile-image" src={profileImage} alt="Ralf Mitterbauer" />
               <div>
-                <strong>Application</strong>
-                <p>Senior Technical Product Manager – Platform &amp; Workflow Orchestration</p>
+                <strong>Senior Technical Product Manager – Platform &amp; Workflow Orchestration</strong>
               </div>
             </Card>
           </div>
 
-          <Card className="cv-card">
-            <h3>Application</h3>
-            <p>Application for Senior Technical Product Manager – Platform &amp; Workflow Orchestration</p>
+          <Card className="cv-card cv-letter">
+            <h3>Senior Technical Product Manager – Platform &amp; Workflow Orchestration</h3>
+            <p>Bad Salzdetfuth (Region Hannover), Germany</p>
+            <p>Phone: +49 (0)151 22644067</p>
+            <p>Email: ralf.mitterbauer@t-online.de</p>
+            <p>LinkedIn: www.linkedin.com/in/ralf-mitterbauer-6a9a319/</p>
+            <p>Remote (Germany)</p>
+            <h3 className="cv-letter-heading">Statement of Interest</h3>
             <p>Dear Hiring Team,</p>
             <p>
               I am writing to express my interest in the Senior Technical Product Manager – Platform &amp; Workflow Orchestration role. The
@@ -45,26 +51,27 @@ export default function AnschreibenPage() {
             <p>
               In my current role as Product Owner / Technical Product Manager at Insurfox, I take end-to-end ownership of a central,
               revenue-generating platform within the insurance domain. This platform coordinates complex workflows across intake, validation,
-              decision logic, partner interaction, and communication. My responsibilities include defining the product vision and roadmap,
-              owning and prioritizing the backlog, and translating business, operational, and compliance requirements into robust, reusable
-              platform capabilities. I work closely with senior engineers and architects to ensure scalability, reliability, and long-term
-              maintainability while managing dependencies across multiple domains.
+              decision logic, partner interaction, and communication. My responsibilities include defining product vision and roadmaps, owning
+              and prioritizing the backlog, and translating business, operational, and compliance requirements into robust, reusable platform
+              capabilities. I work closely with senior engineers and architects to ensure scalability, reliability, and long-term
+              maintainability while actively managing dependencies across multiple domains.
             </p>
             <p>
-              Beyond my current role, my career has consistently focused on orchestration, coordination, and platform ownership in complex
-              environments. Earlier, as Service Manager at Nobilas (Akzo Nobel), I was responsible for steering nationwide partner networks
-              in the insurance claims ecosystem. I coordinated end-to-end workflows across insurers, service partners, and internal teams and
-              held leadership responsibility for more than 50 employees. This experience deeply shaped my systems-oriented mindset and my
+              Throughout my career, I have consistently focused on orchestration, coordination, and platform ownership in complex environments.
+              Earlier, as Service Manager at Nobilas (Akzo Nobel), I was responsible for steering nationwide partner networks within the
+              insurance claims ecosystem. I coordinated end-to-end workflows across insurers, service partners, and internal teams and held
+              leadership responsibility for more than 50 employees. This experience significantly shaped my systems-oriented mindset and my
               understanding of how platform decisions directly impact operational efficiency, partner performance, and customer outcomes.
             </p>
             <p>
-              What particularly attracts me to this role is the focus on an already live, business-critical orchestration layer where the
-              challenge lies not in validation, but in improving performance, reliability, scalability, and economic efficiency under growing
-              complexity. I am comfortable operating in environments where workflows are revenue-critical, highly interconnected, and subject
-              to regulatory requirements, and where product decisions must balance technical integrity with business impact.
+              What particularly attracts me to this role is the focus on an already live, business-critical orchestration layer, where the
+              challenge lies not in validation but in continuously improving performance, reliability, scalability, and economic efficiency
+              under increasing complexity. I am comfortable operating in environments where workflows are revenue-critical, highly
+              interconnected, and subject to regulatory requirements, and where product decisions must carefully balance technical integrity
+              with business impact.
             </p>
             <p>
-              I see the orchestration platform not as a technical abstraction, but as a product in its own right: one that enables
+              I view the orchestration platform not as a technical abstraction, but as a product in its own right—one that enables
               consistency, quality, and speed across multiple services while protecting long-term platform health. I enjoy working at this
               horizontal layer, aligning product, engineering, operations, and compliance, and taking clear ownership when trade-offs are
               required.
@@ -95,8 +102,13 @@ export default function AnschreibenPage() {
             <p>LinkedIn: www.linkedin.com/in/ralf-mitterbauer-6a9a319/</p>
           </div>
 
-          <h3>Application</h3>
-          <p>Application for Senior Technical Product Manager – Platform &amp; Workflow Orchestration</p>
+          <h3>Senior Technical Product Manager – Platform &amp; Workflow Orchestration</h3>
+          <p>Bad Salzdetfuth (Region Hannover), Germany</p>
+          <p>Phone: +49 (0)151 22644067</p>
+          <p>Email: ralf.mitterbauer@t-online.de</p>
+          <p>LinkedIn: www.linkedin.com/in/ralf-mitterbauer-6a9a319/</p>
+          <p>Remote (Germany)</p>
+          <h3>Cover Letter</h3>
           <p>Dear Hiring Team,</p>
           <p>
             I am writing to express my interest in the Senior Technical Product Manager – Platform &amp; Workflow Orchestration role. The
@@ -106,26 +118,27 @@ export default function AnschreibenPage() {
           <p>
             In my current role as Product Owner / Technical Product Manager at Insurfox, I take end-to-end ownership of a central,
             revenue-generating platform within the insurance domain. This platform coordinates complex workflows across intake, validation,
-            decision logic, partner interaction, and communication. My responsibilities include defining the product vision and roadmap,
-            owning and prioritizing the backlog, and translating business, operational, and compliance requirements into robust, reusable
-            platform capabilities. I work closely with senior engineers and architects to ensure scalability, reliability, and long-term
-            maintainability while managing dependencies across multiple domains.
+            decision logic, partner interaction, and communication. My responsibilities include defining product vision and roadmaps, owning
+            and prioritizing the backlog, and translating business, operational, and compliance requirements into robust, reusable platform
+            capabilities. I work closely with senior engineers and architects to ensure scalability, reliability, and long-term
+            maintainability while actively managing dependencies across multiple domains.
           </p>
           <p>
-            Beyond my current role, my career has consistently focused on orchestration, coordination, and platform ownership in complex
-            environments. Earlier, as Service Manager at Nobilas (Akzo Nobel), I was responsible for steering nationwide partner networks
-            in the insurance claims ecosystem. I coordinated end-to-end workflows across insurers, service partners, and internal teams and
-            held leadership responsibility for more than 50 employees. This experience deeply shaped my systems-oriented mindset and my
+            Throughout my career, I have consistently focused on orchestration, coordination, and platform ownership in complex environments.
+            Earlier, as Service Manager at Nobilas (Akzo Nobel), I was responsible for steering nationwide partner networks within the
+            insurance claims ecosystem. I coordinated end-to-end workflows across insurers, service partners, and internal teams and held
+            leadership responsibility for more than 50 employees. This experience significantly shaped my systems-oriented mindset and my
             understanding of how platform decisions directly impact operational efficiency, partner performance, and customer outcomes.
           </p>
           <p>
-            What particularly attracts me to this role is the focus on an already live, business-critical orchestration layer where the
-            challenge lies not in validation, but in improving performance, reliability, scalability, and economic efficiency under growing
-            complexity. I am comfortable operating in environments where workflows are revenue-critical, highly interconnected, and subject
-            to regulatory requirements, and where product decisions must balance technical integrity with business impact.
+            What particularly attracts me to this role is the focus on an already live, business-critical orchestration layer, where the
+            challenge lies not in validation but in continuously improving performance, reliability, scalability, and economic efficiency
+            under increasing complexity. I am comfortable operating in environments where workflows are revenue-critical, highly
+            interconnected, and subject to regulatory requirements, and where product decisions must carefully balance technical integrity
+            with business impact.
           </p>
           <p>
-            I see the orchestration platform not as a technical abstraction, but as a product in its own right: one that enables
+            I view the orchestration platform not as a technical abstraction, but as a product in its own right—one that enables
             consistency, quality, and speed across multiple services while protecting long-term platform health. I enjoy working at this
             horizontal layer, aligning product, engineering, operations, and compliance, and taking clear ownership when trade-offs are
             required.

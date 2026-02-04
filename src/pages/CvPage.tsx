@@ -396,7 +396,7 @@ export default function CvPage() {
           <div className="cv-print-header">
             <div>
               <h1>Senior Technical Product Manager – Platform &amp; Workflow Orchestration</h1>
-              <h2>Cover Letter</h2>
+              <h2>Ralf Mitterbauer</h2>
             </div>
             <div className="cv-print-photo">
               <img src={profileImage} alt="Ralf Mitterbauer" />
@@ -407,9 +407,10 @@ export default function CvPage() {
             <p>Phone: +49 (0)151 22644067</p>
             <p>Email: ralf.mitterbauer@t-online.de</p>
             <p>LinkedIn: www.linkedin.com/in/ralf-mitterbauer-6a9a319/</p>
-            <p>Remote (Germany)</p>
+          <p>Remote (Germany)</p>
           </div>
 
+          <h3 className="cv-letter-heading">Statement of Interest</h3>
           <p>Dear Hiring Team,</p>
           <p>
             I am writing to express my interest in the Senior Technical Product Manager – Platform &amp; Workflow Orchestration role. The
@@ -578,7 +579,7 @@ export default function CvPage() {
           <div className="cv-print-header">
             <div>
               <h1>Senior Technical Product Manager – Platform &amp; Workflow Orchestration</h1>
-              <h2>Cover Letter</h2>
+              <h2>Ralf Mitterbauer</h2>
             </div>
             <div className="cv-print-photo">
               <img src={profileImage} alt="Ralf Mitterbauer" />
@@ -589,10 +590,10 @@ export default function CvPage() {
             <p>Phone: +49 (0)151 22644067</p>
             <p>Email: ralf.mitterbauer@t-online.de</p>
             <p>LinkedIn: www.linkedin.com/in/ralf-mitterbauer-6a9a319/</p>
-            <p>Remote (Germany)</p>
+          <p>Remote (Germany)</p>
           </div>
 
-          <h3>Cover Letter</h3>
+          <h3 className="cv-letter-heading">Statement of Interest</h3>
           <p>Dear Hiring Team,</p>
           <p>
             I am writing to express my interest in the Senior Technical Product Manager – Platform &amp; Workflow Orchestration role. The
