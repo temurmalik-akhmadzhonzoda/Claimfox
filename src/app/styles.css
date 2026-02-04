@@ -2532,6 +2532,9 @@ a {
 
   .cv-page {
     background: #ffffff !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    min-height: 0 !important;
   }
 
   .cv-shell,
@@ -2544,6 +2547,10 @@ a {
   .cv-print-combined,
   .cv-print-cover {
     page: cv;
+    margin: 0 !important;
+    padding: 0 !important;
+    break-before: auto;
+    page-break-before: auto;
   }
 
   .cv-print {
