@@ -134,12 +134,12 @@ export default function CvPage() {
                   Senior Technical Product Manager with extensive experience owning and evolving mission-critical platforms, partner systems,
                   and end-to-end workflows in complex, regulated, and revenue-generating environments. Strong background in platform
                   orchestration, workflow coordination, and system integration, with a proven ability to translate business, operational,
-                  and compliance requirements into robust, scalable product capabilities.
+                  and compliance requirements into robust and scalable product capabilities.
                 </p>
                 <p>
                   Highly experienced in operating as a horizontal product lead, aligning multiple domains, engineering teams, and external
                   partners while safeguarding long-term platform integrity. Structured, systems-oriented, and comfortable taking ownership
-                  in high-complexity environments with strong focus on reliability, performance, and operational efficiency.
+                  in high-complexity environments with a strong focus on reliability, performance, and operational efficiency.
                 </p>
               </div>
             </Card>
@@ -154,7 +154,7 @@ export default function CvPage() {
               </p>
               <p>
                 Strong background in platform orchestration, workflow coordination, and system integration, with a proven ability to translate
-                business, operational, and compliance requirements into robust, scalable product capabilities.
+                business, operational, and compliance requirements into robust and scalable product capabilities.
               </p>
               <p>
                 Highly experienced in operating as a horizontal product lead, aligning multiple domains, engineering teams, and external partners
@@ -201,8 +201,8 @@ export default function CvPage() {
                 <span>Product Manager / Product Owner – Digital Platforms · 01/2022 – 10/2025</span>
                 <ul>
                   <li>Owned digital platform and partner products from concept to market launch.</li>
-                  <li>Led the restructuring and further development of existing applications in agile environments.</li>
-                  <li>Coordinated integration of external systems, partners, and service providers.</li>
+                  <li>Led the restructuring and further development of existing products in agile environments.</li>
+                  <li>Coordinated the integration of external systems, partners, and service providers.</li>
                   <li>Defined product requirements, roadmaps, and success metrics.</li>
                   <li>Worked closely with Engineering, Business stakeholders, and customers to deliver scalable solutions.</li>
                 </ul>
@@ -232,7 +232,7 @@ export default function CvPage() {
                 <strong>Nobilas GmbH (Akzo Nobel) – Germany (Nationwide)</strong>
                 <span>Service Manager – Claims Steering &amp; Partner Networks · 12/2006 – 04/2008</span>
                 <ul>
-                  <li>Senior management role in the insurance and claims ecosystem, highly relevant to platform orchestration and partner coordination.</li>
+                  <li>Senior management role within the insurance and claims ecosystem.</li>
                   <li>Strategic and operational ownership of a nationwide workshop and partner network.</li>
                   <li>Key partner for major insurance groups in claims and repair management.</li>
                   <li>Coordination of end-to-end claims workflows across insurers, service partners, and internal teams.</li>
@@ -293,12 +293,12 @@ export default function CvPage() {
             Senior Technical Product Manager with extensive experience owning and evolving mission-critical platforms, partner systems,
             and end-to-end workflows in complex, regulated, and revenue-generating environments. Strong background in platform orchestration,
             workflow coordination, and system integration, with a proven ability to translate business, operational, and compliance requirements
-            into robust, scalable product capabilities.
+            into robust and scalable product capabilities.
           </p>
           <p>
             Highly experienced in operating as a horizontal product lead, aligning multiple domains, engineering teams, and external partners
             while safeguarding long-term platform integrity. Structured, systems-oriented, and comfortable taking ownership in high-complexity
-            environments with strong focus on reliability, performance, and operational efficiency.
+            environments with a strong focus on reliability, performance, and operational efficiency.
           </p>
 
           <h3>Core Competencies</h3>
@@ -333,8 +333,8 @@ export default function CvPage() {
           <p>Product Manager / Product Owner – Digital Platforms · 01/2022 – 10/2025</p>
           <ul>
             <li>Owned digital platform and partner products from concept to market launch.</li>
-            <li>Led the restructuring and further development of existing applications in agile environments.</li>
-            <li>Coordinated integration of external systems, partners, and service providers.</li>
+            <li>Led the restructuring and further development of existing products in agile environments.</li>
+            <li>Coordinated the integration of external systems, partners, and service providers.</li>
             <li>Defined product requirements, roadmaps, and success metrics.</li>
             <li>Worked closely with Engineering, Business stakeholders, and customers to deliver scalable solutions.</li>
           </ul>
@@ -361,7 +361,7 @@ export default function CvPage() {
           <h4>Nobilas GmbH (Akzo Nobel) – Germany (Nationwide)</h4>
           <p>Service Manager – Claims Steering &amp; Partner Networks · 12/2006 – 04/2008</p>
           <ul>
-            <li>Senior management role in the insurance and claims ecosystem, highly relevant to platform orchestration and partner coordination.</li>
+            <li>Senior management role within the insurance and claims ecosystem.</li>
             <li>Strategic and operational ownership of a nationwide workshop and partner network.</li>
             <li>Key partner for major insurance groups in claims and repair management.</li>
             <li>Coordination of end-to-end claims workflows across insurers, service partners, and internal teams.</li>
@@ -395,57 +395,60 @@ export default function CvPage() {
         <div className="cv-print cv-print-combined">
           <div className="cv-print-header">
             <div>
-              <h1>Anschreiben</h1>
-              <h2>Bewerbung als Product Owner Partner Neuausrichtung</h2>
+              <h1>Senior Technical Product Manager – Platform &amp; Workflow Orchestration</h1>
+              <h2>Cover Letter</h2>
             </div>
             <div className="cv-print-photo">
               <img src={profileImage} alt="Ralf Mitterbauer" />
             </div>
           </div>
           <div className="cv-print-contact">
-            <p>HDI AG – Standort Hannover</p>
-            <p>Ralf Mitterbauer</p>
-            <p>Uhlandstraße 11</p>
-            <p>31162 Bad Salzdetfuth (Region Hannover)</p>
-            <p>Telefon: +49 (0)151 22644067</p>
-            <p>E-Mail: ralf.mitterbauer@t-online.de</p>
+            <p>Bad Salzdetfuth (Region Hannover), Germany</p>
+            <p>Phone: +49 (0)151 22644067</p>
+            <p>Email: ralf.mitterbauer@t-online.de</p>
             <p>LinkedIn: www.linkedin.com/in/ralf-mitterbauer-6a9a319/</p>
+            <p>Remote (Germany)</p>
           </div>
 
-          <p>Sehr geehrte Damen und Herren,</p>
+          <p>Dear Hiring Team,</p>
           <p>
-            die ausgeschriebene Position als Product Owner Partner Neuausrichtung bei der HDI AG spricht mich sehr an, da sie meine
-            langjährige Erfahrung in der strategischen Weiterentwicklung zentraler Plattform- und Partnersysteme mit meiner fundierten
-            Branchenkenntnis im Versicherungsumfeld ideal verbindet.
+            I am writing to express my interest in the Senior Technical Product Manager – Platform &amp; Workflow Orchestration role. The
+            position strongly resonates with my background in owning and evolving mission-critical, horizontal platforms that coordinate
+            complex workflows across multiple services, stakeholders, and regulatory constraints.
           </p>
           <p>
-            In meiner aktuellen Rolle als Product Owner bei der Insurfox GmbH verantworte ich die Weiterentwicklung eines zentralen
-            Plattform- und Partnersystems im Schadenumfeld. Zu meinen Aufgaben zählen die Gestaltung der Produktvision, die Verantwortung
-            strategischer Roadmaps sowie die Erstellung, Priorisierung und transparente Kommunikation des Product Backlogs. Dabei agiere
-            ich als zentrale Schnittstelle zwischen Fachbereichen, IT, agilen Teams und externen Dienstleistern und begleite die
-            kontinuierliche Weiterentwicklung der Plattform- und Anwendungslandschaft in Richtung modularer, skalierbarer Lösungen.
+            In my current role as Product Owner / Technical Product Manager at Insurfox, I take end-to-end ownership of a central,
+            revenue-generating platform within the insurance domain. This platform coordinates complex workflows across intake, validation,
+            decision logic, partner interaction, and communication. My responsibilities include defining product vision and roadmaps, owning
+            and prioritizing the backlog, and translating business, operational, and compliance requirements into robust, reusable platform
+            capabilities. I work closely with senior engineers and architects to ensure scalability, reliability, and long-term
+            maintainability while actively managing dependencies across multiple domains.
           </p>
           <p>
-            Ergänzend bringe ich umfangreiche Management- und Führungserfahrung im Versicherungsumfeld mit: Als Service Manager der
-            Nobilas GmbH (Akzo Nobel) war ich für die Schadensteuerung sowie die strategische und operative Zusammenarbeit mit namhaften
-            Versicherungskonzernen verantwortlich. In dieser Funktion steuerte ich ein bundesweites Werkstatt- und Partnernetzwerk und trug
-            Führungsverantwortung für über 50 Mitarbeitende. Diese Erfahrung hat mein Verständnis für Partnerprozesse, Steuerungslogiken und
-            die Interessen unterschiedlicher Stakeholder nachhaltig geprägt und bildet eine wertvolle Grundlage für die Neuausrichtung
-            zentraler Partnersysteme.
+            Throughout my career, I have consistently focused on orchestration, coordination, and platform ownership in complex environments.
+            Earlier, as Service Manager at Nobilas (Akzo Nobel), I was responsible for steering nationwide partner networks within the
+            insurance claims ecosystem. I coordinated end-to-end workflows across insurers, service partners, and internal teams and held
+            leadership responsibility for more than 50 employees. This experience significantly shaped my systems-oriented mindset and my
+            understanding of how platform decisions directly impact operational efficiency, partner performance, and customer outcomes.
           </p>
           <p>
-            Meine berufliche Laufbahn ist geprägt von der Arbeit an komplexen Transformations- und Neuausrichtungsprojekten, in denen ich
-            unterschiedliche Perspektiven zusammenführe, Teams in variierenden Führungsstilen moderiere und gemeinsam tragfähige Lösungen
-            entwickle. Eine proaktive, analytische und lösungsorientierte Arbeitsweise sowie ein hoher Anspruch an Qualität, Transparenz und
-            Zusammenarbeit zeichnen mich dabei aus.
+            What particularly attracts me to this role is the focus on an already live, business-critical orchestration layer, where the
+            challenge lies not in validation but in continuously improving performance, reliability, scalability, and economic efficiency
+            under increasing complexity. I am comfortable operating in environments where workflows are revenue-critical, highly
+            interconnected, and subject to regulatory requirements, and where product decisions must carefully balance technical integrity
+            with business impact.
           </p>
           <p>
-            Die strategische Bedeutung des zentralen Partnersystems für die HDI Deutschland sowie die Möglichkeit, dessen zukunftsorientierte
-            Weiterentwicklung aktiv mitzugestalten, motivieren mich sehr. Gern bringe ich meine Erfahrung, meine strukturierte Arbeitsweise
-            und meine ausgeprägte Schnittstellen- und Führungskompetenz am Standort Hannover ein.
+            I view the orchestration platform not as a technical abstraction, but as a product in its own right—one that enables
+            consistency, quality, and speed across multiple services while protecting long-term platform health. I enjoy working at this
+            horizontal layer, aligning product, engineering, operations, and compliance, and taking clear ownership when trade-offs are
+            required.
           </p>
-          <p>Über eine Einladung zu einem persönlichen Gespräch freue ich mich sehr.</p>
-          <p>Mit freundlichen Grüßen</p>
+          <p>
+            I would welcome the opportunity to discuss how my experience in platform ownership, workflow coordination, and cross-functional
+            leadership can contribute to the continued evolution of your orchestration platform. Thank you for your time and consideration.
+          </p>
+          <p>Kind regards,</p>
           <p>Ralf Mitterbauer</p>
 
           <div className="print-page-break" />
@@ -472,12 +475,12 @@ export default function CvPage() {
             Senior Technical Product Manager with extensive experience owning and evolving mission-critical platforms, partner systems,
             and end-to-end workflows in complex, regulated, and revenue-generating environments. Strong background in platform orchestration,
             workflow coordination, and system integration, with a proven ability to translate business, operational, and compliance requirements
-            into robust, scalable product capabilities.
+            into robust and scalable product capabilities.
           </p>
           <p>
             Highly experienced in operating as a horizontal product lead, aligning multiple domains, engineering teams, and external partners
             while safeguarding long-term platform integrity. Structured, systems-oriented, and comfortable taking ownership in high-complexity
-            environments with strong focus on reliability, performance, and operational efficiency.
+            environments with a strong focus on reliability, performance, and operational efficiency.
           </p>
 
           <h3>Core Competencies</h3>
@@ -512,8 +515,8 @@ export default function CvPage() {
           <p>Product Manager / Product Owner – Digital Platforms · 01/2022 – 10/2025</p>
           <ul>
             <li>Owned digital platform and partner products from concept to market launch.</li>
-            <li>Led the restructuring and further development of existing applications in agile environments.</li>
-            <li>Coordinated integration of external systems, partners, and service providers.</li>
+            <li>Led the restructuring and further development of existing products in agile environments.</li>
+            <li>Coordinated the integration of external systems, partners, and service providers.</li>
             <li>Defined product requirements, roadmaps, and success metrics.</li>
             <li>Worked closely with Engineering, Business stakeholders, and customers to deliver scalable solutions.</li>
           </ul>
@@ -540,7 +543,7 @@ export default function CvPage() {
           <h4>Nobilas GmbH (Akzo Nobel) – Germany (Nationwide)</h4>
           <p>Service Manager – Claims Steering &amp; Partner Networks · 12/2006 – 04/2008</p>
           <ul>
-            <li>Senior management role in the insurance and claims ecosystem, highly relevant to platform orchestration and partner coordination.</li>
+            <li>Senior management role within the insurance and claims ecosystem.</li>
             <li>Strategic and operational ownership of a nationwide workshop and partner network.</li>
             <li>Key partner for major insurance groups in claims and repair management.</li>
             <li>Coordination of end-to-end claims workflows across insurers, service partners, and internal teams.</li>
@@ -574,8 +577,8 @@ export default function CvPage() {
         <div className="cv-print cv-print-cover">
           <div className="cv-print-header">
             <div>
-              <h1>Application</h1>
-              <h2>Senior Technical Product Manager – Platform &amp; Workflow Orchestration</h2>
+              <h1>Senior Technical Product Manager – Platform &amp; Workflow Orchestration</h1>
+              <h2>Cover Letter</h2>
             </div>
             <div className="cv-print-photo">
               <img src={profileImage} alt="Ralf Mitterbauer" />
@@ -589,8 +592,7 @@ export default function CvPage() {
             <p>Remote (Germany)</p>
           </div>
 
-          <h3>Application</h3>
-          <p>Application for Senior Technical Product Manager – Platform &amp; Workflow Orchestration</p>
+          <h3>Cover Letter</h3>
           <p>Dear Hiring Team,</p>
           <p>
             I am writing to express my interest in the Senior Technical Product Manager – Platform &amp; Workflow Orchestration role. The
@@ -600,26 +602,27 @@ export default function CvPage() {
           <p>
             In my current role as Product Owner / Technical Product Manager at Insurfox, I take end-to-end ownership of a central,
             revenue-generating platform within the insurance domain. This platform coordinates complex workflows across intake, validation,
-            decision logic, partner interaction, and communication. My responsibilities include defining the product vision and roadmap,
-            owning and prioritizing the backlog, and translating business, operational, and compliance requirements into robust, reusable
-            platform capabilities. I work closely with senior engineers and architects to ensure scalability, reliability, and long-term
-            maintainability while managing dependencies across multiple domains.
+            decision logic, partner interaction, and communication. My responsibilities include defining product vision and roadmaps, owning
+            and prioritizing the backlog, and translating business, operational, and compliance requirements into robust, reusable platform
+            capabilities. I work closely with senior engineers and architects to ensure scalability, reliability, and long-term
+            maintainability while actively managing dependencies across multiple domains.
           </p>
           <p>
-            Beyond my current role, my career has consistently focused on orchestration, coordination, and platform ownership in complex
-            environments. Earlier, as Service Manager at Nobilas (Akzo Nobel), I was responsible for steering nationwide partner networks
-            in the insurance claims ecosystem. I coordinated end-to-end workflows across insurers, service partners, and internal teams and
-            held leadership responsibility for more than 50 employees. This experience deeply shaped my systems-oriented mindset and my
+            Throughout my career, I have consistently focused on orchestration, coordination, and platform ownership in complex environments.
+            Earlier, as Service Manager at Nobilas (Akzo Nobel), I was responsible for steering nationwide partner networks within the
+            insurance claims ecosystem. I coordinated end-to-end workflows across insurers, service partners, and internal teams and held
+            leadership responsibility for more than 50 employees. This experience significantly shaped my systems-oriented mindset and my
             understanding of how platform decisions directly impact operational efficiency, partner performance, and customer outcomes.
           </p>
           <p>
-            What particularly attracts me to this role is the focus on an already live, business-critical orchestration layer where the
-            challenge lies not in validation, but in improving performance, reliability, scalability, and economic efficiency under growing
-            complexity. I am comfortable operating in environments where workflows are revenue-critical, highly interconnected, and subject
-            to regulatory requirements, and where product decisions must balance technical integrity with business impact.
+            What particularly attracts me to this role is the focus on an already live, business-critical orchestration layer, where the
+            challenge lies not in validation but in continuously improving performance, reliability, scalability, and economic efficiency
+            under increasing complexity. I am comfortable operating in environments where workflows are revenue-critical, highly
+            interconnected, and subject to regulatory requirements, and where product decisions must carefully balance technical integrity
+            with business impact.
           </p>
           <p>
-            I see the orchestration platform not as a technical abstraction, but as a product in its own right: one that enables
+            I view the orchestration platform not as a technical abstraction, but as a product in its own right—one that enables
             consistency, quality, and speed across multiple services while protecting long-term platform health. I enjoy working at this
             horizontal layer, aligning product, engineering, operations, and compliance, and taking clear ownership when trade-offs are
             required.
