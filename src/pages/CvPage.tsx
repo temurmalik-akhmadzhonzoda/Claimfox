@@ -45,6 +45,9 @@ export default function CvPage() {
 
   return (
     <CvAuthGate>
+      <style>
+        {`@media print { @page { size: A4 portrait !important; } }`}
+      </style>
       <section className="page cv-page cv-a4">
         <div className="cv-shell">
           <div className="cv-header">
