@@ -64,12 +64,14 @@ export default function AnschreibenPage() {
             <p>
               Neben der fachlichen Motivation ist mir auch der persönliche Rahmen wichtig. Ich bin 55 Jahre alt, Vater von zwei Kindern und
               seit vielen Jahren beruflich wie privat klar verankert. Mein Lebensmittelpunkt ist Bad Salzdetfuth bei Hannover, wo ich auch
-              Eigentum besitze. Der Standort Berlin ist für mich in mehrfacher Hinsicht attraktiv: Zum einen ermöglicht er mir, meine Rolle
-              bei InsurGo mit der notwendigen Präsenz und Nähe zum Team auszufüllen, was ich gerade in einer Startup-Phase als entscheidend
-              erachte. Zum anderen lebt meine Tochter, Leistungssportlerin im Wasserball und Mitglied der Frauen-Bundesliga sowie der
-              deutschen Nationalmannschaft, im Sportinternat in Berlin. Die Verbindung von beruflicher Präsenz und familiärer Nähe schafft
-              für mich zusätzliche Stabilität und ermöglicht es mir, mich langfristig mit voller Energie und Verlässlichkeit in diese
-              Aufgabe einzubringen.
+              Eigentum besitze.
+            </p>
+            <p>
+              Für die Rolle bei Insurgo ist mir eine ausgewogene Balance zwischen Remote-Arbeit und erforderlichen Präsenzzeiten vor Ort
+              wichtig. Gerade in der Anfangsphase halte ich eine erhöhte Präsenz in Berlin für notwendig, um Strukturen aufzubauen,
+              Abstimmungen zu festigen und die Zusammenarbeit im Team wirksam zu gestalten. Dass meine Tochter als Leistungssportlerin im
+              Wasserball im Sportinternat in Berlin lebt, erleichtert mir diese arbeitsbedingt notwendigen Präsenzzeiten und unterstützt
+              eine verlässliche Wahrnehmung meiner Aufgaben.
             </p>
             <p>
               Gerne würde ich meine Erfahrung, meine Haltung und meine Arbeitsweise bei Insurgo einbringen und die Weiterentwicklung Ihrer
@@ -119,12 +121,14 @@ export default function AnschreibenPage() {
           <p>
             Neben der fachlichen Motivation ist mir auch der persönliche Rahmen wichtig. Ich bin 55 Jahre alt, Vater von zwei Kindern und
             seit vielen Jahren beruflich wie privat klar verankert. Mein Lebensmittelpunkt ist Bad Salzdetfuth bei Hannover, wo ich auch
-            Eigentum besitze. Der Standort Berlin ist für mich in mehrfacher Hinsicht attraktiv: Zum einen ermöglicht er mir, meine Rolle
-            bei InsurGo mit der notwendigen Präsenz und Nähe zum Team auszufüllen, was ich gerade in einer Startup-Phase als entscheidend
-            erachte. Zum anderen lebt meine Tochter, Leistungssportlerin im Wasserball und Mitglied der Frauen-Bundesliga sowie der
-            deutschen Nationalmannschaft, im Sportinternat in Berlin. Die Verbindung von beruflicher Präsenz und familiärer Nähe schafft
-            für mich zusätzliche Stabilität und ermöglicht es mir, mich langfristig mit voller Energie und Verlässlichkeit in diese
-            Aufgabe einzubringen.
+            Eigentum besitze.
+          </p>
+          <p>
+            Für die Rolle bei Insurgo ist mir eine ausgewogene Balance zwischen Remote-Arbeit und erforderlichen Präsenzzeiten vor Ort
+            wichtig. Gerade in der Anfangsphase halte ich eine erhöhte Präsenz in Berlin für notwendig, um Strukturen aufzubauen,
+            Abstimmungen zu festigen und die Zusammenarbeit im Team wirksam zu gestalten. Dass meine Tochter als Leistungssportlerin im
+            Wasserball im Sportinternat in Berlin lebt, erleichtert mir diese arbeitsbedingt notwendigen Präsenzzeiten und unterstützt
+            eine verlässliche Wahrnehmung meiner Aufgaben.
           </p>
           <p>
             Gerne würde ich meine Erfahrung, meine Haltung und meine Arbeitsweise bei Insurgo einbringen und die Weiterentwicklung Ihrer
