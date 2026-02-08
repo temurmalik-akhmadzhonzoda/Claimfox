@@ -104,7 +104,7 @@ export default function CvPage() {
       <section className="page cv-page cv-a4">
         <div className="cv-shell">
           <div className="cv-header">
-            <Header title="LEBENSLAUF" subtitle="Ralf Mitterbauer" subtitleColor="#65748b" />
+            <Header title="CV – Ralf Mitterbauer" subtitle="Head of Product | Insurgo GmbH" subtitleColor="#65748b" />
             <div className="cv-actions">
               <Button className="cv-download" onClick={handlePrintCv}>
                 PDF herunterladen
@@ -120,27 +120,28 @@ export default function CvPage() {
 
           <div className="cv-hero">
             <div className="cv-hero-left">
-              <h2>Director Product &amp; Operations | Product Leadership &amp; Execution</h2>
-              <p>Bad Salzdetfuth (Region Hannover)</p>
-              <p>Bereit für hybrides Arbeiten in Bremen</p>
+              <h2>Head of Product | Insurgo GmbH</h2>
+              <p>Bad Salzdetfuth (Region Hannover), Deutschland</p>
+              <p>Bereit für Präsenz in Berlin &amp; Remote-Arbeit</p>
               <p>Telefon: +49 (0)151 22644067</p>
               <p>E-Mail: ralf.mitterbauer@t-online.de</p>
               <p>LinkedIn: www.linkedin.com/in/ralf-mitterbauer-6a9a319/</p>
-              <p>Remote (Germany)</p>
             </div>
             <Card className="cv-profile-card">
               <img className="cv-profile-image" src={profileImage} alt="Ralf Mitterbauer" />
               <div>
                 <strong>Profil</strong>
                 <p>
-                  Erfahrener Product- und Operations-Leader mit klarer Verantwortung für Outcome, Fokus und verlässliche Execution in
-                  technologiegetriebenen Organisationen. Langjährige Erfahrung darin, strategische Ziele (OKRs) in klare Prioritäten,
-                  wirksame Initiativen und messbare Ergebnisse zu übersetzen – auch unter hoher Komplexität und Zeitdruck.
+                  Erfahrener Versicherungsexperte mit langjähriger Führungserfahrung in der Versicherungs- und Dienstleistungsbranche.
+                  Umfassendes Verständnis der versicherungsseitigen End-to-End-Wertschöpfung – von Underwriting, Vertrieb und
+                  Brokeranbindung über Policierung und Bestandsführung bis hin zu Schadenprozessen, Partnermanagement, Prüfung, Freigabe,
+                  Abrechnung, Qualitätssicherung sowie der Entwicklung und Nutzung digitaler Plattform- und Kernsysteme.
                 </p>
                 <p>
-                  Stark in der Führung interdisziplinärer Teams, im Aufbau klarer Entscheidungs- und Priorisierungslogiken sowie in der
-                  End-to-End-Verantwortung für Customer Journeys, Delivery und operative Wirksamkeit. Ruhig, entscheidungsstark und
-                  konsequent in der Umsetzung – mit hohem Anspruch an Klarheit, Ownership und Wirkung.
+                  Langjährige Verantwortung für die strategische Ausrichtung, Priorisierung und Umsetzung komplexer Software- und
+                  Plattformprodukte. Verbindet unternehmerisches Denken mit tiefem technischem Verständnis, strukturierter Arbeitsweise
+                  und ausgeprägter Hands-on-Mentalität. Gewohnt, Verantwortung zu übernehmen, Entscheidungen nachvollziehbar zu treffen
+                  und Teams sicher durch komplexe Veränderungsvorhaben zu führen.
                 </p>
               </div>
             </Card>
@@ -150,31 +151,30 @@ export default function CvPage() {
             <Card className="cv-card">
               <h3>Profil</h3>
               <p>
-                Erfahrener Product- und Operations-Leader mit klarer Verantwortung für Outcome, Fokus und verlässliche Execution in
-                technologiegetriebenen Organisationen.
+                Erfahrener Versicherungsexperte mit langjähriger Führungserfahrung in der Versicherungs- und Dienstleistungsbranche.
+                Umfassendes Verständnis der versicherungsseitigen End-to-End-Wertschöpfung – von Underwriting, Vertrieb und Brokeranbindung
+                über Policierung und Bestandsführung bis hin zu Schadenprozessen, Partnermanagement, Prüfung, Freigabe, Abrechnung,
+                Qualitätssicherung sowie der Entwicklung und Nutzung digitaler Plattform- und Kernsysteme.
               </p>
               <p>
-                Langjährige Erfahrung darin, strategische Ziele (OKRs) in klare Prioritäten, wirksame Initiativen und messbare Ergebnisse zu
-                übersetzen – auch unter hoher Komplexität und Zeitdruck.
-              </p>
-              <p>
-                Stark in der Führung interdisziplinärer Teams, im Aufbau klarer Entscheidungs- und Priorisierungslogiken sowie in der
-                End-to-End-Verantwortung für Customer Journeys, Delivery und operative Wirksamkeit.
+                Langjährige Verantwortung für die strategische Ausrichtung, Priorisierung und Umsetzung komplexer Software- und
+                Plattformprodukte. Verbindet unternehmerisches Denken mit tiefem technischem Verständnis, strukturierter Arbeitsweise und
+                ausgeprägter Hands-on-Mentalität. Gewohnt, Verantwortung zu übernehmen, Entscheidungen nachvollziehbar zu treffen und Teams
+                sicher durch komplexe Veränderungsvorhaben zu führen.
               </p>
             </Card>
 
             <Card className="cv-card">
-              <h3>Kernkompetenzen</h3>
+              <h3>Schwerpunkte &amp; Kompetenzen</h3>
               <ul>
-                <li>Product &amp; Operations Leadership</li>
-                <li>Verantwortung für Outcome, KPIs &amp; Delivery</li>
-                <li>OKR-basierte Zielsteuerung &amp; Priorisierung</li>
-                <li>Aufbau stabiler Produkt- &amp; Execution-Systeme</li>
-                <li>Customer Journey Ownership (SaaS / Plattform / SMB)</li>
-                <li>Fokusdisziplin, Scope-Shaping &amp; Entscheidungsfindung</li>
-                <li>Führung interdisziplinärer Teams (Product, Tech, Ops)</li>
-                <li>Enge Zusammenarbeit mit Geschäftsführung &amp; Stakeholdern</li>
-                <li>Change, Skalierung &amp; Organisationsentwicklung</li>
+                <li>Gesamtverantwortung für Produktstrategie, Vision und Roadmaps</li>
+                <li>Digitale Versicherungsplattformen und versicherungsseitige Kernprozesse</li>
+                <li>Führung und Weiterentwicklung interdisziplinärer Produkt- und Entwicklungsteams</li>
+                <li>Übersetzung fachlicher Anforderungen in belastbare technische Produktkonzepte</li>
+                <li>Priorisierung, Entscheidungsfindung und verlässliche Execution</li>
+                <li>Strukturierte Produktsteuerung und nachvollziehbare Entscheidungslogiken</li>
+                <li>Umsetzung komplexer Software- und Plattformprojekte</li>
+                <li>Startup-Erfahrung und unternehmerische Denkweise</li>
               </ul>
             </Card>
           </div>
@@ -184,58 +184,59 @@ export default function CvPage() {
             <div className="cv-timeline">
               <div>
                 <strong>Insurfox GmbH</strong>
-                <span>Product Lead / Product Owner – Plattform &amp; Operations-nahe Prozesse · seit 11/2025</span>
+                <span>Senior Product Owner | Platform Strategy &amp; Insurance Processes · seit 11/2025</span>
                 <ul>
-                  <li>Gesamtverantwortung für den Produkterfolg einer zentralen, geschäftskritischen Plattform mit hoher operativer Relevanz.</li>
-                  <li>Verantwortung für Produktvision, Roadmap und Prioritäten mit klarem Fokus auf messbare Outcomes.</li>
-                  <li>Übersetzung strategischer Ziele in konkrete Initiativen, sauberes Scope-Shaping und stabile Execution.</li>
-                  <li>Sicherstellung einer ruhigen, vorhersehbaren Delivery über Produkt, Entwicklung und angrenzende operative Bereiche hinweg.</li>
-                  <li>Enge Zusammenarbeit mit Geschäftsführung, Fachbereichen und externen Partnern.</li>
-                  <li>Etablierung klarer Regeln für Priorisierung, Entscheidungsfindung sowie Start/Stop von Initiativen.</li>
-                  <li>Stärkung von Ownership, Verantwortung und Entscheidungsfähigkeit im Team.</li>
+                  <li>Steuerung der Produktstrategie und Roadmap entlang klar definierter Unternehmensziele.</li>
+                  <li>Ganzheitlicher Blick auf alle versicherungsrelevanten Prozesse, Systeme und beteiligten Einheiten.</li>
+                  <li>Übersetzung komplexer fachlicher Anforderungen in klare, umsetzbare technische Produktanforderungen.</li>
+                  <li>Enge Zusammenarbeit mit Entwicklung, Business, Kunden und externen Partnern.</li>
+                  <li>Strukturierte Priorisierung von Anforderungen und Initiativen.</li>
+                  <li>Fundierte Produktentscheidungen auf Basis operativer Nutzungserfahrungen, Marktverständnis und fachlicher Expertise.</li>
+                  <li>Sicherstellung einer nachvollziehbaren, stabilen und zielgerichteten Produktentwicklung.</li>
                 </ul>
               </div>
               <div>
                 <strong>RLE Nova GmbH</strong>
-                <span>Produktmanager / Product Lead · 01/2022 – 10/2025</span>
+                <span>Produktmanager / Product Owner · 01/2022 – 10/2025</span>
                 <ul>
-                  <li>Verantwortung für digitale Produkte und Angebotslogiken von der Idee bis zum Marktbetrieb.</li>
-                  <li>Aufbau klarer Produktstrukturen, Prioritäten und Entscheidungswege.</li>
-                  <li>Führung und Koordination interdisziplinärer Teams (Tech, Business, externe Partner).</li>
-                  <li>Fokus auf Wirkung, Kundennutzen und nachhaltige Delivery statt Feature-Output.</li>
+                  <li>Verantwortung für mehrere digitale Produkte und Plattformlösungen.</li>
+                  <li>Konzeption von Produktlogiken, User Flows und funktionalen Anforderungen.</li>
+                  <li>Umsetzung komplexer Softwareprojekte von der Idee bis zum Produktivbetrieb.</li>
+                  <li>Zusammenarbeit mit Design, Entwicklung und Business auf Augenhöhe.</li>
+                  <li>Strukturierte Dokumentation und transparente Entscheidungsgrundlagen.</li>
                 </ul>
               </div>
               <div>
                 <strong>RLE INTERNATIONAL GmbH &amp; Co. KG</strong>
                 <span>Senior Berater / Projektleiter · 05/2017 – 12/2021</span>
                 <ul>
-                  <li>Verantwortung für komplexe Transformations- und Optimierungsprogramme.</li>
-                  <li>Steuerung mehrerer paralleler Initiativen mit klarer Ergebnisverantwortung.</li>
-                  <li>Moderation anspruchsvoller Stakeholder-Situationen auf Management-Ebene.</li>
-                  <li>Nachweisliche Verbesserung von Effizienz, Qualität und wirtschaftlichem Ergebnis.</li>
-                </ul>
-              </div>
-              <div>
-                <strong>A.T.U. GmbH &amp; Co. KG</strong>
-                <span>Geschäftsleiter · 06/2015 – 05/2017</span>
-                <ul>
-                  <li>Gesamtverantwortung für einen großen Standort mit über 36 Mitarbeitenden.</li>
-                  <li>Führung, Zielsteuerung und operative Exzellenz.</li>
-                  <li>Klare Entscheidungen auch unter Unsicherheit und Zeitdruck.</li>
-                  <li>Verantwortung für Ergebnis, Qualität, Prozesse und Teamleistung.</li>
+                  <li>Steuerung komplexer Transformations- und Optimierungsprojekte.</li>
+                  <li>Ganzheitlicher Blick auf Organisation, Prozesse, IT und Wirtschaftlichkeit.</li>
+                  <li>Führung interdisziplinärer Projektteams.</li>
+                  <li>Verantwortung für Ergebnis, Qualität und Umsetzung.</li>
                 </ul>
               </div>
               <div>
                 <strong>Nobilas GmbH (Akzo Nobel)</strong>
-                <span>Service Manager – Schadensteuerung &amp; Partnernetzwerke · 12/2006 – 04/2008</span>
+                <span>Service Manager – Schadensteuerung und Partnernetzwerke · 12/2006 – 04/2008</span>
                 <ul>
-                  <li>Verantwortung für ein bundesweites Partner- und Werkstattnetzwerk.</li>
-                  <li>Zentrale Schnittstelle zu namhaften Versicherungskonzernen.</li>
+                  <li>Verantwortung für Schadensteuerung und Partnernetzwerke im Versicherungsumfeld.</li>
+                  <li>Zusammenarbeit mit namhaften Versicherungskonzernen.</li>
                   <li>Führung von über 50 Mitarbeitenden.</li>
-                  <li>Steuerung komplexer End-to-End-Prozesse mit hoher operativer Wirkung.</li>
+                  <li>Steuerung komplexer End-to-End-Prozesse über mehrere Organisationseinheiten hinweg.</li>
                 </ul>
               </div>
             </div>
+          </div>
+
+          <div className="cv-section">
+            <h3>Weitere Führungsstationen (Auswahl)</h3>
+            <ul>
+              <li>Geschäftsleiter – A.T.U. GmbH &amp; Co. KG</li>
+              <li>Service Manager – AH Lier GmbH &amp; Co. KG</li>
+              <li>Operations / Innovation Manager – GIMS UG</li>
+              <li>Inhaber / Geschäftsführer – eigene Unternehmen</li>
+            </ul>
           </div>
 
           <div className="cv-grid">
@@ -249,7 +250,7 @@ export default function CvPage() {
             <Card className="cv-card">
               <h3>Sprachen &amp; Tools</h3>
               <p><strong>Sprachen:</strong> Deutsch (Muttersprache), Englisch (verhandlungssicher)</p>
-              <p><strong>Tools &amp; Methoden:</strong> OKRs, Jira, Confluence, Miro, MS Office, agile &amp; hybride Delivery-Modelle</p>
+              <p><strong>Tools &amp; Methoden:</strong> Jira, Confluence, Miro, Prototyping-Tools, MS Office, agile und hybride Produktmethoden</p>
             </Card>
           </div>
         </div>
@@ -257,94 +258,94 @@ export default function CvPage() {
         <div className="cv-print">
           <div className="cv-print-header">
             <div>
-              <h1>Ralf Mitterbauer</h1>
-              <h2>Director Product &amp; Operations | Product Leadership &amp; Execution</h2>
+              <h1>CV – Ralf Mitterbauer</h1>
+              <h2>Head of Product | Insurgo GmbH</h2>
             </div>
             <div className="cv-print-photo">
               <img src={profileImage} alt="Ralf Mitterbauer" />
             </div>
           </div>
           <div className="cv-print-contact">
-            <p>Bad Salzdetfuth (Region Hannover)</p>
-            <p>Bereit für hybrides Arbeiten in Bremen</p>
+            <p>Bad Salzdetfuth (Region Hannover), Deutschland</p>
+            <p>Bereit für Präsenz in Berlin &amp; Remote-Arbeit</p>
             <p>Telefon: +49 (0)151 22644067</p>
             <p>E-Mail: ralf.mitterbauer@t-online.de</p>
             <p>LinkedIn: www.linkedin.com/in/ralf-mitterbauer-6a9a319/</p>
-            <p>Remote (Germany)</p>
           </div>
 
           <h3>Profil</h3>
           <p>
-            Erfahrener Product- und Operations-Leader mit klarer Verantwortung für Outcome, Fokus und verlässliche Execution in
-            technologiegetriebenen Organisationen. Langjährige Erfahrung darin, strategische Ziele (OKRs) in klare Prioritäten, wirksame
-            Initiativen und messbare Ergebnisse zu übersetzen – auch unter hoher Komplexität und Zeitdruck.
+            Erfahrener Versicherungsexperte mit langjähriger Führungserfahrung in der Versicherungs- und Dienstleistungsbranche. Umfassendes
+            Verständnis der versicherungsseitigen End-to-End-Wertschöpfung – von Underwriting, Vertrieb und Brokeranbindung über Policierung
+            und Bestandsführung bis hin zu Schadenprozessen, Partnermanagement, Prüfung, Freigabe, Abrechnung, Qualitätssicherung sowie der
+            Entwicklung und Nutzung digitaler Plattform- und Kernsysteme.
           </p>
           <p>
-            Stark in der Führung interdisziplinärer Teams, im Aufbau klarer Entscheidungs- und Priorisierungslogiken sowie in der
-            End-to-End-Verantwortung für Customer Journeys, Delivery und operative Wirksamkeit. Ruhig, entscheidungsstark und konsequent
-            in der Umsetzung – mit hohem Anspruch an Klarheit, Ownership und Wirkung.
+            Langjährige Verantwortung für die strategische Ausrichtung, Priorisierung und Umsetzung komplexer Software- und Plattformprodukte.
+            Verbindet unternehmerisches Denken mit tiefem technischem Verständnis, strukturierter Arbeitsweise und ausgeprägter
+            Hands-on-Mentalität. Gewohnt, Verantwortung zu übernehmen, Entscheidungen nachvollziehbar zu treffen und Teams sicher durch
+            komplexe Veränderungsvorhaben zu führen.
           </p>
 
-          <h3>Kernkompetenzen</h3>
+          <h3>Schwerpunkte &amp; Kompetenzen</h3>
           <ul>
-            <li>Product &amp; Operations Leadership</li>
-            <li>Verantwortung für Outcome, KPIs &amp; Delivery</li>
-            <li>OKR-basierte Zielsteuerung &amp; Priorisierung</li>
-            <li>Aufbau stabiler Produkt- &amp; Execution-Systeme</li>
-            <li>Customer Journey Ownership (SaaS / Plattform / SMB)</li>
-            <li>Fokusdisziplin, Scope-Shaping &amp; Entscheidungsfindung</li>
-            <li>Führung interdisziplinärer Teams (Product, Tech, Ops)</li>
-            <li>Enge Zusammenarbeit mit Geschäftsführung &amp; Stakeholdern</li>
-            <li>Change, Skalierung &amp; Organisationsentwicklung</li>
+            <li>Gesamtverantwortung für Produktstrategie, Vision und Roadmaps</li>
+            <li>Digitale Versicherungsplattformen und versicherungsseitige Kernprozesse</li>
+            <li>Führung und Weiterentwicklung interdisziplinärer Produkt- und Entwicklungsteams</li>
+            <li>Übersetzung fachlicher Anforderungen in belastbare technische Produktkonzepte</li>
+            <li>Priorisierung, Entscheidungsfindung und verlässliche Execution</li>
+            <li>Strukturierte Produktsteuerung und nachvollziehbare Entscheidungslogiken</li>
+            <li>Umsetzung komplexer Software- und Plattformprojekte</li>
+            <li>Startup-Erfahrung und unternehmerische Denkweise</li>
           </ul>
 
           <h3>Beruflicher Werdegang</h3>
           <h4>Insurfox GmbH</h4>
-          <p>Product Lead / Product Owner – Plattform &amp; Operations-nahe Prozesse · seit 11/2025</p>
+          <p>Senior Product Owner | Platform Strategy &amp; Insurance Processes · seit 11/2025</p>
           <ul>
-            <li>Gesamtverantwortung für den Produkterfolg einer zentralen, geschäftskritischen Plattform mit hoher operativer Relevanz.</li>
-            <li>Verantwortung für Produktvision, Roadmap und Prioritäten mit klarem Fokus auf messbare Outcomes.</li>
-            <li>Übersetzung strategischer Ziele in konkrete Initiativen, sauberes Scope-Shaping und stabile Execution.</li>
-            <li>Sicherstellung einer ruhigen, vorhersehbaren Delivery über Produkt, Entwicklung und angrenzende operative Bereiche hinweg.</li>
-            <li>Enge Zusammenarbeit mit Geschäftsführung, Fachbereichen und externen Partnern.</li>
-            <li>Etablierung klarer Regeln für Priorisierung, Entscheidungsfindung sowie Start/Stop von Initiativen.</li>
-            <li>Stärkung von Ownership, Verantwortung und Entscheidungsfähigkeit im Team.</li>
+            <li>Steuerung der Produktstrategie und Roadmap entlang klar definierter Unternehmensziele.</li>
+            <li>Ganzheitlicher Blick auf alle versicherungsrelevanten Prozesse, Systeme und beteiligten Einheiten.</li>
+            <li>Übersetzung komplexer fachlicher Anforderungen in klare, umsetzbare technische Produktanforderungen.</li>
+            <li>Enge Zusammenarbeit mit Entwicklung, Business, Kunden und externen Partnern.</li>
+            <li>Strukturierte Priorisierung von Anforderungen und Initiativen.</li>
+            <li>Fundierte Produktentscheidungen auf Basis operativer Nutzungserfahrungen, Marktverständnis und fachlicher Expertise.</li>
+            <li>Sicherstellung einer nachvollziehbaren, stabilen und zielgerichteten Produktentwicklung.</li>
           </ul>
 
           <h4>RLE Nova GmbH</h4>
-          <p>Produktmanager / Product Lead · 01/2022 – 10/2025</p>
+          <p>Produktmanager / Product Owner · 01/2022 – 10/2025</p>
           <ul>
-            <li>Verantwortung für digitale Produkte und Angebotslogiken von der Idee bis zum Marktbetrieb.</li>
-            <li>Aufbau klarer Produktstrukturen, Prioritäten und Entscheidungswege.</li>
-            <li>Führung und Koordination interdisziplinärer Teams (Tech, Business, externe Partner).</li>
-            <li>Fokus auf Wirkung, Kundennutzen und nachhaltige Delivery statt Feature-Output.</li>
+            <li>Verantwortung für mehrere digitale Produkte und Plattformlösungen.</li>
+            <li>Konzeption von Produktlogiken, User Flows und funktionalen Anforderungen.</li>
+            <li>Umsetzung komplexer Softwareprojekte von der Idee bis zum Produktivbetrieb.</li>
+            <li>Zusammenarbeit mit Design, Entwicklung und Business auf Augenhöhe.</li>
+            <li>Strukturierte Dokumentation und transparente Entscheidungsgrundlagen.</li>
           </ul>
 
           <h4>RLE INTERNATIONAL GmbH &amp; Co. KG</h4>
           <p>Senior Berater / Projektleiter · 05/2017 – 12/2021</p>
           <ul>
-            <li>Verantwortung für komplexe Transformations- und Optimierungsprogramme.</li>
-            <li>Steuerung mehrerer paralleler Initiativen mit klarer Ergebnisverantwortung.</li>
-            <li>Moderation anspruchsvoller Stakeholder-Situationen auf Management-Ebene.</li>
-            <li>Nachweisliche Verbesserung von Effizienz, Qualität und wirtschaftlichem Ergebnis.</li>
-          </ul>
-
-          <h4>A.T.U. GmbH &amp; Co. KG</h4>
-          <p>Geschäftsleiter · 06/2015 – 05/2017</p>
-          <ul>
-            <li>Gesamtverantwortung für einen großen Standort mit über 36 Mitarbeitenden.</li>
-            <li>Führung, Zielsteuerung und operative Exzellenz.</li>
-            <li>Klare Entscheidungen auch unter Unsicherheit und Zeitdruck.</li>
-            <li>Verantwortung für Ergebnis, Qualität, Prozesse und Teamleistung.</li>
+            <li>Steuerung komplexer Transformations- und Optimierungsprojekte.</li>
+            <li>Ganzheitlicher Blick auf Organisation, Prozesse, IT und Wirtschaftlichkeit.</li>
+            <li>Führung interdisziplinärer Projektteams.</li>
+            <li>Verantwortung für Ergebnis, Qualität und Umsetzung.</li>
           </ul>
 
           <h4>Nobilas GmbH (Akzo Nobel)</h4>
-          <p>Service Manager – Schadensteuerung &amp; Partnernetzwerke · 12/2006 – 04/2008</p>
+          <p>Service Manager – Schadensteuerung und Partnernetzwerke · 12/2006 – 04/2008</p>
           <ul>
-            <li>Verantwortung für ein bundesweites Partner- und Werkstattnetzwerk.</li>
-            <li>Zentrale Schnittstelle zu namhaften Versicherungskonzernen.</li>
+            <li>Verantwortung für Schadensteuerung und Partnernetzwerke im Versicherungsumfeld.</li>
+            <li>Zusammenarbeit mit namhaften Versicherungskonzernen.</li>
             <li>Führung von über 50 Mitarbeitenden.</li>
-            <li>Steuerung komplexer End-to-End-Prozesse mit hoher operativer Wirkung.</li>
+            <li>Steuerung komplexer End-to-End-Prozesse über mehrere Organisationseinheiten hinweg.</li>
+          </ul>
+
+          <h3>Weitere Führungsstationen (Auswahl)</h3>
+          <ul>
+            <li>Geschäftsleiter – A.T.U. GmbH &amp; Co. KG</li>
+            <li>Service Manager – AH Lier GmbH &amp; Co. KG</li>
+            <li>Operations / Innovation Manager – GIMS UG</li>
+            <li>Inhaber / Geschäftsführer – eigene Unternehmen</li>
           </ul>
 
           <h3>Ausbildung</h3>
@@ -354,63 +355,63 @@ export default function CvPage() {
           </ul>
 
           <h3>Sprachen &amp; Tools</h3>
-          <p><strong>Sprachen:</strong> Deutsch (Muttersprache), Englisch (verhandlungssicher)</p>
-          <p><strong>Tools &amp; Methoden:</strong> OKRs, Jira, Confluence, Miro, MS Office, agile &amp; hybride Delivery-Modelle</p>
+          <p><strong>Deutsch</strong> (Muttersprache)</p>
+          <p><strong>Englisch</strong> (verhandlungssicher)</p>
+          <p>Jira, Confluence, Miro, Prototyping-Tools, MS Office, agile und hybride Produktmethoden</p>
         </div>
 
         <div className="cv-print cv-print-combined">
           <div className="cv-print-header">
             <div>
-              <h1>Statement of Interest – Director Product &amp; Operations</h1>
-              <h2>Ralf Mitterbauer</h2>
+              <h1>Anschreiben – Ralf Mitterbauer</h1>
+              <h2>Statement of Interest – Head of Product</h2>
             </div>
             <div className="cv-print-photo">
               <img src={profileImage} alt="Ralf Mitterbauer" />
             </div>
           </div>
           <div className="cv-print-contact">
-            <p>Bad Salzdetfuth (Region Hannover)</p>
-            <p>Bereit für hybrides Arbeiten in Bremen</p>
+            <p>Bad Salzdetfuth (Region Hannover), Deutschland</p>
+            <p>Bereit für Präsenz in Berlin &amp; Remote-Arbeit</p>
             <p>Telefon: +49 (0)151 22644067</p>
             <p>E-Mail: ralf.mitterbauer@t-online.de</p>
             <p>LinkedIn: www.linkedin.com/in/ralf-mitterbauer-6a9a319/</p>
-            <p>Remote (Germany)</p>
           </div>
 
           <div className="cv-letter-space cv-letter-space-3" />
-          <h3 className="cv-letter-heading">Statement of Interest – Director Product &amp; Operations</h3>
+          <h3 className="cv-letter-heading">Statement of Interest – Head of Product</h3>
           <div className="cv-letter-space cv-letter-space-2" />
           <p>Sehr geehrte Damen und Herren,</p>
           <p>
-            die Rolle Director Product &amp; Operations bei Robin Cook spricht mich sehr an, da sie genau dort ansetzt, wo nachhaltiger
-            Produkterfolg entsteht: bei klarer Verantwortung für Outcome, Fokusdisziplin und verlässlicher Execution – über Produkt,
-            Operations und Customer Journey hinweg.
+            die Position Head of Product bei der Insurgo GmbH spricht mich sehr an, da sie die Verantwortung für Produktstrategie,
+            operative Umsetzung und tiefes Versicherungsverständnis in einer Weise verbindet, die meiner bisherigen Laufbahn entspricht.
           </p>
           <p>
-            In meinen bisherigen Rollen habe ich wiederholt die Verantwortung übernommen, strategische Ziele in klare Prioritäten,
-            wirksame Initiativen und messbare Ergebnisse zu übersetzen. Dabei lag mein Fokus nie auf einzelnen Features, sondern auf dem
-            Gesamterfolg des Produkts im Alltag der Kund:innen. Als Product Lead bei Insurfox verantworte ich heute den Produkterfolg
-            einer zentralen, operativ hochrelevanten Plattform und sorge für ruhige, vorhersehbare Delivery auch unter hoher Komplexität.
+            In meiner aktuellen Rolle verantworte ich die strategische und operative Weiterentwicklung einer zentralen
+            Versicherungsplattform. Ich steuere Produktstrategie und Roadmap, übersetze komplexe fachliche Anforderungen in belastbare
+            technische Produktkonzepte und arbeite eng mit Entwicklung, Business, Kunden und Partnern zusammen. Dabei lege ich
+            besonderen Wert auf Struktur, Nachvollziehbarkeit und eine verlässliche Umsetzung.
           </p>
           <p>
-            Ein wiederkehrendes Muster meiner Laufbahn ist die Führung interdisziplinärer Teams, das Etablieren klarer Entscheidungslogiken
-            sowie die konsequente Ausrichtung auf Wirkung statt Aktivität. Ob in Produktrollen, in der operativen Geschäftsleitung oder in
-            der Steuerung großer Partnernetzwerke – ich bin es gewohnt, Verantwortung zu übernehmen, Entscheidungen zu treffen und sie auch
-            unter Unsicherheit konsequent zu vertreten.
+            Meine mehr als 25-jährige Führungs- und Managementerfahrung im Versicherungsumfeld ermöglicht mir einen ganzheitlichen Blick
+            auf die gesamte versicherungsseitige Wertschöpfung – von Underwriting, Vertrieb und Brokeranbindung über Policierung und
+            Bestandsführung bis hin zu Schadenprozessen, Abrechnung, Qualitätssicherung sowie digitalen Kern- und Plattformlösungen.
+            Ergänzt wird dies durch ein tiefes technisches Verständnis und umfangreiche Erfahrung in der erfolgreichen Umsetzung
+            komplexer Software- und Plattformprojekte, auch in startup-nahen Strukturen.
           </p>
           <p>
-            Besonders reizt mich an Robin Cook die klare Mission und die Phase, in der sich das Unternehmen befindet: Das Produkt
-            funktioniert, der Markt ist da – jetzt geht es darum, Strukturen, Fokus und Execution auf das nächste Level zu heben. Genau
-            hier sehe ich meine Stärke und meinen Beitrag.
+            Neben der fachlichen Motivation ist mir auch der persönliche Rahmen wichtig. Ich bin 55 Jahre alt, Vater von zwei Kindern und
+            seit vielen Jahren beruflich wie privat klar verankert. Mein Lebensmittelpunkt ist Bad Salzdetfuth bei Hannover, wo ich auch
+            Eigentum besitze. Der Standort Berlin ist für mich in mehrfacher Hinsicht attraktiv: Zum einen ermöglicht er mir, meine Rolle
+            bei InsurGo mit der notwendigen Präsenz und Nähe zum Team auszufüllen, was ich gerade in einer Startup-Phase als entscheidend
+            erachte. Zum anderen lebt meine Tochter, Leistungssportlerin im Wasserball und Mitglied der Frauen-Bundesliga sowie der
+            deutschen Nationalmannschaft, im Sportinternat in Berlin. Die Verbindung von beruflicher Präsenz und familiärer Nähe schafft
+            für mich zusätzliche Stabilität und ermöglicht es mir, mich langfristig mit voller Energie und Verlässlichkeit in diese
+            Aufgabe einzubringen.
           </p>
           <p>
-            Ich arbeite ruhig, klar und verbindlich – auch in stressigen Phasen – und scheue keine Konflikte, wenn sie notwendig sind, um
-            Qualität, Fokus und gemeinsame Ziele zu sichern. Die enge Zusammenarbeit mit der Geschäftsführung sowie die Bereitschaft,
-            Verantwortung vor Ort in Bremen zu übernehmen, sehe ich als selbstverständlichen Teil dieser Rolle.
-          </p>
-          <p>
-            Gerne würde ich meine Erfahrung und Haltung bei Robin Cook einbringen und gemeinsam den messbaren Produkterfolg
-            weiterentwickeln. Über ein persönliches Gespräch freue ich mich sehr.
+            Gerne würde ich meine Erfahrung, meine Haltung und meine Arbeitsweise bei Insurgo einbringen und die Weiterentwicklung Ihrer
+            Produkte verantwortungsvoll und nachhaltig mitgestalten. Über ein persönliches Gespräch freue ich mich sehr.
           </p>
           <p>Mit freundlichen Grüßen</p>
           <p>Ralf Mitterbauer</p>
@@ -419,94 +420,94 @@ export default function CvPage() {
 
           <div className="cv-print-header">
             <div>
-              <h1>Ralf Mitterbauer</h1>
-              <h2>Director Product &amp; Operations | Product Leadership &amp; Execution</h2>
+              <h1>CV – Ralf Mitterbauer</h1>
+              <h2>Head of Product | Insurgo GmbH</h2>
             </div>
             <div className="cv-print-photo">
               <img src={profileImage} alt="Ralf Mitterbauer" />
             </div>
           </div>
           <div className="cv-print-contact">
-            <p>Bad Salzdetfuth (Region Hannover)</p>
-            <p>Bereit für hybrides Arbeiten in Bremen</p>
+            <p>Bad Salzdetfuth (Region Hannover), Deutschland</p>
+            <p>Bereit für Präsenz in Berlin &amp; Remote-Arbeit</p>
             <p>Telefon: +49 (0)151 22644067</p>
             <p>E-Mail: ralf.mitterbauer@t-online.de</p>
             <p>LinkedIn: www.linkedin.com/in/ralf-mitterbauer-6a9a319/</p>
-            <p>Remote (Germany)</p>
           </div>
 
           <h3>Profil</h3>
           <p>
-            Erfahrener Product- und Operations-Leader mit klarer Verantwortung für Outcome, Fokus und verlässliche Execution in
-            technologiegetriebenen Organisationen. Langjährige Erfahrung darin, strategische Ziele (OKRs) in klare Prioritäten, wirksame
-            Initiativen und messbare Ergebnisse zu übersetzen – auch unter hoher Komplexität und Zeitdruck.
+            Erfahrener Versicherungsexperte mit langjähriger Führungserfahrung in der Versicherungs- und Dienstleistungsbranche. Umfassendes
+            Verständnis der versicherungsseitigen End-to-End-Wertschöpfung – von Underwriting, Vertrieb und Brokeranbindung über Policierung
+            und Bestandsführung bis hin zu Schadenprozessen, Partnermanagement, Prüfung, Freigabe, Abrechnung, Qualitätssicherung sowie der
+            Entwicklung und Nutzung digitaler Plattform- und Kernsysteme.
           </p>
           <p>
-            Stark in der Führung interdisziplinärer Teams, im Aufbau klarer Entscheidungs- und Priorisierungslogiken sowie in der
-            End-to-End-Verantwortung für Customer Journeys, Delivery und operative Wirksamkeit. Ruhig, entscheidungsstark und konsequent
-            in der Umsetzung – mit hohem Anspruch an Klarheit, Ownership und Wirkung.
+            Langjährige Verantwortung für die strategische Ausrichtung, Priorisierung und Umsetzung komplexer Software- und Plattformprodukte.
+            Verbindet unternehmerisches Denken mit tiefem technischem Verständnis, strukturierter Arbeitsweise und ausgeprägter
+            Hands-on-Mentalität. Gewohnt, Verantwortung zu übernehmen, Entscheidungen nachvollziehbar zu treffen und Teams sicher durch
+            komplexe Veränderungsvorhaben zu führen.
           </p>
 
-          <h3>Kernkompetenzen</h3>
+          <h3>Schwerpunkte &amp; Kompetenzen</h3>
           <ul>
-            <li>Product &amp; Operations Leadership</li>
-            <li>Verantwortung für Outcome, KPIs &amp; Delivery</li>
-            <li>OKR-basierte Zielsteuerung &amp; Priorisierung</li>
-            <li>Aufbau stabiler Produkt- &amp; Execution-Systeme</li>
-            <li>Customer Journey Ownership (SaaS / Plattform / SMB)</li>
-            <li>Fokusdisziplin, Scope-Shaping &amp; Entscheidungsfindung</li>
-            <li>Führung interdisziplinärer Teams (Product, Tech, Ops)</li>
-            <li>Enge Zusammenarbeit mit Geschäftsführung &amp; Stakeholdern</li>
-            <li>Change, Skalierung &amp; Organisationsentwicklung</li>
+            <li>Gesamtverantwortung für Produktstrategie, Vision und Roadmaps</li>
+            <li>Digitale Versicherungsplattformen und versicherungsseitige Kernprozesse</li>
+            <li>Führung und Weiterentwicklung interdisziplinärer Produkt- und Entwicklungsteams</li>
+            <li>Übersetzung fachlicher Anforderungen in belastbare technische Produktkonzepte</li>
+            <li>Priorisierung, Entscheidungsfindung und verlässliche Execution</li>
+            <li>Strukturierte Produktsteuerung und nachvollziehbare Entscheidungslogiken</li>
+            <li>Umsetzung komplexer Software- und Plattformprojekte</li>
+            <li>Startup-Erfahrung und unternehmerische Denkweise</li>
           </ul>
 
           <h3>Beruflicher Werdegang</h3>
           <h4>Insurfox GmbH</h4>
-          <p>Product Lead / Product Owner – Plattform &amp; Operations-nahe Prozesse · seit 11/2025</p>
+          <p>Senior Product Owner | Platform Strategy &amp; Insurance Processes · seit 11/2025</p>
           <ul>
-            <li>Gesamtverantwortung für den Produkterfolg einer zentralen, geschäftskritischen Plattform mit hoher operativer Relevanz.</li>
-            <li>Verantwortung für Produktvision, Roadmap und Prioritäten mit klarem Fokus auf messbare Outcomes.</li>
-            <li>Übersetzung strategischer Ziele in konkrete Initiativen, sauberes Scope-Shaping und stabile Execution.</li>
-            <li>Sicherstellung einer ruhigen, vorhersehbaren Delivery über Produkt, Entwicklung und angrenzende operative Bereiche hinweg.</li>
-            <li>Enge Zusammenarbeit mit Geschäftsführung, Fachbereichen und externen Partnern.</li>
-            <li>Etablierung klarer Regeln für Priorisierung, Entscheidungsfindung sowie Start/Stop von Initiativen.</li>
-            <li>Stärkung von Ownership, Verantwortung und Entscheidungsfähigkeit im Team.</li>
+            <li>Steuerung der Produktstrategie und Roadmap entlang klar definierter Unternehmensziele.</li>
+            <li>Ganzheitlicher Blick auf alle versicherungsrelevanten Prozesse, Systeme und beteiligten Einheiten.</li>
+            <li>Übersetzung komplexer fachlicher Anforderungen in klare, umsetzbare technische Produktanforderungen.</li>
+            <li>Enge Zusammenarbeit mit Entwicklung, Business, Kunden und externen Partnern.</li>
+            <li>Strukturierte Priorisierung von Anforderungen und Initiativen.</li>
+            <li>Fundierte Produktentscheidungen auf Basis operativer Nutzungserfahrungen, Marktverständnis und fachlicher Expertise.</li>
+            <li>Sicherstellung einer nachvollziehbaren, stabilen und zielgerichteten Produktentwicklung.</li>
           </ul>
 
           <h4>RLE Nova GmbH</h4>
-          <p>Produktmanager / Product Lead · 01/2022 – 10/2025</p>
+          <p>Produktmanager / Product Owner · 01/2022 – 10/2025</p>
           <ul>
-            <li>Verantwortung für digitale Produkte und Angebotslogiken von der Idee bis zum Marktbetrieb.</li>
-            <li>Aufbau klarer Produktstrukturen, Prioritäten und Entscheidungswege.</li>
-            <li>Führung und Koordination interdisziplinärer Teams (Tech, Business, externe Partner).</li>
-            <li>Fokus auf Wirkung, Kundennutzen und nachhaltige Delivery statt Feature-Output.</li>
+            <li>Verantwortung für mehrere digitale Produkte und Plattformlösungen.</li>
+            <li>Konzeption von Produktlogiken, User Flows und funktionalen Anforderungen.</li>
+            <li>Umsetzung komplexer Softwareprojekte von der Idee bis zum Produktivbetrieb.</li>
+            <li>Zusammenarbeit mit Design, Entwicklung und Business auf Augenhöhe.</li>
+            <li>Strukturierte Dokumentation und transparente Entscheidungsgrundlagen.</li>
           </ul>
 
           <h4>RLE INTERNATIONAL GmbH &amp; Co. KG</h4>
           <p>Senior Berater / Projektleiter · 05/2017 – 12/2021</p>
           <ul>
-            <li>Verantwortung für komplexe Transformations- und Optimierungsprogramme.</li>
-            <li>Steuerung mehrerer paralleler Initiativen mit klarer Ergebnisverantwortung.</li>
-            <li>Moderation anspruchsvoller Stakeholder-Situationen auf Management-Ebene.</li>
-            <li>Nachweisliche Verbesserung von Effizienz, Qualität und wirtschaftlichem Ergebnis.</li>
-          </ul>
-
-          <h4>A.T.U. GmbH &amp; Co. KG</h4>
-          <p>Geschäftsleiter · 06/2015 – 05/2017</p>
-          <ul>
-            <li>Gesamtverantwortung für einen großen Standort mit über 36 Mitarbeitenden.</li>
-            <li>Führung, Zielsteuerung und operative Exzellenz.</li>
-            <li>Klare Entscheidungen auch unter Unsicherheit und Zeitdruck.</li>
-            <li>Verantwortung für Ergebnis, Qualität, Prozesse und Teamleistung.</li>
+            <li>Steuerung komplexer Transformations- und Optimierungsprojekte.</li>
+            <li>Ganzheitlicher Blick auf Organisation, Prozesse, IT und Wirtschaftlichkeit.</li>
+            <li>Führung interdisziplinärer Projektteams.</li>
+            <li>Verantwortung für Ergebnis, Qualität und Umsetzung.</li>
           </ul>
 
           <h4>Nobilas GmbH (Akzo Nobel)</h4>
-          <p>Service Manager – Schadensteuerung &amp; Partnernetzwerke · 12/2006 – 04/2008</p>
+          <p>Service Manager – Schadensteuerung und Partnernetzwerke · 12/2006 – 04/2008</p>
           <ul>
-            <li>Verantwortung für ein bundesweites Partner- und Werkstattnetzwerk.</li>
-            <li>Zentrale Schnittstelle zu namhaften Versicherungskonzernen.</li>
+            <li>Verantwortung für Schadensteuerung und Partnernetzwerke im Versicherungsumfeld.</li>
+            <li>Zusammenarbeit mit namhaften Versicherungskonzernen.</li>
             <li>Führung von über 50 Mitarbeitenden.</li>
-            <li>Steuerung komplexer End-to-End-Prozesse mit hoher operativer Wirkung.</li>
+            <li>Steuerung komplexer End-to-End-Prozesse über mehrere Organisationseinheiten hinweg.</li>
+          </ul>
+
+          <h3>Weitere Führungsstationen (Auswahl)</h3>
+          <ul>
+            <li>Geschäftsleiter – A.T.U. GmbH &amp; Co. KG</li>
+            <li>Service Manager – AH Lier GmbH &amp; Co. KG</li>
+            <li>Operations / Innovation Manager – GIMS UG</li>
+            <li>Inhaber / Geschäftsführer – eigene Unternehmen</li>
           </ul>
 
           <h3>Ausbildung</h3>
@@ -516,63 +517,63 @@ export default function CvPage() {
           </ul>
 
           <h3>Sprachen &amp; Tools</h3>
-          <p><strong>Sprachen:</strong> Deutsch (Muttersprache), Englisch (verhandlungssicher)</p>
-          <p><strong>Tools &amp; Methoden:</strong> OKRs, Jira, Confluence, Miro, MS Office, agile &amp; hybride Delivery-Modelle</p>
+          <p><strong>Deutsch</strong> (Muttersprache)</p>
+          <p><strong>Englisch</strong> (verhandlungssicher)</p>
+          <p>Jira, Confluence, Miro, Prototyping-Tools, MS Office, agile und hybride Produktmethoden</p>
         </div>
 
         <div className="cv-print cv-print-cover">
           <div className="cv-print-header">
             <div>
-              <h1>Statement of Interest – Director Product &amp; Operations</h1>
-              <h2>Ralf Mitterbauer</h2>
+              <h1>Anschreiben – Ralf Mitterbauer</h1>
+              <h2>Statement of Interest – Head of Product</h2>
             </div>
             <div className="cv-print-photo">
               <img src={profileImage} alt="Ralf Mitterbauer" />
             </div>
           </div>
           <div className="cv-print-contact">
-            <p>Bad Salzdetfuth (Region Hannover)</p>
-            <p>Bereit für hybrides Arbeiten in Bremen</p>
+            <p>Bad Salzdetfuth (Region Hannover), Deutschland</p>
+            <p>Bereit für Präsenz in Berlin &amp; Remote-Arbeit</p>
             <p>Telefon: +49 (0)151 22644067</p>
             <p>E-Mail: ralf.mitterbauer@t-online.de</p>
             <p>LinkedIn: www.linkedin.com/in/ralf-mitterbauer-6a9a319/</p>
-            <p>Remote (Germany)</p>
           </div>
 
           <div className="cv-letter-space cv-letter-space-3" />
-          <h3 className="cv-letter-heading">Statement of Interest – Director Product &amp; Operations</h3>
+          <h3 className="cv-letter-heading">Statement of Interest – Head of Product</h3>
           <div className="cv-letter-space cv-letter-space-2" />
           <p>Sehr geehrte Damen und Herren,</p>
           <p>
-            die Rolle Director Product &amp; Operations bei Robin Cook spricht mich sehr an, da sie genau dort ansetzt, wo nachhaltiger
-            Produkterfolg entsteht: bei klarer Verantwortung für Outcome, Fokusdisziplin und verlässlicher Execution – über Produkt,
-            Operations und Customer Journey hinweg.
+            die Position Head of Product bei der Insurgo GmbH spricht mich sehr an, da sie die Verantwortung für Produktstrategie,
+            operative Umsetzung und tiefes Versicherungsverständnis in einer Weise verbindet, die meiner bisherigen Laufbahn entspricht.
           </p>
           <p>
-            In meinen bisherigen Rollen habe ich wiederholt die Verantwortung übernommen, strategische Ziele in klare Prioritäten,
-            wirksame Initiativen und messbare Ergebnisse zu übersetzen. Dabei lag mein Fokus nie auf einzelnen Features, sondern auf dem
-            Gesamterfolg des Produkts im Alltag der Kund:innen. Als Product Lead bei Insurfox verantworte ich heute den Produkterfolg
-            einer zentralen, operativ hochrelevanten Plattform und sorge für ruhige, vorhersehbare Delivery auch unter hoher Komplexität.
+            In meiner aktuellen Rolle verantworte ich die strategische und operative Weiterentwicklung einer zentralen
+            Versicherungsplattform. Ich steuere Produktstrategie und Roadmap, übersetze komplexe fachliche Anforderungen in belastbare
+            technische Produktkonzepte und arbeite eng mit Entwicklung, Business, Kunden und Partnern zusammen. Dabei lege ich
+            besonderen Wert auf Struktur, Nachvollziehbarkeit und eine verlässliche Umsetzung.
           </p>
           <p>
-            Ein wiederkehrendes Muster meiner Laufbahn ist die Führung interdisziplinärer Teams, das Etablieren klarer Entscheidungslogiken
-            sowie die konsequente Ausrichtung auf Wirkung statt Aktivität. Ob in Produktrollen, in der operativen Geschäftsleitung oder in
-            der Steuerung großer Partnernetzwerke – ich bin es gewohnt, Verantwortung zu übernehmen, Entscheidungen zu treffen und sie auch
-            unter Unsicherheit konsequent zu vertreten.
+            Meine mehr als 25-jährige Führungs- und Managementerfahrung im Versicherungsumfeld ermöglicht mir einen ganzheitlichen Blick
+            auf die gesamte versicherungsseitige Wertschöpfung – von Underwriting, Vertrieb und Brokeranbindung über Policierung und
+            Bestandsführung bis hin zu Schadenprozessen, Abrechnung, Qualitätssicherung sowie digitalen Kern- und Plattformlösungen.
+            Ergänzt wird dies durch ein tiefes technisches Verständnis und umfangreiche Erfahrung in der erfolgreichen Umsetzung
+            komplexer Software- und Plattformprojekte, auch in startup-nahen Strukturen.
           </p>
           <p>
-            Besonders reizt mich an Robin Cook die klare Mission und die Phase, in der sich das Unternehmen befindet: Das Produkt
-            funktioniert, der Markt ist da – jetzt geht es darum, Strukturen, Fokus und Execution auf das nächste Level zu heben. Genau
-            hier sehe ich meine Stärke und meinen Beitrag.
+            Neben der fachlichen Motivation ist mir auch der persönliche Rahmen wichtig. Ich bin 55 Jahre alt, Vater von zwei Kindern und
+            seit vielen Jahren beruflich wie privat klar verankert. Mein Lebensmittelpunkt ist Bad Salzdetfuth bei Hannover, wo ich auch
+            Eigentum besitze. Der Standort Berlin ist für mich in mehrfacher Hinsicht attraktiv: Zum einen ermöglicht er mir, meine Rolle
+            bei InsurGo mit der notwendigen Präsenz und Nähe zum Team auszufüllen, was ich gerade in einer Startup-Phase als entscheidend
+            erachte. Zum anderen lebt meine Tochter, Leistungssportlerin im Wasserball und Mitglied der Frauen-Bundesliga sowie der
+            deutschen Nationalmannschaft, im Sportinternat in Berlin. Die Verbindung von beruflicher Präsenz und familiärer Nähe schafft
+            für mich zusätzliche Stabilität und ermöglicht es mir, mich langfristig mit voller Energie und Verlässlichkeit in diese
+            Aufgabe einzubringen.
           </p>
           <p>
-            Ich arbeite ruhig, klar und verbindlich – auch in stressigen Phasen – und scheue keine Konflikte, wenn sie notwendig sind, um
-            Qualität, Fokus und gemeinsame Ziele zu sichern. Die enge Zusammenarbeit mit der Geschäftsführung sowie die Bereitschaft,
-            Verantwortung vor Ort in Bremen zu übernehmen, sehe ich als selbstverständlichen Teil dieser Rolle.
-          </p>
-          <p>
-            Gerne würde ich meine Erfahrung und Haltung bei Robin Cook einbringen und gemeinsam den messbaren Produkterfolg
-            weiterentwickeln. Über ein persönliches Gespräch freue ich mich sehr.
+            Gerne würde ich meine Erfahrung, meine Haltung und meine Arbeitsweise bei Insurgo einbringen und die Weiterentwicklung Ihrer
+            Produkte verantwortungsvoll und nachhaltig mitgestalten. Über ein persönliches Gespräch freue ich mich sehr.
           </p>
           <p>Mit freundlichen Grüßen</p>
           <p>Ralf Mitterbauer</p>
