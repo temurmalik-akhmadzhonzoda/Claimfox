@@ -11,7 +11,7 @@ export default function AnschreibenPage() {
       <section className="page cv-page">
         <div className="cv-shell">
           <div className="cv-header">
-            <Header title="Application" subtitle="Ralf Mitterbauer" subtitleColor="#65748b" />
+            <Header title="Anschreiben – Ralf Mitterbauer" subtitle="Statement of Interest – Head of Product" subtitleColor="#65748b" />
             <Button className="cv-download" onClick={() => window.print()}>
               PDF herunterladen
             </Button>
@@ -19,63 +19,61 @@ export default function AnschreibenPage() {
 
           <div className="cv-hero">
             <div className="cv-hero-left">
-              <h2>Senior Technical Product Manager – Platform &amp; Workflow Orchestration</h2>
-              <p>Bad Salzdetfuth (Region Hannover), Germany</p>
-              <p>Phone: +49 (0)151 22644067</p>
-              <p>Email: ralf.mitterbauer@t-online.de</p>
+              <h2>Statement of Interest – Head of Product</h2>
+              <p>Bad Salzdetfuth (Region Hannover), Deutschland</p>
+              <p>Telefon: +49 (0)151 22644067</p>
+              <p>E-Mail: ralf.mitterbauer@t-online.de</p>
               <p>LinkedIn: www.linkedin.com/in/ralf-mitterbauer-6a9a319/</p>
-              <p>Remote (Germany)</p>
             </div>
             <Card className="cv-profile-card">
               <img className="cv-profile-image" src={profileImage} alt="Ralf Mitterbauer" />
               <div>
-                <strong>Senior Technical Product Manager – Platform &amp; Workflow Orchestration</strong>
+                <strong>Anschreiben – Ralf Mitterbauer</strong>
               </div>
             </Card>
           </div>
 
           <Card className="cv-card cv-letter">
-            <h3>Statement of Interest – Director Product &amp; Operations</h3>
+            <h3>Anschreiben – Ralf Mitterbauer</h3>
             <div className="cv-letter-space cv-letter-space-2" />
-            <p>Bad Salzdetfuth (Region Hannover), Germany</p>
-            <p>Phone: +49 (0)151 22644067</p>
-            <p>Email: ralf.mitterbauer@t-online.de</p>
+            <p>Bad Salzdetfuth (Region Hannover), Deutschland</p>
+            <p>Telefon: +49 (0)151 22644067</p>
+            <p>E-Mail: ralf.mitterbauer@t-online.de</p>
             <p>LinkedIn: www.linkedin.com/in/ralf-mitterbauer-6a9a319/</p>
-            <p>Remote (Germany)</p>
             <div className="cv-letter-space cv-letter-space-3" />
-            <h3 className="cv-letter-heading">Statement of Interest – Director Product &amp; Operations</h3>
+            <h3 className="cv-letter-heading">Statement of Interest – Head of Product</h3>
             <div className="cv-letter-space cv-letter-space-2" />
             <p>Sehr geehrte Damen und Herren,</p>
             <p>
-              die Rolle Director Product &amp; Operations bei Robin Cook spricht mich sehr an, da sie genau dort ansetzt, wo nachhaltiger
-              Produkterfolg entsteht: bei klarer Verantwortung für Outcome, Fokusdisziplin und verlässlicher Execution – über Produkt,
-              Operations und Customer Journey hinweg.
+              die Position Head of Product bei der Insurgo GmbH spricht mich sehr an, da sie die Verantwortung für Produktstrategie,
+              operative Umsetzung und tiefes Versicherungsverständnis in einer Weise verbindet, die meiner bisherigen Laufbahn entspricht.
             </p>
             <p>
-              In meinen bisherigen Rollen habe ich wiederholt die Verantwortung übernommen, strategische Ziele in klare Prioritäten,
-              wirksame Initiativen und messbare Ergebnisse zu übersetzen. Dabei lag mein Fokus nie auf einzelnen Features, sondern auf dem
-              Gesamterfolg des Produkts im Alltag der Kund:innen. Als Product Lead bei Insurfox verantworte ich heute den Produkterfolg
-              einer zentralen, operativ hochrelevanten Plattform und sorge für ruhige, vorhersehbare Delivery auch unter hoher Komplexität.
+              In meiner aktuellen Rolle verantworte ich die strategische und operative Weiterentwicklung einer zentralen
+              Versicherungsplattform. Ich steuere Produktstrategie und Roadmap, übersetze komplexe fachliche Anforderungen in belastbare
+              technische Produktkonzepte und arbeite eng mit Entwicklung, Business, Kunden und Partnern zusammen. Dabei lege ich
+              besonderen Wert auf Struktur, Nachvollziehbarkeit und eine verlässliche Umsetzung.
             </p>
             <p>
-              Ein wiederkehrendes Muster meiner Laufbahn ist die Führung interdisziplinärer Teams, das Etablieren klarer Entscheidungslogiken
-              sowie die konsequente Ausrichtung auf Wirkung statt Aktivität. Ob in Produktrollen, in der operativen Geschäftsleitung oder in
-              der Steuerung großer Partnernetzwerke – ich bin es gewohnt, Verantwortung zu übernehmen, Entscheidungen zu treffen und sie auch
-              unter Unsicherheit konsequent zu vertreten.
+              Meine mehr als 25-jährige Führungs- und Managementerfahrung im Versicherungsumfeld ermöglicht mir einen ganzheitlichen Blick
+              auf die gesamte versicherungsseitige Wertschöpfung – von Underwriting, Vertrieb und Brokeranbindung über Policierung und
+              Bestandsführung bis hin zu Schadenprozessen, Abrechnung, Qualitätssicherung sowie digitalen Kern- und Plattformlösungen.
+              Ergänzt wird dies durch ein tiefes technisches Verständnis und umfangreiche Erfahrung in der erfolgreichen Umsetzung
+              komplexer Software- und Plattformprojekte, auch in startup-nahen Strukturen.
             </p>
             <p>
-              Besonders reizt mich an Robin Cook die klare Mission und die Phase, in der sich das Unternehmen befindet: Das Produkt
-              funktioniert, der Markt ist da – jetzt geht es darum, Strukturen, Fokus und Execution auf das nächste Level zu heben. Genau
-              hier sehe ich meine Stärke und meinen Beitrag.
+              Neben der fachlichen Motivation ist mir auch der persönliche Rahmen wichtig. Ich bin 55 Jahre alt, Vater von zwei Kindern und
+              seit vielen Jahren beruflich wie privat klar verankert. Mein Lebensmittelpunkt ist Bad Salzdetfuth bei Hannover, wo ich auch
+              Eigentum besitze. Der Standort Berlin ist für mich in mehrfacher Hinsicht attraktiv: Zum einen ermöglicht er mir, meine Rolle
+              bei InsurGo mit der notwendigen Präsenz und Nähe zum Team auszufüllen, was ich gerade in einer Startup-Phase als entscheidend
+              erachte. Zum anderen lebt meine Tochter, Leistungssportlerin im Wasserball und Mitglied der Frauen-Bundesliga sowie der
+              deutschen Nationalmannschaft, im Sportinternat in Berlin. Die Verbindung von beruflicher Präsenz und familiärer Nähe schafft
+              für mich zusätzliche Stabilität und ermöglicht es mir, mich langfristig mit voller Energie und Verlässlichkeit in diese
+              Aufgabe einzubringen.
             </p>
             <p>
-              Ich arbeite ruhig, klar und verbindlich – auch in stressigen Phasen – und scheue keine Konflikte, wenn sie notwendig sind, um
-              Qualität, Fokus und gemeinsame Ziele zu sichern. Die enge Zusammenarbeit mit der Geschäftsführung sowie die Bereitschaft,
-              Verantwortung vor Ort in Bremen zu übernehmen, sehe ich als selbstverständlichen Teil dieser Rolle.
-            </p>
-            <p>
-              Gerne würde ich meine Erfahrung und Haltung bei Robin Cook einbringen und gemeinsam den messbaren Produkterfolg
-              weiterentwickeln. Über ein persönliches Gespräch freue ich mich sehr.
+              Gerne würde ich meine Erfahrung, meine Haltung und meine Arbeitsweise bei Insurgo einbringen und die Weiterentwicklung Ihrer
+              Produkte verantwortungsvoll und nachhaltig mitgestalten. Über ein persönliches Gespräch freue ich mich sehr.
             </p>
             <p>Mit freundlichen Grüßen</p>
             <p>Ralf Mitterbauer</p>
@@ -85,66 +83,54 @@ export default function AnschreibenPage() {
         <div className="cv-print">
           <div className="cv-print-header">
             <div>
-              <h1>Ralf Mitterbauer</h1>
-              <h2>Senior Technical Product Manager | Platform &amp; Workflow Orchestration</h2>
+              <h1>Anschreiben – Ralf Mitterbauer</h1>
+              <h2>Statement of Interest – Head of Product</h2>
             </div>
             <div className="cv-print-photo">
               <img src={profileImage} alt="Ralf Mitterbauer" />
             </div>
           </div>
           <div className="cv-print-contact">
-            <p>Bad Salzdetfuth (Region Hannover), Germany</p>
-            <p>Phone: +49 (0)151 22644067</p>
-            <p>Email: ralf.mitterbauer@t-online.de</p>
+            <p>Bad Salzdetfuth (Region Hannover), Deutschland</p>
+            <p>Telefon: +49 (0)151 22644067</p>
+            <p>E-Mail: ralf.mitterbauer@t-online.de</p>
             <p>LinkedIn: www.linkedin.com/in/ralf-mitterbauer-6a9a319/</p>
           </div>
 
-          <h3>Senior Technical Product Manager – Platform &amp; Workflow Orchestration</h3>
-          <p>Bad Salzdetfuth (Region Hannover), Germany</p>
-          <p>Phone: +49 (0)151 22644067</p>
-          <p>Email: ralf.mitterbauer@t-online.de</p>
-          <p>LinkedIn: www.linkedin.com/in/ralf-mitterbauer-6a9a319/</p>
-          <p>Remote (Germany)</p>
-          <h3>Cover Letter</h3>
-          <p>Dear Hiring Team,</p>
+          <h3>Statement of Interest – Head of Product</h3>
+          <p>Sehr geehrte Damen und Herren,</p>
           <p>
-            I am writing to express my interest in the Senior Technical Product Manager – Platform &amp; Workflow Orchestration role. The
-            position strongly resonates with my background in owning and evolving mission-critical, horizontal platforms that coordinate
-            complex workflows across multiple services, stakeholders, and regulatory constraints.
+            die Position Head of Product bei der Insurgo GmbH spricht mich sehr an, da sie die Verantwortung für Produktstrategie,
+            operative Umsetzung und tiefes Versicherungsverständnis in einer Weise verbindet, die meiner bisherigen Laufbahn entspricht.
           </p>
           <p>
-            In my current role as Product Owner / Technical Product Manager at Insurfox, I take end-to-end ownership of a central,
-            revenue-generating platform within the insurance domain. This platform coordinates complex workflows across intake, validation,
-            decision logic, partner interaction, and communication. My responsibilities include defining product vision and roadmaps, owning
-            and prioritizing the backlog, and translating business, operational, and compliance requirements into robust, reusable platform
-            capabilities. I work closely with senior engineers and architects to ensure scalability, reliability, and long-term
-            maintainability while actively managing dependencies across multiple domains.
+            In meiner aktuellen Rolle verantworte ich die strategische und operative Weiterentwicklung einer zentralen
+            Versicherungsplattform. Ich steuere Produktstrategie und Roadmap, übersetze komplexe fachliche Anforderungen in belastbare
+            technische Produktkonzepte und arbeite eng mit Entwicklung, Business, Kunden und Partnern zusammen. Dabei lege ich
+            besonderen Wert auf Struktur, Nachvollziehbarkeit und eine verlässliche Umsetzung.
           </p>
           <p>
-            Throughout my career, I have consistently focused on orchestration, coordination, and platform ownership in complex environments.
-            Earlier, as Service Manager at Nobilas (Akzo Nobel), I was responsible for steering nationwide partner networks within the
-            insurance claims ecosystem. I coordinated end-to-end workflows across insurers, service partners, and internal teams and held
-            leadership responsibility for more than 50 employees. This experience significantly shaped my systems-oriented mindset and my
-            understanding of how platform decisions directly impact operational efficiency, partner performance, and customer outcomes.
+            Meine mehr als 25-jährige Führungs- und Managementerfahrung im Versicherungsumfeld ermöglicht mir einen ganzheitlichen Blick
+            auf die gesamte versicherungsseitige Wertschöpfung – von Underwriting, Vertrieb und Brokeranbindung über Policierung und
+            Bestandsführung bis hin zu Schadenprozessen, Abrechnung, Qualitätssicherung sowie digitalen Kern- und Plattformlösungen.
+            Ergänzt wird dies durch ein tiefes technisches Verständnis und umfangreiche Erfahrung in der erfolgreichen Umsetzung
+            komplexer Software- und Plattformprojekte, auch in startup-nahen Strukturen.
           </p>
           <p>
-            What particularly attracts me to this role is the focus on an already live, business-critical orchestration layer, where the
-            challenge lies not in validation but in continuously improving performance, reliability, scalability, and economic efficiency
-            under increasing complexity. I am comfortable operating in environments where workflows are revenue-critical, highly
-            interconnected, and subject to regulatory requirements, and where product decisions must carefully balance technical integrity
-            with business impact.
+            Neben der fachlichen Motivation ist mir auch der persönliche Rahmen wichtig. Ich bin 55 Jahre alt, Vater von zwei Kindern und
+            seit vielen Jahren beruflich wie privat klar verankert. Mein Lebensmittelpunkt ist Bad Salzdetfuth bei Hannover, wo ich auch
+            Eigentum besitze. Der Standort Berlin ist für mich in mehrfacher Hinsicht attraktiv: Zum einen ermöglicht er mir, meine Rolle
+            bei InsurGo mit der notwendigen Präsenz und Nähe zum Team auszufüllen, was ich gerade in einer Startup-Phase als entscheidend
+            erachte. Zum anderen lebt meine Tochter, Leistungssportlerin im Wasserball und Mitglied der Frauen-Bundesliga sowie der
+            deutschen Nationalmannschaft, im Sportinternat in Berlin. Die Verbindung von beruflicher Präsenz und familiärer Nähe schafft
+            für mich zusätzliche Stabilität und ermöglicht es mir, mich langfristig mit voller Energie und Verlässlichkeit in diese
+            Aufgabe einzubringen.
           </p>
           <p>
-            I view the orchestration platform not as a technical abstraction, but as a product in its own right—one that enables
-            consistency, quality, and speed across multiple services while protecting long-term platform health. I enjoy working at this
-            horizontal layer, aligning product, engineering, operations, and compliance, and taking clear ownership when trade-offs are
-            required.
+            Gerne würde ich meine Erfahrung, meine Haltung und meine Arbeitsweise bei Insurgo einbringen und die Weiterentwicklung Ihrer
+            Produkte verantwortungsvoll und nachhaltig mitgestalten. Über ein persönliches Gespräch freue ich mich sehr.
           </p>
-          <p>
-            I would welcome the opportunity to discuss how my experience in platform ownership, workflow coordination, and cross-functional
-            leadership can contribute to the continued evolution of your orchestration platform. Thank you for your time and consideration.
-          </p>
-          <p>Kind regards,</p>
+          <p>Mit freundlichen Grüßen</p>
           <p>Ralf Mitterbauer</p>
         </div>
       </section>
