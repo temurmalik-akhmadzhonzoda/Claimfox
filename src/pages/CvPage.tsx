@@ -364,7 +364,6 @@ export default function CvPage() {
           <div className="cv-print-header">
             <div>
               <h1>Anschreiben – Ralf Mitterbauer</h1>
-              <h2>Statement of Interest – Head of Product</h2>
             </div>
             <div className="cv-print-photo">
               <img src={profileImage} alt="Ralf Mitterbauer" />
@@ -526,7 +525,6 @@ export default function CvPage() {
           <div className="cv-print-header">
             <div>
               <h1>Anschreiben – Ralf Mitterbauer</h1>
-              <h2>Statement of Interest – Head of Product</h2>
             </div>
             <div className="cv-print-photo">
               <img src={profileImage} alt="Ralf Mitterbauer" />

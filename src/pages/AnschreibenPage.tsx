@@ -11,7 +11,7 @@ export default function AnschreibenPage() {
       <section className="page cv-page">
         <div className="cv-shell">
           <div className="cv-header">
-            <Header title="Anschreiben – Ralf Mitterbauer" subtitle="Statement of Interest – Head of Product" subtitleColor="#65748b" />
+            <Header title="Anschreiben – Ralf Mitterbauer" subtitle="" subtitleColor="#65748b" />
             <Button className="cv-download" onClick={() => window.print()}>
               PDF herunterladen
             </Button>
