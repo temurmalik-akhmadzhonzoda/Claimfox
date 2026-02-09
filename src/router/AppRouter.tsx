@@ -146,6 +146,16 @@ import DemoPartnerMajorLossPage from '@/pages/demo-partners/DemoPartnerMajorLoss
 import DemoPartnerMajorLossStepPage from '@/pages/demo-partners/DemoPartnerMajorLossStepPage'
 import DemoPartnerPartsPage from '@/pages/demo-partners/DemoPartnerPartsPage'
 import DemoPartnerPartsStepPage from '@/pages/demo-partners/DemoPartnerPartsStepPage'
+import BrokerfoxDashboardPage from '@/pages/BrokerfoxDashboardPage'
+import BrokerfoxClientsPage from '@/pages/BrokerfoxClientsPage'
+import BrokerfoxClientDetailPage from '@/pages/BrokerfoxClientDetailPage'
+import BrokerfoxTendersPage from '@/pages/BrokerfoxTendersPage'
+import BrokerfoxTenderDetailPage from '@/pages/BrokerfoxTenderDetailPage'
+import BrokerfoxOffersPage from '@/pages/BrokerfoxOffersPage'
+import BrokerfoxRenewalsPage from '@/pages/BrokerfoxRenewalsPage'
+import BrokerfoxDocumentsPage from '@/pages/BrokerfoxDocumentsPage'
+import BrokerfoxIntegrationsPage from '@/pages/BrokerfoxIntegrationsPage'
+import BrokerfoxTasksPage from '@/pages/BrokerfoxTasksPage'
 
 function NotFoundRedirect() {
   const { isAuthenticated } = useAuth()
@@ -240,6 +250,16 @@ export default function AppRouter() {
         <Route path="/broker-crm" element={<BrokerCrmPage />} />
         <Route path="/broker-admin" element={<BrokerAdminPage />} />
         <Route path="/broker-admin/customer/:customerId" element={<BrokerAdminCustomerPage />} />
+        <Route path="/brokerfox" element={<BrokerfoxDashboardPage />} />
+        <Route path="/brokerfox/clients" element={<BrokerfoxClientsPage />} />
+        <Route path="/brokerfox/clients/:clientId" element={<BrokerfoxClientDetailPage />} />
+        <Route path="/brokerfox/tenders" element={<BrokerfoxTendersPage />} />
+        <Route path="/brokerfox/tenders/:tenderId" element={<BrokerfoxTenderDetailPage />} />
+        <Route path="/brokerfox/offers" element={<BrokerfoxOffersPage />} />
+        <Route path="/brokerfox/renewals" element={<BrokerfoxRenewalsPage />} />
+        <Route path="/brokerfox/documents" element={<BrokerfoxDocumentsPage />} />
+        <Route path="/brokerfox/integrations" element={<BrokerfoxIntegrationsPage />} />
+        <Route path="/brokerfox/tasks" element={<BrokerfoxTasksPage />} />
         <Route path="/fleet-reporting" element={<FleetReportingPage />} />
         <Route path="/fleet-management" element={<FleetManagementPage />} />
         <Route path="/claim-manager" element={<ClaimManagerMarketingPage />} />

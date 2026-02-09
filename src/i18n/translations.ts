@@ -22,6 +22,217 @@ type TranslationTree = {
       demo: string
     }
   }
+  brokerfox: {
+    nav: {
+      title: string
+      dashboard: string
+      clients: string
+      tenders: string
+      offers: string
+      renewals: string
+      documents: string
+      integrations: string
+      tasks: string
+    }
+    actions: {
+      newClient: string
+      newTender: string
+      newMessage: string
+      uploadDocument: string
+      generateSummary: string
+      approveAndSend: string
+      save: string
+      cancel: string
+    }
+    status: {
+      draft: string
+      sent: string
+      offersReceived: string
+      negotiation: string
+      won: string
+      lost: string
+    }
+    timeline: {
+      title: string
+      subtitle: string
+      externalMessage: string
+      internalNote: string
+      statusUpdate: string
+      attachment: string
+      system: string
+      searchPlaceholder: string
+      messagePlaceholder: string
+      composeTitle: string
+      composeSubtitle: string
+      empty: string
+    }
+    empty: {
+      noClients: string
+      noTenders: string
+      noOffers: string
+      noRenewals: string
+      noDocuments: string
+      noTasks: string
+      noIntegrations: string
+    }
+    state: {
+      loading: string
+      error: string
+      notFound: string
+    }
+    dashboard: {
+      title: string
+      subtitle: string
+      kpi: {
+        clients: string
+        tenders: string
+        offers: string
+        renewals: string
+        unread: string
+        tasks: string
+      }
+      quickActions: string
+      quickActionsSubtitle: string
+      goToClients: string
+      goToDocuments: string
+    }
+    clients: {
+      title: string
+      subtitle: string
+      createTitle: string
+      createSubtitle: string
+      fieldName: string
+      fieldSegment: string
+      fieldIndustry: string
+      listTitle: string
+      listSubtitle: string
+      searchPlaceholder: string
+      segmentMissing: string
+      industryMissing: string
+      viewDetails: string
+      back: string
+      detailSubtitle: string
+      detailSummary: string
+      segmentLabel: string
+      industryLabel: string
+      contactsTitle: string
+      noContacts: string
+      contactRoleMissing: string
+      programsTitle: string
+      programsPlaceholder: string
+      newPlaceholder: string
+    }
+    tenders: {
+      title: string
+      subtitle: string
+      createTitle: string
+      createSubtitle: string
+      fieldTitle: string
+      fieldDescription: string
+      listTitle: string
+      listSubtitle: string
+      clientMissing: string
+      back: string
+      detailSubtitle: string
+      statusTitle: string
+      statusLabel: string
+      requirementsTitle: string
+      requirementsEmpty: string
+      limitLabel: string
+      deductibleLabel: string
+      none: string
+      carriersTitle: string
+      carriersEmpty: string
+      noEmail: string
+      wizardTitle: string
+      wizardSubtitle: string
+      wizard: {
+        requirements: string
+        risk: string
+        timeline: string
+        requirementsHint: string
+        requirementsField: string
+        riskHint: string
+        riskField: string
+        timelineHint: string
+        timelineField: string
+      }
+      newPlaceholder: string
+    }
+    offers: {
+      title: string
+      subtitle: string
+      listTitle: string
+      listSubtitle: string
+      compareAction: string
+      linesCount: string
+      compareTitle: string
+      compareSubtitle: string
+      aiCompareTitle: string
+      aiHint: string
+      approvalLabel: string
+      compareEmpty: string
+      noQuote: string
+      clientUnknown: string
+      noOfferSelected: string
+      summarySentTitle: string
+      summarySentMessage: string
+    }
+    renewals: {
+      title: string
+      subtitle: string
+      bucket: string
+      detailTitle: string
+      detailSubtitle: string
+      policyLabel: string
+      carrierLabel: string
+      premiumLabel: string
+      statusLabel: string
+      status: {
+        upcoming: string
+        inReview: string
+        quoted: string
+        renewed: string
+      }
+      selectFirst: string
+    }
+    documents: {
+      title: string
+      subtitle: string
+      uploadTitle: string
+      uploadSubtitle: string
+      entityClient: string
+      entityTender: string
+      listTitle: string
+      listSubtitle: string
+      inboxOnly: string
+      unassigned: string
+      assignAction: string
+    }
+    integrations: {
+      title: string
+      subtitle: string
+      listTitle: string
+      listSubtitle: string
+      connected: string
+      notConnected: string
+    }
+    tasks: {
+      title: string
+      subtitle: string
+      createTitle: string
+      createSubtitle: string
+      fieldTitle: string
+      fieldDescription: string
+      linkClient: string
+      linkTender: string
+      linkRenewal: string
+      todo: string
+      inProgress: string
+      done: string
+      noDescription: string
+    }
+  }
   roles: {
       title: string
       subtitle: string
@@ -983,6 +1194,217 @@ export const translations: Record<Lang, TranslationTree> = {
         fleet: 'Flotte',
         partner: 'Partner',
         demo: 'Demo'
+      }
+    },
+    brokerfox: {
+      nav: {
+        title: 'Brokerfox',
+        dashboard: 'Dashboard',
+        clients: 'Kunden',
+        tenders: 'Ausschreibungen',
+        offers: 'Angebote',
+        renewals: 'Erneuerungen',
+        documents: 'Dokumente',
+        integrations: 'Integrationen',
+        tasks: 'Aufgaben'
+      },
+      actions: {
+        newClient: 'Neuer Kunde',
+        newTender: 'Neue Ausschreibung',
+        newMessage: 'Neue Nachricht',
+        uploadDocument: 'Dokument hochladen',
+        generateSummary: 'Zusammenfassung erzeugen',
+        approveAndSend: 'Freigeben & senden',
+        save: 'Speichern',
+        cancel: 'Abbrechen'
+      },
+      status: {
+        draft: 'Entwurf',
+        sent: 'Gesendet',
+        offersReceived: 'Angebote erhalten',
+        negotiation: 'Verhandlung',
+        won: 'Gewonnen',
+        lost: 'Verloren'
+      },
+      timeline: {
+        title: '360° Kommunikation',
+        subtitle: 'Nachrichten, interne Notizen und Statusupdates in einer Linie.',
+        externalMessage: 'Externe Nachricht',
+        internalNote: 'Interne Notiz',
+        statusUpdate: 'Statusupdate',
+        attachment: 'Anhang',
+        system: 'System',
+        searchPlaceholder: 'Timeline durchsuchen',
+        messagePlaceholder: 'Nachricht oder Notiz erfassen …',
+        composeTitle: 'Neue Timeline-Aktion',
+        composeSubtitle: 'AI-Vorschläge sind assistierend und müssen freigegeben werden.',
+        empty: 'Noch keine Timeline-Einträge.'
+      },
+      empty: {
+        noClients: 'Noch keine Kunden vorhanden.',
+        noTenders: 'Noch keine Ausschreibungen vorhanden.',
+        noOffers: 'Noch keine Angebote vorhanden.',
+        noRenewals: 'Noch keine Erneuerungen vorhanden.',
+        noDocuments: 'Noch keine Dokumente vorhanden.',
+        noTasks: 'Noch keine Aufgaben vorhanden.',
+        noIntegrations: 'Noch keine Integrationen vorhanden.'
+      },
+      state: {
+        loading: 'Lade …',
+        error: 'Etwas ist schiefgelaufen. Bitte erneut versuchen.',
+        notFound: 'Eintrag wurde nicht gefunden.'
+      },
+      dashboard: {
+        title: 'Brokerfox Workspace',
+        subtitle: 'Makler-Suite mit CRM, Ausschreibungen, Angeboten und 360° Kommunikation.',
+        kpi: {
+          clients: 'Kunden',
+          tenders: 'Offene Ausschreibungen',
+          offers: 'Angebote',
+          renewals: 'Erneuerungen (30T)',
+          unread: 'Ungelesene Nachrichten',
+          tasks: 'Offene Aufgaben'
+        },
+        quickActions: 'Schnellaktionen',
+        quickActionsSubtitle: 'Erzeuge neue Datensätze oder starte eine Kommunikation.',
+        goToClients: 'Zum Kundenbereich',
+        goToDocuments: 'Zum Dokumentenbereich'
+      },
+      clients: {
+        title: 'Kunden & CRM',
+        subtitle: 'Kundenübersicht, Kontakte und Programme.',
+        createTitle: 'Kunde anlegen',
+        createSubtitle: 'Minimaler CRM-Start mit Validierung.',
+        fieldName: 'Kundenname',
+        fieldSegment: 'Segment',
+        fieldIndustry: 'Branche',
+        listTitle: 'Kundenliste',
+        listSubtitle: 'Durchsuche alle aktiven Mandate.',
+        searchPlaceholder: 'Kunden suchen …',
+        segmentMissing: 'Segment fehlt',
+        industryMissing: 'Branche fehlt',
+        viewDetails: 'Details öffnen',
+        back: 'Zurück zur Liste',
+        detailSubtitle: 'CRM-Details mit 360° Kommunikation.',
+        detailSummary: 'Kurzprofil',
+        segmentLabel: 'Segment',
+        industryLabel: 'Branche',
+        contactsTitle: 'Ansprechpartner',
+        noContacts: 'Keine Kontakte hinterlegt.',
+        contactRoleMissing: 'Rolle offen',
+        programsTitle: 'Programme & Policen',
+        programsPlaceholder: 'Platzhalter für Programme, Policen und Verträge.',
+        newPlaceholder: 'z.B. Nordlicht Logistics'
+      },
+      tenders: {
+        title: 'Ausschreibungen',
+        subtitle: 'Status, Anforderungen und Carrier-Steuerung.',
+        createTitle: 'Ausschreibung erstellen',
+        createSubtitle: 'Zuordnung zu einem Kunden erforderlich.',
+        fieldTitle: 'Ausschreibungstitel',
+        fieldDescription: 'Kurzbeschreibung',
+        listTitle: 'Ausschreibungen',
+        listSubtitle: 'Aktive Ausschreibungen nach Status.',
+        clientMissing: 'Kunde unbekannt',
+        back: 'Zurück zu Ausschreibungen',
+        detailSubtitle: 'Anforderungen, Carrier und Intake-Wizard.',
+        statusTitle: 'Status',
+        statusLabel: 'Aktueller Status',
+        requirementsTitle: 'Anforderungen & Deckungen',
+        requirementsEmpty: 'Keine Anforderungen hinterlegt.',
+        limitLabel: 'Limit',
+        deductibleLabel: 'Selbstbehalt',
+        none: 'Keine Angabe',
+        carriersTitle: 'Eingeladene Carrier',
+        carriersEmpty: 'Noch keine Carrier eingeladen.',
+        noEmail: 'Keine Kontaktadresse',
+        wizardTitle: 'Intake Wizard',
+        wizardSubtitle: 'Strukturierte Risikoaufnahme (Prototyp).',
+        wizard: {
+          requirements: 'Anforderungen',
+          risk: 'Risiko',
+          timeline: 'Timeline',
+          requirementsHint: 'Welche Deckungen sind Pflicht?',
+          requirementsField: 'Pflichtdeckung eingeben',
+          riskHint: 'Wichtigste Risikotreiber notieren.',
+          riskField: 'Risiko-Notiz erfassen',
+          timelineHint: 'Welche Fristen sind kritisch?',
+          timelineField: 'Frist hinzufügen'
+        },
+        newPlaceholder: 'z.B. Fleet Programm 2026'
+      },
+      offers: {
+        title: 'Angebote',
+        subtitle: 'Vergleich, Zusammenfassung und Freigabe.',
+        listTitle: 'Angebote pro Ausschreibung',
+        listSubtitle: 'Wähle eine Ausschreibung zur Gegenüberstellung.',
+        compareAction: 'Vergleich starten',
+        linesCount: '{{count}} Leistungsbausteine',
+        compareTitle: 'Angebotsvergleich',
+        compareSubtitle: 'Nur Unterschiede werden hervorgehoben.',
+        aiCompareTitle: 'AI Vergleich (Vorschlag)',
+        aiHint: 'AI liefert nur Vorschläge. Entscheidung erfolgt manuell.',
+        approvalLabel: 'Ich habe die Zusammenfassung geprüft und freigegeben.',
+        compareEmpty: 'Noch kein Vergleich gestartet.',
+        noQuote: 'Keine Quote',
+        clientUnknown: 'Kunde unbekannt',
+        noOfferSelected: 'Kein Angebot ausgewählt.',
+        summarySentTitle: 'Zusammenfassung gesendet',
+        summarySentMessage: 'Die Angebotszusammenfassung wurde an den Kunden gesendet.'
+      },
+      renewals: {
+        title: 'Erneuerungen',
+        subtitle: 'Pipeline nach Fälligkeit.',
+        bucket: 'Fällig in {{days}} Tagen',
+        detailTitle: 'Erneuerungsdetails',
+        detailSubtitle: 'Status und Kommunikation.',
+        policyLabel: 'Police',
+        carrierLabel: 'Carrier',
+        premiumLabel: 'Prämie',
+        statusLabel: 'Status',
+        status: {
+          upcoming: 'Anstehend',
+          inReview: 'In Prüfung',
+          quoted: 'Angeboten',
+          renewed: 'Erneuert'
+        },
+        selectFirst: 'Erneuerung auswählen'
+      },
+      documents: {
+        title: 'Dokumente & Inbox',
+        subtitle: 'Dokumente hochladen, zuordnen und verfolgen.',
+        uploadTitle: 'Dokument hochladen',
+        uploadSubtitle: 'Speichere Metadaten in der Inbox.',
+        entityClient: 'Kunde',
+        entityTender: 'Ausschreibung',
+        listTitle: 'Dokumentenliste',
+        listSubtitle: 'Inbox und zugeordnete Dokumente.',
+        inboxOnly: 'Nur Inbox (nicht zugeordnet)',
+        unassigned: 'Nicht zugeordnet',
+        assignAction: 'Zuordnen'
+      },
+      integrations: {
+        title: 'Integrationen',
+        subtitle: 'Registry für externe Systeme.',
+        listTitle: 'Integrationen',
+        listSubtitle: 'Status je Schnittstelle verwalten.',
+        connected: 'Verbunden',
+        notConnected: 'Nicht verbunden'
+      },
+      tasks: {
+        title: 'Aufgaben & Workflows',
+        subtitle: 'Leichtgewichtiges Board für Arbeitsschritte.',
+        createTitle: 'Aufgabe erstellen',
+        createSubtitle: 'Mit optionaler Verknüpfung.',
+        fieldTitle: 'Titel',
+        fieldDescription: 'Beschreibung',
+        linkClient: 'Kunde verknüpfen',
+        linkTender: 'Ausschreibung verknüpfen',
+        linkRenewal: 'Erneuerung verknüpfen',
+        todo: 'To Do',
+        inProgress: 'In Bearbeitung',
+        done: 'Erledigt',
+        noDescription: 'Keine Beschreibung'
       }
     },
     roles: {
@@ -3096,6 +3518,217 @@ export const translations: Record<Lang, TranslationTree> = {
         fleet: 'Fleet',
         partner: 'Partner',
         demo: 'Demo'
+      }
+    },
+    brokerfox: {
+      nav: {
+        title: 'Brokerfox',
+        dashboard: 'Dashboard',
+        clients: 'Clients',
+        tenders: 'Tenders',
+        offers: 'Offers',
+        renewals: 'Renewals',
+        documents: 'Documents',
+        integrations: 'Integrations',
+        tasks: 'Tasks'
+      },
+      actions: {
+        newClient: 'New client',
+        newTender: 'New tender',
+        newMessage: 'New message',
+        uploadDocument: 'Upload document',
+        generateSummary: 'Generate summary',
+        approveAndSend: 'Approve & send',
+        save: 'Save',
+        cancel: 'Cancel'
+      },
+      status: {
+        draft: 'Draft',
+        sent: 'Sent',
+        offersReceived: 'Offers received',
+        negotiation: 'Negotiation',
+        won: 'Won',
+        lost: 'Lost'
+      },
+      timeline: {
+        title: '360° Communication',
+        subtitle: 'Messages, internal notes, and status updates in one thread.',
+        externalMessage: 'External message',
+        internalNote: 'Internal note',
+        statusUpdate: 'Status update',
+        attachment: 'Attachment',
+        system: 'System',
+        searchPlaceholder: 'Search timeline',
+        messagePlaceholder: 'Capture a message or note …',
+        composeTitle: 'New timeline action',
+        composeSubtitle: 'AI suggestions are assistive and require approval.',
+        empty: 'No timeline entries yet.'
+      },
+      empty: {
+        noClients: 'No clients yet.',
+        noTenders: 'No tenders yet.',
+        noOffers: 'No offers yet.',
+        noRenewals: 'No renewals yet.',
+        noDocuments: 'No documents yet.',
+        noTasks: 'No tasks yet.',
+        noIntegrations: 'No integrations yet.'
+      },
+      state: {
+        loading: 'Loading …',
+        error: 'Something went wrong. Please try again.',
+        notFound: 'Record not found.'
+      },
+      dashboard: {
+        title: 'Brokerfox workspace',
+        subtitle: 'Broker suite with CRM, tenders, offers, and 360° communication.',
+        kpi: {
+          clients: 'Clients',
+          tenders: 'Open tenders',
+          offers: 'Offers',
+          renewals: 'Renewals (30d)',
+          unread: 'Unread messages',
+          tasks: 'Open tasks'
+        },
+        quickActions: 'Quick actions',
+        quickActionsSubtitle: 'Create records or start communication.',
+        goToClients: 'Go to clients',
+        goToDocuments: 'Go to documents'
+      },
+      clients: {
+        title: 'Clients & CRM',
+        subtitle: 'Client overview, contacts, and programs.',
+        createTitle: 'Create client',
+        createSubtitle: 'Minimal CRM start with validation.',
+        fieldName: 'Client name',
+        fieldSegment: 'Segment',
+        fieldIndustry: 'Industry',
+        listTitle: 'Client list',
+        listSubtitle: 'Search all active accounts.',
+        searchPlaceholder: 'Search clients …',
+        segmentMissing: 'Segment missing',
+        industryMissing: 'Industry missing',
+        viewDetails: 'View details',
+        back: 'Back to list',
+        detailSubtitle: 'CRM detail with 360° communication.',
+        detailSummary: 'Summary',
+        segmentLabel: 'Segment',
+        industryLabel: 'Industry',
+        contactsTitle: 'Contacts',
+        noContacts: 'No contacts yet.',
+        contactRoleMissing: 'Role missing',
+        programsTitle: 'Programs & policies',
+        programsPlaceholder: 'Placeholder for programs, policies, and contracts.',
+        newPlaceholder: 'e.g. Nordlicht Logistics'
+      },
+      tenders: {
+        title: 'Tenders',
+        subtitle: 'Status, requirements, and carrier steering.',
+        createTitle: 'Create tender',
+        createSubtitle: 'Client assignment required.',
+        fieldTitle: 'Tender title',
+        fieldDescription: 'Short description',
+        listTitle: 'Tenders',
+        listSubtitle: 'Active tenders by status.',
+        clientMissing: 'Unknown client',
+        back: 'Back to tenders',
+        detailSubtitle: 'Requirements, carriers, and intake wizard.',
+        statusTitle: 'Status',
+        statusLabel: 'Current status',
+        requirementsTitle: 'Requirements & coverages',
+        requirementsEmpty: 'No requirements added.',
+        limitLabel: 'Limit',
+        deductibleLabel: 'Deductible',
+        none: 'None',
+        carriersTitle: 'Invited carriers',
+        carriersEmpty: 'No carriers invited yet.',
+        noEmail: 'No contact email',
+        wizardTitle: 'Intake wizard',
+        wizardSubtitle: 'Structured intake (prototype).',
+        wizard: {
+          requirements: 'Requirements',
+          risk: 'Risk',
+          timeline: 'Timeline',
+          requirementsHint: 'Which coverages are mandatory?',
+          requirementsField: 'Add mandatory coverage',
+          riskHint: 'Capture primary risk drivers.',
+          riskField: 'Add risk note',
+          timelineHint: 'Which deadlines are critical?',
+          timelineField: 'Add deadline'
+        },
+        newPlaceholder: 'e.g. Fleet program 2026'
+      },
+      offers: {
+        title: 'Offers',
+        subtitle: 'Comparison, summary, and approval.',
+        listTitle: 'Offers per tender',
+        listSubtitle: 'Select a tender to compare.',
+        compareAction: 'Start comparison',
+        linesCount: '{{count}} coverage lines',
+        compareTitle: 'Offer comparison',
+        compareSubtitle: 'Only differences are highlighted.',
+        aiCompareTitle: 'AI comparison (suggestion)',
+        aiHint: 'AI provides suggestions only. Decision remains manual.',
+        approvalLabel: 'I reviewed and approve this summary.',
+        compareEmpty: 'No comparison started yet.',
+        noQuote: 'No quote',
+        clientUnknown: 'Unknown client',
+        noOfferSelected: 'No offer selected.',
+        summarySentTitle: 'Summary sent',
+        summarySentMessage: 'The offer summary has been sent to the client.'
+      },
+      renewals: {
+        title: 'Renewals',
+        subtitle: 'Pipeline by due date.',
+        bucket: 'Due in {{days}} days',
+        detailTitle: 'Renewal details',
+        detailSubtitle: 'Status and communication.',
+        policyLabel: 'Policy',
+        carrierLabel: 'Carrier',
+        premiumLabel: 'Premium',
+        statusLabel: 'Status',
+        status: {
+          upcoming: 'Upcoming',
+          inReview: 'In review',
+          quoted: 'Quoted',
+          renewed: 'Renewed'
+        },
+        selectFirst: 'Select a renewal'
+      },
+      documents: {
+        title: 'Documents & inbox',
+        subtitle: 'Upload, assign, and track documents.',
+        uploadTitle: 'Upload document',
+        uploadSubtitle: 'Store metadata in the inbox.',
+        entityClient: 'Client',
+        entityTender: 'Tender',
+        listTitle: 'Document list',
+        listSubtitle: 'Inbox and linked documents.',
+        inboxOnly: 'Inbox only (unassigned)',
+        unassigned: 'Unassigned',
+        assignAction: 'Assign'
+      },
+      integrations: {
+        title: 'Integrations',
+        subtitle: 'Registry for external systems.',
+        listTitle: 'Integrations',
+        listSubtitle: 'Manage status per interface.',
+        connected: 'Connected',
+        notConnected: 'Not connected'
+      },
+      tasks: {
+        title: 'Tasks & workflows',
+        subtitle: 'Lightweight board for work items.',
+        createTitle: 'Create task',
+        createSubtitle: 'Optional entity link.',
+        fieldTitle: 'Title',
+        fieldDescription: 'Description',
+        linkClient: 'Link client',
+        linkTender: 'Link tender',
+        linkRenewal: 'Link renewal',
+        todo: 'To do',
+        inProgress: 'In progress',
+        done: 'Done',
+        noDescription: 'No description'
       }
     },
     roles: {
