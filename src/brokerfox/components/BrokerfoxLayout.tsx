@@ -55,15 +55,17 @@ export default function BrokerfoxLayout({ title, subtitle, children }: Brokerfox
 
   return (
     <div style={{ width: '100%', maxWidth: 1200, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-      <div style={{ display: 'grid', gridTemplateColumns: 'minmax(240px, 1fr) minmax(280px, 360px)', gap: '1.5rem', alignItems: 'start' }}>
-        <Header title={title} subtitle={subtitle} titleColor="#0f172a" />
-        <div style={{ justifySelf: 'end', display: 'grid', gap: '0.75rem' }}>
+      <BrokerfoxNav />
+      <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) 320px', gap: '1.5rem', alignItems: 'start' }}>
+        <div style={{ display: 'grid', gap: '1.5rem' }}>
+          <Header title={title} subtitle={subtitle} titleColor="#0f172a" />
+          {children}
+        </div>
+        <div style={{ display: 'grid', gap: '0.75rem' }}>
           <DemoUtilitiesPanel tenantId={ctx.tenantId} onTenantChange={() => navigate(0)} />
           <CalendarWidget events={events} onAddEvent={handleAdd} onSelectEvent={handleSelect} />
         </div>
       </div>
-      <BrokerfoxNav />
-      {children}
     </div>
   )
 }
