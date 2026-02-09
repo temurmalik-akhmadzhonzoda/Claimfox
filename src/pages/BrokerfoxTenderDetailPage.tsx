@@ -6,6 +6,7 @@ import Button from '@/components/ui/Button'
 import BrokerfoxNav from '@/brokerfox/components/BrokerfoxNav'
 import TimelineComposer from '@/brokerfox/components/TimelineComposer'
 import TimelineThread from '@/brokerfox/components/TimelineThread'
+import DemoUtilitiesPanel from '@/brokerfox/components/DemoUtilitiesPanel'
 import { useI18n } from '@/i18n/I18nContext'
 import { useTenantContext } from '@/brokerfox/hooks/useTenantContext'
 import {
@@ -116,6 +117,7 @@ export default function BrokerfoxTenderDetailPage() {
     <section className="page" style={{ gap: '1.5rem' }}>
       <div style={{ width: '100%', maxWidth: 1200, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
         <Header title={tender.title} subtitle={t('brokerfox.tenders.detailSubtitle')} titleColor="#0f172a" />
+        <DemoUtilitiesPanel tenantId={ctx.tenantId} onTenantChange={() => navigate(0)} />
         <BrokerfoxNav />
         <Button onClick={() => navigate('/brokerfox/tenders')}>{t('brokerfox.tenders.back')}</Button>
 

@@ -5,10 +5,12 @@ import Header from '@/components/ui/Header'
 import Button from '@/components/ui/Button'
 import { useI18n } from '@/i18n/I18nContext'
 import BrokerfoxNav from '@/brokerfox/components/BrokerfoxNav'
+import DemoUtilitiesPanel from '@/brokerfox/components/DemoUtilitiesPanel'
 import { useTenantContext } from '@/brokerfox/hooks/useTenantContext'
 import {
   createClient,
   createTender,
+  getHeroIds,
   listAllTimelineEvents,
   listClients,
   listOffers,
@@ -31,6 +33,7 @@ export default function BrokerfoxDashboardPage() {
     unread: 0,
     tasks: 0
   })
+  const [hero, setHero] = useState<{ clientId: string; tenderId: string } | null>(null)
   const [newClientName, setNewClientName] = useState('')
   const [newTenderTitle, setNewTenderTitle] = useState('')
 
@@ -56,6 +59,7 @@ export default function BrokerfoxDashboardPage() {
           unread,
           tasks: tasks.filter((task) => task.status !== 'done').length
         })
+        setHero(getHeroIds(ctx.tenantId))
         setLoading(false)
       } catch (err) {
         if (!mounted) return
@@ -96,6 +100,7 @@ export default function BrokerfoxDashboardPage() {
     <section className="page" style={{ gap: '1.5rem' }}>
       <div style={{ width: '100%', maxWidth: 1200, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
         <Header title={t('brokerfox.dashboard.title')} subtitle={t('brokerfox.dashboard.subtitle')} titleColor="#0f172a" />
+        <DemoUtilitiesPanel tenantId={ctx.tenantId} onTenantChange={() => navigate(0)} />
         <BrokerfoxNav />
         {loading ? <p>{t('brokerfox.state.loading')}</p> : null}
         {error ? <p>{error}</p> : null}
@@ -155,7 +160,7 @@ export default function BrokerfoxDashboardPage() {
             </div>
             <div style={{ display: 'grid', gap: '0.6rem' }}>
               <strong>{t('brokerfox.actions.newMessage')}</strong>
-              <Button onClick={() => navigate('/brokerfox/clients')}>{t('brokerfox.dashboard.goToClients')}</Button>
+              <Button onClick={() => navigate(hero ? `/brokerfox/clients/${hero.clientId}` : '/brokerfox/clients')}>{t('brokerfox.dashboard.goToClients')}</Button>
             </div>
             <div style={{ display: 'grid', gap: '0.6rem' }}>
               <strong>{t('brokerfox.actions.uploadDocument')}</strong>

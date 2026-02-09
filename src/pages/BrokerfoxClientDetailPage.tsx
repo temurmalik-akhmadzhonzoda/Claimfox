@@ -4,6 +4,7 @@ import Card from '@/components/ui/Card'
 import Header from '@/components/ui/Header'
 import Button from '@/components/ui/Button'
 import BrokerfoxNav from '@/brokerfox/components/BrokerfoxNav'
+import DemoUtilitiesPanel from '@/brokerfox/components/DemoUtilitiesPanel'
 import TimelineThread from '@/brokerfox/components/TimelineThread'
 import TimelineComposer from '@/brokerfox/components/TimelineComposer'
 import { useI18n } from '@/i18n/I18nContext'
@@ -108,6 +109,7 @@ export default function BrokerfoxClientDetailPage() {
     <section className="page" style={{ gap: '1.5rem' }}>
       <div style={{ width: '100%', maxWidth: 1200, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
         <Header title={client.name} subtitle={t('brokerfox.clients.detailSubtitle')} titleColor="#0f172a" />
+        <DemoUtilitiesPanel tenantId={ctx.tenantId} onTenantChange={() => navigate(0)} />
         <BrokerfoxNav />
         <Button onClick={() => navigate('/brokerfox/clients')}>{t('brokerfox.clients.back')}</Button>
 

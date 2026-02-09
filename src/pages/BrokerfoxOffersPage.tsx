@@ -3,6 +3,7 @@ import Card from '@/components/ui/Card'
 import Header from '@/components/ui/Header'
 import Button from '@/components/ui/Button'
 import BrokerfoxNav from '@/brokerfox/components/BrokerfoxNav'
+import DemoUtilitiesPanel from '@/brokerfox/components/DemoUtilitiesPanel'
 import TimelineComposer from '@/brokerfox/components/TimelineComposer'
 import TimelineThread from '@/brokerfox/components/TimelineThread'
 import { useI18n } from '@/i18n/I18nContext'
@@ -98,6 +99,15 @@ export default function BrokerfoxOffersPage() {
     setComparison(result)
     setSummary('')
     setApproved(false)
+    if (selectedTenderId) {
+      await addTimelineEvent(ctx, {
+        entityType: 'tender',
+        entityId: selectedTenderId,
+        type: 'statusUpdate',
+        title: t('brokerfox.offers.compareLoggedTitle'),
+        message: t('brokerfox.offers.compareLoggedMessage')
+      })
+    }
   }
 
   async function handleGenerateSummary() {
@@ -110,6 +120,13 @@ export default function BrokerfoxOffersPage() {
       comparison: comparison.result
     })
     setSummary(result.result)
+    await addTimelineEvent(ctx, {
+      entityType: 'tender',
+      entityId: selectedTender.id,
+      type: 'statusUpdate',
+      title: t('brokerfox.offers.aiSummaryTitle'),
+      message: t('brokerfox.offers.aiSummaryMessage')
+    })
   }
 
   async function handleSend() {
@@ -144,6 +161,7 @@ export default function BrokerfoxOffersPage() {
     <section className="page" style={{ gap: '1.5rem' }}>
       <div style={{ width: '100%', maxWidth: 1200, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
         <Header title={t('brokerfox.offers.title')} subtitle={t('brokerfox.offers.subtitle')} titleColor="#0f172a" />
+        <DemoUtilitiesPanel tenantId={ctx.tenantId} onTenantChange={() => window.location.reload()} />
         <BrokerfoxNav />
         <Card variant="glass" title={t('brokerfox.offers.listTitle')} subtitle={t('brokerfox.offers.listSubtitle')}>
           {loading ? <p>{t('brokerfox.state.loading')}</p> : null}

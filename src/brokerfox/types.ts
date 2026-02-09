@@ -34,6 +34,7 @@ export type Client = {
   createdAt: string
   updatedAt: string
   contacts: Contact[]
+  isHero?: boolean
 }
 
 export type CoverageRequest = {
@@ -59,6 +60,7 @@ export type Tender = {
   invitedCarriers: Party[]
   createdAt: string
   updatedAt: string
+  isHero?: boolean
 }
 
 export type OfferLine = {
@@ -101,6 +103,8 @@ export type DocumentMeta = {
   uploadedBy: string
   entityType?: EntityType
   entityId?: string
+  url?: string
+  source?: 'demo' | 'upload'
 }
 
 export type IntegrationStatus = 'connected' | 'notConnected'
@@ -138,6 +142,7 @@ export type TimelineEvent = {
   id: string
   tenantId: string
   actorId: string
+  createdAt: string
   timestamp: string
   entityType: EntityType
   entityId: string

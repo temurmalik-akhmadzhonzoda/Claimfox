@@ -4,6 +4,7 @@ import Card from '@/components/ui/Card'
 import Header from '@/components/ui/Header'
 import Button from '@/components/ui/Button'
 import BrokerfoxNav from '@/brokerfox/components/BrokerfoxNav'
+import DemoUtilitiesPanel from '@/brokerfox/components/DemoUtilitiesPanel'
 import { useI18n } from '@/i18n/I18nContext'
 import { useTenantContext } from '@/brokerfox/hooks/useTenantContext'
 import { createTender, listClients, listTenders } from '@/brokerfox/api/brokerfoxApi'
@@ -65,6 +66,7 @@ export default function BrokerfoxTendersPage() {
     <section className="page" style={{ gap: '1.5rem' }}>
       <div style={{ width: '100%', maxWidth: 1200, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
         <Header title={t('brokerfox.tenders.title')} subtitle={t('brokerfox.tenders.subtitle')} titleColor="#0f172a" />
+        <DemoUtilitiesPanel tenantId={ctx.tenantId} onTenantChange={() => navigate(0)} />
         <BrokerfoxNav />
         <Card variant="glass" title={t('brokerfox.tenders.createTitle')} subtitle={t('brokerfox.tenders.createSubtitle')}>
           <div style={{ display: 'grid', gap: '0.75rem', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))' }}>
@@ -97,7 +99,7 @@ export default function BrokerfoxTendersPage() {
           {error ? <p>{error}</p> : null}
           {tenders.length === 0 ? <p>{t('brokerfox.empty.noTenders')}</p> : null}
           <div style={{ display: 'grid', gap: '0.75rem' }}>
-            {tenders.map((tender) => (
+            {[...tenders].sort((a, b) => Number(Boolean(b.isHero)) - Number(Boolean(a.isHero))).map((tender) => (
               <button
                 key={tender.id}
                 type="button"

@@ -165,6 +165,10 @@ type TranslationTree = {
       listTitle: string
       listSubtitle: string
       compareAction: string
+      compareLoggedTitle: string
+      compareLoggedMessage: string
+      aiSummaryTitle: string
+      aiSummaryMessage: string
       linesCount: string
       compareTitle: string
       compareSubtitle: string
@@ -201,13 +205,27 @@ type TranslationTree = {
       subtitle: string
       uploadTitle: string
       uploadSubtitle: string
+      dragDrop: string
+      dragDropHint: string
       entityClient: string
       entityTender: string
+      entityOffer: string
+      entityRenewal: string
       listTitle: string
       listSubtitle: string
       inboxOnly: string
       unassigned: string
       assignAction: string
+      download: string
+      downloaded: string
+      downloadedMessage: string
+    }
+    demo: {
+      title: string
+      subtitle: string
+      tenant: string
+      reset: string
+      seedAll: string
     }
     integrations: {
       title: string
@@ -1339,6 +1357,10 @@ export const translations: Record<Lang, TranslationTree> = {
         listTitle: 'Angebote pro Ausschreibung',
         listSubtitle: 'Wähle eine Ausschreibung zur Gegenüberstellung.',
         compareAction: 'Vergleich starten',
+        compareLoggedTitle: 'Vergleich protokolliert',
+        compareLoggedMessage: 'Ein Angebotsvergleich wurde gestartet.',
+        aiSummaryTitle: 'AI Zusammenfassung (Vorschlag)',
+        aiSummaryMessage: 'AI hat eine Zusammenfassung als Vorschlag erzeugt.',
         linesCount: '{{count}} Leistungsbausteine',
         compareTitle: 'Angebotsvergleich',
         compareSubtitle: 'Nur Unterschiede werden hervorgehoben.',
@@ -1375,13 +1397,27 @@ export const translations: Record<Lang, TranslationTree> = {
         subtitle: 'Dokumente hochladen, zuordnen und verfolgen.',
         uploadTitle: 'Dokument hochladen',
         uploadSubtitle: 'Speichere Metadaten in der Inbox.',
+        dragDrop: 'Dateien hierher ziehen',
+        dragDropHint: 'Drag & Drop oder Dateiauswahl nutzen.',
         entityClient: 'Kunde',
         entityTender: 'Ausschreibung',
+        entityOffer: 'Angebot',
+        entityRenewal: 'Erneuerung',
         listTitle: 'Dokumentenliste',
         listSubtitle: 'Inbox und zugeordnete Dokumente.',
         inboxOnly: 'Nur Inbox (nicht zugeordnet)',
         unassigned: 'Nicht zugeordnet',
-        assignAction: 'Zuordnen'
+        assignAction: 'Zuordnen',
+        download: 'Download',
+        downloaded: 'Download protokolliert',
+        downloadedMessage: 'heruntergeladen'
+      },
+      demo: {
+        title: 'Demo Utilities',
+        subtitle: 'Tenant wechseln oder Demo-Daten neu erzeugen.',
+        tenant: 'Tenant',
+        reset: 'Demo-Daten zurücksetzen',
+        seedAll: 'Alle Demo-Tenants befüllen'
       },
       integrations: {
         title: 'Integrationen',
@@ -3663,6 +3699,10 @@ export const translations: Record<Lang, TranslationTree> = {
         listTitle: 'Offers per tender',
         listSubtitle: 'Select a tender to compare.',
         compareAction: 'Start comparison',
+        compareLoggedTitle: 'Comparison logged',
+        compareLoggedMessage: 'An offer comparison was started.',
+        aiSummaryTitle: 'AI summary (suggestion)',
+        aiSummaryMessage: 'AI generated a summary suggestion.',
         linesCount: '{{count}} coverage lines',
         compareTitle: 'Offer comparison',
         compareSubtitle: 'Only differences are highlighted.',
@@ -3699,13 +3739,27 @@ export const translations: Record<Lang, TranslationTree> = {
         subtitle: 'Upload, assign, and track documents.',
         uploadTitle: 'Upload document',
         uploadSubtitle: 'Store metadata in the inbox.',
+        dragDrop: 'Drag & drop files',
+        dragDropHint: 'Drop files here or use the file picker.',
         entityClient: 'Client',
         entityTender: 'Tender',
+        entityOffer: 'Offer',
+        entityRenewal: 'Renewal',
         listTitle: 'Document list',
         listSubtitle: 'Inbox and linked documents.',
         inboxOnly: 'Inbox only (unassigned)',
         unassigned: 'Unassigned',
-        assignAction: 'Assign'
+        assignAction: 'Assign',
+        download: 'Download',
+        downloaded: 'Download logged',
+        downloadedMessage: 'downloaded'
+      },
+      demo: {
+        title: 'Demo Utilities',
+        subtitle: 'Switch tenant or regenerate demo data.',
+        tenant: 'Tenant',
+        reset: 'Reset demo data',
+        seedAll: 'Seed all demo tenants'
       },
       integrations: {
         title: 'Integrations',

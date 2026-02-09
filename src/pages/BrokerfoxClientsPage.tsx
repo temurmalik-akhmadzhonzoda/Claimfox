@@ -4,6 +4,7 @@ import Card from '@/components/ui/Card'
 import Header from '@/components/ui/Header'
 import Button from '@/components/ui/Button'
 import BrokerfoxNav from '@/brokerfox/components/BrokerfoxNav'
+import DemoUtilitiesPanel from '@/brokerfox/components/DemoUtilitiesPanel'
 import { useI18n } from '@/i18n/I18nContext'
 import { useTenantContext } from '@/brokerfox/hooks/useTenantContext'
 import { createClient, listClients } from '@/brokerfox/api/brokerfoxApi'
@@ -39,9 +40,10 @@ export default function BrokerfoxClientsPage() {
   }, [ctx, t])
 
   const filtered = useMemo(() => {
-    if (!query.trim()) return clients
-    const lower = query.toLowerCase()
-    return clients.filter((client: any) => client.name.toLowerCase().includes(lower))
+    const list = query.trim()
+      ? clients.filter((client: any) => client.name.toLowerCase().includes(query.toLowerCase()))
+      : clients
+    return [...list].sort((a: any, b: any) => Number(Boolean(b.isHero)) - Number(Boolean(a.isHero)))
   }, [clients, query])
 
   async function handleCreate() {
@@ -61,6 +63,7 @@ export default function BrokerfoxClientsPage() {
     <section className="page" style={{ gap: '1.5rem' }}>
       <div style={{ width: '100%', maxWidth: 1200, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
         <Header title={t('brokerfox.clients.title')} subtitle={t('brokerfox.clients.subtitle')} titleColor="#0f172a" />
+        <DemoUtilitiesPanel tenantId={ctx.tenantId} onTenantChange={() => navigate(0)} />
         <BrokerfoxNav />
         <Card variant="glass" title={t('brokerfox.clients.createTitle')} subtitle={t('brokerfox.clients.createSubtitle')}>
           <div style={{ display: 'grid', gap: '0.75rem', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))' }}>
