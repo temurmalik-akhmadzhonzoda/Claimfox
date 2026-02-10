@@ -20,14 +20,18 @@ export default function BrokerfoxNav() {
   const location = useLocation()
 
   return (
-    <nav aria-label={t('brokerfox.nav.title')} style={{ position: 'relative', zIndex: 2 }}>
+    <nav aria-label={t('brokerfox.nav.title')}>
       <div
         role="tablist"
         style={{
           display: 'flex',
           gap: 8,
           alignItems: 'flex-end',
-          padding: '0 12px',
+          padding: '0 4px 10px',
+          background: '#f1f5f9',
+          border: '1px solid #cbd5e1',
+          borderBottom: '1px solid #cbd5e1',
+          borderRadius: 14,
           overflowX: 'auto',
           WebkitOverflowScrolling: 'touch'
         }}
@@ -52,36 +56,19 @@ export default function BrokerfoxNav() {
                 display: 'inline-flex',
                 alignItems: 'center',
                 padding: '0 14px',
-                borderRadius: '12px 12px 10px 10px',
+                borderRadius: 999,
                 textDecoration: 'none',
                 fontSize: 14,
-                fontWeight: isActive ? 700 : 500,
-                background: isActive ? '#ffffff' : '#f3f6fb',
-                color: '#0f172a',
-                border: '1px solid #cfd6e3',
-                borderBottomColor: isActive ? 'transparent' : '#cfd6e3',
-                boxShadow: isActive ? '0 1px 0 rgba(15,23,42,0.06)' : 'none',
-                position: isActive ? 'relative' : 'static',
-                transform: isActive ? 'translateY(0)' : 'translateY(2px)',
-                opacity: isActive ? 1 : 0.95,
-                zIndex: isActive ? 4 : 1,
+                fontWeight: isActive ? 600 : 500,
+                background: isActive ? '#ffffff' : 'transparent',
+                color: isActive ? '#0f172a' : '#475569',
+                border: `1px solid ${isActive ? '#94a3b8' : '#cbd5e1'}`,
+                boxShadow: isActive ? '0 2px 6px rgba(15,23,42,0.08)' : 'none',
+                position: 'relative',
                 whiteSpace: 'nowrap'
               }}
             >
               {t(`brokerfox.nav.${item.key}`)}
-              {isActive && (
-                <span
-                  aria-hidden="true"
-                  style={{
-                    position: 'absolute',
-                    left: 1,
-                    right: 1,
-                    bottom: -1,
-                    height: 2,
-                    background: '#ffffff'
-                  }}
-                />
-              )}
             </NavLink>
           )
         })}
@@ -93,7 +80,7 @@ export default function BrokerfoxNav() {
             outline-offset: 2px;
           }
           .brokerfox-tab:not(.active):hover {
-            background: #eef3fb;
+            background: #e9eff7;
           }
         `}
       </style>

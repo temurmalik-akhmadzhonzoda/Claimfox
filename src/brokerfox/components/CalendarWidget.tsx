@@ -60,6 +60,8 @@ export default function CalendarWidget({ events, onAddEvent, onSelectEvent, dens
     setIsAdding(false)
   }
 
+  const listMaxHeight = height ? Math.max(height - 160, 110) : undefined
+
   return (
     <Card
       variant="glass"
@@ -111,7 +113,7 @@ export default function CalendarWidget({ events, onAddEvent, onSelectEvent, dens
 
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <strong style={{ color: '#0f172a' }}>{t('brokerfox.calendar.upcoming')}</strong>
-          <Button size="sm" onClick={() => setIsAdding((prev) => !prev)}>{t('brokerfox.calendar.addEvent')}</Button>
+          <Button size="sm" variant="secondary" onClick={() => setIsAdding((prev) => !prev)}>{t('brokerfox.calendar.addEvent')}</Button>
         </div>
 
         {isAdding ? (
@@ -135,7 +137,7 @@ export default function CalendarWidget({ events, onAddEvent, onSelectEvent, dens
           </div>
         ) : null}
 
-        <div style={{ flex: 1, overflowY: 'auto', paddingRight: 4 }}>
+        <div style={{ flex: 1, overflowY: 'auto', paddingRight: 4, maxHeight: listMaxHeight }}>
           {filteredEvents.length === 0 ? <p style={{ margin: 0, color: '#64748b', fontSize: '0.85rem' }}>{t('brokerfox.calendar.empty')}</p> : null}
           {filteredEvents.map((event) => (
             <button
