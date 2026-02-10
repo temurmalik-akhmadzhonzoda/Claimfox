@@ -118,47 +118,26 @@ export default function CalendarWidget({ events, onAddEvent, onSelectEvent, dens
           })}
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.45rem' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <strong style={{ color: '#0f172a' }}>{t('brokerfox.calendar.upcoming')}</strong>
-          </div>
-
-          {isAdding ? (
-            <div style={{ display: 'grid', gap: '0.35rem' }}>
-              <input
-                value={newEvent.title}
-                onChange={(event) => setNewEvent((prev) => ({ ...prev, title: event.target.value }))}
-                placeholder={t('brokerfox.calendar.eventTitle')}
-                style={{ padding: '0.35rem 0.55rem', borderRadius: 8, border: '1px solid #d6d9e0', fontSize: '0.85rem' }}
-              />
-              <input
-                type="date"
-                value={newEvent.date}
-                onChange={(event) => setNewEvent((prev) => ({ ...prev, date: event.target.value }))}
-                style={{ padding: '0.35rem 0.55rem', borderRadius: 8, border: '1px solid #d6d9e0', fontSize: '0.85rem' }}
-              />
-              <div style={{ display: 'flex', gap: '0.5rem' }}>
-                <Button size="sm" onClick={handleSubmit}>{t('brokerfox.actions.save')}</Button>
-                <Button size="sm" variant="secondary" onClick={() => setIsAdding(false)}>{t('brokerfox.actions.cancel')}</Button>
-              </div>
+        {isAdding ? (
+          <div style={{ display: 'grid', gap: '0.35rem' }}>
+            <input
+              value={newEvent.title}
+              onChange={(event) => setNewEvent((prev) => ({ ...prev, title: event.target.value }))}
+              placeholder={t('brokerfox.calendar.eventTitle')}
+              style={{ padding: '0.35rem 0.55rem', borderRadius: 8, border: '1px solid #d6d9e0', fontSize: '0.85rem' }}
+            />
+            <input
+              type="date"
+              value={newEvent.date}
+              onChange={(event) => setNewEvent((prev) => ({ ...prev, date: event.target.value }))}
+              style={{ padding: '0.35rem 0.55rem', borderRadius: 8, border: '1px solid #d6d9e0', fontSize: '0.85rem' }}
+            />
+            <div style={{ display: 'flex', gap: '0.5rem' }}>
+              <Button size="sm" onClick={handleSubmit}>{t('brokerfox.actions.save')}</Button>
+              <Button size="sm" variant="secondary" onClick={() => setIsAdding(false)}>{t('brokerfox.actions.cancel')}</Button>
             </div>
-          ) : null}
-
-          <div>
-            {filteredEvents.length === 0 ? <p style={{ margin: 0, color: '#64748b', fontSize: '0.85rem' }}>{t('brokerfox.calendar.empty')}</p> : null}
-            {filteredEvents.map((event) => (
-              <button
-                key={event.id}
-                type="button"
-                onClick={() => setSelectedEvent(event)}
-                style={{ display: 'block', width: '100%', textAlign: 'left', padding: '0.35rem 0', border: 'none', background: 'transparent', color: '#0f172a' }}
-              >
-                <strong style={{ fontSize: '0.85rem' }}>{event.title}</strong>
-                <div style={{ color: '#64748b', fontSize: '0.75rem' }}>{new Intl.DateTimeFormat(lang, { dateStyle: 'medium' }).format(new Date(event.date))}</div>
-              </button>
-            ))}
           </div>
-        </div>
+        ) : null}
       </div>
 
       {selectedEvent ? (
