@@ -29,8 +29,6 @@ export default function BrokerfoxNav() {
           alignItems: 'flex-end',
           padding: '0 4px 10px',
           background: '#f1f5f9',
-          border: '1px solid #cbd5e1',
-          borderBottom: '1px solid #cbd5e1',
           borderRadius: 14,
           overflowX: 'auto',
           WebkitOverflowScrolling: 'touch'
@@ -62,7 +60,7 @@ export default function BrokerfoxNav() {
                 fontWeight: isActive ? 600 : 500,
                 background: isActive ? '#ffffff' : 'transparent',
                 color: isActive ? '#0f172a' : '#475569',
-                border: `1px solid ${isActive ? '#94a3b8' : '#cbd5e1'}`,
+                border: 'none',
                 boxShadow: isActive ? '0 2px 6px rgba(15,23,42,0.08)' : 'none',
                 position: 'relative',
                 whiteSpace: 'nowrap'
