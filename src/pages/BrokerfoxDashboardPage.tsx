@@ -106,29 +106,29 @@ export default function BrokerfoxDashboardPage() {
         {error ? <p>{error}</p> : null}
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))', gap: '1rem' }}>
-          <Card variant="glass">
-            <p style={{ margin: 0 }}>{t('brokerfox.dashboard.kpi.clients')}</p>
-            <strong style={{ fontSize: '1.8rem' }}>{stats.clients}</strong>
+          <Card variant="glass" style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem', alignItems: 'flex-start', minHeight: 90 }}>
+            <p style={{ margin: 0, color: '#475569', fontSize: '0.9rem', lineHeight: 1.2, minHeight: '2.2rem' }}>{t('brokerfox.dashboard.kpi.clients')}</p>
+            <strong style={{ fontSize: '1.8rem', lineHeight: 1 }}>{stats.clients}</strong>
           </Card>
-          <Card variant="glass">
-            <p style={{ margin: 0 }}>{t('brokerfox.dashboard.kpi.tenders')}</p>
-            <strong style={{ fontSize: '1.8rem' }}>{stats.tenders}</strong>
+          <Card variant="glass" style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem', alignItems: 'flex-start', minHeight: 90 }}>
+            <p style={{ margin: 0, color: '#475569', fontSize: '0.9rem', lineHeight: 1.2, minHeight: '2.2rem' }}>{t('brokerfox.dashboard.kpi.tenders')}</p>
+            <strong style={{ fontSize: '1.8rem', lineHeight: 1 }}>{stats.tenders}</strong>
           </Card>
-          <Card variant="glass">
-            <p style={{ margin: 0 }}>{t('brokerfox.dashboard.kpi.offers')}</p>
-            <strong style={{ fontSize: '1.8rem' }}>{stats.offers}</strong>
+          <Card variant="glass" style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem', alignItems: 'flex-start', minHeight: 90 }}>
+            <p style={{ margin: 0, color: '#475569', fontSize: '0.9rem', lineHeight: 1.2, minHeight: '2.2rem' }}>{t('brokerfox.dashboard.kpi.offers')}</p>
+            <strong style={{ fontSize: '1.8rem', lineHeight: 1 }}>{stats.offers}</strong>
           </Card>
-          <Card variant="glass">
-            <p style={{ margin: 0 }}>{t('brokerfox.dashboard.kpi.renewals')}</p>
-            <strong style={{ fontSize: '1.8rem' }}>{stats.renewals}</strong>
+          <Card variant="glass" style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem', alignItems: 'flex-start', minHeight: 90 }}>
+            <p style={{ margin: 0, color: '#475569', fontSize: '0.9rem', lineHeight: 1.2, minHeight: '2.2rem' }}>{t('brokerfox.dashboard.kpi.renewals')}</p>
+            <strong style={{ fontSize: '1.8rem', lineHeight: 1 }}>{stats.renewals}</strong>
           </Card>
-          <Card variant="glass">
-            <p style={{ margin: 0 }}>{t('brokerfox.dashboard.kpi.unread')}</p>
-            <strong style={{ fontSize: '1.8rem' }}>{stats.unread}</strong>
+          <Card variant="glass" style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem', alignItems: 'flex-start', minHeight: 90 }}>
+            <p style={{ margin: 0, color: '#475569', fontSize: '0.9rem', lineHeight: 1.2, minHeight: '2.2rem' }}>{t('brokerfox.dashboard.kpi.unread')}</p>
+            <strong style={{ fontSize: '1.8rem', lineHeight: 1 }}>{stats.unread}</strong>
           </Card>
-          <Card variant="glass">
-            <p style={{ margin: 0 }}>{t('brokerfox.dashboard.kpi.tasks')}</p>
-            <strong style={{ fontSize: '1.8rem' }}>{stats.tasks}</strong>
+          <Card variant="glass" style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem', alignItems: 'flex-start', minHeight: 90 }}>
+            <p style={{ margin: 0, color: '#475569', fontSize: '0.9rem', lineHeight: 1.2, minHeight: '2.2rem' }}>{t('brokerfox.dashboard.kpi.tasks')}</p>
+            <strong style={{ fontSize: '1.8rem', lineHeight: 1 }}>{stats.tasks}</strong>
           </Card>
         </div>
 
