@@ -536,7 +536,88 @@ export async function applyExtraction(ctx: TenantContext, documentId: string) {
 
 export async function listMailboxItems(ctx: TenantContext) {
   ensureSeeded(ctx.tenantId)
-  return readList<MailboxItem>(ctx.tenantId, 'mailbox')
+  const items = readList<MailboxItem>(ctx.tenantId, 'mailbox')
+  if (items.length > 0) {
+    return items
+  }
+  const clients = readList<Client>(ctx.tenantId, 'clients')
+  const contracts = readList<Contract>(ctx.tenantId, 'contracts')
+  const base = new Date()
+  const fallback: MailboxItem[] = [
+    {
+      id: makeId('mail'),
+      tenantId: ctx.tenantId,
+      sender: 'carrier@allianz.example',
+      subject: 'Offer update for SME Package Renewal 2026',
+      receivedAt: new Date(base.getFullYear(), base.getMonth(), base.getDate() - 3, 4, 0).toISOString(),
+      attachments: [
+        {
+          id: makeId('doc'),
+          tenantId: ctx.tenantId,
+          name: 'Offer_Update_SME_Package.pdf',
+          type: 'application/pdf',
+          size: 182000,
+          uploadedAt: nowIso(),
+          uploadedBy: 'carrier@allianz.example',
+          source: 'demo'
+        }
+      ],
+      extractedEntities: [
+        { type: 'contract', label: contracts[0]?.policyNumber ?? 'POL-2026-SME' }
+      ],
+      status: 'unassigned'
+    },
+    {
+      id: makeId('mail'),
+      tenantId: ctx.tenantId,
+      sender: 'risk@suedpol-advisory.example',
+      subject: 'Updated risk information',
+      receivedAt: new Date(base.getFullYear(), base.getMonth(), base.getDate() - 3, 6, 0).toISOString(),
+      attachments: [
+        {
+          id: makeId('doc'),
+          tenantId: ctx.tenantId,
+          name: 'Risk_Assessment_Update.pdf',
+          type: 'application/pdf',
+          size: 245000,
+          uploadedAt: nowIso(),
+          uploadedBy: 'risk@suedpol-advisory.example',
+          source: 'demo'
+        }
+      ],
+      extractedEntities: [
+        { type: 'client', label: clients[0]?.name ?? 'Nordlicht Logistics' }
+      ],
+      status: 'unassigned',
+      body: 'Please find the updated risk assessment and facility overview.'
+    },
+    {
+      id: makeId('mail'),
+      tenantId: ctx.tenantId,
+      sender: 'renewals@carrier.example',
+      subject: 'Renewal reminder for Atlas Holding',
+      receivedAt: new Date(base.getFullYear(), base.getMonth(), base.getDate() - 2, 9, 0).toISOString(),
+      attachments: [
+        {
+          id: makeId('doc'),
+          tenantId: ctx.tenantId,
+          name: 'Renewal_Reminder_Atlas.pdf',
+          type: 'application/pdf',
+          size: 96000,
+          uploadedAt: nowIso(),
+          uploadedBy: 'renewals@carrier.example',
+          source: 'demo'
+        }
+      ],
+      extractedEntities: [
+        { type: 'client', label: clients[1]?.name ?? 'Atlas Holding' }
+      ],
+      status: 'unassigned',
+      body: 'Please provide updated loss history and renewal preferences.'
+    }
+  ]
+  writeList(ctx.tenantId, 'mailbox', fallback)
+  return fallback
 }
 
 export async function updateMailboxItem(ctx: TenantContext, itemId: string, update: Partial<MailboxItem>) {
