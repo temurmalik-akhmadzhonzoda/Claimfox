@@ -50,10 +50,10 @@ export default function CalendarWidget({ events, density = 'regular', height }: 
       style={{ minWidth: density === 'compact' ? 260 : 300, height, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}
     >
       <div style={{ display: 'flex', flexDirection: 'column', gap: density === 'compact' ? '0.35rem' : '0.5rem', flex: 1, minHeight: 0 }}>
-        <div style={{ color: '#d4380d', fontWeight: 700, fontSize: density === 'compact' ? '0.88rem' : '0.92rem', lineHeight: 1.1, whiteSpace: 'nowrap', textAlign: 'left' }}>
+        <div style={{ color: '#d4380d', fontWeight: 700, fontSize: density === 'compact' ? '1.14rem' : '1.2rem', lineHeight: 1.1, whiteSpace: 'nowrap', textAlign: 'left' }}>
           {t('brokerfox.calendar.title')}
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: density === 'compact' ? '0.12rem' : '0.2rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: density === 'compact' ? '0.18rem' : '0.26rem' }}>
           {weekdayLabels.map((label) => (
             <span key={label} style={{ fontSize: density === 'compact' ? '0.6rem' : '0.7rem', color: '#64748b', textAlign: 'center' }}>{label}</span>
           ))}
