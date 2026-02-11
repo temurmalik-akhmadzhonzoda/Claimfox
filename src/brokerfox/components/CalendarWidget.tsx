@@ -52,14 +52,14 @@ export default function CalendarWidget({ events, density = 'regular', height }: 
   const upcomingEvents = useMemo(() => {
     const month = activeMonth.getMonth()
     const year = activeMonth.getFullYear()
-    return [...events]
+    const sorted = [...events]
       .filter((event) => !Number.isNaN(new Date(event.date).getTime()))
-      .filter((event) => {
+      .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+    const inMonth = sorted.filter((event) => {
         const date = new Date(event.date)
         return date.getMonth() === month && date.getFullYear() === year
       })
-      .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
-      .slice(0, 3)
+    return (inMonth.length > 0 ? inMonth : sorted).slice(0, 3)
   }, [events, activeMonth])
   const weekdayLabels = useMemo(() => {
     const formatter = new Intl.DateTimeFormat(lang, { weekday: 'short' })
