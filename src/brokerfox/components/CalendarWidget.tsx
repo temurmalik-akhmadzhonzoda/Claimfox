@@ -62,17 +62,18 @@ export default function CalendarWidget({ events, density = 'regular', height }: 
     if (inMonth.length > 0) {
       return inMonth.slice(0, 3)
     }
+    const monthLabel = new Intl.DateTimeFormat(lang, { month: 'short' }).format(activeMonth)
     const demoTitles = [
-      'Tender deadline: SME Package Renewal',
-      'Tender deadline: Property Program',
-      'Tender deadline: Cyber Program'
+      `Tender deadline: SME Package Renewal (${monthLabel})`,
+      `Tender deadline: Property Program (${monthLabel})`,
+      `Tender deadline: Cyber Program (${monthLabel})`
     ]
     return demoTitles.map((title, idx) => ({
       id: `demo_${year}_${month + 1}_${idx}`,
       title,
       date: new Date(year, month, 12 + idx * 3, 9, 0).toISOString()
     } as CalendarEvent))
-  }, [events, activeMonth])
+  }, [events, activeMonth, lang])
   const weekdayLabels = useMemo(() => {
     const formatter = new Intl.DateTimeFormat(lang, { weekday: 'short' })
     const base = new Date(2025, 0, 6)

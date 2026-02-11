@@ -33,8 +33,8 @@ export default function AppHeader() {
   const navItems = [
     { label: t('header.nav.insurance'), route: '/insurance' },
     { label: t('brokerfox.nav.title'), route: '/brokerfox' },
-    { label: t('header.nav.logistics'), route: '/logistics' },
-    { label: t('header.nav.fleet'), route: '/fleet' },
+    { label: t('header.nav.claimsfox'), route: '/claim-manager' },
+    { label: t('header.nav.aiFox'), route: '/insurfox-iaas' },
     { label: t('header.nav.partner'), route: '/partner' },
     { label: t('header.nav.demo'), route: '/demo' }
   ].filter((item) => (user?.mode === 'insurance-only' ? item.route === '/insurance' : true))

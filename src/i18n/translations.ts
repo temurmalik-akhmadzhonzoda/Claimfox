@@ -1481,8 +1481,8 @@ export const translations: Record<Lang, TranslationTree> = {
       nav: {
         insurance: 'Insurfox',
         broker: 'Makler',
-        logistics: 'Logistik',
-        fleet: 'Flotte',
+        claimsfox: 'Claimsfox',
+        aiFox: 'AI Fox',
         partner: 'Partner',
         demo: 'Demo'
       }
@@ -4059,8 +4059,8 @@ export const translations: Record<Lang, TranslationTree> = {
       nav: {
         insurance: 'Insurfox',
         broker: 'Broker',
-        logistics: 'Logistics',
-        fleet: 'Fleet',
+        claimsfox: 'Claimsfox',
+        aiFox: 'AI Fox',
         partner: 'Partner',
         demo: 'Demo'
       }
