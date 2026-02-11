@@ -50,7 +50,7 @@ export default function CalendarWidget({ events, density = 'regular', height }: 
       style={{ minWidth: density === 'compact' ? 260 : 300, height, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}
     >
       <div style={{ display: 'flex', flexDirection: 'column', gap: density === 'compact' ? '0.35rem' : '0.5rem', flex: 1, minHeight: 0 }}>
-        <div style={{ color: '#d4380d', fontWeight: 700, fontSize: density === 'compact' ? '0.9rem' : '0.95rem', lineHeight: 1.1, whiteSpace: 'nowrap', textAlign: 'left' }}>
+        <div style={{ color: '#d4380d', fontWeight: 700, fontSize: density === 'compact' ? '0.88rem' : '0.92rem', lineHeight: 1.1, whiteSpace: 'nowrap', textAlign: 'left' }}>
           {t('brokerfox.calendar.title')}
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: density === 'compact' ? '0.12rem' : '0.2rem' }}>
@@ -79,16 +79,16 @@ export default function CalendarWidget({ events, density = 'regular', height }: 
             )
           })}
         </div>
-        <div style={{ display: 'grid', gap: '0.22rem', fontSize: 'calc(0.7rem - 2px)', lineHeight: 1.2, color: '#475569', textAlign: 'left', marginTop: density === 'compact' ? '0.35rem' : '0.4rem' }}>
+        <div style={{ display: 'grid', gap: '0.18rem', fontSize: '0.62rem', lineHeight: 1.15, color: '#475569', textAlign: 'left', marginTop: density === 'compact' ? '0.5rem' : '0.55rem' }}>
           {upcomingEvents.length === 0 ? (
             <span style={{ whiteSpace: 'nowrap' }}>{t('brokerfox.calendar.empty')}</span>
           ) : (
             upcomingEvents.map((event) => (
               <div key={event.id} style={{ display: 'flex', justifyContent: 'space-between', gap: '0.5rem' }}>
                 <span style={{ color: '#0f172a', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                  {event.title}
+                  {event.title.replace(/^Tender deadline:\s*/i, '')}
                 </span>
-                <span style={{ whiteSpace: 'nowrap', color: '#64748b', fontSize: 'calc(0.68rem - 2px)' }}>
+                <span style={{ whiteSpace: 'nowrap', color: '#64748b', fontSize: '0.6rem' }}>
                   {new Intl.DateTimeFormat(lang, { month: 'short', day: '2-digit' }).format(new Date(event.date))}
                 </span>
               </div>
