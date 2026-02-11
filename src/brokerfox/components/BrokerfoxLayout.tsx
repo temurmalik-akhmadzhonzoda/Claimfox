@@ -7,6 +7,7 @@ import { useTenantContext } from '@/brokerfox/hooks/useTenantContext'
 import { listCalendarEvents } from '@/brokerfox/api/brokerfoxApi'
 import type { CalendarEvent } from '@/brokerfox/types'
 import HomeHeroBackground from '@/assets/images/Home1.png'
+import InsurfoxLogoLight from '@/assets/logos/insurfox-logo-light.svg'
 type BrokerfoxLayoutProps = {
   title: string
   subtitle?: string
@@ -74,11 +75,24 @@ export default function BrokerfoxLayout({ title, subtitle, topLeft, children }: 
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat',
-              height: TOP_ROW_HEIGHT
+              height: TOP_ROW_HEIGHT,
+              position: 'relative',
+              overflow: 'hidden'
             }}
           >
-            <Header title={title} subtitle={subtitle} titleColor="#0f172a" />
+            <Header title={title} subtitle={subtitle} titleColor="#d4380d" subtitleColor="#ffffff" />
             {topLeft}
+            <img
+              src={InsurfoxLogoLight}
+              alt="Insurfox"
+              style={{
+                position: 'absolute',
+                right: 14,
+                bottom: 12,
+                width: 78,
+                opacity: 0.9
+              }}
+            />
           </div>
           <div style={{ height: TOP_ROW_HEIGHT, alignSelf: 'stretch', minHeight: 0 }}>
             <CalendarWidget
