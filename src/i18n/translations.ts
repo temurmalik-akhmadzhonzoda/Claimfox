@@ -1479,7 +1479,7 @@ export const translations: Record<Lang, TranslationTree> = {
       login: 'Login',
       logout: 'Logout',
       nav: {
-        insurance: 'Versicherungen',
+        insurance: 'Insurfox',
         broker: 'Makler',
         logistics: 'Logistik',
         fleet: 'Flotte',
@@ -4057,7 +4057,7 @@ export const translations: Record<Lang, TranslationTree> = {
       login: 'Login',
       logout: 'Logout',
       nav: {
-        insurance: 'Insurance',
+        insurance: 'Insurfox',
         broker: 'Broker',
         logistics: 'Logistics',
         fleet: 'Fleet',

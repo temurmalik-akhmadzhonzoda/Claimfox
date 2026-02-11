@@ -32,7 +32,6 @@ export default function AppHeader() {
 
   const navItems = [
     { label: t('header.nav.insurance'), route: '/insurance' },
-    { label: t('header.nav.broker'), route: '/broker-portal' },
     { label: t('brokerfox.nav.title'), route: '/brokerfox' },
     { label: t('header.nav.logistics'), route: '/logistics' },
     { label: t('header.nav.fleet'), route: '/fleet' },
