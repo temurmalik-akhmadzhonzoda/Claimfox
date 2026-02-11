@@ -208,7 +208,58 @@ export async function updateClient(ctx: TenantContext, clientId: string, update:
 
 export async function listContracts(ctx: TenantContext) {
   ensureSeeded(ctx.tenantId)
-  return readList<Contract>(ctx.tenantId, 'contracts')
+  const contracts = readList<Contract>(ctx.tenantId, 'contracts')
+  if (contracts.length > 0) {
+    return contracts
+  }
+  const clients = readList<Client>(ctx.tenantId, 'clients')
+  const base = new Date()
+  const fallback: Contract[] = [
+    {
+      id: makeId('contract'),
+      tenantId: ctx.tenantId,
+      clientId: clients[0]?.id ?? '',
+      carrierName: 'Hannover Re',
+      lob: 'Fleet Liability',
+      policyNumber: `POL-${ctx.tenantId.slice(-3)}-1201`,
+      status: 'active',
+      startDate: new Date(base.getFullYear() - 1, 0, 1).toISOString(),
+      endDate: new Date(base.getFullYear(), 11, 31).toISOString(),
+      premiumEUR: 118000,
+      renewalDueDate: new Date(base.getFullYear(), base.getMonth() + 1, 10).toISOString(),
+      isHero: true
+    },
+    {
+      id: makeId('contract'),
+      tenantId: ctx.tenantId,
+      clientId: clients[1]?.id ?? clients[0]?.id ?? '',
+      carrierName: 'Allianz',
+      lob: 'Property All Risk',
+      policyNumber: `POL-${ctx.tenantId.slice(-3)}-1202`,
+      status: 'pending',
+      startDate: new Date(base.getFullYear() - 1, 2, 1).toISOString(),
+      endDate: new Date(base.getFullYear() + 1, 1, 28).toISOString(),
+      premiumEUR: 154000,
+      renewalDueDate: new Date(base.getFullYear(), base.getMonth() + 2, 3).toISOString(),
+      isHero: false
+    },
+    {
+      id: makeId('contract'),
+      tenantId: ctx.tenantId,
+      clientId: clients[2]?.id ?? clients[0]?.id ?? '',
+      carrierName: 'Swiss Re',
+      lob: 'Cyber Shield',
+      policyNumber: `POL-${ctx.tenantId.slice(-3)}-1203`,
+      status: 'active',
+      startDate: new Date(base.getFullYear() - 2, 5, 1).toISOString(),
+      endDate: new Date(base.getFullYear(), 5, 1).toISOString(),
+      premiumEUR: 92000,
+      renewalDueDate: new Date(base.getFullYear(), base.getMonth() + 2, 9).toISOString(),
+      isHero: false
+    }
+  ]
+  writeList(ctx.tenantId, 'contracts', fallback)
+  return fallback
 }
 
 export async function listContractsByClient(ctx: TenantContext, clientId: string) {
