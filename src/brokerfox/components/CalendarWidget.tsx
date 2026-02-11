@@ -50,7 +50,7 @@ export default function CalendarWidget({ events, density = 'regular', height }: 
       style={{ minWidth: density === 'compact' ? 260 : 300, height, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}
     >
       <div style={{ display: 'flex', flexDirection: 'column', gap: density === 'compact' ? '0.35rem' : '0.5rem', flex: 1, minHeight: 0 }}>
-        <div style={{ color: '#f97316', fontWeight: 700, fontSize: density === 'compact' ? '0.92rem' : '0.98rem', lineHeight: 1.1, whiteSpace: 'nowrap', textAlign: 'left' }}>
+        <div style={{ color: '#d4380d', fontWeight: 700, fontSize: density === 'compact' ? '0.9rem' : '0.95rem', lineHeight: 1.1, whiteSpace: 'nowrap', textAlign: 'left' }}>
           {t('brokerfox.calendar.title')}
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: density === 'compact' ? '0.12rem' : '0.2rem' }}>
@@ -79,7 +79,7 @@ export default function CalendarWidget({ events, density = 'regular', height }: 
             )
           })}
         </div>
-        <div style={{ display: 'grid', gap: '0.28rem', fontSize: '0.75rem', color: '#475569', textAlign: 'left', marginTop: density === 'compact' ? '0.1rem' : '0.15rem' }}>
+        <div style={{ display: 'grid', gap: '0.22rem', fontSize: '0.7rem', lineHeight: 1.2, color: '#475569', textAlign: 'left', marginTop: density === 'compact' ? '0.1rem' : '0.12rem' }}>
           {upcomingEvents.length === 0 ? (
             <span style={{ whiteSpace: 'nowrap' }}>{t('brokerfox.calendar.empty')}</span>
           ) : (
@@ -88,7 +88,7 @@ export default function CalendarWidget({ events, density = 'regular', height }: 
                 <span style={{ color: '#0f172a', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                   {event.title}
                 </span>
-                <span style={{ whiteSpace: 'nowrap', color: '#64748b' }}>
+                <span style={{ whiteSpace: 'nowrap', color: '#64748b', fontSize: '0.68rem' }}>
                   {new Intl.DateTimeFormat(lang, { month: 'short', day: '2-digit' }).format(new Date(event.date))}
                 </span>
               </div>
