@@ -49,11 +49,11 @@ export default function CalendarWidget({ events, density = 'regular', height }: 
       variant="glass"
       style={{ minWidth: density === 'compact' ? 260 : 300, height, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}
     >
-      <div style={{ display: 'flex', flexDirection: 'column', gap: density === 'compact' ? '0.35rem' : '0.5rem', flex: 1, minHeight: 0 }}>
-        <div style={{ color: '#d4380d', fontWeight: 700, fontSize: density === 'compact' ? '1.14rem' : '1.2rem', lineHeight: 1.1, whiteSpace: 'nowrap', textAlign: 'left' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: density === 'compact' ? '0.45rem' : '0.6rem', flex: 1, minHeight: 0 }}>
+        <div style={{ color: '#d4380d', fontWeight: 700, fontSize: density === 'compact' ? '1.14rem' : '1.2rem', lineHeight: 1.1, whiteSpace: 'nowrap', textAlign: 'left', marginBottom: density === 'compact' ? '0.25rem' : '0.3rem' }}>
           {t('brokerfox.calendar.title')}
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: density === 'compact' ? '0.18rem' : '0.26rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: density === 'compact' ? '0.2rem' : '0.28rem', rowGap: density === 'compact' ? '0.28rem' : '0.34rem' }}>
           {weekdayLabels.map((label) => (
             <span key={label} style={{ fontSize: density === 'compact' ? '0.6rem' : '0.7rem', color: '#64748b', textAlign: 'center' }}>{label}</span>
           ))}
