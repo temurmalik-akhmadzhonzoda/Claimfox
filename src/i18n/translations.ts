@@ -248,6 +248,233 @@ type TranslationTree = {
       exportedMessage: string
     }
   }
+  claimsfox: {
+    nav: {
+      title: string
+      dashboard: string
+      claims: string
+      intake: string
+      triage: string
+      documents: string
+      mailbox: string
+      partners: string
+      reporting: string
+      tasks: string
+      integrations: string
+    }
+    calendar: {
+      title: string
+      subtitle: string
+      location: string
+      participants: string
+      description: string
+      locationTbd: string
+      participantsTbd: string
+      descriptionTbd: string
+      close: string
+      openRelated: string
+    }
+    dashboard: {
+      title: string
+      subtitle: string
+      kpi: {
+        openClaims: string
+        slaRisk: string
+        fraudFlags: string
+        queue: string
+      }
+      queueTitle: string
+      queueSubtitle: string
+      mailTitle: string
+      mailSubtitle: string
+      recentTitle: string
+      recentSubtitle: string
+    }
+    claims: {
+      title: string
+      subtitle: string
+    }
+    filters: {
+      status: string
+      lob: string
+      search: string
+      searchPlaceholder: string
+      all: string
+    }
+    status: {
+      intake: string
+      triage: string
+      investigation: string
+      settlement: string
+      closed: string
+      denied: string
+    }
+    severity: {
+      low: string
+      medium: string
+      high: string
+      critical: string
+    }
+    claimDetail: {
+      title: string
+      subtitle: string
+      policy: string
+      status: string
+      overviewTitle: string
+      lossDate: string
+      severity: string
+      reserve: string
+      paid: string
+      slaDue: string
+      assigned: string
+      notePlaceholder: string
+      decisionHint: string
+      assignmentsTitle: string
+      assignmentsSubtitle: string
+      tasksLabel: string
+      partnerLabel: string
+      assignPartner: string
+      aiTitle: string
+      aiSubtitle: string
+      aiRecommendation: string
+      aiSummary: string
+      aiBullet1: string
+      aiBullet2: string
+      aiBullet3: string
+      aiSources: string
+      tabs: {
+        overview: string
+        documents: string
+        timeline: string
+        decision: string
+      }
+      actions: {
+        settlement: string
+        investigation: string
+        deny: string
+        addNote: string
+      }
+    }
+    documents: {
+      title: string
+      subtitle: string
+      helper: string
+      linkTo: string
+      upload: string
+      view: string
+      approve: string
+      previewText: string
+      open: string
+      status: string
+      statusLabels: {
+        pending: string
+        needsReview: string
+        approved: string
+      }
+    }
+    mailbox: {
+      title: string
+      subtitle: string
+      inbox: string
+      inboxSubtitle: string
+      detail: string
+      from: string
+      date: string
+      attachments: string
+      link: string
+      noSelection: string
+    }
+    partners: {
+      title: string
+      subtitle: string
+      assignTo: string
+      request: string
+      updateStatus: string
+      status: {
+        active: string
+        standby: string
+        onHold: string
+      }
+    }
+    triage: {
+      title: string
+      subtitle: string
+      recommendation: string
+      sources: string
+      score: string
+      needsApproval: string
+      approve: string
+    }
+    intake: {
+      title: string
+      subtitle: string
+      claimant: string
+      policyRef: string
+      lossDate: string
+      lossLocation: string
+      description: string
+      attachmentsHint: string
+      back: string
+      next: string
+      submit: string
+    }
+    deadlines: {
+      title: string
+      subtitle: string
+      openClaim: string
+      items: {
+        inspection: string
+        inspectionDetail: string
+        reserve: string
+        reserveDetail: string
+        settlement: string
+        settlementDetail: string
+        broker: string
+        brokerDetail: string
+        fraud: string
+        fraudDetail: string
+      }
+    }
+    reporting: {
+      title: string
+      subtitle: string
+      statusTitle: string
+      severityTitle: string
+      slaTitle: string
+      tasksTitle: string
+      slaOnTrack: string
+      slaRisk: string
+      auditTitle: string
+      auditSubtitle: string
+      fraudFlags: string
+      auditHint: string
+      auditExport: string
+    }
+    tasks: {
+      title: string
+      subtitle: string
+      advance: string
+      status: {
+        open: string
+        inProgress: string
+        blocked: string
+        done: string
+      }
+    }
+    integrations: {
+      title: string
+      subtitle: string
+      helper: string
+      guidewire: string
+      duckcreek: string
+      email: string
+      storage: string
+      payments: string
+    }
+    common: {
+      loading: string
+    }
+  }
   brokerfox: {
     nav: {
       title: string
@@ -3383,6 +3610,9 @@ export const translations: Record<Lang, TranslationTree> = {
         secondary: 'Fleet Reporting öffnen'
       }
     },
+
+
+
     claimManager: {
       rolesCard: {
         description: 'Sachbearbeiter-Cockpit für schnelle Entscheidungen, Freigaben, Partnersteuerung und AI-Hinweise.',
@@ -4266,6 +4496,233 @@ export const translations: Record<Lang, TranslationTree> = {
         documents: 'Unterlagen für Contora prüfen',
         audit: 'Audit-Termin mit Atlas Maklerwerk vereinbaren',
         training: 'Digitales Training für neues Partner-Team planen'
+      }
+    },
+    claimsfox: {
+      nav: {
+        title: 'Claimsfox',
+        dashboard: 'Dashboard',
+        claims: 'Schäden',
+        intake: 'FNOL',
+        triage: 'Triage',
+        documents: 'Dokumente',
+        mailbox: 'Postfach',
+        partners: 'Partner',
+        reporting: 'Reporting',
+        tasks: 'Aufgaben',
+        integrations: 'Integrationen'
+      },
+      calendar: {
+        title: 'Kalender',
+        subtitle: 'Nächste Termine',
+        location: 'Ort',
+        participants: 'Teilnehmende',
+        description: 'Beschreibung',
+        locationTbd: 'Ort offen',
+        participantsTbd: 'Teilnehmer offen',
+        descriptionTbd: 'Details folgen',
+        close: 'Schließen',
+        openRelated: 'Zum Fall'
+      },
+      dashboard: {
+        title: 'Claimsfox Workspace',
+        subtitle: 'Schadenmanagement mit Intake, Triage und Workflow.',
+        kpi: {
+          openClaims: 'Offene Schäden',
+          slaRisk: 'SLA-Risiko',
+          fraudFlags: 'Fraud-Flags',
+          queue: 'Meine Queue'
+        },
+        queueTitle: 'Meine Aufgaben',
+        queueSubtitle: 'Aktive Zuweisungen',
+        mailTitle: 'Postfach',
+        mailSubtitle: 'Neue Nachrichten',
+        recentTitle: 'Aktuelle Schäden',
+        recentSubtitle: 'Zuletzt eröffnet'
+      },
+      claims: {
+        title: 'Schadenliste',
+        subtitle: 'Alle offenen und abgeschlossenen Schäden'
+      },
+      filters: {
+        status: 'Status',
+        lob: 'Sparte',
+        search: 'Suche',
+        searchPlaceholder: 'Schadennummer, Versicherter, Police',
+        all: 'Alle'
+      },
+      status: {
+        intake: 'Intake',
+        triage: 'Triage',
+        investigation: 'Prüfung',
+        settlement: 'Regulierung',
+        closed: 'Abgeschlossen',
+        denied: 'Abgelehnt'
+      },
+      severity: {
+        low: 'Niedrig',
+        medium: 'Mittel',
+        high: 'Hoch',
+        critical: 'Kritisch'
+      },
+      claimDetail: {
+        title: 'Schaden',
+        subtitle: 'Details',
+        policy: 'Police',
+        status: 'Status',
+        overviewTitle: 'Überblick',
+        lossDate: 'Schadendatum',
+        severity: 'Schwere',
+        reserve: 'Reserve',
+        paid: 'Gezahlt',
+        slaDue: 'SLA fällig',
+        assigned: 'Zuständig',
+        notePlaceholder: 'Notiz hinzufügen …',
+        decisionHint: 'Entscheidung dokumentieren und nächste Schritte auslösen.',
+        assignmentsTitle: 'Zuweisungen',
+        assignmentsSubtitle: 'Tasks & Partner',
+        tasksLabel: 'Aktive Tasks',
+        partnerLabel: 'Partner zuweisen',
+        assignPartner: 'Partner anfragen',
+        aiTitle: 'AI Assist',
+        aiSubtitle: 'Erklärbare Triage',
+        aiRecommendation: 'Empfehlung',
+        aiSummary: 'Sofortprüfung mit Standardreserve; keine Betrugsindikatoren.',
+        aiBullet1: 'Schadenhöhe im erwarteten Bereich',
+        aiBullet2: 'Belege vollständig, nur Rechnung fehlt',
+        aiBullet3: 'SLA in 8 Tagen, Priorität mittel',
+        aiSources: 'Quellen: FNOL, Rechnungen, Historie',
+        tabs: {
+          overview: 'Übersicht',
+          documents: 'Dokumente',
+          timeline: 'Timeline',
+          decision: 'Entscheidung'
+        },
+        actions: {
+          settlement: 'Regulierung starten',
+          investigation: 'In Prüfung',
+          deny: 'Ablehnen',
+          addNote: 'Notiz hinzufügen'
+        }
+      },
+      documents: {
+        title: 'Dokumente',
+        subtitle: 'Belege & Extraktion',
+        helper: 'Extraktion prüfen und freigeben.',
+        linkTo: 'Verknüpfen mit Schaden',
+        upload: 'Dokument hochladen',
+        view: 'Vorschau',
+        approve: 'Freigeben',
+        previewText: 'Vorschau der extrahierten Inhalte.',
+        open: 'Öffnen',
+        status: 'Status',
+        statusLabels: {
+          pending: 'Ausstehend',
+          needsReview: 'Prüfen',
+          approved: 'Freigegeben'
+        }
+      },
+      mailbox: {
+        title: 'Postfach',
+        subtitle: 'Eingang & Verknüpfung',
+        inbox: 'Eingang',
+        inboxSubtitle: 'Neue Nachrichten',
+        detail: 'Nachricht',
+        from: 'Von',
+        date: 'Datum',
+        attachments: 'Anhänge',
+        link: 'Mit Schaden verknüpfen',
+        noSelection: 'Keine Nachricht ausgewählt'
+      },
+      partners: {
+        title: 'Partner',
+        subtitle: 'Dienstleister & Netzwerke',
+        assignTo: 'Zuweisen zu',
+        request: 'Anfragen',
+        updateStatus: 'Status ändern',
+        status: {
+          active: 'Aktiv',
+          standby: 'Standby',
+          onHold: 'Pausiert'
+        }
+      },
+      triage: {
+        title: 'Triage',
+        subtitle: 'AI-gestützte Priorisierung',
+        recommendation: 'AI Empfehlung: in Prüfung',
+        sources: 'Belege, Historie, SLA',
+        score: 'Score',
+        needsApproval: 'Freigabe erforderlich',
+        approve: 'Freigeben'
+      },
+      intake: {
+        title: 'FNOL Intake',
+        subtitle: 'Schadenaufnahme in 3 Schritten',
+        claimant: 'Versicherter',
+        policyRef: 'Police',
+        lossDate: 'Schadendatum',
+        lossLocation: 'Ort des Schadens',
+        description: 'Beschreibung',
+        attachmentsHint: 'Anhänge werden im nächsten Schritt ergänzt.',
+        back: 'Zurück',
+        next: 'Weiter',
+        submit: 'Erstellen'
+      },
+      deadlines: {
+        title: 'Fristen',
+        subtitle: 'Nächste Meilensteine',
+        openClaim: 'Fall öffnen',
+        items: {
+          inspection: 'Vor-Ort-Inspektion',
+          inspectionDetail: 'Besichtigung durch Surveyor bestätigen und Sicherheitscheck.',
+          reserve: 'Reserve-Abgleich',
+          reserveDetail: 'Reserve basierend auf neuen Rechnungen aktualisieren.',
+          settlement: 'Regulierungskomitee',
+          settlementDetail: 'Vorschlag im Gremium vorstellen.',
+          broker: 'Broker-Update',
+          brokerDetail: 'Status und nächste Schritte abstimmen.',
+          fraud: 'Fraud-Check',
+          fraudDetail: 'Anomalien prüfen und dokumentieren.'
+        }
+      },
+      reporting: {
+        title: 'Reporting',
+        subtitle: 'KPI & Analysen',
+        statusTitle: 'Statusverteilung',
+        severityTitle: 'Schweregrad',
+        slaTitle: 'SLA Risiko',
+        tasksTitle: 'Tasks',
+        slaOnTrack: 'Im Plan',
+        slaRisk: 'Risiko',
+        auditTitle: 'Audit & Compliance',
+        auditSubtitle: 'Export & Nachweis',
+        fraudFlags: 'Fraud-Flags',
+        auditHint: 'Export erstellt eine prüfbare Audit-Spur.',
+        auditExport: 'Audit exportieren'
+      },
+      tasks: {
+        title: 'Aufgaben',
+        subtitle: 'Queues & SLAs',
+        advance: 'Weiter',
+        status: {
+          open: 'Offen',
+          inProgress: 'In Arbeit',
+          blocked: 'Blockiert',
+          done: 'Erledigt'
+        }
+      },
+      integrations: {
+        title: 'Integrationen',
+        subtitle: 'Systemverbindungen',
+        helper: 'Demo-Integration',
+        guidewire: 'Guidewire',
+        duckcreek: 'Duck Creek',
+        email: 'E-Mail Gateway',
+        storage: 'Dokumentenablage',
+        payments: 'Payments'
+      },
+      common: {
+        loading: 'Lade Daten ...'
       }
     },
     underwriterfox: {
@@ -6185,6 +6642,233 @@ export const translations: Record<Lang, TranslationTree> = {
       cta: {
         primary: 'View demo',
         secondary: 'Open Fleet Reporting'
+      }
+    },
+    claimsfox: {
+      nav: {
+        title: 'Claimsfox',
+        dashboard: 'Dashboard',
+        claims: 'Claims',
+        intake: 'FNOL',
+        triage: 'Triage',
+        documents: 'Documents',
+        mailbox: 'Mailbox',
+        partners: 'Partners',
+        reporting: 'Reporting',
+        tasks: 'Tasks',
+        integrations: 'Integrations'
+      },
+      calendar: {
+        title: 'Calendar',
+        subtitle: 'Upcoming appointments',
+        location: 'Location',
+        participants: 'Participants',
+        description: 'Description',
+        locationTbd: 'TBD',
+        participantsTbd: 'TBD',
+        descriptionTbd: 'Details to follow',
+        close: 'Close',
+        openRelated: 'Open claim'
+      },
+      dashboard: {
+        title: 'Claimsfox Workspace',
+        subtitle: 'Claims intake, triage, and workflow overview.',
+        kpi: {
+          openClaims: 'Open claims',
+          slaRisk: 'SLA risk',
+          fraudFlags: 'Fraud flags',
+          queue: 'My queue'
+        },
+        queueTitle: 'My queue',
+        queueSubtitle: 'Active assignments',
+        mailTitle: 'Mailbox',
+        mailSubtitle: 'New inbound messages',
+        recentTitle: 'Recent claims',
+        recentSubtitle: 'Latest FNOL submissions'
+      },
+      claims: {
+        title: 'Claims list',
+        subtitle: 'All open and closed claims'
+      },
+      filters: {
+        status: 'Status',
+        lob: 'Line of business',
+        search: 'Search',
+        searchPlaceholder: 'Claim number, insured, policy',
+        all: 'All'
+      },
+      status: {
+        intake: 'Intake',
+        triage: 'Triage',
+        investigation: 'Investigation',
+        settlement: 'Settlement',
+        closed: 'Closed',
+        denied: 'Denied'
+      },
+      severity: {
+        low: 'Low',
+        medium: 'Medium',
+        high: 'High',
+        critical: 'Critical'
+      },
+      claimDetail: {
+        title: 'Claim',
+        subtitle: 'Details',
+        policy: 'Policy',
+        status: 'Status',
+        overviewTitle: 'Overview',
+        lossDate: 'Loss date',
+        severity: 'Severity',
+        reserve: 'Reserve',
+        paid: 'Paid',
+        slaDue: 'SLA due',
+        assigned: 'Assignee',
+        notePlaceholder: 'Add a note …',
+        decisionHint: 'Document the decision and trigger next steps.',
+        assignmentsTitle: 'Assignments',
+        assignmentsSubtitle: 'Tasks & partners',
+        tasksLabel: 'Active tasks',
+        partnerLabel: 'Assign partner',
+        assignPartner: 'Request partner',
+        aiTitle: 'AI assist',
+        aiSubtitle: 'Explainable triage',
+        aiRecommendation: 'Recommendation',
+        aiSummary: 'Fast-track review with standard reserve; no fraud indicators.',
+        aiBullet1: 'Loss amount within expected range',
+        aiBullet2: 'Documents complete, invoice pending',
+        aiBullet3: 'SLA due in 8 days, medium priority',
+        aiSources: 'Sources: FNOL, invoices, history',
+        tabs: {
+          overview: 'Overview',
+          documents: 'Documents',
+          timeline: 'Timeline',
+          decision: 'Decision'
+        },
+        actions: {
+          settlement: 'Start settlement',
+          investigation: 'Move to investigation',
+          deny: 'Deny claim',
+          addNote: 'Add note'
+        }
+      },
+      documents: {
+        title: 'Documents',
+        subtitle: 'Evidence & extraction',
+        helper: 'Review extraction results and approve.',
+        linkTo: 'Link to claim',
+        upload: 'Upload document',
+        view: 'Preview',
+        approve: 'Approve',
+        previewText: 'Preview of extracted content.',
+        open: 'Open',
+        status: 'Status',
+        statusLabels: {
+          pending: 'Pending',
+          needsReview: 'Needs review',
+          approved: 'Approved'
+        }
+      },
+      mailbox: {
+        title: 'Mailbox',
+        subtitle: 'Inbox and linkage',
+        inbox: 'Inbox',
+        inboxSubtitle: 'Latest messages',
+        detail: 'Message',
+        from: 'From',
+        date: 'Date',
+        attachments: 'Attachments',
+        link: 'Link to claim',
+        noSelection: 'No message selected'
+      },
+      partners: {
+        title: 'Partners',
+        subtitle: 'Service providers and network',
+        assignTo: 'Assign to',
+        request: 'Request',
+        updateStatus: 'Update status',
+        status: {
+          active: 'Active',
+          standby: 'Standby',
+          onHold: 'On hold'
+        }
+      },
+      triage: {
+        title: 'Triage',
+        subtitle: 'AI-assisted prioritization',
+        recommendation: 'AI recommendation: move to investigation',
+        sources: 'Evidence, history, SLA',
+        score: 'Score',
+        needsApproval: 'Needs approval',
+        approve: 'Approve'
+      },
+      intake: {
+        title: 'FNOL intake',
+        subtitle: 'Capture a claim in 3 steps',
+        claimant: 'Insured',
+        policyRef: 'Policy',
+        lossDate: 'Loss date',
+        lossLocation: 'Loss location',
+        description: 'Description',
+        attachmentsHint: 'Attachments will be added in the next step.',
+        back: 'Back',
+        next: 'Next',
+        submit: 'Create claim'
+      },
+      deadlines: {
+        title: 'Deadlines',
+        subtitle: 'Upcoming milestones',
+        openClaim: 'Open claim',
+        items: {
+          inspection: 'On-site inspection',
+          inspectionDetail: 'Confirm surveyor visit and safety review.',
+          reserve: 'Reserve calibration',
+          reserveDetail: 'Update reserve based on new invoices.',
+          settlement: 'Settlement committee',
+          settlementDetail: 'Present proposal to the committee.',
+          broker: 'Broker update',
+          brokerDetail: 'Share status and next steps.',
+          fraud: 'Fraud check',
+          fraudDetail: 'Complete anomaly review and file notes.'
+        }
+      },
+      reporting: {
+        title: 'Reporting',
+        subtitle: 'KPIs & analytics',
+        statusTitle: 'Status distribution',
+        severityTitle: 'Severity',
+        slaTitle: 'SLA risk',
+        tasksTitle: 'Tasks',
+        slaOnTrack: 'On track',
+        slaRisk: 'At risk',
+        auditTitle: 'Audit & compliance',
+        auditSubtitle: 'Export & traceability',
+        fraudFlags: 'Fraud flags',
+        auditHint: 'Export creates an audit-ready trace.',
+        auditExport: 'Export audit'
+      },
+      tasks: {
+        title: 'Tasks',
+        subtitle: 'Queues & SLAs',
+        advance: 'Advance',
+        status: {
+          open: 'Open',
+          inProgress: 'In progress',
+          blocked: 'Blocked',
+          done: 'Done'
+        }
+      },
+      integrations: {
+        title: 'Integrations',
+        subtitle: 'System connections',
+        helper: 'Demo integration',
+        guidewire: 'Guidewire',
+        duckcreek: 'Duck Creek',
+        email: 'Email gateway',
+        storage: 'Document storage',
+        payments: 'Payments'
+      },
+      common: {
+        loading: 'Loading data …'
       }
     },
     claimManager: {

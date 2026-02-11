@@ -170,6 +170,17 @@ import UnderwriterfoxRatingPage from '@/pages/UnderwriterfoxRatingPage'
 import UnderwriterfoxAiPage from '@/pages/UnderwriterfoxAiPage'
 import UnderwriterfoxReportingPage from '@/pages/UnderwriterfoxReportingPage'
 import UnderwriterfoxGovernancePage from '@/pages/UnderwriterfoxGovernancePage'
+import ClaimsfoxDashboardPage from '@/pages/ClaimsfoxDashboardPage'
+import ClaimsfoxClaimsPage from '@/pages/ClaimsfoxClaimsPage'
+import ClaimsfoxClaimDetailPage from '@/pages/ClaimsfoxClaimDetailPage'
+import ClaimsfoxIntakePage from '@/pages/ClaimsfoxIntakePage'
+import ClaimsfoxTriagePage from '@/pages/ClaimsfoxTriagePage'
+import ClaimsfoxDocumentsPage from '@/pages/ClaimsfoxDocumentsPage'
+import ClaimsfoxMailboxPage from '@/pages/ClaimsfoxMailboxPage'
+import ClaimsfoxPartnersPage from '@/pages/ClaimsfoxPartnersPage'
+import ClaimsfoxReportingPage from '@/pages/ClaimsfoxReportingPage'
+import ClaimsfoxTasksPage from '@/pages/ClaimsfoxTasksPage'
+import ClaimsfoxIntegrationsPage from '@/pages/ClaimsfoxIntegrationsPage'
 
 function NotFoundRedirect() {
   const { isAuthenticated } = useAuth()
@@ -288,6 +299,17 @@ export default function AppRouter() {
         <Route path="/underwriterfox/ai" element={<UnderwriterfoxAiPage />} />
         <Route path="/underwriterfox/reporting" element={<UnderwriterfoxReportingPage />} />
         <Route path="/underwriterfox/governance" element={<UnderwriterfoxGovernancePage />} />
+        <Route path="/claimsfox" element={<ClaimsfoxDashboardPage />} />
+        <Route path="/claimsfox/claims" element={<ClaimsfoxClaimsPage />} />
+        <Route path="/claimsfox/claims/:claimId" element={<ClaimsfoxClaimDetailPage />} />
+        <Route path="/claimsfox/intake" element={<ClaimsfoxIntakePage />} />
+        <Route path="/claimsfox/triage" element={<ClaimsfoxTriagePage />} />
+        <Route path="/claimsfox/documents" element={<ClaimsfoxDocumentsPage />} />
+        <Route path="/claimsfox/mailbox" element={<ClaimsfoxMailboxPage />} />
+        <Route path="/claimsfox/partners" element={<ClaimsfoxPartnersPage />} />
+        <Route path="/claimsfox/reporting" element={<ClaimsfoxReportingPage />} />
+        <Route path="/claimsfox/tasks" element={<ClaimsfoxTasksPage />} />
+        <Route path="/claimsfox/integrations" element={<ClaimsfoxIntegrationsPage />} />
         <Route path="/fleet-reporting" element={<FleetReportingPage />} />
         <Route path="/fleet-management" element={<FleetManagementPage />} />
         <Route path="/claim-manager" element={<ClaimManagerMarketingPage />} />
