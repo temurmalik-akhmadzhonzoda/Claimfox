@@ -21,6 +21,22 @@ function getMonthDays(date: Date) {
   return days
 }
 
+function getCalendarGrid(date: Date) {
+  const days = getMonthDays(date)
+  const firstDay = new Date(date.getFullYear(), date.getMonth(), 1)
+  const startOffset = (firstDay.getDay() + 6) % 7
+  const cells: Array<Date | null> = Array.from({ length: startOffset }, () => null)
+  days.forEach((day) => cells.push(day))
+  const remainder = cells.length % 7
+  if (remainder !== 0) {
+    const fill = 7 - remainder
+    for (let i = 0; i < fill; i += 1) {
+      cells.push(null)
+    }
+  }
+  return cells
+}
+
 type CalendarWidgetProps = {
   events: CalendarEvent[]
   density?: 'compact' | 'regular'
@@ -31,7 +47,7 @@ export default function CalendarWidget({ events, density = 'regular', height }: 
   const { lang, t } = useI18n()
   const [activeMonth, setActiveMonth] = useState(() => new Date())
 
-  const days = useMemo(() => getMonthDays(activeMonth), [activeMonth])
+  const days = useMemo(() => getCalendarGrid(activeMonth), [activeMonth])
   const monthLabel = useMemo(() => new Intl.DateTimeFormat(lang, { month: 'long', year: 'numeric' }).format(activeMonth), [lang, activeMonth])
   const upcomingEvents = useMemo(() => {
     return [...events]
@@ -41,7 +57,7 @@ export default function CalendarWidget({ events, density = 'regular', height }: 
   }, [events])
   const weekdayLabels = useMemo(() => {
     const formatter = new Intl.DateTimeFormat(lang, { weekday: 'short' })
-    const base = new Date(2025, 0, 5)
+    const base = new Date(2025, 0, 6)
     return Array.from({ length: 7 }).map((_, idx) => formatter.format(new Date(base.getTime() + idx * 86400000)))
   }, [lang])
 
@@ -83,7 +99,10 @@ export default function CalendarWidget({ events, density = 'regular', height }: 
           {weekdayLabels.map((label) => (
             <span key={label} style={{ fontSize: density === 'compact' ? '0.6rem' : '0.7rem', color: '#64748b', textAlign: 'center' }}>{label}</span>
           ))}
-          {days.map((day) => {
+          {days.map((day, idx) => {
+            if (!day) {
+              return <div key={`empty-${idx}`} />
+            }
             const hasEvent = events.some((event) => new Date(event.date).toDateString() === day.toDateString())
             return (
               <button
