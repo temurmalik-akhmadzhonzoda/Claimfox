@@ -84,7 +84,7 @@ export default function BrokerfoxRenewalDetailPage() {
         subtitle={renewal.policyName}
         topLeft={(
           <div style={{ display: 'grid', gap: '0.65rem' }}>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem 1rem', color: '#475569', fontSize: '0.9rem' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem 1rem', color: '#ffffff', fontSize: '0.9rem' }}>
               <span><strong>{t('brokerfox.renewals.policyLabel')}:</strong> {renewal.policyName}</span>
               <span><strong>{t('brokerfox.renewals.carrierLabel')}:</strong> {renewal.carrier}</span>
               <span><strong>{t('brokerfox.renewals.premiumLabel')}:</strong> {renewal.premium}</span>
