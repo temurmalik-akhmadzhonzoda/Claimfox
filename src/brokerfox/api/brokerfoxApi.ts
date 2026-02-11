@@ -599,7 +599,35 @@ export async function listTasks(ctx: TenantContext) {
 
 export async function listCalendarEvents(ctx: TenantContext) {
   ensureSeeded(ctx.tenantId)
-  return readList<CalendarEvent>(ctx.tenantId, 'calendar')
+  const events = readList<CalendarEvent>(ctx.tenantId, 'calendar')
+  if (events.length > 0) {
+    return events
+  }
+  const base = new Date()
+  const year = base.getFullYear()
+  const month = base.getMonth()
+  const fallback: CalendarEvent[] = [
+    {
+      id: makeId('cal'),
+      tenantId: ctx.tenantId,
+      title: 'Tender deadline: SME Package Renewal 2026',
+      date: new Date(year, month, 17, 9, 0).toISOString()
+    },
+    {
+      id: makeId('cal'),
+      tenantId: ctx.tenantId,
+      title: 'Tender deadline: Property Program 2026',
+      date: new Date(year, month, 18, 9, 0).toISOString()
+    },
+    {
+      id: makeId('cal'),
+      tenantId: ctx.tenantId,
+      title: 'Tender deadline: Cyber Program 2025',
+      date: new Date(year, month, 19, 9, 0).toISOString()
+    }
+  ]
+  writeList(ctx.tenantId, 'calendar', fallback)
+  return fallback
 }
 
 export async function addCalendarEvent(ctx: TenantContext, event: Omit<CalendarEvent, 'id' | 'tenantId'>) {
