@@ -79,7 +79,7 @@ export default function CalendarWidget({ events, density = 'regular', height }: 
             )
           })}
         </div>
-        <div style={{ display: 'grid', gap: '0.22rem', fontSize: '0.7rem', lineHeight: 1.2, color: '#475569', textAlign: 'left', marginTop: density === 'compact' ? '0.1rem' : '0.12rem' }}>
+        <div style={{ display: 'grid', gap: '0.22rem', fontSize: 'calc(0.7rem - 2px)', lineHeight: 1.2, color: '#475569', textAlign: 'left', marginTop: density === 'compact' ? '0.35rem' : '0.4rem' }}>
           {upcomingEvents.length === 0 ? (
             <span style={{ whiteSpace: 'nowrap' }}>{t('brokerfox.calendar.empty')}</span>
           ) : (
@@ -88,7 +88,7 @@ export default function CalendarWidget({ events, density = 'regular', height }: 
                 <span style={{ color: '#0f172a', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                   {event.title}
                 </span>
-                <span style={{ whiteSpace: 'nowrap', color: '#64748b', fontSize: '0.68rem' }}>
+                <span style={{ whiteSpace: 'nowrap', color: '#64748b', fontSize: 'calc(0.68rem - 2px)' }}>
                   {new Intl.DateTimeFormat(lang, { month: 'short', day: '2-digit' }).format(new Date(event.date))}
                 </span>
               </div>
