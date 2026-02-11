@@ -46,9 +46,18 @@ export default function TimelineComposer({ onSubmit }: TimelineComposerProps) {
   }
 
   return (
-    <Card variant="glass" title={t('brokerfox.timeline.composeTitle')} subtitle={t('brokerfox.timeline.composeSubtitle')}>
+    <Card
+      variant="glass"
+      title={<span style={{ color: '#0f172a', fontSize: '1rem', lineHeight: 1.2 }}>{t('brokerfox.timeline.composeTitle')}</span>}
+      subtitle={<span style={{ color: '#64748b', fontSize: '0.85rem', lineHeight: 1.3 }}>{t('brokerfox.timeline.composeSubtitle')}</span>}
+      style={{ overflow: 'hidden' }}
+    >
       <div style={{ display: 'grid', gap: '0.75rem' }}>
-        <select value={type} onChange={(event) => setType(event.target.value as TimelineEventType)} style={{ padding: '0.6rem 0.75rem', borderRadius: 10, border: '1px solid #d6d9e0' }}>
+        <select
+          value={type}
+          onChange={(event) => setType(event.target.value as TimelineEventType)}
+          style={{ padding: '0.6rem 0.75rem', borderRadius: 10, border: '1px solid #d6d9e0', width: '100%' }}
+        >
           <option value="externalMessage">{t('brokerfox.timeline.externalMessage')}</option>
           <option value="internalNote">{t('brokerfox.timeline.internalNote')}</option>
           <option value="statusUpdate">{t('brokerfox.timeline.statusUpdate')}</option>
@@ -58,9 +67,9 @@ export default function TimelineComposer({ onSubmit }: TimelineComposerProps) {
           onChange={(event) => setMessage(event.target.value)}
           placeholder={t('brokerfox.timeline.messagePlaceholder')}
           rows={4}
-          style={{ padding: '0.75rem', borderRadius: 10, border: '1px solid #d6d9e0', resize: 'vertical' }}
+          style={{ padding: '0.75rem', borderRadius: 10, border: '1px solid #d6d9e0', resize: 'vertical', width: '100%' }}
         />
-        <input type="file" multiple onChange={(event) => handleFiles(event.target.files)} />
+        <input type="file" multiple onChange={(event) => handleFiles(event.target.files)} style={{ width: '100%' }} />
         {attachments.length > 0 ? (
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
             {attachments.map((file) => (
