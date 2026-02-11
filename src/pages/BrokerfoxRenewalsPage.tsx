@@ -56,17 +56,21 @@ export default function BrokerfoxRenewalsPage() {
         {error ? <p>{error}</p> : null}
         <div style={{ display: 'grid', gap: '1rem', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))' }}>
           {(['30', '60', '90'] as const).map((bucket) => (
-            <Card key={bucket} variant="glass" title={t('brokerfox.renewals.bucket', { days: bucket })}>
+            <Card
+              key={bucket}
+              variant="glass"
+              title={<span style={{ color: '#0f172a' }}>{t('brokerfox.renewals.bucket', { days: bucket })}</span>}
+            >
               {grouped[bucket].length === 0 ? <p>{t('brokerfox.empty.noRenewals')}</p> : null}
               {grouped[bucket].map((item) => (
                 <button
                   key={item.id}
                   type="button"
                   onClick={() => navigate(`/brokerfox/renewals/${item.id}`)}
-                  style={{ display: 'block', width: '100%', textAlign: 'left', padding: '0.5rem 0', border: 'none', background: 'transparent' }}
+                  style={{ display: 'block', width: '100%', textAlign: 'left', padding: '0.5rem 0', border: 'none', background: 'transparent', color: '#0f172a' }}
                 >
                   <strong>{item.policyName}</strong>
-                  <div style={{ color: '#64748b' }}>{new Date(item.renewalDate).toLocaleDateString()}</div>
+                  <div style={{ color: '#475569' }}>{new Date(item.renewalDate).toLocaleDateString()}</div>
                 </button>
               ))}
             </Card>
