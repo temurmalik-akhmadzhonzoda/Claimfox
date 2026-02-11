@@ -56,10 +56,22 @@ export default function CalendarWidget({ events, density = 'regular', height }: 
       .filter((event) => !Number.isNaN(new Date(event.date).getTime()))
       .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
     const inMonth = sorted.filter((event) => {
-        const date = new Date(event.date)
-        return date.getMonth() === month && date.getFullYear() === year
-      })
-    return (inMonth.length > 0 ? inMonth : sorted).slice(0, 3)
+      const date = new Date(event.date)
+      return date.getMonth() === month && date.getFullYear() === year
+    })
+    if (inMonth.length > 0) {
+      return inMonth.slice(0, 3)
+    }
+    const demoTitles = [
+      'Tender deadline: SME Package Renewal',
+      'Tender deadline: Property Program',
+      'Tender deadline: Cyber Program'
+    ]
+    return demoTitles.map((title, idx) => ({
+      id: `demo_${year}_${month + 1}_${idx}`,
+      title,
+      date: new Date(year, month, 12 + idx * 3, 9, 0).toISOString()
+    } as CalendarEvent))
   }, [events, activeMonth])
   const weekdayLabels = useMemo(() => {
     const formatter = new Intl.DateTimeFormat(lang, { weekday: 'short' })
