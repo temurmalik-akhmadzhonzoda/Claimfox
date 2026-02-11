@@ -475,6 +475,7 @@ type TranslationTree = {
       loading: string
     }
   }
+  aifox: {
   brokerfox: {
     nav: {
       title: string
@@ -1915,6 +1916,7 @@ type TranslationTree = {
       training: string
     }
   }
+}
 }
 
 export const translations: Record<Lang, TranslationTree> = {
@@ -4725,6 +4727,173 @@ export const translations: Record<Lang, TranslationTree> = {
         loading: 'Lade Daten ...'
       }
     },
+    aifox: {
+      nav: {
+        title: 'AI.FOX',
+        dashboard: 'Dashboard',
+        claimsVision: 'Schaden Vision',
+        fraud: 'Betrug',
+        risk: 'Risiko',
+        documentAi: 'Dokumenten-AI',
+        chatbot: 'Chatbot',
+        governance: 'Governance',
+        monitoring: 'Monitoring',
+        integrations: 'Integrationen',
+        audit: 'Audit'
+      },
+      dashboard: {
+        title: 'AI.FOX Workspace',
+        subtitle: 'Erklärbare KI-Module für Versicherungsprozesse.',
+        kpi: {
+          autoProcessed: 'Automatisch bearbeitet',
+          fraudAlerts: 'Betrugsalarme',
+          avgConfidence: 'Durchschn. KI-Konfidenz',
+          modelDrift: 'Model Drift Risiko',
+          modelDriftValue: 'Niedrig',
+          aiActRisk: 'EU AI Act Risiko',
+          aiActValue: 'Hohes Risiko'
+        },
+        modulesTitle: 'KI-Module',
+        modulesSubtitle: 'Modul öffnen und AI-Workflow ansehen.',
+        modules: {
+          claimsVision: 'Vision AI für Schadenbilder',
+          fraud: 'Betrugsmuster-Erkennung',
+          risk: 'Risk & Underwriting Engine',
+          documentAi: 'Dokumenten-Extraktion',
+          chatbot: 'Conversational AI',
+          governance: 'EU AI Act Governance',
+          monitoring: 'Model Monitoring',
+          integrations: 'Integrationskatalog',
+          audit: 'Audit-Log'
+        },
+        performanceTitle: 'Model Performance',
+        performanceSubtitle: 'Accuracy und Durchsatz',
+        performanceChart: 'Performance-Chart',
+        heatmapTitle: 'Fraud Heatmap',
+        heatmapSubtitle: 'Alert-Dichte nach Region',
+        heatmapChart: 'Heatmap',
+        riskTitle: 'Top Risk Segmente',
+        riskSubtitle: 'Höchste Risikoportfolios'
+      },
+      claimsVision: {
+        title: 'Claims Vision AI',
+        subtitle: 'Schadenerkennung & Kostenschätzung',
+        uploadTitle: 'Unfallbild hochladen',
+        uploadSubtitle: 'Tractable-Simulation',
+        uploadHint: 'Unfallbild hier ablegen (Demo)',
+        overlayLabel: 'Bounding Box Overlay',
+        detectedParts: 'Erkannte Teile',
+        analysisTitle: 'AI-Analyse',
+        analysisSubtitle: 'Reparaturkosten & Konfidenz',
+        claimSelect: 'Schadenreferenz',
+        estimate: 'Geschätzte Reparaturkosten',
+        severity: 'Schweregrad',
+        confidence: 'Konfidenzscore',
+        explainability: 'Modell erkannte Stoßfänger-Deformation mit 87% Konfidenz basierend auf visuellen Feature-Clustern.',
+        approve: 'Freigeben',
+        override: 'Übersteuern',
+        decisionSaved: 'Entscheidung gespeichert:'
+      },
+      fraud: {
+        title: 'Fraud Detection',
+        subtitle: 'Shift / Friss Simulation',
+        listTitle: 'Betrugsalarme',
+        listSubtitle: 'KI-gekennzeichnete Schäden',
+        detailTitle: 'Alarmdetails',
+        detailSubtitle: 'Verdachtsmuster',
+        score: 'Fraud Score',
+        riskLevel: 'Risikostufe',
+        escalate: 'Eskalieren',
+        clear: 'Verdacht löschen'
+      },
+      risk: {
+        title: 'Risk & Underwriting Engine',
+        subtitle: 'Gradient AI Simulation',
+        inputTitle: 'Eingabedaten',
+        inputSubtitle: 'Fahrer- & Fahrzeugprofil',
+        outputTitle: 'AI-Output',
+        outputSubtitle: 'Risikoscore & Prämie',
+        age: 'Fahreralter',
+        vehicle: 'Fahrzeug',
+        region: 'Region',
+        lossHistory: 'Schadenhistorie',
+        recalculate: 'Neu berechnen',
+        riskScore: 'Risikoscore',
+        premium: 'Empfohlene Prämie',
+        biasCheck: 'Bias-Check',
+        aiActCategory: 'EU AI Act Kategorie'
+      },
+      documentAi: {
+        title: 'Document AI',
+        subtitle: 'omni:us / Chisel Simulation',
+        uploadTitle: 'Dokument hochladen',
+        uploadSubtitle: 'Rechnung, Polizei- oder Policenbericht',
+        uploadHint: 'Dokument hier ablegen (Demo)',
+        extractionTitle: 'Extraktion',
+        extractionSubtitle: 'Felder & Konfidenz',
+        confidence: 'Extraktions-Konfidenz',
+        gdprWarning: 'DSGVO-Hinweis: Gesundheitsdaten erkannt.',
+        approve: 'Felder freigeben',
+        reject: 'Ablehnen & korrigieren'
+      },
+      chatbot: {
+        title: 'Conversational AI',
+        subtitle: 'LoyJoy Simulation',
+        listTitle: 'Konversationen',
+        listSubtitle: 'Demo-Dialoge',
+        chatTitle: 'Chat-Oberfläche',
+        chatSubtitle: 'Kundenkonversation',
+        transparency: 'Dies ist ein automatisiertes System.',
+        confidence: 'Konfidenz',
+        escalate: 'An Mensch übergeben'
+      },
+      governance: {
+        title: 'Governance',
+        subtitle: 'EU AI Act Simulation',
+        classificationTitle: 'AI-System-Klassifizierung',
+        classificationSubtitle: 'Risikokategorie',
+        systemType: 'Klassifizierung',
+        systemValue: 'Hohes Risiko',
+        logging: 'Logging-Status: Aktiv',
+        checklistTitle: 'Transparenz-Checkliste',
+        checklistSubtitle: 'Compliance-Anforderungen',
+        actionsTitle: 'Compliance-Aktionen',
+        actionsSubtitle: 'Reports & Checks',
+        generateReport: 'AI-Dokumentationsreport erzeugen',
+        runCheck: 'Compliance-Check ausführen'
+      },
+      monitoring: {
+        title: 'Monitoring',
+        subtitle: 'Model Drift & Bias',
+        accuracyTitle: 'Genauigkeit über Zeit',
+        accuracySubtitle: 'Rolling 90 Tage',
+        accuracyChart: 'Accuracy-Chart',
+        driftTitle: 'Drift Detection',
+        driftSubtitle: 'Feature-Shift',
+        driftAlert: 'Drift-Alarm: Moderate Verschiebung erkannt',
+        biasTitle: 'Bias-Verteilung',
+        biasSubtitle: 'Nach Region & Segment',
+        biasChart: 'Bias-Chart',
+        alertTitle: 'Alerts',
+        alertSubtitle: 'Empfehlungen',
+        alertMessage: 'Alert: Drift-Schwelle überschritten',
+        retrainHint: 'Empfehlung: Model-Retrain starten',
+        retrain: 'Retrain empfehlen'
+      },
+      integrations: {
+        title: 'Integrationen',
+        subtitle: 'AI-Plattform-Anbindungen'
+      },
+      audit: {
+        title: 'Audit Log',
+        subtitle: 'AI-Entscheidungen & Overrides'
+      },
+      common: {
+        noSelection: 'Kein Eintrag ausgewählt',
+        selectItem: 'Bitte Eintrag auswählen.'
+      }
+    },
+
     underwriterfox: {
       nav: {
         title: 'Underwriterfox',
@@ -6871,6 +7040,173 @@ export const translations: Record<Lang, TranslationTree> = {
         loading: 'Loading data …'
       }
     },
+    aifox: {
+      nav: {
+        title: 'AI.FOX',
+        dashboard: 'Dashboard',
+        claimsVision: 'Claims Vision',
+        fraud: 'Fraud',
+        risk: 'Risk',
+        documentAi: 'Document AI',
+        chatbot: 'Chatbot',
+        governance: 'Governance',
+        monitoring: 'Monitoring',
+        integrations: 'Integrations',
+        audit: 'Audit'
+      },
+      dashboard: {
+        title: 'AI.FOX Workspace',
+        subtitle: 'Explainable AI modules for insurance operations.',
+        kpi: {
+          autoProcessed: 'Claims auto-processed',
+          fraudAlerts: 'Fraud alerts',
+          avgConfidence: 'Average AI confidence',
+          modelDrift: 'Model drift risk',
+          modelDriftValue: 'Low',
+          aiActRisk: 'EU AI Act risk',
+          aiActValue: 'High Risk'
+        },
+        modulesTitle: 'AI Modules',
+        modulesSubtitle: 'Open a module to explore the AI workflow.',
+        modules: {
+          claimsVision: 'Vision AI for damage assessment',
+          fraud: 'Fraud pattern detection',
+          risk: 'Risk & underwriting engine',
+          documentAi: 'Document extraction AI',
+          chatbot: 'Conversational AI',
+          governance: 'EU AI Act governance',
+          monitoring: 'Model monitoring',
+          integrations: 'Integration catalog',
+          audit: 'Audit log'
+        },
+        performanceTitle: 'Model Performance',
+        performanceSubtitle: 'Accuracy and throughput overview',
+        performanceChart: 'Performance chart',
+        heatmapTitle: 'Fraud Heatmap',
+        heatmapSubtitle: 'Alert density by region',
+        heatmapChart: 'Heatmap',
+        riskTitle: 'Top Risk Segments',
+        riskSubtitle: 'Highest risk portfolios'
+      },
+      claimsVision: {
+        title: 'Claims Vision AI',
+        subtitle: 'Damage detection and repair estimation',
+        uploadTitle: 'Upload accident image',
+        uploadSubtitle: 'Simulated Tractable workflow',
+        uploadHint: 'Drop accident image here (demo)',
+        overlayLabel: 'Bounding box overlay',
+        detectedParts: 'Detected parts',
+        analysisTitle: 'AI analysis',
+        analysisSubtitle: 'Repair cost & confidence',
+        claimSelect: 'Claim reference',
+        estimate: 'Estimated repair cost',
+        severity: 'Severity level',
+        confidence: 'Confidence score',
+        explainability: 'Model detected bumper deformation with 87% confidence based on visual feature cluster.',
+        approve: 'Approve',
+        override: 'Override',
+        decisionSaved: 'Decision saved:'
+      },
+      fraud: {
+        title: 'Fraud Detection',
+        subtitle: 'Shift / Friss simulation',
+        listTitle: 'Fraud alerts',
+        listSubtitle: 'AI-flagged claims',
+        detailTitle: 'Alert detail',
+        detailSubtitle: 'Suspicious pattern explanation',
+        score: 'Fraud score',
+        riskLevel: 'Risk level',
+        escalate: 'Escalate',
+        clear: 'Clear suspicion'
+      },
+      risk: {
+        title: 'Risk & Underwriting Engine',
+        subtitle: 'Gradient AI simulation',
+        inputTitle: 'Input data',
+        inputSubtitle: 'Driver & vehicle profile',
+        outputTitle: 'AI output',
+        outputSubtitle: 'Risk score and premium',
+        age: 'Driver age',
+        vehicle: 'Vehicle',
+        region: 'Region',
+        lossHistory: 'Loss history',
+        recalculate: 'Recalculate',
+        riskScore: 'Risk score',
+        premium: 'Suggested premium',
+        biasCheck: 'Bias check',
+        aiActCategory: 'EU AI Act category'
+      },
+      documentAi: {
+        title: 'Document AI',
+        subtitle: 'omni:us / Chisel simulation',
+        uploadTitle: 'Upload document',
+        uploadSubtitle: 'Medical invoice, police report, policy PDF',
+        uploadHint: 'Drop a document here (demo)',
+        extractionTitle: 'Extraction',
+        extractionSubtitle: 'Fields & confidence',
+        confidence: 'Extraction confidence',
+        gdprWarning: 'GDPR warning: health data detected.',
+        approve: 'Approve fields',
+        reject: 'Reject & correct'
+      },
+      chatbot: {
+        title: 'Conversational AI',
+        subtitle: 'LoyJoy simulation',
+        listTitle: 'Conversations',
+        listSubtitle: 'Pre-seeded demos',
+        chatTitle: 'Chat interface',
+        chatSubtitle: 'Customer conversation',
+        transparency: 'This is an automated system.',
+        confidence: 'Confidence',
+        escalate: 'Escalate to human'
+      },
+      governance: {
+        title: 'Governance',
+        subtitle: 'EU AI Act simulation',
+        classificationTitle: 'AI system classification',
+        classificationSubtitle: 'Risk category overview',
+        systemType: 'Classification',
+        systemValue: 'High Risk',
+        logging: 'Logging status: Enabled',
+        checklistTitle: 'Transparency checklist',
+        checklistSubtitle: 'Compliance requirements',
+        actionsTitle: 'Compliance actions',
+        actionsSubtitle: 'Generate reports and checks',
+        generateReport: 'Generate AI Documentation Report',
+        runCheck: 'Run Compliance Check'
+      },
+      monitoring: {
+        title: 'Monitoring',
+        subtitle: 'Model drift & bias detection',
+        accuracyTitle: 'Accuracy over time',
+        accuracySubtitle: 'Rolling 90 days',
+        accuracyChart: 'Accuracy chart',
+        driftTitle: 'Drift detection',
+        driftSubtitle: 'Feature distribution shift',
+        driftAlert: 'Drift alert: Moderate shift detected',
+        biasTitle: 'Bias distribution',
+        biasSubtitle: 'By region and segment',
+        biasChart: 'Bias chart',
+        alertTitle: 'Alerts',
+        alertSubtitle: 'Operational recommendations',
+        alertMessage: 'Alert: Model drift exceeds threshold',
+        retrainHint: 'Recommendation: trigger model retrain',
+        retrain: 'Recommend retrain'
+      },
+      integrations: {
+        title: 'Integrations',
+        subtitle: 'AI platform connections'
+      },
+      audit: {
+        title: 'Audit Log',
+        subtitle: 'AI decisions and overrides'
+      },
+      common: {
+        noSelection: 'No item selected',
+        selectItem: 'Select an item to view details.'
+      }
+    },
+
     claimManager: {
       rolesCard: {
         description: 'Claims handler cockpit for fast decisions, approvals, partner orchestration and AI insights.',

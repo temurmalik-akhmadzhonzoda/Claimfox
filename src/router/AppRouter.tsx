@@ -181,6 +181,16 @@ import ClaimsfoxPartnersPage from '@/pages/ClaimsfoxPartnersPage'
 import ClaimsfoxReportingPage from '@/pages/ClaimsfoxReportingPage'
 import ClaimsfoxTasksPage from '@/pages/ClaimsfoxTasksPage'
 import ClaimsfoxIntegrationsPage from '@/pages/ClaimsfoxIntegrationsPage'
+import AifoxDashboardPage from '@/pages/AifoxDashboardPage'
+import AifoxClaimsVisionPage from '@/pages/AifoxClaimsVisionPage'
+import AifoxFraudPage from '@/pages/AifoxFraudPage'
+import AifoxRiskPage from '@/pages/AifoxRiskPage'
+import AifoxDocumentAiPage from '@/pages/AifoxDocumentAiPage'
+import AifoxChatbotPage from '@/pages/AifoxChatbotPage'
+import AifoxGovernancePage from '@/pages/AifoxGovernancePage'
+import AifoxMonitoringPage from '@/pages/AifoxMonitoringPage'
+import AifoxIntegrationsPage from '@/pages/AifoxIntegrationsPage'
+import AifoxAuditPage from '@/pages/AifoxAuditPage'
 
 function NotFoundRedirect() {
   const { isAuthenticated } = useAuth()
@@ -310,6 +320,16 @@ export default function AppRouter() {
         <Route path="/claimsfox/reporting" element={<ClaimsfoxReportingPage />} />
         <Route path="/claimsfox/tasks" element={<ClaimsfoxTasksPage />} />
         <Route path="/claimsfox/integrations" element={<ClaimsfoxIntegrationsPage />} />
+        <Route path="/aifox" element={<AifoxDashboardPage />} />
+        <Route path="/aifox/claims-vision" element={<AifoxClaimsVisionPage />} />
+        <Route path="/aifox/fraud" element={<AifoxFraudPage />} />
+        <Route path="/aifox/risk" element={<AifoxRiskPage />} />
+        <Route path="/aifox/document-ai" element={<AifoxDocumentAiPage />} />
+        <Route path="/aifox/chatbot" element={<AifoxChatbotPage />} />
+        <Route path="/aifox/governance" element={<AifoxGovernancePage />} />
+        <Route path="/aifox/monitoring" element={<AifoxMonitoringPage />} />
+        <Route path="/aifox/integrations" element={<AifoxIntegrationsPage />} />
+        <Route path="/aifox/audit" element={<AifoxAuditPage />} />
         <Route path="/fleet-reporting" element={<FleetReportingPage />} />
         <Route path="/fleet-management" element={<FleetManagementPage />} />
         <Route path="/claim-manager" element={<ClaimManagerMarketingPage />} />
