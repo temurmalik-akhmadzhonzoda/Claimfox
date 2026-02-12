@@ -92,6 +92,15 @@ type TranslationTree = {
         ratingSaved: string
         auditExported: string
       }
+      systemMessages: {
+        intakeStarted: string
+        documentIngested: string
+        rulesFindings: string
+        ratingSaved: string
+        aiRecommendation: string
+        reviewedFactors: string
+        movedQueue: string
+      }
       type: {
         statusUpdate: string
         internalNote: string
@@ -5835,6 +5844,15 @@ export const translations: Record<Lang, TranslationTree> = {
           ratingSaved: 'Rating-Snapshot gespeichert',
           auditExported: 'Audit-Export erzeugt'
         },
+        systemMessages: {
+          intakeStarted: 'Intake für {{caseNumber}} gestartet.',
+          documentIngested: '{{documentName}} wurde eingelesen und extrahiert.',
+          rulesFindings: 'Regel-Engine ausgeführt: {{findings}} Findings.',
+          ratingSaved: 'Rating-Snapshot {{version}} mit technischer Prämie €{{premium}} gespeichert.',
+          aiRecommendation: 'Empfehlung: {{decision}}. Sicherheit {{confidence}}.',
+          reviewedFactors: '{{productLine}}-Risikofaktoren und Maklereinreichung geprüft.',
+          movedQueue: 'In die Queue {{status}} zur Nachverfolgung verschoben.'
+        },
         type: {
           statusUpdate: 'Status',
           internalNote: 'Interne Notiz',
@@ -9481,6 +9499,15 @@ export const translations: Record<Lang, TranslationTree> = {
         rulesSaved: 'Rules evaluation saved',
         ratingSaved: 'Rating snapshot saved',
         auditExported: 'Audit export generated'
+      },
+      systemMessages: {
+        intakeStarted: 'Intake started for {{caseNumber}}.',
+        documentIngested: '{{documentName}} ingested and extracted.',
+        rulesFindings: 'Rules engine executed: {{findings}} findings.',
+        ratingSaved: 'Rating snapshot {{version}} saved with technical premium €{{premium}}.',
+        aiRecommendation: 'Recommendation: {{decision}}. Confidence {{confidence}}.',
+        reviewedFactors: 'Reviewed {{productLine}} risk factors and broker submission.',
+        movedQueue: 'Moved to {{status}} queue for follow-up.'
       },
       type: {
         statusUpdate: 'Status',
