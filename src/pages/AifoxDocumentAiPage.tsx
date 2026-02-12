@@ -8,7 +8,7 @@ import { addTimelineEvent, listDocuments } from '@/aifox/api/aifoxApi'
 import type { AifoxDocument } from '@/aifox/types'
 
 export default function AifoxDocumentAiPage() {
-  const { t } = useI18n()
+  const { t, lang } = useI18n()
   const ctx = useTenantContext()
   const [docs, setDocs] = useState<AifoxDocument[]>([])
   const [selected, setSelected] = useState<AifoxDocument | null>(null)
@@ -31,8 +31,8 @@ export default function AifoxDocumentAiPage() {
       entityType: 'document',
       entityId: selected.id,
       type: 'statusUpdate',
-      title: 'Document extraction approved',
-      message: `Fields approved for ${selected.fileName}.`,
+      title: lang === 'de' ? 'Dokumentenextraktion freigegeben' : 'Document extraction approved',
+      message: lang === 'de' ? `Felder für ${selected.fileName} freigegeben.` : `Fields approved for ${selected.fileName}.`,
       actor: ctx.userId
     })
   }
