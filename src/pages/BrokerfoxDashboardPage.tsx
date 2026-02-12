@@ -160,10 +160,18 @@ export default function BrokerfoxDashboardPage() {
             </div>
             <div style={{ display: 'grid', gap: '0.6rem' }}>
               <strong>{t('brokerfox.actions.newMessage')}</strong>
+              <div
+                aria-hidden="true"
+                style={{ height: 41, border: '1px solid transparent', borderRadius: 10 }}
+              />
               <Button size="sm" onClick={() => navigate(hero ? `/brokerfox/clients/${hero.clientId}` : '/brokerfox/clients')} style={{ height: 36 }}>{t('brokerfox.dashboard.goToClients')}</Button>
             </div>
             <div style={{ display: 'grid', gap: '0.6rem' }}>
               <strong>{t('brokerfox.actions.uploadDocument')}</strong>
+              <div
+                aria-hidden="true"
+                style={{ height: 41, border: '1px solid transparent', borderRadius: 10 }}
+              />
               <Button size="sm" onClick={() => navigate('/brokerfox/documents')} style={{ height: 36 }}>{t('brokerfox.dashboard.goToDocuments')}</Button>
             </div>
           </div>
