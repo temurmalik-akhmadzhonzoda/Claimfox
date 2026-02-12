@@ -240,8 +240,12 @@ type TranslationTree = {
       adminSubtitle: string
       lossRatioLabel: string
       geoShareLabel: string
+      referralLabel: string
+      confidenceLabel: string
+      authorityCapLabel: string
       sanctionsLabel: string
       coverageGapLabel: string
+      dualApprovalLabel: string
       saveAdmin: string
       savedVersion: string
       ruleNames: {
@@ -6007,8 +6011,12 @@ export const translations: Record<Lang, TranslationTree> = {
         adminSubtitle: 'Schwellenwerte und Schalter für die Regelsteuerung.',
         lossRatioLabel: 'Maximale Schadenquote',
         geoShareLabel: 'Maximaler Top-Region-Anteil',
+        referralLabel: 'Referral-Schwelle (Risk Score)',
+        confidenceLabel: 'Minimale KI-Konfidenz',
+        authorityCapLabel: 'Delegated Authority Cap (EUR)',
         sanctionsLabel: 'Sanktionsprüfung erzwingen',
         coverageGapLabel: 'Deckungslücken-Prüfung aktivieren',
+        dualApprovalLabel: 'Dual-Approval für Out-of-Corridor',
         saveAdmin: 'Regelkonfiguration speichern',
         savedVersion: 'Neue Version gespeichert',
         ruleNames: {
@@ -9678,8 +9686,12 @@ export const translations: Record<Lang, TranslationTree> = {
       adminSubtitle: 'Thresholds and toggles for rule control.',
       lossRatioLabel: 'Maximum loss ratio',
       geoShareLabel: 'Maximum top-region share',
+      referralLabel: 'Referral threshold (risk score)',
+      confidenceLabel: 'Minimum AI confidence',
+      authorityCapLabel: 'Delegated authority cap (EUR)',
       sanctionsLabel: 'Enforce sanctions screening',
       coverageGapLabel: 'Enable coverage gap review',
+      dualApprovalLabel: 'Dual approval for out-of-corridor',
       saveAdmin: 'Save rules configuration',
       savedVersion: 'New version saved',
       ruleNames: {

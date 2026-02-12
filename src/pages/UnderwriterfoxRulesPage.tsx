@@ -14,21 +14,25 @@ export default function UnderwriterfoxRulesPage() {
   const ctx = { tenantId: tenant.tenantId, userId: tenant.userId }
   const [lossRatioThreshold, setLossRatioThreshold] = useState(0.65)
   const [geoShareThreshold, setGeoShareThreshold] = useState(0.45)
+  const [referralThreshold, setReferralThreshold] = useState(72)
+  const [minConfidence, setMinConfidence] = useState(0.75)
+  const [authorityCap, setAuthorityCap] = useState(250000)
   const [sanctionsEnabled, setSanctionsEnabled] = useState(true)
   const [coverageGapEnabled, setCoverageGapEnabled] = useState(true)
+  const [dualApprovalEnabled, setDualApprovalEnabled] = useState(true)
   const [rulesetVersion, setRulesetVersion] = useState('v3.4')
 
   const hits = useMemo<RuleHit[]>(() => ([
     {
       ruleId: 'R-101',
       name: t('underwriterfox.rulesPage.ruleNames.lossRatioThreshold'),
-      outcome: lossRatioThreshold <= 0.65 ? 'warn' : 'pass',
+      outcome: lossRatioThreshold <= 0.65 ? 'warn' : lossRatioThreshold > 0.75 ? 'fail' : 'pass',
       severity: 'high'
     },
     {
       ruleId: 'R-204',
       name: t('underwriterfox.rulesPage.ruleNames.geoAggregationCheck'),
-      outcome: geoShareThreshold <= 0.45 ? 'warn' : 'pass',
+      outcome: geoShareThreshold <= 0.45 ? 'warn' : geoShareThreshold > 0.58 ? 'fail' : 'pass',
       severity: 'medium'
     },
     {
@@ -42,25 +46,42 @@ export default function UnderwriterfoxRulesPage() {
       name: t('underwriterfox.rulesPage.ruleNames.coverageGapReview'),
       outcome: coverageGapEnabled ? 'warn' : 'pass',
       severity: 'low'
+    },
+    {
+      ruleId: 'R-512',
+      name: t('underwriterfox.rulesPage.referralLabel'),
+      outcome: referralThreshold < 70 ? 'warn' : referralThreshold > 82 ? 'fail' : 'pass',
+      severity: 'medium'
+    },
+    {
+      ruleId: 'R-690',
+      name: t('underwriterfox.rulesPage.confidenceLabel'),
+      outcome: minConfidence > 0.82 ? 'warn' : 'pass',
+      severity: 'low'
+    },
+    {
+      ruleId: 'R-740',
+      name: t('underwriterfox.rulesPage.authorityCapLabel'),
+      outcome: authorityCap < 175000 ? 'warn' : 'pass',
+      severity: 'medium'
+    },
+    {
+      ruleId: 'R-802',
+      name: t('underwriterfox.rulesPage.dualApprovalLabel'),
+      outcome: dualApprovalEnabled ? 'pass' : 'warn',
+      severity: 'high'
     }
-  ]), [coverageGapEnabled, geoShareThreshold, lossRatioThreshold, sanctionsEnabled, t])
-
-  const editorText = useMemo(() => `// Ruleset ${rulesetVersion}
-rule LossRatioThreshold {
-  if (lossRatio > ${lossRatioThreshold.toFixed(2)}) then WARN
-}
-
-rule GeoAggregationCheck {
-  if (topRegionShare > ${geoShareThreshold.toFixed(2)}) then WARN
-}
-
-rule SanctionsScreening {
-  if (sanctionsHit == true && ${sanctionsEnabled}) then FAIL
-}
-
-rule CoverageGapReview {
-  if (coverageGapDetected == true && ${coverageGapEnabled}) then WARN
-}`, [coverageGapEnabled, geoShareThreshold, lossRatioThreshold, rulesetVersion, sanctionsEnabled])
+  ]), [
+    authorityCap,
+    coverageGapEnabled,
+    dualApprovalEnabled,
+    geoShareThreshold,
+    lossRatioThreshold,
+    minConfidence,
+    referralThreshold,
+    sanctionsEnabled,
+    t
+  ])
 
   async function handleSave() {
     await saveRuleEvaluation(ctx, 'ruleset', hits)
@@ -98,6 +119,39 @@ rule CoverageGapReview {
                 onChange={(event) => setGeoShareThreshold(Number(event.target.value))}
               />
             </label>
+            <label style={{ display: 'grid', gap: '0.4rem', color: '#475569', fontSize: '0.9rem' }}>
+              {t('underwriterfox.rulesPage.referralLabel')}: {referralThreshold}
+              <input
+                type="range"
+                min={55}
+                max={90}
+                step={1}
+                value={referralThreshold}
+                onChange={(event) => setReferralThreshold(Number(event.target.value))}
+              />
+            </label>
+            <label style={{ display: 'grid', gap: '0.4rem', color: '#475569', fontSize: '0.9rem' }}>
+              {t('underwriterfox.rulesPage.confidenceLabel')}: {minConfidence.toFixed(2)}
+              <input
+                type="range"
+                min={0.55}
+                max={0.95}
+                step={0.01}
+                value={minConfidence}
+                onChange={(event) => setMinConfidence(Number(event.target.value))}
+              />
+            </label>
+            <label style={{ display: 'grid', gap: '0.4rem', color: '#475569', fontSize: '0.9rem' }}>
+              {t('underwriterfox.rulesPage.authorityCapLabel')}: {authorityCap.toLocaleString()}
+              <input
+                type="range"
+                min={100000}
+                max={500000}
+                step={10000}
+                value={authorityCap}
+                onChange={(event) => setAuthorityCap(Number(event.target.value))}
+              />
+            </label>
             <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#475569', fontSize: '0.9rem' }}>
               <input type="checkbox" checked={sanctionsEnabled} onChange={(event) => setSanctionsEnabled(event.target.checked)} />
               {t('underwriterfox.rulesPage.sanctionsLabel')}
@@ -106,6 +160,10 @@ rule CoverageGapReview {
               <input type="checkbox" checked={coverageGapEnabled} onChange={(event) => setCoverageGapEnabled(event.target.checked)} />
               {t('underwriterfox.rulesPage.coverageGapLabel')}
             </label>
+            <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#475569', fontSize: '0.9rem' }}>
+              <input type="checkbox" checked={dualApprovalEnabled} onChange={(event) => setDualApprovalEnabled(event.target.checked)} />
+              {t('underwriterfox.rulesPage.dualApprovalLabel')}
+            </label>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap' }}>
               <Button size="sm" onClick={handleSave}>{t('underwriterfox.rulesPage.saveAdmin')}</Button>
               <span style={{ color: '#64748b', fontSize: '0.85rem' }}>
@@ -113,11 +171,6 @@ rule CoverageGapReview {
               </span>
             </div>
           </div>
-        </Card>
-        <Card variant="glass" title={t('underwriterfox.rulesPage.editorTitle')} subtitle={t('underwriterfox.rulesPage.editorSubtitle')}>
-          <pre style={{ margin: 0, background: '#0f172a', color: '#e2e8f0', padding: '1rem', borderRadius: 12, fontSize: '0.85rem', overflowX: 'auto' }}>
-            {editorText}
-          </pre>
         </Card>
       </UnderwriterfoxLayout>
     </section>
