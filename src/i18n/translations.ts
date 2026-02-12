@@ -5732,8 +5732,8 @@ export const translations: Record<Lang, TranslationTree> = {
         reject: 'Ablehnen & korrigieren'
       },
       chatbot: {
-        title: 'Conversational AI',
-        subtitle: 'LoyJoy Simulation',
+        title: 'Chatfox',
+        subtitle: '360 Grad Kommunikation',
         listTitle: 'Konversationen',
         listSubtitle: 'Demo-Dialoge',
         chatTitle: 'Chat-Oberfläche',
@@ -8518,8 +8518,8 @@ export const translations: Record<Lang, TranslationTree> = {
         reject: 'Reject & correct'
       },
       chatbot: {
-        title: 'Conversational AI',
-        subtitle: 'LoyJoy simulation',
+        title: 'Chatfox',
+        subtitle: '360 Grad Kommunikation',
         listTitle: 'Conversations',
         listSubtitle: 'Pre-seeded demos',
         chatTitle: 'Chat interface',
