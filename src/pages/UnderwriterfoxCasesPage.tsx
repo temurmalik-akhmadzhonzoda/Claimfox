@@ -6,9 +6,10 @@ import { useI18n } from '@/i18n/I18nContext'
 import { useTenantContext } from '@/brokerfox/hooks/useTenantContext'
 import { listCases } from '@/underwriterfox/api/underwriterfoxApi'
 import type { UnderwritingCase } from '@/underwriterfox/types'
+import { localizeUnderwriterProductLine } from '@/underwriterfox/utils/localizeDemoValues'
 
 export default function UnderwriterfoxCasesPage() {
-  const { t } = useI18n()
+  const { lang, t } = useI18n()
   const navigate = useNavigate()
   const tenant = useTenantContext()
   const ctx = { tenantId: tenant.tenantId, userId: tenant.userId }
@@ -61,7 +62,7 @@ export default function UnderwriterfoxCasesPage() {
               <select value={productLine} onChange={(event) => setProductLine(event.target.value)} style={{ padding: '0.5rem 0.75rem', borderRadius: 10, border: '1px solid #d6d9e0' }}>
                 <option value="all">{t('underwriterfox.cases.filterAllProduct')}</option>
                 {productOptions.map((line) => (
-                  <option key={line} value={line}>{line}</option>
+                  <option key={line} value={line}>{localizeUnderwriterProductLine(line, lang) ?? line}</option>
                 ))}
               </select>
             </label>
@@ -91,7 +92,7 @@ export default function UnderwriterfoxCasesPage() {
               >
                 <strong>{item.caseNumber}</strong>
                 <span>{item.insured}</span>
-                <span>{item.productLine}</span>
+                <span>{localizeUnderwriterProductLine(item.productLine, lang) ?? item.productLine}</span>
                 <span style={{ color: '#64748b' }}>{t(`underwriterfox.status.${item.status}`)}</span>
                 <span style={{ color: '#0f172a' }}>€{item.premium.total.toLocaleString()}</span>
               </button>

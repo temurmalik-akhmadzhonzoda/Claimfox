@@ -9,6 +9,7 @@ import { useI18n } from '@/i18n/I18nContext'
 import { useTenantContext } from '@/brokerfox/hooks/useTenantContext'
 import { listCases, listDocumentsByCase, listTimeline, updateCaseStatus } from '@/underwriterfox/api/underwriterfoxApi'
 import type { CaseDocument, TimelineEvent, UnderwritingCase } from '@/underwriterfox/types'
+import { localizeUnderwriterProductLine, localizeUnderwriterSegment } from '@/underwriterfox/utils/localizeDemoValues'
 
 const deadlineItems = [
   { id: 'd1', key: 'committee', dueAt: '2026-02-12' },
@@ -77,7 +78,7 @@ export default function UnderwriterfoxCaseDetailPage() {
     <section className="page" style={{ gap: '1.5rem' }}>
       <UnderwriterfoxLayout
         title={`${t('underwriterfox.caseDetail.title')} ${uwCase.caseNumber}`}
-        subtitle={`${uwCase.insured} · ${uwCase.productLine}`}
+        subtitle={`${uwCase.insured} · ${localizeUnderwriterProductLine(uwCase.productLine, lang) ?? uwCase.productLine}`}
         rightRail={(
           <Card variant="glass" title={t('underwriterfox.deadlines.title')} subtitle={t('underwriterfox.deadlines.subtitle')} style={{ height: 280 }}>
             <div style={{ display: 'grid', gap: '0.45rem' }}>
@@ -107,10 +108,10 @@ export default function UnderwriterfoxCaseDetailPage() {
         <Card variant="glass" title={t('underwriterfox.caseDetail.overview')}>
           <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', color: '#475569', fontSize: '0.9rem' }}>
             <span><strong>{t('underwriterfox.labels.broker')}:</strong> {uwCase.broker}</span>
-            <span><strong>{t('underwriterfox.labels.segment')}:</strong> {uwCase.segment}</span>
+            <span><strong>{t('underwriterfox.labels.segment')}:</strong> {localizeUnderwriterSegment(uwCase.segment, lang) ?? uwCase.segment}</span>
             <span><strong>{t('underwriterfox.labels.premium')}:</strong> €{uwCase.premium.total.toLocaleString()}</span>
             <span><strong>{t('underwriterfox.labels.status')}:</strong> {t(`underwriterfox.status.${uwCase.status}`)}</span>
-            <span><strong>{t('underwriterfox.labels.inception')}:</strong> {new Date(uwCase.inceptionDate).toLocaleDateString()}</span>
+            <span><strong>{t('underwriterfox.labels.inception')}:</strong> {new Date(uwCase.inceptionDate).toLocaleDateString(dateLocale)}</span>
           </div>
         </Card>
 
