@@ -8,7 +8,7 @@ import { listClaims, listFraudAlerts, logFraudAction } from '@/aifox/api/aifoxAp
 import type { AifoxClaim, AifoxFraudAlert } from '@/aifox/types'
 
 export default function AifoxFraudPage() {
-  const { t } = useI18n()
+  const { t, lang } = useI18n()
   const ctx = useTenantContext()
   const [claims, setClaims] = useState<AifoxClaim[]>([])
   const [alerts, setAlerts] = useState<AifoxFraudAlert[]>([])
@@ -73,8 +73,8 @@ export default function AifoxFraudPage() {
                 ))}
               </div>
               <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                <Button size="sm" onClick={() => act('Escalated for manual review')}>{t('aifox.fraud.escalate')}</Button>
-                <Button size="sm" variant="secondary" onClick={() => act('Suspicion cleared')}>{t('aifox.fraud.clear')}</Button>
+                <Button size="sm" onClick={() => act(lang === 'de' ? 'Zur manuellen Prüfung eskaliert' : 'Escalated for manual review')}>{t('aifox.fraud.escalate')}</Button>
+                <Button size="sm" variant="secondary" onClick={() => act(lang === 'de' ? 'Verdacht ausgeräumt' : 'Suspicion cleared')}>{t('aifox.fraud.clear')}</Button>
               </div>
             </div>
           ) : (
