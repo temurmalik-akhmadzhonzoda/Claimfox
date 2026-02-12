@@ -262,6 +262,14 @@ type TranslationTree = {
     aiPage: {
       title: string
       subtitle: string
+      kpis: {
+        confidence: string
+        riskScore: string
+        openFindings: string
+        decisionReadiness: string
+        readinessPending: string
+        readinessReady: string
+      }
       generatedSummary: string
       generatedBullets: {
         lossRatio: string
@@ -6033,6 +6041,14 @@ export const translations: Record<Lang, TranslationTree> = {
       aiPage: {
         title: 'AI',
         subtitle: 'Empfehlungen & Zusammenfassungen',
+        kpis: {
+          confidence: 'Empfehlungskonfidenz',
+          riskScore: 'Aggregierter Risiko-Score',
+          openFindings: 'Offene Findings',
+          decisionReadiness: 'Entscheidungsreife',
+          readinessPending: 'Review erforderlich',
+          readinessReady: 'Freigabereif'
+        },
         generatedSummary: 'Preisadjustierung mit Verweis ins Committee empfohlen.',
         generatedBullets: {
           lossRatio: 'Schadenquote oberhalb des Schwellenwerts; Selbstbehalt anpassen.',
@@ -9708,6 +9724,14 @@ export const translations: Record<Lang, TranslationTree> = {
     aiPage: {
       title: 'AI',
       subtitle: 'Recommendations & summaries',
+      kpis: {
+        confidence: 'Recommendation confidence',
+        riskScore: 'Aggregated risk score',
+        openFindings: 'Open findings',
+        decisionReadiness: 'Decision readiness',
+        readinessPending: 'Review required',
+        readinessReady: 'Ready for approval'
+      },
       generatedSummary: 'Pricing adjustment recommended with referral to committee.',
       generatedBullets: {
         lossRatio: 'Loss ratio above threshold; recommend deductible adjustment.',
