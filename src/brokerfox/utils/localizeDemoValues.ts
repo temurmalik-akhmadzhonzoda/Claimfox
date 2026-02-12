@@ -122,3 +122,25 @@ export function localizePolicyName(value: string | undefined, lang: Lang) {
   next = next.replace(/\bCargo Protect\b/g, lang === 'de' ? 'Transportschutz' : 'Cargo Protect')
   return next
 }
+
+const INTEGRATION_NAME_MAP: Record<string, { de: string; en: string }> = {
+  'BiPRO connector': { de: 'BiPRO Konnektor', en: 'BiPRO connector' },
+  'Pool connector': { de: 'Pool Konnektor', en: 'Pool connector' },
+  'Carrier API/Webhooks': { de: 'Carrier API/Webhooks', en: 'Carrier API/Webhooks' },
+  'Document mailbox ingest': { de: 'Dokumenten-Postfach Ingest', en: 'Document mailbox ingest' }
+}
+
+const INTEGRATION_DESCRIPTION_MAP: Record<string, { de: string; en: string }> = {
+  'Standard carrier messaging and data exchange.': { de: 'Standardisierter Carrier-Nachrichten- und Datenaustausch.', en: 'Standard carrier messaging and data exchange.' },
+  'Broker pool connection for quotes and renewals.': { de: 'Anbindung an Maklerpools fuer Angebote und Prolongierungen.', en: 'Broker pool connection for quotes and renewals.' },
+  'Direct API and webhook integrations.': { de: 'Direkte API- und Webhook-Integrationen.', en: 'Direct API and webhook integrations.' },
+  'Inbound document capture and routing.': { de: 'Eingehende Dokumentenerfassung und Routing.', en: 'Inbound document capture and routing.' }
+}
+
+export function localizeIntegrationName(value: string | undefined, lang: Lang) {
+  return pickLocalized(value, lang, INTEGRATION_NAME_MAP)
+}
+
+export function localizeIntegrationDescription(value: string | undefined, lang: Lang) {
+  return pickLocalized(value, lang, INTEGRATION_DESCRIPTION_MAP)
+}

@@ -6,9 +6,10 @@ import { useI18n } from '@/i18n/I18nContext'
 import { useTenantContext } from '@/brokerfox/hooks/useTenantContext'
 import { applyGdvImport, listContracts, listIntegrations, runBiproSync, runPortalFetch, updateIntegrationStatus } from '@/brokerfox/api/brokerfoxApi'
 import type { IntegrationItem, IntegrationStatus } from '@/brokerfox/types'
+import { localizeIntegrationDescription, localizeIntegrationName } from '@/brokerfox/utils/localizeDemoValues'
 
 export default function BrokerfoxIntegrationsPage() {
-  const { t } = useI18n()
+  const { lang, t } = useI18n()
   const ctx = useTenantContext()
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -132,8 +133,8 @@ export default function BrokerfoxIntegrationsPage() {
           {items.map((item) => (
             <div key={item.id} style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: '1rem', alignItems: 'center', padding: '0.5rem 0', borderBottom: '1px solid #e2e8f0' }}>
               <div>
-                <strong>{item.name}</strong>
-                <div style={{ color: '#64748b', fontSize: '0.9rem' }}>{item.description}</div>
+                <strong>{localizeIntegrationName(item.name, lang) ?? item.name}</strong>
+                <div style={{ color: '#64748b', fontSize: '0.9rem' }}>{localizeIntegrationDescription(item.description, lang) ?? item.description}</div>
               </div>
               <select
                 value={item.status}
