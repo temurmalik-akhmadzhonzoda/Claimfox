@@ -9,12 +9,13 @@ import type { TimelineEvent, UnderwritingCase } from '@/underwriterfox/types'
 import { translateTimelineMessage, translateTimelineTitle } from '@/underwriterfox/utils/timelineText'
 
 export default function UnderwriterfoxGovernancePage() {
-  const { t } = useI18n()
+  const { lang, t } = useI18n()
   const tenant = useTenantContext()
   const ctx = { tenantId: tenant.tenantId, userId: tenant.userId }
   const [cases, setCases] = useState<UnderwritingCase[]>([])
   const [events, setEvents] = useState<TimelineEvent[]>([])
   const [selectedCaseId, setSelectedCaseId] = useState('')
+  const dateLocale = lang === 'de' ? 'de-DE' : 'en-US'
 
   useEffect(() => {
     let mounted = true
@@ -65,7 +66,7 @@ export default function UnderwriterfoxGovernancePage() {
                 <div key={event.id} style={{ paddingBottom: '0.5rem', borderBottom: '1px solid #e2e8f0' }}>
                   <strong style={{ color: '#0f172a' }}>{translateTimelineTitle(event, t)}</strong>
                   <div style={{ color: '#475569', fontSize: '0.9rem' }}>{translateTimelineMessage(event, t)}</div>
-                  <div style={{ color: '#94a3b8', fontSize: '0.75rem' }}>{new Date(event.createdAt).toLocaleString()} · {event.actor}</div>
+                  <div style={{ color: '#94a3b8', fontSize: '0.75rem' }}>{new Date(event.createdAt).toLocaleString(dateLocale)} · {event.actor}</div>
                 </div>
               ))}
             </div>

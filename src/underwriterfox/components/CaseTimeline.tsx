@@ -8,7 +8,8 @@ type CaseTimelineProps = {
 }
 
 export default function CaseTimeline({ events }: CaseTimelineProps) {
-  const { t } = useI18n()
+  const { lang, t } = useI18n()
+  const dateLocale = lang === 'de' ? 'de-DE' : 'en-US'
 
   return (
     <Card variant="glass" title={t('underwriterfox.timeline.title')} subtitle={t('underwriterfox.timeline.subtitle')}>
@@ -18,7 +19,7 @@ export default function CaseTimeline({ events }: CaseTimelineProps) {
           <div key={event.id} style={{ display: 'grid', gap: '0.15rem', paddingBottom: '0.5rem', borderBottom: '1px solid #e2e8f0' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', fontSize: '0.85rem' }}>
               <strong style={{ color: '#0f172a' }}>{translateTimelineTitle(event, t)}</strong>
-              <span style={{ color: '#94a3b8' }}>{new Date(event.createdAt).toLocaleString()}</span>
+              <span style={{ color: '#94a3b8' }}>{new Date(event.createdAt).toLocaleString(dateLocale)}</span>
             </div>
             <div style={{ color: '#475569', fontSize: '0.9rem' }}>{translateTimelineMessage(event, t)}</div>
             <div style={{ color: '#94a3b8', fontSize: '0.75rem' }}>{event.actor} · {t(`underwriterfox.timeline.type.${event.type}`)}</div>

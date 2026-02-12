@@ -6,9 +6,10 @@ import { useI18n } from '@/i18n/I18nContext'
 import { useTenantContext } from '@/brokerfox/hooks/useTenantContext'
 import { listCases, listDocuments } from '@/underwriterfox/api/underwriterfoxApi'
 import type { CaseDocument, UnderwritingCase } from '@/underwriterfox/types'
+import { localizeUnderwriterExtractedText } from '@/underwriterfox/utils/localizeDemoValues'
 
 export default function UnderwriterfoxDocumentsPage() {
-  const { t } = useI18n()
+  const { lang, t } = useI18n()
   const tenant = useTenantContext()
   const ctx = { tenantId: tenant.tenantId, userId: tenant.userId }
   const [documents, setDocuments] = useState<CaseDocument[]>([])
@@ -102,7 +103,7 @@ export default function UnderwriterfoxDocumentsPage() {
             </div>
             <div style={{ display: 'grid', gap: '0.5rem', fontSize: '0.9rem' }}>
               <div><strong>{selected.name}</strong></div>
-              <div>{selected.extractedText}</div>
+              <div>{localizeUnderwriterExtractedText(selected.extractedText, lang) ?? selected.extractedText}</div>
             </div>
             <div style={{ marginTop: '1rem', display: 'flex', justifyContent: 'flex-end' }}>
               <Button size="sm" variant="secondary" onClick={() => setSelected(null)}>{t('underwriterfox.documentsPage.modalClose')}</Button>
