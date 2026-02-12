@@ -5607,7 +5607,7 @@ export const translations: Record<Lang, TranslationTree> = {
       nav: {
         title: 'AI.FOX',
         dashboard: 'Dashboard',
-        claimsVision: 'Schaden Vision',
+        claimsVision: 'Claimfox AI',
         fraud: 'Betrug',
         risk: 'Risiko',
         documentAi: 'Dokumenten-AI',
@@ -5632,7 +5632,7 @@ export const translations: Record<Lang, TranslationTree> = {
         modulesTitle: 'KI-Module',
         modulesSubtitle: 'Modul öffnen und AI-Workflow ansehen.',
         modules: {
-          claimsVision: 'Vision AI für Schadenbilder',
+          claimsVision: 'Claimfox AI für Schadenbilder',
           fraud: 'Betrugsmuster-Erkennung',
           risk: 'Risk & Underwriting Engine',
           documentAi: 'Dokumenten-Extraktion',
@@ -5652,7 +5652,7 @@ export const translations: Record<Lang, TranslationTree> = {
         riskSubtitle: 'Höchste Risikoportfolios'
       },
       claimsVision: {
-        title: 'Claims Vision AI',
+        title: 'Claimfox AI',
         subtitle: 'Schadenerkennung & Kostenschätzung',
         uploadTitle: 'Unfallbild hochladen',
         uploadSubtitle: 'Tractable-Simulation',
@@ -5670,7 +5670,7 @@ export const translations: Record<Lang, TranslationTree> = {
         override: 'Übersteuern',
         decisionSaved: 'Entscheidung gespeichert:',
         events: {
-          decisionTitle: 'Vision-AI-Entscheidung',
+          decisionTitle: 'Claimfox-AI-Entscheidung',
           decisionMessage: '{{action}} für {{claimNumber}} wurde protokolliert.'
         }
       },
@@ -8385,7 +8385,7 @@ export const translations: Record<Lang, TranslationTree> = {
       nav: {
         title: 'AI.FOX',
         dashboard: 'Dashboard',
-        claimsVision: 'Claims Vision',
+        claimsVision: 'Claimfox AI',
         fraud: 'Fraud',
         risk: 'Risk',
         documentAi: 'Document AI',
@@ -8410,7 +8410,7 @@ export const translations: Record<Lang, TranslationTree> = {
         modulesTitle: 'AI Modules',
         modulesSubtitle: 'Open a module to explore the AI workflow.',
         modules: {
-          claimsVision: 'Vision AI for damage assessment',
+          claimsVision: 'Claimfox AI for damage assessment',
           fraud: 'Fraud pattern detection',
           risk: 'Risk & underwriting engine',
           documentAi: 'Document extraction AI',
@@ -8430,7 +8430,7 @@ export const translations: Record<Lang, TranslationTree> = {
         riskSubtitle: 'Highest risk portfolios'
       },
       claimsVision: {
-        title: 'Claims Vision AI',
+        title: 'Claimfox AI',
         subtitle: 'Damage detection and repair estimation',
         uploadTitle: 'Upload accident image',
         uploadSubtitle: 'Simulated Tractable workflow',
@@ -8448,7 +8448,7 @@ export const translations: Record<Lang, TranslationTree> = {
         override: 'Override',
         decisionSaved: 'Decision saved:',
         events: {
-          decisionTitle: 'Vision AI decision',
+          decisionTitle: 'Claimfox AI decision',
           decisionMessage: '{{action}} recorded for {{claimNumber}}.'
         }
       },
