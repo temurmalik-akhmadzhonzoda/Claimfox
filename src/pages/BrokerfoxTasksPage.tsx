@@ -186,7 +186,7 @@ export default function BrokerfoxTasksPage() {
                         key={col.key}
                         type="button"
                         onClick={() => moveTask(task.id, col.key)}
-                        style={{ border: '1px solid #e2e8f0', background: '#fff', borderRadius: 999, padding: '0.2rem 0.6rem' }}
+                        style={{ border: '1px solid #e2e8f0', background: '#fff', color: '#0f172a', borderRadius: 999, padding: '0.2rem 0.6rem' }}
                       >
                         {t(col.labelKey)}
                       </button>
