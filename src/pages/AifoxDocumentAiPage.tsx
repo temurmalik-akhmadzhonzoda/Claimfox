@@ -37,6 +37,32 @@ export default function AifoxDocumentAiPage() {
     })
   }
 
+  function localizeDocType(value: string) {
+    if (lang === 'de') {
+      if (value === 'medical') return 'Medizinisch'
+      if (value === 'police') return 'Polizei'
+      if (value === 'policy') return 'Police'
+    }
+    if (value === 'medical') return 'Medical'
+    if (value === 'police') return 'Police report'
+    if (value === 'policy') return 'Policy'
+    return value
+  }
+
+  function localizeFieldLabel(value: string) {
+    if (lang === 'de') {
+      if (value === 'name') return 'Name'
+      if (value === 'claimNumber') return 'Schadennummer'
+      if (value === 'amount') return 'Betrag'
+      if (value === 'incidentDate') return 'Schadendatum'
+    }
+    if (value === 'name') return 'Name'
+    if (value === 'claimNumber') return 'Claim number'
+    if (value === 'amount') return 'Amount'
+    if (value === 'incidentDate') return 'Incident date'
+    return value
+  }
+
   return (
     <AifoxLayout title={t('aifox.documentAi.title')} subtitle={t('aifox.documentAi.subtitle')}>
       <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: '1.5rem' }}>
@@ -61,7 +87,7 @@ export default function AifoxDocumentAiPage() {
                   }}
                 >
                   <div style={{ fontWeight: 600 }}>{doc.fileName}</div>
-                  <div style={{ fontSize: '0.85rem', color: '#64748b' }}>{doc.type}</div>
+                  <div style={{ fontSize: '0.85rem', color: '#64748b' }}>{localizeDocType(doc.type)}</div>
                 </button>
               ))}
             </div>
@@ -74,7 +100,7 @@ export default function AifoxDocumentAiPage() {
               <div style={{ display: 'grid', gap: '0.4rem' }}>
                 {Object.entries(selected.extractedFields).map(([key, value]) => (
                   <label key={key} style={{ display: 'grid', gap: '0.25rem', fontSize: '0.85rem' }}>
-                    {key}
+                    {localizeFieldLabel(key)}
                     <input defaultValue={value} style={{ padding: '0.5rem', borderRadius: 10, border: '1px solid #e2e8f0' }} />
                   </label>
                 ))}
