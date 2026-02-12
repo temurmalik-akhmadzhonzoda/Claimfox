@@ -289,7 +289,7 @@ export default function BrokerfoxReportingPage() {
               <button
                 type="button"
                 onClick={() => handleReminder(item.contractId, item.id)}
-                style={{ border: '1px solid #e2e8f0', background: '#fff', borderRadius: 999, padding: '0.3rem 0.8rem' }}
+                style={{ border: '1px solid #e2e8f0', background: '#fff', color: '#0f172a', borderRadius: 999, padding: '0.3rem 0.8rem' }}
               >
                 {t('brokerfox.commissions.sendReminder')}
               </button>
