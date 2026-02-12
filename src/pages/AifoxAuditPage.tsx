@@ -13,6 +13,7 @@ export default function AifoxAuditPage() {
   const locale = lang === 'de' ? 'de-DE' : 'en-US'
 
   function mapTitle(raw: string) {
+    if (raw === 'AI decision logged') return lang === 'de' ? 'KI-Entscheidung protokolliert' : 'AI decision logged'
     if (raw === 'AI decision updated') return lang === 'de' ? 'KI-Entscheidung aktualisiert' : 'AI decision updated'
     if (raw === 'Fraud action logged') return lang === 'de' ? 'Betrugsaktion protokolliert' : 'Fraud action logged'
     if (raw === 'Integration toggled') return lang === 'de' ? 'Integration umgeschaltet' : 'Integration toggled'
@@ -21,6 +22,10 @@ export default function AifoxAuditPage() {
   }
 
   function mapMessage(raw: string) {
+    const decisionMatch = /^Decision logged for (.+) with confidence ([0-9.]+)\.$/.exec(raw)
+    if (decisionMatch && lang === 'de') {
+      return `Entscheidung für ${decisionMatch[1]} mit Konfidenz ${decisionMatch[2]} protokolliert.`
+    }
     if (raw.endsWith(' enabled.')) {
       const name = raw.replace(' enabled.', '')
       return lang === 'de' ? `${name} aktiviert.` : raw
