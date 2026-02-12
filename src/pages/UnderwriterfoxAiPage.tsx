@@ -14,12 +14,12 @@ export default function UnderwriterfoxAiPage() {
 
   async function handleGenerate() {
     const next: AiRecommendation = {
-      summary: 'Pricing adjustment recommended with referral to committee.',
+      summary: t('underwriterfox.aiPage.generatedSummary'),
       recommendedDecision: 'refer',
       bullets: [
-        'Loss ratio above threshold; recommend deductible adjustment.',
-        'Controls evidence strong; broker submission quality high.',
-        'Exposure concentration acceptable with minor wording updates.'
+        t('underwriterfox.aiPage.generatedBullets.lossRatio'),
+        t('underwriterfox.aiPage.generatedBullets.controls'),
+        t('underwriterfox.aiPage.generatedBullets.exposure')
       ],
       confidence: 0.74
     }

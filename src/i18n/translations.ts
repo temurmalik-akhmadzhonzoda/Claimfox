@@ -224,6 +224,12 @@ type TranslationTree = {
     aiPage: {
       title: string
       subtitle: string
+      generatedSummary: string
+      generatedBullets: {
+        lossRatio: string
+        controls: string
+        exposure: string
+      }
     }
     reporting: {
       title: string
@@ -5943,7 +5949,13 @@ export const translations: Record<Lang, TranslationTree> = {
       },
       aiPage: {
         title: 'AI',
-        subtitle: 'Empfehlungen & Zusammenfassungen'
+        subtitle: 'Empfehlungen & Zusammenfassungen',
+        generatedSummary: 'Preisadjustierung mit Verweis ins Committee empfohlen.',
+        generatedBullets: {
+          lossRatio: 'Schadenquote oberhalb des Schwellenwerts; Selbstbehalt anpassen.',
+          controls: 'Kontrollnachweise solide; hohe Qualität der Maklereinreichung.',
+          exposure: 'Exponierung akzeptabel mit kleineren Wording-Anpassungen.'
+        }
       },
       reporting: {
         title: 'Reporting',
@@ -9567,7 +9579,13 @@ export const translations: Record<Lang, TranslationTree> = {
     },
     aiPage: {
       title: 'AI',
-      subtitle: 'Recommendations & summaries'
+      subtitle: 'Recommendations & summaries',
+      generatedSummary: 'Pricing adjustment recommended with referral to committee.',
+      generatedBullets: {
+        lossRatio: 'Loss ratio above threshold; recommend deductible adjustment.',
+        controls: 'Controls evidence is strong; broker submission quality is high.',
+        exposure: 'Exposure concentration acceptable with minor wording updates.'
+      }
     },
     reporting: {
       title: 'Reporting',
