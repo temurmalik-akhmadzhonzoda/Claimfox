@@ -85,7 +85,7 @@ export default function BrokerfoxIntegrationsPage() {
                 <strong>{t('brokerfox.integrations.biproAction')}</strong>
                 <div style={{ color: '#64748b', fontSize: '0.85rem' }}>{t('brokerfox.integrations.biproHint')}</div>
               </div>
-              <button type="button" onClick={handleBiproSync} style={{ border: '1px solid #e2e8f0', background: '#fff', borderRadius: 999, padding: '0.35rem 0.9rem' }}>
+              <button type="button" onClick={handleBiproSync} style={{ border: '1px solid #e2e8f0', background: '#fff', color: '#0f172a', borderRadius: 999, padding: '0.35rem 0.9rem' }}>
                 {t('brokerfox.integrations.runAction')}
               </button>
             </div>
@@ -95,10 +95,10 @@ export default function BrokerfoxIntegrationsPage() {
               <div style={{ color: '#64748b', fontSize: '0.85rem' }}>{t('brokerfox.integrations.gdvHint')}</div>
               <input type="file" accept=".csv" onChange={(event) => setGdvFile(event.target.files?.[0] ?? null)} />
               <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                <button type="button" onClick={handleGdvPreview} style={{ border: '1px solid #e2e8f0', background: '#fff', borderRadius: 999, padding: '0.35rem 0.9rem' }}>
+                <button type="button" onClick={handleGdvPreview} style={{ border: '1px solid #e2e8f0', background: '#fff', color: '#0f172a', borderRadius: 999, padding: '0.35rem 0.9rem' }}>
                   {t('brokerfox.integrations.preview')}
                 </button>
-                <button type="button" onClick={handleGdvApply} style={{ border: '1px solid #e2e8f0', background: '#fff', borderRadius: 999, padding: '0.35rem 0.9rem' }}>
+                <button type="button" onClick={handleGdvApply} style={{ border: '1px solid #e2e8f0', background: '#fff', color: '#0f172a', borderRadius: 999, padding: '0.35rem 0.9rem' }}>
                   {t('brokerfox.integrations.apply')}
                 </button>
               </div>
@@ -118,7 +118,7 @@ export default function BrokerfoxIntegrationsPage() {
                 <strong>{t('brokerfox.integrations.portalAction')}</strong>
                 <div style={{ color: '#64748b', fontSize: '0.85rem' }}>{t('brokerfox.integrations.portalHint')}</div>
               </div>
-              <button type="button" onClick={handlePortalFetch} style={{ border: '1px solid #e2e8f0', background: '#fff', borderRadius: 999, padding: '0.35rem 0.9rem' }}>
+              <button type="button" onClick={handlePortalFetch} style={{ border: '1px solid #e2e8f0', background: '#fff', color: '#0f172a', borderRadius: 999, padding: '0.35rem 0.9rem' }}>
                 {t('brokerfox.integrations.runAction')}
               </button>
             </div>
