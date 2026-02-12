@@ -8549,7 +8549,7 @@ export const translations: Record<Lang, TranslationTree> = {
       },
       chatbot: {
         title: 'Chatfox',
-        subtitle: '360 Grad Kommunikation',
+        subtitle: '360-degree communication',
         listTitle: 'Conversations',
         listSubtitle: 'Pre-seeded demos',
         chatTitle: 'Chat interface',

@@ -57,6 +57,20 @@ export default function AifoxChatbotPage() {
     [lang]
   )
 
+  const localizeTopic = useMemo(() => {
+    return (topic: string) => {
+      if (lang === 'de') {
+        if (topic === 'Claim status') return 'Schadenstatus'
+        if (topic === 'Coverage question') return 'Deckungsfrage'
+        if (topic === 'Policy change') return 'Policenanpassung'
+      }
+      if (topic === 'Schadenstatus') return 'Claim status'
+      if (topic === 'Deckungsfrage') return 'Coverage question'
+      if (topic === 'Policenanpassung') return 'Policy change'
+      return topic
+    }
+  }, [lang])
+
   function buildAssistantReply(userText: string): { text: string; confidence: number } {
     const normalized = userText.toLowerCase()
     if (normalized.includes('status') || normalized.includes('stand')) {
@@ -153,7 +167,7 @@ export default function AifoxChatbotPage() {
                 }}
               >
                 <div style={{ fontWeight: 600 }}>{conv.customer}</div>
-                <div style={{ fontSize: '0.85rem', color: '#64748b' }}>{conv.topic}</div>
+                <div style={{ fontSize: '0.85rem', color: '#64748b' }}>{localizeTopic(conv.topic)}</div>
               </button>
             ))}
           </div>
