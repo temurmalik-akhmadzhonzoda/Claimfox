@@ -11,15 +11,15 @@ import { listCases, listDocumentsByCase, listTimeline, updateCaseStatus } from '
 import type { CaseDocument, TimelineEvent, UnderwritingCase } from '@/underwriterfox/types'
 
 const deadlineItems = [
-  { id: 'd1', key: 'committee', due: '12 Feb' },
-  { id: 'd2', key: 'broker', due: '15 Feb' },
-  { id: 'd3', key: 'pricing', due: '18 Feb' },
-  { id: 'd4', key: 'qa', due: '21 Feb' },
-  { id: 'd5', key: 'decision', due: '25 Feb' }
+  { id: 'd1', key: 'committee', dueAt: '2026-02-12' },
+  { id: 'd2', key: 'broker', dueAt: '2026-02-15' },
+  { id: 'd3', key: 'pricing', dueAt: '2026-02-18' },
+  { id: 'd4', key: 'qa', dueAt: '2026-02-21' },
+  { id: 'd5', key: 'decision', dueAt: '2026-02-25' }
 ]
 
 export default function UnderwriterfoxCaseDetailPage() {
-  const { t } = useI18n()
+  const { t, lang } = useI18n()
   const navigate = useNavigate()
   const { caseId } = useParams()
   const tenant = useTenantContext()
@@ -29,6 +29,8 @@ export default function UnderwriterfoxCaseDetailPage() {
   const [events, setEvents] = useState<TimelineEvent[]>([])
   const [activeTab, setActiveTab] = useState<'overview' | 'documents' | 'timeline' | 'decision'>('overview')
   const [selectedDeadline, setSelectedDeadline] = useState<typeof deadlineItems[number] | null>(null)
+  const dateLocale = lang === 'de' ? 'de-DE' : 'en-US'
+  const formatDue = (isoDate: string) => new Date(isoDate).toLocaleDateString(dateLocale, { day: 'numeric', month: 'short' })
 
   async function handleStatusChange(status: UnderwritingCase['status'], rationale: string) {
     if (!uwCase) return
@@ -88,7 +90,7 @@ export default function UnderwriterfoxCaseDetailPage() {
                 style={{ display: 'flex', justifyContent: 'space-between', gap: '0.5rem', border: 'none', background: 'transparent', textAlign: 'left', color: '#0f172a' }}
               >
                 <span style={{ fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{t(`underwriterfox.deadlines.caseItems.${item.key}.title`)}</span>
-                <span style={{ color: '#64748b', whiteSpace: 'nowrap' }}>{item.due}</span>
+                <span style={{ color: '#64748b', whiteSpace: 'nowrap' }}>{formatDue(item.dueAt)}</span>
               </button>
             ))}
             </div>
@@ -159,7 +161,7 @@ export default function UnderwriterfoxCaseDetailPage() {
             <div style={{ display: 'grid', gap: '0.5rem' }}>
               <div style={{ fontWeight: 600 }}>{t(`underwriterfox.deadlines.caseItems.${selectedDeadline.key}.title`)}</div>
               <div style={{ color: '#64748b' }}>{t(`underwriterfox.deadlines.caseItems.${selectedDeadline.key}.detail`)}</div>
-              <div style={{ color: '#0f172a' }}>{selectedDeadline.due}</div>
+              <div style={{ color: '#0f172a' }}>{formatDue(selectedDeadline.dueAt)}</div>
             </div>
             <div style={{ marginTop: '1rem', display: 'flex', justifyContent: 'flex-end' }}>
               <Button size="sm" variant="secondary" onClick={() => setSelectedDeadline(null)}>{t('underwriterfox.deadlines.modalClose')}</Button>

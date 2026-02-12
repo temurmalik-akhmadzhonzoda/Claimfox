@@ -18,13 +18,15 @@ const RIGHT_RAIL_WIDTH = 280
 const TOP_ROW_HEIGHT = RIGHT_RAIL_WIDTH
 
 export default function UnderwriterfoxLayout({ title, subtitle, topLeft, rightRail, children }: UnderwriterfoxLayoutProps) {
-  const { t } = useI18n()
+  const { t, lang } = useI18n()
+  const dateLocale = lang === 'de' ? 'de-DE' : 'en-US'
+  const formatDue = (isoDate: string) => new Date(isoDate).toLocaleDateString(dateLocale, { day: 'numeric', month: 'short' })
   const defaultDeadlines = [
-    { title: t('underwriterfox.deadlines.items.review'), due: '12 Feb' },
-    { title: t('underwriterfox.deadlines.items.pricing'), due: '15 Feb' },
-    { title: t('underwriterfox.deadlines.items.cyber'), due: '18 Feb' },
-    { title: t('underwriterfox.deadlines.items.brokerCall'), due: '21 Feb' },
-    { title: t('underwriterfox.deadlines.items.qa'), due: '25 Feb' }
+    { title: t('underwriterfox.deadlines.items.review'), due: formatDue('2026-02-12') },
+    { title: t('underwriterfox.deadlines.items.pricing'), due: formatDue('2026-02-15') },
+    { title: t('underwriterfox.deadlines.items.cyber'), due: formatDue('2026-02-18') },
+    { title: t('underwriterfox.deadlines.items.brokerCall'), due: formatDue('2026-02-21') },
+    { title: t('underwriterfox.deadlines.items.qa'), due: formatDue('2026-02-25') }
   ]
   const railContent = rightRail ?? (
     <Card variant="glass" title={t('underwriterfox.deadlines.title')} subtitle={t('underwriterfox.deadlines.subtitle')} style={{ height: TOP_ROW_HEIGHT }}>
