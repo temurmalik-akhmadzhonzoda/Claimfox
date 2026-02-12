@@ -1152,6 +1152,8 @@ type TranslationTree = {
       quickActionsSubtitle: string
       goToClients: string
       goToDocuments: string
+      newMessagePlaceholder: string
+      uploadDocumentPlaceholder: string
     }
     clients: {
       title: string
@@ -2616,7 +2618,9 @@ export const translations: Record<Lang, TranslationTree> = {
         quickActions: 'Schnellaktionen',
         quickActionsSubtitle: 'Erzeuge neue Datensätze oder starte eine Kommunikation.',
         goToClients: 'Zum Kundenbereich',
-        goToDocuments: 'Zum Dokumentenbereich'
+        goToDocuments: 'Zum Dokumentenbereich',
+        newMessagePlaceholder: 'z.B. Angebot bitte bis Freitag finalisieren',
+        uploadDocumentPlaceholder: 'z.B. police_renewal_2026.pdf'
       },
       clients: {
         title: 'Kunden & CRM',
@@ -6302,7 +6306,9 @@ export const translations: Record<Lang, TranslationTree> = {
         quickActions: 'Quick actions',
         quickActionsSubtitle: 'Create records or start communication.',
         goToClients: 'Go to clients',
-        goToDocuments: 'Go to documents'
+        goToDocuments: 'Go to documents',
+        newMessagePlaceholder: 'e.g. Please finalize the offer by Friday',
+        uploadDocumentPlaceholder: 'e.g. policy_renewal_2026.pdf'
       },
       clients: {
         title: 'Clients & CRM',

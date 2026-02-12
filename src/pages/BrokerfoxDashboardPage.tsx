@@ -161,7 +161,7 @@ export default function BrokerfoxDashboardPage() {
             <div style={{ display: 'grid', gap: '0.6rem' }}>
               <strong>{t('brokerfox.actions.newMessage')}</strong>
               <input
-                defaultValue="z.B. Angebot bitte bis Freitag finalisieren"
+                placeholder={t('brokerfox.dashboard.newMessagePlaceholder')}
                 style={{ padding: '0.6rem 0.75rem', borderRadius: 10, border: '1px solid #d6d9e0' }}
               />
               <Button size="sm" onClick={() => navigate(hero ? `/brokerfox/clients/${hero.clientId}` : '/brokerfox/clients')} style={{ height: 36 }}>{t('brokerfox.dashboard.goToClients')}</Button>
@@ -169,7 +169,7 @@ export default function BrokerfoxDashboardPage() {
             <div style={{ display: 'grid', gap: '0.6rem' }}>
               <strong>{t('brokerfox.actions.uploadDocument')}</strong>
               <input
-                defaultValue="z.B. police_renewal_2026.pdf"
+                placeholder={t('brokerfox.dashboard.uploadDocumentPlaceholder')}
                 style={{ padding: '0.6rem 0.75rem', borderRadius: 10, border: '1px solid #d6d9e0' }}
               />
               <Button size="sm" onClick={() => navigate('/brokerfox/documents')} style={{ height: 36 }}>{t('brokerfox.dashboard.goToDocuments')}</Button>
