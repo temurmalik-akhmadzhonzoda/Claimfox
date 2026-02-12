@@ -24,7 +24,7 @@ import { generateDocumentText } from '@/brokerfox/utils/documentGenerator'
 import type { MailboxItem } from '@/brokerfox/types'
 
 export default function BrokerfoxMailboxPage() {
-  const { t } = useI18n()
+  const { t, lang } = useI18n()
   const ctx = useTenantContext()
   const navigate = useNavigate()
   const [items, setItems] = useState<MailboxItem[]>([])
@@ -38,6 +38,87 @@ export default function BrokerfoxMailboxPage() {
   const [entityType, setEntityType] = useState<'client' | 'tender' | 'offer' | 'renewal' | 'contract'>('client')
   const [entityId, setEntityId] = useState('')
   const [approvedExtraction, setApprovedExtraction] = useState<Record<string, boolean>>({})
+  const dateLocale = lang === 'de' ? 'de-DE' : 'en-US'
+
+  const subjectMap: Record<string, { de: string; en: string }> = {
+    'Offer update for SME Package Renewal 2026': {
+      de: 'Angebotsupdate für SME Package Renewal 2026',
+      en: 'Offer update for SME Package Renewal 2026'
+    },
+    'Updated risk information': {
+      de: 'Aktualisierte Risiko-Informationen',
+      en: 'Updated risk information'
+    },
+    'Renewal reminder for Atlas Holding': {
+      de: 'Verlängerungserinnerung für Atlas Holding',
+      en: 'Renewal reminder for Atlas Holding'
+    },
+    'Updated loss run attachment': {
+      de: 'Aktualisierter Schadenverlauf im Anhang',
+      en: 'Updated loss run attachment'
+    },
+    'Carrier offer update — revised premium': {
+      de: 'Carrier-Angebotsupdate — angepasste Prämie',
+      en: 'Carrier offer update — revised premium'
+    },
+    'Renewal reminder and documentation request': {
+      de: 'Verlängerungserinnerung und Dokumentenanfrage',
+      en: 'Renewal reminder and documentation request'
+    },
+    'Client update — new location added': {
+      de: 'Kundenupdate — neuer Standort hinzugefügt',
+      en: 'Client update — new location added'
+    },
+    'Loss history clarification needed': {
+      de: 'Klärung zur Schadenhistorie erforderlich',
+      en: 'Loss history clarification needed'
+    }
+  }
+
+  const bodyMap: Record<string, { de: string; en: string }> = {
+    'Please find the updated risk assessment and facility overview.': {
+      de: 'Bitte finden Sie die aktualisierte Risikobewertung und Standortübersicht.',
+      en: 'Please find the updated risk assessment and facility overview.'
+    },
+    'Please provide updated loss history and renewal preferences.': {
+      de: 'Bitte senden Sie die aktualisierte Schadenhistorie und Verlängerungspräferenzen.',
+      en: 'Please provide updated loss history and renewal preferences.'
+    },
+    'Hello team,\n\nPlease find attached the updated loss run for the last 24 months. We have highlighted two larger events for your review.\n\nLet us know if you need anything else.\n\nRegards,\nLaura Stein': {
+      de: 'Hallo Team,\n\nim Anhang finden Sie den aktualisierten Schadenverlauf der letzten 24 Monate. Zwei größere Ereignisse haben wir zur Prüfung markiert.\n\nGeben Sie gerne Bescheid, falls weitere Informationen benötigt werden.\n\nViele Grüße,\nLaura Stein',
+      en: 'Hello team,\n\nPlease find attached the updated loss run for the last 24 months. We have highlighted two larger events for your review.\n\nLet us know if you need anything else.\n\nRegards,\nLaura Stein'
+    },
+    'Hi Brokerfox team,\n\nWe reviewed the submitted exposure updates and can provide revised terms. Please see the attached offer and summary in the email below.\n\nBest,\nM. Keller': {
+      de: 'Hallo Brokerfox-Team,\n\nwir haben die eingereichten Exposure-Updates geprüft und können angepasste Konditionen anbieten. Bitte beachten Sie das angehängte Angebot und die Zusammenfassung unten.\n\nBeste Grüße,\nM. Keller',
+      en: 'Hi Brokerfox team,\n\nWe reviewed the submitted exposure updates and can provide revised terms. Please see the attached offer and summary in the email below.\n\nBest,\nM. Keller'
+    },
+    'Dear all,\n\nYour renewal is approaching in the next 60 days. Please provide updated fleet lists and recent claims summaries to proceed.\n\nThanks,\nCarrier Renewals Desk': {
+      de: 'Hallo zusammen,\n\ndie Verlängerung steht in den nächsten 60 Tagen an. Bitte senden Sie aktualisierte Flottenlisten und aktuelle Schadenzusammenfassungen.\n\nDanke,\nCarrier Renewals Desk',
+      en: 'Dear all,\n\nYour renewal is approaching in the next 60 days. Please provide updated fleet lists and recent claims summaries to proceed.\n\nThanks,\nCarrier Renewals Desk'
+    },
+    'Hello,\n\nWe have opened a new warehouse location in Bremen. Please advise if additional coverage documentation is required.\n\nRegards,\nJonas': {
+      de: 'Hallo,\n\nwir haben einen neuen Lagerstandort in Bremen eröffnet. Bitte teilen Sie uns mit, ob zusätzliche Deckungsdokumente erforderlich sind.\n\nViele Grüße,\nJonas',
+      en: 'Hello,\n\nWe have opened a new warehouse location in Bremen. Please advise if additional coverage documentation is required.\n\nRegards,\nJonas'
+    },
+    'Hi,\n\nWe noticed a discrepancy in the reported losses for Q4. Can you confirm whether the reserve has been released?\n\nBest,\nRisk Team': {
+      de: 'Hallo,\n\nuns ist eine Abweichung in den gemeldeten Schäden für Q4 aufgefallen. Können Sie bestätigen, ob die Reserve bereits aufgelöst wurde?\n\nBeste Grüße,\nRisk Team',
+      en: 'Hi,\n\nWe noticed a discrepancy in the reported losses for Q4. Can you confirm whether the reserve has been released?\n\nBest,\nRisk Team'
+    }
+  }
+
+  function localizeSubject(subject: string) {
+    if (subjectMap[subject]) return subjectMap[subject][lang]
+    const split = subject.split(' — ')
+    if (split.length === 2 && subjectMap[split[0]]) {
+      return `${subjectMap[split[0]][lang]} — ${split[1]}`
+    }
+    return subject
+  }
+
+  function localizeBody(body?: string) {
+    if (!body) return body
+    return bodyMap[body]?.[lang] ?? body
+  }
 
   useEffect(() => {
     let mounted = true
@@ -102,7 +183,7 @@ export default function BrokerfoxMailboxPage() {
       entityId,
       type: 'documentAssigned',
       title: t('brokerfox.mailbox.assignedTitle'),
-      message: `${selected.subject} ${t('brokerfox.mailbox.assignedMessage')}`
+      message: `${localizeSubject(selected.subject)} ${t('brokerfox.mailbox.assignedMessage')}`
     })
   }
 
@@ -124,8 +205,8 @@ export default function BrokerfoxMailboxPage() {
   async function handleCreateTask() {
     if (!selected) return
     const task = await createTask(ctx, {
-      title: `${t('brokerfox.mailbox.taskPrefix')}: ${selected.subject}`,
-      description: selected.body,
+      title: `${t('brokerfox.mailbox.taskPrefix')}: ${localizeSubject(selected.subject)}`,
+      description: localizeBody(selected.body),
       status: 'todo',
       linkedEntityType: selected.entityType ?? entityType,
       linkedEntityId: selected.entityId ?? entityId
@@ -206,13 +287,13 @@ export default function BrokerfoxMailboxPage() {
                     <strong style={{ fontSize: '0.95rem' }}>{item.sender}</strong>
                     <span style={{ color: '#94a3b8', fontSize: '0.75rem' }}>{item.attachments.length} {t('brokerfox.mailbox.attachments')}</span>
                   </div>
-                  <div style={{ color: '#0f172a', fontWeight: 600 }}>{item.subject}</div>
+                  <div style={{ color: '#0f172a', fontWeight: 600 }}>{localizeSubject(item.subject)}</div>
                   <div style={{ color: '#64748b', fontSize: '0.85rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                    {(item.body ?? '').replace(/\\s+/g, ' ').slice(0, 120)}
+                    {(localizeBody(item.body) ?? '').replace(/\s+/g, ' ').slice(0, 120)}
                   </div>
                 </div>
                 <div style={{ textAlign: 'right', display: 'grid', gap: '0.25rem', alignContent: 'start' }}>
-                  <span style={{ color: '#94a3b8', fontSize: '0.75rem' }}>{new Date(item.receivedAt).toLocaleString()}</span>
+                  <span style={{ color: '#94a3b8', fontSize: '0.75rem' }}>{new Date(item.receivedAt).toLocaleString(dateLocale)}</span>
                   <span style={{ fontSize: '0.7rem', padding: '0.1rem 0.45rem', borderRadius: 999, background: '#eef2f7', color: '#0f172a', border: '1px solid #d6d9e0' }}>
                     {t(`brokerfox.mailbox.status.${item.status}`)}
                   </span>
@@ -225,12 +306,12 @@ export default function BrokerfoxMailboxPage() {
             {selected ? (
               <div style={{ display: 'grid', gap: '0.75rem' }}>
                 <div style={{ display: 'grid', gap: '0.25rem' }}>
-                  <strong style={{ fontSize: '1rem', color: '#0f172a' }}>{selected.subject}</strong>
+                  <strong style={{ fontSize: '1rem', color: '#0f172a' }}>{localizeSubject(selected.subject)}</strong>
                   <div style={{ color: '#64748b', fontSize: '0.85rem' }}>{t('brokerfox.mailbox.from')}: {selected.sender}</div>
                   <div style={{ color: '#64748b', fontSize: '0.85rem' }}>{t('brokerfox.mailbox.to')}: {t('brokerfox.mailbox.toValue')}</div>
-                  <div style={{ color: '#64748b', fontSize: '0.85rem' }}>{t('brokerfox.mailbox.date')}: {new Date(selected.receivedAt).toLocaleString()}</div>
+                  <div style={{ color: '#64748b', fontSize: '0.85rem' }}>{t('brokerfox.mailbox.date')}: {new Date(selected.receivedAt).toLocaleString(dateLocale)}</div>
                 </div>
-                <div style={{ whiteSpace: 'pre-line', color: '#0f172a' }}>{selected.body ?? t('brokerfox.mailbox.previewPlaceholder')}</div>
+                <div style={{ whiteSpace: 'pre-line', color: '#0f172a' }}>{localizeBody(selected.body) ?? t('brokerfox.mailbox.previewPlaceholder')}</div>
                 <div>
                   <strong>{t('brokerfox.mailbox.attachments')}</strong>
                   {selected.attachments.map((doc) => (
