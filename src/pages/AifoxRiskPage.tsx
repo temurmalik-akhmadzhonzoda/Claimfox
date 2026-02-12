@@ -8,7 +8,7 @@ import { addTimelineEvent, listUnderwriting } from '@/aifox/api/aifoxApi'
 import type { AifoxUnderwritingSim } from '@/aifox/types'
 
 export default function AifoxRiskPage() {
-  const { t } = useI18n()
+  const { t, lang } = useI18n()
   const ctx = useTenantContext()
   const [sims, setSims] = useState<AifoxUnderwritingSim[]>([])
   const [selected, setSelected] = useState<AifoxUnderwritingSim | null>(null)
@@ -31,8 +31,8 @@ export default function AifoxRiskPage() {
       entityType: 'risk',
       entityId: selected.id,
       type: 'system',
-      title: 'Risk calculation logged',
-      message: 'Risk score and premium recalculated.',
+      title: lang === 'de' ? 'Risikoberechnung protokolliert' : 'Risk calculation logged',
+      message: lang === 'de' ? 'Risiko-Score und Prämie neu berechnet.' : 'Risk score and premium recalculated.',
       actor: ctx.userId
     })
   }
