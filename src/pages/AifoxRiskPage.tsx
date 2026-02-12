@@ -37,6 +37,49 @@ export default function AifoxRiskPage() {
     })
   }
 
+  function localizeVehicle(value: string) {
+    if (lang === 'de') {
+      if (value === 'Sedan') return 'Limousine'
+      if (value === 'Truck') return 'Lkw'
+    }
+    return value
+  }
+
+  function localizeRegion(value: string) {
+    if (lang === 'de') {
+      if (value === 'High theft region') return 'Region mit hoher Diebstahlquote'
+      if (value === 'Low risk region') return 'Niedrigrisikoregion'
+    }
+    return value
+  }
+
+  function localizeFactor(value: string) {
+    if (lang === 'de') {
+      if (value === 'Theft region') return 'Diebstahlregion'
+      if (value === 'Loss history') return 'Schadenhistorie'
+      if (value === 'Vehicle type') return 'Fahrzeugtyp'
+    }
+    return value
+  }
+
+  function localizeBiasCheck(value: string) {
+    if (lang === 'de') {
+      if (value === 'pass') return 'Bestanden'
+      if (value === 'review') return 'Prüfung'
+    }
+    if (value === 'pass') return 'Pass'
+    if (value === 'review') return 'Review'
+    return value
+  }
+
+  function localizeAiActCategory(value: string) {
+    if (lang === 'de') {
+      if (value === 'Limited Risk') return 'Begrenztes Risiko'
+      if (value === 'High Risk') return 'Hohes Risiko'
+    }
+    return value
+  }
+
   return (
     <AifoxLayout title={t('aifox.risk.title')} subtitle={t('aifox.risk.subtitle')}>
       <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: '1.5rem' }}>
@@ -49,11 +92,11 @@ export default function AifoxRiskPage() {
               </label>
               <label style={{ display: 'grid', gap: '0.35rem' }}>
                 {t('aifox.risk.vehicle')}
-                <input value={selected.input.vehicle} readOnly style={{ padding: '0.6rem', borderRadius: 10, border: '1px solid #e2e8f0' }} />
+                <input value={localizeVehicle(selected.input.vehicle)} readOnly style={{ padding: '0.6rem', borderRadius: 10, border: '1px solid #e2e8f0' }} />
               </label>
               <label style={{ display: 'grid', gap: '0.35rem' }}>
                 {t('aifox.risk.region')}
-                <input value={selected.input.region} readOnly style={{ padding: '0.6rem', borderRadius: 10, border: '1px solid #e2e8f0' }} />
+                <input value={localizeRegion(selected.input.region)} readOnly style={{ padding: '0.6rem', borderRadius: 10, border: '1px solid #e2e8f0' }} />
               </label>
               <label style={{ display: 'grid', gap: '0.35rem' }}>
                 {t('aifox.risk.lossHistory')}
@@ -70,11 +113,11 @@ export default function AifoxRiskPage() {
               <div style={{ fontWeight: 600 }}>{t('aifox.risk.premium')}: € {selected.output.premium}</div>
               <div style={{ display: 'grid', gap: '0.35rem' }}>
                 {selected.output.factors.map((factor) => (
-                  <div key={factor.label} style={{ fontSize: '0.85rem', color: '#475569' }}>{factor.label}: {factor.value}%</div>
+                  <div key={factor.label} style={{ fontSize: '0.85rem', color: '#475569' }}>{localizeFactor(factor.label)}: {factor.value}%</div>
                 ))}
               </div>
-              <div style={{ fontSize: '0.85rem', color: '#64748b' }}>{t('aifox.risk.biasCheck')}: {selected.output.biasCheck}</div>
-              <div style={{ fontSize: '0.85rem', color: '#64748b' }}>{t('aifox.risk.aiActCategory')}: {selected.output.aiActCategory}</div>
+              <div style={{ fontSize: '0.85rem', color: '#64748b' }}>{t('aifox.risk.biasCheck')}: {localizeBiasCheck(selected.output.biasCheck)}</div>
+              <div style={{ fontSize: '0.85rem', color: '#64748b' }}>{t('aifox.risk.aiActCategory')}: {localizeAiActCategory(selected.output.aiActCategory)}</div>
             </div>
           ) : null}
         </Card>
