@@ -81,16 +81,29 @@ export default function UnderwriterfoxCaseDetailPage() {
         subtitle={`${uwCase.insured} · ${uwCase.productLine}`}
         rightRail={(
           <Card variant="glass" title={t('underwriterfox.deadlines.title')} subtitle={t('underwriterfox.deadlines.subtitle')} style={{ height: 280 }}>
-            <div style={{ display: 'grid', gap: '0.5rem' }}>
+            <div style={{ display: 'grid', gap: '0.45rem' }}>
             {deadlineItems.map((item) => (
               <button
                 key={item.id}
                 type="button"
                 onClick={() => setSelectedDeadline(item)}
-                style={{ display: 'flex', justifyContent: 'space-between', gap: '0.5rem', border: 'none', background: 'transparent', textAlign: 'left', color: '#0f172a' }}
+                style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: '0.5rem', border: 'none', background: 'transparent', textAlign: 'left', color: '#0f172a', minWidth: 0 }}
               >
-                <span style={{ fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{t(`underwriterfox.deadlines.caseItems.${item.key}.title`)}</span>
-                <span style={{ color: '#64748b', whiteSpace: 'nowrap' }}>{formatDue(item.dueAt)}</span>
+                <span
+                  style={{
+                    fontWeight: 600,
+                    fontSize: '0.82rem',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    whiteSpace: 'nowrap',
+                    flex: 1,
+                    minWidth: 0
+                  }}
+                  title={t(`underwriterfox.deadlines.caseItems.${item.key}.title`)}
+                >
+                  {t(`underwriterfox.deadlines.caseItems.${item.key}.title`)}
+                </span>
+                <span style={{ color: '#64748b', whiteSpace: 'nowrap', flexShrink: 0, fontSize: '0.82rem' }}>{formatDue(item.dueAt)}</span>
               </button>
             ))}
             </div>

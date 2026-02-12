@@ -236,6 +236,14 @@ type TranslationTree = {
       subtitle: string
       editorTitle: string
       editorSubtitle: string
+      adminTitle: string
+      adminSubtitle: string
+      lossRatioLabel: string
+      geoShareLabel: string
+      sanctionsLabel: string
+      coverageGapLabel: string
+      saveAdmin: string
+      savedVersion: string
       ruleNames: {
         lossRatioThreshold: string
         geoAggregationCheck: string
@@ -5995,6 +6003,14 @@ export const translations: Record<Lang, TranslationTree> = {
         subtitle: 'Regelsätze & Versionierung',
         editorTitle: 'Regel-Editor (Read-only)',
         editorSubtitle: 'Änderungen werden als neue Version gespeichert.',
+        adminTitle: 'Admin Panel',
+        adminSubtitle: 'Schwellenwerte und Schalter für die Regelsteuerung.',
+        lossRatioLabel: 'Maximale Schadenquote',
+        geoShareLabel: 'Maximaler Top-Region-Anteil',
+        sanctionsLabel: 'Sanktionsprüfung erzwingen',
+        coverageGapLabel: 'Deckungslücken-Prüfung aktivieren',
+        saveAdmin: 'Regelkonfiguration speichern',
+        savedVersion: 'Neue Version gespeichert',
         ruleNames: {
           lossRatioThreshold: 'Schadenquoten-Schwellenwert',
           geoAggregationCheck: 'Geo-Aggregationsprüfung',
@@ -9658,6 +9674,14 @@ export const translations: Record<Lang, TranslationTree> = {
       subtitle: 'Rulesets & versioning',
       editorTitle: 'Rules editor (read-only)',
       editorSubtitle: 'Changes are saved as a new version.',
+      adminTitle: 'Admin panel',
+      adminSubtitle: 'Thresholds and toggles for rule control.',
+      lossRatioLabel: 'Maximum loss ratio',
+      geoShareLabel: 'Maximum top-region share',
+      sanctionsLabel: 'Enforce sanctions screening',
+      coverageGapLabel: 'Enable coverage gap review',
+      saveAdmin: 'Save rules configuration',
+      savedVersion: 'New version saved',
       ruleNames: {
         lossRatioThreshold: 'Loss ratio threshold',
         geoAggregationCheck: 'Geo aggregation check',

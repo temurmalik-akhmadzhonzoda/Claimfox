@@ -30,11 +30,24 @@ export default function UnderwriterfoxLayout({ title, subtitle, topLeft, rightRa
   ]
   const railContent = rightRail ?? (
     <Card variant="glass" title={t('underwriterfox.deadlines.title')} subtitle={t('underwriterfox.deadlines.subtitle')} style={{ height: TOP_ROW_HEIGHT }}>
-      <div style={{ display: 'grid', gap: '0.5rem' }}>
+      <div style={{ display: 'grid', gap: '0.45rem' }}>
         {defaultDeadlines.map((item) => (
-          <div key={item.title} style={{ display: 'flex', justifyContent: 'space-between', gap: '0.5rem', fontSize: '0.85rem' }}>
-            <span style={{ color: '#0f172a', fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.title}</span>
-            <span style={{ color: '#64748b', whiteSpace: 'nowrap' }}>{item.due}</span>
+          <div key={item.title} style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: '0.5rem', fontSize: '0.82rem', minWidth: 0 }}>
+            <span
+              style={{
+                color: '#0f172a',
+                fontWeight: 600,
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap',
+                flex: 1,
+                minWidth: 0
+              }}
+              title={item.title}
+            >
+              {item.title}
+            </span>
+            <span style={{ color: '#64748b', whiteSpace: 'nowrap', flexShrink: 0 }}>{item.due}</span>
           </div>
         ))}
       </div>
