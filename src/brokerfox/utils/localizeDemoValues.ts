@@ -85,3 +85,30 @@ export function localizeTenderTitle(value: string | undefined, lang: Lang) {
   }
   return value.replace(/\bProgramm\b/g, 'Program')
 }
+
+export function buildOfferComparisonSummary(lang: Lang, carriers: string[]) {
+  if (lang === 'de') {
+    return `Vorgeschlagener Vergleich fuer Carrier: ${carriers.join(', ')}.`
+  }
+  return `Suggested comparison based on carriers: ${carriers.join(', ')}.`
+}
+
+export function buildOfferComparisonHighlights(lang: Lang) {
+  if (lang === 'de') {
+    return [
+      'Deckungslimits unterscheiden sich zwischen den Carriern.',
+      'Die Praemienspanne zeigt Verhandlungsspielraum.'
+    ]
+  }
+  return [
+    'Coverage limits differ between carriers.',
+    'Premium spread indicates negotiation room.'
+  ]
+}
+
+export function buildOfferClientSummary(lang: Lang, clientName: string, tenderTitle: string) {
+  if (lang === 'de') {
+    return `Vorschlag fuer ${clientName}: Fuer ${tenderTitle} liegen mehrere Angebote vor. Die wichtigsten Unterschiede betreffen Limits und Ausschluesse; bitte die markierten Risiken vor Auswahl pruefen. Dieser Text ist KI-generiert und muss manuell freigegeben werden.`
+  }
+  return `Suggested summary for ${clientName}: We received multiple offers for ${tenderTitle}. The key differences are limits and exclusions; review the highlighted risks before selecting. This is an AI-generated suggestion and requires human approval.`
+}

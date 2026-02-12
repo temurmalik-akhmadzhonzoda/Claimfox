@@ -19,9 +19,16 @@ import {
 } from '@/brokerfox/api/brokerfoxApi'
 import type { Offer, TimelineEvent } from '@/brokerfox/types'
 import { buildRiskAnalysis } from '@/brokerfox/ai/riskEngine'
+import {
+  buildOfferClientSummary,
+  buildOfferComparisonHighlights,
+  buildOfferComparisonSummary,
+  localizeCoverageLabel,
+  localizeTenderTitle
+} from '@/brokerfox/utils/localizeDemoValues'
 
 export default function BrokerfoxOffersPage() {
-  const { t } = useI18n()
+  const { lang, t } = useI18n()
   const ctx = useTenantContext()
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -105,7 +112,15 @@ export default function BrokerfoxOffersPage() {
 
   async function handleCompare() {
     const result = await aiCompareOffers(tenderOffers)
-    setComparison(result)
+    const carrierNames = tenderOffers.map((offer) => offer.carrier.name)
+    setComparison({
+      ...result,
+      result: {
+        ...result.result,
+        summary: buildOfferComparisonSummary(lang, carrierNames),
+        highlights: buildOfferComparisonHighlights(lang)
+      }
+    })
     setSummary('')
     setApproved(false)
     if (selectedTenderId) {
@@ -123,12 +138,12 @@ export default function BrokerfoxOffersPage() {
     if (!comparison || !selectedTender) {
       return
     }
-    const result = await aiGenerateClientSummary({
+    await aiGenerateClientSummary({
       clientName,
-      tenderTitle: selectedTender.title,
+      tenderTitle: localizeTenderTitle(selectedTender.title, lang) ?? selectedTender.title,
       comparison: comparison.result
     })
-    setSummary(result.result)
+    setSummary(buildOfferClientSummary(lang, clientName, localizeTenderTitle(selectedTender.title, lang) ?? selectedTender.title))
     await addTimelineEvent(ctx, {
       entityType: 'tender',
       entityId: selectedTender.id,
@@ -197,7 +212,7 @@ export default function BrokerfoxOffersPage() {
               style={{ padding: '0.5rem 0.75rem', borderRadius: 10, border: '1px solid #d6d9e0' }}
             >
               {tenders.map((tender) => (
-                <option key={tender.id} value={tender.id}>{tender.title}</option>
+                <option key={tender.id} value={tender.id}>{localizeTenderTitle(tender.title, lang) ?? tender.title}</option>
               ))}
             </select>
             <Button size="sm" onClick={handleCompare}>{t('brokerfox.offers.compareAction')}</Button>
@@ -220,7 +235,7 @@ export default function BrokerfoxOffersPage() {
                 ))}
                 {compareRows.filter((row) => row.differ).map((row) => (
                   <React.Fragment key={row.coverage}>
-                    <div style={{ fontWeight: 600 }}>{row.coverage}</div>
+                    <div style={{ fontWeight: 600 }}>{localizeCoverageLabel(row.coverage, lang) ?? row.coverage}</div>
                     {row.values.map((value, index) => (
                       <div key={index} style={{ background: '#fef3c7', padding: '0.35rem', borderRadius: 8, textAlign: 'center' }}>{value}</div>
                     ))}
