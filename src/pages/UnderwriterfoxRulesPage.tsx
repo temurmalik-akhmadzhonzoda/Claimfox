@@ -12,10 +12,10 @@ export default function UnderwriterfoxRulesPage() {
   const tenant = useTenantContext()
   const ctx = { tenantId: tenant.tenantId, userId: tenant.userId }
   const [hits] = useState<RuleHit[]>([
-    { ruleId: 'R-101', name: 'Loss ratio threshold', outcome: 'warn', severity: 'high' },
-    { ruleId: 'R-204', name: 'Geo aggregation check', outcome: 'pass', severity: 'medium' },
-    { ruleId: 'R-315', name: 'Sanctions screening', outcome: 'pass', severity: 'high' },
-    { ruleId: 'R-408', name: 'Coverage gap review', outcome: 'warn', severity: 'low' }
+    { ruleId: 'R-101', name: t('underwriterfox.rulesPage.ruleNames.lossRatioThreshold'), outcome: 'warn', severity: 'high' },
+    { ruleId: 'R-204', name: t('underwriterfox.rulesPage.ruleNames.geoAggregationCheck'), outcome: 'pass', severity: 'medium' },
+    { ruleId: 'R-315', name: t('underwriterfox.rulesPage.ruleNames.sanctionsScreening'), outcome: 'pass', severity: 'high' },
+    { ruleId: 'R-408', name: t('underwriterfox.rulesPage.ruleNames.coverageGapReview'), outcome: 'warn', severity: 'low' }
   ])
 
   const editorText = useMemo(() => `// Ruleset v3.4

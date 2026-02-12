@@ -216,6 +216,12 @@ type TranslationTree = {
       subtitle: string
       editorTitle: string
       editorSubtitle: string
+      ruleNames: {
+        lossRatioThreshold: string
+        geoAggregationCheck: string
+        sanctionsScreening: string
+        coverageGapReview: string
+      }
     }
     ratingPage: {
       title: string
@@ -5941,7 +5947,13 @@ export const translations: Record<Lang, TranslationTree> = {
         title: 'Regeln',
         subtitle: 'Regelsätze & Versionierung',
         editorTitle: 'Regel-Editor (Read-only)',
-        editorSubtitle: 'Änderungen werden als neue Version gespeichert.'
+        editorSubtitle: 'Änderungen werden als neue Version gespeichert.',
+        ruleNames: {
+          lossRatioThreshold: 'Schadenquoten-Schwellenwert',
+          geoAggregationCheck: 'Geo-Aggregationsprüfung',
+          sanctionsScreening: 'Sanktionsprüfung',
+          coverageGapReview: 'Deckungslücken-Prüfung'
+        }
       },
       ratingPage: {
         title: 'Rating',
@@ -9571,7 +9583,13 @@ export const translations: Record<Lang, TranslationTree> = {
       title: 'Rules',
       subtitle: 'Rulesets & versioning',
       editorTitle: 'Rules editor (read-only)',
-      editorSubtitle: 'Changes are saved as a new version.'
+      editorSubtitle: 'Changes are saved as a new version.',
+      ruleNames: {
+        lossRatioThreshold: 'Loss ratio threshold',
+        geoAggregationCheck: 'Geo aggregation check',
+        sanctionsScreening: 'Sanctions screening',
+        coverageGapReview: 'Coverage gap review'
+      }
     },
     ratingPage: {
       title: 'Rating',
