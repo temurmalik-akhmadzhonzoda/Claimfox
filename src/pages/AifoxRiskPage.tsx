@@ -10,6 +10,10 @@ import type { AifoxUnderwritingSim } from '@/aifox/types'
 export default function AifoxRiskPage() {
   const { t, lang } = useI18n()
   const ctx = useTenantContext()
+  const locale = lang === 'de' ? 'de-DE' : 'en-US'
+  const numberFormatter = new Intl.NumberFormat(locale)
+  const percentFormatter = new Intl.NumberFormat(locale, { maximumFractionDigits: 0 })
+  const currencyFormatter = new Intl.NumberFormat(locale, { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 })
   const [sims, setSims] = useState<AifoxUnderwritingSim[]>([])
   const [selected, setSelected] = useState<AifoxUnderwritingSim | null>(null)
 
@@ -88,7 +92,7 @@ export default function AifoxRiskPage() {
             <div style={{ display: 'grid', gap: '0.75rem' }}>
               <label style={{ display: 'grid', gap: '0.35rem' }}>
                 {t('aifox.risk.age')}
-                <input value={selected.input.age} readOnly style={{ padding: '0.6rem', borderRadius: 10, border: '1px solid #e2e8f0' }} />
+                <input value={numberFormatter.format(selected.input.age)} readOnly style={{ padding: '0.6rem', borderRadius: 10, border: '1px solid #e2e8f0' }} />
               </label>
               <label style={{ display: 'grid', gap: '0.35rem' }}>
                 {t('aifox.risk.vehicle')}
@@ -100,7 +104,7 @@ export default function AifoxRiskPage() {
               </label>
               <label style={{ display: 'grid', gap: '0.35rem' }}>
                 {t('aifox.risk.lossHistory')}
-                <input value={selected.input.lossHistory} readOnly style={{ padding: '0.6rem', borderRadius: 10, border: '1px solid #e2e8f0' }} />
+                <input value={numberFormatter.format(selected.input.lossHistory)} readOnly style={{ padding: '0.6rem', borderRadius: 10, border: '1px solid #e2e8f0' }} />
               </label>
               <Button size="sm" onClick={logAction}>{t('aifox.risk.recalculate')}</Button>
             </div>
@@ -109,11 +113,11 @@ export default function AifoxRiskPage() {
         <Card title={t('aifox.risk.outputTitle')} subtitle={t('aifox.risk.outputSubtitle')}>
           {selected ? (
             <div style={{ display: 'grid', gap: '0.75rem' }}>
-              <div style={{ fontWeight: 600 }}>{t('aifox.risk.riskScore')}: {selected.output.riskScore}</div>
-              <div style={{ fontWeight: 600 }}>{t('aifox.risk.premium')}: € {selected.output.premium}</div>
+              <div style={{ fontWeight: 600 }}>{t('aifox.risk.riskScore')}: {numberFormatter.format(selected.output.riskScore)}</div>
+              <div style={{ fontWeight: 600 }}>{t('aifox.risk.premium')}: {currencyFormatter.format(selected.output.premium)}</div>
               <div style={{ display: 'grid', gap: '0.35rem' }}>
                 {selected.output.factors.map((factor) => (
-                  <div key={factor.label} style={{ fontSize: '0.85rem', color: '#475569' }}>{localizeFactor(factor.label)}: {factor.value}%</div>
+                  <div key={factor.label} style={{ fontSize: '0.85rem', color: '#475569' }}>{localizeFactor(factor.label)}: {percentFormatter.format(factor.value)}%</div>
                 ))}
               </div>
               <div style={{ fontSize: '0.85rem', color: '#64748b' }}>{t('aifox.risk.biasCheck')}: {localizeBiasCheck(selected.output.biasCheck)}</div>
