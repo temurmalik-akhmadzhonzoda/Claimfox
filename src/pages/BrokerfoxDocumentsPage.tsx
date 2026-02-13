@@ -227,9 +227,11 @@ export default function BrokerfoxDocumentsPage() {
     if (lang === 'de') {
       if (key === 'policyNumber') return 'Policennummer'
       if (key === 'insurer') return 'Versicherer'
-      if (key === 'premium') return 'Praemie'
+      if (key === 'premium') return 'Prämie'
       if (key === 'startDate') return 'Beginn'
       if (key === 'endDate') return 'Ablauf'
+      if (key === 'expiry') return 'Ablaufdatum'
+      if (key === 'lossRatio') return 'Schadenquote'
       if (key === 'lineOfBusiness') return 'Sparte'
       if (key === 'attachmentType') return 'Anhangstyp'
       if (key === 'sender') return 'Absender'
@@ -239,6 +241,8 @@ export default function BrokerfoxDocumentsPage() {
     if (key === 'premium') return 'Premium'
     if (key === 'startDate') return 'Start date'
     if (key === 'endDate') return 'End date'
+    if (key === 'expiry') return 'Expiry date'
+    if (key === 'lossRatio') return 'Loss ratio'
     if (key === 'lineOfBusiness') return 'Line of business'
     if (key === 'attachmentType') return 'Attachment type'
     if (key === 'sender') return 'Sender'
@@ -248,6 +252,12 @@ export default function BrokerfoxDocumentsPage() {
   function localizeExtractionFieldValue(key: string, value: string) {
     if (key === 'lineOfBusiness') return localizeLob(value, lang) ?? value
     if (key === 'policyNumber') return localizePolicyName(value, lang) ?? value
+    if (key === 'startDate' || key === 'endDate' || key === 'expiry') {
+      const parsed = new Date(value)
+      if (!Number.isNaN(parsed.getTime())) {
+        return parsed.toLocaleDateString(locale)
+      }
+    }
     return value
   }
 
