@@ -11,6 +11,8 @@ import ClaimDamageImage from '@/assets/images/claim_damage_1.png'
 export default function AifoxClaimsVisionPage() {
   const { t, lang } = useI18n()
   const ctx = useTenantContext()
+  const numberFormatter = new Intl.NumberFormat(lang === 'de' ? 'de-DE' : 'en-US', { maximumFractionDigits: 2 })
+  const currencyFormatter = new Intl.NumberFormat(lang === 'de' ? 'de-DE' : 'en-US', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 })
   const [claims, setClaims] = useState<AifoxClaim[]>([])
   const [selected, setSelected] = useState<AifoxClaim | null>(null)
   const [decision, setDecision] = useState('')
@@ -137,9 +139,9 @@ export default function AifoxClaimsVisionPage() {
               </select>
             </label>
             <div style={{ display: 'grid', gap: '0.35rem', fontSize: '0.9rem' }}>
-              <div><strong>{t('aifox.claimsVision.estimate')}:</strong> € 4,850</div>
+              <div><strong>{t('aifox.claimsVision.estimate')}:</strong> {currencyFormatter.format(4850)}</div>
               <div><strong>{t('aifox.claimsVision.severity')}:</strong> {lang === 'de' ? 'Mittel' : 'Medium'}</div>
-              <div><strong>{t('aifox.claimsVision.confidence')}:</strong> 0.87</div>
+              <div><strong>{t('aifox.claimsVision.confidence')}:</strong> {numberFormatter.format(0.87)}</div>
             </div>
             <div style={{ background: '#f8fafc', borderRadius: 10, padding: '0.75rem', color: '#475569' }}>
               {t('aifox.claimsVision.explainability')}
