@@ -14,9 +14,20 @@ const integrations = [
 ]
 
 export default function AifoxIntegrationsPage() {
-  const { t } = useI18n()
+  const { t, lang } = useI18n()
   const ctx = useTenantContext()
   const [enabled, setEnabled] = useState<Record<string, boolean>>({})
+
+  function localizeIntegrationName(name: string) {
+    if (lang === 'de') {
+      if (name === 'Azure AI') return 'Azure KI'
+      if (name === 'Guidewire') return 'Guidewire'
+      if (name === 'Salesforce Einstein') return 'Salesforce Einstein'
+      if (name === 'Palantir') return 'Palantir'
+      if (name === 'Munich Re aiSure™') return 'Munich Re aiSure™'
+    }
+    return name
+  }
 
   async function toggle(name: string) {
     const next = { ...enabled, [name]: !enabled[name] }
@@ -30,7 +41,7 @@ export default function AifoxIntegrationsPage() {
         <div style={{ display: 'grid', gap: '0.75rem' }}>
           {integrations.map((name) => (
             <label key={name} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', border: '1px solid #e2e8f0', borderRadius: 12, padding: '0.75rem 1rem' }}>
-              <span style={{ fontWeight: 600 }}>{name}</span>
+              <span style={{ fontWeight: 600 }}>{localizeIntegrationName(name)}</span>
               <input type="checkbox" checked={Boolean(enabled[name])} onChange={() => toggle(name)} />
             </label>
           ))}
