@@ -33,6 +33,22 @@ export default function ClaimsfoxClaimDetailPage() {
   const locale = lang === 'de' ? 'de-DE' : 'en-US'
   const currencyFormatter = new Intl.NumberFormat(locale, { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 })
 
+  function localizeLob(value: string) {
+    if (lang === 'de') {
+      if (value === 'Liability') return 'Haftpflicht'
+      if (value === 'Property') return 'Sach'
+      if (value === 'Cargo') return 'Transport'
+      if (value === 'Fleet') return 'Flotte'
+      if (value === 'Cyber') return 'Cyber'
+    } else {
+      if (value === 'Haftpflicht') return 'Liability'
+      if (value === 'Sach') return 'Property'
+      if (value === 'Transport') return 'Cargo'
+      if (value === 'Flotte') return 'Fleet'
+    }
+    return value
+  }
+
   useEffect(() => {
     let mounted = true
     async function load() {
@@ -113,7 +129,7 @@ export default function ClaimsfoxClaimDetailPage() {
   return (
     <ClaimsfoxLayout
       title={`${t('claimsfox.claimDetail.title')} ${claim.claimNumber}`}
-      subtitle={`${claim.insured} · ${claim.lineOfBusiness}`}
+      subtitle={`${claim.insured} · ${localizeLob(claim.lineOfBusiness)}`}
       topLeft={(
         <div style={{ display: 'grid', gap: '0.35rem', color: '#ffffff', fontSize: '0.85rem' }}>
           <span>{t('claimsfox.claimDetail.policy')}: {claim.policyRef}</span>
@@ -247,7 +263,7 @@ export default function ClaimsfoxClaimDetailPage() {
                 }}
               >
                 <span style={{ fontWeight: 600, color: '#0f172a' }}>{t(item.titleKey)}</span>
-                <span style={{ color: '#64748b' }}>{new Date(Date.now() + (idx + 2) * 86400000).toLocaleDateString(lang, { month: 'short', day: '2-digit' })}</span>
+                <span style={{ color: '#64748b' }}>{new Date(Date.now() + (idx + 2) * 86400000).toLocaleDateString(locale, { month: 'short', day: '2-digit' })}</span>
               </button>
             ))}
           </div>
