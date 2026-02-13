@@ -6,15 +6,15 @@ import { useI18n } from '@/i18n/I18nContext'
 
 type SegmentRow = {
   company: string
-  motorFleet: string
-  marineCargo: string
-  logisticsLiability: string
-  internationalPrograms: string
-  distributionModel: string
+  motorFleet: { de: string; en: string }
+  marineCargo: { de: string; en: string }
+  logisticsLiability: { de: string; en: string }
+  internationalPrograms: { de: string; en: string }
+  distributionModel: { de: string; en: string }
 }
 
 type FinancialRow = {
-  year: string
+  year: { de: string; en: string }
   allianzRange: string
   allianzEsaRange: string
   vhvRange: string
@@ -22,55 +22,57 @@ type FinancialRow = {
 
 type Lead = {
   name: string
-  role: string
+  roleDe: string
+  roleEn: string
   company: string
   city: string
   linkedin: string
-  comment?: string
+  commentDe?: string
+  commentEn?: string
 }
 
 const segmentRows: SegmentRow[] = [
   {
     company: 'Allianz Group',
-    motorFleet: 'Strong multinational fleet programs, SME to enterprise',
-    marineCargo: 'Global cargo capacity with broad reinsurance support',
-    logisticsLiability: 'Integrated liability wording for transport operators',
-    internationalPrograms: 'High maturity, centralized control model',
-    distributionModel: 'Broker-led with key account direct channels'
+    motorFleet: { de: 'Starke internationale Flottenprogramme von KMU bis Enterprise', en: 'Strong multinational fleet programs, SME to enterprise' },
+    marineCargo: { de: 'Globale Cargo-Kapazität mit breiter Rückversicherungsunterstützung', en: 'Global cargo capacity with broad reinsurance support' },
+    logisticsLiability: { de: 'Integrierte Haftpflichtbausteine für Transportbetreiber', en: 'Integrated liability wording for transport operators' },
+    internationalPrograms: { de: 'Hohe Reife, zentral gesteuertes Kontrollmodell', en: 'High maturity, centralized control model' },
+    distributionModel: { de: 'Broker-getrieben mit Key-Account-Direktkanälen', en: 'Broker-led with key account direct channels' }
   },
   {
     company: 'Allianz ESA',
-    motorFleet: 'Selective focus on complex and specialty fleets',
-    marineCargo: 'Core specialty strength in cross-border logistics chains',
-    logisticsLiability: 'Specialty-focused risk appetite and engineering input',
-    internationalPrograms: 'Strong in specialty cross-border placements',
-    distributionModel: 'Specialty broker ecosystem with technical underwriting'
+    motorFleet: { de: 'Selektiver Fokus auf komplexe und Specialty-Flotten', en: 'Selective focus on complex and specialty fleets' },
+    marineCargo: { de: 'Kernstärke bei Specialty-Risiken in grenzüberschreitender Logistik', en: 'Core specialty strength in cross-border logistics chains' },
+    logisticsLiability: { de: 'Specialty-orientierter Risikoappetit mit Engineering Input', en: 'Specialty-focused risk appetite and engineering input' },
+    internationalPrograms: { de: 'Stark in Specialty-Programmen über Ländergrenzen', en: 'Strong in specialty cross-border placements' },
+    distributionModel: { de: 'Specialty-Broker-Ökosystem mit technischem Underwriting', en: 'Specialty broker ecosystem with technical underwriting' }
   },
   {
     company: 'VHV Gruppe',
-    motorFleet: 'Strong domestic fleet footprint with mid-market strength',
-    marineCargo: 'Targeted marine participation, primarily regional books',
-    logisticsLiability: 'Balanced liability offering for logistics SMEs',
-    internationalPrograms: 'Selective international capacity via partnerships',
-    distributionModel: 'Broker-centric model with regional market depth'
+    motorFleet: { de: 'Starke nationale Flottenposition mit Mid-Market-Fokus', en: 'Strong domestic fleet footprint with mid-market strength' },
+    marineCargo: { de: 'Gezielte Marine-Beteiligung, primär regionale Bücher', en: 'Targeted marine participation, primarily regional books' },
+    logisticsLiability: { de: 'Ausgewogenes Haftpflichtangebot für Logistik-KMU', en: 'Balanced liability offering for logistics SMEs' },
+    internationalPrograms: { de: 'Selektive internationale Kapazität über Partnerschaften', en: 'Selective international capacity via partnerships' },
+    distributionModel: { de: 'Broker-zentriertes Modell mit regionaler Markttiefe', en: 'Broker-centric model with regional market depth' }
   }
 ]
 
 const financialRows: FinancialRow[] = [
   {
-    year: '2023',
+    year: { de: '2023', en: '2023' },
     allianzRange: 'EUR 3.8B - EUR 4.6B',
     allianzEsaRange: 'EUR 0.8B - EUR 1.0B',
     vhvRange: 'EUR 0.6B - EUR 0.75B'
   },
   {
-    year: '2024',
+    year: { de: '2024', en: '2024' },
     allianzRange: 'EUR 4.0B - EUR 4.8B',
     allianzEsaRange: 'EUR 0.85B - EUR 1.1B',
     vhvRange: 'EUR 0.65B - EUR 0.8B'
   },
   {
-    year: '2025 (est.)',
+    year: { de: '2025 (Schätzung)', en: '2025 (est.)' },
     allianzRange: 'EUR 4.2B - EUR 5.0B',
     allianzEsaRange: 'EUR 0.9B - EUR 1.2B',
     vhvRange: 'EUR 0.68B - EUR 0.9B'
@@ -80,177 +82,204 @@ const financialRows: FinancialRow[] = [
 const transportLeadsInput: Lead[] = [
   {
     name: 'Stefanie Thier',
-    role: 'Head of Motor Claims Germany at Allianz Versicherungs AG',
+    roleDe: 'Leiterin Motor Claims Deutschland bei Allianz Versicherungs AG',
+    roleEn: 'Head of Motor Claims Germany at Allianz Versicherungs AG',
     company: 'Allianz',
     city: 'Munich',
     linkedin: 'https://www.linkedin.com/in/stefanie-thier-98011418a/'
   },
   {
     name: 'Christian Hempel',
-    role: 'Head of Motor Claims | Abteilungsleiter Schadenmanagement Kraft',
+    roleDe: 'Head of Motor Claims | Abteilungsleiter Schadenmanagement Kraft',
+    roleEn: 'Head of Motor Claims | Department Lead Motor Claims Management',
     company: 'Allianz',
     city: 'Leipzig/Berlin',
     linkedin: 'https://www.linkedin.com/in/christian-hempel-allianz/'
   },
   {
     name: 'Rico Förster',
-    role: 'Head of Fleet, Mobility and Cyber Motor & Retail - Global P&C bei Allianz Group',
+    roleDe: 'Head of Fleet, Mobility and Cyber Motor & Retail - Global P&C bei Allianz Group',
+    roleEn: 'Head of Fleet, Mobility and Cyber Motor & Retail - Global P&C at Allianz Group',
     company: 'Allianz',
     city: 'Munich',
     linkedin: 'https://www.linkedin.com/in/rico-f%C3%B6rster-7b77b241/',
-    comment: 'Left Allianz 3 months ago'
+    commentDe: 'Allianz vor 3 Monaten verlassen',
+    commentEn: 'Left Allianz 3 months ago'
   },
   {
     name: 'Lennart Krämer',
-    role: 'Chief Underwriter of Commercial Motor Fleet @ Allianz Versicherungs AG',
+    roleDe: 'Chief Underwriter Commercial Motor Fleet @ Allianz Versicherungs AG',
+    roleEn: 'Chief Underwriter of Commercial Motor Fleet @ Allianz Versicherungs AG',
     company: 'Allianz',
     city: 'Siegen, North Rhine-Westphalia, Germany',
     linkedin: 'https://www.linkedin.com/in/lennart-kr%C3%A4mer-073368243/'
   },
   {
     name: 'Florian Weiss',
-    role: 'Head of motor commercial bei Allianz Versicherungs AG',
+    roleDe: 'Head of Motor Commercial bei Allianz Versicherungs AG',
+    roleEn: 'Head of Motor Commercial at Allianz Versicherungs AG',
     company: 'Allianz',
     city: 'Dachau, Bavaria, Germany',
     linkedin: 'https://www.linkedin.com/in/florian-weiss-5121192b9/'
   },
   {
     name: 'Thies Dibbern',
-    role: 'Head of Motor Insurance bei VHV Versicherungen',
+    roleDe: 'Head of Motor Insurance bei VHV Versicherungen',
+    roleEn: 'Head of Motor Insurance at VHV Versicherungen',
     company: 'VHV Versicherungen',
     city: 'Hannover',
     linkedin: 'https://www.linkedin.com/in/thies-dibbern-63295b152/'
   },
   {
     name: 'Björn Pahnreck',
-    role: 'Abteilungsleiter Schaden KFZ',
+    roleDe: 'Abteilungsleiter Schaden KFZ',
+    roleEn: 'Department Head Motor Claims',
     company: 'VHV Gruppe',
     city: 'Barsinghausen, Lower Saxony, Germany',
     linkedin: 'https://www.linkedin.com/in/bj%C3%B6rn-pahnreck-947a82216/'
   },
   {
     name: 'Dr. Sebastian Reddemann',
-    role: 'Chief Executive Officer',
+    roleDe: 'Chief Executive Officer',
+    roleEn: 'Chief Executive Officer',
     company: 'VHV Versicherungen',
     city: 'Hannover, Lower Saxony, Germany',
     linkedin: 'https://www.linkedin.com/in/dr-sebastian-reddemann-33a20049/'
   },
   {
     name: 'Can Ari',
-    role: 'Underwriter & Claim Specialist',
+    roleDe: 'Underwriter & Claim Specialist',
+    roleEn: 'Underwriter & Claim Specialist',
     company: 'VHV Versicherungen',
     city: 'Hannover, Niedersachsen, Germany',
     linkedin: 'https://www.linkedin.com/in/alican-ari/',
-    comment: 'Worked at Allianz, AXA and now in VHV'
+    commentDe: 'War bei Allianz und AXA, jetzt bei VHV',
+    commentEn: 'Worked at Allianz, AXA and now in VHV'
   },
   {
     name: 'Christian E. Wittwer',
-    role: 'Head of Process and Project Management',
+    roleDe: 'Head of Process and Project Management',
+    roleEn: 'Head of Process and Project Management',
     company: 'VHV Versicherungen',
     city: 'Hannover, Munich',
     linkedin: 'https://www.linkedin.com/in/c-wittwer/'
   },
   {
     name: 'Ulf Bretz',
-    role: 'Chief Operating Officer',
+    roleDe: 'Chief Operating Officer',
+    roleEn: 'Chief Operating Officer',
     company: 'VHV Versicherungen',
     city: 'Hannover, Niedersachsen, Germany',
     linkedin: 'https://www.linkedin.com/in/ulf-bretz-a3529586/'
   },
   {
     name: 'Frederick Olivier',
-    role: 'MGA Business Coordinator',
+    roleDe: 'MGA Business Coordinator',
+    roleEn: 'MGA Business Coordinator',
     company: 'VHV Versicherungen',
     city: 'Brunswick, Lower Saxony, Germany',
     linkedin: 'https://www.linkedin.com/in/frederick-olivier-3b7696173/?locale=en_US'
   },
   {
     name: 'Arndt Bickhoff',
-    role: 'Mitglied des Vorstands',
+    roleDe: 'Mitglied des Vorstands',
+    roleEn: 'Executive Board Member',
     company: 'VHV Versicherungen',
     city: 'Hannover, Niedersachsen, Germany',
     linkedin: 'https://www.linkedin.com/in/arndt-bickhoff/'
   },
   {
     name: 'Sina Rintelmann',
-    role: 'Vorstandsmitglied',
+    roleDe: 'Vorstandsmitglied',
+    roleEn: 'Executive Board Member',
     company: 'VHV Versicherungen',
     city: 'Germany',
     linkedin: 'https://www.linkedin.com/in/sina-rintelmann-17305b265/'
   },
   {
     name: 'Dr. Angelo O. Rohlfs',
-    role: 'Mitglied des Vorstands',
+    roleDe: 'Mitglied des Vorstands',
+    roleEn: 'Executive Board Member',
     company: 'VHV Versicherungen',
     city: 'Hannover, Lower Saxony, Germany',
     linkedin: 'https://www.linkedin.com/in/dr-angelo-o-rohlfs-654162125/'
   },
   {
     name: 'Sebastian Steininger',
-    role: 'CEO VHV International',
+    roleDe: 'CEO VHV International',
+    roleEn: 'CEO VHV International',
     company: 'VHV Versicherungen',
     city: 'Hannover, Lower Saxony, Germany',
     linkedin: 'https://www.linkedin.com/in/sebastian-steininger-8b28bb13/'
   },
   {
     name: 'Daniel Prochnow',
-    role: 'Schadensgutachter',
+    roleDe: 'Schadensgutachter',
+    roleEn: 'Claims Surveyor',
     company: 'VHV Versicherungen',
     city: 'Hamburg',
     linkedin: 'https://www.linkedin.com/in/daniel-prochnow-5b6677b6/'
   },
   {
     name: 'Stefano Pozzi',
-    role: 'Head of Claims',
+    roleDe: 'Head of Claims',
+    roleEn: 'Head of Claims',
     company: 'VHV Assicurazioni',
     city: 'Belluno, Veneto, Italy',
     linkedin: 'https://www.linkedin.com/in/stefano-pozzi-a7771b51/'
   },
   {
     name: 'Dr. Steffen Benker',
-    role: 'Vorstandsassisstent Finanzen und Risikomanagement',
+    roleDe: 'Vorstandsassistent Finanzen und Risikomanagement',
+    roleEn: 'Executive Assistant Finance and Risk Management',
     company: 'VHV Versicherungen',
     city: 'Hamburg',
     linkedin: 'https://www.linkedin.com/in/dr-steffen-benker-12b22130b/'
   },
   {
     name: 'Simon Orthey',
-    role: 'Senior Schadenregulierer',
+    roleDe: 'Senior Schadenregulierer',
+    roleEn: 'Senior Claims Adjuster',
     company: 'VHV Versicherungen',
     city: 'Hannover, Lower Saxony, Germany',
     linkedin: 'https://www.linkedin.com/in/simon-orthey-25a941265/'
   },
   {
     name: 'Nina Henjes',
-    role: 'Leiterin Gruppe Fraud Investigation',
+    roleDe: 'Leiterin Gruppe Fraud Investigation',
+    roleEn: 'Head of Fraud Investigation Group',
     company: 'VHV Versicherungen',
     city: 'Hannover, Niedersachsen, Germany',
     linkedin: 'https://www.linkedin.com/in/nina-henjes-b02662321/'
   },
   {
     name: 'Christian Schattenhofer',
-    role: 'Vertriebsdirektor',
+    roleDe: 'Vertriebsdirektor',
+    roleEn: 'Sales Director',
     company: 'VHV Versicherungen',
     city: 'Germany',
     linkedin: 'https://www.linkedin.com/in/christian-schattenhofer-4511532bb/'
   },
   {
     name: 'Nils Dräger',
-    role: 'Schadenregulierer',
+    roleDe: 'Schadenregulierer',
+    roleEn: 'Claims Adjuster',
     company: 'VHV Versicherungen',
     city: 'Hannover, Niedersachsen, Germany',
     linkedin: 'https://www.linkedin.com/in/nils-dr%C3%A4ger-403b57122/'
   },
   {
     name: 'Anna Weber',
-    role: 'Head of Underwriting Transport',
+    roleDe: 'Head of Underwriting Transport',
+    roleEn: 'Head of Underwriting Transport',
     company: 'Allianz ESA',
     city: 'Hamburg',
     linkedin: 'https://www.linkedin.com/in/anna-weber-transport'
   },
   {
     name: 'Markus Lehmann',
-    role: 'Distribution Leadership - Logistics',
+    roleDe: 'Distribution Leadership - Logistics',
+    roleEn: 'Distribution Leadership - Logistics',
     company: 'VHV Gruppe',
     city: 'Hannover',
     linkedin: 'https://www.linkedin.com/in/markus-lehmann-vhv'
@@ -275,21 +304,6 @@ const gwpMidpoints = [
   { company: 'Allianz', gwp: 4200 },
   { company: 'Allianz ESA', gwp: 950 },
   { company: 'VHV', gwp: 700 }
-]
-
-const highlightedRoleChecks = [
-  'Head of Motor Claims',
-  'Head of Fleet',
-  'Mobility',
-  'Underwriting Transport',
-  'Distribution Leadership',
-  'Chief Underwriter',
-  'Head of Motor Insurance',
-  'Abteilungsleiter',
-  'COO',
-  'CEO',
-  'Vorstand',
-  'Vertriebsdirektor'
 ]
 
 export default function TransportMarketReportPage() {
@@ -374,6 +388,10 @@ export default function TransportMarketReportPage() {
             size: A4 landscape;
             margin: 10mm;
           }
+          * {
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+          }
           .transport-report-print-hide {
             display: none !important;
           }
@@ -402,11 +420,11 @@ export default function TransportMarketReportPage() {
             <div style={{ fontSize: '1.45rem', fontWeight: 700, color: '#0f172a', marginTop: '0.35rem' }}>EUR 3.5B - EUR 5B</div>
             <div style={{ fontSize: '0.86rem', color: '#475569', marginTop: '0.35rem' }}>{copy.cards.gwp}</div>
           </Card>
-          <Card title="Allianz ESA (Specialty Transport)">
+          <Card title={isDe ? 'Allianz ESA (Spezialtransport)' : 'Allianz ESA (Specialty Transport)'}>
             <div style={{ fontSize: '0.9rem', color: '#64748b' }}>{copy.cards.esaSub}</div>
             <div style={{ fontSize: '1.45rem', fontWeight: 700, color: '#0f172a', marginTop: '0.35rem' }}>EUR 700M - EUR 1.2B</div>
           </Card>
-          <Card title="VHV Gruppe (Transport / Marine / Fleet)">
+          <Card title={isDe ? 'VHV Gruppe (Transport / Marine / Flotte)' : 'VHV Gruppe (Transport / Marine / Fleet)'}>
             <div style={{ fontSize: '0.9rem', color: '#64748b' }}>{copy.cards.vhvSub}</div>
             <div style={{ fontSize: '1.45rem', fontWeight: 700, color: '#0f172a', marginTop: '0.35rem' }}>EUR 500M - EUR 900M</div>
           </Card>
@@ -435,11 +453,11 @@ export default function TransportMarketReportPage() {
                 {segmentRows.map((row) => (
                   <tr key={row.company}>
                     <td style={tdStyleStrong}>{row.company}</td>
-                    <td style={tdStyle}>{row.motorFleet}</td>
-                    <td style={tdStyle}>{row.marineCargo}</td>
-                    <td style={tdStyle}>{row.logisticsLiability}</td>
-                    <td style={tdStyle}>{row.internationalPrograms}</td>
-                    <td style={tdStyle}>{row.distributionModel}</td>
+                    <td style={tdStyle}>{isDe ? row.motorFleet.de : row.motorFleet.en}</td>
+                    <td style={tdStyle}>{isDe ? row.marineCargo.de : row.marineCargo.en}</td>
+                    <td style={tdStyle}>{isDe ? row.logisticsLiability.de : row.logisticsLiability.en}</td>
+                    <td style={tdStyle}>{isDe ? row.internationalPrograms.de : row.internationalPrograms.en}</td>
+                    <td style={tdStyle}>{isDe ? row.distributionModel.de : row.distributionModel.en}</td>
                   </tr>
                 ))}
               </tbody>
@@ -460,8 +478,8 @@ export default function TransportMarketReportPage() {
               </thead>
               <tbody>
                 {financialRows.map((row) => (
-                  <tr key={row.year}>
-                    <td style={tdStyleStrong}>{row.year}</td>
+                  <tr key={row.year.en}>
+                    <td style={tdStyleStrong}>{isDe ? row.year.de : row.year.en}</td>
                     <td style={tdStyle}>{row.allianzRange}</td>
                     <td style={tdStyle}>{row.allianzEsaRange}</td>
                     <td style={tdStyle}>{row.vhvRange}</td>
@@ -487,11 +505,12 @@ export default function TransportMarketReportPage() {
               </thead>
               <tbody>
                 {transportLeads.map((lead) => {
-                  const isDecisionRole = highlightedRoleChecks.some((term) => lead.role.includes(term))
+                  const role = isDe ? lead.roleDe : lead.roleEn
+                  const status = isDe ? lead.commentDe : lead.commentEn
                   return (
-                    <tr key={`${lead.name}-${lead.role}`}>
+                    <tr key={`${lead.name}-${lead.roleEn}`}>
                       <td style={tdStyleStrong}>{lead.name}</td>
-                      <td style={{ ...tdStyle, fontWeight: isDecisionRole ? 700 : 500, color: isDecisionRole ? '#0f172a' : '#334155' }}>{lead.role}</td>
+                      <td style={{ ...tdStyle, fontWeight: 700, color: '#0f172a' }}>{role}</td>
                       <td style={tdStyle}>{lead.company}</td>
                       <td style={tdStyle}>{lead.city}</td>
                       <td style={tdStyle}>
@@ -499,7 +518,7 @@ export default function TransportMarketReportPage() {
                           {copy.table.profile}
                         </a>
                       </td>
-                      <td style={tdStyle}>{lead.comment ? lead.comment : copy.table.active}</td>
+                      <td style={tdStyle}>{status ? status : copy.table.active}</td>
                     </tr>
                   )
                 })}
