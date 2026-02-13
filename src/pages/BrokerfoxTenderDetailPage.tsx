@@ -18,7 +18,7 @@ import {
   updateTender,
   uploadDocument
 } from '@/brokerfox/api/brokerfoxApi'
-import type { DocumentMeta, TenderStatus } from '@/brokerfox/types'
+import type { Client, CoverageRequest, DocumentMeta, Party, Tender, TenderStatus, TimelineEvent, TimelineEventType } from '@/brokerfox/types'
 import { buildRiskAnalysis } from '@/brokerfox/ai/riskEngine'
 import { localizeCoverageLabel, localizeTenderTitle } from '@/brokerfox/utils/localizeDemoValues'
 
@@ -33,10 +33,10 @@ export default function BrokerfoxTenderDetailPage() {
   const { tenderId } = useParams()
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  const [tender, setTender] = useState<any>(null)
-  const [client, setClient] = useState<any>(null)
+  const [tender, setTender] = useState<Tender | null>(null)
+  const [client, setClient] = useState<Client | null>(null)
   const [documents, setDocuments] = useState<DocumentMeta[]>([])
-  const [events, setEvents] = useState([])
+  const [events, setEvents] = useState<TimelineEvent[]>([])
   const [wizardStep, setWizardStep] = useState<WizardStep>('requirements')
   const [draftMessage, setDraftMessage] = useState('')
   const [approved, setApproved] = useState(false)
@@ -70,7 +70,7 @@ export default function BrokerfoxTenderDetailPage() {
     }
   }, [tenderId, ctx, t])
 
-  const coverageRequests = useMemo(() => tender?.coverageRequests ?? [], [tender])
+  const coverageRequests = useMemo<CoverageRequest[]>(() => tender?.coverageRequests ?? [], [tender])
   const analysis = useMemo(() => buildRiskAnalysis(client, tender), [client, tender])
   const locale = lang === 'de' ? 'de-DE' : 'en-US'
 
@@ -82,7 +82,7 @@ export default function BrokerfoxTenderDetailPage() {
     return raw.replace(/\bMio\b/g, 'm').replace(/\bTsd\b/g, 'k')
   }
 
-  async function handleComposer(payload: { type: any; message: string; attachments: DocumentMeta[] }) {
+  async function handleComposer(payload: { type: TimelineEventType; message: string; attachments: DocumentMeta[] }) {
     if (!tenderId) return
     for (const attachment of payload.attachments) {
       await uploadDocument(ctx, {
@@ -173,7 +173,7 @@ export default function BrokerfoxTenderDetailPage() {
         <div style={{ display: 'grid', gap: '1rem', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
           <Card variant="glass" title={t('brokerfox.tenders.requirementsTitle')}>
             {coverageRequests.length === 0 ? <p>{t('brokerfox.tenders.requirementsEmpty')}</p> : null}
-            {coverageRequests.map((req: any) => (
+            {coverageRequests.map((req) => (
               <div key={req.id} style={{ marginBottom: '0.5rem' }}>
                 <strong>{localizeCoverageLabel(req.label, lang) ?? req.label}</strong>
                 <div style={{ color: '#64748b' }}>{t('brokerfox.tenders.limitLabel')}: {localizeCoverageValue(req.limit)}</div>
@@ -183,7 +183,7 @@ export default function BrokerfoxTenderDetailPage() {
           </Card>
           <Card variant="glass" title={t('brokerfox.tenders.carriersTitle')}>
             {tender.invitedCarriers.length === 0 ? <p>{t('brokerfox.tenders.carriersEmpty')}</p> : null}
-            {tender.invitedCarriers.map((carrier: any) => (
+            {tender.invitedCarriers.map((carrier: Party) => (
               <div key={carrier.id} style={{ marginBottom: '0.5rem' }}>
                 <strong>{carrier.name}</strong>
                 <div style={{ color: '#64748b' }}>{carrier.email ?? t('brokerfox.tenders.noEmail')}</div>
