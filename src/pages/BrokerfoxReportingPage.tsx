@@ -125,10 +125,10 @@ export default function BrokerfoxReportingPage() {
       return { key: date.toISOString().slice(0, 7), label: date.toLocaleString(locale, { month: 'short' }) }
     })
     return months.map((month) => {
-      const list = (data.commissions ?? []).filter((c: any) => c.period === month.key)
-      const expected = list.reduce((sum: number, item: any) => sum + item.expectedEUR, 0)
-      const paid = list.reduce((sum: number, item: any) => sum + item.paidEUR, 0)
-      const outstanding = list.reduce((sum: number, item: any) => sum + item.outstandingEUR, 0)
+      const list = data.commissions.filter((c) => c.period === month.key)
+      const expected = list.reduce((sum, item) => sum + item.expectedEUR, 0)
+      const paid = list.reduce((sum, item) => sum + item.paidEUR, 0)
+      const outstanding = list.reduce((sum, item) => sum + item.outstandingEUR, 0)
       return { label: month.label, expected, paid, outstanding }
     })
   }, [data.commissions, locale])
