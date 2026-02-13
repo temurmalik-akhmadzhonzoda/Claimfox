@@ -7,8 +7,8 @@ import { useI18n } from '@/i18n/I18nContext'
 import DemoUtilitiesPanel from '@/brokerfox/components/DemoUtilitiesPanel'
 import { useTenantContext } from '@/brokerfox/hooks/useTenantContext'
 import { createTender, listClients, listTenders } from '@/brokerfox/api/brokerfoxApi'
-import type { Client } from '@/brokerfox/types'
-import { localizeTenderTitle } from '@/brokerfox/utils/localizeDemoValues'
+import type { Client, Tender } from '@/brokerfox/types'
+import { localizeDemoDescription, localizeTenderTitle } from '@/brokerfox/utils/localizeDemoValues'
 
 export default function BrokerfoxTendersPage() {
   const { lang, t } = useI18n()
@@ -16,7 +16,7 @@ export default function BrokerfoxTendersPage() {
   const navigate = useNavigate()
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  const [tenders, setTenders] = useState<any[]>([])
+  const [tenders, setTenders] = useState<Tender[]>([])
   const [clients, setClients] = useState<Client[]>([])
   const [form, setForm] = useState({ title: '', clientId: '', description: '' })
 
@@ -119,7 +119,10 @@ export default function BrokerfoxTendersPage() {
               >
                 <div>
                   <strong style={{ color: '#0f172a' }}>{localizeTenderTitle(tender.title, lang) ?? tender.title}</strong>
-                  <div style={{ color: '#475569', fontSize: '0.9rem' }}>{clientLookup[tender.clientId]?.name ?? t('brokerfox.tenders.clientMissing')}</div>
+                  <div style={{ color: '#475569', fontSize: '0.9rem' }}>
+                    {clientLookup[tender.clientId]?.name ?? t('brokerfox.tenders.clientMissing')}
+                    {tender.description ? ` · ${localizeDemoDescription(tender.description, lang) ?? tender.description}` : ''}
+                  </div>
                 </div>
                 <span style={{ color: '#64748b' }}>{t(`brokerfox.status.${tender.status}`)}</span>
               </button>

@@ -78,6 +78,17 @@ export function localizeCoverageLabel(value: string | undefined, lang: Lang) {
   return pickLocalized(value, lang, COVERAGE_LABEL_MAP)
 }
 
+const DEMO_DESCRIPTION_MAP: Record<string, { de: string; en: string }> = {
+  'Multi-line placement with structured intake and carrier negotiation.': {
+    de: 'Mehrzeilige Platzierung mit strukturiertem Intake und Carrier-Verhandlung.',
+    en: 'Multi-line placement with structured intake and carrier negotiation.'
+  }
+}
+
+export function localizeDemoDescription(value: string | undefined, lang: Lang) {
+  return pickLocalized(value, lang, DEMO_DESCRIPTION_MAP)
+}
+
 export function localizeTenderTitle(value: string | undefined, lang: Lang) {
   if (!value) return value
   if (lang === 'de') {
