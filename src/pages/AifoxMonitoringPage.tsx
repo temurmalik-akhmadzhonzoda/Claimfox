@@ -5,7 +5,8 @@ import { useI18n } from '@/i18n/I18nContext'
 import { Bar, BarChart, CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 
 export default function AifoxMonitoringPage() {
-  const { t } = useI18n()
+  const { t, lang } = useI18n()
+  const decimalFormatter = new Intl.NumberFormat(lang === 'de' ? 'de-DE' : 'en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
   const accuracySeries = [
     { week: 'W1', value: 0.84 },
     { week: 'W2', value: 0.86 },
@@ -36,7 +37,7 @@ export default function AifoxMonitoringPage() {
                   <CartesianGrid strokeDasharray="3 3" vertical={false} />
                   <XAxis dataKey="week" />
                   <YAxis domain={[0.8, 0.9]} />
-                  <Tooltip />
+                  <Tooltip formatter={(value) => decimalFormatter.format(Number(value))} />
                   <Line dataKey="value" stroke="#d4380d" strokeWidth={2} dot={{ r: 3 }} />
                 </LineChart>
               </ResponsiveContainer>
@@ -49,7 +50,7 @@ export default function AifoxMonitoringPage() {
                   <CartesianGrid strokeDasharray="3 3" vertical={false} />
                   <XAxis dataKey="week" />
                   <YAxis domain={[0, 0.2]} />
-                  <Tooltip />
+                  <Tooltip formatter={(value) => decimalFormatter.format(Number(value))} />
                   <Line dataKey="value" stroke="#b91c1c" strokeWidth={2} dot={{ r: 3 }} />
                 </LineChart>
               </ResponsiveContainer>
@@ -62,7 +63,7 @@ export default function AifoxMonitoringPage() {
                   <CartesianGrid strokeDasharray="3 3" vertical={false} />
                   <XAxis dataKey="region" />
                   <YAxis />
-                  <Tooltip />
+                  <Tooltip formatter={(value) => decimalFormatter.format(Number(value))} />
                   <Bar dataKey="value" fill="#475569" radius={[6, 6, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
