@@ -8,10 +8,28 @@ import { addTimelineEvent, listClaims, updateClaimStatus } from '@/claimsfox/api
 import type { Claim } from '@/claimsfox/types'
 
 export default function ClaimsfoxTriagePage() {
-  const { t } = useI18n()
+  const { t, lang } = useI18n()
   const ctx = useTenantContext()
   const [claims, setClaims] = useState<Claim[]>([])
   const [approvals, setApprovals] = useState<Record<string, boolean>>({})
+  const numberFormatter = new Intl.NumberFormat(lang === 'de' ? 'de-DE' : 'en-US')
+
+  function localizeLob(value: string) {
+    if (lang === 'de') {
+      if (value === 'Liability') return 'Haftpflicht'
+      if (value === 'Property') return 'Sach'
+      if (value === 'Cargo') return 'Transport'
+      if (value === 'Fleet') return 'Flotte'
+      if (value === 'Motor Fleet') return 'Kfz-Flotte'
+    } else {
+      if (value === 'Haftpflicht') return 'Liability'
+      if (value === 'Sach') return 'Property'
+      if (value === 'Transport') return 'Cargo'
+      if (value === 'Flotte') return 'Fleet'
+      if (value === 'Kfz-Flotte') return 'Motor Fleet'
+    }
+    return value
+  }
 
   useEffect(() => {
     let mounted = true
@@ -38,8 +56,10 @@ export default function ClaimsfoxTriagePage() {
       entityType: 'claim',
       entityId: claimId,
       type: 'system',
-      title: 'AI triage approved',
-      message: 'AI triage recommendation accepted and moved to investigation.',
+      title: lang === 'de' ? 'KI-Triage freigegeben' : 'AI triage approved',
+      message: lang === 'de'
+        ? 'KI-Triage-Empfehlung akzeptiert und in Untersuchung überführt.'
+        : 'AI triage recommendation accepted and moved to investigation.',
       actor: ctx.userId
     })
     const refreshed = await listClaims(ctx)
@@ -58,8 +78,8 @@ export default function ClaimsfoxTriagePage() {
                 <div style={{ fontSize: '0.8rem', color: '#475569', marginTop: '0.25rem' }}>{t('claimsfox.triage.recommendation')}</div>
                 <div style={{ fontSize: '0.8rem', color: '#94a3b8' }}>{t('claimsfox.triage.sources')}</div>
               </div>
-              <div style={{ fontSize: '0.85rem' }}>{claim.lineOfBusiness}</div>
-              <div style={{ fontSize: '0.85rem', color: '#64748b' }}>{t('claimsfox.triage.score')}: {(claim.triageScore * 100).toFixed(0)}%</div>
+              <div style={{ fontSize: '0.85rem' }}>{localizeLob(claim.lineOfBusiness)}</div>
+              <div style={{ fontSize: '0.85rem', color: '#64748b' }}>{t('claimsfox.triage.score')}: {numberFormatter.format(Math.round(claim.triageScore * 100))}%</div>
               <div style={{ display: 'grid', gap: '0.4rem' }}>
                 <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.8rem', color: '#475569' }}>
                   <input
