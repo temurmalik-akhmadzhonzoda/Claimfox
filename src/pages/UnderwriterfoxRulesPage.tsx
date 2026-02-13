@@ -9,9 +9,12 @@ import { saveRuleEvaluation } from '@/underwriterfox/api/underwriterfoxApi'
 import type { RuleHit } from '@/underwriterfox/types'
 
 export default function UnderwriterfoxRulesPage() {
-  const { t } = useI18n()
+  const { t, lang } = useI18n()
   const tenant = useTenantContext()
   const ctx = { tenantId: tenant.tenantId, userId: tenant.userId }
+  const locale = lang === 'de' ? 'de-DE' : 'en-US'
+  const decimalFormatter = new Intl.NumberFormat(locale, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+  const integerFormatter = new Intl.NumberFormat(locale)
   const [lossRatioThreshold, setLossRatioThreshold] = useState(0.65)
   const [geoShareThreshold, setGeoShareThreshold] = useState(0.45)
   const [referralThreshold, setReferralThreshold] = useState(72)
@@ -98,7 +101,7 @@ export default function UnderwriterfoxRulesPage() {
         <Card variant="glass" title={t('underwriterfox.rulesPage.adminTitle')} subtitle={t('underwriterfox.rulesPage.adminSubtitle')}>
           <div style={{ display: 'grid', gap: '0.9rem' }}>
             <label style={{ display: 'grid', gap: '0.4rem', color: '#475569', fontSize: '0.9rem' }}>
-              {t('underwriterfox.rulesPage.lossRatioLabel')}: {lossRatioThreshold.toFixed(2)}
+              {t('underwriterfox.rulesPage.lossRatioLabel')}: {decimalFormatter.format(lossRatioThreshold)}
               <input
                 type="range"
                 min={0.45}
@@ -109,7 +112,7 @@ export default function UnderwriterfoxRulesPage() {
               />
             </label>
             <label style={{ display: 'grid', gap: '0.4rem', color: '#475569', fontSize: '0.9rem' }}>
-              {t('underwriterfox.rulesPage.geoShareLabel')}: {geoShareThreshold.toFixed(2)}
+              {t('underwriterfox.rulesPage.geoShareLabel')}: {decimalFormatter.format(geoShareThreshold)}
               <input
                 type="range"
                 min={0.25}
@@ -120,7 +123,7 @@ export default function UnderwriterfoxRulesPage() {
               />
             </label>
             <label style={{ display: 'grid', gap: '0.4rem', color: '#475569', fontSize: '0.9rem' }}>
-              {t('underwriterfox.rulesPage.referralLabel')}: {referralThreshold}
+              {t('underwriterfox.rulesPage.referralLabel')}: {integerFormatter.format(referralThreshold)}
               <input
                 type="range"
                 min={55}
@@ -131,7 +134,7 @@ export default function UnderwriterfoxRulesPage() {
               />
             </label>
             <label style={{ display: 'grid', gap: '0.4rem', color: '#475569', fontSize: '0.9rem' }}>
-              {t('underwriterfox.rulesPage.confidenceLabel')}: {minConfidence.toFixed(2)}
+              {t('underwriterfox.rulesPage.confidenceLabel')}: {decimalFormatter.format(minConfidence)}
               <input
                 type="range"
                 min={0.55}
@@ -142,7 +145,7 @@ export default function UnderwriterfoxRulesPage() {
               />
             </label>
             <label style={{ display: 'grid', gap: '0.4rem', color: '#475569', fontSize: '0.9rem' }}>
-              {t('underwriterfox.rulesPage.authorityCapLabel')}: {authorityCap.toLocaleString()}
+              {t('underwriterfox.rulesPage.authorityCapLabel')}: {integerFormatter.format(authorityCap)}
               <input
                 type="range"
                 min={100000}
