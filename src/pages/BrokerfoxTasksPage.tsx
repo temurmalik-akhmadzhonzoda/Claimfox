@@ -26,6 +26,7 @@ export default function BrokerfoxTasksPage() {
   const [entityOptions, setEntityOptions] = useState<any[]>([])
   const [form, setForm] = useState({ title: '', description: '', ownerName: '', dueDate: '' })
   const [delegateDraft, setDelegateDraft] = useState<Record<string, string>>({})
+  const locale = lang === 'de' ? 'de-DE' : 'en-US'
 
   useEffect(() => {
     let mounted = true
@@ -117,6 +118,27 @@ export default function BrokerfoxTasksPage() {
     return item.id
   }
 
+  function localizeTaskTitle(value: string) {
+    if (lang === 'de') {
+      if (value === 'Follow up with carrier underwriter') return 'Follow-up mit Carrier Underwriter'
+      if (value === 'Prepare renewal briefing') return 'Renewal-Briefing vorbereiten'
+      if (value === 'Collect loss run updates') return 'Loss-Run-Updates einsammeln'
+      if (value === 'Schedule client steering meeting') return 'Client-Steering-Meeting planen'
+      if (value === 'Review coverage exclusions') return 'Deckungsausschluesse pruefen'
+      if (value === 'Upload updated fleet list') return 'Aktualisierte Flottenliste hochladen'
+      if (value === 'Draft client summary') return 'Kundenzusammenfassung entwerfen'
+      if (value === 'Confirm pricing assumptions') return 'Pricing-Annahmen bestaetigen'
+    }
+    return value
+  }
+
+  function localizeTaskDescription(value?: string) {
+    if (!value) return value
+    if (lang === 'de' && value === 'Demo task created for broker workflow.') return 'Demo-Aufgabe fuer den Broker-Workflow erstellt.'
+    if (lang === 'en' && value === 'Demo-Aufgabe fuer den Broker-Workflow erstellt.') return 'Demo task created for broker workflow.'
+    return value
+  }
+
   return (
     <section className="page" style={{ gap: '1.5rem' }}>
       <BrokerfoxLayout
@@ -173,12 +195,12 @@ export default function BrokerfoxTasksPage() {
               {grouped[column.key].length === 0 ? <p>{t('brokerfox.empty.noTasks')}</p> : null}
               {grouped[column.key].map((task) => (
                 <div key={task.id} style={{ padding: '0.5rem 0', borderBottom: '1px solid #e2e8f0' }}>
-                  <strong>{task.title}</strong>
-                  <div style={{ color: '#64748b', fontSize: '0.85rem' }}>{task.description ?? t('brokerfox.tasks.noDescription')}</div>
+                  <strong>{localizeTaskTitle(task.title)}</strong>
+                  <div style={{ color: '#64748b', fontSize: '0.85rem' }}>{localizeTaskDescription(task.description) ?? t('brokerfox.tasks.noDescription')}</div>
                   <div style={{ color: '#94a3b8', fontSize: '0.8rem' }}>
                     {task.ownerName ? `${t('brokerfox.tasks.owner')}: ${task.ownerName}` : t('brokerfox.tasks.ownerMissing')}
                   </div>
-                  {task.dueDate ? <div style={{ color: '#94a3b8', fontSize: '0.8rem' }}>{t('brokerfox.tasks.dueDate')}: {new Date(task.dueDate).toLocaleDateString()}</div> : null}
+                  {task.dueDate ? <div style={{ color: '#94a3b8', fontSize: '0.8rem' }}>{t('brokerfox.tasks.dueDate')}: {new Date(task.dueDate).toLocaleDateString(locale)}</div> : null}
                   <div style={{ display: 'grid', gap: '0.35rem', marginTop: '0.4rem' }}>
                     <input
                       value={delegateDraft[task.id] ?? ''}
