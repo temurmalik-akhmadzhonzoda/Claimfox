@@ -10,6 +10,7 @@ import type { AifoxClaim, AifoxFraudAlert } from '@/aifox/types'
 export default function AifoxFraudPage() {
   const { t, lang } = useI18n()
   const ctx = useTenantContext()
+  const numberFormatter = new Intl.NumberFormat(lang === 'de' ? 'de-DE' : 'en-US')
   const [claims, setClaims] = useState<AifoxClaim[]>([])
   const [alerts, setAlerts] = useState<AifoxFraudAlert[]>([])
   const [selected, setSelected] = useState<AifoxFraudAlert | null>(null)
@@ -37,10 +38,15 @@ export default function AifoxFraudPage() {
 
   function mapSignal(signal: string) {
     if (signal === 'Repeated phone number usage') return t('aifox.fraud.signals.repeatedPhone')
+    if (signal === 'Wiederholte Telefonnummern-Nutzung') return t('aifox.fraud.signals.repeatedPhone')
     if (signal === 'Claim shortly after policy start') return t('aifox.fraud.signals.shortlyAfterStart')
+    if (signal === 'Schaden kurz nach Policenstart') return t('aifox.fraud.signals.shortlyAfterStart')
     if (signal === 'Similar IP address cluster') return t('aifox.fraud.signals.similarIp')
+    if (signal === 'Ähnliche IP-Adress-Cluster') return t('aifox.fraud.signals.similarIp')
     if (signal === 'Multiple claims across regions') return t('aifox.fraud.signals.multiRegion')
+    if (signal === 'Mehrere Schäden über Regionen hinweg') return t('aifox.fraud.signals.multiRegion')
     if (signal === 'Unusual repair estimate pattern') return t('aifox.fraud.signals.unusualEstimate')
+    if (signal === 'Ungewöhnliches Muster bei Reparaturkosten') return t('aifox.fraud.signals.unusualEstimate')
     return signal
   }
 
@@ -73,7 +79,7 @@ export default function AifoxFraudPage() {
                   }}
                 >
                   <div style={{ fontWeight: 600 }}>{claim?.claimNumber}</div>
-                  <div style={{ fontSize: '0.85rem', color: '#64748b' }}>{t('aifox.fraud.score')}: {alert.fraudScore}</div>
+                  <div style={{ fontSize: '0.85rem', color: '#64748b' }}>{t('aifox.fraud.score')}: {numberFormatter.format(alert.fraudScore)}</div>
                 </button>
               )
             })}
