@@ -14,7 +14,7 @@ const connectors = [
 ]
 
 export default function ClaimsfoxIntegrationsPage() {
-  const { t } = useI18n()
+  const { t, lang } = useI18n()
   const ctx = useTenantContext()
   const [enabled, setEnabled] = useState<Record<string, boolean>>({})
 
@@ -25,8 +25,10 @@ export default function ClaimsfoxIntegrationsPage() {
       entityType: 'task',
       entityId: id,
       type: 'system',
-      title: 'Integration updated',
-      message: `${id} integration ${next[id] ? 'enabled' : 'disabled'}.`,
+      title: lang === 'de' ? 'Integration aktualisiert' : 'Integration updated',
+      message: lang === 'de'
+        ? `Integration ${id} ${next[id] ? 'aktiviert' : 'deaktiviert'}.`
+        : `${id} integration ${next[id] ? 'enabled' : 'disabled'}.`,
       actor: ctx.userId
     })
   }
