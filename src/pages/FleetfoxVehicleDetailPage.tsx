@@ -33,13 +33,17 @@ function downloadText(filename: string, content: string, mime: string) {
 
 export default function FleetfoxVehicleDetailPage() {
   const { vehicleId } = useParams()
-  const { t } = useI18n()
+  const { t, lang } = useI18n()
   const ctx = useTenantContext()
   const [vehicle, setVehicle] = useState<Vehicle | null>(null)
   const [drivers, setDrivers] = useState<Driver[]>([])
   const [telematics, setTelematics] = useState<TelematicsSnapshot[]>([])
   const [timeline, setTimeline] = useState<TimelineEvent[]>([])
   const [costSummary, setCostSummary] = useState<FleetCostSummary>({ fuelCost: 0, maintenanceCost: 0, insuranceCost: 0, totalCost: 0, costPerKm: 0 })
+  const locale = lang === 'de' ? 'de-DE' : 'en-US'
+  const numberFormatter = new Intl.NumberFormat(locale)
+  const twoDecimalFormatter = new Intl.NumberFormat(locale, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+  const currencyFormatter = new Intl.NumberFormat(locale, { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 })
 
   useEffect(() => {
     let mounted = true
@@ -72,6 +76,24 @@ export default function FleetfoxVehicleDetailPage() {
 
   const isServiceOverdue = Boolean(vehicle && vehicle.mileageKm > vehicle.nextServiceDueKm)
 
+  function localizeVehicleStatus(status: Vehicle['status']) {
+    if (lang === 'de') {
+      if (status === 'active') return 'aktiv'
+      if (status === 'idle') return 'Leerlauf'
+      if (status === 'maintenance') return 'Wartung'
+    }
+    return status
+  }
+
+  function localizeMaintenanceRiskLabel(risk: Vehicle['maintenanceRisk']) {
+    if (lang === 'de') {
+      if (risk === 'High') return 'Hoch'
+      if (risk === 'Medium') return 'Mittel'
+      if (risk === 'Low') return 'Niedrig'
+    }
+    return risk
+  }
+
   async function refreshTimeline() {
     if (!vehicleId) return
     setTimeline(await listTimelineEvents(ctx, 'vehicle', vehicleId))
@@ -90,8 +112,10 @@ export default function FleetfoxVehicleDetailPage() {
       entityType: 'vehicle',
       entityId: vehicleId,
       type: 'note',
-      title: 'Manual note',
-      message: 'Operator reviewed telematics timeline and accepted AI recommendation.',
+      title: lang === 'de' ? 'Manuelle Notiz' : 'Manual note',
+      message: lang === 'de'
+        ? 'Operator hat die Telematik-Timeline geprüft und die KI-Empfehlung akzeptiert.'
+        : 'Operator reviewed telematics timeline and accepted AI recommendation.',
       meta: { actor: ctx.userId }
     })
     await refreshTimeline()
@@ -117,23 +141,23 @@ export default function FleetfoxVehicleDetailPage() {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))', gap: '1rem' }}>
           <Card style={{ padding: '1rem' }}><strong>{t('fleetfox.vehicleDetail.vin')}</strong><div style={{ fontSize: '0.85rem' }}>{vehicle.vin}</div></Card>
           <Card style={{ padding: '1rem' }}><strong>{t('fleetfox.vehicleDetail.licensePlate')}</strong><div>{vehicle.licensePlate}</div></Card>
-          <Card style={{ padding: '1rem' }}><strong>{t('fleetfox.vehicleDetail.weight')}</strong><div>{vehicle.totalWeightKg.toLocaleString()} kg</div></Card>
-          <Card style={{ padding: '1rem' }}><strong>{t('fleetfox.vehicleDetail.mileage')}</strong><div>{vehicle.mileageKm.toLocaleString()} km</div></Card>
+          <Card style={{ padding: '1rem' }}><strong>{t('fleetfox.vehicleDetail.weight')}</strong><div>{numberFormatter.format(vehicle.totalWeightKg)} kg</div></Card>
+          <Card style={{ padding: '1rem' }}><strong>{t('fleetfox.vehicleDetail.mileage')}</strong><div>{numberFormatter.format(vehicle.mileageKm)} km</div></Card>
         </div>
 
         <Card title={t('fleetfox.vehicleDetail.overviewTitle')}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '0.8rem' }}>
             <div>{t('fleetfox.vehicleDetail.manufacturer')}: {vehicle.manufacturer}</div>
             <div>{t('fleetfox.vehicleDetail.model')}: {vehicle.model}</div>
-            <div>{t('fleetfox.vehicleDetail.serviceStatus')}: {vehicle.status}</div>
+            <div>{t('fleetfox.vehicleDetail.serviceStatus')}: {localizeVehicleStatus(vehicle.status)}</div>
             <div>{t('fleetfox.vehicleDetail.assignedDriver')}: {assignedDriver ? `${assignedDriver.firstName} ${assignedDriver.lastName}` : '-'}</div>
             <div>
               {t('fleetfox.vehicleDetail.maintenanceRisk')}: {' '}
               <span style={{ display: 'inline-block', padding: '0.1rem 0.45rem', borderRadius: 999, background: vehicle.maintenanceRisk === 'High' ? '#fee2e2' : vehicle.maintenanceRisk === 'Medium' ? '#fef3c7' : '#dcfce7', color: '#0f172a' }}>
-                {vehicle.maintenanceRisk}
+                {localizeMaintenanceRiskLabel(vehicle.maintenanceRisk)}
               </span>
             </div>
-            <div>{t('fleetfox.vehicleDetail.predictedServiceDate')}: {new Date(predictServiceDate(vehicle)).toLocaleDateString()}</div>
+            <div>{t('fleetfox.vehicleDetail.predictedServiceDate')}: {new Date(predictServiceDate(vehicle)).toLocaleDateString(locale)}</div>
           </div>
           <div style={{ marginTop: '0.8rem', display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
             <Button size="sm" onClick={() => setStatus('active')}>{t('fleetfox.vehicleDetail.activate')}</Button>
@@ -163,7 +187,7 @@ export default function FleetfoxVehicleDetailPage() {
           <div style={{ display: 'grid', gap: '0.45rem' }}>
             {telematics.slice(0, 10).map((row) => (
               <div key={row.id} style={{ display: 'grid', gap: '0.15rem', borderBottom: '1px solid #e2e8f0', paddingBottom: '0.45rem' }}>
-                <div style={{ fontWeight: 600 }}>{new Date(row.timestamp).toLocaleString()} · {row.location.city}</div>
+                <div style={{ fontWeight: 600 }}>{new Date(row.timestamp).toLocaleString(locale)} · {row.location.city}</div>
                 <div style={{ fontSize: '0.85rem', color: '#475569' }}>
                   {t('fleetfox.telematics.speed')}: {row.speed} km/h · {t('fleetfox.telematics.idle')}: {row.idleMinutes} min · {t('fleetfox.telematics.fuel')}: {row.fuelConsumption}
                 </div>
@@ -177,9 +201,9 @@ export default function FleetfoxVehicleDetailPage() {
 
         <Card title={t('fleetfox.costs.title')} subtitle={t('fleetfox.costs.subtitle')}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '0.8rem' }}>
-            <div>{t('fleetfox.costs.total')}: EUR {costSummary.totalCost.toLocaleString()}</div>
-            <div>{t('fleetfox.costs.perVehicle')}: EUR {Math.round(costSummary.totalCost / 40).toLocaleString()}</div>
-            <div>{t('fleetfox.costs.perKm')}: EUR {costSummary.costPerKm.toFixed(2)}</div>
+            <div>{t('fleetfox.costs.total')}: {currencyFormatter.format(costSummary.totalCost)}</div>
+            <div>{t('fleetfox.costs.perVehicle')}: {currencyFormatter.format(Math.round(costSummary.totalCost / 40))}</div>
+            <div>{t('fleetfox.costs.perKm')}: {twoDecimalFormatter.format(costSummary.costPerKm)} EUR</div>
           </div>
         </Card>
 
