@@ -11,6 +11,7 @@ export default function AifoxAuditPage() {
   const ctx = useTenantContext()
   const [events, setEvents] = useState<AifoxTimelineEvent[]>([])
   const locale = lang === 'de' ? 'de-DE' : 'en-US'
+  const numberFormatter = new Intl.NumberFormat(locale, { maximumFractionDigits: 2 })
 
   function mapTitle(raw: string) {
     if (raw === 'AI decision logged') return lang === 'de' ? 'KI-Entscheidung protokolliert' : 'AI decision logged'
@@ -24,7 +25,8 @@ export default function AifoxAuditPage() {
   function mapMessage(raw: string) {
     const decisionMatch = /^Decision logged for (.+) with confidence ([0-9.]+)\.$/.exec(raw)
     if (decisionMatch && lang === 'de') {
-      return `Entscheidung für ${decisionMatch[1]} mit Konfidenz ${decisionMatch[2]} protokolliert.`
+      const confidence = Number(decisionMatch[2])
+      return `Entscheidung für ${decisionMatch[1]} mit Konfidenz ${numberFormatter.format(Number.isNaN(confidence) ? 0 : confidence)} protokolliert.`
     }
     if (raw.endsWith(' enabled.')) {
       const name = raw.replace(' enabled.', '')
@@ -40,6 +42,8 @@ export default function AifoxAuditPage() {
   function mapType(type: AifoxTimelineEvent['type']) {
     if (type === 'system') return lang === 'de' ? 'System' : 'System'
     if (type === 'statusUpdate') return lang === 'de' ? 'Status' : 'Status'
+    if (type === 'internalNote') return lang === 'de' ? 'Interne Notiz' : 'Internal note'
+    if (type === 'externalMessage') return lang === 'de' ? 'Externe Nachricht' : 'External message'
     return type
   }
 
