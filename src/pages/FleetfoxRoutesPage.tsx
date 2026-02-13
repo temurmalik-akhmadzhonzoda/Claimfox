@@ -7,10 +7,12 @@ import { addTimelineEvent, listRoutes } from '@/fleetfox/api/fleetfoxApi'
 import type { Route } from '@/fleetfox/types'
 
 export default function FleetfoxRoutesPage() {
-  const { t } = useI18n()
+  const { t, lang } = useI18n()
   const ctx = useTenantContext()
   const [routes, setRoutes] = useState<Route[]>([])
   const [query, setQuery] = useState('')
+  const locale = lang === 'de' ? 'de-DE' : 'en-US'
+  const numberFormatter = new Intl.NumberFormat(locale)
 
   useEffect(() => {
     let mounted = true
@@ -34,8 +36,10 @@ export default function FleetfoxRoutesPage() {
       entityType: 'route',
       entityId: route.id,
       type: 'status',
-      title: 'Route optimization accepted',
-      message: `${route.startAddress} -> ${route.endAddress} deviation ${route.deviationPercent}%`,
+      title: lang === 'de' ? 'Routenoptimierung akzeptiert' : 'Route optimization accepted',
+      message: lang === 'de'
+        ? `${route.startAddress} -> ${route.endAddress} Abweichung ${numberFormatter.format(route.deviationPercent)}%`
+        : `${route.startAddress} -> ${route.endAddress} deviation ${numberFormatter.format(route.deviationPercent)}%`,
       meta: { actor: ctx.userId }
     })
   }
@@ -56,10 +60,10 @@ export default function FleetfoxRoutesPage() {
               <div key={route.id} style={{ border: '1px solid #e2e8f0', borderRadius: 12, padding: '0.75rem 0.85rem', display: 'grid', gap: '0.3rem' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', gap: '0.65rem' }}>
                   <strong>{route.startAddress}{' -> '}{route.endAddress}</strong>
-                  <span style={{ color: '#64748b', fontSize: '0.84rem' }}>{t('fleetfox.routes.risk')}: {route.riskScore}</span>
+                  <span style={{ color: '#64748b', fontSize: '0.84rem' }}>{t('fleetfox.routes.risk')}: {numberFormatter.format(route.riskScore)}</span>
                 </div>
-                <div style={{ color: '#475569', fontSize: '0.9rem' }}>{t('fleetfox.routes.eta')}: {route.actualDurationMin} / {route.plannedDurationMin} min</div>
-                <div style={{ color: '#64748b', fontSize: '0.82rem' }}>Deviation {route.deviationPercent}% · {route.delayReason}</div>
+                <div style={{ color: '#475569', fontSize: '0.9rem' }}>{t('fleetfox.routes.eta')}: {numberFormatter.format(route.actualDurationMin)} / {numberFormatter.format(route.plannedDurationMin)} {lang === 'de' ? 'Min' : 'min'}</div>
+                <div style={{ color: '#64748b', fontSize: '0.82rem' }}>{lang === 'de' ? 'Abweichung' : 'Deviation'} {numberFormatter.format(route.deviationPercent)}% · {route.delayReason}</div>
                 <button type="button" onClick={() => acceptSuggestion(route)} style={{ border: '1px solid #d9d9d9', borderRadius: 999, background: '#fff', padding: '0.3rem 0.7rem', width: 'fit-content', cursor: 'pointer' }}>
                   {t('fleetfox.routes.accept')}
                 </button>
