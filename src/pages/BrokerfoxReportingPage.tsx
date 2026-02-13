@@ -7,6 +7,7 @@ import DemoUtilitiesPanel from '@/brokerfox/components/DemoUtilitiesPanel'
 import { useI18n } from '@/i18n/I18nContext'
 import { useTenantContext } from '@/brokerfox/hooks/useTenantContext'
 import { listClients, listCommissions, listContracts, listMailboxItems, listOffers, listRenewals, listTasks, listTenders, sendCommissionReminder } from '@/brokerfox/api/brokerfoxApi'
+import type { Client, Commission, Contract, MailboxItem, Offer, RenewalItem, TaskItem, Tender } from '@/brokerfox/types'
 import { localizeClientIndustry, localizeCoverageLabel } from '@/brokerfox/utils/localizeDemoValues'
 
 const rangeOptions = [
@@ -21,8 +22,19 @@ export default function BrokerfoxReportingPage() {
   const navigate = useNavigate()
   const [range, setRange] = useState('90')
   const [industry, setIndustry] = useState('all')
-  const [data, setData] = useState<any>({})
+  const [data, setData] = useState<{
+    clients: Client[]
+    tenders: Tender[]
+    offers: Offer[]
+    renewals: RenewalItem[]
+    tasks: TaskItem[]
+    mailbox: MailboxItem[]
+    contracts: Contract[]
+    commissions: Commission[]
+  }>({ clients: [], tenders: [], offers: [], renewals: [], tasks: [], mailbox: [], contracts: [], commissions: [] })
   const locale = lang === 'de' ? 'de-DE' : 'en-US'
+  const numberFormatter = new Intl.NumberFormat(locale)
+  const currencyFormatter = new Intl.NumberFormat(locale, { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 })
 
   useEffect(() => {
     let mounted = true
@@ -49,36 +61,34 @@ export default function BrokerfoxReportingPage() {
   }
 
   const filteredClients = useMemo(() => {
-    if (!data.clients) return []
     if (industry === 'all') return data.clients
-    return data.clients.filter((client: any) => client.industry === industry)
+    return data.clients.filter((client) => client.industry === industry)
   }, [data.clients, industry])
 
   const filteredTenders = useMemo(() => {
-    if (!data.tenders) return []
     const days = Number(range)
     const cutoff = Date.now() - days * 86400000
-    return data.tenders.filter((tender: any) => new Date(tender.createdAt).getTime() >= cutoff)
+    return data.tenders.filter((tender) => new Date(tender.createdAt).getTime() >= cutoff)
   }, [data.tenders, range])
 
   const kpiData = useMemo(() => {
     return [
       { name: t('brokerfox.reporting.kpi.clients'), value: filteredClients.length },
-      { name: t('brokerfox.reporting.kpi.openTenders'), value: filteredTenders.filter((t: any) => !['won', 'lost'].includes(t.status)).length },
-      { name: t('brokerfox.reporting.kpi.offers'), value: data.offers?.length ?? 0 },
-      { name: t('brokerfox.reporting.kpi.renewals'), value: data.renewals?.length ?? 0 }
+      { name: t('brokerfox.reporting.kpi.openTenders'), value: filteredTenders.filter((t) => !['won', 'lost'].includes(t.status)).length },
+      { name: t('brokerfox.reporting.kpi.offers'), value: data.offers.length },
+      { name: t('brokerfox.reporting.kpi.renewals'), value: data.renewals.length }
     ]
-  }, [filteredClients, filteredTenders, data.offers, data.renewals, t])
+  }, [filteredClients, filteredTenders, data.offers.length, data.renewals.length, t])
 
   const statusDistribution = useMemo(() => {
     const counts: Record<string, number> = { draft: 0, sent: 0, offersReceived: 0, negotiation: 0, won: 0, lost: 0 }
-    filteredTenders.forEach((t: any) => { counts[t.status] = (counts[t.status] ?? 0) + 1 })
+    filteredTenders.forEach((t) => { counts[t.status] = (counts[t.status] ?? 0) + 1 })
     return Object.entries(counts).map(([key, value]) => ({ name: t(`brokerfox.status.${key}`), value }))
   }, [filteredTenders, t])
 
   const tasksByStatus = useMemo(() => {
     const counts: Record<string, number> = { todo: 0, inProgress: 0, done: 0 }
-    ;(data.tasks ?? []).forEach((task: any) => { counts[task.status] = (counts[task.status] ?? 0) + 1 })
+    data.tasks.forEach((task) => { counts[task.status] = (counts[task.status] ?? 0) + 1 })
     return Object.entries(counts).map(([key, value]) => ({ name: t(`brokerfox.tasks.${key}`), value }))
   }, [data.tasks, t])
 
@@ -89,17 +99,17 @@ export default function BrokerfoxReportingPage() {
       return { key: date.toISOString().slice(0, 7), label: date.toLocaleString(locale, { month: 'short' }) }
     })
     return months.map((month) => {
-      const tenders = (data.tenders ?? []).filter((t: any) => t.createdAt.startsWith(month.key)).length
-      const offers = (data.offers ?? []).filter((o: any) => o.createdAt.startsWith(month.key)).length
-      const renewals = (data.renewals ?? []).filter((r: any) => r.renewalDate.startsWith(month.key)).length
+      const tenders = data.tenders.filter((t) => t.createdAt.startsWith(month.key)).length
+      const offers = data.offers.filter((o) => o.createdAt.startsWith(month.key)).length
+      const renewals = data.renewals.filter((r) => r.renewalDate.startsWith(month.key)).length
       return { label: month.label, tenders, offers, renewals }
     })
   }, [data.tenders, data.offers, data.renewals, locale])
 
   const premiumByLine = useMemo(() => {
     const buckets: Record<string, number> = {}
-    ;(data.offers ?? []).forEach((offer: any) => {
-      offer.lines.forEach((line: any) => {
+    data.offers.forEach((offer) => {
+      offer.lines.forEach((line) => {
         const key = line.coverage
         const value = Number(line.premium.replace(/[^0-9]/g, '')) || 0
         buckets[key] = (buckets[key] ?? 0) + value
@@ -124,9 +134,9 @@ export default function BrokerfoxReportingPage() {
   }, [data.commissions, locale])
 
   const outstandingByCarrier = useMemo(() => {
-    const contractsMap = new Map((data.contracts ?? []).map((contract: any) => [contract.id, contract]))
+    const contractsMap = new Map(data.contracts.map((contract) => [contract.id, contract]))
     const buckets: Record<string, number> = {}
-    ;(data.commissions ?? []).forEach((item: any) => {
+    data.commissions.forEach((item) => {
       if (!item.outstandingEUR) return
       const carrier = contractsMap.get(item.contractId)?.carrierName ?? (lang === 'de' ? 'Unbekannt' : 'Unknown')
       buckets[carrier] = (buckets[carrier] ?? 0) + item.outstandingEUR
@@ -135,19 +145,19 @@ export default function BrokerfoxReportingPage() {
   }, [data.contracts, data.commissions, lang])
 
   const outstandingTable = useMemo(() => {
-    const contractsMap = new Map((data.contracts ?? []).map((contract: any) => [contract.id, contract]))
-    return (data.commissions ?? [])
-      .filter((item: any) => item.outstandingEUR > 0)
-      .map((item: any) => ({ ...item, carrier: contractsMap.get(item.contractId)?.carrierName ?? (lang === 'de' ? 'Unbekannt' : 'Unknown') }))
+    const contractsMap = new Map(data.contracts.map((contract) => [contract.id, contract]))
+    return data.commissions
+      .filter((item) => item.outstandingEUR > 0)
+      .map((item) => ({ ...item, carrier: contractsMap.get(item.contractId)?.carrierName ?? (lang === 'de' ? 'Unbekannt' : 'Unknown') }))
   }, [data.contracts, data.commissions, lang])
 
   const mailboxBacklog = useMemo(() => {
-    return (data.mailbox ?? []).filter((item: any) => item.status !== 'done').length
+    return data.mailbox.filter((item) => item.status !== 'done').length
   }, [data.mailbox])
 
   const avgTenderToOffers = useMemo(() => {
-    const pairs = (data.tenders ?? []).map((t: any) => {
-      const offers = (data.offers ?? []).filter((o: any) => o.tenderId === t.id)
+    const pairs = data.tenders.map((t) => {
+      const offers = data.offers.filter((o) => o.tenderId === t.id)
       if (!offers.length) return null
       const firstOffer = offers[0]
       const diff = new Date(firstOffer.createdAt).getTime() - new Date(t.createdAt).getTime()
@@ -158,7 +168,7 @@ export default function BrokerfoxReportingPage() {
   }, [data.tenders, data.offers])
 
   const industries = useMemo(() => {
-    const list = (data.clients ?? []).map((client: any) => client.industry).filter(Boolean)
+    const list = data.clients.map((client) => client.industry).filter(Boolean)
     return Array.from(new Set(list))
   }, [data.clients])
 
@@ -195,7 +205,7 @@ export default function BrokerfoxReportingPage() {
           ))}
           <Card variant="glass">
             <p style={{ margin: 0 }}>{t('brokerfox.reporting.kpi.avgOffer')}</p>
-              <strong style={{ fontSize: '1.6rem' }}>{avgTenderToOffers.toLocaleString(locale)} {t('brokerfox.reporting.days')}</strong>
+              <strong style={{ fontSize: '1.6rem' }}>{numberFormatter.format(avgTenderToOffers)} {t('brokerfox.reporting.days')}</strong>
             </Card>
           <Card variant="glass">
             <p style={{ margin: 0 }}>{t('brokerfox.reporting.kpi.mailboxBacklog')}</p>
@@ -281,13 +291,13 @@ export default function BrokerfoxReportingPage() {
 
         <Card variant="glass" title={t('brokerfox.commissions.outstandingTitle')}>
           {outstandingTable.length === 0 ? <p>{t('brokerfox.commissions.noneOutstanding')}</p> : null}
-          {outstandingTable.map((item: any) => (
+          {outstandingTable.map((item) => (
             <div key={item.id} style={{ display: 'grid', gridTemplateColumns: '1fr auto auto', gap: '0.75rem', alignItems: 'center', padding: '0.4rem 0', borderBottom: '1px solid #e2e8f0' }}>
               <div>
                 <strong>{item.period}</strong>
                 <div style={{ color: '#64748b', fontSize: '0.85rem' }}>{item.carrier}</div>
               </div>
-              <span style={{ color: '#ef4444' }}>€ {item.outstandingEUR.toLocaleString(locale)}</span>
+              <span style={{ color: '#ef4444' }}>{currencyFormatter.format(item.outstandingEUR)}</span>
               <button
                 type="button"
                 onClick={() => handleReminder(item.contractId, item.id)}
