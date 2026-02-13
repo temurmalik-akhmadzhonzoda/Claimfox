@@ -20,6 +20,7 @@ type AuthUser = {
 const ADDITIONAL_CREDENTIALS: Array<AuthUser & { password: string }> = [
   { username: 'insurteam', password: '2105', mode: 'full' },
   { username: 'demofuchs', password: '2105', mode: 'full' },
+  { username: 'managementfox', password: '130226', mode: 'full' },
   { username: 'priyanka', password: '9876', mode: 'insurance-only' }
 ]
 

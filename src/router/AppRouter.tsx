@@ -214,6 +214,7 @@ import PartnerfoxSubrogationPage from '@/partnerfox/pages/PartnerfoxSubrogationP
 import PartnerfoxAssistancePage from '@/partnerfox/pages/PartnerfoxAssistancePage'
 import PartnerfoxReportingPage from '@/partnerfox/pages/PartnerfoxReportingPage'
 import PartnerfoxAuditPage from '@/partnerfox/pages/PartnerfoxAuditPage'
+import TransportMarketReportPage from '@/pages/TransportMarketReportPage'
 
 function NotFoundRedirect() {
   const { isAuthenticated } = useAuth()
@@ -287,6 +288,7 @@ export default function AppRouter() {
       </Route>
       <Route element={<ProtectedRoute><FullscreenBgLayout showHeader /></ProtectedRoute>}>
         <Route path="/home" element={<HomePage />} />
+        <Route path="/transport-market-report" element={<TransportMarketReportPage />} />
       </Route>
       <Route element={<ProtectedRoute><FullscreenBgLayout showHeader /></ProtectedRoute>}>
         <Route path="/demo" element={<DemoOverviewPage />} />

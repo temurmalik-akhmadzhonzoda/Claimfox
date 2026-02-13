@@ -14,8 +14,16 @@ export default function LoginPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const navigate = useNavigate()
-  const { login, isAuthenticated } = useAuth()
+  const { login, isAuthenticated, user } = useAuth()
   const { t } = useI18n()
+
+  function resolveLandingRoute(nextUsername?: string) {
+    const normalized = nextUsername?.trim().toLowerCase()
+    if (normalized === 'managementfox' || user?.username.toLowerCase() === 'managementfox') {
+      return '/transport-market-report'
+    }
+    return '/home'
+  }
 
   // Hard reset against browser autofill
   useEffect(() => {
@@ -24,8 +32,8 @@ export default function LoginPage() {
   }, [])
 
   useEffect(() => {
-    if (isAuthenticated) navigate('/home', { replace: true })
-  }, [isAuthenticated, navigate])
+    if (isAuthenticated) navigate(resolveLandingRoute(), { replace: true })
+  }, [isAuthenticated, navigate, user])
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -40,7 +48,7 @@ export default function LoginPage() {
     try {
       const success = login(username, password)
       if (success) {
-        navigate('/home', { replace: true })
+        navigate(resolveLandingRoute(username), { replace: true })
       } else {
         setError(t('login.invalid'))
       }
