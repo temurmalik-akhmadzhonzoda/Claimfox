@@ -13,6 +13,7 @@ export default function UnderwriterfoxCasesPage() {
   const navigate = useNavigate()
   const tenant = useTenantContext()
   const ctx = { tenantId: tenant.tenantId, userId: tenant.userId }
+  const currencyFormatter = new Intl.NumberFormat(lang === 'de' ? 'de-DE' : 'en-US', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 })
   const [cases, setCases] = useState<UnderwritingCase[]>([])
   const [status, setStatus] = useState('all')
   const [productLine, setProductLine] = useState('all')
@@ -94,7 +95,7 @@ export default function UnderwriterfoxCasesPage() {
                 <span>{item.insured}</span>
                 <span>{localizeUnderwriterProductLine(item.productLine, lang) ?? item.productLine}</span>
                 <span style={{ color: '#64748b' }}>{t(`underwriterfox.status.${item.status}`)}</span>
-                <span style={{ color: '#0f172a' }}>€{item.premium.total.toLocaleString()}</span>
+                <span style={{ color: '#0f172a' }}>{currencyFormatter.format(item.premium.total)}</span>
               </button>
             ))}
           </div>
