@@ -10,6 +10,9 @@ import type { AifoxDocument } from '@/aifox/types'
 export default function AifoxDocumentAiPage() {
   const { t, lang } = useI18n()
   const ctx = useTenantContext()
+  const locale = lang === 'de' ? 'de-DE' : 'en-US'
+  const percentFormatter = new Intl.NumberFormat(locale, { maximumFractionDigits: 0 })
+  const currencyFormatter = new Intl.NumberFormat(locale, { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 })
   const [docs, setDocs] = useState<AifoxDocument[]>([])
   const [selected, setSelected] = useState<AifoxDocument | null>(null)
 
@@ -63,6 +66,22 @@ export default function AifoxDocumentAiPage() {
     return value
   }
 
+  function localizeFieldValue(key: string, value: string) {
+    if (key === 'amount') {
+      const numeric = Number(value.replace(/[^\d,.-]/g, '').replace(/\./g, '').replace(',', '.'))
+      if (!Number.isNaN(numeric)) return currencyFormatter.format(numeric)
+    }
+    if (key === 'incidentDate') {
+      const [day, month, year] = value.split('.').map((part) => Number(part))
+      if (day && month && year) {
+        return new Date(year, month - 1, day).toLocaleDateString(locale)
+      }
+      const parsed = new Date(value)
+      if (!Number.isNaN(parsed.getTime())) return parsed.toLocaleDateString(locale)
+    }
+    return value
+  }
+
   return (
     <AifoxLayout title={t('aifox.documentAi.title')} subtitle={t('aifox.documentAi.subtitle')}>
       <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: '1.5rem' }}>
@@ -96,12 +115,12 @@ export default function AifoxDocumentAiPage() {
         <Card title={t('aifox.documentAi.extractionTitle')} subtitle={t('aifox.documentAi.extractionSubtitle')}>
           {selected ? (
             <div style={{ display: 'grid', gap: '0.75rem' }}>
-              <div style={{ fontSize: '0.85rem', color: '#64748b' }}>{t('aifox.documentAi.confidence')}: {(selected.confidence * 100).toFixed(0)}%</div>
+              <div style={{ fontSize: '0.85rem', color: '#64748b' }}>{t('aifox.documentAi.confidence')}: {percentFormatter.format(selected.confidence * 100)}%</div>
               <div style={{ display: 'grid', gap: '0.4rem' }}>
                 {Object.entries(selected.extractedFields).map(([key, value]) => (
                   <label key={key} style={{ display: 'grid', gap: '0.25rem', fontSize: '0.85rem' }}>
                     {localizeFieldLabel(key)}
-                    <input defaultValue={value} style={{ padding: '0.5rem', borderRadius: 10, border: '1px solid #e2e8f0' }} />
+                    <input defaultValue={localizeFieldValue(key, value)} style={{ padding: '0.5rem', borderRadius: 10, border: '1px solid #e2e8f0' }} />
                   </label>
                 ))}
               </div>
