@@ -10,10 +10,13 @@ type RatingPanelProps = {
 }
 
 export default function RatingPanel({ snapshot, onRecalculate }: RatingPanelProps) {
-  const { t } = useI18n()
+  const { t, lang } = useI18n()
   const [revenue, setRevenue] = useState(18000000)
   const [lossRatio, setLossRatio] = useState(0.52)
   const [fleetSize, setFleetSize] = useState(240)
+  const locale = lang === 'de' ? 'de-DE' : 'en-US'
+  const currencyFormatter = new Intl.NumberFormat(locale, { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 })
+  const numberFormatter = new Intl.NumberFormat(locale, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 
   return (
     <Card variant="glass" title={t('underwriterfox.rating.title')} subtitle={t('underwriterfox.rating.subtitle')}>
@@ -37,8 +40,8 @@ export default function RatingPanel({ snapshot, onRecalculate }: RatingPanelProp
       {snapshot ? (
         <div style={{ marginTop: '0.75rem', display: 'grid', gap: '0.25rem', fontSize: '0.85rem', color: '#475569' }}>
           <div>{t('underwriterfox.rating.version')}: {snapshot.version}</div>
-          <div>{t('underwriterfox.rating.techPremium')}: €{snapshot.outputs.technicalPremium}</div>
-          <div>{t('underwriterfox.rating.indicatedRate')}: {snapshot.outputs.indicatedRate}</div>
+          <div>{t('underwriterfox.rating.techPremium')}: {currencyFormatter.format(snapshot.outputs.technicalPremium)}</div>
+          <div>{t('underwriterfox.rating.indicatedRate')}: {numberFormatter.format(snapshot.outputs.indicatedRate)}</div>
         </div>
       ) : null}
     </Card>
