@@ -30,8 +30,18 @@ export default function UnderwriterfoxCaseDetailPage() {
   const [events, setEvents] = useState<TimelineEvent[]>([])
   const [activeTab, setActiveTab] = useState<'overview' | 'documents' | 'timeline' | 'decision'>('overview')
   const dateLocale = lang === 'de' ? 'de-DE' : 'en-US'
+  const numberFormatter = new Intl.NumberFormat(dateLocale)
   const currencyFormatter = new Intl.NumberFormat(dateLocale, { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 })
   const formatDue = (isoDate: string) => new Date(isoDate).toLocaleDateString(dateLocale, { day: 'numeric', month: 'short' })
+
+  function localizeRiskFactor(value: string) {
+    if (lang !== 'de') return value
+    return value
+      .replace(' exposure concentration', ' Exponierungskonzentration')
+      .replace(' loss ratio trend', ' Schadenquoten-Trend')
+      .replace('Controls evidence quality', 'Qualität der Kontrollnachweise')
+      .replace('Mid-Market', 'Mittelstand')
+  }
 
   async function handleStatusChange(status: UnderwritingCase['status'], rationale: string) {
     if (!uwCase) return
@@ -63,7 +73,7 @@ export default function UnderwriterfoxCaseDetailPage() {
 
   const decisionSummary = useMemo(() => {
     if (!uwCase?.decision) return t('underwriterfox.caseDetail.decision.none')
-    return `${uwCase.decision.status.toUpperCase()} · ${uwCase.decision.rationale}`
+    return `${t(`underwriterfox.status.${uwCase.decision.status}`)} · ${uwCase.decision.rationale}`
   }, [uwCase, t])
 
   if (!uwCase) {
@@ -127,10 +137,10 @@ export default function UnderwriterfoxCaseDetailPage() {
           <div style={{ marginTop: '1rem' }}>
             {activeTab === 'overview' ? (
               <div style={{ display: 'grid', gap: '0.75rem' }}>
-                <div><strong>{t('underwriterfox.labels.riskScore')}:</strong> {uwCase.risk.score} · {t('underwriterfox.ai.confidence')}: {Math.round(uwCase.risk.confidence * 100)}%</div>
+                <div><strong>{t('underwriterfox.labels.riskScore')}:</strong> {numberFormatter.format(uwCase.risk.score)} · {t('underwriterfox.ai.confidence')}: {numberFormatter.format(Math.round(uwCase.risk.confidence * 100))}%</div>
                 <div style={{ display: 'grid', gap: '0.25rem' }}>
                   {uwCase.risk.factors.map((factor) => (
-                    <span key={factor} style={{ color: '#64748b' }}>{factor}</span>
+                    <span key={factor} style={{ color: '#64748b' }}>{localizeRiskFactor(factor)}</span>
                   ))}
                 </div>
               </div>
