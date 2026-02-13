@@ -8,9 +8,10 @@ import { saveAiRecommendation } from '@/underwriterfox/api/underwriterfoxApi'
 import type { AiRecommendation } from '@/underwriterfox/types'
 
 export default function UnderwriterfoxAiPage() {
-  const { t } = useI18n()
+  const { t, lang } = useI18n()
   const tenant = useTenantContext()
   const ctx = { tenantId: tenant.tenantId, userId: tenant.userId }
+  const numberFormatter = new Intl.NumberFormat(lang === 'de' ? 'de-DE' : 'en-US')
   const [recommendation, setRecommendation] = useState<AiRecommendation | null>(null)
 
   async function handleGenerate() {
@@ -35,19 +36,19 @@ export default function UnderwriterfoxAiPage() {
           <Card variant="glass" style={{ padding: '0.8rem 0.95rem' }}>
             <div style={{ color: '#64748b', fontSize: '0.82rem' }}>{t('underwriterfox.aiPage.kpis.confidence')}</div>
             <div style={{ marginTop: '0.3rem', fontWeight: 700, fontSize: '1.3rem', color: '#0f172a' }}>
-              {Math.round((recommendation?.confidence ?? 0.74) * 100)}%
+              {numberFormatter.format(Math.round((recommendation?.confidence ?? 0.74) * 100))}%
             </div>
           </Card>
           <Card variant="glass" style={{ padding: '0.8rem 0.95rem' }}>
             <div style={{ color: '#64748b', fontSize: '0.82rem' }}>{t('underwriterfox.aiPage.kpis.riskScore')}</div>
             <div style={{ marginTop: '0.3rem', fontWeight: 700, fontSize: '1.3rem', color: '#0f172a' }}>
-              {recommendation ? 68 : 72}
+              {numberFormatter.format(recommendation ? 68 : 72)}
             </div>
           </Card>
           <Card variant="glass" style={{ padding: '0.8rem 0.95rem' }}>
             <div style={{ color: '#64748b', fontSize: '0.82rem' }}>{t('underwriterfox.aiPage.kpis.openFindings')}</div>
             <div style={{ marginTop: '0.3rem', fontWeight: 700, fontSize: '1.3rem', color: '#0f172a' }}>
-              {recommendation ? 3 : 5}
+              {numberFormatter.format(recommendation ? 3 : 5)}
             </div>
           </Card>
           <Card variant="glass" style={{ padding: '0.8rem 0.95rem' }}>
