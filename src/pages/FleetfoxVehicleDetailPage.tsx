@@ -94,6 +94,23 @@ export default function FleetfoxVehicleDetailPage() {
     return risk
   }
 
+  function localizeRiskCategory(value: string) {
+    if (lang === 'de') {
+      if (value === 'Low') return 'Niedrig'
+      if (value === 'Medium') return 'Mittel'
+      if (value === 'High') return 'Hoch'
+    }
+    return value
+  }
+
+  function localizeRiskRecommendation(value: string) {
+    if (lang !== 'de') return value
+    return value
+      .replace('Maintain current control set and continue eco coaching cadence.', 'Aktuelles Kontrollset beibehalten und Eco-Coaching fortführen.')
+      .replace('Add targeted coaching and tighten route compliance monitoring.', 'Gezieltes Coaching ergänzen und Routen-Compliance enger überwachen.')
+      .replace('Immediate intervention: service + coaching + underwriting review.', 'Sofortmaßnahme: Service + Coaching + Underwriting-Review.')
+  }
+
   async function refreshTimeline() {
     if (!vehicleId) return
     setTimeline(await listTimelineEvents(ctx, 'vehicle', vehicleId))
@@ -176,8 +193,8 @@ export default function FleetfoxVehicleDetailPage() {
           <Card title={t('fleetfox.risk.title')} subtitle={t('fleetfox.risk.subtitle')}>
             <div style={{ display: 'grid', gap: '0.45rem' }}>
               <div>{t('fleetfox.risk.score')}: <strong>{riskPanel.riskScore}</strong></div>
-              <div>{t('fleetfox.risk.category')}: <strong>{riskPanel.riskCategory}</strong></div>
-              <div>{t('fleetfox.risk.recommendation')}: {riskPanel.recommendation}</div>
+              <div>{t('fleetfox.risk.category')}: <strong>{localizeRiskCategory(riskPanel.riskCategory)}</strong></div>
+              <div>{t('fleetfox.risk.recommendation')}: {localizeRiskRecommendation(riskPanel.recommendation)}</div>
               <div>{t('fleetfox.risk.premiumImpact')}: {riskPanel.premiumImpact}</div>
             </div>
           </Card>
