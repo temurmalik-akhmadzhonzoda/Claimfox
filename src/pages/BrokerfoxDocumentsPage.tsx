@@ -24,7 +24,7 @@ import {
 } from '@/brokerfox/api/brokerfoxApi'
 import { generateDocumentText } from '@/brokerfox/utils/documentGenerator'
 import { localizeLob, localizePolicyName, localizeTenderTitle } from '@/brokerfox/utils/localizeDemoValues'
-import type { Client, DocumentMeta } from '@/brokerfox/types'
+import type { Client, Contract, DocumentMeta, EntityType, Extraction, Offer, RenewalItem, SignatureRequest, Tender } from '@/brokerfox/types'
 
 export default function BrokerfoxDocumentsPage() {
   const { t, lang } = useI18n()
@@ -34,12 +34,12 @@ export default function BrokerfoxDocumentsPage() {
   const [error, setError] = useState<string | null>(null)
   const [documents, setDocuments] = useState<DocumentMeta[]>([])
   const [clients, setClients] = useState<Client[]>([])
-  const [tenders, setTenders] = useState<any[]>([])
-  const [offers, setOffers] = useState<any[]>([])
-  const [renewals, setRenewals] = useState<any[]>([])
-  const [contracts, setContracts] = useState<any[]>([])
-  const [extractions, setExtractions] = useState<any[]>([])
-  const [signatures, setSignatures] = useState<any[]>([])
+  const [tenders, setTenders] = useState<Tender[]>([])
+  const [offers, setOffers] = useState<Offer[]>([])
+  const [renewals, setRenewals] = useState<RenewalItem[]>([])
+  const [contracts, setContracts] = useState<Contract[]>([])
+  const [extractions, setExtractions] = useState<Extraction[]>([])
+  const [signatures, setSignatures] = useState<SignatureRequest[]>([])
   const [inboxOnly, setInboxOnly] = useState(false)
   const [file, setFile] = useState<File | null>(null)
   const [entityType, setEntityType] = useState<'client' | 'tender' | 'offer' | 'renewal' | 'contract'>('client')
@@ -49,6 +49,7 @@ export default function BrokerfoxDocumentsPage() {
   const [approvedExtraction, setApprovedExtraction] = useState<Record<string, boolean>>({})
   const [signatureDraft, setSignatureDraft] = useState<{ docId: string; name: string; email: string }>({ docId: '', name: '', email: '' })
   const locale = lang === 'de' ? 'de-DE' : 'en-US'
+  const numberFormatter = new Intl.NumberFormat(locale)
 
   useEffect(() => {
     let mounted = true
@@ -193,7 +194,7 @@ export default function BrokerfoxDocumentsPage() {
     setSignatures((prev) => prev.map((item) => (item.id === signatureId ? updated : item)))
   }
 
-  const entityOptions =
+  const entityOptions: Array<Client | Tender | Offer | Contract | RenewalItem> =
     entityType === 'client'
       ? clients
       : entityType === 'tender'
@@ -204,12 +205,22 @@ export default function BrokerfoxDocumentsPage() {
             ? contracts
             : renewals
 
-  function getEntityLabel(item: any) {
+  function getEntityLabel(item: Client | Tender | Offer | Contract | RenewalItem) {
     if (item.name) return item.name
     if (item.title) return localizeTenderTitle(item.title, lang) ?? item.title
     if (item.policyName) return localizePolicyName(item.policyName, lang) ?? item.policyName
     if (item.policyNumber) return localizePolicyName(item.policyNumber, lang) ?? item.policyNumber
     return item.carrier?.name ?? item.id
+  }
+
+  function localizeEntityType(type?: EntityType) {
+    if (!type) return t('brokerfox.documents.unassigned')
+    if (type === 'client') return t('brokerfox.documents.entityClient')
+    if (type === 'tender') return t('brokerfox.documents.entityTender')
+    if (type === 'offer') return t('brokerfox.documents.entityOffer')
+    if (type === 'renewal') return t('brokerfox.documents.entityRenewal')
+    if (type === 'contract') return t('brokerfox.documents.entityContract')
+    return type
   }
 
   function localizeExtractionFieldLabel(key: string) {
@@ -278,7 +289,7 @@ export default function BrokerfoxDocumentsPage() {
               <option value="contract">{t('brokerfox.documents.entityContract')}</option>
             </select>
             <select value={entityId} onChange={(event) => setEntityId(event.target.value)} style={{ padding: '0.5rem 0.75rem', borderRadius: 10, border: '1px solid #d6d9e0' }}>
-              {entityOptions.map((item: any) => (
+              {entityOptions.map((item) => (
                 <option key={item.id} value={item.id}>{getEntityLabel(item)}</option>
               ))}
             </select>
@@ -307,9 +318,9 @@ export default function BrokerfoxDocumentsPage() {
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr auto auto auto auto', gap: '0.75rem', alignItems: 'center' }}>
                   <div>
                     <strong>{doc.name}</strong>
-                    <div style={{ color: '#64748b', fontSize: '0.85rem' }}>{doc.entityType ?? t('brokerfox.documents.unassigned')}</div>
+                    <div style={{ color: '#64748b', fontSize: '0.85rem' }}>{localizeEntityType(doc.entityType)}</div>
                   </div>
-                  <span style={{ color: '#94a3b8' }}>{Math.round(doc.size / 1000).toLocaleString(locale)} KB</span>
+                  <span style={{ color: '#94a3b8' }}>{numberFormatter.format(Math.round(doc.size / 1000))} KB</span>
                   <Button size="sm" onClick={() => handleDownload(doc)}>{t('brokerfox.documents.download')}</Button>
                   <Button size="sm" onClick={() => handleGeneratedDownload(doc)}>{t('brokerfox.documents.downloadGenerated')}</Button>
                   {!doc.entityId ? <Button size="sm" onClick={() => handleAssign(doc)}>{t('brokerfox.documents.assignAction')}</Button> : null}
