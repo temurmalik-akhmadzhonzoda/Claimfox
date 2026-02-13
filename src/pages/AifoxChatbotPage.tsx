@@ -10,6 +10,7 @@ import type { AifoxConversation } from '@/aifox/types'
 export default function AifoxChatbotPage() {
   const { t, lang } = useI18n()
   const ctx = useTenantContext()
+  const percentFormatter = new Intl.NumberFormat(lang === 'de' ? 'de-DE' : 'en-US', { maximumFractionDigits: 0 })
   const [conversations, setConversations] = useState<AifoxConversation[]>([])
   const [selected, setSelected] = useState<AifoxConversation | null>(null)
   const [chatMessages, setChatMessages] = useState<AifoxConversation['messages']>([])
@@ -197,7 +198,7 @@ export default function AifoxChatbotPage() {
                       {msg.text}
                     </div>
                     {msg.confidence !== undefined ? (
-                      <div style={{ fontSize: '0.75rem', color: '#94a3b8', marginTop: '0.2rem' }}>{t('aifox.chatbot.confidence')}: {(msg.confidence * 100).toFixed(0)}%</div>
+                      <div style={{ fontSize: '0.75rem', color: '#94a3b8', marginTop: '0.2rem' }}>{t('aifox.chatbot.confidence')}: {percentFormatter.format(msg.confidence * 100)}%</div>
                     ) : null}
                   </div>
                 ))}
