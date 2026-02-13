@@ -18,7 +18,7 @@ import {
   listTimelineEvents,
   sendCommissionReminder
 } from '@/brokerfox/api/brokerfoxApi'
-import type { DocumentMeta, TaskItem } from '@/brokerfox/types'
+import type { Client, Commission, Contract, DocumentMeta, TaskItem, TimelineEvent, TimelineEventType } from '@/brokerfox/types'
 import { localizeLob, localizePolicyName } from '@/brokerfox/utils/localizeDemoValues'
 
 export default function BrokerfoxContractDetailPage() {
@@ -26,13 +26,15 @@ export default function BrokerfoxContractDetailPage() {
   const ctx = useTenantContext()
   const navigate = useNavigate()
   const { contractId } = useParams()
-  const [contract, setContract] = useState<any>(null)
-  const [client, setClient] = useState<any>(null)
+  const [contract, setContract] = useState<Contract | null>(null)
+  const [client, setClient] = useState<Client | null>(null)
   const [documents, setDocuments] = useState<DocumentMeta[]>([])
   const [tasks, setTasks] = useState<TaskItem[]>([])
-  const [commissions, setCommissions] = useState<any[]>([])
-  const [events, setEvents] = useState<any[]>([])
+  const [commissions, setCommissions] = useState<Commission[]>([])
+  const [events, setEvents] = useState<TimelineEvent[]>([])
   const locale = lang === 'de' ? 'de-DE' : 'en-US'
+  const currencyFormatter = new Intl.NumberFormat(locale, { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 })
+  const numberFormatter = new Intl.NumberFormat(locale)
 
   useEffect(() => {
     let mounted = true
@@ -48,7 +50,7 @@ export default function BrokerfoxContractDetailPage() {
       ])
       if (!mounted) return
       setContract(contractData)
-      setClient(clientsData.find((entry: any) => entry.id === contractData?.clientId) ?? null)
+      setClient(clientsData.find((entry) => entry.id === contractData?.clientId) ?? null)
       setDocuments(docs.filter((doc) => doc.entityType === 'contract' && doc.entityId === contractId))
       setTasks(taskData.filter((task) => task.linkedEntityType === 'contract' && task.linkedEntityId === contractId))
       setCommissions(commissionData)
@@ -60,7 +62,7 @@ export default function BrokerfoxContractDetailPage() {
 
   const outstanding = useMemo(() => commissions.filter((item) => item.outstandingEUR > 0), [commissions])
 
-  async function handleComposer(payload: { type: any; message: string; attachments: DocumentMeta[] }) {
+  async function handleComposer(payload: { type: TimelineEventType; message: string; attachments: DocumentMeta[] }) {
     if (!contractId) return
     await addTimelineEvent(ctx, {
       entityType: 'contract',
@@ -102,14 +104,14 @@ export default function BrokerfoxContractDetailPage() {
             <p style={{ margin: 0 }}>{t('brokerfox.contracts.clientLabel')}: {client?.name ?? '-'}</p>
             <p style={{ margin: 0 }}>{t('brokerfox.contracts.lobLabel')}: {localizeLob(contract.lob, lang) ?? contract.lob}</p>
             <p style={{ margin: 0 }}>{t('brokerfox.contracts.carrierLabel')}: {contract.carrierName}</p>
-            <p style={{ margin: 0 }}>{t('brokerfox.contracts.premiumLabel')}: € {contract.premiumEUR.toLocaleString(locale)}</p>
+            <p style={{ margin: 0 }}>{t('brokerfox.contracts.premiumLabel')}: {currencyFormatter.format(contract.premiumEUR)}</p>
             <p style={{ margin: 0 }}>{t('brokerfox.contracts.statusLabel')}: {t(`brokerfox.contracts.status.${contract.status}`)}</p>
           </Card>
           <Card variant="glass" title={t('brokerfox.commissions.title')}>
             {commissions.slice(0, 6).map((item) => (
               <div key={item.id} style={{ display: 'flex', justifyContent: 'space-between', padding: '0.3rem 0' }}>
                 <span>{item.period}</span>
-                <span>€ {item.outstandingEUR.toLocaleString(locale)}</span>
+                <span>{currencyFormatter.format(item.outstandingEUR)}</span>
               </div>
             ))}
             {outstanding.length === 0 ? <p style={{ color: '#94a3b8' }}>{t('brokerfox.commissions.noneOutstanding')}</p> : null}
@@ -130,7 +132,7 @@ export default function BrokerfoxContractDetailPage() {
           {documents.map((doc) => (
             <div key={doc.id} style={{ display: 'flex', justifyContent: 'space-between', padding: '0.3rem 0' }}>
               <span>{doc.name}</span>
-              <span style={{ color: '#94a3b8' }}>{Math.round(doc.size / 1000)} KB</span>
+              <span style={{ color: '#94a3b8' }}>{numberFormatter.format(Math.round(doc.size / 1000))} KB</span>
             </div>
           ))}
         </Card>
@@ -141,7 +143,7 @@ export default function BrokerfoxContractDetailPage() {
             <div key={item.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.4rem 0', borderBottom: '1px solid #e2e8f0' }}>
               <div>
                 <strong>{item.period}</strong>
-                <div style={{ color: '#64748b', fontSize: '0.85rem' }}>{t('brokerfox.commissions.outstanding')}: € {item.outstandingEUR.toLocaleString(locale)}</div>
+                <div style={{ color: '#64748b', fontSize: '0.85rem' }}>{t('brokerfox.commissions.outstanding')}: {currencyFormatter.format(item.outstandingEUR)}</div>
               </div>
               <Button size="sm" onClick={() => handleCommissionReminder(item.id)}>{t('brokerfox.commissions.sendReminder')}</Button>
             </div>
