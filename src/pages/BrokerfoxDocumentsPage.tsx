@@ -333,7 +333,7 @@ export default function BrokerfoxDocumentsPage() {
                     <div style={{ marginTop: '0.4rem', display: 'grid', gap: '0.3rem' }}>
                       <div>{t('brokerfox.extraction.suggestedClient')}: {clients.find((client) => client.id === extraction.suggestedClientId)?.name ?? '-'}</div>
                       <div>{t('brokerfox.extraction.suggestedContract')}: {localizePolicyName(contracts.find((contract) => contract.id === extraction.suggestedContractId)?.policyNumber, lang) ?? '-'}</div>
-                      <div>{t('brokerfox.extraction.confidence')}: {Math.round(extraction.confidence * 100)}%</div>
+                      <div>{t('brokerfox.extraction.confidence')}: {numberFormatter.format(Math.round(extraction.confidence * 100))}%</div>
                       <div style={{ color: '#64748b', fontSize: '0.85rem' }}>{t('brokerfox.extraction.fieldsTitle')}</div>
                       {Object.entries(extraction.extractedFields).map(([key, value]) => (
                         <div key={key} style={{ fontSize: '0.85rem' }}>
