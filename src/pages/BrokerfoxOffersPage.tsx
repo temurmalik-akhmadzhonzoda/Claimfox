@@ -17,7 +17,7 @@ import {
   listTimelineEvents,
   listTenders
 } from '@/brokerfox/api/brokerfoxApi'
-import type { Offer, TimelineEvent } from '@/brokerfox/types'
+import type { Client, ComparisonResult, DocumentMeta, Tender, TimelineEvent, TimelineEventType } from '@/brokerfox/types'
 import { buildRiskAnalysis } from '@/brokerfox/ai/riskEngine'
 import {
   buildOfferClientSummary,
@@ -33,11 +33,11 @@ export default function BrokerfoxOffersPage() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [offers, setOffers] = useState<Offer[]>([])
-  const [tenders, setTenders] = useState<any[]>([])
-  const [clients, setClients] = useState<any[]>([])
+  const [tenders, setTenders] = useState<Tender[]>([])
+  const [clients, setClients] = useState<Client[]>([])
   const [selectedTenderId, setSelectedTenderId] = useState('')
   const [selectedOfferId, setSelectedOfferId] = useState('')
-  const [comparison, setComparison] = useState<any | null>(null)
+  const [comparison, setComparison] = useState<{ suggestion: true; result: ComparisonResult } | null>(null)
   const [summary, setSummary] = useState('')
   const [approved, setApproved] = useState(false)
   const [events, setEvents] = useState<TimelineEvent[]>([])
@@ -203,7 +203,7 @@ export default function BrokerfoxOffersPage() {
     setDraftApproved(false)
   }
 
-  async function handleComposer(payload: { type: any; message: string; attachments: any[] }) {
+  async function handleComposer(payload: { type: TimelineEventType; message: string; attachments: DocumentMeta[] }) {
     if (!selectedOfferId) return
     await addTimelineEvent(ctx, {
       entityType: 'offer',
