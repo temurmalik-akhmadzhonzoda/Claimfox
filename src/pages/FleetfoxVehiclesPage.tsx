@@ -8,12 +8,23 @@ import { listVehicles } from '@/fleetfox/api/fleetfoxApi'
 import type { Vehicle } from '@/fleetfox/types'
 
 export default function FleetfoxVehiclesPage() {
-  const { t } = useI18n()
+  const { t, lang } = useI18n()
   const ctx = useTenantContext()
   const navigate = useNavigate()
   const [vehicles, setVehicles] = useState<Vehicle[]>([])
   const [search, setSearch] = useState('')
   const [status, setStatus] = useState<'all' | Vehicle['status']>('all')
+  const locale = lang === 'de' ? 'de-DE' : 'en-US'
+  const numberFormatter = new Intl.NumberFormat(locale)
+
+  function localizeMaintenanceRisk(risk: Vehicle['maintenanceRisk']) {
+    if (lang === 'de') {
+      if (risk === 'High') return 'Hoch'
+      if (risk === 'Medium') return 'Mittel'
+      if (risk === 'Low') return 'Niedrig'
+    }
+    return risk
+  }
 
   useEffect(() => {
     let mounted = true
@@ -68,7 +79,7 @@ export default function FleetfoxVehiclesPage() {
                   <strong>{vehicle.licensePlate}</strong>
                   <span style={{ fontSize: '0.82rem', color: '#64748b' }}>{t(`fleetfox.vehicles.status.${vehicle.status}`)}</span>
                 </div>
-                <span style={{ fontSize: '0.84rem', color: '#64748b' }}>{vehicle.manufacturer} {vehicle.model} · {vehicle.mileageKm.toLocaleString()} km · {vehicle.maintenanceRisk}</span>
+                <span style={{ fontSize: '0.84rem', color: '#64748b' }}>{vehicle.manufacturer} {vehicle.model} · {numberFormatter.format(vehicle.mileageKm)} km · {localizeMaintenanceRisk(vehicle.maintenanceRisk)}</span>
               </button>
             ))}
           </div>
