@@ -72,6 +72,15 @@ export default function BrokerfoxTenderDetailPage() {
 
   const coverageRequests = useMemo(() => tender?.coverageRequests ?? [], [tender])
   const analysis = useMemo(() => buildRiskAnalysis(client, tender), [client, tender])
+  const locale = lang === 'de' ? 'de-DE' : 'en-US'
+
+  function localizeCoverageValue(raw?: string) {
+    if (!raw) return raw
+    if (lang === 'de') {
+      return raw.replace(/\bm\b/g, 'Mio').replace(/\bk\b/g, 'Tsd')
+    }
+    return raw.replace(/\bMio\b/g, 'm').replace(/\bTsd\b/g, 'k')
+  }
 
   async function handleComposer(payload: { type: any; message: string; attachments: DocumentMeta[] }) {
     if (!tenderId) return
@@ -167,8 +176,8 @@ export default function BrokerfoxTenderDetailPage() {
             {coverageRequests.map((req: any) => (
               <div key={req.id} style={{ marginBottom: '0.5rem' }}>
                 <strong>{localizeCoverageLabel(req.label, lang) ?? req.label}</strong>
-                <div style={{ color: '#64748b' }}>{t('brokerfox.tenders.limitLabel')}: {req.limit}</div>
-                <div style={{ color: '#64748b' }}>{t('brokerfox.tenders.deductibleLabel')}: {req.deductible ?? t('brokerfox.tenders.none')}</div>
+                <div style={{ color: '#64748b' }}>{t('brokerfox.tenders.limitLabel')}: {localizeCoverageValue(req.limit)}</div>
+                <div style={{ color: '#64748b' }}>{t('brokerfox.tenders.deductibleLabel')}: {localizeCoverageValue(req.deductible) ?? t('brokerfox.tenders.none')}</div>
               </div>
             ))}
           </Card>
@@ -186,7 +195,7 @@ export default function BrokerfoxTenderDetailPage() {
             {documents.map((doc) => (
               <div key={doc.id} style={{ display: 'flex', justifyContent: 'space-between', padding: '0.35rem 0' }}>
                 <span>{doc.name}</span>
-                <span style={{ color: '#94a3b8' }}>{Math.round(doc.size / 1000)} KB</span>
+                <span style={{ color: '#94a3b8' }}>{Math.round(doc.size / 1000).toLocaleString(locale)} KB</span>
               </div>
             ))}
           </Card>
