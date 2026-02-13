@@ -133,6 +133,10 @@ export default function BrokerfoxMailboxPage() {
   function localizeExtractionFieldLabel(key: string) {
     if (lang === 'de') {
       if (key === 'policyNumber') return 'Policennummer'
+      if (key === 'insurer') return 'Versicherer'
+      if (key === 'premium') return 'Prämie'
+      if (key === 'startDate') return 'Startdatum'
+      if (key === 'endDate') return 'Enddatum'
       if (key === 'expiry') return 'Ablaufdatum'
       if (key === 'lossRatio') return 'Schadenquote'
       if (key === 'brokerComment') return 'Broker-Kommentar'
@@ -141,6 +145,10 @@ export default function BrokerfoxMailboxPage() {
       if (key === 'sender') return 'Absender'
     }
     if (key === 'policyNumber') return 'Policy number'
+    if (key === 'insurer') return 'Insurer'
+    if (key === 'premium') return 'Premium'
+    if (key === 'startDate') return 'Start date'
+    if (key === 'endDate') return 'End date'
     if (key === 'expiry') return 'Expiry date'
     if (key === 'lossRatio') return 'Loss ratio'
     if (key === 'brokerComment') return 'Broker comment'
@@ -153,6 +161,12 @@ export default function BrokerfoxMailboxPage() {
   function localizeExtractionFieldValue(key: string, value: string) {
     if (key === 'lineOfBusiness') return localizeLob(value, lang) ?? value
     if (key === 'policyNumber') return localizePolicyName(value, lang) ?? value
+    if (key === 'startDate' || key === 'endDate' || key === 'expiry') {
+      const parsed = new Date(value)
+      if (!Number.isNaN(parsed.getTime())) {
+        return parsed.toLocaleDateString(dateLocale)
+      }
+    }
     return value
   }
 
