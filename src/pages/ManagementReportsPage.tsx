@@ -10,12 +10,13 @@ export default function ManagementReportsPage() {
       <div style={{ width: '100%', maxWidth: 1200, margin: '0 auto', display: 'grid', gap: '1rem' }}>
         <Card title="Management Reports" subtitle="Executive intelligence workspace">
           <div style={{ display: 'grid', gap: '0.9rem' }}>
-            <p style={{ margin: 0, color: '#475569' }}>
-              Open the strategic market report for Allianz and VHV.
-            </p>
-            <div>
+            <p style={{ margin: 0, color: '#475569' }}>Open executive strategy and competitor reports.</p>
+            <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap' }}>
               <Button size="sm" onClick={() => navigate('/transport-market-report')}>
                 Allianz/VHV
+              </Button>
+              <Button size="sm" variant="secondary" onClick={() => navigate('/strategy/loadsure-analysis')}>
+                Loadsure
               </Button>
             </div>
           </div>

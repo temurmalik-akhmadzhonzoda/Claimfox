@@ -32,7 +32,10 @@ export default function AppHeader() {
   }
 
   const navItems = isManagementUser
-    ? [{ label: 'Allianz/VHV', route: '/transport-market-report' }]
+    ? [
+      { label: 'Allianz/VHV', route: '/transport-market-report' },
+      { label: 'Loadsure', route: '/strategy/loadsure-analysis' }
+    ]
     : [
       { label: t('header.nav.insurance'), route: '/underwriterfox' },
       { label: t('brokerfox.nav.title'), route: '/brokerfox' },
