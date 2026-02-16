@@ -20,7 +20,7 @@ export default function LoginPage() {
   function resolveLandingRoute(nextUsername?: string) {
     const normalized = nextUsername?.trim().toLowerCase()
     if (normalized === 'managementfox' || user?.username.toLowerCase() === 'managementfox') {
-      return '/transport-market-report'
+      return '/managementreports'
     }
     return '/home'
   }

@@ -13,6 +13,7 @@ export default function AppHeader() {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
 
   const authLabel = isAuthenticated ? t('header.logout') : t('header.login')
+  const isManagementUser = user?.username.toLowerCase() === 'managementfox'
 
   function handleAuthClick() {
     if (isAuthenticated) {
@@ -30,14 +31,16 @@ export default function AppHeader() {
     window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
   }
 
-  const navItems = [
-    { label: t('header.nav.insurance'), route: '/underwriterfox' },
-    { label: t('brokerfox.nav.title'), route: '/brokerfox' },
-    { label: t('header.nav.claimsfox'), route: '/claimsfox' },
-    { label: t('header.nav.aiFox'), route: '/aifox' },
-    { label: t('header.nav.partnerfox'), route: '/partnerfox' },
-    { label: t('header.nav.fleetfox'), route: '/fleetfox' }
-  ].filter((item) => (user?.mode === 'insurance-only' ? item.route === '/insurance' : true))
+  const navItems = isManagementUser
+    ? [{ label: 'Allianz/VHV', route: '/transport-market-report' }]
+    : [
+      { label: t('header.nav.insurance'), route: '/underwriterfox' },
+      { label: t('brokerfox.nav.title'), route: '/brokerfox' },
+      { label: t('header.nav.claimsfox'), route: '/claimsfox' },
+      { label: t('header.nav.aiFox'), route: '/aifox' },
+      { label: t('header.nav.partnerfox'), route: '/partnerfox' },
+      { label: t('header.nav.fleetfox'), route: '/fleetfox' }
+    ].filter((item) => (user?.mode === 'insurance-only' ? item.route === '/insurance' : true))
 
   useEffect(() => {
     const header = headerRef.current
