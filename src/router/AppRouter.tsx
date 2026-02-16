@@ -181,6 +181,7 @@ import ClaimsfoxPartnersPage from '@/pages/ClaimsfoxPartnersPage'
 import ClaimsfoxReportingPage from '@/pages/ClaimsfoxReportingPage'
 import ClaimsfoxTasksPage from '@/pages/ClaimsfoxTasksPage'
 import ClaimsfoxIntegrationsPage from '@/pages/ClaimsfoxIntegrationsPage'
+import ClaimsfoxFnolDemoPage from '@/claimsfox/pages/ClaimsfoxFnolDemoPage'
 import AifoxDashboardPage from '@/pages/AifoxDashboardPage'
 import AifoxClaimsVisionPage from '@/pages/AifoxClaimsVisionPage'
 import AifoxFraudPage from '@/pages/AifoxFraudPage'
@@ -338,6 +339,7 @@ export default function AppRouter() {
         <Route path="/claimsfox/claims" element={<ClaimsfoxClaimsPage />} />
         <Route path="/claimsfox/claims/:claimId" element={<ClaimsfoxClaimDetailPage />} />
         <Route path="/claimsfox/intake" element={<ClaimsfoxIntakePage />} />
+        <Route path="/claimsfox/fnol-demo" element={<ClaimsfoxFnolDemoPage />} />
         <Route path="/claimsfox/triage" element={<ClaimsfoxTriagePage />} />
         <Route path="/claimsfox/documents" element={<ClaimsfoxDocumentsPage />} />
         <Route path="/claimsfox/mailbox" element={<ClaimsfoxMailboxPage />} />
