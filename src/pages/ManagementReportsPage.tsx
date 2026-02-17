@@ -21,6 +21,9 @@ export default function ManagementReportsPage() {
               <Button size="sm" variant="secondary" onClick={() => navigate('/strategy/wtw-analysis')}>
                 WTW
               </Button>
+              <Button size="sm" variant="secondary" onClick={() => navigate('/strategy/nmip-analysis')}>
+                NMIP
+              </Button>
             </div>
           </div>
         </Card>
