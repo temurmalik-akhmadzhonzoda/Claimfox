@@ -3,6 +3,7 @@ import Card from '@/components/ui/Card'
 import Header from '@/components/ui/Header'
 import Button from '@/components/ui/Button'
 import { useI18n } from '@/i18n/I18nContext'
+import NmiLogoMain from '@/assets/images/NMI_Logo_main.png'
 
 type BiText = { de: string; en: string }
 
@@ -114,6 +115,11 @@ export default function NMIPAnalysisPage() {
               </div>
             </div>
             <div style={{ display: 'grid', gap: '0.6rem', alignItems: 'start' }}>
+              <img
+                src={NmiLogoMain}
+                alt="Nordic Marine Insurance"
+                style={{ width: 190, maxWidth: '100%', justifySelf: 'end', objectFit: 'contain' }}
+              />
               <Button className="nmip-print-hide" size="sm" onClick={handlePdfExport}>
                 {bi({ de: 'Download Full Executive PDF', en: 'Download Full Executive PDF' }, l)}
               </Button>
