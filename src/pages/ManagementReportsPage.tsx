@@ -18,6 +18,9 @@ export default function ManagementReportsPage() {
               <Button size="sm" variant="secondary" onClick={() => navigate('/strategy/loadsure-analysis')}>
                 Loadsure
               </Button>
+              <Button size="sm" variant="secondary" onClick={() => navigate('/strategy/wtw-analysis')}>
+                WTW
+              </Button>
             </div>
           </div>
         </Card>

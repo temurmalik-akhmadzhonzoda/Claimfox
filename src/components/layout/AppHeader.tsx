@@ -34,7 +34,8 @@ export default function AppHeader() {
   const navItems = isManagementUser
     ? [
       { label: 'Allianz/VHV', route: '/transport-market-report' },
-      { label: 'Loadsure', route: '/strategy/loadsure-analysis' }
+      { label: 'Loadsure', route: '/strategy/loadsure-analysis' },
+      { label: 'WTW', route: '/strategy/wtw-analysis' }
     ]
     : [
       { label: t('header.nav.insurance'), route: '/underwriterfox' },

@@ -216,6 +216,7 @@ import PartnerfoxAuditPage from '@/partnerfox/pages/PartnerfoxAuditPage'
 import TransportMarketReportPage from '@/pages/TransportMarketReportPage'
 import ManagementReportsPage from '@/pages/ManagementReportsPage'
 import LoadsureAnalysisPage from '@/pages/strategy/LoadsureAnalysisPage'
+import WTWAnalysisPage from '@/pages/strategy/WTWAnalysisPage'
 
 function NotFoundRedirect() {
   const { isAuthenticated } = useAuth()
@@ -292,6 +293,7 @@ export default function AppRouter() {
         <Route path="/transport-market-report" element={<TransportMarketReportPage />} />
         <Route path="/managementreports" element={<ManagementReportsPage />} />
         <Route path="/strategy/loadsure-analysis" element={<LoadsureAnalysisPage />} />
+        <Route path="/strategy/wtw-analysis" element={<WTWAnalysisPage />} />
       </Route>
       <Route element={<ProtectedRoute><FullscreenBgLayout showHeader /></ProtectedRoute>}>
         <Route path="/demo" element={<DemoOverviewPage />} />
