@@ -88,6 +88,15 @@ export default function NMIPAnalysisPage() {
   return (
     <section className="page" style={{ gap: '1.25rem', background: '#ffffff', paddingTop: '1rem' }}>
       <style>{`
+        .nmip-hero-grid {
+          display: grid;
+          grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+          gap: 1rem;
+          align-items: start;
+        }
+        @media (max-width: 980px) {
+          .nmip-hero-grid { grid-template-columns: 1fr; }
+        }
         @media print {
           @page { size: A4 landscape; margin: 10mm; }
           * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
@@ -96,8 +105,8 @@ export default function NMIPAnalysisPage() {
       `}</style>
       <div style={{ width: '100%', maxWidth: 1240, margin: '0 auto', display: 'grid', gap: '1.1rem' }}>
         <Card>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem', flexWrap: 'wrap' }}>
-            <div style={{ display: 'grid', gap: '0.8rem', minWidth: 320 }}>
+          <div className="nmip-hero-grid">
+            <div style={{ display: 'grid', gap: '0.8rem' }}>
               <Header
                 title={bi({ de: 'Nordic Marine Insurance (NMIP) – Strategic Capacity & Marine Niche Analysis', en: 'Nordic Marine Insurance (NMIP) – Strategic Capacity & Marine Niche Analysis' }, l)}
                 subtitle={bi({ de: 'Executive Assessment for Insurfox Platform & MGA Strategy', en: 'Executive Assessment for Insurfox Platform & MGA Strategy' }, l)}
@@ -114,16 +123,18 @@ export default function NMIPAnalysisPage() {
                 <span style={metaPillStyle}>West P&amp;I Alignment</span>
               </div>
             </div>
-            <div style={{ display: 'grid', gap: '0.6rem', alignItems: 'start' }}>
-              <img
-                src={NmiLogoMain}
-                alt="Nordic Marine Insurance"
-                style={{ width: 190, maxWidth: '100%', justifySelf: 'end', objectFit: 'contain' }}
-              />
+            <div style={{ display: 'grid', gap: '0.6rem', justifyItems: 'end' }}>
               <Button className="nmip-print-hide" size="sm" onClick={handlePdfExport}>
                 {bi({ de: 'Download Full Executive PDF', en: 'Download Full Executive PDF' }, l)}
               </Button>
-              <Card title={bi({ de: 'Key Facts', en: 'Key Facts' }, l)}>
+              <Card title={bi({ de: 'Key Facts', en: 'Key Facts' }, l)} style={{ width: '100%' }}>
+                <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '0.55rem' }}>
+                  <img
+                    src={NmiLogoMain}
+                    alt="Nordic Marine Insurance"
+                    style={{ width: 190, maxWidth: '100%', objectFit: 'contain' }}
+                  />
+                </div>
                 <ul style={listStyle}>
                   <li>{bi({ de: 'Fokus: Marine Nischenzeichnung', en: 'Focus: Marine niche underwriting' }, l)}</li>
                   <li>{bi({ de: 'Produkte: Delay / Loss of Earnings / Hull / Maritime Lien', en: 'Core products: Delay / Loss of Earnings / Hull / Maritime Lien' }, l)}</li>
