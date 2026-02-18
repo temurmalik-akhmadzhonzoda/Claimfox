@@ -35,7 +35,7 @@ export default function ClaimsfoxLayout({ title, subtitle, topLeft, children }: 
   }, [ctx])
 
   return (
-    <div style={{ width: '100%', maxWidth: 1200, margin: '1rem auto 0', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ width: '100%', margin: '1rem 0 0', padding: '0 1rem', boxSizing: 'border-box', display: 'flex', flexDirection: 'column' }}>
       <div
         style={{
           background: '#f1f5f9',
