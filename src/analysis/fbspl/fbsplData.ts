@@ -11,6 +11,25 @@ export type CapabilityRow = {
   insurfox: BiText
 }
 
+export type SolutionLensRow = {
+  lens: BiText
+  fbspl: BiText
+  insurfox: BiText
+  implication: BiText
+}
+
+export type CoverageRow = {
+  area: BiText
+  fbspl: number
+  insurfox: number
+}
+
+export type StrategicPoint = {
+  name: BiText
+  overlap: number
+  value: number
+}
+
 export type HeatmapRisk = {
   label: BiText
   likelihood: number
@@ -27,12 +46,13 @@ export type DecisionOption = {
   upside: number
 }
 
-export type ContactRoleTemplate = {
+export type ContactPerson = {
+  name: string
   role: BiText
-  region: string
-  businessUnit: string
-  linkedin: string
-  note: BiText
+  region: BiText
+  businessUnit: BiText
+  linkedinUrl?: string
+  source: string
 }
 
 export const companyProfile: { fbspl: CompanyFact[]; insurfox: CompanyFact[] } = {
@@ -55,8 +75,8 @@ export const companyProfile: { fbspl: CompanyFact[]; insurfox: CompanyFact[] } =
     {
       label: { de: 'Operating Model', en: 'Operating model' },
       value: {
-        de: 'Human Intelligence + AI zur Reduktion von TAT und zur Produktivitätssteigerung.',
-        en: 'Human intelligence + AI to reduce turnaround times and increase productivity.'
+        de: 'Kombination aus Human Intelligence + AI zur Senkung von Turnaround-Zeiten und Steigerung der Produktivität.',
+        en: 'Combination of human intelligence + AI to reduce turnaround times and increase productivity.'
       }
     },
     {
@@ -67,83 +87,103 @@ export const companyProfile: { fbspl: CompanyFact[]; insurfox: CompanyFact[] } =
   insurfox: [
     {
       label: { de: 'Positionierung', en: 'Positioning' },
-      value: { de: 'Hybrid MGA + Broker + Plattform (IaaS) + AI Operator', en: 'Hybrid MGA + broker + platform (IaaS) + AI operator' }
+      value: { de: 'Hybrid aus MGA + Broker + Plattformbetreiber (IaaS) + AI Operator', en: 'Hybrid of MGA + broker + platform operator (IaaS) + AI operator' }
     },
     {
       label: { de: 'Kernwert', en: 'Core value' },
       value: {
-        de: 'End-to-end Versicherungsinfrastruktur mit Workflow, Governance und operativer AI-Execution.',
-        en: 'End-to-end insurance infrastructure with workflow, governance, and operational AI execution.'
+        de: 'End-to-end Versicherungsinfrastruktur mit Workflow-Orchestrierung, Governance und operativer AI-Ausführung.',
+        en: 'End-to-end insurance infrastructure with workflow orchestration, governance, and operational AI execution.'
       }
     },
     {
       label: { de: 'Kontrollfokus', en: 'Control focus' },
       value: {
-        de: 'Underwriting-/Claims-Entscheidungslogik, Plattformsteuerung, Datenhoheit.',
-        en: 'Underwriting/claims decision logic, platform control, data ownership.'
+        de: 'Underwriting-/Claims-Entscheidungslogik, Plattformsteuerung, Datenhoheit und Distribution Control.',
+        en: 'Underwriting/claims decision logic, platform control, data ownership, and distribution control.'
       }
     }
   ]
 }
 
+export const solutionLensRows: SolutionLensRow[] = [
+  {
+    lens: { de: 'MGA-Linse', en: 'MGA lens' },
+    fbspl: { de: 'Liefert Prozesskapazität und operative Stabilisierung für MGA-Backoffice.', en: 'Provides process capacity and operational stabilization for MGA back office.' },
+    insurfox: { de: 'Steuert Underwriting-Mandat, Delegationsrahmen und Produktentscheidung.', en: 'Controls underwriting mandate, delegation framework, and product decisions.' },
+    implication: { de: 'Partnerschaft ist sinnvoll, solange Entscheidungsmandate bei Insurfox verbleiben.', en: 'Partnership is effective as long as decision mandates stay with Insurfox.' }
+  },
+  {
+    lens: { de: 'Broker-Linse', en: 'Broker lens' },
+    fbspl: { de: 'Unterstützt Servicing, Renewals, Dokumentation und COI-Prozesse im Volumenbetrieb.', en: 'Supports servicing, renewals, documentation, and COI processes at volume.' },
+    insurfox: { de: 'Steuert Distribution, Kundenzugang und Broker-Orchestrierung.', en: 'Controls distribution, client access, and broker orchestration.' },
+    implication: { de: 'Hohe Synergie bei Servicequalität; Wettbewerb gering, solange FBSPL nicht in Distribution expandiert.', en: 'High service synergy; competitive pressure remains low unless FBSPL expands into distribution.' }
+  },
+  {
+    lens: { de: 'Plattformbetreiber-Linse', en: 'Platform operator lens' },
+    fbspl: { de: 'Arbeitet auf vorhandenen Kundenplattformen und ergänzt Execution-Layer.', en: 'Operates on client platforms and augments the execution layer.' },
+    insurfox: { de: 'Betreibt die eigene Plattform inkl. Workflow, Data Layer und Auditability.', en: 'Operates own platform including workflow, data layer, and auditability.' },
+    implication: { de: 'Klare Schnittstellen-/Governance-Regeln verhindern Kontrollverlust.', en: 'Clear interface and governance rules prevent control erosion.' }
+  }
+]
+
 export const capabilityRows: CapabilityRow[] = [
   {
     category: { de: 'Policy Lifecycle (Quote -> Issuance -> Endorsements)', en: 'Policy lifecycle (quote -> issuance -> endorsements)' },
-    fbspl: { de: 'Operative Bearbeitung und Back-office-Support', en: 'Operational processing and back-office support' },
-    insurfox: { de: 'Plattform-native Orchestrierung und Produktsteuerung', en: 'Platform-native orchestration and product steering' }
+    fbspl: { de: 'Operative Bearbeitung und Backoffice-Support', en: 'Operational processing and back-office support' },
+    insurfox: { de: 'Plattform-native Orchestrierung, Regelwerk und Produktsteuerung', en: 'Platform-native orchestration, rules, and product steering' }
   },
   {
     category: { de: 'Claims Management Support', en: 'Claims management support' },
-    fbspl: { de: 'Triage, Dokumentation, Follow-up, TAT-Fokus', en: 'Triage, documentation, follow-up, TAT focus' },
-    insurfox: { de: 'Claims-Workflow, FNOL, Governance und Entscheidungsführung', en: 'Claims workflow, FNOL, governance, and decision leadership' }
+    fbspl: { de: 'Triage, Dokumentation, Follow-up mit TAT-Fokus', en: 'Triage, documentation, and follow-up with TAT focus' },
+    insurfox: { de: 'FNOL, Decisioning, Governance und End-to-end Fallsteuerung', en: 'FNOL, decisioning, governance, and end-to-end case control' }
   },
   {
     category: { de: 'Renewals & COI Issuance', en: 'Renewals & COI issuance' },
-    fbspl: { de: 'Hohe operative Eignung bei standardisierten Volumina', en: 'High operational fit for standardized volumes' },
-    insurfox: { de: 'Regelwerke, Priorisierung und Eskalationssteuerung', en: 'Rules, prioritization, and escalation control' }
+    fbspl: { de: 'Hohe Eignung in standardisierten Volumenprozessen', en: 'High fit in standardized high-volume processes' },
+    insurfox: { de: 'Priorisierung, Qualitätssicherung und Ausnahme-Handling', en: 'Prioritization, quality assurance, and exception handling' }
   },
   {
     category: { de: 'Compliance & QA', en: 'Compliance & QA' },
-    fbspl: { de: 'SLA- und QA-basierte Ausführung, kontrollpflichtig', en: 'SLA and QA based execution, requires oversight' },
-    insurfox: { de: 'Regulatorische Endverantwortung und Auditability', en: 'Regulatory end-accountability and auditability' }
+    fbspl: { de: 'SLA/QA-basierte Ausführung unter Kundenkontrolle', en: 'SLA/QA-based execution under client controls' },
+    insurfox: { de: 'Regulatorische Endverantwortung und Audit-Trail Ownership', en: 'Regulatory end-accountability and audit-trail ownership' }
   },
   {
     category: { de: 'AI-Driven Automation', en: 'AI-driven automation' },
-    fbspl: { de: 'Enablement-orientiert in Operations', en: 'Enablement-oriented in operations' },
-    insurfox: { de: 'Direkt in Kern-Workflows integriert', en: 'Directly integrated into core workflows' }
+    fbspl: { de: 'AI-gestützte Prozessbeschleunigung im Operations-Layer', en: 'AI-enabled process acceleration in operations layer' },
+    insurfox: { de: 'AI direkt in Kern-Workflows mit Entscheidungsbezug', en: 'AI embedded in core workflows with decision relevance' }
   },
   {
     category: { de: 'Platform Native Execution', en: 'Platform native execution' },
     fbspl: { de: 'Servicebereitstellung auf Kundenplattformen', en: 'Service delivery on client platforms' },
-    insurfox: { de: 'Eigene modulare Plattform mit End-to-end-Steuerung', en: 'Own modular platform with end-to-end control' }
+    insurfox: { de: 'Eigene modulare Plattform mit End-to-end Prozesskontrolle', en: 'Own modular platform with end-to-end process control' }
   },
   {
     category: { de: 'Underwriting Authority', en: 'Underwriting authority' },
-    fbspl: { de: 'Keine originäre Underwriting Authority im Mandantenmodell', en: 'No native underwriting authority in client service model' },
+    fbspl: { de: 'Keine originäre Underwriting Authority im Service-Modell', en: 'No native underwriting authority in service model' },
     insurfox: { de: 'MGA-/Broker-orientierte Underwriting-Kontrolle', en: 'MGA/broker-oriented underwriting control' }
   },
   {
     category: { de: 'Distribution Access', en: 'Distribution access' },
-    fbspl: { de: 'Indirekt über Kundenbeziehungen', en: 'Indirect via client relationships' },
+    fbspl: { de: 'Indirekt über Kundenmandate', en: 'Indirect through client mandates' },
     insurfox: { de: 'Direkt über MGA-/Broker- und Plattformkanäle', en: 'Direct through MGA/broker and platform channels' }
   }
 ]
 
-export const capabilityCoverage = [
-  { area: 'Back Office Support', fbspl: 90, insurfox: 72 },
-  { area: 'Claims Ops Support', fbspl: 84, insurfox: 78 },
-  { area: 'Underwriting Support', fbspl: 72, insurfox: 82 },
-  { area: 'Regulatory Advisory Support', fbspl: 60, insurfox: 74 },
-  { area: 'AI Integration', fbspl: 68, insurfox: 86 },
-  { area: 'BI Dashboards', fbspl: 73, insurfox: 80 }
+export const capabilityCoverage: CoverageRow[] = [
+  { area: { de: 'Backoffice Support', en: 'Back office support' }, fbspl: 90, insurfox: 72 },
+  { area: { de: 'Claims Ops Support', en: 'Claims ops support' }, fbspl: 84, insurfox: 78 },
+  { area: { de: 'Underwriting Support', en: 'Underwriting support' }, fbspl: 72, insurfox: 82 },
+  { area: { de: 'Regulatory Advisory Support', en: 'Regulatory advisory support' }, fbspl: 60, insurfox: 74 },
+  { area: { de: 'AI Integration', en: 'AI integration' }, fbspl: 68, insurfox: 86 },
+  { area: { de: 'BI Dashboards', en: 'Business intelligence dashboards' }, fbspl: 73, insurfox: 80 }
 ]
 
-export const strategicFitPoints = [
-  { name: 'Capacity sourcing partner', overlap: 30, value: 82 },
-  { name: 'Claims enablement partner', overlap: 44, value: 89 },
-  { name: 'Process-heavy overlap zone', overlap: 68, value: 56 },
-  { name: 'Neutral delivery zone', overlap: 52, value: 70 },
-  { name: 'Threat zone (expanded scope)', overlap: 78, value: 45 }
+export const strategicFitPoints: StrategicPoint[] = [
+  { name: { de: 'Capacity-Sourcing-Partner', en: 'Capacity sourcing partner' }, overlap: 30, value: 82 },
+  { name: { de: 'Claims-Enabler', en: 'Claims enablement partner' }, overlap: 44, value: 89 },
+  { name: { de: 'Threat Zone (bei Scope-Erweiterung)', en: 'Threat zone (if scope expands)' }, overlap: 78, value: 45 },
+  { name: { de: 'Neutral Zone', en: 'Neutral zone' }, overlap: 52, value: 70 }
 ]
 
 export const synergies: BiText[] = [
@@ -153,20 +193,20 @@ export const synergies: BiText[] = [
   },
   {
     de: 'Entlastung hochvolumiger Standardprozesse zugunsten von Kernentscheidungen.',
-    en: 'Offloading high-volume standard tasks to protect core decision capacity.'
+    en: 'Offloading high-volume standard tasks to protect core decision bandwidth.'
   },
   {
-    de: 'SLA/KPI-Standardisierung als Hebel für TAT und Qualität.',
-    en: 'SLA/KPI standardization as a lever for TAT and quality.'
+    de: 'SLA-/KPI-Standardisierung als Hebel für TAT und Prozessqualität.',
+    en: 'SLA/KPI standardization as a lever for TAT and process quality.'
   }
 ]
 
 export const riskHeatmap: HeatmapRisk[] = [
-  { label: { de: 'Data Security & Governance', en: 'Data security & governance' }, likelihood: 3, impact: 5 },
-  { label: { de: 'Quality Variability', en: 'Quality variability' }, likelihood: 4, impact: 4 },
-  { label: { de: 'Regulatory Accountability Gap', en: 'Regulatory accountability gap' }, likelihood: 3, impact: 5 },
+  { label: { de: 'Datensicherheit & Governance', en: 'Data security & governance' }, likelihood: 3, impact: 5 },
+  { label: { de: 'Qualitätsvarianz', en: 'Quality variability' }, likelihood: 4, impact: 4 },
+  { label: { de: 'Regulatorische Verantwortungsgrenze', en: 'Regulatory accountability boundary' }, likelihood: 3, impact: 5 },
   { label: { de: 'Vendor Lock-in', en: 'Vendor lock-in' }, likelihood: 3, impact: 4 },
-  { label: { de: 'Pricing Pressure', en: 'Pricing pressure' }, likelihood: 3, impact: 3 }
+  { label: { de: 'Preisdruck', en: 'Pricing pressure' }, likelihood: 3, impact: 3 }
 ]
 
 export const riskBullets: BiText[] = [
@@ -227,39 +267,41 @@ export const decisionOptions: DecisionOption[] = [
   }
 ]
 
-export const contactRoleTemplates: ContactRoleTemplate[] = [
+export const contactPeople: ContactPerson[] = [
   {
-    role: { de: 'VP / Head Insurance Outsourcing', en: 'VP / Head Insurance Outsourcing' },
-    region: '',
-    businessUnit: 'Insurance Outsourcing',
-    linkedin: '',
-    note: { de: 'verify', en: 'verify' }
+    name: 'Madhukar S Dubey',
+    role: { de: 'Founder & Managing Director', en: 'Founder & Managing Director' },
+    region: { de: 'Global', en: 'Global' },
+    businessUnit: { de: 'Executive Leadership', en: 'Executive leadership' },
+    source: 'https://www.fbspl.com/our-leadership'
   },
   {
-    role: { de: 'Head of P&C Services', en: 'Head of P&C Services' },
-    region: '',
-    businessUnit: 'P&C Services',
-    linkedin: '',
-    note: { de: 'verify', en: 'verify' }
+    name: 'Vinod Verma',
+    role: { de: 'Co-CEO', en: 'Co-CEO' },
+    region: { de: 'Global', en: 'Global' },
+    businessUnit: { de: 'Executive Leadership', en: 'Executive leadership' },
+    source: 'https://www.fbspl.com/our-leadership'
   },
   {
-    role: { de: 'Head of Automation & AI Practice', en: 'Head of Automation & AI Practice' },
-    region: '',
-    businessUnit: 'Automation & AI',
-    linkedin: '',
-    note: { de: 'verify', en: 'verify' }
+    name: 'Ankur Chatterjee',
+    role: { de: 'Deputy General Manager, Sales & Marketing', en: 'Deputy General Manager, Sales & Marketing' },
+    region: { de: 'Versicherungsmarkt Kanada/Global', en: 'Insurance market Canada/global' },
+    businessUnit: { de: 'Sales & Marketing', en: 'Sales & marketing' },
+    source: 'https://www.fbspl.com/news/fbspl-at-ibaocon'
   },
   {
-    role: { de: 'Head of Strategic Accounts (Insurance)', en: 'Head of Strategic Accounts (Insurance)' },
-    region: '',
-    businessUnit: 'Strategic Accounts',
-    linkedin: '',
-    note: { de: 'verify', en: 'verify' }
+    name: 'Bharat Lokchandani',
+    role: { de: 'Senior Manager & Domain Head, Operations', en: 'Senior Manager & Domain Head, Operations' },
+    region: { de: 'Versicherungsbetrieb', en: 'Insurance operations' },
+    businessUnit: { de: 'Insurance Operations', en: 'Insurance operations' },
+    source: 'https://www.fbspl.com/our-leadership'
   }
 ]
 
 export const sourceUrls = [
   'https://www.fbspl.com/',
   'https://www.fbspl.com/frequently-asked-questions',
-  'https://www.fbspl.com/services/property-and-casualty-insurance-consulting-and-outsourcing-services'
+  'https://www.fbspl.com/services/property-and-casualty-insurance-consulting-and-outsourcing-services',
+  'https://www.fbspl.com/our-leadership',
+  'https://www.fbspl.com/news/fbspl-at-ibaocon'
 ]
