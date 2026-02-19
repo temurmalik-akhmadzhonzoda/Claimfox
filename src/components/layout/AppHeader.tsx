@@ -36,7 +36,8 @@ export default function AppHeader() {
       { label: 'Allianz/VHV', route: '/transport-market-report' },
       { label: 'Loadsure', route: '/strategy/loadsure-analysis' },
       { label: 'WTW', route: '/strategy/wtw-analysis' },
-      { label: 'Nordic MIP', route: '/strategy/nmip-analysis' }
+      { label: 'Nordic MIP', route: '/strategy/nmip-analysis' },
+      { label: 'FBSPL', route: '/analysis/fbspl' }
     ]
     : [
       { label: t('header.nav.insurance'), route: '/underwriterfox' },
