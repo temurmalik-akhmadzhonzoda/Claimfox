@@ -24,6 +24,9 @@ export default function ManagementReportsPage() {
               <Button size="sm" variant="secondary" onClick={() => navigate('/strategy/nmip-analysis')}>
                 NMIP
               </Button>
+              <Button size="sm" variant="secondary" onClick={() => navigate('/analysis/fbspl')}>
+                FBSPL AI
+              </Button>
             </div>
           </div>
         </Card>

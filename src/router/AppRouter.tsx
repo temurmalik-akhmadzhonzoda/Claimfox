@@ -218,6 +218,7 @@ import ManagementReportsPage from '@/pages/ManagementReportsPage'
 import LoadsureAnalysisPage from '@/pages/strategy/LoadsureAnalysisPage'
 import WTWAnalysisPage from '@/pages/strategy/WTWAnalysisPage'
 import NMIPAnalysisPage from '@/pages/strategy/NMIPAnalysisPage'
+import FBSPLAnalysisPage from '@/pages/FBSPLAnalysisPage'
 
 function NotFoundRedirect() {
   const { isAuthenticated } = useAuth()
@@ -296,6 +297,7 @@ export default function AppRouter() {
         <Route path="/strategy/loadsure-analysis" element={<LoadsureAnalysisPage />} />
         <Route path="/strategy/wtw-analysis" element={<WTWAnalysisPage />} />
         <Route path="/strategy/nmip-analysis" element={<NMIPAnalysisPage />} />
+        <Route path="/analysis/fbspl" element={<FBSPLAnalysisPage />} />
       </Route>
       <Route element={<ProtectedRoute><FullscreenBgLayout showHeader /></ProtectedRoute>}>
         <Route path="/demo" element={<DemoOverviewPage />} />
