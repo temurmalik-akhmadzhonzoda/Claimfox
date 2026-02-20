@@ -220,6 +220,7 @@ import WTWAnalysisPage from '@/pages/strategy/WTWAnalysisPage'
 import NMIPAnalysisPage from '@/pages/strategy/NMIPAnalysisPage'
 import FBSPLAnalysisPage from '@/pages/FBSPLAnalysisPage'
 import CorifyAnalysisPage from '@/pages/CorifyAnalysisPage'
+import ClaimsforceAnalysisPage from '@/pages/ClaimsforceAnalysisPage'
 
 function NotFoundRedirect() {
   const { isAuthenticated } = useAuth()
@@ -300,6 +301,7 @@ export default function AppRouter() {
         <Route path="/strategy/nmip-analysis" element={<NMIPAnalysisPage />} />
         <Route path="/analysis/fbspl" element={<FBSPLAnalysisPage />} />
         <Route path="/analysis/corify" element={<CorifyAnalysisPage />} />
+        <Route path="/analysis/claimsforce" element={<ClaimsforceAnalysisPage />} />
       </Route>
       <Route element={<ProtectedRoute><FullscreenBgLayout showHeader /></ProtectedRoute>}>
         <Route path="/demo" element={<DemoOverviewPage />} />
