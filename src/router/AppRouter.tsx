@@ -219,6 +219,7 @@ import LoadsureAnalysisPage from '@/pages/strategy/LoadsureAnalysisPage'
 import WTWAnalysisPage from '@/pages/strategy/WTWAnalysisPage'
 import NMIPAnalysisPage from '@/pages/strategy/NMIPAnalysisPage'
 import FBSPLAnalysisPage from '@/pages/FBSPLAnalysisPage'
+import CorifyAnalysisPage from '@/pages/CorifyAnalysisPage'
 
 function NotFoundRedirect() {
   const { isAuthenticated } = useAuth()
@@ -298,6 +299,7 @@ export default function AppRouter() {
         <Route path="/strategy/wtw-analysis" element={<WTWAnalysisPage />} />
         <Route path="/strategy/nmip-analysis" element={<NMIPAnalysisPage />} />
         <Route path="/analysis/fbspl" element={<FBSPLAnalysisPage />} />
+        <Route path="/analysis/corify" element={<CorifyAnalysisPage />} />
       </Route>
       <Route element={<ProtectedRoute><FullscreenBgLayout showHeader /></ProtectedRoute>}>
         <Route path="/demo" element={<DemoOverviewPage />} />
