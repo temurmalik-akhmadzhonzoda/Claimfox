@@ -90,6 +90,55 @@ type TranslationTree = {
       publicSourcesCaptured: string
       disclaimer: string
     }
+    smartInsurTech: {
+      title: string
+      subtitle: string
+      exportPdf: string
+      sections: {
+        executiveSummary: string
+        snapshot: string
+        capabilityMap: string
+        strengths: string
+        gaps: string
+        comparison: string
+        charts: string
+        scenarios: string
+        risks: string
+        recommendation: string
+        sources: string
+      }
+      labels: {
+        capability: string
+        volumeGrowth: string
+        reportedVolumeNote: string
+        partnershipFitMatrix: string
+        channelOverlap: string
+        strategicValue: string
+        internalScoreNote: string
+        upside: string
+        risks: string
+        prerequisites: string
+        actions30d: string
+        likelihood: string
+        impact: string
+        score: string
+        option: string
+        risk: string
+        control: string
+        capital: string
+      }
+      text: {
+        summaryP1: string
+        summaryP2: string
+        summaryP3: string
+        strengthsNarrative: string
+        gapsNarrative: string
+        comparisonNarrative: string
+        recommendationNarrative: string
+        captureDate: string
+        disclaimer: string
+      }
+    }
   }
   hypoport: {
     title: string
@@ -2633,6 +2682,55 @@ export const translations: Record<Lang, TranslationTree> = {
         sources: 'Sources',
         publicSourcesCaptured: 'Public sources captured on {{date}}.',
         disclaimer: 'Analysis based on publicly available information.'
+      },
+      smartInsurTech: {
+        title: 'Smart InsurTech / SMART INSUR – Strategic Analysis vs Insurfox',
+        subtitle: 'Broker tooling and platform scale vs hybrid MGA/Broker/Platform execution model',
+        exportPdf: 'Download Executive Report (PDF)',
+        sections: {
+          executiveSummary: 'Executive Summary',
+          snapshot: 'Company & Platform Snapshot',
+          capabilityMap: 'Product / Capability Map',
+          strengths: 'What Smart InsurTech does well',
+          gaps: 'Gaps / limitations',
+          comparison: 'Competitive comparison vs Insurfox',
+          charts: 'Market Signals & Fit Charts',
+          scenarios: 'Partnership Scenarios',
+          risks: 'Risks & Governance',
+          recommendation: 'Recommendations / Board Decision',
+          sources: 'Sources'
+        },
+        labels: {
+          capability: 'Capability',
+          volumeGrowth: 'Platform Volume Growth (illustrative)',
+          reportedVolumeNote: 'Reported platform volume (JNP) based on cited public source.',
+          partnershipFitMatrix: 'Partnership Fit Matrix',
+          channelOverlap: 'Channel overlap',
+          strategicValue: 'Strategic value',
+          internalScoreNote: 'Internal score 0–100 (management interpretation).',
+          upside: 'Upside',
+          risks: 'Risks',
+          prerequisites: 'Prerequisites',
+          actions30d: 'First 30-day actions',
+          likelihood: 'Wkt.',
+          impact: 'Imp.',
+          score: 'Score',
+          option: 'Option',
+          risk: 'Risk',
+          control: 'Control',
+          capital: 'Capital'
+        },
+        text: {
+          summaryP1: 'Smart InsurTech / SMART INSUR ist als Plattform- und Tooling-Anbieter im Makler-/Versicherungsumfeld positioniert und adressiert workflownahe Kernprozesse.',
+          summaryP2: 'Für Versicherer und Makler ist die Relevanz vor allem daten- und prozessseitig: standardisierte Arbeitsabläufe, Portfoliotransferfähigkeit und Anschlussfähigkeit in Bestands- und Vergütungsprozessen.',
+          summaryP3: 'Für Insurfox ist der Fit ambivalent: Smart InsurTech wirkt als potenzieller Connectivity-/Distribution-Layer, während Insurfox als Hybrid aus MGA, Broker und IaaS-Plattform stärker in operative Underwriting- und Claims-Ausführung geht.',
+          strengthsNarrative: 'Smart InsurTech überzeugt aktuell besonders über Plattformreichweite, Broker-Workflow-Fokus und öffentlich sichtbares Volumenwachstum. Diese Stärke ist vor allem distributions- und prozesszentriert.',
+          gapsNarrative: 'Im Vergleich zu einem Full-stack-Hybridmodell bleiben underwriting-nahe Execution-Tiefe, claims-zentrierte Automatisierung und MGA-nahe Entscheidungslogik weniger ausgeprägt oder öffentlich nicht als Primärfokus kommuniziert.',
+          comparisonNarrative: 'Insurfox differenziert sich über operative End-to-end Ausführung in FNOL, Claims, UW-Workflows, Partnersteuerung und fleetnahen Prozessen. Smart InsurTech bleibt stärker ein skalierter Broker-/Plattform-Backbone.',
+          recommendationNarrative: 'Empfehlung: zuerst daten- und workflowzentrierte Kooperation prüfen (API/Governance), parallel klare Channel-Grenzen sichern und eigene Full-stack-Differenzierung im MGA-/Claims-Execution-Modell beschleunigen.',
+          captureDate: 'Public sources captured on {{date}}.',
+          disclaimer: 'Analysis based on publicly available information. No unpublished metrics were assumed.'
+        }
       }
     },
     hypoport: {
@@ -6469,6 +6567,55 @@ export const translations: Record<Lang, TranslationTree> = {
         sources: 'Sources',
         publicSourcesCaptured: 'Public sources captured on {{date}}.',
         disclaimer: 'Analysis based on publicly available information.'
+      },
+      smartInsurTech: {
+        title: 'Smart InsurTech / SMART INSUR – Strategic Analysis vs Insurfox',
+        subtitle: 'Broker tooling and platform scale vs hybrid MGA/Broker/Platform execution model',
+        exportPdf: 'Download Executive Report (PDF)',
+        sections: {
+          executiveSummary: 'Executive Summary',
+          snapshot: 'Company & Platform Snapshot',
+          capabilityMap: 'Product / Capability Map',
+          strengths: 'What Smart InsurTech does well',
+          gaps: 'Gaps / limitations',
+          comparison: 'Competitive comparison vs Insurfox',
+          charts: 'Market Signals & Fit Charts',
+          scenarios: 'Partnership Scenarios',
+          risks: 'Risks & Governance',
+          recommendation: 'Recommendations / Board Decision',
+          sources: 'Sources'
+        },
+        labels: {
+          capability: 'Capability',
+          volumeGrowth: 'Platform Volume Growth (illustrative)',
+          reportedVolumeNote: 'Reported platform volume (JNP) based on cited public source.',
+          partnershipFitMatrix: 'Partnership Fit Matrix',
+          channelOverlap: 'Channel overlap',
+          strategicValue: 'Strategic value',
+          internalScoreNote: 'Internal score 0–100 (management interpretation).',
+          upside: 'Upside',
+          risks: 'Risks',
+          prerequisites: 'Prerequisites',
+          actions30d: 'First 30-day actions',
+          likelihood: 'Lik.',
+          impact: 'Imp.',
+          score: 'Score',
+          option: 'Option',
+          risk: 'Risk',
+          control: 'Control',
+          capital: 'Capital'
+        },
+        text: {
+          summaryP1: 'Smart InsurTech / SMART INSUR is positioned as a platform and tooling provider in broker/insurance workflows with strong process-centric orientation.',
+          summaryP2: 'For insurers and brokers, relevance is primarily data and process quality: standardized workflows, portfolio transfer support, and operational connectivity in servicing and remuneration.',
+          summaryP3: 'For Insurfox, fit is mixed: Smart InsurTech can be a connectivity/distribution layer, while Insurfox differentiates as hybrid MGA + broker + IaaS with deeper underwriting and claims execution.',
+          strengthsNarrative: 'Smart InsurTech currently stands out through platform reach, broker workflow focus, and publicly visible managed volume growth. Its edge is mainly distribution/process centric.',
+          gapsNarrative: 'Compared with a full-stack hybrid model, underwriting execution depth, claims automation focus, and MGA-style decision authority are less pronounced or not publicly communicated as primary focus.',
+          comparisonNarrative: 'Insurfox differentiates through operational end-to-end execution in FNOL, claims, underwriting workflows, partner coordination, and fleet-centric operations. Smart InsurTech remains more of a scaled broker/platform backbone.',
+          recommendationNarrative: 'Recommendation: test data/workflow cooperation first (API + governance), protect channel boundaries, and simultaneously accelerate Insurfox full-stack differentiation in MGA and claims execution.',
+          captureDate: 'Public sources captured on {{date}}.',
+          disclaimer: 'Analysis based on publicly available information. No unpublished metrics were assumed.'
+        }
       }
     },
     hypoport: {
