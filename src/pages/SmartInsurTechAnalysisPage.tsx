@@ -119,30 +119,30 @@ const volumeData = [
   { period: '2024 H1', volume: 4.5 }
 ]
 
-const fitMatrix = [
-  { name: 'Distribution Platform Fit', overlap: 66, value: 84 },
-  { name: 'Data Exchange Layer', overlap: 58, value: 88 },
-  { name: 'Competitive Channel Risk', overlap: 82, value: 42 },
-  { name: 'Broker Ecosystem Leverage', overlap: 73, value: 76 }
+const fitMatrix: Array<{ name: BiText; overlap: number; value: number }> = [
+  { name: { de: 'Distribution-Plattform-Fit', en: 'Distribution Platform Fit' }, overlap: 66, value: 84 },
+  { name: { de: 'Datenaustausch-Layer', en: 'Data Exchange Layer' }, overlap: 58, value: 88 },
+  { name: { de: 'Kompetitives Kanalrisiko', en: 'Competitive Channel Risk' }, overlap: 82, value: 42 },
+  { name: { de: 'Makler-Ökosystem-Leverage', en: 'Broker Ecosystem Leverage' }, overlap: 73, value: 76 }
 ]
 
 const scenarioRows: ScenarioRow[] = [
   {
-    title: { de: 'Scenario A: Distribution/Platform cooperation', en: 'Scenario A: Distribution/platform cooperation' },
+    title: { de: 'Szenario A: Distribution-/Plattform-Kooperation', en: 'Scenario A: Distribution/platform cooperation' },
     upside: { de: 'Schneller Zugang zu standardisierten Brokerprozessen.', en: 'Fast access to standardized broker processes.' },
     risks: { de: 'Channel-Konflikte bei Kundenzugang und Ownership.', en: 'Channel conflicts on client access and ownership.' },
     prerequisites: { de: 'Klares Go-to-market-Rollenmodell und Governance.', en: 'Clear go-to-market role model and governance.' },
     actions30d: { de: 'Joint fit workshop + Scope-Grenzen definieren.', en: 'Run joint fit workshop and define scope boundaries.' }
   },
   {
-    title: { de: 'Scenario B: Data exchange / connectivity cooperation', en: 'Scenario B: Data exchange/connectivity cooperation' },
+    title: { de: 'Szenario B: Datenaustausch-/Konnektivitäts-Kooperation', en: 'Scenario B: Data exchange/connectivity cooperation' },
     upside: { de: 'Höhere Datenqualität und weniger Reibung in Bestandsprozessen.', en: 'Higher data quality and less friction in servicing flows.' },
     risks: { de: 'Datenhoheit und Integrationsabhängigkeit.', en: 'Data ownership and integration dependency.' },
     prerequisites: { de: 'Vertragliche Data-Rights und Audit-Trails.', en: 'Contractual data rights and audit trails.' },
     actions30d: { de: 'API-Mapping und Governance Blueprint starten.', en: 'Start API mapping and governance blueprint.' }
   },
   {
-    title: { de: 'Scenario C: Competitive posture (avoid overlap)', en: 'Scenario C: Competitive posture (avoid overlap)' },
+    title: { de: 'Szenario C: Wettbewerbspositionierung (Überschneidung vermeiden)', en: 'Scenario C: Competitive posture (avoid overlap)' },
     upside: { de: 'Wahrung strategischer Unabhängigkeit und Differenzierung.', en: 'Preserve strategic independence and differentiation.' },
     risks: { de: 'Verpasste Synergien und längerer Time-to-value.', en: 'Missed synergies and longer time-to-value.' },
     prerequisites: { de: 'Klarer USP-Ausbau im Full-stack-Execution-Modell.', en: 'Clear USP expansion in full-stack execution model.' },
@@ -151,29 +151,29 @@ const scenarioRows: ScenarioRow[] = [
 ]
 
 const riskRows: RiskRow[] = [
-  { label: { de: 'Data ownership and client access', en: 'Data ownership and client access' }, likelihood: 4, impact: 5 },
-  { label: { de: 'Channel conflict (broker relationships)', en: 'Channel conflict (broker relationships)' }, likelihood: 4, impact: 4 },
-  { label: { de: 'Vendor lock-in', en: 'Vendor lock-in' }, likelihood: 3, impact: 4 },
-  { label: { de: 'Compliance (GDPR, audit trails)', en: 'Compliance (GDPR, audit trails)' }, likelihood: 3, impact: 4 },
-  { label: { de: 'Platform fragmentation', en: 'Platform fragmentation' }, likelihood: 3, impact: 3 }
+  { label: { de: 'Datenhoheit und Kundenzugang', en: 'Data ownership and client access' }, likelihood: 4, impact: 5 },
+  { label: { de: 'Kanal-Konflikt (Maklerbeziehungen)', en: 'Channel conflict (broker relationships)' }, likelihood: 4, impact: 4 },
+  { label: { de: 'Vendor-Lock-in', en: 'Vendor lock-in' }, likelihood: 3, impact: 4 },
+  { label: { de: 'Compliance (DSGVO, Audit-Trails)', en: 'Compliance (GDPR, audit trails)' }, likelihood: 3, impact: 4 },
+  { label: { de: 'Plattform-Fragmentierung', en: 'Platform fragmentation' }, likelihood: 3, impact: 3 }
 ]
 
 const options = [
-  { option: 'A', labelDe: 'Build internally (expand Claimsfox/Brokerfox)', labelEn: 'Build internally (expand Claimsfox/Brokerfox)', risk: 4, control: 5, capital: 4, upside: 5 },
-  { option: 'B', labelDe: 'Integrate via API', labelEn: 'Integrate via API', risk: 3, control: 3, capital: 3, upside: 4 },
-  { option: 'C', labelDe: 'Strategic partnership', labelEn: 'Strategic partnership', risk: 3, control: 2, capital: 2, upside: 4 },
-  { option: 'D', labelDe: 'Ignore & differentiate', labelEn: 'Ignore & differentiate', risk: 4, control: 5, capital: 2, upside: 3 }
+  { option: 'A', labelDe: 'Intern aufbauen (Claimsfox/Brokerfox ausbauen)', labelEn: 'Build internally (expand Claimsfox/Brokerfox)', risk: 4, control: 5, capital: 4, upside: 5 },
+  { option: 'B', labelDe: 'Über API integrieren', labelEn: 'Integrate via API', risk: 3, control: 3, capital: 3, upside: 4 },
+  { option: 'C', labelDe: 'Strategische Partnerschaft', labelEn: 'Strategic partnership', risk: 3, control: 2, capital: 2, upside: 4 },
+  { option: 'D', labelDe: 'Ignorieren & differenzieren', labelEn: 'Ignore & differentiate', risk: 4, control: 5, capital: 2, upside: 3 }
 ]
 
-const capabilityCoverage = [
-  { capability: 'Claims lifecycle', smart: 55, insurfox: 88 },
-  { capability: 'Workflow steering', smart: 84, insurfox: 83 },
-  { capability: 'Adjuster mobility', smart: 58, insurfox: 72 },
-  { capability: 'Claims analytics', smart: 70, insurfox: 79 },
-  { capability: 'Platform integration', smart: 88, insurfox: 90 },
-  { capability: 'AI lifecycle coverage', smart: 62, insurfox: 91 },
-  { capability: 'UW execution', smart: 40, insurfox: 86 },
-  { capability: 'Capacity/broker model', smart: 63, insurfox: 88 }
+const capabilityCoverage: Array<{ capability: BiText; smart: number; insurfox: number }> = [
+  { capability: { de: 'Schaden-Lifecycle', en: 'Claims lifecycle' }, smart: 55, insurfox: 88 },
+  { capability: { de: 'Workflow-Steuerung', en: 'Workflow steering' }, smart: 84, insurfox: 83 },
+  { capability: { de: 'Adjuster-Mobilität', en: 'Adjuster mobility' }, smart: 58, insurfox: 72 },
+  { capability: { de: 'Schaden-Analytik', en: 'Claims analytics' }, smart: 70, insurfox: 79 },
+  { capability: { de: 'Plattform-Integration', en: 'Platform integration' }, smart: 88, insurfox: 90 },
+  { capability: { de: 'KI-Lifecycle-Abdeckung', en: 'AI lifecycle coverage' }, smart: 62, insurfox: 91 },
+  { capability: { de: 'UW-Execution', en: 'UW execution' }, smart: 40, insurfox: 86 },
+  { capability: { de: 'Kapazitäts-/Maklermodell', en: 'Capacity/broker model' }, smart: 63, insurfox: 88 }
 ]
 
 const sources = [
@@ -198,8 +198,8 @@ export default function SmartInsurTechAnalysisPage() {
   const { lang, t } = useI18n()
   const l = lang === 'de' ? 'de' : 'en'
 
-  const barData = capabilityCoverage.map((row) => ({ ...row, capability: row.capability }))
-  const fitData = fitMatrix
+  const barData = capabilityCoverage.map((row) => ({ ...row, capability: bi(row.capability, l) }))
+  const fitData = fitMatrix.map((row) => ({ ...row, name: bi(row.name, l) }))
   const captureDate = l === 'de' ? '20.02.2026' : '2026-02-20'
 
   function handlePdf() {
@@ -241,10 +241,10 @@ export default function SmartInsurTechAnalysisPage() {
 
         <Card title={t('analysis.smartInsurTech.sections.snapshot')}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))', gap: '1rem' }}>
-            <Card title="Known facts (sourced)">
+            <Card title={t('analysis.smartInsurTech.labels.knownFactsTitle')}>
               <ul style={listStyle}>{knownFacts.map((item) => <li key={item.en}>{bi(item, l)}</li>)}</ul>
             </Card>
-            <Card title="Assumptions / interpretation">
+            <Card title={t('analysis.smartInsurTech.labels.assumptionsTitle')}>
               <ul style={listStyle}>{assumptions.map((item) => <li key={item.en}>{bi(item, l)}</li>)}</ul>
             </Card>
           </div>
@@ -309,7 +309,7 @@ export default function SmartInsurTechAnalysisPage() {
                     <XAxis dataKey="period" stroke="#475569" />
                     <YAxis stroke="#475569" />
                     <Tooltip />
-                    <Line type="monotone" dataKey="volume" stroke="#0f172a" strokeWidth={2.3} dot={{ r: 4 }} name="JNP (EUR bn)" />
+                    <Line type="monotone" dataKey="volume" stroke="#0f172a" strokeWidth={2.3} dot={{ r: 4 }} name={t('analysis.smartInsurTech.labels.jnpSeries')} />
                   </LineChart>
                 </ResponsiveContainer>
               </div>
@@ -397,10 +397,10 @@ export default function SmartInsurTechAnalysisPage() {
                 <YAxis domain={[0, 5]} stroke="#475569" />
                 <Tooltip />
                 <Legend />
-                <Bar dataKey="risk" fill="#ef4444" />
-                <Bar dataKey="control" fill="#0ea5e9" />
-                <Bar dataKey="capital" fill="#7c3aed" />
-                <Bar dataKey="upside" fill="#16a34a" />
+                <Bar dataKey="risk" name={t('analysis.smartInsurTech.labels.risk')} fill="#ef4444" />
+                <Bar dataKey="control" name={t('analysis.smartInsurTech.labels.control')} fill="#0ea5e9" />
+                <Bar dataKey="capital" name={t('analysis.smartInsurTech.labels.capital')} fill="#7c3aed" />
+                <Bar dataKey="upside" name={t('analysis.smartInsurTech.labels.upside')} fill="#16a34a" />
               </BarChart>
             </ResponsiveContainer>
           </div>

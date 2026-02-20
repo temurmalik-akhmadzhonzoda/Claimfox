@@ -109,7 +109,10 @@ type TranslationTree = {
       }
       labels: {
         capability: string
+        knownFactsTitle: string
+        assumptionsTitle: string
         volumeGrowth: string
+        jnpSeries: string
         reportedVolumeNote: string
         partnershipFitMatrix: string
         channelOverlap: string
@@ -2684,41 +2687,44 @@ export const translations: Record<Lang, TranslationTree> = {
         disclaimer: 'Analysis based on publicly available information.'
       },
       smartInsurTech: {
-        title: 'Smart InsurTech / SMART INSUR – Strategic Analysis vs Insurfox',
-        subtitle: 'Broker tooling and platform scale vs hybrid MGA/Broker/Platform execution model',
-        exportPdf: 'Download Executive Report (PDF)',
+        title: 'Smart InsurTech / SMART INSUR – Strategische Analyse vs. Insurfox',
+        subtitle: 'Makler-Tooling und Plattformskala vs. hybrides MGA-/Broker-/Plattform-Execution-Modell',
+        exportPdf: 'Executive Report (PDF) herunterladen',
         sections: {
-          executiveSummary: 'Executive Summary',
-          snapshot: 'Company & Platform Snapshot',
-          capabilityMap: 'Product / Capability Map',
-          strengths: 'What Smart InsurTech does well',
-          gaps: 'Gaps / limitations',
-          comparison: 'Competitive comparison vs Insurfox',
-          charts: 'Market Signals & Fit Charts',
-          scenarios: 'Partnership Scenarios',
-          risks: 'Risks & Governance',
-          recommendation: 'Recommendations / Board Decision',
-          sources: 'Sources'
+          executiveSummary: 'Management-Zusammenfassung',
+          snapshot: 'Unternehmens- und Plattform-Snapshot',
+          capabilityMap: 'Produkt- / Fähigkeitsmatrix',
+          strengths: 'Was Smart InsurTech besonders gut macht',
+          gaps: 'Lücken / Einschränkungen',
+          comparison: 'Wettbewerbsvergleich vs. Insurfox',
+          charts: 'Marktsignale & Fit-Charts',
+          scenarios: 'Partnerschaftsszenarien',
+          risks: 'Risiken & Governance',
+          recommendation: 'Empfehlungen / Board-Entscheidung',
+          sources: 'Quellen'
         },
         labels: {
-          capability: 'Capability',
-          volumeGrowth: 'Platform Volume Growth (illustrative)',
-          reportedVolumeNote: 'Reported platform volume (JNP) based on cited public source.',
-          partnershipFitMatrix: 'Partnership Fit Matrix',
-          channelOverlap: 'Channel overlap',
-          strategicValue: 'Strategic value',
-          internalScoreNote: 'Internal score 0–100 (management interpretation).',
-          upside: 'Upside',
-          risks: 'Risks',
-          prerequisites: 'Prerequisites',
-          actions30d: 'First 30-day actions',
+          capability: 'Fähigkeit',
+          knownFactsTitle: 'Bekannte Fakten (quellenbasiert)',
+          assumptionsTitle: 'Annahmen / Interpretation',
+          volumeGrowth: 'Plattformvolumen-Wachstum (illustrativ)',
+          jnpSeries: 'JNP (EUR Mrd.)',
+          reportedVolumeNote: 'Gemeldetes Plattformvolumen (JNP) gemäß zitierter öffentlicher Quelle.',
+          partnershipFitMatrix: 'Partnerschafts-Fit-Matrix',
+          channelOverlap: 'Kanalüberschneidung',
+          strategicValue: 'Strategischer Wert',
+          internalScoreNote: 'Interner Score 0–100 (Management-Interpretation).',
+          upside: 'Potenzial',
+          risks: 'Risiken',
+          prerequisites: 'Voraussetzungen',
+          actions30d: 'Erste 30-Tage-Maßnahmen',
           likelihood: 'Wkt.',
           impact: 'Imp.',
-          score: 'Score',
+          score: 'Wert',
           option: 'Option',
-          risk: 'Risk',
-          control: 'Control',
-          capital: 'Capital'
+          risk: 'Risiko',
+          control: 'Kontrolle',
+          capital: 'Kapital'
         },
         text: {
           summaryP1: 'Smart InsurTech / SMART INSUR ist als Plattform- und Tooling-Anbieter im Makler-/Versicherungsumfeld positioniert und adressiert workflownahe Kernprozesse.',
@@ -2728,8 +2734,8 @@ export const translations: Record<Lang, TranslationTree> = {
           gapsNarrative: 'Im Vergleich zu einem Full-stack-Hybridmodell bleiben underwriting-nahe Execution-Tiefe, claims-zentrierte Automatisierung und MGA-nahe Entscheidungslogik weniger ausgeprägt oder öffentlich nicht als Primärfokus kommuniziert.',
           comparisonNarrative: 'Insurfox differenziert sich über operative End-to-end Ausführung in FNOL, Claims, UW-Workflows, Partnersteuerung und fleetnahen Prozessen. Smart InsurTech bleibt stärker ein skalierter Broker-/Plattform-Backbone.',
           recommendationNarrative: 'Empfehlung: zuerst daten- und workflowzentrierte Kooperation prüfen (API/Governance), parallel klare Channel-Grenzen sichern und eigene Full-stack-Differenzierung im MGA-/Claims-Execution-Modell beschleunigen.',
-          captureDate: 'Public sources captured on {{date}}.',
-          disclaimer: 'Analysis based on publicly available information. No unpublished metrics were assumed.'
+          captureDate: 'Öffentliche Quellen erfasst am {{date}}.',
+          disclaimer: 'Analyse auf Basis öffentlich verfügbarer Informationen. Es wurden keine unveröffentlichten Kennzahlen angenommen.'
         }
       }
     },
@@ -6587,7 +6593,10 @@ export const translations: Record<Lang, TranslationTree> = {
         },
         labels: {
           capability: 'Capability',
+          knownFactsTitle: 'Known facts (sourced)',
+          assumptionsTitle: 'Assumptions / interpretation',
           volumeGrowth: 'Platform Volume Growth (illustrative)',
+          jnpSeries: 'JNP (EUR bn)',
           reportedVolumeNote: 'Reported platform volume (JNP) based on cited public source.',
           partnershipFitMatrix: 'Partnership Fit Matrix',
           channelOverlap: 'Channel overlap',
