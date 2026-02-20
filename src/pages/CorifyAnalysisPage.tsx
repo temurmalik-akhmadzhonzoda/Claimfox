@@ -21,9 +21,17 @@ type BuildFeatureRow = {
   recommendation: BiText
 }
 
+type ContactRow = {
+  name: string
+  role: BiText
+  focus: BiText
+  contactPath: BiText
+  source: string
+}
+
 const companyFacts = {
   corify: [
-    { label: { de: 'Gegruendet', en: 'Founded' }, value: { de: '2021 (im Hypoport-InsurTech-Kontext)', en: '2021 (within Hypoport InsurTech context)' } },
+    { label: { de: 'Gegründet', en: 'Founded' }, value: { de: '2021 (im Hypoport-InsurTech-Kontext)', en: '2021 (within Hypoport InsurTech context)' } },
     { label: { de: 'Positionierung', en: 'Positioning' }, value: { de: 'Digitale Industrieversicherungs-Marktplattform', en: 'Digital industrial insurance marketplace platform' } },
     { label: { de: 'Kerninnovation', en: 'Core innovation' }, value: { de: 'Standardisiertes Risk-Object-Model (CROM)', en: 'Standardized risk object model (CROM)' } },
     { label: { de: 'Zielgruppen', en: 'Target users' }, value: { de: 'Makler, Industrieunternehmen, Versicherer', en: 'Brokers, industrial clients, insurers' } },
@@ -32,8 +40,8 @@ const companyFacts = {
   insurfox: [
     { label: { de: 'Rolle', en: 'Role' }, value: { de: 'Hybrid: MGA + Broker + Plattform', en: 'Hybrid: MGA + broker + platform' } },
     { label: { de: 'Steuerungsmodell', en: 'Control model' }, value: { de: 'End-to-end Workflow-Kontrolle im operativen Betrieb', en: 'End-to-end workflow control in operations' } },
-    { label: { de: 'Claims', en: 'Claims' }, value: { de: 'Claims-Execution inklusive automationsfaehiger Prozesse', en: 'Claims execution with automation-capable processes' } },
-    { label: { de: 'AI', en: 'AI' }, value: { de: 'AI in Underwriting, FNOL und operativen Workflows', en: 'AI in underwriting, FNOL, and operational workflows' } },
+    { label: { de: 'Claims', en: 'Claims' }, value: { de: 'Claims-Execution inklusive automationsfähiger Prozesse', en: 'Claims execution with automation-capable processes' } },
+    { label: { de: 'KI', en: 'AI' }, value: { de: 'KI in Underwriting, FNOL und operativen Workflows', en: 'AI in underwriting, FNOL, and operational workflows' } },
     { label: { de: 'Fokussegmente', en: 'Focus segments' }, value: { de: 'Fleet, Logistics, Mobility', en: 'Fleet, logistics, mobility' } }
   ]
 }
@@ -41,14 +49,14 @@ const companyFacts = {
 const capabilityRows: ComparisonRow[] = [
   { category: { de: 'Risk Data Standardization', en: 'Risk Data Standardization' }, corify: { de: 'Sehr stark: CROM-zentrierte Datenstandardisierung', en: 'Very strong: CROM-centered data standardization' }, insurfox: { de: 'Mittel: modellierbar im Plattformkontext', en: 'Medium: modellable within platform context' } },
   { category: { de: 'Marketplace RFP Engine', en: 'Marketplace RFP Engine' }, corify: { de: 'Stark: strukturierter Industrie-RFP-Prozess', en: 'Strong: structured industrial RFP process' }, insurfox: { de: 'Niedrig-Mittel: nicht als Kernmarktplatz positioniert', en: 'Low-medium: not positioned as a core marketplace' } },
-  { category: { de: 'Multi-carrier Matching', en: 'Multi-carrier Matching' }, corify: { de: 'Stark im Matching-Ansatz', en: 'Strong in matching approach' }, insurfox: { de: 'Selektiv ueber Broker-/Partnernetzwerk', en: 'Selective via broker/partner network' } },
+  { category: { de: 'Multi-carrier Matching', en: 'Multi-carrier Matching' }, corify: { de: 'Stark im Matching-Ansatz', en: 'Strong in matching approach' }, insurfox: { de: 'Selektiv über Broker-/Partnernetzwerk', en: 'Selective via broker/partner network' } },
   { category: { de: 'Underwriting Authority', en: 'Underwriting Authority' }, corify: { de: 'Keine MGA-typische Underwriting Authority', en: 'No MGA-like underwriting authority' }, insurfox: { de: 'Ambitioniert im MGA-Modell', en: 'Ambitioned within MGA model' } },
   { category: { de: 'Claims Execution Engine', en: 'Claims Execution Engine' }, corify: { de: 'Nicht als Claims-Engine positioniert', en: 'Not positioned as a claims engine' }, insurfox: { de: 'Stark: operative Claims-Execution', en: 'Strong: operational claims execution' } },
-  { category: { de: 'Pricing Engine', en: 'Pricing Engine' }, corify: { de: 'Primär RFP-/Marktplatzlogik', en: 'Primarily RFP and marketplace logic' }, insurfox: { de: 'Entwickelbar ueber MGA/Broker-Logik', en: 'Developable via MGA/broker logic' } },
+  { category: { de: 'Pricing Engine', en: 'Pricing Engine' }, corify: { de: 'Primär RFP-/Marktplatzlogik', en: 'Primarily RFP and marketplace logic' }, insurfox: { de: 'Entwickelbar über MGA/Broker-Logik', en: 'Developable via MGA/broker logic' } },
   { category: { de: 'Broker Distribution', en: 'Broker Distribution' }, corify: { de: 'Broker-zentrierte Platzierungsinfrastruktur', en: 'Broker-centered placement infrastructure' }, insurfox: { de: 'Direkte Brokerrolle im Hybridmodell', en: 'Direct broker role in hybrid model' } },
-  { category: { de: 'Platform-native Workflow Control', en: 'Platform-native Workflow Control' }, corify: { de: 'Fokus auf Placement-Workflow', en: 'Focus on placement workflow' }, insurfox: { de: 'Sehr stark ueber End-to-end Plattformsteuerung', en: 'Very strong via end-to-end platform control' } },
-  { category: { de: 'AI in Operational Execution', en: 'AI in Operational Execution' }, corify: { de: 'Begrenzt auf Marktplatz-/Datenprozess', en: 'Limited to marketplace/data process' }, insurfox: { de: 'Stark in operativer Ausfuehrung', en: 'Strong in operational execution' } },
-  { category: { de: 'Capacity Structuring', en: 'Capacity Structuring' }, corify: { de: 'Indirekt ueber Marktplatzbeziehungen', en: 'Indirect via marketplace relationships' }, insurfox: { de: 'MGA-/Partnerbasiert aufbaubar', en: 'Buildable via MGA/partner model' } }
+  { category: { de: 'Platform-native Workflow Control', en: 'Platform-native Workflow Control' }, corify: { de: 'Fokus auf Placement-Workflow', en: 'Focus on placement workflow' }, insurfox: { de: 'Sehr stark über End-to-end Plattformsteuerung', en: 'Very strong via end-to-end platform control' } },
+  { category: { de: 'AI in Operational Execution', en: 'AI in Operational Execution' }, corify: { de: 'Begrenzt auf Marktplatz-/Datenprozess', en: 'Limited to marketplace/data process' }, insurfox: { de: 'Stark in operativer Ausführung', en: 'Strong in operational execution' } },
+  { category: { de: 'Capacity Structuring', en: 'Capacity Structuring' }, corify: { de: 'Indirekt über Marktplatzbeziehungen', en: 'Indirect via marketplace relationships' }, insurfox: { de: 'MGA-/Partnerbasiert aufbaubar', en: 'Buildable via MGA/partner model' } }
 ]
 
 const capabilityCoverage = [
@@ -110,9 +118,41 @@ const boardOptions = [
 
 const sourceList = [
   'https://corify.de',
+  'https://www.corify.de/',
   'Public insurance press coverage (marketplace/industrial placement context)',
   'Hypoport ecosystem background (public corporate context)',
   'Internal Insurfox model assumptions'
+]
+
+const corifyContacts: ContactRow[] = [
+  {
+    name: 'Artur Reimer',
+    role: { de: 'Chief Executive Officer', en: 'Chief Executive Officer' },
+    focus: { de: 'Gesamtstrategie, Partnerschaften, Marktpositionierung', en: 'Overall strategy, partnerships, market positioning' },
+    contactPath: { de: 'Kontaktformular auf corify.de', en: 'Contact form on corify.de' },
+    source: 'https://www.corify.de/'
+  },
+  {
+    name: 'Gerhard Kremer',
+    role: { de: 'Head of Sales', en: 'Head of Sales' },
+    focus: { de: 'Go-to-Market, Vertrieb, Makler-/Versichererzugang', en: 'Go-to-market, sales, broker/insurer access' },
+    contactPath: { de: 'Kontaktformular auf corify.de', en: 'Contact form on corify.de' },
+    source: 'https://www.corify.de/'
+  },
+  {
+    name: 'Sebastian Titze',
+    role: { de: 'Chief Technology Officer', en: 'Chief Technology Officer' },
+    focus: { de: 'Technologie, Plattformarchitektur, Produktumsetzung', en: 'Technology, platform architecture, product execution' },
+    contactPath: { de: 'Kontaktformular auf corify.de', en: 'Contact form on corify.de' },
+    source: 'https://www.corify.de/'
+  },
+  {
+    name: 'Sonja Bürgle',
+    role: { de: 'Head of Business Operations', en: 'Head of Business Operations' },
+    focus: { de: 'Operatives Modell, Prozesssteuerung, Ausführung', en: 'Operating model, process governance, delivery' },
+    contactPath: { de: 'Kontaktformular auf corify.de', en: 'Contact form on corify.de' },
+    source: 'https://www.corify.de/'
+  }
 ]
 
 function bi(value: BiText, lang: 'de' | 'en') {
@@ -166,8 +206,8 @@ export default function CorifyAnalysisPage() {
         <Card>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem', flexWrap: 'wrap' }}>
             <Header
-              title={bi({ de: 'Corify Strategic Market Analysis & Comparison with Insurfox', en: 'Corify Strategic Market Analysis & Comparison with Insurfox' }, l)}
-              subtitle={bi({ de: 'Industrial Insurance Marketplace vs Digital MGA, Broker & Insurance Infrastructure', en: 'Industrial Insurance Marketplace vs Digital MGA, Broker & Insurance Infrastructure' }, l)}
+              title={bi({ de: 'Corify Strategische Marktanalyse & Vergleich mit Insurfox', en: 'Corify Strategic Market Analysis & Comparison with Insurfox' }, l)}
+              subtitle={bi({ de: 'Industrieller Versicherungsmarktplatz vs. digitaler MGA-, Broker- und Infrastrukturansatz', en: 'Industrial Insurance Marketplace vs Digital MGA, Broker & Insurance Infrastructure' }, l)}
               titleColor="#0f172a"
               subtitleColor="#475569"
             />
@@ -177,16 +217,16 @@ export default function CorifyAnalysisPage() {
           </div>
         </Card>
 
-        <Card title={bi({ de: 'Executive Summary', en: 'Executive Summary' }, l)}>
+        <Card title={bi({ de: 'Management-Zusammenfassung', en: 'Executive Summary' }, l)}>
           <div style={{ display: 'grid', gap: '0.55rem', color: '#334155', lineHeight: 1.65 }}>
             <p style={{ margin: 0 }}>{bi({ de: 'Corify ist als digitale Industrieversicherungs-Marktplattform positioniert und fokussiert standardisierte Risikodaten (CROM), strukturierte RFP-Prozesse und transparentes Matching zwischen Maklern und Versicherern.', en: 'Corify is positioned as a digital industrial insurance marketplace focused on standardized risk data (CROM), structured RFP processes, and transparent matching between brokers and insurers.' }, l)}</p>
-            <p style={{ margin: 0 }}>{bi({ de: 'Im Hypoport-InsurTech-Umfeld liegt der Schwerpunkt auf Datenrueckgrat, Platzierungseffizienz und Vergleichbarkeit von Angeboten.', en: 'Within the Hypoport InsurTech context, the core focus is data backbone, placement efficiency, and offer transparency.' }, l)}</p>
-            <p style={{ margin: 0 }}>{bi({ de: 'Insurfox verfolgt ein Hybridmodell als MGA + Broker + IaaS-Plattform mit operativer Underwriting- und Claims-Ausfuehrung inklusive AI-gestuetzter Workflows.', en: 'Insurfox pursues a hybrid MGA + broker + IaaS platform model with operational underwriting and claims execution, including AI-driven workflows.' }, l)}</p>
-            <p style={{ margin: 0 }}>{bi({ de: 'Strategische Kernfrage: Ist Corify fuer Insurfox Wettbewerber, Infrastruktur-Layer oder komplementaerer Ecosystem-Partner?', en: 'Core strategic question: Is Corify for Insurfox a competitor, infrastructure layer, or ecosystem complement?' }, l)}</p>
+            <p style={{ margin: 0 }}>{bi({ de: 'Im Hypoport-InsurTech-Umfeld liegt der Schwerpunkt auf Datenrückgrat, Platzierungseffizienz und Vergleichbarkeit von Angeboten.', en: 'Within the Hypoport InsurTech context, the core focus is data backbone, placement efficiency, and offer transparency.' }, l)}</p>
+            <p style={{ margin: 0 }}>{bi({ de: 'Insurfox verfolgt ein Hybridmodell als MGA + Broker + IaaS-Plattform mit operativer Underwriting- und Claims-Ausführung inklusive KI-gestützter Workflows.', en: 'Insurfox pursues a hybrid MGA + broker + IaaS platform model with operational underwriting and claims execution, including AI-driven workflows.' }, l)}</p>
+            <p style={{ margin: 0 }}>{bi({ de: 'Strategische Kernfrage: Ist Corify für Insurfox Wettbewerber, Infrastruktur-Layer oder komplementärer Ökosystem-Partner?', en: 'Core strategic question: Is Corify for Insurfox a competitor, infrastructure layer, or ecosystem complement?' }, l)}</p>
           </div>
         </Card>
 
-        <Card title={bi({ de: 'Company Profiles', en: 'Company Profiles' }, l)}>
+        <Card title={bi({ de: 'Unternehmensprofile', en: 'Company Profiles' }, l)}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '1rem' }}>
             <Card title="Corify">
               <ul style={listStyle}>
@@ -205,12 +245,12 @@ export default function CorifyAnalysisPage() {
           </div>
         </Card>
 
-        <Card title={bi({ de: 'Capability Comparison', en: 'Capability Comparison' }, l)}>
+        <Card title={bi({ de: 'Capability-Vergleich', en: 'Capability Comparison' }, l)}>
           <div style={{ overflowX: 'auto' }}>
             <table style={tableStyle}>
               <thead>
                 <tr style={headRowStyle}>
-                  <th style={thStyle}>{bi({ de: 'Capability', en: 'Capability' }, l)}</th>
+                  <th style={thStyle}>{bi({ de: 'Fähigkeit', en: 'Capability' }, l)}</th>
                   <th style={thStyle}>Corify</th>
                   <th style={thStyle}>Insurfox</th>
                 </tr>
@@ -245,35 +285,35 @@ export default function CorifyAnalysisPage() {
             </div>
           </Card>
 
-          <Card title={bi({ de: 'Strategic Positioning Matrix', en: 'Strategic Positioning Matrix' }, l)}>
+          <Card title={bi({ de: 'Strategische Positionierungsmatrix', en: 'Strategic Positioning Matrix' }, l)}>
             <div style={{ height: 320 }}>
               <ResponsiveContainer width="100%" height="100%">
                 <ScatterChart margin={{ top: 10, right: 12, left: 10, bottom: 12 }}>
                   <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
                   <XAxis type="number" dataKey="overlap" name={bi({ de: 'Market Overlap', en: 'Market overlap' }, l)} domain={[20, 90]} stroke="#475569" />
-                  <YAxis type="number" dataKey="value" name={bi({ de: 'Strategic Value to Insurfox', en: 'Strategic value to Insurfox' }, l)} domain={[30, 95]} stroke="#475569" />
+                  <YAxis type="number" dataKey="value" name={bi({ de: 'Strategischer Wert für Insurfox', en: 'Strategic value to Insurfox' }, l)} domain={[30, 95]} stroke="#475569" />
                   <Tooltip labelFormatter={(_, payload) => (payload?.[0]?.payload?.name ?? '') as string} />
                   <Scatter data={scatterData} fill="#0f172a" />
                 </ScatterChart>
               </ResponsiveContainer>
             </div>
-            <p style={noteStyle}>{bi({ de: 'Interpretation: Corify staerkt Insurfox vor allem als Daten- und RFP-Backbone. Disintermediationsrisiko steigt, wenn Corify tiefer in Distribution oder Execution expandiert.', en: 'Interpretation: Corify mainly strengthens Insurfox as a data and RFP backbone. Disintermediation risk rises if Corify expands deeper into distribution or execution.' }, l)}</p>
+            <p style={noteStyle}>{bi({ de: 'Interpretation: Corify stärkt Insurfox vor allem als Daten- und RFP-Backbone. Das Disintermediationsrisiko steigt, wenn Corify tiefer in Distribution oder Execution expandiert.', en: 'Interpretation: Corify mainly strengthens Insurfox as a data and RFP backbone. Disintermediation risk rises if Corify expands deeper into distribution or execution.' }, l)}</p>
           </Card>
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '1rem' }}>
-          <Card title={bi({ de: 'Synergies', en: 'Synergies' }, l)}>
+          <Card title={bi({ de: 'Synergien', en: 'Synergies' }, l)}>
             <ul style={listStyle}>
-              <li>{bi({ de: 'Strukturierter Risikodaten-Feed fuer Brokerfox.', en: 'Structured risk data feed into Brokerfox.' }, l)}</li>
-              <li>{bi({ de: 'RFP-UI-Muster fuer industrielle Platzierungslogik.', en: 'RFP UI patterns for industrial placement workflows.' }, l)}</li>
-              <li>{bi({ de: 'Integration fuer industrielle Fleet-Ausschreibungen.', en: 'Integration path for industrial fleet tenders.' }, l)}</li>
+              <li>{bi({ de: 'Strukturierter Risikodaten-Feed für Brokerfox.', en: 'Structured risk data feed into Brokerfox.' }, l)}</li>
+              <li>{bi({ de: 'RFP-UI-Muster für industrielle Platzierungslogik.', en: 'RFP UI patterns for industrial placement workflows.' }, l)}</li>
+              <li>{bi({ de: 'Integration für industrielle Fleet-Ausschreibungen.', en: 'Integration path for industrial fleet tenders.' }, l)}</li>
               <li>{bi({ de: 'Datenstandardisierung als Underwriting-Enabler.', en: 'Data standardization as underwriting enabler.' }, l)}</li>
             </ul>
           </Card>
-          <Card title={bi({ de: 'Risks', en: 'Risks' }, l)}>
+          <Card title={bi({ de: 'Risiken', en: 'Risks' }, l)}>
             <ul style={listStyle}>
               <li>{bi({ de: 'Marketplace-Disintermediation', en: 'Marketplace disintermediation' }, l)}</li>
-              <li>{bi({ de: 'Verschiebung von Broker-Abhaengigkeiten', en: 'Broker dependency shift' }, l)}</li>
+              <li>{bi({ de: 'Verschiebung von Broker-Abhängigkeiten', en: 'Broker dependency shift' }, l)}</li>
               <li>{bi({ de: 'Datenhoheit und Ownership-Konflikte', en: 'Data ownership conflicts' }, l)}</li>
               <li>{bi({ de: 'Hypoport-Ecosystem-Hebel', en: 'Hypoport ecosystem leverage' }, l)}</li>
               <li>{bi({ de: 'Konzentration von Plattformmacht', en: 'Platform power concentration' }, l)}</li>
@@ -281,7 +321,7 @@ export default function CorifyAnalysisPage() {
           </Card>
         </div>
 
-        <Card title={bi({ de: 'Risk Heatmap (Likelihood x Impact)', en: 'Risk Heatmap (Likelihood x Impact)' }, l)}>
+        <Card title={bi({ de: 'Risikohitzekarte (Wahrscheinlichkeit x Auswirkung)', en: 'Risk Heatmap (Likelihood x Impact)' }, l)}>
           <div style={{ display: 'grid', gap: '0.5rem' }}>
             {riskHeatmap.map((risk) => {
               const score = risk.likelihood * risk.impact
@@ -291,7 +331,7 @@ export default function CorifyAnalysisPage() {
                   <div style={heatCellStyle}>{bi({ de: 'Wkt.', en: 'Lik.' }, l)}: {risk.likelihood}</div>
                   <div style={heatCellStyle}>{bi({ de: 'Imp.', en: 'Imp.' }, l)}: {risk.impact}</div>
                   <div style={{ ...heatCellStyle, color: '#fff', borderColor: 'transparent', background: toHeatColor(score) }}>
-                    {bi({ de: 'Score', en: 'Score' }, l)}: {score}
+                    {bi({ de: 'Wert', en: 'Score' }, l)}: {score}
                   </div>
                 </div>
               )
@@ -299,13 +339,13 @@ export default function CorifyAnalysisPage() {
           </div>
         </Card>
 
-        <Card title={bi({ de: 'What Corify Does Better vs What Insurfox Does Better', en: 'What Corify Does Better vs What Insurfox Does Better' }, l)}>
+        <Card title={bi({ de: 'Was Corify besser macht vs. was Insurfox besser macht', en: 'What Corify Does Better vs What Insurfox Does Better' }, l)}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '1rem' }}>
             <Card title="Corify">
               <ul style={listStyle}>
                 <li>{bi({ de: 'Strukturierter Industrie-RFP-Marktplatz', en: 'Structured industrial RFP marketplace' }, l)}</li>
-                <li>{bi({ de: 'Standardisiertes Risikomodell ueber mehrere Versicherer', en: 'Standardized risk model across multiple insurers' }, l)}</li>
-                <li>{bi({ de: 'Ecosystem-Rueckenwind durch Hypoport-Kontext', en: 'Ecosystem backing in Hypoport context' }, l)}</li>
+                <li>{bi({ de: 'Standardisiertes Risikomodell über mehrere Versicherer', en: 'Standardized risk model across multiple insurers' }, l)}</li>
+                <li>{bi({ de: 'Ecosystem-Rückenwind durch Hypoport-Kontext', en: 'Ecosystem backing in Hypoport context' }, l)}</li>
                 <li>{bi({ de: 'Transparenter Mehrangebot-Vergleich', en: 'Transparent multi-offer comparison' }, l)}</li>
               </ul>
             </Card>
@@ -313,7 +353,7 @@ export default function CorifyAnalysisPage() {
               <ul style={listStyle}>
                 <li>{bi({ de: 'Operative Prozesskontrolle', en: 'Operational control' }, l)}</li>
                 <li>{bi({ de: 'Claims-Automatisierung und Execution', en: 'Claims automation and execution' }, l)}</li>
-                <li>{bi({ de: 'AI-native Workflow-Ausfuehrung', en: 'AI-native workflow execution' }, l)}</li>
+                <li>{bi({ de: 'KI-native Workflow-Ausführung', en: 'AI-native workflow execution' }, l)}</li>
                 <li>{bi({ de: 'Hybrides MGA-Modell', en: 'Hybrid MGA model' }, l)}</li>
                 <li>{bi({ de: 'Vertikaler Fokus auf Fleet, Logistics, Mobility', en: 'Vertical focus on fleet, logistics, mobility' }, l)}</li>
               </ul>
@@ -321,16 +361,16 @@ export default function CorifyAnalysisPage() {
           </div>
         </Card>
 
-        <Card title={bi({ de: 'Can We Build This into Demos? (Analytical Assessment)', en: 'Can We Build This into Demos? (Analytical Assessment)' }, l)}>
+        <Card title={bi({ de: 'Kann Insurfox dies selbst bauen? (Analytische Bewertung)', en: 'Can We Build This into Demos? (Analytical Assessment)' }, l)}>
           <div style={{ overflowX: 'auto' }}>
             <table style={tableStyle}>
               <thead>
                 <tr style={headRowStyle}>
                   <th style={thStyle}>{bi({ de: 'Feature', en: 'Feature' }, l)}</th>
                   <th style={thStyle}>{bi({ de: 'Feasible', en: 'Feasible' }, l)}</th>
-                  <th style={thStyle}>{bi({ de: 'Effort', en: 'Effort' }, l)}</th>
-                  <th style={thStyle}>{bi({ de: 'Strategic Risk', en: 'Strategic Risk' }, l)}</th>
-                  <th style={thStyle}>{bi({ de: 'Recommendation', en: 'Recommendation' }, l)}</th>
+                  <th style={thStyle}>{bi({ de: 'Aufwand', en: 'Effort' }, l)}</th>
+                  <th style={thStyle}>{bi({ de: 'Strategisches Risiko', en: 'Strategic Risk' }, l)}</th>
+                  <th style={thStyle}>{bi({ de: 'Empfehlung', en: 'Recommendation' }, l)}</th>
                 </tr>
               </thead>
               <tbody>
@@ -348,18 +388,18 @@ export default function CorifyAnalysisPage() {
           </div>
         </Card>
 
-        <Card title={bi({ de: 'Board Decision Framework', en: 'Board Decision Framework' }, l)}>
+        <Card title={bi({ de: 'Board-Entscheidungsrahmen', en: 'Board Decision Framework' }, l)}>
           <div style={{ overflowX: 'auto' }}>
             <table style={tableStyle}>
               <thead>
                 <tr style={headRowStyle}>
                   <th style={thStyle}>{bi({ de: 'Option', en: 'Option' }, l)}</th>
-                  <th style={thStyle}>{bi({ de: 'Description', en: 'Description' }, l)}</th>
-                  <th style={thStyle}>{bi({ de: 'Risk', en: 'Risk' }, l)}</th>
-                  <th style={thStyle}>{bi({ de: 'Control', en: 'Control' }, l)}</th>
-                  <th style={thStyle}>{bi({ de: 'Capital', en: 'Capital intensity' }, l)}</th>
-                  <th style={thStyle}>{bi({ de: 'Time', en: 'Time to market' }, l)}</th>
-                  <th style={thStyle}>{bi({ de: 'Upside', en: 'Strategic upside' }, l)}</th>
+                  <th style={thStyle}>{bi({ de: 'Beschreibung', en: 'Description' }, l)}</th>
+                  <th style={thStyle}>{bi({ de: 'Risiko', en: 'Risk' }, l)}</th>
+                  <th style={thStyle}>{bi({ de: 'Kontrolle', en: 'Control' }, l)}</th>
+                  <th style={thStyle}>{bi({ de: 'Kapital', en: 'Capital intensity' }, l)}</th>
+                  <th style={thStyle}>{bi({ de: 'Zeit', en: 'Time to market' }, l)}</th>
+                  <th style={thStyle}>{bi({ de: 'Potenzial', en: 'Strategic upside' }, l)}</th>
                 </tr>
               </thead>
               <tbody>
@@ -388,20 +428,45 @@ export default function CorifyAnalysisPage() {
                 <Bar dataKey="risk" fill="#ef4444" />
                 <Bar dataKey="control" fill="#0ea5e9" />
                 <Bar dataKey="capital" fill="#7c3aed" />
-                <Bar dataKey="speed" name={bi({ de: 'Time to market', en: 'Time to market' }, l)} fill="#f59e0b" />
+                <Bar dataKey="speed" name={bi({ de: 'Time to Market', en: 'Time to market' }, l)} fill="#f59e0b" />
                 <Bar dataKey="upside" fill="#16a34a" />
               </BarChart>
             </ResponsiveContainer>
           </div>
         </Card>
 
-        <Card title={bi({ de: 'Sources & Assumptions', en: 'Sources & Assumptions' }, l)}>
+        <Card title={bi({ de: 'Ansprechpartner (öffentlich, corify.de)', en: 'Contacts (public, corify.de)' }, l)}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '0.65rem' }}>
+            {corifyContacts.map((contact) => (
+              <div key={contact.name} style={{ border: '1px solid #e2e8f0', borderRadius: 10, padding: '0.65rem', background: '#f8fafc', display: 'grid', gap: '0.25rem' }}>
+                <div style={{ fontWeight: 700, color: '#0f172a' }}>{contact.name}</div>
+                <div style={{ color: '#334155', fontSize: '0.85rem' }}>{bi(contact.role, l)}</div>
+                <div style={{ color: '#475569', fontSize: '0.82rem' }}>{bi(contact.focus, l)}</div>
+                <div style={{ color: '#64748b', fontSize: '0.8rem' }}>{bi(contact.contactPath, l)}</div>
+                <a href={contact.source} target="_blank" rel="noreferrer" style={{ color: '#0ea5e9', fontSize: '0.8rem', textDecoration: 'none' }}>
+                  {bi({ de: 'Quelle', en: 'Source' }, l)}
+                </a>
+              </div>
+            ))}
+          </div>
+          <p style={{ ...noteStyle, marginTop: '0.6rem' }}>
+            {bi(
+              {
+                de: 'Aus der öffentlichen Team-Sektion auf corify.de (Abruf: 20.02.2026). Kontaktdaten laufen über das Website-Formular.',
+                en: 'From the public team section on corify.de (captured: 2026-02-20). Contact path is the website form.'
+              },
+              l
+            )}
+          </p>
+        </Card>
+
+        <Card title={bi({ de: 'Quellen & Annahmen', en: 'Sources & Assumptions' }, l)}>
           <ul style={listStyle}>
             {sourceList.map((item) => (
               <li key={item}>{item}</li>
             ))}
           </ul>
-          <p style={{ ...noteStyle, marginTop: '0.6rem' }}>{bi({ de: 'Analyse basiert auf oeffentlich verfuegbaren Informationen.', en: 'Analysis based on publicly available information.' }, l)}</p>
+          <p style={{ ...noteStyle, marginTop: '0.6rem' }}>{bi({ de: 'Analyse basiert auf öffentlich verfügbaren Informationen.', en: 'Analysis based on publicly available information.' }, l)}</p>
         </Card>
       </div>
     </section>
