@@ -22,32 +22,32 @@ type BuildRow = {
 
 const companyFacts = {
   claimsforce: [
-    { label: { de: 'Gegruendet', en: 'Founded' }, value: { de: '2018 (Hamburg)', en: '2018 (Hamburg)' } },
+    { label: { de: 'Gegründet', en: 'Founded' }, value: { de: '2018 (Hamburg)', en: '2018 (Hamburg)' } },
     { label: { de: 'Fokus', en: 'Focus' }, value: { de: 'Claims-Lifecycle-Automatisierung', en: 'Claims lifecycle automation' } },
-    { label: { de: 'Staerke', en: 'Strength' }, value: { de: 'Workflow-Steuerung, Mobile App, Remote Inspection, KPI-Dashboards', en: 'Workflow steering, mobile app, remote inspection, KPI dashboards' } },
+    { label: { de: 'Stärke', en: 'Strength' }, value: { de: 'Workflow-Steuerung, Mobile App, Remote Inspection, KPI-Dashboards', en: 'Workflow steering, mobile app, remote inspection, KPI dashboards' } },
     { label: { de: 'Zielkunden', en: 'Target clients' }, value: { de: 'Versicherer, TPAs, Adjuster, Backoffices', en: 'Insurers, TPAs, adjusters, back offices' } },
-    { label: { de: 'Wertbeitrag', en: 'Value proposition' }, value: { de: 'Effizienz und AI-basierte Schadensteuerung', en: 'Efficiency and AI-based claims steering' } }
+    { label: { de: 'Wertbeitrag', en: 'Value proposition' }, value: { de: 'Effizienz und KI-basierte Schadensteuerung', en: 'Efficiency and AI-based claims steering' } }
   ],
   insurfox: [
     { label: { de: 'Rolle', en: 'Role' }, value: { de: 'Hybrid MGA + Broker', en: 'Hybrid MGA + broker' } },
     { label: { de: 'Modell', en: 'Model' }, value: { de: 'Plattformbasierte Versicherungsinfrastruktur', en: 'Platform-based insurance infrastructure' } },
     { label: { de: 'Claims-Modul', en: 'Claims module' }, value: { de: 'Claimsfox als integriertes Claims-Execution-Modul', en: 'Claimsfox as integrated claims execution module' } },
-    { label: { de: 'AI-Einsatz', en: 'AI usage' }, value: { de: 'AI in Underwriting, FNOL und Fleet-Workflows', en: 'AI in underwriting, FNOL, and fleet workflows' } },
+    { label: { de: 'KI-Einsatz', en: 'AI usage' }, value: { de: 'KI in Underwriting, FNOL und Fleet-Workflows', en: 'AI in underwriting, FNOL, and fleet workflows' } },
     { label: { de: 'Strategische Ambition', en: 'Strategic ambition' }, value: { de: 'Full-stack Insurance Orchestration', en: 'Full-stack insurance orchestration' } }
   ]
 }
 
 const capabilityRows: ComparisonRow[] = [
-  { category: { de: 'FNOL Intake & Automation', en: 'FNOL Intake & Automation' }, claimsforce: { de: 'Stark in standardisierter Intake-Fuehrung', en: 'Strong in standardized intake control' }, insurfox: { de: 'Stark im integrierten FNOL-Kontext', en: 'Strong in integrated FNOL context' } },
+  { category: { de: 'FNOL Intake & Automation', en: 'FNOL Intake & Automation' }, claimsforce: { de: 'Stark in standardisierter Intake-Führung', en: 'Strong in standardized intake control' }, insurfox: { de: 'Stark im integrierten FNOL-Kontext', en: 'Strong in integrated FNOL context' } },
   { category: { de: 'Claims Workflow Management', en: 'Claims Workflow Management' }, claimsforce: { de: 'Sehr stark mit Claims-Spezialisierung', en: 'Very strong with claims specialization' }, insurfox: { de: 'Stark als Teil des Gesamtplattformmodells', en: 'Strong as part of full platform model' } },
   { category: { de: 'Mobile Adjuster App', en: 'Mobile Adjuster App' }, claimsforce: { de: 'Sehr stark mobile-first', en: 'Very strong mobile-first' }, insurfox: { de: 'Teilweise vorhanden, ausbaubar', en: 'Partially available, expandable' } },
-  { category: { de: 'Video Inspection / Remote Survey', en: 'Video Inspection / Remote Survey' }, claimsforce: { de: 'Starke operative Eignung', en: 'Strong operational capability' }, insurfox: { de: 'Integrierbar ueber Partner/API', en: 'Integrable via partner/API' } },
+  { category: { de: 'Video Inspection / Remote Survey', en: 'Video Inspection / Remote Survey' }, claimsforce: { de: 'Starke operative Eignung', en: 'Strong operational capability' }, insurfox: { de: 'Integrierbar über Partner/API', en: 'Integrable via partner/API' } },
   { category: { de: 'AI-based Case Allocation', en: 'AI-based Case Allocation' }, claimsforce: { de: 'Stark im Schadenrouting', en: 'Strong in claim routing' }, insurfox: { de: 'Stark in cross-lifecycle Orchestrierung', en: 'Strong in cross-lifecycle orchestration' } },
   { category: { de: 'Underwriting Authority', en: 'Underwriting Authority' }, claimsforce: { de: 'Keine MGA-Underwriting-Authority', en: 'No MGA underwriting authority' }, insurfox: { de: 'MGA-Ambition inkl. Delegationspfad', en: 'MGA ambition with delegation path' } },
-  { category: { de: 'Risk Pricing Engine', en: 'Risk Pricing Engine' }, claimsforce: { de: 'Kein Kernfokus', en: 'Not a core focus' }, insurfox: { de: 'Strategisch relevant ueber UW-Stack', en: 'Strategically relevant via UW stack' } },
+  { category: { de: 'Risk Pricing Engine', en: 'Risk Pricing Engine' }, claimsforce: { de: 'Kein Kernfokus', en: 'Not a core focus' }, insurfox: { de: 'Strategisch relevant über UW-Stack', en: 'Strategically relevant via UW stack' } },
   { category: { de: 'Broker Distribution', en: 'Broker Distribution' }, claimsforce: { de: 'Keine Distribution-Stack-Rolle', en: 'No distribution stack role' }, insurfox: { de: 'Direkte Broker-Rolle im Hybridmodell', en: 'Direct broker role in hybrid model' } },
-  { category: { de: 'Capacity Structuring', en: 'Capacity Structuring' }, claimsforce: { de: 'Keine Capacity-Structuring-Rolle', en: 'No capacity structuring role' }, insurfox: { de: 'Aufbaubar ueber MGA/Carrier-Partner', en: 'Buildable via MGA/carrier partners' } },
-  { category: { de: 'Platform-native Orchestration', en: 'Platform-native Orchestration' }, claimsforce: { de: 'Claims-zentriert', en: 'Claims-centered' }, insurfox: { de: 'End-to-end Orchestrierung ueber Module', en: 'End-to-end orchestration across modules' } }
+  { category: { de: 'Capacity Structuring', en: 'Capacity Structuring' }, claimsforce: { de: 'Keine Capacity-Structuring-Rolle', en: 'No capacity structuring role' }, insurfox: { de: 'Aufbaubar über MGA/Carrier-Partner', en: 'Buildable via MGA/carrier partners' } },
+  { category: { de: 'Platform-native Orchestration', en: 'Platform-native Orchestration' }, claimsforce: { de: 'Claims-zentriert', en: 'Claims-centered' }, insurfox: { de: 'End-to-end Orchestrierung über Module', en: 'End-to-end orchestration across modules' } }
 ]
 
 const coverageData = [
@@ -74,7 +74,7 @@ const riskHeatmap = [
   { label: { de: 'Data Ownership Konflikte', en: 'Data ownership conflicts' }, likelihood: 3, impact: 5 },
   { label: { de: 'Plattformfragmentierung', en: 'Platform fragmentation' }, likelihood: 4, impact: 4 },
   { label: { de: 'Client Perception Shift', en: 'Client perception shift' }, likelihood: 3, impact: 4 },
-  { label: { de: 'Abhaengigkeit von externem Claims-Vendor', en: 'Dependency on external claims vendor' }, likelihood: 3, impact: 4 }
+  { label: { de: 'Abhängigkeit von externem Claims-Vendor', en: 'Dependency on external claims vendor' }, likelihood: 3, impact: 4 }
 ]
 
 const buildRows: BuildRow[] = [
@@ -86,19 +86,19 @@ const buildRows: BuildRow[] = [
   },
   {
     feature: { de: 'Mobile Offline Adjuster App', en: 'Mobile offline adjuster app' },
-    assessment: { de: 'Technisch machbar, native Entwicklung noetig', en: 'Technically feasible, requires native development' },
+    assessment: { de: 'Technisch machbar, native Entwicklung nötig', en: 'Technically feasible, requires native development' },
     effort: { de: 'High Effort', en: 'High effort' },
     priority: { de: 'Strategic Priority: Mittel-Hoch', en: 'Strategic priority: medium-high' }
   },
   {
     feature: { de: 'Video Inspection Integration', en: 'Video inspection integration' },
-    assessment: { de: 'API-Integration moeglich', en: 'API integration possible' },
+    assessment: { de: 'API-Integration möglich', en: 'API integration possible' },
     effort: { de: 'Medium Effort', en: 'Medium effort' },
     priority: { de: 'Strategic Priority: Mittel', en: 'Strategic priority: medium' }
   },
   {
     feature: { de: 'Enterprise KPI Dashboards', en: 'Enterprise KPI dashboards' },
-    assessment: { de: 'Ausbau im Reporting-Modul moeglich', en: 'Expandable in reporting module' },
+    assessment: { de: 'Ausbau im Reporting-Modul möglich', en: 'Expandable in reporting module' },
     effort: { de: 'Medium Effort', en: 'Medium effort' },
     priority: { de: 'Strategic Priority: Hoch', en: 'Strategic priority: high' }
   }
@@ -174,8 +174,8 @@ export default function ClaimsforceAnalysisPage() {
         <Card>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem', flexWrap: 'wrap' }}>
             <Header
-              title={bi({ de: 'Claimsforce Strategic Analysis & Comparison with Insurfox', en: 'Claimsforce Strategic Analysis & Comparison with Insurfox' }, l)}
-              subtitle={bi({ de: 'AI-driven Claims Operations Platform vs Hybrid MGA & Insurance Infrastructure', en: 'AI-driven Claims Operations Platform vs Hybrid MGA & Insurance Infrastructure' }, l)}
+              title={bi({ de: 'Claimsforce Strategische Analyse & Vergleich mit Insurfox', en: 'Claimsforce Strategic Analysis & Comparison with Insurfox' }, l)}
+              subtitle={bi({ de: 'KI-getriebene Claims-Operations-Plattform vs. hybrides MGA- und Infrastrukturmodell', en: 'AI-driven Claims Operations Platform vs Hybrid MGA & Insurance Infrastructure' }, l)}
               titleColor="#0f172a"
               subtitleColor="#475569"
             />
@@ -185,16 +185,16 @@ export default function ClaimsforceAnalysisPage() {
           </div>
         </Card>
 
-        <Card title={bi({ de: 'Executive Summary', en: 'Executive Summary' }, l)}>
+        <Card title={bi({ de: 'Management-Zusammenfassung', en: 'Executive Summary' }, l)}>
           <div style={{ display: 'grid', gap: '0.55rem', color: '#334155', lineHeight: 1.65 }}>
-            <p style={{ margin: 0 }}>{bi({ de: 'Claimsforce ist ein deutsches InsurTech-SaaS mit Fokus auf AI-unterstuetztes End-to-end Schadenmanagement.', en: 'Claimsforce is a German InsurTech SaaS focused on AI-supported end-to-end claims management.' }, l)}</p>
+            <p style={{ margin: 0 }}>{bi({ de: 'Claimsforce ist ein deutsches InsurTech-SaaS mit Fokus auf KI-unterstütztes End-to-end-Schadenmanagement.', en: 'Claimsforce is a German InsurTech SaaS focused on AI-supported end-to-end claims management.' }, l)}</p>
             <p style={{ margin: 0 }}>{bi({ de: 'Zielkunden sind Versicherer, TPAs, Adjuster und Backoffices; der Schwerpunkt liegt auf Claims-Automatisierung, mobilen Inspektionsworkflows und datengetriebener Fallsteuerung.', en: 'Target clients are insurers, TPAs, adjusters, and back offices; focus is claims automation, mobile inspection workflows, and data-driven case steering.' }, l)}</p>
             <p style={{ margin: 0 }}>{bi({ de: 'Claimsforce hat keine MGA-Rolle, keine Underwriting-Authority und kein Marktplatzmodell.', en: 'Claimsforce has no MGA role, no underwriting authority, and no marketplace model.' }, l)}</p>
-            <p style={{ margin: 0 }}>{bi({ de: 'Insurfox als Hybrid MGA + Broker + IaaS integriert Underwriting, Claims, Fleet und Partnerworkflows; strategische Frage: direkter Claims-Automation-Wettbewerber oder komplementaerer Execution-Partner?', en: 'Insurfox as hybrid MGA + broker + IaaS integrates underwriting, claims, fleet, and partner workflows; key question: direct claims automation competitor or complementary execution partner?' }, l)}</p>
+            <p style={{ margin: 0 }}>{bi({ de: 'Insurfox als Hybrid MGA + Broker + IaaS integriert Underwriting, Claims, Fleet und Partnerworkflows; strategische Frage: direkter Claims-Automation-Wettbewerber oder komplementärer Execution-Partner?', en: 'Insurfox as hybrid MGA + broker + IaaS integrates underwriting, claims, fleet, and partner workflows; key question: direct claims automation competitor or complementary execution partner?' }, l)}</p>
           </div>
         </Card>
 
-        <Card title={bi({ de: 'Company Profiles', en: 'Company Profiles' }, l)}>
+        <Card title={bi({ de: 'Unternehmensprofile', en: 'Company Profiles' }, l)}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '1rem' }}>
             <Card title="Claimsforce">
               <ul style={listStyle}>
@@ -213,12 +213,12 @@ export default function ClaimsforceAnalysisPage() {
           </div>
         </Card>
 
-        <Card title={bi({ de: 'Capability Comparison', en: 'Capability Comparison' }, l)}>
+        <Card title={bi({ de: 'Capability-Vergleich', en: 'Capability Comparison' }, l)}>
           <div style={{ overflowX: 'auto' }}>
             <table style={tableStyle}>
               <thead>
                 <tr style={headRowStyle}>
-                  <th style={thStyle}>{bi({ de: 'Capability', en: 'Capability' }, l)}</th>
+                  <th style={thStyle}>{bi({ de: 'Fähigkeit', en: 'Capability' }, l)}</th>
                   <th style={thStyle}>Claimsforce</th>
                   <th style={thStyle}>Insurfox</th>
                 </tr>
@@ -259,13 +259,13 @@ export default function ClaimsforceAnalysisPage() {
                 <ScatterChart margin={{ top: 10, right: 12, left: 10, bottom: 12 }}>
                   <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
                   <XAxis type="number" dataKey="overlap" name={bi({ de: 'Operational Overlap', en: 'Operational Overlap' }, l)} domain={[35, 90]} stroke="#475569" />
-                  <YAxis type="number" dataKey="value" name={bi({ de: 'Strategic Value to Insurfox', en: 'Strategic Value to Insurfox' }, l)} domain={[35, 95]} stroke="#475569" />
+                  <YAxis type="number" dataKey="value" name={bi({ de: 'Strategischer Wert für Insurfox', en: 'Strategic Value to Insurfox' }, l)} domain={[35, 95]} stroke="#475569" />
                   <Tooltip labelFormatter={(_, payload) => (payload?.[0]?.payload?.name ?? '') as string} />
                   <Scatter data={scatterData} fill="#0f172a" />
                 </ScatterChart>
               </ResponsiveContainer>
             </div>
-            <p style={noteStyle}>{bi({ de: 'Interpretation: Claimsforce ergaenzt Insurfox bei mobiler Schadenexecution und KI-Routing. Substitutionsrisiko fuer Claimsfox steigt, falls Insurfox die eigene Claims-Produktdifferenzierung nicht ausbaut.', en: 'Interpretation: Claimsforce complements Insurfox in mobile claims execution and AI routing. Substitution risk for Claimsfox rises if Insurfox does not strengthen its own claims differentiation.' }, l)}</p>
+            <p style={noteStyle}>{bi({ de: 'Interpretation: Claimsforce ergänzt Insurfox bei mobiler Schadenexecution und KI-Routing. Das Substitutionsrisiko für Claimsfox steigt, falls Insurfox die eigene Claims-Produktdifferenzierung nicht ausbaut.', en: 'Interpretation: Claimsforce complements Insurfox in mobile claims execution and AI routing. Substitution risk for Claimsfox rises if Insurfox does not strengthen its own claims differentiation.' }, l)}</p>
           </Card>
         </div>
 
@@ -286,12 +286,12 @@ export default function ClaimsforceAnalysisPage() {
         </Card>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '1rem' }}>
-          <Card title={bi({ de: 'Synergies', en: 'Synergies' }, l)}>
+          <Card title={bi({ de: 'Synergien', en: 'Synergies' }, l)}>
             <ul style={listStyle}>
-              <li>{bi({ de: 'Integration mobiler Inspection-Faehigkeiten in Claimsfox', en: 'Integrate mobile inspection capabilities into Claimsfox' }, l)}</li>
+              <li>{bi({ de: 'Integration mobiler Inspection-Fähigkeiten in Claimsfox', en: 'Integrate mobile inspection capabilities into Claimsfox' }, l)}</li>
               <li>{bi({ de: 'Schnellere Reife in Claims Operations', en: 'Accelerate claims operational maturity' }, l)}</li>
-              <li>{bi({ de: 'Nutzung fuer externe Adjuster-Orchestrierung', en: 'Use for external adjuster orchestration' }, l)}</li>
-              <li>{bi({ de: 'Benchmarking von AI-Steuerungsmodellen', en: 'Benchmark AI steering models' }, l)}</li>
+              <li>{bi({ de: 'Nutzung für externe Adjuster-Orchestrierung', en: 'Use for external adjuster orchestration' }, l)}</li>
+              <li>{bi({ de: 'Benchmarking von KI-Steuerungsmodellen', en: 'Benchmark AI steering models' }, l)}</li>
             </ul>
           </Card>
           <Card title={bi({ de: 'Risks', en: 'Risks' }, l)}>
@@ -304,7 +304,7 @@ export default function ClaimsforceAnalysisPage() {
           </Card>
         </div>
 
-        <Card title={bi({ de: 'Risk Heatmap (Likelihood x Impact)', en: 'Risk Heatmap (Likelihood x Impact)' }, l)}>
+        <Card title={bi({ de: 'Risikohitzekarte (Wahrscheinlichkeit x Auswirkung)', en: 'Risk Heatmap (Likelihood x Impact)' }, l)}>
           <div style={{ display: 'grid', gap: '0.5rem' }}>
             {riskHeatmap.map((row) => {
               const score = row.likelihood * row.impact
@@ -314,7 +314,7 @@ export default function ClaimsforceAnalysisPage() {
                   <div style={heatCellStyle}>{bi({ de: 'Wkt.', en: 'Lik.' }, l)}: {row.likelihood}</div>
                   <div style={heatCellStyle}>{bi({ de: 'Imp.', en: 'Imp.' }, l)}: {row.impact}</div>
                   <div style={{ ...heatCellStyle, color: '#fff', borderColor: 'transparent', background: toHeatColor(score) }}>
-                    {bi({ de: 'Score', en: 'Score' }, l)}: {score}
+                    {bi({ de: 'Wert', en: 'Score' }, l)}: {score}
                   </div>
                 </div>
               )
@@ -337,21 +337,21 @@ export default function ClaimsforceAnalysisPage() {
                 <li>{bi({ de: 'Full-stack Plattformmodell', en: 'Full-stack platform model' }, l)}</li>
                 <li>{bi({ de: 'MGA- und Underwriting-Authority-Pfad', en: 'MGA and underwriting authority path' }, l)}</li>
                 <li>{bi({ de: 'Integrierte Fleet- und Partnermodule', en: 'Integrated fleet and partner modules' }, l)}</li>
-                <li>{bi({ de: 'AI ueber Claims hinaus', en: 'AI beyond claims' }, l)}</li>
+                <li>{bi({ de: 'KI über Claims hinaus', en: 'AI beyond claims' }, l)}</li>
               </ul>
             </Card>
           </div>
         </Card>
 
-        <Card title={bi({ de: 'Can We Build This into Insurfox? (Analytical)', en: 'Can We Build This into Insurfox? (Analytical)' }, l)}>
+        <Card title={bi({ de: 'Kann Insurfox dies selbst bauen? (Analytisch)', en: 'Can We Build This into Insurfox? (Analytical)' }, l)}>
           <div style={{ overflowX: 'auto' }}>
             <table style={tableStyle}>
               <thead>
                 <tr style={headRowStyle}>
                   <th style={thStyle}>{bi({ de: 'Feature', en: 'Feature' }, l)}</th>
-                  <th style={thStyle}>{bi({ de: 'Assessment', en: 'Assessment' }, l)}</th>
-                  <th style={thStyle}>{bi({ de: 'Effort', en: 'Effort' }, l)}</th>
-                  <th style={thStyle}>{bi({ de: 'Strategic Priority', en: 'Strategic Priority' }, l)}</th>
+                  <th style={thStyle}>{bi({ de: 'Bewertung', en: 'Assessment' }, l)}</th>
+                  <th style={thStyle}>{bi({ de: 'Aufwand', en: 'Effort' }, l)}</th>
+                  <th style={thStyle}>{bi({ de: 'Strategische Priorität', en: 'Strategic Priority' }, l)}</th>
                 </tr>
               </thead>
               <tbody>
@@ -368,18 +368,18 @@ export default function ClaimsforceAnalysisPage() {
           </div>
         </Card>
 
-        <Card title={bi({ de: 'Board Decision Framework', en: 'Board Decision Framework' }, l)}>
+        <Card title={bi({ de: 'Board-Entscheidungsrahmen', en: 'Board Decision Framework' }, l)}>
           <div style={{ overflowX: 'auto' }}>
             <table style={tableStyle}>
               <thead>
                 <tr style={headRowStyle}>
                   <th style={thStyle}>{bi({ de: 'Option', en: 'Option' }, l)}</th>
-                  <th style={thStyle}>{bi({ de: 'Description', en: 'Description' }, l)}</th>
-                  <th style={thStyle}>{bi({ de: 'Risk', en: 'Risk' }, l)}</th>
-                  <th style={thStyle}>{bi({ de: 'Control', en: 'Control' }, l)}</th>
-                  <th style={thStyle}>{bi({ de: 'Capital', en: 'Capital intensity' }, l)}</th>
-                  <th style={thStyle}>{bi({ de: 'Time', en: 'Time to value' }, l)}</th>
-                  <th style={thStyle}>{bi({ de: 'Upside', en: 'Strategic upside' }, l)}</th>
+                  <th style={thStyle}>{bi({ de: 'Beschreibung', en: 'Description' }, l)}</th>
+                  <th style={thStyle}>{bi({ de: 'Risiko', en: 'Risk' }, l)}</th>
+                  <th style={thStyle}>{bi({ de: 'Kontrolle', en: 'Control' }, l)}</th>
+                  <th style={thStyle}>{bi({ de: 'Kapital', en: 'Capital intensity' }, l)}</th>
+                  <th style={thStyle}>{bi({ de: 'Zeit', en: 'Time to value' }, l)}</th>
+                  <th style={thStyle}>{bi({ de: 'Potenzial', en: 'Strategic upside' }, l)}</th>
                 </tr>
               </thead>
               <tbody>
@@ -408,20 +408,20 @@ export default function ClaimsforceAnalysisPage() {
                 <Bar dataKey="risk" fill="#ef4444" />
                 <Bar dataKey="control" fill="#0ea5e9" />
                 <Bar dataKey="capital" fill="#7c3aed" />
-                <Bar dataKey="time" name={bi({ de: 'Time to value', en: 'Time to value' }, l)} fill="#f59e0b" />
+                <Bar dataKey="time" name={bi({ de: 'Time to Value', en: 'Time to value' }, l)} fill="#f59e0b" />
                 <Bar dataKey="upside" fill="#16a34a" />
               </BarChart>
             </ResponsiveContainer>
           </div>
         </Card>
 
-        <Card title={bi({ de: 'Sources & Assumptions', en: 'Sources & Assumptions' }, l)}>
+        <Card title={bi({ de: 'Quellen & Annahmen', en: 'Sources & Assumptions' }, l)}>
           <ul style={listStyle}>
             {sourceList.map((source) => (
               <li key={source}>{source}</li>
             ))}
           </ul>
-          <p style={{ ...noteStyle, marginTop: '0.6rem' }}>{bi({ de: 'Analyse basiert auf oeffentlich verfuegbaren Informationen.', en: 'Analysis based on publicly available information.' }, l)}</p>
+          <p style={{ ...noteStyle, marginTop: '0.6rem' }}>{bi({ de: 'Analyse basiert auf öffentlich verfügbaren Informationen.', en: 'Analysis based on publicly available information.' }, l)}</p>
         </Card>
       </div>
     </section>
