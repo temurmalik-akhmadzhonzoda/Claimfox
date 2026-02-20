@@ -224,6 +224,7 @@ import ClaimsforceAnalysisPage from '@/pages/ClaimsforceAnalysisPage'
 import KairosAnalysisPage from '@/pages/KairosAnalysisPage'
 import HypoportAnalysisPage from '@/pages/HypoportAnalysisPage'
 import SmartInsurTechAnalysisPage from '@/pages/SmartInsurTechAnalysisPage'
+import BlaudirektAnalysisPage from '@/pages/BlaudirektAnalysisPage'
 
 function NotFoundRedirect() {
   const { isAuthenticated } = useAuth()
@@ -308,6 +309,7 @@ export default function AppRouter() {
         <Route path="/analysis/kairos" element={<KairosAnalysisPage />} />
         <Route path="/analysis/hypoport" element={<HypoportAnalysisPage />} />
         <Route path="/analysis/smartinsurtech" element={<SmartInsurTechAnalysisPage />} />
+        <Route path="/analysis/blaudirekt" element={<BlaudirektAnalysisPage />} />
       </Route>
       <Route element={<ProtectedRoute><FullscreenBgLayout showHeader /></ProtectedRoute>}>
         <Route path="/demo" element={<DemoOverviewPage />} />

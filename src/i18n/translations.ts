@@ -91,6 +91,76 @@ type TranslationTree = {
       publicSourcesCaptured: string
       disclaimer: string
     }
+    blaudirekt: {
+      title: string
+      subtitle: string
+      exportPdf: string
+      sections: {
+        executiveSummary: string
+        snapshot: string
+        comparison: string
+        distribution: string
+        strategicNarrative: string
+        scenarios: string
+        risk: string
+        swot: string
+        sources: string
+      }
+      labels: {
+        category: string
+        blaudirekt: string
+        blaudirektProfile: string
+        insurfox: string
+        leadership: string
+        since: string
+        focus: string
+        distributionAccessFootprint: string
+        strategicFitMatrix: string
+        overlap: string
+        value: string
+        indicativeNote: string
+        scenario: string
+        upside: string
+        risk: string
+        prerequisite: string
+        integrationPath: string
+        distributionPath: string
+        independentPath: string
+        lineNote: string
+        likelihood: string
+        impact: string
+        score: string
+        strength: string
+        weakness: string
+        opportunity: string
+        threat: string
+      }
+      text: {
+        summaryP1: string
+        summaryP2: string
+        summaryP3: string
+        summaryP4: string
+        snapshotP1: string
+        snapshotP2: string
+        leadershipIntro: string
+        strengthsTitle: string
+        strengthsBody: string
+        limitsTitle: string
+        limitsBody: string
+        partnershipTitle: string
+        partnershipBody: string
+        swotBdStrength: string
+        swotBdWeakness: string
+        swotBdOpportunity: string
+        swotBdThreat: string
+        swotIfStrength: string
+        swotIfWeakness: string
+        swotIfOpportunity: string
+        swotIfThreat: string
+        captureDate: string
+        disclaimer: string
+      }
+    }
     smartInsurTech: {
       title: string
       subtitle: string
@@ -2687,6 +2757,76 @@ export const translations: Record<Lang, TranslationTree> = {
         sources: 'Quellen',
         publicSourcesCaptured: 'Öffentliche Quellen erfasst am {{date}}.',
         disclaimer: 'Analyse basiert auf öffentlich verfügbaren Informationen.'
+      },
+      blaudirekt: {
+        title: 'blau direkt - Strategische Maklerpool- und Plattformanalyse vs. Insurfox',
+        subtitle: 'Maklerpool-Infrastruktur, digitale Plattformservices und Distributionspositionierung',
+        exportPdf: 'Executive Report (PDF) herunterladen',
+        sections: {
+          executiveSummary: 'Executive Summary',
+          snapshot: 'Unternehmens- und Leadership-Snapshot',
+          comparison: 'Capability-Vergleich',
+          distribution: 'Distribution und Marktposition',
+          strategicNarrative: 'Strategische Einordnung',
+          scenarios: 'Partnerschaftsszenarien und Entscheidungen',
+          risk: 'Risiken / Channel-Conflict-Heatmap',
+          swot: 'SWOT',
+          sources: 'Quellen und Annahmen'
+        },
+        labels: {
+          category: 'Kategorie',
+          blaudirekt: 'blau direkt',
+          blaudirektProfile: 'blau direkt Profil',
+          insurfox: 'Insurfox',
+          leadership: 'Aktuelles Leadership / C-Level',
+          since: 'Seit',
+          focus: 'Fokus',
+          distributionAccessFootprint: 'Distribution Access Footprint (indikativ)',
+          strategicFitMatrix: 'Strategic Fit Matrix',
+          overlap: 'Distributionsüberschneidung',
+          value: 'Strategischer Wert',
+          indicativeNote: 'Indikative interne Einschätzung auf Basis öffentlicher Positionierung.',
+          scenario: 'Szenario',
+          upside: 'Upside',
+          risk: 'Risiko',
+          prerequisite: 'Voraussetzung',
+          integrationPath: 'Integrationspfad',
+          distributionPath: 'Distributionspfad',
+          independentPath: 'Unabhängiger Pfad',
+          lineNote: 'Linien zeigen den relativen strategischen Beitrag über vier Quartale (interner Score 0-100).',
+          likelihood: 'Wkt.',
+          impact: 'Imp.',
+          score: 'Score',
+          strength: 'Stärken',
+          weakness: 'Schwächen',
+          opportunity: 'Chancen',
+          threat: 'Risiken'
+        },
+        text: {
+          summaryP1: 'blau direkt ist als digitaler Maklerpool und Plattformanbieter für Versicherungsvermittler im deutschen Markt etabliert. Die Positionierung kombiniert Distributionsreichweite mit technologischer Prozessunterstützung.',
+          summaryP2: 'Der Führungswechsel von einer stärker gründergeprägten Struktur hin zu einem professionalisierten Managementteam unterstreicht den Skalierungsanspruch und die strategische Weiterentwicklung des Plattformmodells.',
+          summaryP3: 'Strategisch relevant wird blau direkt für Versicherer und Broker durch breite Produktpartneranbindung (240+), MVP-Werkzeuge, simplr-Endkundenanwendungen und API-fähige Integrationslogik.',
+          summaryP4: 'Im Vergleich zu Insurfox liegt der Schwerpunkt bei blau direkt klarer auf Distribution und Maklerinfrastruktur, während Insurfox als Hybrid aus MGA, Broker, Plattform und operativer KI-Ausführung stärker auf End-to-end-Versicherungsexecution ausgerichtet ist.',
+          snapshotP1: 'blau direkt (Gründung 2001, Sitz Lübeck) ist im Kern ein technologieorientierter Maklerpool mit breiter Partnerabdeckung und einem ausgebauten Vermittler-Ökosystem. Der Wertbeitrag liegt in standardisierten Vertriebs- und Serviceprozessen für Vermittler.',
+          snapshotP2: 'Ergänzende Plattformangebote wie MVP-Services, Prozessautomatisierung und simplr-Apps stärken die operative Anschlussfähigkeit entlang der Vermittler- und Kundenreise.',
+          leadershipIntro: 'Das aktuelle Führungsteam adressiert Wachstum, operative Skalierung und strategische Partnerintegration, mit Fokus auf Distributionseffizienz und digitale Modernisierung.',
+          strengthsTitle: 'a) Stärken als Maklerpool-/Plattformanbieter',
+          strengthsBody: 'Die Kombination aus großer Partnerbreite, etablierter Vermittleranbindung, MVP-Tooling und API-Fähigkeit schafft eine starke Ausgangsbasis für Distribution und Prozessstandardisierung. Für Marktzugang und Reichweite bleibt dies ein struktureller Vorteil.',
+          limitsTitle: 'b) Begrenzungen gegenüber dem Insurfox-Operations-Stack',
+          limitsBody: 'Im direkten Vergleich sind underwriting-nahe Authority-Funktionen und tiefe Claims-Automatisierung weniger stark ausgeprägt. Insurfox differenziert sich hier über operatives Lifecycle-Execution-Design.',
+          partnershipTitle: 'c) Wo Partnerschaft sinnvoll ist',
+          partnershipBody: 'Besonders sinnvoll erscheint Zusammenarbeit in Workflow- und API-Integration, Datenstandardisierung sowie segmentierter Distribution. Kritisch sind dabei klare Rollenabgrenzung, Data Governance und Channel-Grenzen.',
+          swotBdStrength: 'blau direkt verfügt über starke Distributionsreichweite, hohe Partnerkonnektivität und markterprobte Vermittlerprozesse. Das schafft Skalenvorteile im deutschen Maklermarkt.',
+          swotBdWeakness: 'Die operative Tiefe in underwriting- und claims-zentrierter Execution ist begrenzter als bei einem hybriden MGA-/Broker-Execution-Modell.',
+          swotBdOpportunity: 'Durch vertiefte API- und Datenschnittstellen kann blau direkt seine Plattformrolle weiter ausbauen und zusätzliche Wertschöpfung in Ökosystempartnerschaften heben.',
+          swotBdThreat: 'Kanal- und Ownership-Konflikte können entstehen, wenn Plattformreichweite und operative Versicherungsexecution in denselben Zielsegmenten konkurrieren.',
+          swotIfStrength: 'Insurfox ist stark in der Verbindung aus MGA-/Broker-Rolle, Plattformarchitektur und operativer KI über Underwriting, Claims, Partner und Fleet.',
+          swotIfWeakness: 'Gegenüber einem etablierten Maklerpool ist die absolute Distributionsbreite derzeit geringer.',
+          swotIfOpportunity: 'Gezielte Kooperation mit Maklerpool-Infrastrukturen kann Time-to-market und Reichweite erhöhen, ohne die eigene Execution-Differenzierung aufzugeben.',
+          swotIfThreat: 'Ohne klare Governance besteht das Risiko von Channel-Konflikten, Datenhoheitsverlusten und Abhängigkeit von externen Distributionslayern.',
+          captureDate: 'Öffentliche Quellen erfasst am {{date}}.',
+          disclaimer: 'Analyse auf Basis öffentlich verfügbarer Informationen und interner Management-Einordnung.'
+        }
       },
       smartInsurTech: {
         title: 'Smart InsurTech / SMART INSUR – Strategische Analyse vs. Insurfox',
@@ -6576,6 +6716,76 @@ export const translations: Record<Lang, TranslationTree> = {
         sources: 'Sources',
         publicSourcesCaptured: 'Public sources captured on {{date}}.',
         disclaimer: 'Analysis based on publicly available information.'
+      },
+      blaudirekt: {
+        title: 'blau direkt - Strategic Maklerpool & Platform Analysis vs Insurfox',
+        subtitle: 'Maklerpool infrastructure, digital platform services, and distribution positioning',
+        exportPdf: 'Download Executive Report (PDF)',
+        sections: {
+          executiveSummary: 'Executive Summary',
+          snapshot: 'Company and Leadership Snapshot',
+          comparison: 'Capability Comparison',
+          distribution: 'Distribution and Market Position',
+          strategicNarrative: 'Strategic Analysis',
+          scenarios: 'Partnership Scenarios and Decisions',
+          risk: 'Risks / Channel Conflict Heatmap',
+          swot: 'SWOT',
+          sources: 'Sources and Assumptions'
+        },
+        labels: {
+          category: 'Category',
+          blaudirekt: 'blau direkt',
+          blaudirektProfile: 'blau direkt profile',
+          insurfox: 'Insurfox',
+          leadership: 'Current Leadership / C-Level',
+          since: 'Since',
+          focus: 'Focus',
+          distributionAccessFootprint: 'Distribution Access Footprint (indicative)',
+          strategicFitMatrix: 'Strategic Fit Matrix',
+          overlap: 'Distribution overlap',
+          value: 'Strategic value',
+          indicativeNote: 'Indicative internal scoring based on public positioning.',
+          scenario: 'Scenario',
+          upside: 'Upside',
+          risk: 'Risk',
+          prerequisite: 'Prerequisite',
+          integrationPath: 'Integration path',
+          distributionPath: 'Distribution path',
+          independentPath: 'Independent path',
+          lineNote: 'Lines show relative strategic contribution over four quarters (internal score 0-100).',
+          likelihood: 'Lik.',
+          impact: 'Imp.',
+          score: 'Score',
+          strength: 'Strengths',
+          weakness: 'Weaknesses',
+          opportunity: 'Opportunities',
+          threat: 'Threats'
+        },
+        text: {
+          summaryP1: 'blau direkt is established as a digital broker pool and platform provider for insurance intermediaries in Germany, combining broad distribution access with technology-enabled process support.',
+          summaryP2: 'The transition from a founder-led setup toward a professionalized leadership team signals a clear scaling ambition and strategic platform maturation.',
+          summaryP3: 'For insurers and brokers, strategic relevance comes from broad product-partner access (240+), MVP tooling, simplr customer apps, and API-capable integration models.',
+          summaryP4: 'Compared with Insurfox, blau direkt is more distribution and intermediary-infrastructure centric, while Insurfox as hybrid MGA + broker + platform + operational AI stack is more execution-centric across the insurance lifecycle.',
+          snapshotP1: 'blau direkt (founded 2001, based in Luebeck) is fundamentally a technology-oriented broker pool with broad partner coverage and a scaled intermediary ecosystem. Core value creation is centered on standardized distribution and service workflows.',
+          snapshotP2: 'Additional platform offerings such as MVP services, process automation, and simplr applications improve operational connectivity across intermediary and customer journeys.',
+          leadershipIntro: 'The current leadership setup focuses on growth, operational scaling, and strategic partner integration, with clear emphasis on distribution efficiency and digital modernization.',
+          strengthsTitle: 'a) Strengths as Maklerpool/platform provider',
+          strengthsBody: 'The combination of partner breadth, intermediary connectivity, MVP tooling, and API capability creates a strong foundation for distribution scale and process standardization. This remains a structural market advantage.',
+          limitsTitle: 'b) Limitations versus Insurfox operational stack',
+          limitsBody: 'Underwriting-authority functions and deep claims automation are less pronounced relative to a hybrid MGA/broker execution model. Insurfox differentiates with deeper lifecycle execution.',
+          partnershipTitle: 'c) Where partnership makes sense',
+          partnershipBody: 'The strongest fit appears in workflow/API integration, data-standard cooperation, and segmented distribution collaboration. Clear role boundaries, data governance, and channel rules are critical.',
+          swotBdStrength: 'blau direkt has strong distribution reach, high partner connectivity, and market-proven intermediary processes, creating scale advantages in the German broker market.',
+          swotBdWeakness: 'Operational depth in underwriting- and claims-centric execution is more limited than in a hybrid MGA/broker execution stack.',
+          swotBdOpportunity: 'By deepening API and data interfaces, blau direkt can further strengthen its platform role and unlock additional ecosystem value.',
+          swotBdThreat: 'Channel and ownership conflicts can emerge when platform reach and operational insurance execution target the same segments.',
+          swotIfStrength: 'Insurfox is strong in combining MGA/broker roles, modular platform architecture, and operational AI across underwriting, claims, partner, and fleet workflows.',
+          swotIfWeakness: 'Compared with an incumbent broker pool, absolute distribution breadth is currently lower.',
+          swotIfOpportunity: 'Selective cooperation with broker-pool infrastructure can accelerate reach and time-to-value without sacrificing execution differentiation.',
+          swotIfThreat: 'Without clear governance, channel conflict, data-right dilution, and dependency on external distribution layers can increase.',
+          captureDate: 'Public sources captured on {{date}}.',
+          disclaimer: 'Analysis based on publicly available information and internal management interpretation.'
+        }
       },
       smartInsurTech: {
         title: 'Smart InsurTech / SMART INSUR – Strategic Analysis vs Insurfox',

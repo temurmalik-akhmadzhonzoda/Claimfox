@@ -36,6 +36,9 @@ export default function ManagementReportsPage() {
               <Button size="sm" variant="secondary" onClick={() => navigate('/analysis/smartinsurtech')}>
                 Smart InsurTech
               </Button>
+              <Button size="sm" variant="secondary" onClick={() => navigate('/analysis/blaudirekt')}>
+                blau direkt
+              </Button>
             </div>
           </div>
         </Card>

@@ -42,7 +42,8 @@ export default function AppHeader() {
       { label: 'Claimsforce', route: '/analysis/claimsforce' },
       { label: 'Kairos RS', route: '/analysis/kairos' },
       { label: 'Hypoport SE', route: '/analysis/hypoport' },
-      { label: 'Smart InsurTech', route: '/analysis/smartinsurtech' }
+      { label: 'Smart InsurTech', route: '/analysis/smartinsurtech' },
+      { label: 'blau direkt', route: '/analysis/blaudirekt' }
     ]
     : [
       { label: t('header.nav.insurance'), route: '/underwriterfox' },
