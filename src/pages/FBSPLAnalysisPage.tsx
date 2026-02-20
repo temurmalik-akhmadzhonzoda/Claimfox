@@ -37,8 +37,8 @@ function bi(value: BiText, lang: 'de' | 'en') {
   return lang === 'de' ? value.de : value.en
 }
 
-function numberFmt(value: number) {
-  return new Intl.NumberFormat('en-US').format(Math.round(value))
+function numberFmt(value: number, lang: 'de' | 'en') {
+  return new Intl.NumberFormat(lang === 'de' ? 'de-DE' : 'en-US').format(Math.round(value))
 }
 
 function heatColor(score: number) {
@@ -152,8 +152,8 @@ export default function FBSPLAnalysisPage() {
         <Card>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem', flexWrap: 'wrap' }}>
             <Header
-              title={bi({ de: 'FBSPL Strategic Analysis & Insurfox Comparison', en: 'FBSPL Strategic Analysis & Insurfox Comparison' }, l)}
-              subtitle={bi({ de: 'Insurance Outsourcing & Operational Enablement vs. Digital MGA, Broker & IaaS Platform', en: 'Insurance Outsourcing & Operational Enablement vs. Digital MGA, Broker & IaaS Platform' }, l)}
+              title={bi({ de: 'FBSPL Strategische Analyse & Vergleich mit Insurfox', en: 'FBSPL Strategic Analysis & Insurfox Comparison' }, l)}
+              subtitle={bi({ de: 'Insurance-Outsourcing & Operational Enablement vs. digitaler MGA-, Broker- & IaaS-Plattformansatz', en: 'Insurance Outsourcing & Operational Enablement vs. Digital MGA, Broker & IaaS Platform' }, l)}
               titleColor="#0f172a"
               subtitleColor="#475569"
             />
@@ -163,7 +163,7 @@ export default function FBSPLAnalysisPage() {
           </div>
         </Card>
 
-        <Card title={bi({ de: 'Executive Summary', en: 'Executive Summary' }, l)}>
+        <Card title={bi({ de: 'Management-Zusammenfassung', en: 'Executive Summary' }, l)}>
           <div style={{ display: 'grid', gap: '0.6rem', color: '#334155', lineHeight: 1.65 }}>
             <p style={{ margin: 0 }}>{bi({ de: 'FBSPL agiert als BPM- und Insurance-Outsourcing-Partner mit Schwerpunkt auf operativer Ausführung in Policy-, Claims- und Servicing-Prozessen.', en: 'FBSPL operates as a BPM and insurance outsourcing partner focused on operational execution in policy, claims, and servicing processes.' }, l)}</p>
             <p style={{ margin: 0 }}>{bi({ de: 'Insurfox agiert als Hybrid aus MGA, Broker und Plattformbetreiber mit AI-gestützter Workflow-Steuerung sowie Entscheidungsverantwortung.', en: 'Insurfox operates as a hybrid MGA, broker, and platform operator with AI-enabled workflow control and decision accountability.' }, l)}</p>
@@ -174,14 +174,14 @@ export default function FBSPLAnalysisPage() {
 
         <Card title={bi({ de: 'Unternehmensprofile', en: 'Company Profiles' }, l)}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '1rem' }}>
-            <Card title={bi({ de: 'FBSPL Profil', en: 'FBSPL Profile' }, l)}>
+            <Card title={bi({ de: 'FBSPL-Profil', en: 'FBSPL Profile' }, l)}>
               <ul style={listStyle}>
                 {companyProfile.fbspl.map((fact) => (
                   <li key={fact.label.en}><strong>{bi(fact.label, l)}:</strong> {bi(fact.value, l)}</li>
                 ))}
               </ul>
             </Card>
-            <Card title={bi({ de: 'Insurfox Profil', en: 'Insurfox Profile' }, l)}>
+            <Card title={bi({ de: 'Insurfox-Profil', en: 'Insurfox Profile' }, l)}>
               <ul style={listStyle}>
                 {companyProfile.insurfox.map((fact) => (
                   <li key={fact.label.en}><strong>{bi(fact.label, l)}:</strong> {bi(fact.value, l)}</li>
@@ -216,12 +216,12 @@ export default function FBSPLAnalysisPage() {
           </div>
         </Card>
 
-        <Card title={bi({ de: 'Capability Comparison', en: 'Capability Comparison' }, l)}>
+        <Card title={bi({ de: 'Capability-Vergleich', en: 'Capability Comparison' }, l)}>
           <div style={{ overflowX: 'auto' }}>
             <table style={tableStyle}>
               <thead>
                 <tr style={headRowStyle}>
-                  <th style={thStyle}>{bi({ de: 'Capability', en: 'Capability' }, l)}</th>
+                  <th style={thStyle}>{bi({ de: 'Fähigkeit', en: 'Capability' }, l)}</th>
                   <th style={thStyle}>FBSPL</th>
                   <th style={thStyle}>Insurfox</th>
                 </tr>
@@ -240,7 +240,7 @@ export default function FBSPLAnalysisPage() {
         </Card>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1.1fr) minmax(0, 1fr)', gap: '1rem' }}>
-          <Card title={bi({ de: 'Capability Coverage (0-100%)', en: 'Capability Coverage (0-100%)' }, l)}>
+          <Card title={bi({ de: 'Capability-Abdeckung (0-100%)', en: 'Capability Coverage (0-100%)' }, l)}>
             <div style={{ height: 320 }}>
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={coverageChartData} margin={{ top: 10, right: 12, left: 0, bottom: 40 }}>
@@ -256,7 +256,7 @@ export default function FBSPLAnalysisPage() {
             </div>
           </Card>
 
-          <Card title={bi({ de: 'Strategic Fit / Value Matrix', en: 'Strategic Fit / Value Matrix' }, l)}>
+          <Card title={bi({ de: 'Strategischer Fit / Wert-Matrix', en: 'Strategic Fit / Value Matrix' }, l)}>
             <div style={{ height: 320 }}>
               <ResponsiveContainer width="100%" height="100%">
                 <ScatterChart margin={{ top: 10, right: 12, left: 10, bottom: 12 }}>
@@ -272,7 +272,7 @@ export default function FBSPLAnalysisPage() {
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))', gap: '1rem' }}>
-          <Card title={bi({ de: 'Synergies', en: 'Synergies' }, l)}>
+          <Card title={bi({ de: 'Synergien', en: 'Synergies' }, l)}>
             <ul style={listStyle}>
               {synergies.map((entry) => (
                 <li key={entry.en}>{bi(entry, l)}</li>
@@ -288,7 +288,7 @@ export default function FBSPLAnalysisPage() {
           </Card>
         </div>
 
-        <Card title={bi({ de: 'Risk Heatmap', en: 'Risk Heatmap' }, l)}>
+        <Card title={bi({ de: 'Risikohitzekarte', en: 'Risk Heatmap' }, l)}>
           <div style={{ height: 320 }}>
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={riskChartData} margin={{ top: 10, right: 12, left: 0, bottom: 40 }}>
@@ -298,7 +298,7 @@ export default function FBSPLAnalysisPage() {
                 <Tooltip formatter={(value: number, _, payload) => {
                   const p = payload as { payload?: { likelihood: number; impact: number } }
                   const detail = p?.payload ? `L${p.payload.likelihood} x I${p.payload.impact}` : ''
-                  return [`${value} (${detail})`, bi({ de: 'Score', en: 'Score' }, l)]
+                  return [`${value} (${detail})`, bi({ de: 'Wert', en: 'Score' }, l)]
                 }} />
                 <Bar dataKey="score" radius={[6, 6, 0, 0]}>
                   {riskChartData.map((item) => (
@@ -310,50 +310,54 @@ export default function FBSPLAnalysisPage() {
           </div>
         </Card>
 
-        <Card title={bi({ de: 'Financial Impact Simulation', en: 'Financial Impact Simulation' }, l)}>
+        <Card title={bi({ de: 'Simulation finanzieller Auswirkungen', en: 'Financial Impact Simulation' }, l)}>
           <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(360px, 1fr)', gap: '1rem' }}>
             <div style={{ display: 'grid', gap: '0.8rem' }}>
               <SliderRow
-                label={bi({ de: 'Annual transaction volume', en: 'Annual transaction volume' }, l)}
+                label={bi({ de: 'Jährliches Transaktionsvolumen', en: 'Annual transaction volume' }, l)}
                 value={annualVolume}
                 min={20_000}
                 max={300_000}
                 step={5_000}
                 suffix=""
+                lang={l}
                 onChange={setAnnualVolume}
               />
               <SliderRow
-                label={bi({ de: 'In-house cost per process', en: 'In-house cost per process' }, l)}
+                label={bi({ de: 'Inhouse-Kosten pro Vorgang', en: 'In-house cost per process' }, l)}
                 value={inhouseCost}
                 min={10}
                 max={90}
                 step={1}
                 suffix="€"
+                lang={l}
                 onChange={setInhouseCost}
               />
               <SliderRow
-                label={bi({ de: 'Outsourced cost per process', en: 'Outsourced cost per process' }, l)}
+                label={bi({ de: 'Outsourcing-Kosten pro Vorgang', en: 'Outsourced cost per process' }, l)}
                 value={outsourcedCost}
                 min={8}
                 max={80}
                 step={1}
                 suffix="€"
+                lang={l}
                 onChange={setOutsourcedCost}
               />
               <SliderRow
-                label={bi({ de: 'Rework / QA overhead', en: 'Rework / QA overhead' }, l)}
+                label={bi({ de: 'Nacharbeit / QA-Aufwand', en: 'Rework / QA overhead' }, l)}
                 value={qaOverheadPct}
                 min={0}
                 max={25}
                 step={1}
                 suffix="%"
+                lang={l}
                 onChange={setQaOverheadPct}
               />
             </div>
             <div style={{ display: 'grid', gap: '0.55rem' }}>
-              <MetricCard label={bi({ de: 'Gross operational cost savings', en: 'Gross operational cost savings' }, l)} value={`€${numberFmt(finance.grossOperationalSavings)}`} />
-              <MetricCard label={bi({ de: 'Break-even outsourcing point (volume)', en: 'Break-even outsourcing point (volume)' }, l)} value={Number.isFinite(finance.breakEvenVolume) ? `${numberFmt(finance.breakEvenVolume)} tx` : bi({ de: 'Kein Break-even', en: 'No break-even' }, l)} />
-              <MetricCard label={bi({ de: 'Risk-adjusted value', en: 'Risk-adjusted value' }, l)} value={`€${numberFmt(finance.riskAdjustedValue)}`} />
+              <MetricCard label={bi({ de: 'Brutto-Einsparung Betriebskosten', en: 'Gross operational cost savings' }, l)} value={`€${numberFmt(finance.grossOperationalSavings, l)}`} />
+              <MetricCard label={bi({ de: 'Break-even-Outsourcing-Punkt (Volumen)', en: 'Break-even outsourcing point (volume)' }, l)} value={Number.isFinite(finance.breakEvenVolume) ? `${numberFmt(finance.breakEvenVolume, l)} tx` : bi({ de: 'Kein Break-even', en: 'No break-even' }, l)} />
+              <MetricCard label={bi({ de: 'Risikoadjustierter Wert', en: 'Risk-adjusted value' }, l)} value={`€${numberFmt(finance.riskAdjustedValue, l)}`} />
               <p style={noteStyle}>{bi({ de: 'Finanzwerte sind modellbasierte Szenarioannahmen für die Management-Entscheidung.', en: 'Financial values are scenario assumptions for management decision support.' }, l)}</p>
             </div>
           </div>
@@ -366,10 +370,10 @@ export default function FBSPLAnalysisPage() {
                   <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
                   <XAxis dataKey="month" stroke="#475569" />
                   <YAxis stroke="#475569" />
-                  <Tooltip formatter={(value: number) => `€${numberFmt(value)}`} />
+                  <Tooltip formatter={(value: number) => `€${numberFmt(value, l)}`} />
                   <Legend />
-                  <Line type="monotone" dataKey="inhouse" name={bi({ de: 'In-house kumuliert', en: 'In-house cumulative' }, l)} stroke="#0f172a" strokeWidth={2.2} dot={false} />
-                  <Line type="monotone" dataKey="outsourced" name={bi({ de: 'Outsourced kumuliert', en: 'Outsourced cumulative' }, l)} stroke="#d4380d" strokeWidth={2.2} dot={false} />
+                  <Line type="monotone" dataKey="inhouse" name={bi({ de: 'Inhouse kumuliert', en: 'In-house cumulative' }, l)} stroke="#0f172a" strokeWidth={2.2} dot={false} />
+                  <Line type="monotone" dataKey="outsourced" name={bi({ de: 'Outsourcing kumuliert', en: 'Outsourced cumulative' }, l)} stroke="#d4380d" strokeWidth={2.2} dot={false} />
                   <Line type="monotone" dataKey="value" name={bi({ de: 'Netto-Wert', en: 'Net value' }, l)} stroke="#16a34a" strokeWidth={2.2} dot={false} />
                 </LineChart>
               </ResponsiveContainer>
@@ -377,18 +381,18 @@ export default function FBSPLAnalysisPage() {
           </div>
         </Card>
 
-        <Card title={bi({ de: 'Partnership Decision Radar', en: 'Partnership Decision Radar' }, l)}>
+        <Card title={bi({ de: 'Partnerschafts-Entscheidungsradar', en: 'Partnership Decision Radar' }, l)}>
           <div style={{ overflowX: 'auto' }}>
             <table style={tableStyle}>
               <thead>
                 <tr style={headRowStyle}>
                   <th style={thStyle}>{bi({ de: 'Option', en: 'Option' }, l)}</th>
-                  <th style={thStyle}>{bi({ de: 'Description', en: 'Description' }, l)}</th>
-                  <th style={thStyle}>{bi({ de: 'Risk', en: 'Risk' }, l)}</th>
-                  <th style={thStyle}>{bi({ de: 'Control', en: 'Control' }, l)}</th>
-                  <th style={thStyle}>{bi({ de: 'Time-to-value', en: 'Time-to-value' }, l)}</th>
+                  <th style={thStyle}>{bi({ de: 'Beschreibung', en: 'Description' }, l)}</th>
+                  <th style={thStyle}>{bi({ de: 'Risiko', en: 'Risk' }, l)}</th>
+                  <th style={thStyle}>{bi({ de: 'Kontrolle', en: 'Control' }, l)}</th>
+                  <th style={thStyle}>{bi({ de: 'Time-to-Value', en: 'Time-to-value' }, l)}</th>
                   <th style={thStyle}>{bi({ de: 'Compliance', en: 'Compliance' }, l)}</th>
-                  <th style={thStyle}>{bi({ de: 'Strategic upside', en: 'Strategic upside' }, l)}</th>
+                  <th style={thStyle}>{bi({ de: 'Strategisches Potenzial', en: 'Strategic upside' }, l)}</th>
                 </tr>
               </thead>
               <tbody>
@@ -438,7 +442,7 @@ export default function FBSPLAnalysisPage() {
                       LinkedIn
                     </a>
                   ) : (
-                    <span style={{ color: '#94a3b8', fontSize: '0.8rem' }}>{bi({ de: 'LinkedIn: verify', en: 'LinkedIn: verify' }, l)}</span>
+                    <span style={{ color: '#94a3b8', fontSize: '0.8rem' }}>{bi({ de: 'LinkedIn: verifizieren', en: 'LinkedIn: verify' }, l)}</span>
                   )}
                   <a href={contact.source} target="_blank" rel="noreferrer" style={{ color: '#0ea5e9', fontSize: '0.8rem', textDecoration: 'none' }}>
                     {bi({ de: 'Quelle', en: 'Source' }, l)}
@@ -449,14 +453,14 @@ export default function FBSPLAnalysisPage() {
           </Card>
         )}
 
-        <Card title={bi({ de: 'Sources & Assumptions', en: 'Sources & Assumptions' }, l)}>
+        <Card title={bi({ de: 'Quellen & Annahmen', en: 'Sources & Assumptions' }, l)}>
           <ul style={listStyle}>
             {sourceUrls.map((url) => (
               <li key={url}>{url}</li>
             ))}
             <li>{bi({ de: 'FBSPL Capability Coverage basiert auf öffentlich verfügbaren Servicebeschreibungen.', en: 'FBSPL capability coverage is based on publicly available service descriptions.' }, l)}</li>
             <li>{bi({ de: 'Insurfox wird im Vergleich als Modell mit Underwriting Authority und Plattformkontrolle angenommen (interne Annahme).', en: 'Insurfox is assumed to have underwriting authority and platform control in this comparison (internal assumption).' }, l)}</li>
-            <li>{bi({ de: 'Finanzielle Szenarien sind Managementannahmen und keine Preiszusage.', en: 'Financial scenarios are management assumptions, not a commercial quote.' }, l)}</li>
+            <li>{bi({ de: 'Finanzielle Szenarien sind Managementannahmen und kein kommerzielles Angebot.', en: 'Financial scenarios are management assumptions, not a commercial quote.' }, l)}</li>
           </ul>
         </Card>
       </div>
@@ -488,6 +492,7 @@ function SliderRow({
   max: number
   step: number
   suffix: string
+  lang: 'de' | 'en'
   onChange: (value: number) => void
 }) {
   return (
@@ -495,7 +500,7 @@ function SliderRow({
       <div style={{ display: 'flex', justifyContent: 'space-between', gap: '0.6rem' }}>
         <span style={{ color: '#334155', fontWeight: 600 }}>{label}</span>
         <span style={{ color: '#0f172a', fontWeight: 700 }}>
-          {suffix === '€' ? `${suffix}${value}` : `${numberFmt(value)}${suffix}`}
+          {suffix === '€' ? `${suffix}${value}` : `${numberFmt(value, lang)}${suffix}`}
         </span>
       </div>
       <input

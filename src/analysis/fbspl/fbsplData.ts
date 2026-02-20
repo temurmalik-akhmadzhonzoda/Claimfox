@@ -73,7 +73,7 @@ export const companyProfile: { fbspl: CompanyFact[]; insurfox: CompanyFact[] } =
       }
     },
     {
-      label: { de: 'Operating Model', en: 'Operating model' },
+      label: { de: 'Betriebsmodell', en: 'Operating model' },
       value: {
         de: 'Kombination aus Human Intelligence + AI zur Senkung von Turnaround-Zeiten und Steigerung der Produktivität.',
         en: 'Combination of human intelligence + AI to reduce turnaround times and increase productivity.'
@@ -171,19 +171,19 @@ export const capabilityRows: CapabilityRow[] = [
 ]
 
 export const capabilityCoverage: CoverageRow[] = [
-  { area: { de: 'Backoffice Support', en: 'Back office support' }, fbspl: 90, insurfox: 72 },
-  { area: { de: 'Claims Ops Support', en: 'Claims ops support' }, fbspl: 84, insurfox: 78 },
-  { area: { de: 'Underwriting Support', en: 'Underwriting support' }, fbspl: 72, insurfox: 82 },
-  { area: { de: 'Regulatory Advisory Support', en: 'Regulatory advisory support' }, fbspl: 60, insurfox: 74 },
-  { area: { de: 'AI Integration', en: 'AI integration' }, fbspl: 68, insurfox: 86 },
-  { area: { de: 'BI Dashboards', en: 'Business intelligence dashboards' }, fbspl: 73, insurfox: 80 }
+  { area: { de: 'Backoffice-Support', en: 'Back office support' }, fbspl: 90, insurfox: 72 },
+  { area: { de: 'Claims-Ops-Support', en: 'Claims ops support' }, fbspl: 84, insurfox: 78 },
+  { area: { de: 'Underwriting-Support', en: 'Underwriting support' }, fbspl: 72, insurfox: 82 },
+  { area: { de: 'Regulatorischer Advisory-Support', en: 'Regulatory advisory support' }, fbspl: 60, insurfox: 74 },
+  { area: { de: 'KI-Integration', en: 'AI integration' }, fbspl: 68, insurfox: 86 },
+  { area: { de: 'BI-Dashboards', en: 'Business intelligence dashboards' }, fbspl: 73, insurfox: 80 }
 ]
 
 export const strategicFitPoints: StrategicPoint[] = [
   { name: { de: 'Capacity-Sourcing-Partner', en: 'Capacity sourcing partner' }, overlap: 30, value: 82 },
   { name: { de: 'Claims-Enabler', en: 'Claims enablement partner' }, overlap: 44, value: 89 },
   { name: { de: 'Threat Zone (bei Scope-Erweiterung)', en: 'Threat zone (if scope expands)' }, overlap: 78, value: 45 },
-  { name: { de: 'Neutral Zone', en: 'Neutral zone' }, overlap: 52, value: 70 }
+  { name: { de: 'Neutrale Zone', en: 'Neutral zone' }, overlap: 52, value: 70 }
 ]
 
 export const synergies: BiText[] = [
@@ -231,7 +231,7 @@ export const riskBullets: BiText[] = [
 export const decisionOptions: DecisionOption[] = [
   {
     option: 'A',
-    label: { de: 'Operational Pilot', en: 'Operational pilot' },
+    label: { de: 'Operativer Pilot', en: 'Operational pilot' },
     risk: 2,
     control: 4,
     timeToValue: 4,
@@ -240,7 +240,7 @@ export const decisionOptions: DecisionOption[] = [
   },
   {
     option: 'B',
-    label: { de: 'Strategic Ops Partnership', en: 'Strategic ops partnership' },
+    label: { de: 'Strategische Ops-Partnerschaft', en: 'Strategic ops partnership' },
     risk: 3,
     control: 3,
     timeToValue: 4,
@@ -258,7 +258,7 @@ export const decisionOptions: DecisionOption[] = [
   },
   {
     option: 'D',
-    label: { de: 'Internal Build (No Partnership)', en: 'Internal build (no partnership)' },
+    label: { de: 'Interner Aufbau (ohne Partnerschaft)', en: 'Internal build (no partnership)' },
     risk: 4,
     control: 5,
     timeToValue: 2,
