@@ -596,6 +596,113 @@ export default function InsideInsurfoxPage({ section }: { section: InsideSection
                 )}
               </p>
             </Card>
+
+            <Card title={bi({ de: '11) Enterprise Permission Matrix & Multi-Tenant Access Control', en: '11) Enterprise Permission Matrix & Multi-Tenant Access Control' }, l)}>
+              <h3 style={subHeadingStyle}>{bi({ de: 'Multi-Level Access Model', en: 'Multi-Level Access Model' }, l)}</h3>
+              <p style={pStyle}>
+                {bi(
+                  {
+                    de: 'Das Berechtigungsmodell ist hierarchisch und tenantfähig aufgebaut: Platform Level (Insurfox Operator), Broker Level, Corporate Client Level und Internal Client Role Level. Jede Ebene erweitert Rechte nur innerhalb ihres Governance-Scope.',
+                    en: 'The permission model is hierarchical and tenant-aware: platform level (Insurfox operator), broker level, corporate client level, and internal client role level. Each level can extend access only within its governance scope.'
+                  },
+                  l
+                )}
+              </p>
+              <h3 style={{ ...subHeadingStyle, marginTop: '0.65rem' }}>{bi({ de: 'Hybrid RBAC + ABAC', en: 'Hybrid RBAC + ABAC' }, l)}</h3>
+              <p style={noteStyle}>
+                {bi(
+                  {
+                    de: 'RBAC steuert Rollenrechte (z. B. claim.edit, policy.read). ABAC filtert zur Laufzeit über Attribute wie region, location, object_type und tenant_id.',
+                    en: 'RBAC governs role permissions (e.g., claim.edit, policy.read). ABAC applies runtime filters using attributes such as region, location, object_type, and tenant_id.'
+                  },
+                  l
+                )}
+              </p>
+              <div style={{ ...roleCardStyle, marginTop: '0.65rem' }}>
+                <p style={noteStyle}><strong>{bi({ de: 'Permission Layers', en: 'Permission Layers' }, l)}:</strong> {bi({ de: 'Module access, Action permissions, Data scope permissions, Object-level filtering, Field-level masking.', en: 'Module access, action permissions, data scope permissions, object-level filtering, field-level masking.' }, l)}</p>
+              </div>
+
+              <MermaidBlock
+                title={bi({ de: 'Autorisierungs-Schema (logisch)', en: 'Authorization Schema (logical)' }, l)}
+                code={`erDiagram
+  tenants ||--o{ organizations : has
+  organizations ||--o{ users : contains
+  roles ||--o{ role_permissions : grants
+  permissions ||--o{ role_permissions : maps
+  users ||--o{ user_roles : assigned
+  roles ||--o{ user_roles : linked
+  users ||--o{ permission_audit_log : triggers
+  permissions ||--o{ permission_audit_log : references`}
+              />
+
+              <div style={{ overflowX: 'auto', marginTop: '0.65rem' }}>
+                <table style={tableStyle}>
+                  <thead>
+                    <tr style={headRowStyle}>
+                      <th style={thStyle}>{bi({ de: 'Rolle', en: 'Role' }, l)}</th>
+                      <th style={thStyle}>Module</th>
+                      <th style={thStyle}>{bi({ de: 'Aktionen', en: 'Actions' }, l)}</th>
+                      <th style={thStyle}>{bi({ de: 'Datenscope', en: 'Data scope' }, l)}</th>
+                      <th style={thStyle}>{bi({ de: 'Objektfilter', en: 'Object filtering' }, l)}</th>
+                      <th style={thStyle}>{bi({ de: 'Feldmaskierung', en: 'Field masking' }, l)}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[
+                      [{ de: 'Driver', en: 'Driver' }, 'FNOL', { de: 'create_claim, upload_photo, read_own_claim', en: 'create_claim, upload_photo, read_own_claim' }, { de: 'own_user_id', en: 'own_user_id' }, { de: 'vehicle_id in assigned_vehicles', en: 'vehicle_id in assigned_vehicles' }, { de: 'Finanz-/Policydaten maskiert', en: 'Finance/policy fields masked' }],
+                      [{ de: 'Regional Fleet Manager', en: 'Regional Fleet Manager' }, 'Fleetfox, Claimsfox', { de: 'read_claim, read_fleet_report, assign_task', en: 'read_claim, read_fleet_report, assign_task' }, { de: 'region in user_regions', en: 'region in user_regions' }, { de: 'location and fleet_cluster filters', en: 'location and fleet_cluster filters' }, { de: 'PII teilmaskiert', en: 'PII partially masked' }],
+                      [{ de: 'Claims Manager', en: 'Claims Manager' }, 'Claimsfox', { de: 'edit_claim, reserve_update, settlement_approve', en: 'edit_claim, reserve_update, settlement_approve' }, { de: 'tenant + claims_domain', en: 'tenant + claims_domain' }, { de: 'claim_state and partner_scope', en: 'claim_state and partner_scope' }, { de: 'Bankdaten maskiert', en: 'Bank details masked' }],
+                      [{ de: 'Finance Officer', en: 'Finance Officer' }, 'Finance, Reporting', { de: 'read_invoice, read_statement, export_report', en: 'read_invoice, read_statement, export_report' }, { de: 'tenant + finance_scope', en: 'tenant + finance_scope' }, { de: 'document_type=finance', en: 'document_type=finance' }, { de: 'Schadendetails maskiert', en: 'Claim details masked' }],
+                      [{ de: 'Broker Admin', en: 'Broker Admin' }, 'Brokerfox', { de: 'manage_client, submit_risk, read_policy', en: 'manage_client, submit_risk, read_policy' }, { de: 'broker_id + tenant scope', en: 'broker_id + tenant scope' }, { de: 'assigned_clients only', en: 'assigned_clients only' }, { de: 'Carrier-internes Pricing maskiert', en: 'Carrier internal pricing masked' }],
+                      [{ de: 'MGA Underwriter', en: 'MGA Underwriter' }, 'Underwriting, Claims', { de: 'risk_decide, pricing_edit, referral_handle', en: 'risk_decide, pricing_edit, referral_handle' }, { de: 'program_id + authority_band', en: 'program_id + authority_band' }, { de: 'line_of_business and limit caps', en: 'line_of_business and limit caps' }, { de: 'nur notwendige PII sichtbar', en: 'need-to-know PII only' }],
+                      [{ de: 'Platform Admin', en: 'Platform Admin' }, 'All', { de: 'tenant_admin, policy_admin, iam_admin', en: 'tenant_admin, policy_admin, iam_admin' }, { de: 'cross-tenant by explicit break-glass policy', en: 'cross-tenant by explicit break-glass policy' }, { de: 'full governance scope', en: 'full governance scope' }, { de: 'unmasking nur per auditierter Freigabe', en: 'unmasking only via audited approval' }]
+                    ].map((row) => (
+                      <tr key={(row[0] as BiText).en}>
+                        <td style={tdStrongStyle}>{bi(row[0] as BiText, l)}</td>
+                        <td style={tdStyle}>{row[1] as string}</td>
+                        <td style={tdStyle}>{bi({ de: row[2] as string, en: row[2] as string }, l)}</td>
+                        <td style={tdStyle}>{bi({ de: row[3] as string, en: row[3] as string }, l)}</td>
+                        <td style={tdStyle}>{bi({ de: row[4] as string, en: row[4] as string }, l)}</td>
+                        <td style={tdStyle}>{bi(row[5] as BiText, l)}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              <h3 style={{ ...subHeadingStyle, marginTop: '0.7rem' }}>{bi({ de: 'Runtime Permission Evaluation', en: 'Runtime Permission Evaluation' }, l)}</h3>
+              <p style={noteStyle}>
+                {bi(
+                  {
+                    de: '1) User authentifizieren. 2) Rollen aus user_roles laden. 3) Aktionen über role_permissions auflösen. 4) ABAC-Filter aus Tenant/Region/Object anwenden. 5) Feldmaskierung anwenden. 6) Entscheidung und Kontext in permission_audit_log protokollieren.',
+                    en: '1) Authenticate user. 2) Load roles from user_roles. 3) Resolve actions via role_permissions. 4) Apply ABAC filters from tenant/region/object attributes. 5) Apply field masking. 6) Log decision context into permission_audit_log.'
+                  },
+                  l
+                )}
+              </p>
+
+              <h3 style={{ ...subHeadingStyle, marginTop: '0.7rem' }}>{bi({ de: 'Row-Level-Filtering in Cloud Spanner', en: 'Row-Level Filtering in Cloud Spanner' }, l)}</h3>
+              <p style={noteStyle}>
+                {bi(
+                  {
+                    de: 'Alle Abfragen werden mit tenant_id als Pflichtprädikat ausgeführt. Zusätzliche ABAC-Filter (region, organization_id, object scope) werden serverseitig erzwungen. Ergebnis: kein Cross-Tenant-Read ohne explizite, auditierte Break-Glass-Freigabe.',
+                    en: 'All queries enforce tenant_id as a mandatory predicate. Additional ABAC filters (region, organization_id, object scope) are applied server-side. Result: no cross-tenant reads without explicit, audited break-glass approval.'
+                  },
+                  l
+                )}
+              </p>
+
+              <h3 style={{ ...subHeadingStyle, marginTop: '0.7rem' }}>{bi({ de: 'Audit Logging & Compliance', en: 'Audit Logging & Compliance' }, l)}</h3>
+              <p style={noteStyle}>
+                {bi(
+                  {
+                    de: 'permission_audit_log erfasst Subject, Action, Resource, Decision, Policy-Version, Zeitstempel und Begründung. Damit werden interne Kontrollanforderungen, regulatorische Prüfpfade und Forensik für Datenschutz- und Versicherungs-Compliance unterstützt.',
+                    en: 'permission_audit_log records subject, action, resource, decision, policy version, timestamp, and rationale. This supports internal controls, regulatory audit trails, and forensic requirements for privacy and insurance compliance.'
+                  },
+                  l
+                )}
+              </p>
+            </Card>
           </>
         )}
 
