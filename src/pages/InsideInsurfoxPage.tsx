@@ -287,12 +287,12 @@ export default function InsideInsurfoxPage({ section }: { section: InsideSection
         {section === 'home' && (
           <>
             <Card title={bi({ de: '1) Plattformidentität', en: '1) Platform Identity' }, l)}>
-              <h3 style={subHeadingStyle}>{bi({ de: 'Insurfox – AI-Native Insurance Operating System', en: 'Insurfox – AI-Native Insurance Operating System' }, l)}</h3>
+              <h3 style={subHeadingStyle}>{bi({ de: 'Insurfox – Enterprise Insurance Operating System', en: 'Insurfox – Enterprise Insurance Operating System' }, l)}</h3>
               <p style={pStyle}>
                 {bi(
                   {
-                    de: 'Insurfox ist als Insurance Infrastructure as a Service (IaaS) aufgebaut und vereint Broker-, MGA-, AI-, Fleet- und Claims-Kompetenz in einem durchgängigen Betriebsmodell.',
-                    en: 'Insurfox is built as Insurance Infrastructure as a Service (IaaS), combining broker, MGA, AI, fleet, and claims capabilities in one integrated operating model.'
+                    de: 'Insurfox agiert gleichzeitig als AI-native Insurance Infrastructure as a Service (IaaS), als MGA mit delegierter Zeichnungsvollmacht, als gewerblicher Broker, als Broker-Portal-Betreiber sowie als AI Risk & Claims Engine mit Fleet- und Logistics-Intelligence.',
+                    en: 'Insurfox operates simultaneously as an AI-native Insurance Infrastructure as a Service (IaaS), an MGA with delegated underwriting authority, a commercial broker, a broker portal operator, and an AI risk & claims engine with fleet and logistics intelligence.'
                   },
                   l
                 )}
@@ -300,40 +300,47 @@ export default function InsideInsurfoxPage({ section }: { section: InsideSection
               <p style={{ ...pStyle, marginTop: '0.55rem' }}>
                 {bi(
                   {
-                    de: 'Die Plattform umfasst Broker, MGA, AI Platform, Fleet Intelligence Engine, Claims Automation Engine und Partner Network Orchestrator. Multi-Tenant-Design und Rollenentkopplung stellen sicher, dass Mandanten sauber getrennt und gleichzeitig global skalierbar betrieben werden können.',
-                    en: 'The platform includes broker, MGA, AI platform, fleet intelligence engine, claims automation engine, and partner network orchestrator. Multi-tenant design and role separation ensure clean tenant boundaries with global scalability.'
-                  },
-                  l
-                )}
-              </p>
-            </Card>
-
-            <Card title={bi({ de: '2) Globale Skalierungsstrategie', en: '2) Global Scaling Strategy' }, l)}>
-              <p style={pStyle}>
-                {bi(
-                  {
-                    de: 'Die Skalierungslogik startet mit einer DE-/EU-Compliance-Basis (Datenschutz, Governance, Auditierbarkeit) und erweitert sich auf Multi-Region-Betrieb für internationale Programme.',
-                    en: 'The scaling model starts from a DE/EU compliance baseline (data protection, governance, auditability) and expands into multi-region operations for international programs.'
-                  },
-                  l
-                )}
-              </p>
-              <p style={{ ...pStyle, marginTop: '0.55rem' }}>
-                {bi(
-                  {
-                    de: 'Datenresidenz wird über regionale Datenhaltung und tenant-spezifische Kontrollpfade umgesetzt. Tenant Isolation erfolgt auf Daten-, Zugriff- und Workflow-Ebene, um regulatorische Flexibilität für MGA-Expansion in mehreren Jurisdiktionen zu ermöglichen.',
-                    en: 'Data residency is implemented through regional storage and tenant-specific control paths. Tenant isolation is enforced at data, access, and workflow levels to support MGA expansion across jurisdictions.'
+                    de: 'Das Zielbild ist ein Multi-Line Commercial Insurance Operating System für DE/EU und globale Programme, das Transport Core und Logistics Composite in einer einheitlichen Ausführungsarchitektur verbindet.',
+                    en: 'The target model is a multi-line commercial insurance operating system for DE/EU and global programs, connecting transport core and logistics composite in one unified execution architecture.'
                   },
                   l
                 )}
               </p>
               <div style={{ ...roleCardStyle, marginTop: '0.65rem' }}>
-                <h3 style={subHeadingStyle}>{bi({ de: 'Warum Cloud Spanner statt nur Cloud SQL', en: 'Why Cloud Spanner instead of only Cloud SQL' }, l)}</h3>
-                <p style={noteStyle}>{bi({ de: 'Horizontale Skalierung, globale Replikation, starke Konsistenz, Multi-Region-Verfügbarkeit und niedrige Latenz bei regionübergreifenden Writes sind für globale Insurance-IaaS-Workloads entscheidend.', en: 'Horizontal scaling, global replication, strong consistency, multi-region availability, and low-latency cross-region writes are critical for global insurance IaaS workloads.' }, l)}</p>
+                <h3 style={subHeadingStyle}>{bi({ de: 'Transport Core', en: 'Transport Core' }, l)}</h3>
+                <p style={noteStyle}>{bi({ de: 'Carrier’s Liability, Fleet Insurance, Cargo Insurance.', en: 'Carrier’s Liability, Fleet Insurance, Cargo Insurance.' }, l)}</p>
+                <h3 style={{ ...subHeadingStyle, marginTop: '0.55rem' }}>{bi({ de: 'Logistics Composite', en: 'Logistics Composite' }, l)}</h3>
+                <p style={noteStyle}>{bi({ de: 'Contents, General Liability, Photovoltaic, Cyber, D&O, Legal Expenses, Electronic Equipment, Machinery, Trade Credit.', en: 'Contents, General Liability, Photovoltaic, Cyber, D&O, Legal Expenses, Electronic Equipment, Machinery, Trade Credit.' }, l)}</p>
               </div>
             </Card>
 
-            <Card title={bi({ de: '3) End-to-End Prozessfluss', en: '3) Full End-to-End Process Flow' }, l)}>
+            <Card title={bi({ de: '2) Multi-Tenant-Enterprise-Modell', en: '2) Multi-Tenant Enterprise Model' }, l)}>
+              <p style={pStyle}>
+                {bi(
+                  {
+                    de: 'Die Mandantenstruktur ist dreistufig aufgebaut: Level 1 bildet den Insurfox Platform Operator, Level 2 umfasst Broker-Tenants, MGA-Programme, Carrier-Partner und Logistik-Unternehmenskunden, Level 3 steuert die internen Rollen eines Corporate Clients.',
+                    en: 'The tenant structure is organized in three levels: level 1 is the Insurfox platform operator, level 2 includes broker tenants, MGA programs, carrier partners, and logistics corporate clients, and level 3 governs internal roles within each corporate client.'
+                  },
+                  l
+                )}
+              </p>
+              <div style={{ ...roleCardStyle, marginTop: '0.65rem' }}>
+                <p style={noteStyle}><strong>Level 1:</strong> {bi({ de: 'Insurfox Platform Operator', en: 'Insurfox platform operator' }, l)}</p>
+                <p style={{ ...noteStyle, marginTop: '0.35rem' }}><strong>Level 2:</strong> {bi({ de: 'Broker Tenants, MGA Programs, Carrier Partners, Logistics Corporate Clients', en: 'Broker tenants, MGA programs, carrier partners, logistics corporate clients' }, l)}</p>
+                <p style={{ ...noteStyle, marginTop: '0.35rem' }}><strong>Level 3:</strong> {bi({ de: 'Global Admin, Regional Fleet Manager, Claims Manager, Finance Officer, Driver, Warehouse Manager', en: 'Global admin, regional fleet manager, claims manager, finance officer, driver, warehouse manager' }, l)}</p>
+              </div>
+              <p style={{ ...pStyle, marginTop: '0.55rem' }}>
+                {bi(
+                  {
+                    de: 'Jeder Unternehmenskunde besitzt ein eigenes Admin-Panel zur Vergabe von Modulzugriff, Daten-Sichtbarkeit, Rollenrechten, geografischem Scope, Bearbeitungsrechten für Schäden und Leserechten auf Policen. Das Zugriffsmodell kombiniert Row-Level-Isolation pro Tenant, rollenbasiertes View-Filtering und Field-Level-Masking für sensible Daten.',
+                    en: 'Each corporate client has an internal admin panel to assign module access, data visibility, role permissions, geographic scope, claim editing rights, and policy view rights. The access model combines row-level tenant isolation, role-based view filtering, and field-level masking for sensitive data.'
+                  },
+                  l
+                )}
+              </p>
+            </Card>
+
+            <Card title={bi({ de: '3) End-to-End-Insurance-Lifecycle', en: '3) End-to-End Insurance Lifecycle' }, l)}>
               <div style={{ overflowX: 'auto' }}>
                 <table style={tableStyle}>
                   <thead>
@@ -341,27 +348,29 @@ export default function InsideInsurfoxPage({ section }: { section: InsideSection
                       <th style={thStyle}>#</th>
                       <th style={thStyle}>{bi({ de: 'Schritt', en: 'Step' }, l)}</th>
                       <th style={thStyle}>{bi({ de: 'Rollen', en: 'Roles involved' }, l)}</th>
-                      <th style={thStyle}>{bi({ de: 'Erzeugte Daten', en: 'Data generated' }, l)}</th>
-                      <th style={thStyle}>{bi({ de: 'Entscheidungen', en: 'Decisions made' }, l)}</th>
+                      <th style={thStyle}>{bi({ de: 'Erzeugte Daten', en: 'Data created' }, l)}</th>
+                      <th style={thStyle}>{bi({ de: 'AI-Nutzung', en: 'AI usage' }, l)}</th>
                       <th style={thStyle}>{bi({ de: 'Events', en: 'Events emitted' }, l)}</th>
                     </tr>
                   </thead>
                   <tbody>
                     {[
-                      ['1', { de: 'Mandanten-Registrierung', en: 'Tenant Registration' }, { de: 'Platform Owner, Unternehmens-Admin', en: 'Platform owner, corporate admin' }, { de: 'Mandantenprofil, Zugriffsbasis', en: 'Tenant profile, access baseline' }, { de: 'Mandantenaktivierung', en: 'Tenant activation' }, 'tenant.registered'],
-                      ['2', { de: 'Makler-Onboarding', en: 'Broker Onboarding' }, { de: 'Makler, Operations', en: 'Broker, operations' }, { de: 'Maklerkonto, Vollmachten-Mapping', en: 'Broker account, authority mapping' }, { de: 'Maklerfreigabe', en: 'Broker approval' }, 'broker.onboarded'],
-                      ['3', { de: 'Risikoeinreichung', en: 'Risk Submission' }, { de: 'Makler, Unternehmenskunde', en: 'Broker, corporate client' }, { de: 'Submission-Payload, Exponierungsdaten', en: 'Submission payload, exposure data' }, { de: 'Vollständigkeitsprüfung', en: 'Submission completeness' }, 'submission.created'],
-                      ['4', { de: 'AI-Risikoscoring', en: 'AI Risk Scoring' }, { de: 'MGA, AI Core', en: 'MGA, AI core' }, { de: 'Risikoscore, Feature-Snapshot', en: 'Risk score, feature snapshot' }, { de: 'Risikotier-Zuordnung', en: 'Risk tier assignment' }, 'submission.scored'],
-                      ['5', { de: 'Underwriting-Entscheidung', en: 'Underwriting Decision' }, { de: 'MGA, Carrier', en: 'MGA, carrier' }, { de: 'Pricing-Korridor, Referral-Flags', en: 'Pricing corridor, referral flags' }, { de: 'Annehmen/Ablehnen/Referral', en: 'Accept/decline/referral' }, 'underwriting.decisioned'],
-                      ['6', { de: 'Policierung', en: 'Policy Issuance' }, { de: 'Makler, Operations', en: 'Broker, operations' }, { de: 'Policenobjekt, Konditionen', en: 'Policy object, terms' }, { de: 'Binden + ausstellen', en: 'Bind + issue' }, 'policy.bound'],
-                      ['7', { de: 'Flotten-Monitoring', en: 'Fleet Monitoring' }, { de: 'Flottenbetreiber, AI Core', en: 'Fleet operator, AI core' }, { de: 'Telematik-Stream, Verhaltens-KPIs', en: 'Telematics stream, behavior KPIs' }, { de: 'Interventions-Trigger', en: 'Intervention trigger' }, 'fleet.signal.ingested'],
-                      ['8', { de: 'FNOL (Schadenaufnahme)', en: 'FNOL (Claims Intake)' }, { de: 'Kunde, Claims Ops', en: 'Client, claims ops' }, { de: 'FNOL-Datensatz, Ereigniskontext', en: 'FNOL record, incident context' }, { de: 'Schadeneröffnung', en: 'Claim opening' }, 'claim.created'],
-                      ['9', { de: 'AI-Schadenscan', en: 'AI Damage Scan' }, { de: 'Claims AI, Sachbearbeitung', en: 'Claims AI, adjuster' }, { de: 'Bildextraktion, Schadensindikatoren', en: 'Image extraction, damage indicators' }, { de: 'Reparaturpfad-Empfehlung', en: 'Repair path recommendation' }, 'scan.completed'],
-                      ['10', { de: 'Betrugs-Scoring', en: 'Fraud Scoring' }, { de: 'Claims AI, Governance', en: 'Claims AI, governance' }, { de: 'Betrugsscore, Anomalie-Evidenz', en: 'Fraud score, anomaly evidence' }, { de: 'Untersuchungs-Trigger', en: 'Investigation trigger' }, 'fraud.flagged'],
-                      ['11', { de: 'Partnerzuweisung', en: 'Partner Assignment' }, { de: 'Claims Ops, Partnernetzwerk', en: 'Claims ops, partner network' }, { de: 'Partner-SLA-Zuweisung', en: 'Partner SLA assignment' }, { de: 'Dispatch-Entscheidung', en: 'Dispatch decision' }, 'partner.assigned'],
-                      ['12', { de: 'Regulierung', en: 'Settlement' }, { de: 'Claims, Finance', en: 'Claims, finance' }, { de: 'Reserve-Update, Auszahlungsdatensatz', en: 'Reserve update, payout record' }, { de: 'Regulieren / schließen', en: 'Settle / close' }, 'claim.settled'],
-                      ['13', { de: 'Portfolio-Reporting', en: 'Portfolio Reporting' }, { de: 'Management, Carrier', en: 'Management, carrier' }, { de: 'Loss-, Marge-, Risiko-Dashboards', en: 'Loss, margin, risk dashboards' }, { de: 'Portfolio-Steuerung', en: 'Portfolio steering' }, 'report.generated'],
-                      ['14', { de: 'Erneuerung / Verlängerung', en: 'Renewal / Prolongation' }, { de: 'Makler, MGA, Carrier', en: 'Broker, MGA, carrier' }, { de: 'Renewal-Score, Repricing-Vorschlag', en: 'Renewal score, repricing suggestion' }, { de: 'Renewal-Konditionen', en: 'Renewal terms' }, 'renewal.generated']
+                      ['1', { de: 'Plattform-Registrierung', en: 'Platform Registration' }, { de: 'Platform Owner, Tenant Admin', en: 'Platform owner, tenant admin' }, { de: 'Tenant-Metadaten, Vertrags- und Compliance-Profil', en: 'Tenant metadata, contract and compliance profile' }, { de: 'Policy-basierte Onboarding-Prüfung', en: 'Policy-based onboarding checks' }, 'tenant.registered'],
+                      ['2', { de: 'Makler-Onboarding', en: 'Broker Onboarding' }, { de: 'Broker, Operations', en: 'Broker, operations' }, { de: 'Brokerkonto, Vollmachten, API-Setup', en: 'Broker account, authority mapping, API setup' }, { de: 'Dokument- und Konsistenzprüfung', en: 'Document and consistency checks' }, 'broker.onboarded'],
+                      ['3', { de: 'Unternehmenskunden-Onboarding', en: 'Corporate Client Onboarding' }, { de: 'Broker, Client Admin', en: 'Broker, client admin' }, { de: 'Organisationseinheiten, User-Gruppen, Regionen', en: 'Organization units, user groups, regions' }, { de: 'Rollen-/Berechtigungs-Vorschläge', en: 'Role and permission recommendations' }, 'organization.created'],
+                      ['4', { de: 'Risikoeinreichung (Fleet, Cargo, Composite)', en: 'Risk Submission (Fleet, Cargo, Composite)' }, { de: 'Broker, Corporate Client', en: 'Broker, corporate client' }, { de: 'Risk Objects, Deckungswunsch, Exposure-Daten', en: 'Risk objects, coverage request, exposure data' }, { de: 'Datenqualitäts-Scoring', en: 'Data quality scoring' }, 'submission.created'],
+                      ['5', { de: 'AI-Pre-Scoring', en: 'AI Pre-Scoring' }, { de: 'MGA UW Team, AI Core', en: 'MGA underwriting team, AI core' }, { de: 'Fleet/Cargo/Composite Risk Scores', en: 'Fleet/cargo/composite risk scores' }, { de: 'Vorläufige Risikoklassifikation', en: 'Preliminary risk classification' }, 'risk.scored'],
+                      ['6', { de: 'Underwriting-Entscheidung (MGA oder Carrier)', en: 'Underwriting Decision (MGA or Carrier)' }, { de: 'MGA, Carrier Underwriter', en: 'MGA, carrier underwriter' }, { de: 'Pricing-Korridor, Referral-Flags, Zeichnungsentscheid', en: 'Pricing corridor, referral flags, underwriting decision' }, { de: 'Entscheidungsunterstützung & Explainability', en: 'Decision support and explainability' }, 'underwriting.decisioned'],
+                      ['7', { de: 'Policierung', en: 'Policy Issuance' }, { de: 'Broker, Policy Ops', en: 'Broker, policy ops' }, { de: 'Police, Endorsement-Basis, Dokumente', en: 'Policy, endorsement baseline, documents' }, { de: 'Dokumenten-Konsistenzcheck', en: 'Document consistency checks' }, 'policy.bound'],
+                      ['8', { de: 'Interner Client-Rollenzugriff', en: 'Internal Client Role Access' }, { de: 'Client Admin, Internal Users', en: 'Client admin, internal users' }, { de: 'Rollenfreigaben, Scope-Mappings', en: 'Role grants, scope mappings' }, { de: 'Anomalie-Hinweise bei Rechten', en: 'Anomaly hints on access rights' }, 'access.scope.updated'],
+                      ['9', { de: 'Shipment- & Fleet-Monitoring', en: 'Shipment & Fleet Monitoring' }, { de: 'Fleet Manager, Driver, AI Core', en: 'Fleet manager, driver, AI core' }, { de: 'Telematik, Shipment-Legs, Verhaltenssignale', en: 'Telematics, shipment legs, behavior signals' }, { de: 'Laufendes Risk Re-Scoring', en: 'Continuous risk re-scoring' }, 'shipment.declared'],
+                      ['10', { de: 'FNOL', en: 'FNOL' }, { de: 'Driver, Claims Manager', en: 'Driver, claims manager' }, { de: 'Schadenmeldung, Erstbelege, Kontextdaten', en: 'First notice of loss, evidence, context data' }, { de: 'Priorisierung nach Schweregrad', en: 'Severity-based prioritization' }, 'claim.created'],
+                      ['11', { de: 'AI-Schadenscan', en: 'AI Damage Scan' }, { de: 'Claims AI, Adjuster', en: 'Claims AI, adjuster' }, { de: 'Bildmerkmale, Schadenshypothesen', en: 'Image features, damage hypotheses' }, { de: 'Vision Damage Detection', en: 'Vision damage detection' }, 'scan.completed'],
+                      ['12', { de: 'Betrugs-Scoring', en: 'Fraud Scoring' }, { de: 'Claims AI, Fraud Team', en: 'Claims AI, fraud team' }, { de: 'Betrugsindikatoren, Anomaliecluster', en: 'Fraud indicators, anomaly clusters' }, { de: 'Loss Pattern Matching', en: 'Loss pattern matching' }, 'fraud.flagged'],
+                      ['13', { de: 'Partnerzuweisung', en: 'Partner Assignment' }, { de: 'Claims Manager, Partner Network', en: 'Claims manager, partner network' }, { de: 'Dispatch-Daten, SLA-Priorität', en: 'Dispatch data, SLA priority' }, { de: 'Match gegen Partnerprofil', en: 'Match against partner profile' }, 'partner.assigned'],
+                      ['14', { de: 'Regulierung', en: 'Settlement' }, { de: 'Claims, Finance Officer', en: 'Claims, finance officer' }, { de: 'Reserve, Auszahlungsdatensatz, Abschlussstatus', en: 'Reserve, payout record, closure status' }, { de: 'Leakage-/Outlier-Prüfung', en: 'Leakage and outlier checks' }, 'claim.settled'],
+                      ['15', { de: 'Reporting & Portfolio-Steuerung', en: 'Reporting & Portfolio Steering' }, { de: 'Management, Carrier, MGA', en: 'Management, carrier, MGA' }, { de: 'Loss Ratio, Segment-Marge, Kumulationssicht', en: 'Loss ratio, segment margin, accumulation view' }, { de: 'Forecasting & Renewal-Signale', en: 'Forecasting and renewal signals' }, 'report.generated'],
+                      ['16', { de: 'Erneuerung / Verlängerung', en: 'Renewal / Prolongation' }, { de: 'Broker, MGA, Carrier, Client', en: 'Broker, MGA, carrier, client' }, { de: 'Renewal Score, Konditionsvorschlag', en: 'Renewal score, terms proposal' }, { de: 'Renewal Optimization', en: 'Renewal optimization' }, 'renewal.generated']
                     ].map((row) => (
                       <tr key={row[0]}>
                         <td style={tdStrongStyle}>{row[0]}</td>
@@ -377,95 +386,101 @@ export default function InsideInsurfoxPage({ section }: { section: InsideSection
               </div>
             </Card>
 
-            <Card title={bi({ de: '4) Detaillierte GCP-Architektur', en: '4) Detailed GCP Architecture' }, l)}>
-              <MermaidBlock title={bi({ de: 'Diagramm 1 – Context', en: 'Diagram 1 – Context' }, l)} code={`flowchart LR
-  Broker[Broker] --> Platform[Insurfox Platform]
-  Carrier[Carrier] --> Platform
-  Fleet[Fleet] --> Platform
-  Driver[Driver] --> Platform
-  Partner[Partner] --> Platform
-  APIs[External APIs] --> Platform`} />
-              <MermaidBlock title={bi({ de: 'Diagramm 2 – Container', en: 'Diagram 2 – Container' }, l)} code={`flowchart TB
-  FE[Frontend React / CDN] --> GW[API Gateway]
-  GW --> CR[Cloud Run Services]
-  CR --> BUS[Event Bus Pub/Sub]
-  CR --> SP[(Spanner Core DB)]
-  CR --> ST[(Cloud Storage Docs & Images)]
-  CR --> BQ[(BigQuery Analytics)]
-  CR --> VAI[Vertex AI Models]
-  CR --> SEC[Secret Manager]
-  CR --> IAM[IAM]
-  CR --> MON[Monitoring]`} />
-              <MermaidBlock title={bi({ de: 'Diagramm 3 – Deployment', en: 'Diagram 3 – Deployment' }, l)} code={`flowchart TB
-  ORG[GCP Organization]
-  ORG --> PROD[Folder prod]
-  ORG --> STAGE[Folder staging]
-  ORG --> DEV[Folder dev]
-  PROD --> NET[shared-net-prod]
-  PROD --> CORE[platform-core-prod]
-  PROD --> DATA[data-platform-prod]
-  PROD --> ML[ml-platform-prod]
-  NET --> VPC[Shared VPC]
-  VPC --> SUB[Private Subnets]
-  VPC --> NAT[Cloud NAT]
-  VPC --> LB[Load Balancer + Cloud Armor]
-  CORE --> RUN[Cloud Run services]
-  DATA --> SPN[Spanner multi-region]
-  DATA --> BQD[BigQuery datasets]
-  ML --> VEP[Vertex AI endpoints]`} />
-            </Card>
-
-            <Card title={bi({ de: '5) Datenbankstruktur (Spanner-ready)', en: '5) Database Structure (Spanner-ready)' }, l)}>
+            <Card title={bi({ de: '4) Rollenbasierte Access-Architektur', en: '4) Role-Based Access Architecture' }, l)}>
               <p style={pStyle}>
                 {bi(
                   {
-                    de: 'Domänentrennung erfolgt entlang Tenant & Identity, Company & Broker, Fleet & Driver, Underwriting & Policy, Claims, Telematics, Partner Network, AI Governance sowie Audit & Timeline.',
-                    en: 'Domain separation follows Tenant & Identity, Company & Broker, Fleet & Driver, Underwriting & Policy, Claims, Telematics, Partner Network, AI Governance, and Audit & Timeline.'
+                    de: 'Das Enterprise-IAM-Modell basiert auf den Entitäten tenants, organizations, user_accounts, roles, permissions und user_role_assignments. Berechtigungen werden dynamisch über Plattform-, Broker- und Client-Level zugewiesen.',
+                    en: 'The enterprise IAM model is based on entities tenants, organizations, user_accounts, roles, permissions, and user_role_assignments. Permissions are dynamically assigned across platform, broker, and client levels.'
                   },
                   l
                 )}
               </p>
-              <MermaidBlock title={bi({ de: 'Kern-ERD', en: 'Core ERD' }, l)} code={`erDiagram
-  tenants ||--o{ users : has
-  tenants ||--o{ accounts : owns
-  accounts ||--o{ submissions : creates
-  submissions ||--o{ policies : converts_to
-  policies ||--o{ endorsements : has
-  policies ||--o{ renewals : has
-  policies ||--o{ claims : suffers
-  claims ||--o{ claim_photos : contains
-  accounts ||--o{ vehicles : owns
-  vehicles ||--o{ drivers : assigned_to
-  claims }o--|| partners : handled_by
-  submissions ||--o{ ai_runs : evaluated_by
-  tenants ||--o{ timeline_events : logs`} />
               <div style={{ ...roleCardStyle, marginTop: '0.65rem' }}>
-                <p style={noteStyle}><strong>{bi({ de: 'Primärschlüssel', en: 'Primary keys' }, l)}:</strong> {bi({ de: 'Globale IDs pro Entität mit tenant_id als führendem Partitionierungsmerkmal.', en: 'Global IDs per entity with tenant_id as leading partition key.' }, l)}</p>
-                <p style={{ ...noteStyle, marginTop: '0.35rem' }}><strong>{bi({ de: 'Fremdschlüssel', en: 'Foreign keys' }, l)}:</strong> {bi({ de: 'Domänensichere Referenzen zwischen Submission, Policy, Claim und Partner.', en: 'Domain-safe references across submission, policy, claim, and partner.' }, l)}</p>
-                <p style={{ ...noteStyle, marginTop: '0.35rem' }}><strong>{bi({ de: 'Indexing', en: 'Indexing strategy' }, l)}:</strong> {bi({ de: 'Sekundärindizes auf tenant_id + status + time für schnelle operative Filter.', en: 'Secondary indexes on tenant_id + status + time for fast operational filtering.' }, l)}</p>
-                <p style={{ ...noteStyle, marginTop: '0.35rem' }}><strong>{bi({ de: 'PII-Schutz', en: 'PII encryption' }, l)}:</strong> {bi({ de: 'Feldbasierte Verschlüsselung über Cloud KMS und rollenbasierte Entschlüsselung.', en: 'Field-level encryption via Cloud KMS with role-based decryption.' }, l)}</p>
-                <p style={{ ...noteStyle, marginTop: '0.35rem' }}><strong>{bi({ de: 'Retention', en: 'Retention policy' }, l)}:</strong> {bi({ de: 'Lifecycle-basierte Lösch-/Archivregeln je Datenklasse und regulatorischem Rahmen.', en: 'Lifecycle-based purge/archive rules by data class and regulatory context.' }, l)}</p>
+                <p style={noteStyle}><strong>{bi({ de: 'Driver', en: 'Driver' }, l)}:</strong> {bi({ de: 'darf Schaden melden, Fotos hochladen und eigene Vorfälle einsehen.', en: 'can submit claims, upload photos, and view own incidents.' }, l)}</p>
+                <p style={{ ...noteStyle, marginTop: '0.35rem' }}><strong>{bi({ de: 'Regional Fleet Manager', en: 'Regional Fleet Manager' }, l)}:</strong> {bi({ de: 'sieht regionale Fahrzeuge, Schäden und Flottenreports.', en: 'can view regional vehicles, claims, and fleet reports.' }, l)}</p>
+                <p style={{ ...noteStyle, marginTop: '0.35rem' }}><strong>{bi({ de: 'Finance Officer', en: 'Finance Officer' }, l)}:</strong> {bi({ de: 'sieht Rechnungen und Prämienabrechnungen.', en: 'can view invoices and premium statements.' }, l)}</p>
+              </div>
+              <p style={{ ...pStyle, marginTop: '0.55rem' }}>
+                {bi(
+                  {
+                    de: 'Der interne Client-Admin steuert Rechte pro Modul, Region und Funktion. Dadurch bleiben operative Rollen fokussiert, während Governance und Datenhoheit tenant-spezifisch erhalten bleiben.',
+                    en: 'The internal client admin controls rights per module, region, and function. This keeps operational roles focused while preserving tenant-specific governance and data ownership.'
+                  },
+                  l
+                )}
+              </p>
+            </Card>
+
+            <Card title={bi({ de: '5) Erweitertes Datenmodell', en: '5) Extended Data Model' }, l)}>
+              <p style={pStyle}>
+                {bi(
+                  {
+                    de: 'Die Domänenmodellierung basiert auf dem abstrakten RiskObject, das in operative Risikotypen für Transport und Composite aufgelöst wird.',
+                    en: 'Domain modeling is based on an abstract RiskObject that is specialized into operational risk types for transport and composite lines.'
+                  },
+                  l
+                )}
+              </p>
+              <MermaidBlock title={bi({ de: 'RiskObject-Abstraktion', en: 'RiskObject Abstraction' }, l)} code={`flowchart TB
+  R[RiskObject]
+  R --> V[Vehicle]
+  R --> S[Shipment]
+  R --> W[Warehouse]
+  R --> B[Building]
+  R --> A[Asset]
+  R --> D[Director]
+  R --> C[CreditExposure]`} />
+              <div style={{ ...roleCardStyle, marginTop: '0.65rem' }}>
+                <p style={noteStyle}><strong>{bi({ de: 'Transport', en: 'Transport' }, l)}:</strong> <code>vehicles</code>, <code>drivers</code>, <code>shipments</code>, <code>shipment_legs</code></p>
+                <p style={{ ...noteStyle, marginTop: '0.35rem' }}><strong>{bi({ de: 'Composite', en: 'Composite' }, l)}:</strong> <code>assets</code>, <code>locations</code>, <code>machinery_profiles</code>, <code>cyber_profiles</code>, <code>directors</code>, <code>credit_exposures</code></p>
+                <p style={{ ...noteStyle, marginTop: '0.35rem' }}><strong>{bi({ de: 'Governance', en: 'Governance' }, l)}:</strong> <code>policies</code>, <code>endorsements</code>, <code>renewals</code>, <code>claims</code>, <code>claim_photos</code>, <code>ai_runs</code>, <code>timeline_events</code></p>
+              </div>
+              <p style={{ ...pStyle, marginTop: '0.55rem' }}>
+                {bi(
+                  {
+                    de: 'Cloud Spanner dient als primäre verteilte Datenbank mit Multi-Region-Konfiguration, starker Konsistenz, tenant-orientierter Partitionierung und hoher Write-Throughput-Fähigkeit für ereignisintensive Versicherungsprozesse.',
+                    en: 'Cloud Spanner is the primary distributed database with multi-region configuration, strong consistency, tenant-oriented partitioning, and high write-throughput for event-intensive insurance operations.'
+                  },
+                  l
+                )}
+              </p>
+            </Card>
+
+            <Card title={bi({ de: '6) Event-Driven Core', en: '6) Event-Driven Core' }, l)}>
+              <p style={pStyle}>
+                {bi(
+                  {
+                    de: 'Der fachliche Kern ist event-getrieben über Pub/Sub orchestriert. Services verarbeiten idempotent, speichern Prozessstände deterministisch und unterstützen Event-Replay für Recovery, Audit und Modell-Retraining.',
+                    en: 'The business core is orchestrated via Pub/Sub in an event-driven architecture. Services process idempotently, persist deterministic process states, and support event replay for recovery, audit, and model retraining.'
+                  },
+                  l
+                )}
+              </p>
+              <div style={{ ...roleCardStyle, marginTop: '0.65rem' }}>
+                <p style={noteStyle}><code>submission.created</code>, <code>risk.scored</code>, <code>policy.bound</code>, <code>shipment.declared</code>, <code>claim.created</code>, <code>scan.completed</code>, <code>fraud.flagged</code>, <code>renewal.generated</code></p>
               </div>
             </Card>
 
-            <Card title={bi({ de: '6) Event-Driven Architecture', en: '6) Event-Driven Architecture' }, l)}>
-              <p style={pStyle}>{bi({ de: 'Jede fachliche Aktion erzeugt ein Domain-Event und wird über Pub/Sub verteilt. Services verarbeiten Events idempotent, um Mehrfachzustellungen ohne Seiteneffekte zu beherrschen.', en: 'Every business action emits a domain event distributed over Pub/Sub. Services consume events idempotently to handle duplicate delivery without side effects.' }, l)}</p>
-              <div style={{ ...roleCardStyle, marginTop: '0.65rem' }}>
-                <p style={noteStyle}><code>submission.created</code>, <code>quote.generated</code>, <code>policy.bound</code>, <code>claim.created</code>, <code>scan.completed</code>, <code>fraud.flagged</code>, <code>renewal.generated</code></p>
-              </div>
-            </Card>
-
-            <Card title={bi({ de: '7) AI Core Integration', en: '7) AI Core Integration' }, l)}>
-              <p style={pStyle}>{bi({ de: 'Der AI Core umfasst Underwriting AI, Claims Vision AI, Fraud Detection, Fleet Risk Scoring und Renewal Optimization. Das Modell-Lifecycle-Management folgt einem kontrollierten Betriebsprozess.', en: 'The AI core includes underwriting AI, claims vision AI, fraud detection, fleet risk scoring, and renewal optimization. Model lifecycle management follows a controlled operating process.' }, l)}</p>
+            <Card title={bi({ de: '7) AI-Core-Architektur', en: '7) AI Core Architecture' }, l)}>
+              <p style={pStyle}>
+                {bi(
+                  {
+                    de: 'Underwriting AI umfasst Fleet Risk Score, Cargo Risk Score und Composite Risk Aggregation. Claims AI liefert Vision Damage Detection, Fraud Detection und Loss Pattern Matching. Portfolio AI steuert Loss-Ratio-Forecast, Renewal-Optimierung und Accumulation-Risk-Engine.',
+                    en: 'Underwriting AI covers fleet risk score, cargo risk score, and composite risk aggregation. Claims AI provides vision damage detection, fraud detection, and loss pattern matching. Portfolio AI drives loss ratio forecasting, renewal optimization, and accumulation risk engine.'
+                  },
+                  l
+                )}
+              </p>
               <div style={flowGridStyle}>
                 {[
                   { de: 'Datenaufnahme', en: 'Data ingestion' },
                   { de: 'Feature Engineering', en: 'Feature engineering' },
                   { de: 'Training', en: 'Training' },
-                  { de: 'Modell-Registry', en: 'Registry' },
+                  { de: 'Modell-Registry', en: 'Model registry' },
                   { de: 'Deployment', en: 'Deployment' },
                   { de: 'Monitoring', en: 'Monitoring' },
-                  { de: 'Menschliche Prüfung', en: 'Human review' }
+                  { de: 'Human Override', en: 'Human override' }
                 ].map((step, idx) => (
                   <div key={step.en} style={flowItemStyle}>
                     <div style={flowIndexStyle}>{idx + 1}</div>
@@ -473,41 +488,113 @@ export default function InsideInsurfoxPage({ section }: { section: InsideSection
                   </div>
                 ))}
               </div>
-              <p style={{ ...noteStyle, marginTop: '0.55rem' }}>{bi({ de: 'Explainability, Human Override, Audit Logging und EU-AI-Act-konforme Governance sind verpflichtende Architekturbausteine.', en: 'Explainability, human override, audit logging, and EU AI Act-aligned governance are mandatory architecture components.' }, l)}</p>
+              <p style={{ ...noteStyle, marginTop: '0.55rem' }}>
+                {bi(
+                  {
+                    de: 'AI-Governance enthält EU-AI-Act-Readiness, Human Override, Audit Logging und Explainability-Layer für regulatorisch belastbare Entscheidungen.',
+                    en: 'AI governance includes EU AI Act readiness, human override, audit logging, and an explainability layer for regulatorily defensible decisions.'
+                  },
+                  l
+                )}
+              </p>
             </Card>
 
-            <Card title={bi({ de: '8) Data Flow Summary', en: '8) Data Flow Summary' }, l)}>
-              <MermaidBlock title={bi({ de: 'Lineare Übersicht', en: 'Linear Summary' }, l)} code={`flowchart LR
-  U[User Input] --> API[API]
-  API --> BUS[Event Bus]
-  BUS --> DB[Spanner]
-  DB --> AI[AI]
-  AI --> DEC[Decision]
-  DEC --> TL[Timeline]
-  TL --> REP[Reporting]
-  REP --> REN[Renewal]`} />
+            <Card title={bi({ de: '8) GCP-Cloud-Architektur', en: '8) GCP Cloud Architecture' }, l)}>
+              <p style={pStyle}>
+                {bi(
+                  {
+                    de: 'Das Architekturziel kombiniert React SPA auf CDN mit Cloud-Run-Microservices hinter API Gateway. Eventing läuft über Pub/Sub; persistente Kernprozesse liegen in Cloud Spanner, Dokumente in Cloud Storage, Analytics in BigQuery und Modelle in Vertex AI.',
+                    en: 'The architecture combines a React SPA on CDN with Cloud Run microservices behind API Gateway. Eventing is handled by Pub/Sub; persistent core processes run in Cloud Spanner, documents in Cloud Storage, analytics in BigQuery, and models in Vertex AI.'
+                  },
+                  l
+                )}
+              </p>
+              <p style={{ ...pStyle, marginTop: '0.55rem' }}>
+                {bi(
+                  {
+                    de: 'Shared VPC, getrennte Umgebungen (prod/staging/dev), Folder-Struktur, Multi-Region-Replikation, Cloud Armor und Load Balancer bilden die Grundlage für globalen Enterprise-Betrieb.',
+                    en: 'Shared VPC, separated environments (prod/staging/dev), folder structure, multi-region replication, Cloud Armor, and load balancing form the foundation for global enterprise operations.'
+                  },
+                  l
+                )}
+              </p>
+              <MermaidBlock title={bi({ de: 'Context Diagram', en: 'Context Diagram' }, l)} code={`flowchart LR
+  Broker[Broker] --> Platform[Insurfox Platform]
+  Carrier[Carrier] --> Platform
+  Logistics[Logistics Client] --> Platform
+  Driver[Driver] --> Platform
+  Partner[Partner Network] --> Platform
+  APIs[External APIs] --> Platform`} />
+              <MermaidBlock title={bi({ de: 'Container Diagram', en: 'Container Diagram' }, l)} code={`flowchart TB
+  FE[React SPA / CDN] --> APIGW[API Gateway]
+  APIGW --> RUN[Cloud Run Microservices]
+  RUN --> BUS[Pub/Sub]
+  RUN --> SP[(Cloud Spanner)]
+  RUN --> ST[(Cloud Storage)]
+  RUN --> BQ[(BigQuery)]
+  RUN --> VAI[Vertex AI]
+  RUN --> SM[Secret Manager]
+  RUN --> IAM[IAM]
+  APIGW --> LB[Load Balancer]
+  LB --> ARM[Cloud Armor]`} />
+              <MermaidBlock title={bi({ de: 'Deployment Diagram', en: 'Deployment Diagram' }, l)} code={`flowchart TB
+  ORG[GCP Organization]
+  ORG --> PROD[Folder: prod]
+  ORG --> STAGE[Folder: staging]
+  ORG --> DEV[Folder: dev]
+  PROD --> NET[shared-vpc-prod]
+  PROD --> CORE[platform-core-prod]
+  PROD --> DATA[data-platform-prod]
+  PROD --> ML[ml-platform-prod]
+  NET --> VPC[Shared VPC]
+  VPC --> RUN[Cloud Run services]
+  VPC --> LB[Global Load Balancer]
+  LB --> ARM[Cloud Armor]
+  DATA --> SPN[Spanner multi-region]
+  DATA --> BQD[BigQuery datasets]
+  ML --> VEP[Vertex AI endpoints]`} />
             </Card>
 
-            <Card title={bi({ de: '9) Observability & Security', en: '9) Observability & Security' }, l)}>
-              <p style={pStyle}>{bi({ de: 'Sicherheits- und Betriebskontrollen basieren auf IAM-Rollenmodellen, dedizierten Service Accounts, Secret Manager, Cloud KMS, vollständigem Audit Trail sowie zentralem Logging & Monitoring.', en: 'Security and operations controls are built on IAM role models, dedicated service accounts, Secret Manager, Cloud KMS, full audit trails, and centralized logging & monitoring.' }, l)}</p>
-              <p style={{ ...pStyle, marginTop: '0.55rem' }}>{bi({ de: 'Zero-Trust-Netzwerkprinzipien mit privaten Subnetzen, kontrolliertem Egress und Perimeter-Schutz reduzieren laterale Risiken in Multi-Tenant-Umgebungen.', en: 'Zero-trust networking with private subnets, controlled egress, and perimeter protection reduces lateral risk in multi-tenant environments.' }, l)}</p>
+            <Card title={bi({ de: '9) Security & Data Governance', en: '9) Security & Data Governance' }, l)}>
+              <p style={pStyle}>
+                {bi(
+                  {
+                    de: 'Die Sicherheitsarchitektur folgt Zero-Trust-Prinzipien mit rollenbasierter Zugriffskontrolle, Row-Level-Filtering und Field-Level-Masking. Verschlüsselung erfolgt at rest und in transit; Audit Trails sowie zentrales Logging und Monitoring sichern Nachvollziehbarkeit und Betriebsstabilität.',
+                    en: 'The security architecture follows zero-trust principles with role-based access control, row-level filtering, and field-level masking. Encryption is enforced at rest and in transit; audit trails and centralized logging and monitoring ensure traceability and operational stability.'
+                  },
+                  l
+                )}
+              </p>
+              <p style={{ ...pStyle, marginTop: '0.55rem' }}>
+                {bi(
+                  {
+                    de: 'Der Governance-Rahmen ist auf Compliance-Readiness für internationale Programme ausgelegt und unterstützt regulatorische Prüfpfade ohne Medienbruch.',
+                    en: 'The governance framework is designed for compliance readiness across international programs and supports regulatory audit paths without process breaks.'
+                  },
+                  l
+                )}
+              </p>
             </Card>
 
-            <Card title={bi({ de: '10) MVP zu globaler Skalierung', en: '10) MVP to Global Scale Roadmap' }, l)}>
-              <div style={{ display: 'grid', gap: '0.65rem' }}>
-                <div style={roleCardStyle}>
-                  <h3 style={subHeadingStyle}>Phase 1</h3>
-                  <p style={noteStyle}>{bi({ de: 'Cloud Run + Cloud SQL, manuelles Underwriting und FNOL-Kernprozess.', en: 'Cloud Run + Cloud SQL, manual underwriting and FNOL core flow.' }, l)}</p>
-                </div>
-                <div style={roleCardStyle}>
-                  <h3 style={subHeadingStyle}>Phase 2</h3>
-                  <p style={noteStyle}>{bi({ de: 'Spanner-Migration, event-driven Orchestrierung, AI Damage Scan in Claims.', en: 'Spanner migration, event-driven orchestration, and AI damage scan in claims.' }, l)}</p>
-                </div>
-                <div style={roleCardStyle}>
-                  <h3 style={subHeadingStyle}>Phase 3</h3>
-                  <p style={noteStyle}>{bi({ de: 'Multi-Region-Spanner, vollständiger AI-Feedback-Loop, Portfolio-Steering und Reinsurance-Integration.', en: 'Multi-region Spanner, full AI feedback loop, portfolio steering, and reinsurance integration.' }, l)}</p>
-                </div>
-              </div>
+            <Card title={bi({ de: '10) Strategische Positionierung', en: '10) Strategic Positioning' }, l)}>
+              <p style={pStyle}>
+                {bi(
+                  {
+                    de: 'Insurfox ist nicht nur ein SaaS-Tool. Die Plattform vereint MGA, Broker, Infrastruktur und AI Risk Operator in einem Enterprise Insurance Backbone und verbindet Vertrieb, Zeichnung, Schaden und Portfoliosteuerung in einer operativen Einheit.',
+                    en: 'Insurfox is not just a SaaS tool. The platform combines MGA, broker, infrastructure, and AI risk operator capabilities into one enterprise insurance backbone, connecting distribution, underwriting, claims, and portfolio steering in a single operating unit.'
+                  },
+                  l
+                )}
+              </p>
+              <p style={{ ...pStyle, marginTop: '0.55rem' }}>
+                {bi(
+                  {
+                    de: 'Damit differenziert sich Insurfox strukturell gegenüber Claims-only-Lösungen, Broker-only-Plattformen und Underwriting-only-Systemen durch eine durchgängige End-to-End-Execution mit Multi-Tenant- und Multi-Role-Fähigkeit.',
+                    en: 'This structurally differentiates Insurfox from claims-only tools, broker-only platforms, and underwriting-only systems by delivering end-to-end execution with multi-tenant and multi-role capability.'
+                  },
+                  l
+                )}
+              </p>
             </Card>
           </>
         )}
