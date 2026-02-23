@@ -314,6 +314,7 @@ export default function AppRouter() {
         <Route path="/analysis/blaudirekt" element={<BlaudirektAnalysisPage />} />
         <Route path="/analysis/flock-admiral" element={<FlockAdmiralAnalysisPage />} />
         <Route path="/inside-insurfox" element={<InsideInsurfoxPage section="home" />} />
+        <Route path="/inside-insurfox/app-architecture" element={<InsideInsurfoxPage section="app-architecture" />} />
         <Route path="/inside-insurfox/vision" element={<InsideInsurfoxPage section="vision" />} />
         <Route path="/inside-insurfox/roles" element={<InsideInsurfoxPage section="roles" />} />
         <Route path="/inside-insurfox/lifecycle" element={<InsideInsurfoxPage section="lifecycle" />} />

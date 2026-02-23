@@ -400,6 +400,7 @@ type TranslationTree = {
     }
     nav: {
       home: string
+      appArchitecture: string
       vision: string
       roles: string
       lifecycle: string
@@ -3162,6 +3163,7 @@ export const translations: Record<Lang, TranslationTree> = {
       },
       pages: {
         home: { title: 'Architektur', subtitle: 'Zentrale Architekturübersicht und Operating-Blueprint für Inside Insurfox' },
+        'app-architecture': { title: 'App Architektur', subtitle: 'Hybrid-Web- und Native-Mobile-Referenzarchitektur für Insurfox' },
         vision: { title: 'Vision', subtitle: 'Warum Insurfox als integriertes Insurance Operating System aufgebaut wird' },
         roles: { title: 'Rollen', subtitle: 'Verantwortlichkeiten, Entscheidungsrechte und KPI-Ownership' },
         lifecycle: { title: 'Lebenszyklus', subtitle: 'Von Registrierung bis Erneuerung als durchgängige Ausführungskette' },
@@ -3276,6 +3278,7 @@ export const translations: Record<Lang, TranslationTree> = {
       },
       nav: {
         home: 'Architektur',
+        appArchitecture: 'App Architektur',
         vision: 'Vision',
         roles: 'Rollen',
         lifecycle: 'Lebenszyklus',
@@ -7330,6 +7333,7 @@ export const translations: Record<Lang, TranslationTree> = {
       },
       pages: {
         home: { title: 'Architecture', subtitle: 'Central architecture overview and operating blueprint for Inside Insurfox' },
+        'app-architecture': { title: 'App Architecture', subtitle: 'Hybrid web and native mobile reference architecture for Insurfox' },
         vision: { title: 'Vision', subtitle: 'Why Insurfox is built as an integrated insurance operating system' },
         roles: { title: 'Roles', subtitle: 'Responsibilities, decision rights, and KPI ownership' },
         lifecycle: { title: 'Lifecycle', subtitle: 'From registration to renewal as one connected execution chain' },
@@ -7444,6 +7448,7 @@ export const translations: Record<Lang, TranslationTree> = {
       },
       nav: {
         home: 'Architecture',
+        appArchitecture: 'App Architecture',
         vision: 'Vision',
         roles: 'Roles',
         lifecycle: 'Lifecycle',

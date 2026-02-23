@@ -4,6 +4,7 @@ import { useI18n } from '@/i18n/I18nContext'
 
 export type InsideSectionKey =
   | 'home'
+  | 'app-architecture'
   | 'vision'
   | 'roles'
   | 'lifecycle'
@@ -22,6 +23,7 @@ type SectionDef = {
 
 const sectionDefs: SectionDef[] = [
   { key: 'home', route: '/inside-insurfox', labelKey: 'insideInsurfox.nav.home' },
+  { key: 'app-architecture', route: '/inside-insurfox/app-architecture', labelKey: 'insideInsurfox.nav.appArchitecture' },
   { key: 'vision', route: '/inside-insurfox/vision', labelKey: 'insideInsurfox.nav.vision' },
   { key: 'roles', route: '/inside-insurfox/roles', labelKey: 'insideInsurfox.nav.roles' },
   { key: 'lifecycle', route: '/inside-insurfox/lifecycle', labelKey: 'insideInsurfox.nav.lifecycle' },

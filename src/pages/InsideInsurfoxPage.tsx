@@ -718,6 +718,257 @@ export default function InsideInsurfoxPage({ section }: { section: InsideSection
           </>
         )}
 
+        {section === 'app-architecture' && (
+          <>
+            <Card title={bi({ de: '1) ARCHITECTURAL VISION', en: '1) ARCHITECTURAL VISION' }, l)}>
+              <h3 style={subHeadingStyle}>{bi({ de: 'Hybrid Web + Native Architecture for Insurfox', en: 'Hybrid Web + Native Architecture for Insurfox' }, l)}</h3>
+              <p style={pStyle}>
+                {bi(
+                  {
+                    de: 'Insurfox folgt einem One-Platform-Modell mit einem Backend, einer API und rollenbasierter UI-Aussteuerung für MGA, Broker und Corporate Clients in einer Multi-Tenant-Architektur.',
+                    en: 'Insurfox follows a one-platform model with one backend, one API, and role-based UI rendering for MGA, broker, and corporate clients in a multi-tenant architecture.'
+                  },
+                  l
+                )}
+              </p>
+              <p style={{ ...pStyle, marginTop: '0.55rem' }}>
+                {bi(
+                  {
+                    de: 'Claimsfox, Brokerfox, Fleetfox, Partnerfox und AI Fox sind Feature-Domänen innerhalb derselben Anwendung und nicht separate Apps. Für Mobile wird ein einzelner App-Store-Client betrieben.',
+                    en: 'Claimsfox, Brokerfox, Fleetfox, Partnerfox, and AI Fox are feature domains inside one application, not separate apps. Mobile is delivered through one single app-store client.'
+                  },
+                  l
+                )}
+              </p>
+            </Card>
+
+            <Card title={bi({ de: '2) HIGH-LEVEL SYSTEM OVERVIEW', en: '2) HIGH-LEVEL SYSTEM OVERVIEW' }, l)}>
+              <MermaidBlock
+                title={bi({ de: 'Systemübersicht', en: 'System Overview' }, l)}
+                code={`flowchart LR
+  WEB[Web App React SPA] --> GW[API Gateway]
+  MOB[Mobile App React Native] --> GW
+  GW --> RUN[Cloud Run Services]
+  RUN --> SP[(Cloud Spanner)]
+  RUN --> BUS[Pub/Sub]
+  RUN --> ST[(Cloud Storage)]
+  RUN --> BQ[(BigQuery)]
+  RUN --> AI[Vertex AI]`}
+              />
+              <p style={{ ...noteStyle, marginTop: '0.55rem' }}>
+                {bi(
+                  {
+                    de: 'Web und Mobile nutzen eine gemeinsame API-Schicht. Backend-Services arbeiten event-getrieben und tenant-aware.',
+                    en: 'Web and mobile share the same API layer. Backend services are event-driven and tenant-aware.'
+                  },
+                  l
+                )}
+              </p>
+            </Card>
+
+            <Card title={bi({ de: '3) FRONTEND ARCHITECTURE', en: '3) FRONTEND ARCHITECTURE' }, l)}>
+              <div style={{ ...roleCardStyle, marginBottom: '0.6rem' }}>
+                <pre style={mermaidPreStyle}>
+                  <code>{`apps/
+  web/
+  mobile/
+packages/
+  ui/
+  auth/
+  permissions/
+  api-client/`}</code>
+                </pre>
+              </div>
+              <p style={pStyle}>
+                {bi(
+                  {
+                    de: 'Die Monorepo-Strategie konsolidiert UI-Komponenten, Auth-Logik, Permission Engine und API-Client. Navigation und Modul-Rendering werden zur Laufzeit über JWT-basierte Rechte gesteuert.',
+                    en: 'The monorepo strategy consolidates UI components, auth logic, permission engine, and API client. Navigation and module rendering are controlled at runtime via JWT-based permissions.'
+                  },
+                  l
+                )}
+              </p>
+            </Card>
+
+            <Card title={bi({ de: '4) MOBILE ARCHITECTURE', en: '4) MOBILE ARCHITECTURE' }, l)}>
+              <p style={pStyle}>
+                {bi(
+                  {
+                    de: 'Mobile basiert auf React Native (Expo mit Übergang auf Bare Workflow für Enterprise-Anforderungen). Offline-Fähigkeit umfasst FNOL, Foto-Upload und Standorterfassung.',
+                    en: 'Mobile is based on React Native (Expo with transition to Bare Workflow for enterprise requirements). Offline capability includes FNOL, photo upload, and location capture.'
+                  },
+                  l
+                )}
+              </p>
+              <p style={{ ...noteStyle, marginTop: '0.45rem' }}>
+                {bi(
+                  {
+                    de: 'Offline-Sync-Modell: lokale SQLite-Persistenz, Queue-System, Retry bei Reconnect, Background-Sync mit Konfliktauflösung per serverseitigem Timestamp.',
+                    en: 'Offline sync model: local SQLite persistence, queue system, retry on reconnect, background sync with server-side timestamp conflict resolution.'
+                  },
+                  l
+                )}
+              </p>
+            </Card>
+
+            <Card title={bi({ de: '5) AUTHENTICATION & ROLE MODEL', en: '5) AUTHENTICATION & ROLE MODEL' }, l)}>
+              <p style={pStyle}>
+                {bi(
+                  {
+                    de: 'Authentifizierung erfolgt über OAuth2/OIDC. Das JWT enthält tenant_id, role_ids, module_permissions, region_scope und field_mask_rules.',
+                    en: 'Authentication uses OAuth2/OIDC. The JWT contains tenant_id, role_ids, module_permissions, region_scope, and field_mask_rules.'
+                  },
+                  l
+                )}
+              </p>
+              <div style={{ ...roleCardStyle, marginTop: '0.6rem' }}>
+                <pre style={mermaidPreStyle}>
+                  <code>{`const canAccess = (token, action, resource) => {
+  const hasRolePermission = token.module_permissions.includes(action)
+  const inScope = resource.tenant_id === token.tenant_id
+    && token.region_scope.includes(resource.region)
+  return hasRolePermission && inScope
+}`}</code>
+                </pre>
+              </div>
+            </Card>
+
+            <Card title={bi({ de: '6) BACKEND SERVICE LAYER', en: '6) BACKEND SERVICE LAYER' }, l)}>
+              <p style={pStyle}>
+                {bi(
+                  {
+                    de: 'Cloud-Run-Microservices: auth-service, policy-service, claims-service, fleet-service, cargo-service, partner-service, reporting-service und ai-service. Alle Services sind tenant-aware und erzwingen Berechtigungsprüfungen serverseitig.',
+                    en: 'Cloud Run microservices: auth-service, policy-service, claims-service, fleet-service, cargo-service, partner-service, reporting-service, and ai-service. All services are tenant-aware and enforce permission checks server-side.'
+                  },
+                  l
+                )}
+              </p>
+            </Card>
+
+            <Card title={bi({ de: '7) EVENT-DRIVEN ARCHITECTURE', en: '7) EVENT-DRIVEN ARCHITECTURE' }, l)}>
+              <p style={pStyle}>
+                {bi(
+                  {
+                    de: 'Alle Domänenevents werden über Pub/Sub publiziert. Konsumenten verarbeiten idempotent (dedupe_key) und unterstützen Replay für Recovery, Reprocessing und Audit.',
+                    en: 'All domain events are published via Pub/Sub. Consumers process idempotently (dedupe_key) and support replay for recovery, reprocessing, and audit.'
+                  },
+                  l
+                )}
+              </p>
+              <MermaidBlock
+                title={bi({ de: 'Event Flow', en: 'Event Flow' }, l)}
+                code={`flowchart LR
+  C[claim.created] --> BUS[Pub/Sub]
+  B[policy.bound] --> BUS
+  R[renewal.generated] --> BUS
+  S[scan.completed] --> BUS
+  BUS --> CS[claims-service]
+  BUS --> RS[reporting-service]
+  BUS --> AIS[ai-service]`}
+              />
+            </Card>
+
+            <Card title={bi({ de: '8) AI INTEGRATION FLOW', en: '8) AI INTEGRATION FLOW' }, l)}>
+              <MermaidBlock
+                title={bi({ de: 'Mobile-to-AI-Pipeline', en: 'Mobile-to-AI Pipeline' }, l)}
+                code={`flowchart LR
+  M[Mobile App] --> U[Image Upload]
+  U --> ST[Cloud Storage]
+  ST --> BUS[Pub/Sub]
+  BUS --> AI[AI Service]
+  AI --> TL[Timeline Event]
+  TL --> APP[Web/Mobile App]`}
+              />
+              <p style={{ ...noteStyle, marginTop: '0.55rem' }}>
+                {bi(
+                  {
+                    de: 'AI-Use-Cases: Damage Detection, Fraud Scoring, Fleet Risk Scoring und Renewal Optimization.',
+                    en: 'AI use cases: damage detection, fraud scoring, fleet risk scoring, and renewal optimization.'
+                  },
+                  l
+                )}
+              </p>
+            </Card>
+
+            <Card title={bi({ de: '9) CLOUD ARCHITECTURE (GCP)', en: '9) CLOUD ARCHITECTURE (GCP)' }, l)}>
+              <p style={pStyle}>
+                {bi(
+                  {
+                    de: 'Betriebsmodell mit Shared VPC, Environment-Trennung (prod/staging/dev), Cloud Armor, Load Balancer, Cloud Run, Spanner Multi-Region, BigQuery, Vertex AI Endpoints, Secret Manager und IAM-Rollen.',
+                    en: 'Operating model with shared VPC, environment separation (prod/staging/dev), Cloud Armor, load balancer, Cloud Run, Spanner multi-region, BigQuery, Vertex AI endpoints, Secret Manager, and IAM roles.'
+                  },
+                  l
+                )}
+              </p>
+              <MermaidBlock
+                title={bi({ de: 'Deployment Diagram', en: 'Deployment Diagram' }, l)}
+                code={`flowchart TB
+  ORG[GCP Org] --> PROD[prod]
+  ORG --> STG[staging]
+  ORG --> DEV[dev]
+  PROD --> VPC[Shared VPC]
+  VPC --> LB[Load Balancer + Cloud Armor]
+  LB --> RUN[Cloud Run]
+  RUN --> SP[Spanner Multi-Region]
+  RUN --> BQ[BigQuery]
+  RUN --> VAI[Vertex AI Endpoints]
+  RUN --> SEC[Secret Manager]
+  RUN --> IAM[IAM]`}
+              />
+            </Card>
+
+            <Card title={bi({ de: '10) SECURITY & DEVOPS', en: '10) SECURITY & DEVOPS' }, l)}>
+              <p style={pStyle}>
+                {bi(
+                  {
+                    de: 'Security Controls: kurze JWT-Laufzeiten, Refresh-Token-Rotation, sichere Token-Speicherung (Keychain/Keystore), Certificate Pinning, Zero-Trust-Networking, serverseitige Rollenvalidierung, Audit Logging sowie Cloud Logging/Monitoring.',
+                    en: 'Security controls: short JWT lifetimes, refresh-token rotation, secure token storage (Keychain/Keystore), certificate pinning, zero-trust networking, server-side role validation, audit logging, and Cloud Logging/Monitoring.'
+                  },
+                  l
+                )}
+              </p>
+              <p style={{ ...noteStyle, marginTop: '0.45rem' }}>
+                {bi(
+                  {
+                    de: 'CI/CD Web: Vite Build + CDN Deploy. CI/CD Mobile: Expo EAS, Store Releases (App Store / Google Play) und optional Enterprise Distribution.',
+                    en: 'CI/CD web: Vite build + CDN deploy. CI/CD mobile: Expo EAS, store releases (App Store / Google Play), and optional enterprise distribution.'
+                  },
+                  l
+                )}
+              </p>
+            </Card>
+
+            <Card title={bi({ de: '11) WHITE LABEL STRATEGY', en: '11) WHITE LABEL STRATEGY' }, l)}>
+              <p style={pStyle}>
+                {bi(
+                  {
+                    de: 'Ein App-Binary, tenantbasierte Branding-Konfiguration, modulare Aktivierung pro Tenant. Themes, Logos und Feature Flags werden zur Laufzeit aus Tenant-Metadaten geladen.',
+                    en: 'One app binary with tenant-based branding configuration and per-tenant module activation. Themes, logos, and feature flags are loaded at runtime from tenant metadata.'
+                  },
+                  l
+                )}
+              </p>
+            </Card>
+
+            <Card title={bi({ de: '12) SCALING STRATEGY', en: '12) SCALING STRATEGY' }, l)}>
+              <div style={{ display: 'grid', gap: '0.65rem' }}>
+                <div style={roleCardStyle}>
+                  <h3 style={subHeadingStyle}>Phase 1</h3>
+                  <p style={noteStyle}>{bi({ de: 'Cloud SQL + Cloud Run als initiale Delivery-Basis.', en: 'Cloud SQL + Cloud Run as initial delivery baseline.' }, l)}</p>
+                </div>
+                <div style={roleCardStyle}>
+                  <h3 style={subHeadingStyle}>Phase 2</h3>
+                  <p style={noteStyle}>{bi({ de: 'Migration auf Spanner und event-getriebene Orchestrierung.', en: 'Migration to Spanner and event-driven orchestration.' }, l)}</p>
+                </div>
+                <div style={roleCardStyle}>
+                  <h3 style={subHeadingStyle}>Phase 3</h3>
+                  <p style={noteStyle}>{bi({ de: 'Multi-Region-Deployment, vollständiger AI-Feedback-Loop und globale Datenresidenz.', en: 'Multi-region deployment, full AI feedback loop, and global data residency.' }, l)}</p>
+                </div>
+              </div>
+            </Card>
+          </>
+        )}
+
         {section === 'vision' && (
           <>
             <Card title={t('insideInsurfox.vision.strategyTitle')}>
