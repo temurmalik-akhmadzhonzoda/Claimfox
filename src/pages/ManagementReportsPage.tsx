@@ -56,7 +56,7 @@ export default function ManagementReportsPage() {
   ]
 
   return (
-    <section className="page" style={{ gap: '1.25rem' }}>
+    <section className="page" style={{ gap: '1.25rem', paddingTop: '0.85rem' }}>
       <div style={{ width: '100%', maxWidth: 1200, margin: '0 auto', display: 'grid', gap: '1rem' }}>
         <Card
           title={l === 'de' ? 'Marktanalysen' : 'Market Analyses'}
