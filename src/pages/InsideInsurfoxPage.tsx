@@ -1,242 +1,243 @@
-import { type CSSProperties } from 'react'
+import { useMemo, useState, type CSSProperties } from 'react'
 import Card from '@/components/ui/Card'
 import Header from '@/components/ui/Header'
 import Button from '@/components/ui/Button'
 import { useI18n } from '@/i18n/I18nContext'
 import { InsideInsurfoxSubnav, type InsideSectionKey } from '@/components/inside-insurfox/InsideInsurfoxSubnav'
+import DataFieldExplorer from '@/components/inside-insurfox/DataFieldExplorer'
 
 type BiText = { de: string; en: string }
 
-type SectionContent = {
-  title: BiText
-  subtitle: BiText
-  summary: BiText[]
-  flow: BiText[]
-  callouts: BiText[]
+type RoleDetail = {
+  role: BiText
+  objectives: BiText
+  responsibilities: BiText
+  dataScope: BiText
+  decisions: BiText
+  kpis: BiText
 }
 
-const sectionContent: Record<InsideSectionKey, SectionContent> = {
-  home: {
-    title: { de: 'Inside Insurfox - The Insurance Operating System', en: 'Inside Insurfox - The Insurance Operating System' },
-    subtitle: { de: 'Strategische Innenansicht über Operating Model, Architektur und Skalierungslogik', en: 'Strategic internal view of operating model, architecture, and scaling logic' },
-    summary: [
-      { de: 'Diese Rubrik zeigt die Zielarchitektur von Insurfox als durchgängiges Insurance Operating System mit klaren Führungs- und Ausführungsverantwortungen.', en: 'This section presents the target architecture of Insurfox as an integrated insurance operating system with clear leadership and execution responsibilities.' },
-      { de: 'Der Fokus liegt auf End-to-end Steuerung über Underwriting, Claims, Fleet, Partner und Reporting, inklusive AI-unterstützter Entscheidungslogik.', en: 'The focus is end-to-end control across underwriting, claims, fleet, partner, and reporting, including AI-supported decision logic.' }
-    ],
-    flow: [
-      { de: 'Strategie & Ziele', en: 'Strategy & goals' },
-      { de: 'Operating Model', en: 'Operating model' },
-      { de: 'Plattformarchitektur', en: 'Platform architecture' },
-      { de: 'Ausführungs-Module', en: 'Execution modules' },
-      { de: 'Messung & Lernschleife', en: 'Measurement & learning loop' }
-    ],
-    callouts: [
-      { de: 'Ein Betriebssystem statt isolierter Tools: jede Funktion zahlt auf Governance und Profitabilität ein.', en: 'An operating system instead of isolated tools: every function contributes to governance and profitability.' },
-      { de: 'Module sind skalierbar kombinierbar, aber zentral über Datenmodell und Rollenmodell gekoppelt.', en: 'Modules are combinable at scale, yet centrally linked through data and role models.' },
-      { de: 'Die Rubrik dient als interne Referenz für Management, Produkt und Delivery.', en: 'This section serves as internal reference for management, product, and delivery.' }
-    ]
-  },
-  vision: {
-    title: { de: 'Vision', en: 'Vision' },
-    subtitle: { de: 'Insurfox als durchgängige Versicherungsinfrastruktur', en: 'Insurfox as end-to-end insurance infrastructure' },
-    summary: [
-      { de: 'Die Vision verbindet MGA-, Broker- und Plattformfähigkeiten in einem integrierten Modell statt in getrennten Organisationssilos.', en: 'The vision combines MGA, broker, and platform capabilities in one integrated model rather than separate organizational silos.' },
-      { de: 'Strategisches Ziel ist ein belastbarer Ausführungsstandard von Risikoaufnahme bis Erneuerung, mit klarer Daten- und Entscheidungsführung.', en: 'The strategic goal is a robust execution standard from risk intake to renewal, with clear data and decision governance.' }
-    ],
-    flow: [
-      { de: 'Marktproblem', en: 'Market problem' },
-      { de: 'Integrierte Wertkette', en: 'Integrated value chain' },
-      { de: 'Skalierbare Plattform', en: 'Scalable platform' },
-      { de: 'Operative Exzellenz', en: 'Operational excellence' },
-      { de: 'Nachhaltiger Moat', en: 'Sustainable moat' }
-    ],
-    callouts: [
-      { de: 'Vision und Ausführung sind gekoppelt: nur operative Tiefe schafft verteidigbare Margen.', en: 'Vision and execution are linked: only operational depth creates defendable margins.' },
-      { de: 'AI ist kein Add-on, sondern Bestandteil des Betriebsmodells.', en: 'AI is not an add-on; it is part of the operating model.' },
-      { de: 'Distribution und Operating Stack müssen gemeinsam skaliert werden.', en: 'Distribution and operating stack must scale together.' }
-    ]
-  },
-  roles: {
-    title: { de: 'Rollenmodell', en: 'Roles' },
-    subtitle: { de: 'Verantwortlichkeiten über Management, Underwriting, Claims und Operations', en: 'Responsibilities across management, underwriting, claims, and operations' },
-    summary: [
-      { de: 'Das Rollenmodell definiert Entscheidungswege, Eskalationen und Qualitätsverantwortung entlang der Kernprozesse.', en: 'The role model defines decision paths, escalations, and quality accountability across core processes.' },
-      { de: 'Jede Rolle verfügt über klare Inputs, KPIs und Governance-Pflichten, um Geschwindigkeit ohne Kontrollverlust zu ermöglichen.', en: 'Each role has explicit inputs, KPIs, and governance duties to enable speed without losing control.' }
-    ],
-    flow: [
-      { de: 'Vorstand/Management', en: 'Board/management' },
-      { de: 'Produkt & Underwriting', en: 'Product & underwriting' },
-      { de: 'Claims & Partnersteuerung', en: 'Claims & partner steering' },
-      { de: 'Operations & Compliance', en: 'Operations & compliance' },
-      { de: 'Reporting & Steering', en: 'Reporting & steering' }
-    ],
-    callouts: [
-      { de: 'Klare Rollen reduzieren Reibung und verkürzen Durchlaufzeiten.', en: 'Clear roles reduce friction and shorten cycle times.' },
-      { de: 'Governance ist integraler Teil jeder Rolle, nicht nur der Compliance-Funktion.', en: 'Governance is integral to every role, not only compliance.' },
-      { de: 'Ownership über Datenpunkte ist Voraussetzung für belastbare Entscheidungen.', en: 'Data-point ownership is a prerequisite for robust decisions.' }
-    ]
-  },
-  lifecycle: {
-    title: { de: 'Lifecycle', en: 'Lifecycle' },
-    subtitle: { de: 'Von Intake bis Renewal als zusammenhängender Prozess', en: 'From intake to renewal as one connected process' },
-    summary: [
-      { de: 'Der Lifecycle-Ansatz orchestriert Akquise, Underwriting, Policierung, Claims und Erneuerung in einer durchgehenden Prozesskette.', en: 'The lifecycle approach orchestrates acquisition, underwriting, policy operations, claims, and renewal in one continuous process chain.' },
-      { de: 'Übergaben zwischen Teams werden über standardisierte Datenobjekte statt ad-hoc Kommunikation gesteuert.', en: 'Handoffs between teams are governed via standardized data objects instead of ad-hoc communication.' }
-    ],
-    flow: [
-      { de: 'Intake & Qualifizierung', en: 'Intake & qualification' },
-      { de: 'Underwriting & Pricing', en: 'Underwriting & pricing' },
-      { de: 'Policy Operations', en: 'Policy operations' },
-      { de: 'Claims & Service', en: 'Claims & service' },
-      { de: 'Renewal & Cross-Sell', en: 'Renewal & cross-sell' }
-    ],
-    callouts: [
-      { de: 'Lifecycle-Kohärenz senkt operative Kosten und verbessert Servicelevels.', en: 'Lifecycle coherence reduces operating cost and improves service levels.' },
-      { de: 'Relevante Signale werden an Folgeschritte übergeben, nicht verworfen.', en: 'Relevant signals are passed to downstream steps, not discarded.' },
-      { de: 'Renewal ist Ergebnis der gesamten Vorperiode, nicht nur Vertriebsaufgabe.', en: 'Renewal is the outcome of the full prior period, not only a sales task.' }
-    ]
-  },
-  'data-model': {
-    title: { de: 'Datenmodell', en: 'Data Model' },
-    subtitle: { de: 'Einheitliche Entitäten für konsistente Entscheidungen', en: 'Unified entities for consistent decisions' },
-    summary: [
-      { de: 'Das Datenmodell bildet Risiken, Policen, Schäden, Partner und Flottenobjekte in einem gemeinsamen Referenzrahmen ab.', en: 'The data model maps risks, policies, claims, partners, and fleet objects in one common reference framework.' },
-      { de: 'So werden Reporting, AI-Modelle und operative Entscheidungen auf konsistente Definitionen gestellt.', en: 'This aligns reporting, AI models, and operational decisions on consistent definitions.' }
-    ],
-    flow: [
-      { de: 'Datenquellen', en: 'Data sources' },
-      { de: 'Normalisierung', en: 'Normalization' },
-      { de: 'Kernentitäten', en: 'Core entities' },
-      { de: 'Prozesskontext', en: 'Process context' },
-      { de: 'Steuerung & Audit', en: 'Steering & audit' }
-    ],
-    callouts: [
-      { de: 'Ohne einheitliches Datenmodell entstehen widersprüchliche KPIs und Entscheidungen.', en: 'Without a unified data model, KPIs and decisions become inconsistent.' },
-      { de: 'Datenqualität ist ein Management-Thema, kein rein technisches Thema.', en: 'Data quality is a management topic, not purely technical.' },
-      { de: 'Traceability auf Entitätsebene ist Basis für regulatorische Nachvollziehbarkeit.', en: 'Entity-level traceability is foundational for regulatory auditability.' }
-    ]
-  },
-  'ai-core': {
-    title: { de: 'AI Core', en: 'AI Core' },
-    subtitle: { de: 'KI als Steuerungsschicht für Priorisierung und Entscheidungshilfe', en: 'AI as a steering layer for prioritization and decision support' },
-    summary: [
-      { de: 'Der AI Core bündelt Regeln, Modelle und Monitoring, um operative Entscheidungen entlang des Lifecycles zu unterstützen.', en: 'The AI core combines rules, models, and monitoring to support operational decisions across the lifecycle.' },
-      { de: 'Er priorisiert Fälle, markiert Risiken und liefert erklärbare Empfehlungen für menschliche Freigaben.', en: 'It prioritizes cases, flags risk, and provides explainable recommendations for human approval.' }
-    ],
-    flow: [
-      { de: 'Feature-Eingang', en: 'Feature intake' },
-      { de: 'Regeln + Modelle', en: 'Rules + models' },
-      { de: 'Empfehlung', en: 'Recommendation' },
-      { de: 'Human-in-the-loop', en: 'Human-in-the-loop' },
-      { de: 'Monitoring', en: 'Monitoring' }
-    ],
-    callouts: [
-      { de: 'AI-Output ist kontrolliert und erklärbar, nicht autonomer Endentscheid.', en: 'AI output is controlled and explainable, not autonomous final decision.' },
-      { de: 'Modellüberwachung schützt vor Drift und Qualitätsverlust.', en: 'Model monitoring protects against drift and quality deterioration.' },
-      { de: 'Governance und Fairness sind Designprinzipien, nicht Nacharbeit.', en: 'Governance and fairness are design principles, not afterthoughts.' }
-    ]
-  },
-  architecture: {
-    title: { de: 'Architektur', en: 'Architecture' },
-    subtitle: { de: 'Plattformschichten von Interface bis Governance', en: 'Platform layers from interface to governance' },
-    summary: [
-      { de: 'Die Architektur trennt Kanäle, Geschäftslogik, Daten und Governance klar, bleibt aber prozessual integriert.', en: 'The architecture separates channels, business logic, data, and governance clearly while remaining process-integrated.' },
-      { de: 'Dadurch entsteht Modularität ohne Fragmentierung und eine belastbare Basis für internationale Skalierung.', en: 'This enables modularity without fragmentation and a robust base for international scaling.' }
-    ],
-    flow: [
-      { de: 'Experience Layer', en: 'Experience layer' },
-      { de: 'Workflow Engine', en: 'Workflow engine' },
-      { de: 'Domain Services', en: 'Domain services' },
-      { de: 'Data & AI Core', en: 'Data & AI core' },
-      { de: 'Governance Layer', en: 'Governance layer' }
-    ],
-    callouts: [
-      { de: 'Schichten entkoppeln Komplexität und erhöhen Liefergeschwindigkeit.', en: 'Layering decouples complexity and increases delivery speed.' },
-      { de: 'Jede Architekturentscheidung braucht ein klares Betriebs- und Ownership-Modell.', en: 'Every architecture decision needs a clear operating and ownership model.' },
-      { de: 'Skalierung funktioniert nur mit beobachtbarer Plattformqualität.', en: 'Scaling works only with observable platform quality.' }
-    ]
-  },
-  modules: {
-    title: { de: 'Module', en: 'Modules' },
-    subtitle: { de: 'Brokerfox, Claimsfox, Fleetfox, Partnerfox und AI Fox im Zusammenspiel', en: 'Brokerfox, Claimsfox, Fleetfox, Partnerfox, and AI Fox working together' },
-    summary: [
-      { de: 'Die Module sind fachlich fokussiert, aber über gemeinsame Entitäten und Workflows orchestriert.', en: 'Modules are domain-focused but orchestrated via shared entities and workflows.' },
-      { de: 'So lassen sich neue Produkte oder Märkte ohne Neuaufbau des gesamten Stacks ergänzen.', en: 'This enables adding new products or markets without rebuilding the entire stack.' }
-    ],
-    flow: [
-      { de: 'Brokerfox', en: 'Brokerfox' },
-      { de: 'Claimsfox', en: 'Claimsfox' },
-      { de: 'Fleetfox', en: 'Fleetfox' },
-      { de: 'Partnerfox', en: 'Partnerfox' },
-      { de: 'AI Fox', en: 'AI Fox' }
-    ],
-    callouts: [
-      { de: 'Module liefern Geschwindigkeit in Domänen, Plattform liefert Konsistenz.', en: 'Modules provide domain speed, platform provides consistency.' },
-      { de: 'Wiederverwendbare Bausteine senken Time-to-market bei neuen Programmen.', en: 'Reusable building blocks reduce time-to-market for new programs.' },
-      { de: 'Cross-Module-KPIs sind Pflicht für echte End-to-end-Steuerung.', en: 'Cross-module KPIs are required for true end-to-end control.' }
-    ]
-  },
-  reporting: {
-    title: { de: 'Reporting', en: 'Reporting' },
-    subtitle: { de: 'Steuerungskennzahlen für Profitabilität, Qualität und Geschwindigkeit', en: 'Steering metrics for profitability, quality, and speed' },
-    summary: [
-      { de: 'Reporting verbindet operative und finanzielle Kennzahlen, um Managemententscheidungen evidenzbasiert zu machen.', en: 'Reporting connects operational and financial metrics to enable evidence-based management decisions.' },
-      { de: 'Der Fokus liegt auf Ursachensteuerung statt reiner Rückspiegelanalyse.', en: 'The focus is on steering root causes rather than rear-view analysis only.' }
-    ],
-    flow: [
-      { de: 'KPI-Definition', en: 'KPI definition' },
-      { de: 'Datenerhebung', en: 'Data collection' },
-      { de: 'Analyse & Segmentierung', en: 'Analysis & segmentation' },
-      { de: 'Management-Entscheid', en: 'Management decision' },
-      { de: 'Maßnahmen-Tracking', en: 'Action tracking' }
-    ],
-    callouts: [
-      { de: 'Konsistente KPI-Logik verhindert Steuerungswidersprüche zwischen Teams.', en: 'Consistent KPI logic prevents steering conflicts across teams.' },
-      { de: 'Reporting muss entscheidungsnah und handlungsorientiert sein.', en: 'Reporting must stay decision-proximate and action-oriented.' },
-      { de: 'Auditierbarkeit erhöht Vertrauen bei Carriern und Partnern.', en: 'Auditability increases trust with carriers and partners.' }
-    ]
-  },
-  'renewal-loop': {
-    title: { de: 'Renewal Loop', en: 'Renewal Loop' },
-    subtitle: { de: 'Erneuerung als integrierte Wertschöpfungsschleife', en: 'Renewal as an integrated value-creation loop' },
-    summary: [
-      { de: 'Die Erneuerung wird als kontinuierlicher Regelkreis mit Signalen aus Underwriting, Claims und Fleet geführt.', en: 'Renewal is managed as a continuous control loop using signals from underwriting, claims, and fleet.' },
-      { de: 'Dadurch steigt Vorhersagbarkeit von Retention, Pricing und Portfoliomarge.', en: 'This improves predictability of retention, pricing, and portfolio margin.' }
-    ],
-    flow: [
-      { de: 'Performance-Signale', en: 'Performance signals' },
-      { de: 'Risikoneubewertung', en: 'Risk reassessment' },
-      { de: 'Angebotsstrategie', en: 'Offer strategy' },
-      { de: 'Kundeninteraktion', en: 'Client interaction' },
-      { de: 'Feedback ins Underwriting', en: 'Feedback to underwriting' }
-    ],
-    callouts: [
-      { de: 'Renewal ist der stärkste Hebel für profitable Skalierung.', en: 'Renewal is the strongest lever for profitable scaling.' },
-      { de: 'Frühe Signale reduzieren Überraschungen in Preisverhandlungen.', en: 'Early signals reduce surprises in pricing negotiations.' },
-      { de: 'Ein geschlossener Loop verbessert Portfoliostabilität über Zyklen hinweg.', en: 'A closed loop improves portfolio stability across cycles.' }
-    ]
-  },
-  'mvp-roadmap': {
-    title: { de: 'MVP Roadmap', en: 'MVP Roadmap' },
-    subtitle: { de: 'Priorisierte Ausbaupfade für Plattformreife', en: 'Prioritized expansion paths for platform maturity' },
-    summary: [
-      { de: 'Die Roadmap priorisiert wertorientierte Inkremente entlang Produkt, Technologie und Operating Model.', en: 'The roadmap prioritizes value-oriented increments across product, technology, and operating model.' },
-      { de: 'Ziel ist ein kontrolliertes Skalierungstempo mit messbarer Wirkung auf Wachstum und Combined Ratio.', en: 'The target is controlled scaling speed with measurable impact on growth and combined ratio.' }
-    ],
-    flow: [
-      { de: 'Now: Stabilisierung', en: 'Now: stabilization' },
-      { de: 'Next: Automatisierung', en: 'Next: automation' },
-      { de: 'Later: Internationalisierung', en: 'Later: internationalization' },
-      { de: 'Scale: Ökosystem', en: 'Scale: ecosystem' },
-      { de: 'Optimize: Governance', en: 'Optimize: governance' }
-    ],
-    callouts: [
-      { de: 'Roadmap-Entscheide müssen an P&L-Wirkung gekoppelt sein.', en: 'Roadmap decisions must be tied to P&L impact.' },
-      { de: 'Technischer Ausbau ohne Operating Readiness erzeugt Reibung.', en: 'Technical expansion without operating readiness creates friction.' },
-      { de: 'MVP heißt fokussiert, nicht oberflächlich.', en: 'MVP means focused, not superficial.' }
-    ]
-  }
+type LifecycleDetail = {
+  key: string
+  label: BiText
+  whoActs: BiText
+  dataCreated: BiText
+  aiModules: BiText
+  decisions: BiText
 }
+
+type ModuleDetail = {
+  name: string
+  primaryUser: BiText
+  coreData: BiText
+  aiContribution: BiText
+  businessValue: BiText
+}
+
+type ReportingMetric = {
+  title: BiText
+  meaning: BiText
+  action: BiText
+}
+
+const roleDetails: RoleDetail[] = [
+  {
+    role: { de: 'Platform Owner', en: 'Platform Owner' },
+    objectives: { de: 'Skalierbare Plattformleistung und strategische Produktkohärenz sicherstellen.', en: 'Ensure scalable platform performance and strategic product coherence.' },
+    responsibilities: { de: 'Roadmap-Steuerung, Priorisierung, Architekturentscheidungen, Abhängigkeitsmanagement.', en: 'Roadmap steering, prioritization, architecture decisions, and dependency management.' },
+    dataScope: { de: 'Cross-Module KPI- und Qualitätsdaten, Betriebs- und Governance-Indikatoren.', en: 'Cross-module KPI and quality data, operational and governance indicators.' },
+    decisions: { de: 'Release-Go/No-Go, Investitionsprioritäten, Standardisierungsrichtlinien.', en: 'Release go/no-go, investment priorities, and standardization policies.' },
+    kpis: { de: 'Delivery-Zykluszeit, Verfügbarkeit, Defect-Rate, Plattformmarge.', en: 'Delivery cycle time, availability, defect rate, and platform margin.' }
+  },
+  {
+    role: { de: 'Carrier', en: 'Carrier' },
+    objectives: { de: 'Risikoadäquate Portfolios und stabile Combined Ratio.', en: 'Risk-adequate portfolios and stable combined ratio.' },
+    responsibilities: { de: 'Kapazitätsfreigabe, Guidelines, Underwriting-Rahmen, Portfolioüberwachung.', en: 'Capacity approval, guidelines, underwriting framework, and portfolio oversight.' },
+    dataScope: { de: 'Portfolio-Performance, Schadenentwicklung, Pricing-Korridore.', en: 'Portfolio performance, claims development, and pricing corridors.' },
+    decisions: { de: 'Kapazitätsallokation, Zeichnungsgrenzen, Repricing-Impulse.', en: 'Capacity allocation, underwriting limits, and repricing impulses.' },
+    kpis: { de: 'Loss Ratio, Combined Ratio, Capacity Utilization.', en: 'Loss ratio, combined ratio, and capacity utilization.' }
+  },
+  {
+    role: { de: 'MGA', en: 'MGA' },
+    objectives: { de: 'Profitables Wachstum durch kontrollierte Zeichnung und operative Exzellenz.', en: 'Profitable growth through controlled underwriting and operational excellence.' },
+    responsibilities: { de: 'Submission-Triage, Pricing, Authority-Steuerung, Erneuerungslogik.', en: 'Submission triage, pricing, authority steering, and renewal logic.' },
+    dataScope: { de: 'Risikoscores, erwartete Verluste, Referral-Historie, Renewal-Signale.', en: 'Risk scores, expected losses, referral history, and renewal signals.' },
+    decisions: { de: 'Annahme/Ablehnung/Referral, Prämienband, Deckungsstruktur.', en: 'Accept/decline/referral, premium corridor, and coverage structure.' },
+    kpis: { de: 'Hit Ratio, Margin je Segment, Referral-Quote.', en: 'Hit ratio, margin by segment, and referral ratio.' }
+  },
+  {
+    role: { de: 'Broker', en: 'Broker' },
+    objectives: { de: 'Kundenpassung, Platzierungsqualität und Bindungsrate steigern.', en: 'Increase client fit, placement quality, and retention.' },
+    responsibilities: { de: 'Risikoaufbereitung, Marktansprache, Angebotskommunikation, Renewal-Vorbereitung.', en: 'Risk packaging, market outreach, offer communication, and renewal preparation.' },
+    dataScope: { de: 'Kundenprofil, Angebotsstatus, Schadensmuster, Renewal-Empfehlungen.', en: 'Client profile, offer status, claims patterns, and renewal recommendations.' },
+    decisions: { de: 'Platzierungsstrategie, Angebotsselektion, Verhandlungspfad.', en: 'Placement strategy, offer selection, and negotiation path.' },
+    kpis: { de: 'Bindungsquote, Time-to-Quote, Renewal-Erfolg.', en: 'Bind rate, time-to-quote, and renewal success.' }
+  },
+  {
+    role: { de: 'Corporate Client', en: 'Corporate Client' },
+    objectives: { de: 'Planbare Kosten, Risikoabsicherung und Servicequalität über die Laufzeit.', en: 'Achieve predictable cost, risk protection, and service quality over policy term.' },
+    responsibilities: { de: 'Datenbereitstellung, Präventionsmaßnahmen, FNOL-Qualität.', en: 'Data provision, prevention actions, and FNOL quality.' },
+    dataScope: { de: 'Flottenstatus, Policeninformationen, Schaden- und Präventionsdaten.', en: 'Fleet status, policy data, claims, and prevention data.' },
+    decisions: { de: 'Risikomaßnahmen, Flottenrichtlinien, Renewal-Freigabe.', en: 'Risk actions, fleet policies, and renewal approval.' },
+    kpis: { de: 'Total Cost of Risk, Schadenhäufigkeit, Service-Zufriedenheit.', en: 'Total cost of risk, claim frequency, and service satisfaction.' }
+  },
+  {
+    role: { de: 'Driver', en: 'Driver' },
+    objectives: { de: 'Sicheres Fahrverhalten und geringere Incident-Rate.', en: 'Safer driving behavior and reduced incident rate.' },
+    responsibilities: { de: 'Regelkonformes Fahren, Meldung von Ereignissen, Präventionsfeedback umsetzen.', en: 'Compliant driving, event reporting, and prevention feedback execution.' },
+    dataScope: { de: 'Eigene Verhaltens- und Sicherheitsindikatoren.', en: 'Own behavior and safety indicators.' },
+    decisions: { de: 'Verhaltensanpassung und Sicherheitstasks im Tagesbetrieb.', en: 'Behavior adjustments and safety-task execution in daily operations.' },
+    kpis: { de: 'Risk-Score-Verlauf, Harsh-Braking-Rate, Incident-Frequenz.', en: 'Risk score trend, harsh braking rate, and incident frequency.' }
+  },
+  {
+    role: { de: 'Claims Adjuster', en: 'Claims Adjuster' },
+    objectives: { de: 'Schnelle, faire und fraud-resistente Schadenabwicklung.', en: 'Fast, fair, and fraud-resilient claims handling.' },
+    responsibilities: { de: 'FNOL-Prüfung, Reservierung, Partnersteuerung, Eskalation.', en: 'FNOL review, reserving, partner steering, and escalation.' },
+    dataScope: { de: 'Schadendokumentation, Telematik-Kontext, Fraud-/Severity-Scores.', en: 'Claims documentation, telematics context, and fraud/severity scores.' },
+    decisions: { de: 'Deckungsprüfung, Reservehöhe, Settlement-Pfad.', en: 'Coverage assessment, reserve level, and settlement path.' },
+    kpis: { de: 'Cycle Time, Leakage, Reopen-Rate.', en: 'Cycle time, leakage, and reopen rate.' }
+  },
+  {
+    role: { de: 'Partner Network', en: 'Partner Network' },
+    objectives: { de: 'Konsistente Serviceleistung in Reparatur-, Assistance- und Spezialfällen.', en: 'Consistent service delivery across repair, assistance, and specialty cases.' },
+    responsibilities: { de: 'Leistungserbringung, SLA-Einhaltung, Qualitätstransparenz.', en: 'Service execution, SLA compliance, and quality transparency.' },
+    dataScope: { de: 'Fallzuweisungen, Bearbeitungsstatus, Leistungsnachweise.', en: 'Case assignments, processing status, and service evidence.' },
+    decisions: { de: 'Priorisierung, Kapazitätsplanung, Eskalationshandling.', en: 'Prioritization, capacity planning, and escalation handling.' },
+    kpis: { de: 'SLA-Erfüllung, Kosten je Fall, Servicequalität.', en: 'SLA fulfillment, cost per case, and service quality.' }
+  },
+  {
+    role: { de: 'AI Governance', en: 'AI Governance' },
+    objectives: { de: 'Modellsicherheit, Transparenz und regulatorische Konformität sicherstellen.', en: 'Ensure model safety, transparency, and regulatory compliance.' },
+    responsibilities: { de: 'Model Monitoring, Drift-Kontrolle, Explainability und Dokumentation.', en: 'Model monitoring, drift control, explainability, and documentation.' },
+    dataScope: { de: 'Feature-Nutzung, Modelloutputs, Bias-Indikatoren, Audit-Trails.', en: 'Feature usage, model outputs, bias indicators, and audit trails.' },
+    decisions: { de: 'Model Release/Freeze, Schwellenwerte, Governance-Eskalation.', en: 'Model release/freeze, thresholds, and governance escalation.' },
+    kpis: { de: 'Stabilität, Fehlalarmquote, Governance-Compliance.', en: 'Stability, false-positive ratio, and governance compliance.' }
+  }
+]
+
+const lifecycleDetails: LifecycleDetail[] = [
+  {
+    key: 'registration',
+    label: { de: 'Registration', en: 'Registration' },
+    whoActs: { de: 'Broker + Corporate Client', en: 'Broker + corporate client' },
+    dataCreated: { de: 'Stammdaten, Unternehmensprofil, Exponierungsbasis.', en: 'Master data, company profile, and exposure baseline.' },
+    aiModules: { de: 'Data quality checks, initial segmentation.', en: 'Data quality checks and initial segmentation.' },
+    decisions: { de: 'Onboarding-Freigabe und Datenvollständigkeit.', en: 'Onboarding approval and data completeness.' }
+  },
+  {
+    key: 'risk-analysis',
+    label: { de: 'Risk Analysis', en: 'Risk Analysis' },
+    whoActs: { de: 'MGA + AI Governance', en: 'MGA + AI governance' },
+    dataCreated: { de: 'Risikoindikatoren, Basisscore, Segmentklassifizierung.', en: 'Risk indicators, baseline score, and segment classification.' },
+    aiModules: { de: 'Risk scoring engine, anomaly checks.', en: 'Risk scoring engine and anomaly checks.' },
+    decisions: { de: 'Priorisierung und Bearbeitungspfad.', en: 'Prioritization and processing path.' }
+  },
+  {
+    key: 'underwriting',
+    label: { de: 'Underwriting', en: 'Underwriting' },
+    whoActs: { de: 'MGA + Carrier', en: 'MGA + carrier' },
+    dataCreated: { de: 'Deckungs- und Pricing-Parameter, Referral-Hinweise.', en: 'Coverage and pricing parameters, referral flags.' },
+    aiModules: { de: 'Pricing suggestion, expected loss model.', en: 'Pricing suggestion and expected loss model.' },
+    decisions: { de: 'Annahme, Ablehnung oder Referral.', en: 'Accept, decline, or referral.' }
+  },
+  {
+    key: 'policy-issuance',
+    label: { de: 'Policy Issuance', en: 'Policy Issuance' },
+    whoActs: { de: 'Broker + Operations', en: 'Broker + operations' },
+    dataCreated: { de: 'Policenobjekt, Laufzeit, Limits, Dokumentation.', en: 'Policy object, term, limits, and documentation.' },
+    aiModules: { de: 'Dokumentenvalidierung, Pflichtfeldprüfung.', en: 'Document validation and mandatory field checks.' },
+    decisions: { de: 'Bindung und Vertragsfreigabe.', en: 'Binding and contract release.' }
+  },
+  {
+    key: 'fleet-monitoring',
+    label: { de: 'Fleet Monitoring', en: 'Fleet Monitoring' },
+    whoActs: { de: 'Fleet Operator + AI Core', en: 'Fleet operator + AI core' },
+    dataCreated: { de: 'Telematik-Events, Fahrer- und Flottenrisikoindex.', en: 'Telematics events, driver and fleet risk index.' },
+    aiModules: { de: 'Driver risk scoring, intervention triggers.', en: 'Driver risk scoring and intervention triggers.' },
+    decisions: { de: 'Präventionsmaßnahmen und Coaching-Prioritäten.', en: 'Prevention actions and coaching priorities.' }
+  },
+  {
+    key: 'claims',
+    label: { de: 'Claims', en: 'Claims' },
+    whoActs: { de: 'Claims Adjuster + Partner', en: 'Claims adjuster + partner' },
+    dataCreated: { de: 'FNOL, Schadenakte, Reserve- und Betrugsindikatoren.', en: 'FNOL, claim file, reserve and fraud indicators.' },
+    aiModules: { de: 'Severity estimate, fraud scoring.', en: 'Severity estimate and fraud scoring.' },
+    decisions: { de: 'Deckung, Bearbeitungspfad, Partnerzuteilung.', en: 'Coverage, processing path, and partner assignment.' }
+  },
+  {
+    key: 'settlement',
+    label: { de: 'Settlement', en: 'Settlement' },
+    whoActs: { de: 'Claims + Finance', en: 'Claims + finance' },
+    dataCreated: { de: 'Abrechnung, Abschlussstatus, Outcome-Qualität.', en: 'Settlement data, closure status, and outcome quality.' },
+    aiModules: { de: 'Leakage checks, anomaly controls.', en: 'Leakage checks and anomaly controls.' },
+    decisions: { de: 'Auszahlung, Abschluss, Reopen-Handling.', en: 'Payout, closure, and reopen handling.' }
+  },
+  {
+    key: 'reporting',
+    label: { de: 'Reporting', en: 'Reporting' },
+    whoActs: { de: 'Management + Platform Owner', en: 'Management + platform owner' },
+    dataCreated: { de: 'Portfolio-, Schaden- und Effizienzkennzahlen.', en: 'Portfolio, claims, and efficiency metrics.' },
+    aiModules: { de: 'Forecasting, trend alerts.', en: 'Forecasting and trend alerts.' },
+    decisions: { de: 'Portfolioanpassung, Kapazitäts- und Pricing-Steuerung.', en: 'Portfolio adjustment, capacity and pricing steering.' }
+  },
+  {
+    key: 'renewal',
+    label: { de: 'Renewal', en: 'Renewal' },
+    whoActs: { de: 'Broker + MGA + Carrier', en: 'Broker + MGA + carrier' },
+    dataCreated: { de: 'Renewal-Risikoscore, Preisanpassung, Retention-Prognose.', en: 'Renewal risk score, price adjustment, and retention forecast.' },
+    aiModules: { de: 'Renewal intelligence, discount/surcharge recommendations.', en: 'Renewal intelligence and discount/surcharge recommendations.' },
+    decisions: { de: 'Verlängerungskonditionen und Segmentstrategie.', en: 'Renewal terms and segment strategy.' }
+  }
+]
+
+const moduleDetails: ModuleDetail[] = [
+  {
+    name: 'Brokerfox',
+    primaryUser: { de: 'Broker / Distribution Teams', en: 'Broker / distribution teams' },
+    coreData: { de: 'Kundenprofil, Submission-Daten, Angebots- und Renewal-Status.', en: 'Client profile, submission data, offer and renewal status.' },
+    aiContribution: { de: 'Priorisierung, Angebotsvergleich, Renewal-Hinweise.', en: 'Prioritization, offer comparison, and renewal hints.' },
+    businessValue: { de: 'Höhere Bindungsquote und kürzere Time-to-Quote.', en: 'Higher bind rate and shorter time-to-quote.' }
+  },
+  {
+    name: 'Claimsfox',
+    primaryUser: { de: 'Claims Operations', en: 'Claims operations' },
+    coreData: { de: 'FNOL, Schadenakte, Reserveentwicklung, Partnerstatus.', en: 'FNOL, claim file, reserve development, partner status.' },
+    aiContribution: { de: 'Fraud Score, Severity Estimate, Triage-Routing.', en: 'Fraud score, severity estimate, and triage routing.' },
+    businessValue: { de: 'Schnellere Bearbeitung und geringere Leakage.', en: 'Faster handling and lower leakage.' }
+  },
+  {
+    name: 'Fleetfox',
+    primaryUser: { de: 'Fleet Manager / Risk Teams', en: 'Fleet manager / risk teams' },
+    coreData: { de: 'Telematikdaten, Verhaltensmuster, Flottenrisikoindex.', en: 'Telematics data, behavior patterns, fleet risk index.' },
+    aiContribution: { de: 'Risikoscoring und Präventionsauslöser.', en: 'Risk scoring and prevention triggers.' },
+    businessValue: { de: 'Niedrigere Schadenfrequenz und bessere Retention.', en: 'Lower claim frequency and improved retention.' }
+  },
+  {
+    name: 'Partnerfox',
+    primaryUser: { de: 'Partner Management', en: 'Partner management' },
+    coreData: { de: 'SLA-Daten, Kapazität, Leistungsmessung.', en: 'SLA data, capacity, and performance measurement.' },
+    aiContribution: { de: 'Eskalationswarnungen und Qualitätsprognosen.', en: 'Escalation warnings and quality forecasts.' },
+    businessValue: { de: 'Besseres Service-Level und skalierbare Ausführung.', en: 'Better service level and scalable execution.' }
+  },
+  {
+    name: 'AI Fox',
+    primaryUser: { de: 'Underwriting, Claims, Management', en: 'Underwriting, claims, management' },
+    coreData: { de: 'Cross-Module Features, Modelloutputs, Audit-Trails.', en: 'Cross-module features, model outputs, and audit trails.' },
+    aiContribution: { de: 'Scoring, Empfehlung, Forecasting und Explainability.', en: 'Scoring, recommendation, forecasting, and explainability.' },
+    businessValue: { de: 'Konsistente AI-Steuerung über den gesamten Lifecycle.', en: 'Consistent AI steering across the full lifecycle.' }
+  }
+]
+
+const reportingMetrics: ReportingMetric[] = [
+  { title: { de: 'Loss Ratio', en: 'Loss Ratio' }, meaning: { de: 'Schadenquote als Kernindikator der technischen Profitabilität.', en: 'Core indicator of technical profitability.' }, action: { de: 'Pricing und Segmentgrenzen nachjustieren.', en: 'Adjust pricing and segment boundaries.' } },
+  { title: { de: 'Combined Ratio', en: 'Combined Ratio' }, meaning: { de: 'Gesamteffizienz aus Schaden- und Kostenquote.', en: 'Overall efficiency combining loss and expense ratios.' }, action: { de: 'Kosten- und Prozesshebel priorisieren.', en: 'Prioritize cost and process levers.' } },
+  { title: { de: 'Claim Frequency', en: 'Claim Frequency' }, meaning: { de: 'Häufigkeit als Frühindikator für Portfolioqualität.', en: 'Frequency as early indicator of portfolio quality.' }, action: { de: 'Präventionsprogramme und Underwriting-Kriterien anpassen.', en: 'Tune prevention programs and underwriting criteria.' } },
+  { title: { de: 'Severity Trends', en: 'Severity Trends' }, meaning: { de: 'Schadenschwere und Inflationseffekte im Zeitverlauf.', en: 'Severity and inflation effects over time.' }, action: { de: 'Reserve- und Pricing-Annahmen aktualisieren.', en: 'Update reserve and pricing assumptions.' } },
+  { title: { de: 'Driver Risk Ranking', en: 'Driver Risk Ranking' }, meaning: { de: 'Fahrer-Risikoranking für Coaching und Steering.', en: 'Driver risk ranking for coaching and steering.' }, action: { de: 'Gezielte Sicherheitsmaßnahmen ausrollen.', en: 'Roll out targeted safety actions.' } },
+  { title: { de: 'Geo Heatmap', en: 'Geo Heatmap' }, meaning: { de: 'Regionale Risikoballungen und Schadenschwerpunkte.', en: 'Regional risk concentrations and claims hotspots.' }, action: { de: 'Geosteuerung in Pricing und Kapazität integrieren.', en: 'Integrate geo steering into pricing and capacity.' } },
+  { title: { de: 'Capacity Utilization', en: 'Capacity Utilization' }, meaning: { de: 'Auslastung verfügbarer Kapazitäten je Segment.', en: 'Utilization of available capacity by segment.' }, action: { de: 'Kapazitätsallokation und Referral-Pfade anpassen.', en: 'Adjust capacity allocation and referral paths.' } },
+  { title: { de: 'Renewal Forecast', en: 'Renewal Forecast' }, meaning: { de: 'Prognose der Verlängerungswahrscheinlichkeit und Margenwirkung.', en: 'Forecast of renewal likelihood and margin impact.' }, action: { de: 'Frühzeitige Angebots- und Kundenstrategie steuern.', en: 'Steer offer and client strategy early.' } }
+]
 
 function bi(value: BiText, lang: 'de' | 'en') {
   return lang === 'de' ? value.de : value.en
@@ -245,7 +246,11 @@ function bi(value: BiText, lang: 'de' | 'en') {
 export default function InsideInsurfoxPage({ section }: { section: InsideSectionKey }) {
   const { lang, t } = useI18n()
   const l = lang === 'de' ? 'de' : 'en'
-  const content = sectionContent[section]
+  const [selectedLifecycle, setSelectedLifecycle] = useState<string>('registration')
+
+  const activeLifecycle = useMemo(() => {
+    return lifecycleDetails.find((item) => item.key === selectedLifecycle) ?? lifecycleDetails[0]
+  }, [selectedLifecycle])
 
   function handlePrint() {
     const oldTitle = document.title
@@ -269,7 +274,7 @@ export default function InsideInsurfoxPage({ section }: { section: InsideSection
       <div style={{ width: '100%', maxWidth: 1240, margin: '0 auto', display: 'grid', gap: '1rem' }}>
         <Card>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem', flexWrap: 'wrap' }}>
-            <Header title={bi(content.title, l)} subtitle={bi(content.subtitle, l)} titleColor="#0f172a" subtitleColor="#475569" />
+            <Header title={t(`insideInsurfox.pages.${section}.title`)} subtitle={t(`insideInsurfox.pages.${section}.subtitle`)} titleColor="#0f172a" subtitleColor="#475569" />
             <div className="print-hide" style={{ position: 'sticky', top: 84 }}>
               <Button size="sm" onClick={handlePrint}>{t('insideInsurfox.exportPdf')}</Button>
             </div>
@@ -279,38 +284,221 @@ export default function InsideInsurfoxPage({ section }: { section: InsideSection
           </div>
         </Card>
 
-        <Card title={t('insideInsurfox.labels.structuredOverview')}>
-          <div style={{ display: 'grid', gap: '0.6rem' }}>
-            {content.summary.map((item, idx) => (
-              <p key={`${section}-summary-${idx}`} style={pStyle}>{bi(item, l)}</p>
-            ))}
-          </div>
-        </Card>
-
-        <Card title={t('insideInsurfox.labels.architectureFlow')}>
-          <div style={flowGridStyle}>
-            {content.flow.map((item, idx) => (
-              <div key={`${section}-flow-${idx}`} style={flowItemStyle}>
-                <div style={flowIndexStyle}>{idx + 1}</div>
-                <div style={flowLabelStyle}>{bi(item, l)}</div>
+        {section === 'home' && (
+          <>
+            <Card title={t('insideInsurfox.labels.structuredOverview')}>
+              <p style={pStyle}>{t('insideInsurfox.home.overview1')}</p>
+              <p style={{ ...pStyle, marginTop: '0.55rem' }}>{t('insideInsurfox.home.overview2')}</p>
+            </Card>
+            <Card title={t('insideInsurfox.labels.architectureFlow')}>
+              <div style={architectureDiagramStyle}>
+                {['Experience', 'Workflow', 'Domain', 'Data', 'AI', 'Reporting', 'Governance'].map((item) => (
+                  <div key={item} style={architectureNodeStyle}>{item}</div>
+                ))}
               </div>
-            ))}
-          </div>
-          <p style={{ ...noteStyle, marginTop: '0.55rem' }}>{t('insideInsurfox.labels.flowHint')}</p>
-        </Card>
+            </Card>
+          </>
+        )}
 
-        <Card title={t('insideInsurfox.labels.keyConcepts')}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '0.8rem' }}>
-            {content.callouts.map((item, idx) => (
-              <div key={`${section}-callout-${idx}`} style={calloutStyle}>
-                <div style={calloutTagStyle}>{t('insideInsurfox.labels.callout')}</div>
-                <p style={noteStyle}>{bi(item, l)}</p>
+        {section === 'vision' && (
+          <>
+            <Card title={t('insideInsurfox.vision.strategyTitle')}>
+              <p style={pStyle}>{t('insideInsurfox.vision.strategyBody')}</p>
+              <p style={{ ...pStyle, marginTop: '0.55rem' }}>{t('insideInsurfox.vision.problemBody')}</p>
+            </Card>
+            <Card title={t('insideInsurfox.vision.loopTitle')}>
+              <div style={flowGridStyle}>
+                {['Registration', 'Risk Analysis', 'Underwriting', 'Claims', 'Renewal', 'Model Update'].map((step, idx) => (
+                  <div key={step} style={flowItemStyle}>
+                    <div style={flowIndexStyle}>{idx + 1}</div>
+                    <div style={flowLabelStyle}>{step}</div>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </Card>
+              <p style={{ ...noteStyle, marginTop: '0.55rem' }}>{t('insideInsurfox.vision.loopBody')}</p>
+            </Card>
+            <Card title={t('insideInsurfox.vision.employeeValueTitle')}>
+              <p style={pStyle}>{t('insideInsurfox.vision.employeeValueBody')}</p>
+            </Card>
+          </>
+        )}
+
+        {section === 'roles' && (
+          <Card title={t('insideInsurfox.roles.title')}>
+            <div style={{ display: 'grid', gap: '0.75rem' }}>
+              {roleDetails.map((row) => (
+                <div key={row.role.en} style={roleCardStyle}>
+                  <h3 style={subHeadingStyle}>{bi(row.role, l)}</h3>
+                  <RoleLine label={t('insideInsurfox.roles.objectives')} value={bi(row.objectives, l)} />
+                  <RoleLine label={t('insideInsurfox.roles.responsibilities')} value={bi(row.responsibilities, l)} />
+                  <RoleLine label={t('insideInsurfox.roles.dataScope')} value={bi(row.dataScope, l)} />
+                  <RoleLine label={t('insideInsurfox.roles.decisions')} value={bi(row.decisions, l)} />
+                  <RoleLine label={t('insideInsurfox.roles.kpis')} value={bi(row.kpis, l)} />
+                </div>
+              ))}
+            </div>
+          </Card>
+        )}
+
+        {section === 'lifecycle' && (
+          <>
+            <Card title={t('insideInsurfox.lifecycle.title')}>
+              <div className="print-hide" style={{ display: 'flex', gap: '0.45rem', flexWrap: 'wrap' }}>
+                {lifecycleDetails.map((item) => (
+                  <Button
+                    key={item.key}
+                    size="sm"
+                    variant={selectedLifecycle === item.key ? 'primary' : 'secondary'}
+                    onClick={() => setSelectedLifecycle(item.key)}
+                  >
+                    {bi(item.label, l)}
+                  </Button>
+                ))}
+              </div>
+              <div style={{ ...roleCardStyle, marginTop: '0.75rem' }}>
+                <h3 style={subHeadingStyle}>{bi(activeLifecycle.label, l)}</h3>
+                <RoleLine label={t('insideInsurfox.lifecycle.whoActs')} value={bi(activeLifecycle.whoActs, l)} />
+                <RoleLine label={t('insideInsurfox.lifecycle.dataCreated')} value={bi(activeLifecycle.dataCreated, l)} />
+                <RoleLine label={t('insideInsurfox.lifecycle.aiModules')} value={bi(activeLifecycle.aiModules, l)} />
+                <RoleLine label={t('insideInsurfox.lifecycle.decisions')} value={bi(activeLifecycle.decisions, l)} />
+              </div>
+            </Card>
+          </>
+        )}
+
+        {section === 'data-model' && (
+          <>
+            <Card title={t('insideInsurfox.dataModel.title')}>
+              <p style={pStyle}>{t('insideInsurfox.dataModel.body')}</p>
+            </Card>
+            <Card title={t('insideInsurfox.dataModel.explorerTitle')}>
+              <DataFieldExplorer />
+            </Card>
+          </>
+        )}
+
+        {section === 'ai-core' && (
+          <>
+            <Card title={t('insideInsurfox.aiCore.capabilitiesTitle')}>
+              <div style={flowGridStyle}>
+                {[
+                  t('insideInsurfox.aiCore.capRiskScoring'),
+                  t('insideInsurfox.aiCore.capUnderwritingAi'),
+                  t('insideInsurfox.aiCore.capClaimsAi'),
+                  t('insideInsurfox.aiCore.capFraudDetection'),
+                  t('insideInsurfox.aiCore.capPortfolioForecasting'),
+                  t('insideInsurfox.aiCore.capRenewalIntelligence')
+                ].map((item) => (
+                  <div key={item} style={flowItemStyle}><div style={flowLabelStyle}>{item}</div></div>
+                ))}
+              </div>
+            </Card>
+            <Card title={t('insideInsurfox.aiCore.feedbackLoopTitle')}>
+              <div style={flowGridStyle}>
+                {[t('insideInsurfox.aiCore.loopData'), t('insideInsurfox.aiCore.loopModel'), t('insideInsurfox.aiCore.loopDecision'), t('insideInsurfox.aiCore.loopRetrain')].map((item, idx) => (
+                  <div key={item} style={flowItemStyle}>
+                    <div style={flowIndexStyle}>{idx + 1}</div>
+                    <div style={flowLabelStyle}>{item}</div>
+                  </div>
+                ))}
+              </div>
+              <p style={{ ...noteStyle, marginTop: '0.55rem' }}>{t('insideInsurfox.aiCore.explainability')}</p>
+              <p style={{ ...noteStyle, marginTop: '0.35rem' }}>{t('insideInsurfox.aiCore.euAiAct')}</p>
+            </Card>
+          </>
+        )}
+
+        {section === 'architecture' && (
+          <Card title={t('insideInsurfox.architecture.title')}>
+            <p style={pStyle}>{t('insideInsurfox.architecture.body')}</p>
+            <div style={{ ...architectureDiagramStyle, marginTop: '0.75rem' }}>
+              <div style={architectureNodeStyle}>Frontend Layer</div>
+              <div style={architectureNodeStyle}>API Layer</div>
+              <div style={architectureNodeStyle}>Event Stream (Pub/Sub)</div>
+              <div style={architectureNodeStyle}>Data Layer (Cloud SQL + BigQuery)</div>
+              <div style={architectureNodeStyle}>AI Layer (Vertex AI)</div>
+              <div style={architectureNodeStyle}>Reporting Layer</div>
+            </div>
+          </Card>
+        )}
+
+        {section === 'modules' && (
+          <Card title={t('insideInsurfox.modules.title')}>
+            <div style={{ display: 'grid', gap: '0.75rem' }}>
+              {moduleDetails.map((m) => (
+                <div key={m.name} style={roleCardStyle}>
+                  <h3 style={subHeadingStyle}>{m.name}</h3>
+                  <RoleLine label={t('insideInsurfox.modules.primaryUser')} value={bi(m.primaryUser, l)} />
+                  <RoleLine label={t('insideInsurfox.modules.coreData')} value={bi(m.coreData, l)} />
+                  <RoleLine label={t('insideInsurfox.modules.aiContribution')} value={bi(m.aiContribution, l)} />
+                  <RoleLine label={t('insideInsurfox.modules.businessValue')} value={bi(m.businessValue, l)} />
+                </div>
+              ))}
+            </div>
+          </Card>
+        )}
+
+        {section === 'reporting' && (
+          <Card title={t('insideInsurfox.reporting.title')}>
+            <div style={{ display: 'grid', gap: '0.7rem' }}>
+              {reportingMetrics.map((m) => (
+                <div key={m.title.en} style={roleCardStyle}>
+                  <h3 style={subHeadingStyle}>{bi(m.title, l)}</h3>
+                  <RoleLine label={t('insideInsurfox.reporting.meaning')} value={bi(m.meaning, l)} />
+                  <RoleLine label={t('insideInsurfox.reporting.action')} value={bi(m.action, l)} />
+                </div>
+              ))}
+            </div>
+          </Card>
+        )}
+
+        {section === 'renewal-loop' && (
+          <>
+            <Card title={t('insideInsurfox.renewal.title')}>
+              <p style={pStyle}>{t('insideInsurfox.renewal.body1')}</p>
+              <p style={{ ...pStyle, marginTop: '0.55rem' }}>{t('insideInsurfox.renewal.body2')}</p>
+            </Card>
+            <Card title={t('insideInsurfox.renewal.logicTitle')}>
+              <div style={flowGridStyle}>
+                {[t('insideInsurfox.renewal.logicStep1'), t('insideInsurfox.renewal.logicStep2'), t('insideInsurfox.renewal.logicStep3'), t('insideInsurfox.renewal.logicStep4')].map((s, idx) => (
+                  <div key={s} style={flowItemStyle}>
+                    <div style={flowIndexStyle}>{idx + 1}</div>
+                    <div style={flowLabelStyle}>{s}</div>
+                  </div>
+                ))}
+              </div>
+            </Card>
+          </>
+        )}
+
+        {section === 'mvp-roadmap' && (
+          <Card title={t('insideInsurfox.roadmap.title')}>
+            <div style={{ display: 'grid', gap: '0.7rem' }}>
+              <div style={roleCardStyle}>
+                <h3 style={subHeadingStyle}>{t('insideInsurfox.roadmap.phase1Title')}</h3>
+                <p style={noteStyle}>{t('insideInsurfox.roadmap.phase1Body')}</p>
+              </div>
+              <div style={roleCardStyle}>
+                <h3 style={subHeadingStyle}>{t('insideInsurfox.roadmap.phase2Title')}</h3>
+                <p style={noteStyle}>{t('insideInsurfox.roadmap.phase2Body')}</p>
+              </div>
+              <div style={roleCardStyle}>
+                <h3 style={subHeadingStyle}>{t('insideInsurfox.roadmap.phase3Title')}</h3>
+                <p style={noteStyle}>{t('insideInsurfox.roadmap.phase3Body')}</p>
+              </div>
+            </div>
+          </Card>
+        )}
       </div>
     </section>
+  )
+}
+
+function RoleLine({ label, value }: { label: string; value: string }) {
+  return (
+    <p style={{ ...noteStyle, marginBottom: '0.35rem' }}>
+      <strong>{label}:</strong> {value}
+    </p>
   )
 }
 
@@ -326,6 +514,12 @@ const noteStyle: CSSProperties = {
   color: '#334155',
   fontSize: '0.84rem',
   lineHeight: 1.55
+}
+
+const subHeadingStyle: CSSProperties = {
+  margin: '0 0 0.45rem',
+  color: '#0f172a',
+  fontSize: '0.95rem'
 }
 
 const flowGridStyle: CSSProperties = {
@@ -362,20 +556,25 @@ const flowLabelStyle: CSSProperties = {
   fontSize: '0.84rem'
 }
 
-const calloutStyle: CSSProperties = {
+const roleCardStyle: CSSProperties = {
   border: '1px solid #dbe2ea',
   borderRadius: 10,
   padding: '0.65rem',
-  background: '#fffef8'
+  background: '#f8fafc'
 }
 
-const calloutTagStyle: CSSProperties = {
-  display: 'inline-block',
-  padding: '0.15rem 0.45rem',
-  borderRadius: 999,
-  fontSize: '0.73rem',
+const architectureDiagramStyle: CSSProperties = {
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+  gap: '0.6rem'
+}
+
+const architectureNodeStyle: CSSProperties = {
+  border: '1px solid #dbe2ea',
+  borderRadius: 10,
+  padding: '0.65rem',
+  background: '#f8fafc',
+  color: '#0f172a',
   fontWeight: 700,
-  color: '#854d0e',
-  background: '#fef3c7',
-  marginBottom: '0.4rem'
+  fontSize: '0.84rem'
 }

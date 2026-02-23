@@ -296,6 +296,108 @@ type TranslationTree = {
       keyConcepts: string
       callout: string
     }
+    pages: Record<string, { title: string; subtitle: string }>
+    home: {
+      overview1: string
+      overview2: string
+    }
+    vision: {
+      strategyTitle: string
+      strategyBody: string
+      problemBody: string
+      loopTitle: string
+      loopBody: string
+      employeeValueTitle: string
+      employeeValueBody: string
+    }
+    roles: {
+      title: string
+      objectives: string
+      responsibilities: string
+      dataScope: string
+      decisions: string
+      kpis: string
+    }
+    lifecycle: {
+      title: string
+      whoActs: string
+      dataCreated: string
+      aiModules: string
+      decisions: string
+    }
+    dataModel: {
+      title: string
+      body: string
+      explorerTitle: string
+    }
+    aiCore: {
+      capabilitiesTitle: string
+      capRiskScoring: string
+      capUnderwritingAi: string
+      capClaimsAi: string
+      capFraudDetection: string
+      capPortfolioForecasting: string
+      capRenewalIntelligence: string
+      feedbackLoopTitle: string
+      loopData: string
+      loopModel: string
+      loopDecision: string
+      loopRetrain: string
+      explainability: string
+      euAiAct: string
+    }
+    architecture: {
+      title: string
+      body: string
+    }
+    modules: {
+      title: string
+      primaryUser: string
+      coreData: string
+      aiContribution: string
+      businessValue: string
+    }
+    reporting: {
+      title: string
+      meaning: string
+      action: string
+    }
+    renewal: {
+      title: string
+      body1: string
+      body2: string
+      logicTitle: string
+      logicStep1: string
+      logicStep2: string
+      logicStep3: string
+      logicStep4: string
+    }
+    roadmap: {
+      title: string
+      phase1Title: string
+      phase1Body: string
+      phase2Title: string
+      phase2Body: string
+      phase3Title: string
+      phase3Body: string
+    }
+    explorer: {
+      search: string
+      searchPlaceholder: string
+      phase: string
+      role: string
+      aiOnly: string
+      all: string
+      results: string
+      columns: {
+        field: string
+        phase: string
+        mask: string
+        role: string
+        purpose: string
+        aiUsage: string
+      }
+    }
     nav: {
       home: string
       vision: string
@@ -3058,6 +3160,120 @@ export const translations: Record<Lang, TranslationTree> = {
         flowHint: 'Die Schritte bilden den Kernfluss der jeweiligen Rubrik ab.',
         keyConcepts: 'Schlüsselkonzepte',
         callout: 'Kernpunkt'
+      },
+      pages: {
+        home: { title: 'Inside Insurfox – The Insurance Operating System', subtitle: 'Interne Gesamtübersicht über Operating Model, Architektur und Skalierung' },
+        vision: { title: 'Vision', subtitle: 'Warum Insurfox als integriertes Insurance Operating System aufgebaut wird' },
+        roles: { title: 'Rollen', subtitle: 'Verantwortlichkeiten, Entscheidungsrechte und KPI-Ownership' },
+        lifecycle: { title: 'Lifecycle', subtitle: 'Von Registrierung bis Renewal als durchgängige Ausführungskette' },
+        'data-model': { title: 'Datenmodell', subtitle: 'Insurance Data Field Explorer für operative und AI-relevante Felder' },
+        'ai-core': { title: 'AI Core', subtitle: 'Modelle, Entscheidungshilfe, Explainability und Compliance' },
+        architecture: { title: 'Architektur', subtitle: 'Layered GCP-Architektur für die Insurance-Execution-Plattform' },
+        modules: { title: 'Module', subtitle: 'Brokerfox, Claimsfox, Fleetfox, Partnerfox und AI Fox im Zielbild' },
+        reporting: { title: 'Reporting', subtitle: 'Management-Steuerung über Profitabilität, Risiko und Wachstum' },
+        'renewal-loop': { title: 'Renewal Loop', subtitle: 'Wie Schaden- und Verhaltensdaten in Pricing und Retention wirken' },
+        'mvp-roadmap': { title: 'MVP Roadmap', subtitle: 'Phasenorientierter Ausbaupfad vom Kernprozess zum Closed-Loop-Modell' }
+      },
+      home: {
+        overview1: 'Inside Insurfox beschreibt die Plattform nicht als Sammlung einzelner Tools, sondern als einheitliches Insurance Operating System. Ziel ist die konsequente Verbindung von Underwriting, Claims, Fleet, Partner und Reporting in einem gemeinsamen Steuerungsrahmen.',
+        overview2: 'Die Rubrik dient als interne Referenz für Management und Mitarbeitende, um Architektur, Rollen, Datenflüsse und AI-Steuerung nachvollziehbar und konsistent auszurichten.'
+      },
+      vision: {
+        strategyTitle: 'Strategische Leitidee',
+        strategyBody: 'Insurfox adressiert die fragmentierte Versicherungslandschaft mit einem integrierten Betriebsmodell: statt lokaler Einzellösungen entsteht eine durchgängige Ausführungsplattform mit klaren Verantwortungen.',
+        problemBody: 'Im Markt führen Systembrüche zwischen Vertrieb, Underwriting, Schaden und Erneuerung zu Medienbrüchen, verzögerten Entscheidungen und inkonsistenten Portfoliobildern. Die Insurfox-Vision ist die Beseitigung dieser Brüche.',
+        loopTitle: 'Closed-Loop-AI-Konzept',
+        loopBody: 'Operative Daten erzeugen Risikosignale, diese steuern Entscheidungen, deren Ergebnisse zurück in Modellverbesserung und Prozessanpassung fließen. So entsteht eine lernende Steuerungsschleife über den gesamten Lifecycle.',
+        employeeValueTitle: 'Wertbeitrag für Mitarbeitende',
+        employeeValueBody: 'Mitarbeitende profitieren von klaren Prozesspfaden, reduzierter Abstimmungsreibung, transparenter KPI-Logik und AI-gestützten Empfehlungen mit nachvollziehbaren Entscheidungswegen.'
+      },
+      roles: {
+        title: 'Rollenmodell und Entscheidungsräume',
+        objectives: 'Zielbild',
+        responsibilities: 'Verantwortung',
+        dataScope: 'Datenzugriff',
+        decisions: 'Entscheidungen',
+        kpis: 'KPIs'
+      },
+      lifecycle: {
+        title: 'Interaktiver Lifecycle',
+        whoActs: 'Wer handelt',
+        dataCreated: 'Erzeugte Daten',
+        aiModules: 'Ausgelöste AI-Module',
+        decisions: 'Getroffene Entscheidungen'
+      },
+      dataModel: {
+        title: 'Datenmodell als Steuerungsgrundlage',
+        body: 'Der Explorer zeigt die zentralen Versicherungsfelder entlang der Prozessphasen inkl. Zweck und AI-Verwendung. So werden Datenverantwortung und Modellnutzung für Teams transparent.',
+        explorerTitle: 'Insurance Data Field Explorer'
+      },
+      aiCore: {
+        capabilitiesTitle: 'AI-Core-Fähigkeiten',
+        capRiskScoring: 'Risk Scoring Engine',
+        capUnderwritingAi: 'Underwriting AI',
+        capClaimsAi: 'Claims AI',
+        capFraudDetection: 'Fraud Detection',
+        capPortfolioForecasting: 'Portfolio Forecasting',
+        capRenewalIntelligence: 'Renewal Intelligence',
+        feedbackLoopTitle: 'Feedback-Loop: Daten -> Modell -> Entscheidung -> Retraining',
+        loopData: 'Daten',
+        loopModel: 'Modell',
+        loopDecision: 'Entscheidung',
+        loopRetrain: 'Retraining',
+        explainability: 'Explainability: Jede AI-Empfehlung wird mit relevanten Einflussfaktoren, Confidence-Werten und Audit-Trace dokumentiert.',
+        euAiAct: 'EU AI Act: Für versicherungsnahe Hochrisiko-Use-Cases sind Transparenz, Risikoanalyse, Human Oversight, Monitoring und Dokumentationspflichten durchgängig abzubilden.'
+      },
+      architecture: {
+        title: 'Layered GCP-Architektur',
+        body: 'Die Zielarchitektur trennt Experience, APIs, Eventing, Datenhaltung, AI und Reporting in klaren Schichten. Dadurch entstehen Skalierbarkeit, Wartbarkeit und Governance-Fähigkeit ohne operative Fragmentierung.'
+      },
+      modules: {
+        title: 'Modulstruktur und Wertbeitrag',
+        primaryUser: 'Primärer Nutzer',
+        coreData: 'Kern-Datenbeitrag',
+        aiContribution: 'AI-Beitrag',
+        businessValue: 'Business Value'
+      },
+      reporting: {
+        title: 'Management Reporting',
+        meaning: 'Bedeutung',
+        action: 'Steuerungsimpuls'
+      },
+      renewal: {
+        title: 'Renewal-Steuerungslogik',
+        body1: 'Im Renewal Loop werden Schadenhistorie, Telematikverhalten und Serviceperformance zusammengeführt, um risikoadäquate Konditionen vorzuschlagen.',
+        body2: 'Verbessertes Fahr- und Schadenverhalten wirkt als Safety Dividend in Rabattlogiken, während verschlechterte Trends kontrolliert in Zuschläge und Maßnahmenpläne überführt werden.',
+        logicTitle: 'Rabatt-/Zuschlagslogik',
+        logicStep1: 'Claims- und Telematiktrend aggregieren',
+        logicStep2: 'Renewal Risk Score berechnen',
+        logicStep3: 'Rabatt-/Zuschlagsband ableiten',
+        logicStep4: 'Kondition mit Broker/Kunde finalisieren'
+      },
+      roadmap: {
+        title: 'MVP-Roadmap',
+        phase1Title: 'Phase 1: Registration + Underwriting + FNOL',
+        phase1Body: 'Aufbau der Kernprozesse für risikoqualifizierte Zeichnung und standardisierte Schadenmeldung.',
+        phase2Title: 'Phase 2: Telematik + Claims AI + Reporting',
+        phase2Body: 'Erweiterung um Verhaltenstelematik, AI-gestützte Schadensteuerung und Management-Transparenz.',
+        phase3Title: 'Phase 3: Closed-loop AI + Portfolio Steering',
+        phase3Body: 'Vollständige Lernschleife zwischen operativer Ausführung, Modellsteuerung und Portfoliosteuerung.'
+      },
+      explorer: {
+        search: 'Suche',
+        searchPlaceholder: 'Suche nach Feld, Maske oder Rolle',
+        phase: 'Phase',
+        role: 'Rolle',
+        aiOnly: 'Nur AI-bezogene Felder',
+        all: 'Alle',
+        results: 'Treffer',
+        columns: {
+          field: 'Feld',
+          phase: 'Phase',
+          mask: 'Maske',
+          role: 'Rolle',
+          purpose: 'Zweck',
+          aiUsage: 'AI Usage'
+        }
       },
       nav: {
         home: 'Start',
@@ -7113,6 +7329,120 @@ export const translations: Record<Lang, TranslationTree> = {
         flowHint: 'The steps describe the core flow of the selected section.',
         keyConcepts: 'Key Concepts',
         callout: 'Callout'
+      },
+      pages: {
+        home: { title: 'Inside Insurfox – The Insurance Operating System', subtitle: 'Internal end-to-end view of operating model, architecture, and scale logic' },
+        vision: { title: 'Vision', subtitle: 'Why Insurfox is built as an integrated insurance operating system' },
+        roles: { title: 'Roles', subtitle: 'Responsibilities, decision rights, and KPI ownership' },
+        lifecycle: { title: 'Lifecycle', subtitle: 'From registration to renewal as one connected execution chain' },
+        'data-model': { title: 'Data Model', subtitle: 'Insurance Data Field Explorer for operational and AI-relevant fields' },
+        'ai-core': { title: 'AI Core', subtitle: 'Models, decision support, explainability, and compliance' },
+        architecture: { title: 'Architecture', subtitle: 'Layered GCP architecture for insurance execution' },
+        modules: { title: 'Modules', subtitle: 'Brokerfox, Claimsfox, Fleetfox, Partnerfox, and AI Fox in one operating model' },
+        reporting: { title: 'Reporting', subtitle: 'Management steering across profitability, risk, and growth' },
+        'renewal-loop': { title: 'Renewal Loop', subtitle: 'How claims and behavior data shape pricing and retention' },
+        'mvp-roadmap': { title: 'MVP Roadmap', subtitle: 'Phased path from core process to closed-loop intelligence' }
+      },
+      home: {
+        overview1: 'Inside Insurfox positions the platform as an integrated insurance operating system rather than isolated tools. The objective is to connect underwriting, claims, fleet, partner, and reporting in one steering framework.',
+        overview2: 'This section serves as an internal reference for management and employees to align architecture, roles, data flows, and AI controls consistently.'
+      },
+      vision: {
+        strategyTitle: 'Strategic Narrative',
+        strategyBody: 'Insurfox addresses the fragmented insurance landscape with an integrated operating model: a consistent execution platform instead of disconnected local systems.',
+        problemBody: 'Market fragmentation across distribution, underwriting, claims, and renewal creates handoff friction, delayed decisions, and inconsistent portfolio visibility. The Insurfox vision removes these breaks.',
+        loopTitle: 'Closed-loop AI Concept',
+        loopBody: 'Operational data generates risk signals, signals influence decisions, and outcomes feed model retraining and process adjustments. This creates a learning control loop across the full lifecycle.',
+        employeeValueTitle: 'Employee Value Proposition',
+        employeeValueBody: 'Employees gain from clearer decision paths, less coordination overhead, transparent KPI logic, and AI-assisted recommendations with auditable rationale.'
+      },
+      roles: {
+        title: 'Role Model and Decision Spaces',
+        objectives: 'Objectives',
+        responsibilities: 'Responsibilities',
+        dataScope: 'Data access scope',
+        decisions: 'Decisions taken',
+        kpis: 'KPIs'
+      },
+      lifecycle: {
+        title: 'Interactive Lifecycle',
+        whoActs: 'Who acts',
+        dataCreated: 'Data created',
+        aiModules: 'AI modules triggered',
+        decisions: 'Decisions made'
+      },
+      dataModel: {
+        title: 'Data Model as Steering Foundation',
+        body: 'The explorer maps key insurance fields by process phase, including purpose and AI usage, making ownership and model dependencies transparent across teams.',
+        explorerTitle: 'Insurance Data Field Explorer'
+      },
+      aiCore: {
+        capabilitiesTitle: 'AI Core Capabilities',
+        capRiskScoring: 'Risk Scoring Engine',
+        capUnderwritingAi: 'Underwriting AI',
+        capClaimsAi: 'Claims AI',
+        capFraudDetection: 'Fraud Detection',
+        capPortfolioForecasting: 'Portfolio Forecasting',
+        capRenewalIntelligence: 'Renewal Intelligence',
+        feedbackLoopTitle: 'Feedback Loop: Data -> Model -> Decision -> Retraining',
+        loopData: 'Data',
+        loopModel: 'Model',
+        loopDecision: 'Decision',
+        loopRetrain: 'Retraining',
+        explainability: 'Explainability: every AI recommendation is documented with key drivers, confidence level, and audit trace.',
+        euAiAct: 'EU AI Act: insurance-adjacent high-risk use cases require transparency, risk controls, human oversight, monitoring, and documentation by design.'
+      },
+      architecture: {
+        title: 'Layered GCP Architecture',
+        body: 'The target architecture separates experience, APIs, eventing, storage, AI, and reporting into explicit layers for scalability, maintainability, and governance.'
+      },
+      modules: {
+        title: 'Module Landscape and Value',
+        primaryUser: 'Primary user',
+        coreData: 'Core data generated',
+        aiContribution: 'AI contribution',
+        businessValue: 'Business value'
+      },
+      reporting: {
+        title: 'Management Reporting',
+        meaning: 'Meaning',
+        action: 'Steering action'
+      },
+      renewal: {
+        title: 'Renewal Steering Logic',
+        body1: 'The renewal loop combines claims history, telematics behavior, and service outcomes to derive risk-adequate terms.',
+        body2: 'Improved behavior feeds a safety-dividend logic for discounts, while adverse trends are translated into controlled surcharges and action plans.',
+        logicTitle: 'Discount / Surcharge Logic',
+        logicStep1: 'Aggregate claims and telematics trend',
+        logicStep2: 'Calculate renewal risk score',
+        logicStep3: 'Derive discount/surcharge corridor',
+        logicStep4: 'Finalize terms with broker/client'
+      },
+      roadmap: {
+        title: 'MVP Roadmap',
+        phase1Title: 'Phase 1: Registration + Underwriting + FNOL',
+        phase1Body: 'Establish core flows for qualified risk intake and standardized first notice of loss.',
+        phase2Title: 'Phase 2: Telematics + Claims AI + Reporting',
+        phase2Body: 'Add behavior telemetry, AI-supported claims steering, and management reporting.',
+        phase3Title: 'Phase 3: Closed-loop AI + Portfolio Steering',
+        phase3Body: 'Implement full-loop learning between operations, model steering, and portfolio management.'
+      },
+      explorer: {
+        search: 'Search',
+        searchPlaceholder: 'Search by field, mask, or role',
+        phase: 'Phase',
+        role: 'Role',
+        aiOnly: 'AI-related fields only',
+        all: 'All',
+        results: 'Results',
+        columns: {
+          field: 'Field',
+          phase: 'Phase',
+          mask: 'Mask',
+          role: 'Role',
+          purpose: 'Purpose',
+          aiUsage: 'AI Usage'
+        }
       },
       nav: {
         home: 'Home',
