@@ -520,10 +520,17 @@ export default function InsideInsurfoxPage({ section }: { section: InsideSection
             </Card>
             <Card title={t('insideInsurfox.vision.loopTitle')}>
               <div style={flowGridStyle}>
-                {['Registration', 'Risk Analysis', 'Underwriting', 'Claims', 'Renewal', 'Model Update'].map((step, idx) => (
-                  <div key={step} style={flowItemStyle}>
+                {[
+                  { de: 'Registrierung', en: 'Registration' },
+                  { de: 'Risikoanalyse', en: 'Risk Analysis' },
+                  { de: 'Underwriting', en: 'Underwriting' },
+                  { de: 'Schadenbearbeitung', en: 'Claims' },
+                  { de: 'Erneuerung', en: 'Renewal' },
+                  { de: 'Modell-Update', en: 'Model Update' }
+                ].map((step, idx) => (
+                  <div key={step.en} style={flowItemStyle}>
                     <div style={flowIndexStyle}>{idx + 1}</div>
-                    <div style={flowLabelStyle}>{step}</div>
+                    <div style={flowLabelStyle}>{bi(step, l)}</div>
                   </div>
                 ))}
               </div>
