@@ -33,17 +33,7 @@ export default function AppHeader() {
 
   const navItems = isManagementUser
     ? [
-      { label: 'Allianz/VHV', route: '/transport-market-report' },
-      { label: 'Loadsure', route: '/strategy/loadsure-analysis' },
-      { label: 'WTW', route: '/strategy/wtw-analysis' },
-      { label: 'Nordic MIP', route: '/strategy/nmip-analysis' },
-      { label: 'FBSPL', route: '/analysis/fbspl' },
-      { label: 'Corify', route: '/analysis/corify' },
-      { label: 'Claimsforce', route: '/analysis/claimsforce' },
-      { label: 'Kairos RS', route: '/analysis/kairos' },
-      { label: 'Hypoport SE', route: '/analysis/hypoport' },
-      { label: 'Smart InsurTech', route: '/analysis/smartinsurtech' },
-      { label: 'blau direkt', route: '/analysis/blaudirekt' }
+      { label: lang === 'de' ? 'Marktanalysen' : 'Market Analyses', route: '/managementreports' }
     ]
     : [
       { label: t('header.nav.insurance'), route: '/underwriterfox' },
