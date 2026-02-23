@@ -660,9 +660,9 @@ export default function InsideInsurfoxPage({ section }: { section: InsideSection
                       <tr key={(row[0] as BiText).en}>
                         <td style={tdStrongStyle}>{bi(row[0] as BiText, l)}</td>
                         <td style={tdStyle}>{row[1] as string}</td>
-                        <td style={tdStyle}>{bi({ de: row[2] as string, en: row[2] as string }, l)}</td>
-                        <td style={tdStyle}>{bi({ de: row[3] as string, en: row[3] as string }, l)}</td>
-                        <td style={tdStyle}>{bi({ de: row[4] as string, en: row[4] as string }, l)}</td>
+                        <td style={tdStyle}>{bi(row[2] as BiText, l)}</td>
+                        <td style={tdStyle}>{bi(row[3] as BiText, l)}</td>
+                        <td style={tdStyle}>{bi(row[4] as BiText, l)}</td>
                         <td style={tdStyle}>{bi(row[5] as BiText, l)}</td>
                       </tr>
                     ))}
