@@ -293,7 +293,7 @@ export default function InsideInsurfoxPage({ section }: { section: InsideSection
                 <div style={architectureNodeStyle}>API Layer</div>
                 <div style={architectureNodeStyle}>Event Stream (Pub/Sub)</div>
                 <div style={architectureNodeStyle}>Data Layer (Cloud SQL + BigQuery)</div>
-                <div style={architectureNodeStyle}>AI Layer (Vertex AI)</div>
+                <div style={architectureNodeStyle}>AI Layer</div>
                 <div style={architectureNodeStyle}>Reporting Layer</div>
               </div>
             </Card>
