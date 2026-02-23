@@ -286,6 +286,18 @@ export default function InsideInsurfoxPage({ section }: { section: InsideSection
 
         {section === 'home' && (
           <>
+            <Card title={t('insideInsurfox.architecture.title')}>
+              <p style={pStyle}>{t('insideInsurfox.architecture.body')}</p>
+              <div style={{ ...architectureDiagramStyle, marginTop: '0.75rem' }}>
+                <div style={architectureNodeStyle}>Frontend Layer</div>
+                <div style={architectureNodeStyle}>API Layer</div>
+                <div style={architectureNodeStyle}>Event Stream (Pub/Sub)</div>
+                <div style={architectureNodeStyle}>Data Layer (Cloud SQL + BigQuery)</div>
+                <div style={architectureNodeStyle}>AI Layer (Vertex AI)</div>
+                <div style={architectureNodeStyle}>Reporting Layer</div>
+              </div>
+            </Card>
+
             <Card title={bi({ de: '1) Plattformidentität', en: '1) Platform Identity' }, l)}>
               <h3 style={subHeadingStyle}>{bi({ de: 'Insurfox – Enterprise Insurance Operating System', en: 'Insurfox – Enterprise Insurance Operating System' }, l)}</h3>
               <p style={pStyle}>
@@ -819,20 +831,6 @@ export default function InsideInsurfoxPage({ section }: { section: InsideSection
               <p style={{ ...noteStyle, marginTop: '0.35rem' }}>{t('insideInsurfox.aiCore.euAiAct')}</p>
             </Card>
           </>
-        )}
-
-        {section === 'architecture' && (
-          <Card title={t('insideInsurfox.architecture.title')}>
-            <p style={pStyle}>{t('insideInsurfox.architecture.body')}</p>
-            <div style={{ ...architectureDiagramStyle, marginTop: '0.75rem' }}>
-              <div style={architectureNodeStyle}>Frontend Layer</div>
-              <div style={architectureNodeStyle}>API Layer</div>
-              <div style={architectureNodeStyle}>Event Stream (Pub/Sub)</div>
-              <div style={architectureNodeStyle}>Data Layer (Cloud SQL + BigQuery)</div>
-              <div style={architectureNodeStyle}>AI Layer (Vertex AI)</div>
-              <div style={architectureNodeStyle}>Reporting Layer</div>
-            </div>
-          </Card>
         )}
 
         {section === 'modules' && (

@@ -9,7 +9,6 @@ export type InsideSectionKey =
   | 'lifecycle'
   | 'data-model'
   | 'ai-core'
-  | 'architecture'
   | 'modules'
   | 'reporting'
   | 'renewal-loop'
@@ -28,7 +27,6 @@ const sectionDefs: SectionDef[] = [
   { key: 'lifecycle', route: '/inside-insurfox/lifecycle', labelKey: 'insideInsurfox.nav.lifecycle' },
   { key: 'data-model', route: '/inside-insurfox/data-model', labelKey: 'insideInsurfox.nav.dataModel' },
   { key: 'ai-core', route: '/inside-insurfox/ai-core', labelKey: 'insideInsurfox.nav.aiCore' },
-  { key: 'architecture', route: '/inside-insurfox/architecture', labelKey: 'insideInsurfox.nav.architecture' },
   { key: 'modules', route: '/inside-insurfox/modules', labelKey: 'insideInsurfox.nav.modules' },
   { key: 'reporting', route: '/inside-insurfox/reporting', labelKey: 'insideInsurfox.nav.reporting' },
   { key: 'renewal-loop', route: '/inside-insurfox/renewal-loop', labelKey: 'insideInsurfox.nav.renewalLoop' },

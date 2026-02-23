@@ -405,7 +405,6 @@ type TranslationTree = {
       lifecycle: string
       dataModel: string
       aiCore: string
-      architecture: string
       modules: string
       reporting: string
       renewalLoop: string
@@ -3162,7 +3161,7 @@ export const translations: Record<Lang, TranslationTree> = {
         callout: 'Kernpunkt'
       },
       pages: {
-        home: { title: 'Inside Insurfox – The Insurance Operating System', subtitle: 'Interne Gesamtübersicht über Operating Model, Architektur und Skalierung' },
+        home: { title: 'Architektur', subtitle: 'Zentrale Architekturübersicht und Operating-Blueprint für Inside Insurfox' },
         vision: { title: 'Vision', subtitle: 'Warum Insurfox als integriertes Insurance Operating System aufgebaut wird' },
         roles: { title: 'Rollen', subtitle: 'Verantwortlichkeiten, Entscheidungsrechte und KPI-Ownership' },
         lifecycle: { title: 'Lebenszyklus', subtitle: 'Von Registrierung bis Erneuerung als durchgängige Ausführungskette' },
@@ -3276,13 +3275,12 @@ export const translations: Record<Lang, TranslationTree> = {
         }
       },
       nav: {
-        home: 'Start',
+        home: 'Architektur',
         vision: 'Vision',
         roles: 'Rollen',
         lifecycle: 'Lebenszyklus',
         dataModel: 'Datenmodell',
         aiCore: 'AI Core',
-        architecture: 'Architektur',
         modules: 'Module',
         reporting: 'Reporting',
         renewalLoop: 'Erneuerungs-Loop',
@@ -7331,7 +7329,7 @@ export const translations: Record<Lang, TranslationTree> = {
         callout: 'Callout'
       },
       pages: {
-        home: { title: 'Inside Insurfox – The Insurance Operating System', subtitle: 'Internal end-to-end view of operating model, architecture, and scale logic' },
+        home: { title: 'Architecture', subtitle: 'Central architecture overview and operating blueprint for Inside Insurfox' },
         vision: { title: 'Vision', subtitle: 'Why Insurfox is built as an integrated insurance operating system' },
         roles: { title: 'Roles', subtitle: 'Responsibilities, decision rights, and KPI ownership' },
         lifecycle: { title: 'Lifecycle', subtitle: 'From registration to renewal as one connected execution chain' },
@@ -7445,13 +7443,12 @@ export const translations: Record<Lang, TranslationTree> = {
         }
       },
       nav: {
-        home: 'Home',
+        home: 'Architecture',
         vision: 'Vision',
         roles: 'Roles',
         lifecycle: 'Lifecycle',
         dataModel: 'Data Model',
         aiCore: 'AI Core',
-        architecture: 'Architecture',
         modules: 'Modules',
         reporting: 'Reporting',
         renewalLoop: 'Renewal Loop',

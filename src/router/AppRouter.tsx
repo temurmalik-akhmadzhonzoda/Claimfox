@@ -319,7 +319,7 @@ export default function AppRouter() {
         <Route path="/inside-insurfox/lifecycle" element={<InsideInsurfoxPage section="lifecycle" />} />
         <Route path="/inside-insurfox/data-model" element={<InsideInsurfoxPage section="data-model" />} />
         <Route path="/inside-insurfox/ai-core" element={<InsideInsurfoxPage section="ai-core" />} />
-        <Route path="/inside-insurfox/architecture" element={<InsideInsurfoxPage section="architecture" />} />
+        <Route path="/inside-insurfox/architecture" element={<Navigate to="/inside-insurfox" replace />} />
         <Route path="/inside-insurfox/modules" element={<InsideInsurfoxPage section="modules" />} />
         <Route path="/inside-insurfox/reporting" element={<InsideInsurfoxPage section="reporting" />} />
         <Route path="/inside-insurfox/renewal-loop" element={<InsideInsurfoxPage section="renewal-loop" />} />
