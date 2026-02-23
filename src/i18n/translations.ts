@@ -3165,13 +3165,13 @@ export const translations: Record<Lang, TranslationTree> = {
         home: { title: 'Inside Insurfox – The Insurance Operating System', subtitle: 'Interne Gesamtübersicht über Operating Model, Architektur und Skalierung' },
         vision: { title: 'Vision', subtitle: 'Warum Insurfox als integriertes Insurance Operating System aufgebaut wird' },
         roles: { title: 'Rollen', subtitle: 'Verantwortlichkeiten, Entscheidungsrechte und KPI-Ownership' },
-        lifecycle: { title: 'Lifecycle', subtitle: 'Von Registrierung bis Renewal als durchgängige Ausführungskette' },
-        'data-model': { title: 'Datenmodell', subtitle: 'Insurance Data Field Explorer für operative und AI-relevante Felder' },
+        lifecycle: { title: 'Lebenszyklus', subtitle: 'Von Registrierung bis Erneuerung als durchgängige Ausführungskette' },
+        'data-model': { title: 'Datenmodell', subtitle: 'Insurance-Data-Field-Explorer für operative und AI-relevante Felder' },
         'ai-core': { title: 'AI Core', subtitle: 'Modelle, Entscheidungshilfe, Explainability und Compliance' },
         architecture: { title: 'Architektur', subtitle: 'Layered GCP-Architektur für die Insurance-Execution-Plattform' },
         modules: { title: 'Module', subtitle: 'Brokerfox, Claimsfox, Fleetfox, Partnerfox und AI Fox im Zielbild' },
         reporting: { title: 'Reporting', subtitle: 'Management-Steuerung über Profitabilität, Risiko und Wachstum' },
-        'renewal-loop': { title: 'Renewal Loop', subtitle: 'Wie Schaden- und Verhaltensdaten in Pricing und Retention wirken' },
+        'renewal-loop': { title: 'Erneuerungs-Loop', subtitle: 'Wie Schaden- und Verhaltensdaten auf Pricing und Retention wirken' },
         'mvp-roadmap': { title: 'MVP Roadmap', subtitle: 'Phasenorientierter Ausbaupfad vom Kernprozess zum Closed-Loop-Modell' }
       },
       home: {
@@ -3272,20 +3272,20 @@ export const translations: Record<Lang, TranslationTree> = {
           mask: 'Maske',
           role: 'Rolle',
           purpose: 'Zweck',
-          aiUsage: 'AI Usage'
+          aiUsage: 'AI-Nutzung'
         }
       },
       nav: {
         home: 'Start',
         vision: 'Vision',
         roles: 'Rollen',
-        lifecycle: 'Lifecycle',
+        lifecycle: 'Lebenszyklus',
         dataModel: 'Datenmodell',
         aiCore: 'AI Core',
         architecture: 'Architektur',
         modules: 'Module',
         reporting: 'Reporting',
-        renewalLoop: 'Renewal Loop',
+        renewalLoop: 'Erneuerungs-Loop',
         mvpRoadmap: 'MVP Roadmap'
       }
     },

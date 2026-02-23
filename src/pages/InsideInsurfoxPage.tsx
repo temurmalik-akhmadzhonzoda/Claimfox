@@ -348,28 +348,28 @@ export default function InsideInsurfoxPage({ section }: { section: InsideSection
                   </thead>
                   <tbody>
                     {[
-                      ['1', 'Tenant Registration', 'Platform Owner, Corporate Admin', 'Tenant profile, access baseline', 'Tenant activation', 'tenant.registered'],
-                      ['2', 'Broker Onboarding', 'Broker, Operations', 'Broker account, authority mapping', 'Broker approval', 'broker.onboarded'],
-                      ['3', 'Risk Submission', 'Broker, Corporate Client', 'Submission payload, exposure data', 'Submission completeness', 'submission.created'],
-                      ['4', 'AI Risk Scoring', 'MGA, AI Core', 'Risk score, feature snapshot', 'Risk tier assignment', 'submission.scored'],
-                      ['5', 'Underwriting Decision', 'MGA, Carrier', 'Pricing corridor, referral flags', 'Accept/decline/referral', 'underwriting.decisioned'],
-                      ['6', 'Policy Issuance', 'Broker, Operations', 'Policy object, terms', 'Bind + issue', 'policy.bound'],
-                      ['7', 'Fleet Monitoring', 'Fleet Operator, AI Core', 'Telematics stream, behavior KPIs', 'Intervention trigger', 'fleet.signal.ingested'],
-                      ['8', 'FNOL (Claims Intake)', 'Client, Claims Ops', 'FNOL record, incident context', 'Claim opening', 'claim.created'],
-                      ['9', 'AI Damage Scan', 'Claims AI, Adjuster', 'Image extraction, damage indicators', 'Repair path recommendation', 'scan.completed'],
-                      ['10', 'Fraud Scoring', 'Claims AI, Governance', 'Fraud score, anomaly evidence', 'Investigation trigger', 'fraud.flagged'],
-                      ['11', 'Partner Assignment', 'Claims Ops, Partner Network', 'Partner SLA assignment', 'Dispatch decision', 'partner.assigned'],
-                      ['12', 'Settlement', 'Claims, Finance', 'Reserve update, payout record', 'Settle / close', 'claim.settled'],
-                      ['13', 'Portfolio Reporting', 'Management, Carrier', 'Loss, margin, risk dashboards', 'Portfolio steering', 'report.generated'],
-                      ['14', 'Renewal / Prolongation', 'Broker, MGA, Carrier', 'Renewal score, repricing suggestion', 'Renewal terms', 'renewal.generated']
+                      ['1', { de: 'Mandanten-Registrierung', en: 'Tenant Registration' }, { de: 'Platform Owner, Unternehmens-Admin', en: 'Platform owner, corporate admin' }, { de: 'Mandantenprofil, Zugriffsbasis', en: 'Tenant profile, access baseline' }, { de: 'Mandantenaktivierung', en: 'Tenant activation' }, 'tenant.registered'],
+                      ['2', { de: 'Makler-Onboarding', en: 'Broker Onboarding' }, { de: 'Makler, Operations', en: 'Broker, operations' }, { de: 'Maklerkonto, Vollmachten-Mapping', en: 'Broker account, authority mapping' }, { de: 'Maklerfreigabe', en: 'Broker approval' }, 'broker.onboarded'],
+                      ['3', { de: 'Risikoeinreichung', en: 'Risk Submission' }, { de: 'Makler, Unternehmenskunde', en: 'Broker, corporate client' }, { de: 'Submission-Payload, Exponierungsdaten', en: 'Submission payload, exposure data' }, { de: 'Vollständigkeitsprüfung', en: 'Submission completeness' }, 'submission.created'],
+                      ['4', { de: 'AI-Risikoscoring', en: 'AI Risk Scoring' }, { de: 'MGA, AI Core', en: 'MGA, AI core' }, { de: 'Risikoscore, Feature-Snapshot', en: 'Risk score, feature snapshot' }, { de: 'Risikotier-Zuordnung', en: 'Risk tier assignment' }, 'submission.scored'],
+                      ['5', { de: 'Underwriting-Entscheidung', en: 'Underwriting Decision' }, { de: 'MGA, Carrier', en: 'MGA, carrier' }, { de: 'Pricing-Korridor, Referral-Flags', en: 'Pricing corridor, referral flags' }, { de: 'Annehmen/Ablehnen/Referral', en: 'Accept/decline/referral' }, 'underwriting.decisioned'],
+                      ['6', { de: 'Policierung', en: 'Policy Issuance' }, { de: 'Makler, Operations', en: 'Broker, operations' }, { de: 'Policenobjekt, Konditionen', en: 'Policy object, terms' }, { de: 'Binden + ausstellen', en: 'Bind + issue' }, 'policy.bound'],
+                      ['7', { de: 'Flotten-Monitoring', en: 'Fleet Monitoring' }, { de: 'Flottenbetreiber, AI Core', en: 'Fleet operator, AI core' }, { de: 'Telematik-Stream, Verhaltens-KPIs', en: 'Telematics stream, behavior KPIs' }, { de: 'Interventions-Trigger', en: 'Intervention trigger' }, 'fleet.signal.ingested'],
+                      ['8', { de: 'FNOL (Schadenaufnahme)', en: 'FNOL (Claims Intake)' }, { de: 'Kunde, Claims Ops', en: 'Client, claims ops' }, { de: 'FNOL-Datensatz, Ereigniskontext', en: 'FNOL record, incident context' }, { de: 'Schadeneröffnung', en: 'Claim opening' }, 'claim.created'],
+                      ['9', { de: 'AI-Schadenscan', en: 'AI Damage Scan' }, { de: 'Claims AI, Sachbearbeitung', en: 'Claims AI, adjuster' }, { de: 'Bildextraktion, Schadensindikatoren', en: 'Image extraction, damage indicators' }, { de: 'Reparaturpfad-Empfehlung', en: 'Repair path recommendation' }, 'scan.completed'],
+                      ['10', { de: 'Betrugs-Scoring', en: 'Fraud Scoring' }, { de: 'Claims AI, Governance', en: 'Claims AI, governance' }, { de: 'Betrugsscore, Anomalie-Evidenz', en: 'Fraud score, anomaly evidence' }, { de: 'Untersuchungs-Trigger', en: 'Investigation trigger' }, 'fraud.flagged'],
+                      ['11', { de: 'Partnerzuweisung', en: 'Partner Assignment' }, { de: 'Claims Ops, Partnernetzwerk', en: 'Claims ops, partner network' }, { de: 'Partner-SLA-Zuweisung', en: 'Partner SLA assignment' }, { de: 'Dispatch-Entscheidung', en: 'Dispatch decision' }, 'partner.assigned'],
+                      ['12', { de: 'Regulierung', en: 'Settlement' }, { de: 'Claims, Finance', en: 'Claims, finance' }, { de: 'Reserve-Update, Auszahlungsdatensatz', en: 'Reserve update, payout record' }, { de: 'Regulieren / schließen', en: 'Settle / close' }, 'claim.settled'],
+                      ['13', { de: 'Portfolio-Reporting', en: 'Portfolio Reporting' }, { de: 'Management, Carrier', en: 'Management, carrier' }, { de: 'Loss-, Marge-, Risiko-Dashboards', en: 'Loss, margin, risk dashboards' }, { de: 'Portfolio-Steuerung', en: 'Portfolio steering' }, 'report.generated'],
+                      ['14', { de: 'Erneuerung / Verlängerung', en: 'Renewal / Prolongation' }, { de: 'Makler, MGA, Carrier', en: 'Broker, MGA, carrier' }, { de: 'Renewal-Score, Repricing-Vorschlag', en: 'Renewal score, repricing suggestion' }, { de: 'Renewal-Konditionen', en: 'Renewal terms' }, 'renewal.generated']
                     ].map((row) => (
                       <tr key={row[0]}>
                         <td style={tdStrongStyle}>{row[0]}</td>
-                        <td style={tdStrongStyle}>{row[1]}</td>
-                        <td style={tdStyle}>{row[2]}</td>
-                        <td style={tdStyle}>{row[3]}</td>
-                        <td style={tdStyle}>{row[4]}</td>
-                        <td style={tdStyle}><code>{row[5]}</code></td>
+                        <td style={tdStrongStyle}>{bi(row[1] as BiText, l)}</td>
+                        <td style={tdStyle}>{bi(row[2] as BiText, l)}</td>
+                        <td style={tdStyle}>{bi(row[3] as BiText, l)}</td>
+                        <td style={tdStyle}>{bi(row[4] as BiText, l)}</td>
+                        <td style={tdStyle}><code>{row[5] as string}</code></td>
                       </tr>
                     ))}
                   </tbody>
@@ -458,10 +458,18 @@ export default function InsideInsurfoxPage({ section }: { section: InsideSection
             <Card title={bi({ de: '7) AI Core Integration', en: '7) AI Core Integration' }, l)}>
               <p style={pStyle}>{bi({ de: 'Der AI Core umfasst Underwriting AI, Claims Vision AI, Fraud Detection, Fleet Risk Scoring und Renewal Optimization. Das Modell-Lifecycle-Management folgt einem kontrollierten Betriebsprozess.', en: 'The AI core includes underwriting AI, claims vision AI, fraud detection, fleet risk scoring, and renewal optimization. Model lifecycle management follows a controlled operating process.' }, l)}</p>
               <div style={flowGridStyle}>
-                {['Data ingestion', 'Feature engineering', 'Training', 'Registry', 'Deployment', 'Monitoring', 'Human review'].map((step, idx) => (
-                  <div key={step} style={flowItemStyle}>
+                {[
+                  { de: 'Datenaufnahme', en: 'Data ingestion' },
+                  { de: 'Feature Engineering', en: 'Feature engineering' },
+                  { de: 'Training', en: 'Training' },
+                  { de: 'Modell-Registry', en: 'Registry' },
+                  { de: 'Deployment', en: 'Deployment' },
+                  { de: 'Monitoring', en: 'Monitoring' },
+                  { de: 'Menschliche Prüfung', en: 'Human review' }
+                ].map((step, idx) => (
+                  <div key={step.en} style={flowItemStyle}>
                     <div style={flowIndexStyle}>{idx + 1}</div>
-                    <div style={flowLabelStyle}>{step}</div>
+                    <div style={flowLabelStyle}>{bi(step, l)}</div>
                   </div>
                 ))}
               </div>
