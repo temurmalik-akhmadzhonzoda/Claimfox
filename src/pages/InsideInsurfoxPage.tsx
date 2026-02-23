@@ -720,7 +720,7 @@ export default function InsideInsurfoxPage({ section }: { section: InsideSection
 
         {section === 'app-architecture' && (
           <>
-            <Card title={bi({ de: '1) ARCHITECTURAL VISION', en: '1) ARCHITECTURAL VISION' }, l)}>
+            <Card title={bi({ de: '1) ARCHITEKTONISCHE VISION', en: '1) ARCHITECTURAL VISION' }, l)}>
               <h3 style={subHeadingStyle}>{bi({ de: 'Hybrid Web + Native Architecture for Insurfox', en: 'Hybrid Web + Native Architecture for Insurfox' }, l)}</h3>
               <p style={pStyle}>
                 {bi(
@@ -742,7 +742,7 @@ export default function InsideInsurfoxPage({ section }: { section: InsideSection
               </p>
             </Card>
 
-            <Card title={bi({ de: '2) HIGH-LEVEL SYSTEM OVERVIEW', en: '2) HIGH-LEVEL SYSTEM OVERVIEW' }, l)}>
+            <Card title={bi({ de: '2) SYSTEMÜBERSICHT', en: '2) HIGH-LEVEL SYSTEM OVERVIEW' }, l)}>
               <MermaidBlock
                 title={bi({ de: 'Systemübersicht', en: 'System Overview' }, l)}
                 code={`flowchart LR
@@ -766,7 +766,7 @@ export default function InsideInsurfoxPage({ section }: { section: InsideSection
               </p>
             </Card>
 
-            <Card title={bi({ de: '3) FRONTEND ARCHITECTURE', en: '3) FRONTEND ARCHITECTURE' }, l)}>
+            <Card title={bi({ de: '3) FRONTEND-ARCHITEKTUR', en: '3) FRONTEND ARCHITECTURE' }, l)}>
               <div style={{ ...roleCardStyle, marginBottom: '0.6rem' }}>
                 <pre style={mermaidPreStyle}>
                   <code>{`apps/
@@ -790,7 +790,7 @@ packages/
               </p>
             </Card>
 
-            <Card title={bi({ de: '4) MOBILE ARCHITECTURE', en: '4) MOBILE ARCHITECTURE' }, l)}>
+            <Card title={bi({ de: '4) MOBILE-ARCHITEKTUR', en: '4) MOBILE ARCHITECTURE' }, l)}>
               <p style={pStyle}>
                 {bi(
                   {
@@ -811,7 +811,7 @@ packages/
               </p>
             </Card>
 
-            <Card title={bi({ de: '5) AUTHENTICATION & ROLE MODEL', en: '5) AUTHENTICATION & ROLE MODEL' }, l)}>
+            <Card title={bi({ de: '5) AUTHENTIFIZIERUNG & ROLLENMODELL', en: '5) AUTHENTICATION & ROLE MODEL' }, l)}>
               <p style={pStyle}>
                 {bi(
                   {
@@ -833,7 +833,7 @@ packages/
               </div>
             </Card>
 
-            <Card title={bi({ de: '6) BACKEND SERVICE LAYER', en: '6) BACKEND SERVICE LAYER' }, l)}>
+            <Card title={bi({ de: '6) BACKEND-SERVICE-LAYER', en: '6) BACKEND SERVICE LAYER' }, l)}>
               <p style={pStyle}>
                 {bi(
                   {
@@ -845,7 +845,7 @@ packages/
               </p>
             </Card>
 
-            <Card title={bi({ de: '7) EVENT-DRIVEN ARCHITECTURE', en: '7) EVENT-DRIVEN ARCHITECTURE' }, l)}>
+            <Card title={bi({ de: '7) EREIGNISGETRIEBENE ARCHITEKTUR', en: '7) EVENT-DRIVEN ARCHITECTURE' }, l)}>
               <p style={pStyle}>
                 {bi(
                   {
@@ -868,7 +868,7 @@ packages/
               />
             </Card>
 
-            <Card title={bi({ de: '8) AI INTEGRATION FLOW', en: '8) AI INTEGRATION FLOW' }, l)}>
+            <Card title={bi({ de: '8) AI-INTEGRATIONSFLUSS', en: '8) AI INTEGRATION FLOW' }, l)}>
               <MermaidBlock
                 title={bi({ de: 'Mobile-to-AI-Pipeline', en: 'Mobile-to-AI Pipeline' }, l)}
                 code={`flowchart LR
@@ -890,7 +890,7 @@ packages/
               </p>
             </Card>
 
-            <Card title={bi({ de: '9) CLOUD ARCHITECTURE (GCP)', en: '9) CLOUD ARCHITECTURE (GCP)' }, l)}>
+            <Card title={bi({ de: '9) CLOUD-ARCHITEKTUR (GCP)', en: '9) CLOUD ARCHITECTURE (GCP)' }, l)}>
               <p style={pStyle}>
                 {bi(
                   {
@@ -917,7 +917,7 @@ packages/
               />
             </Card>
 
-            <Card title={bi({ de: '10) SECURITY & DEVOPS', en: '10) SECURITY & DEVOPS' }, l)}>
+            <Card title={bi({ de: '10) SICHERHEIT & DEVOPS', en: '10) SECURITY & DEVOPS' }, l)}>
               <p style={pStyle}>
                 {bi(
                   {
@@ -938,7 +938,7 @@ packages/
               </p>
             </Card>
 
-            <Card title={bi({ de: '11) WHITE LABEL STRATEGY', en: '11) WHITE LABEL STRATEGY' }, l)}>
+            <Card title={bi({ de: '11) WHITE-LABEL-STRATEGIE', en: '11) WHITE LABEL STRATEGY' }, l)}>
               <p style={pStyle}>
                 {bi(
                   {
@@ -950,7 +950,7 @@ packages/
               </p>
             </Card>
 
-            <Card title={bi({ de: '12) SCALING STRATEGY', en: '12) SCALING STRATEGY' }, l)}>
+            <Card title={bi({ de: '12) SKALIERUNGSSTRATEGIE', en: '12) SCALING STRATEGY' }, l)}>
               <div style={{ display: 'grid', gap: '0.65rem' }}>
                 <div style={roleCardStyle}>
                   <h3 style={subHeadingStyle}>Phase 1</h3>
