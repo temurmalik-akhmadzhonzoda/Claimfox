@@ -9,11 +9,51 @@ function includesText(value: string, query: string) {
 }
 
 export default function DataFieldExplorer() {
-  const { t } = useI18n()
+  const { t, lang } = useI18n()
+  const isDe = lang === 'de'
   const [search, setSearch] = useState<string>('')
   const [phase, setPhase] = useState<PhaseFilter>('All')
   const [role, setRole] = useState<string>('All')
   const [aiOnly, setAiOnly] = useState<boolean>(false)
+
+  function phaseLabel(value: InsuranceDataPhase) {
+    if (!isDe) return value
+    const labels: Record<InsuranceDataPhase, string> = {
+      Registration: 'Registrierung',
+      Fleet: 'Flotte',
+      Driver: 'Fahrer',
+      Underwriting: 'Underwriting',
+      Claims: 'Schaden',
+      Monitoring: 'Monitoring',
+      Renewal: 'Erneuerung'
+    }
+    return labels[value]
+  }
+
+  function roleLabel(value: string) {
+    if (!isDe) return value
+    const labels: Record<string, string> = {
+      'Corporate Client': 'Unternehmenskunde',
+      'Claims Adjuster': 'Schadensachbearbeitung',
+      'Fleet Operator': 'Flottenbetrieb',
+      Carrier: 'Versicherer'
+    }
+    return labels[value] ?? value
+  }
+
+  function maskLabel(value: string) {
+    if (!isDe) return value
+    const labels: Record<string, string> = {
+      'Company Onboarding': 'Unternehmens-Onboarding',
+      'Fleet Profile': 'Flottenprofil',
+      'Driver Profile': 'Fahrerprofil',
+      'Underwriting Form': 'Underwriting-Formular',
+      'FNOL Form': 'FNOL-Formular',
+      'Fleet Monitoring': 'Flotten-Monitoring',
+      'Renewal Assessment': 'Erneuerungsbewertung'
+    }
+    return labels[value] ?? value
+  }
 
   const roles = useMemo(() => {
     const allRoles = insuranceDataFields.flatMap((item) => item.role)
@@ -30,10 +70,13 @@ export default function DataFieldExplorer() {
       return (
         includesText(field.fieldName, q) ||
         includesText(field.mask, q) ||
+        includesText(maskLabel(field.mask), q) ||
+        includesText(phaseLabel(field.phase), q) ||
         field.role.some((r) => includesText(r, q))
+        || field.role.some((r) => includesText(roleLabel(r), q))
       )
     })
-  }, [aiOnly, phase, role, search])
+  }, [aiOnly, phase, role, search, isDe])
 
   return (
     <div style={{ display: 'grid', gap: '0.75rem' }}>
@@ -51,13 +94,13 @@ export default function DataFieldExplorer() {
           <span style={filterTitleStyle}>{t('insideInsurfox.explorer.phase')}</span>
           <select value={phase} onChange={(e) => setPhase(e.target.value as PhaseFilter)} style={inputStyle}>
             <option value="All">{t('insideInsurfox.explorer.all')}</option>
-            <option value="Registration">Registration</option>
-            <option value="Fleet">Fleet</option>
-            <option value="Driver">Driver</option>
-            <option value="Underwriting">Underwriting</option>
-            <option value="Claims">Claims</option>
-            <option value="Monitoring">Monitoring</option>
-            <option value="Renewal">Renewal</option>
+            <option value="Registration">{phaseLabel('Registration')}</option>
+            <option value="Fleet">{phaseLabel('Fleet')}</option>
+            <option value="Driver">{phaseLabel('Driver')}</option>
+            <option value="Underwriting">{phaseLabel('Underwriting')}</option>
+            <option value="Claims">{phaseLabel('Claims')}</option>
+            <option value="Monitoring">{phaseLabel('Monitoring')}</option>
+            <option value="Renewal">{phaseLabel('Renewal')}</option>
           </select>
         </label>
         <label style={filterLabelStyle}>
@@ -65,7 +108,7 @@ export default function DataFieldExplorer() {
           <select value={role} onChange={(e) => setRole(e.target.value)} style={inputStyle}>
             <option value="All">{t('insideInsurfox.explorer.all')}</option>
             {roles.map((r) => (
-              <option key={r} value={r}>{r}</option>
+              <option key={r} value={r}>{roleLabel(r)}</option>
             ))}
           </select>
         </label>
@@ -95,9 +138,9 @@ export default function DataFieldExplorer() {
             {filtered.map((row: InsuranceDataField) => (
               <tr key={row.id}>
                 <td style={tdStrongStyle}>{row.fieldName}</td>
-                <td style={tdStyle}>{row.phase}</td>
-                <td style={tdStyle}>{row.mask}</td>
-                <td style={tdStyle}>{row.role.join(', ')}</td>
+                <td style={tdStyle}>{phaseLabel(row.phase)}</td>
+                <td style={tdStyle}>{maskLabel(row.mask)}</td>
+                <td style={tdStyle}>{row.role.map((r) => roleLabel(r)).join(', ')}</td>
                 <td style={tdStyle}>{row.purpose}</td>
                 <td style={tdStyle}>{row.aiUsage ?? '-'}</td>
               </tr>

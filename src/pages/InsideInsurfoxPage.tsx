@@ -40,6 +40,24 @@ type ReportingMetric = {
   action: BiText
 }
 
+type EnterpriseRole = {
+  name: string
+  tenantLevel: string
+  functionalDescription: string
+  coreResponsibilities: string
+  decisionAuthority: string
+  dataAccessScope: string
+  modulesUsed: string
+  trigger?: string
+  temporaryAccess?: string
+}
+
+type EnterpriseRoleSection = {
+  title: BiText
+  intro: BiText
+  roles: EnterpriseRole[]
+}
+
 const roleDetails: RoleDetail[] = [
   {
     role: { de: 'Platform Owner', en: 'Platform Owner' },
@@ -237,6 +255,109 @@ const reportingMetrics: ReportingMetric[] = [
   { title: { de: 'Geo Heatmap', en: 'Geo Heatmap' }, meaning: { de: 'Regionale Risikoballungen und Schadenschwerpunkte.', en: 'Regional risk concentrations and claims hotspots.' }, action: { de: 'Geosteuerung in Pricing und Kapazität integrieren.', en: 'Integrate geo steering into pricing and capacity.' } },
   { title: { de: 'Capacity Utilization', en: 'Capacity Utilization' }, meaning: { de: 'Auslastung verfügbarer Kapazitäten je Segment.', en: 'Utilization of available capacity by segment.' }, action: { de: 'Kapazitätsallokation und Referral-Pfade anpassen.', en: 'Adjust capacity allocation and referral paths.' } },
   { title: { de: 'Renewal Forecast', en: 'Renewal Forecast' }, meaning: { de: 'Prognose der Verlängerungswahrscheinlichkeit und Margenwirkung.', en: 'Forecast of renewal likelihood and margin impact.' }, action: { de: 'Frühzeitige Angebots- und Kundenstrategie steuern.', en: 'Steer offer and client strategy early.' } }
+]
+
+const enterpriseRoleSections: EnterpriseRoleSection[] = [
+  {
+    title: { de: '1) PLATFORM LEVEL (INSURFOX CORE)', en: '1) PLATFORM LEVEL (INSURFOX CORE)' },
+    intro: { de: 'Zentrale Rollen mit systemweiter Steuerung über Governance, Zeichnung, Schaden, Plattformbetrieb, AI und Compliance.', en: 'Central roles with system-wide control across governance, underwriting, claims, platform operations, AI, and compliance.' },
+    roles: [
+      { name: 'Platform Super Admin', tenantLevel: 'Platform', functionalDescription: 'Owns global platform administration and tenant lifecycle.', coreResponsibilities: 'Tenant provisioning, root IAM, emergency controls, platform configuration baselines.', decisionAuthority: 'System-wide authorization and break-glass approval.', dataAccessScope: 'Cross-tenant metadata, audit domain, no default business data read.', modulesUsed: 'All (admin-only controls)' },
+      { name: 'Chief Underwriting Officer (MGA)', tenantLevel: 'Platform / MGA', functionalDescription: 'Defines MGA underwriting framework and authority design.', coreResponsibilities: 'Authority corridors, referral thresholds, portfolio appetite, underwriting governance.', decisionAuthority: 'Final underwriting policy and override rights for delegated lines.', dataAccessScope: 'Underwriting portfolios, referral history, risk-model outputs.', modulesUsed: 'Brokerfox, AI Fox, Reporting' },
+      { name: 'Head of Claims (MGA)', tenantLevel: 'Platform / MGA', functionalDescription: 'Leads claims operating model and leakage controls.', coreResponsibilities: 'Claims SOPs, reserve governance, partner SLAs, escalation protocols.', decisionAuthority: 'Claims policy decisions and high-severity approval thresholds.', dataAccessScope: 'Claims files, reserves, fraud outputs, partner performance.', modulesUsed: 'Claimsfox, Partnerfox, Reporting' },
+      { name: 'Broker Portal Director', tenantLevel: 'Platform', functionalDescription: 'Owns broker operating model and distribution processes.', coreResponsibilities: 'Broker onboarding policy, portal workflow standards, service quality.', decisionAuthority: 'Broker experience standards and distribution operations decisions.', dataAccessScope: 'Broker account metadata, submission throughput, channel KPIs.', modulesUsed: 'Brokerfox, Reporting' },
+      { name: 'AI Governance Officer', tenantLevel: 'Platform', functionalDescription: 'Controls AI risk governance and model assurance.', coreResponsibilities: 'Model approval gates, explainability standards, monitoring and drift policies.', decisionAuthority: 'AI go-live/freeze decisions and mandatory human override rules.', dataAccessScope: 'Model registry, feature usage, decision traces, bias indicators.', modulesUsed: 'AI Fox, Reporting' },
+      { name: 'Compliance & Risk Officer', tenantLevel: 'Platform', functionalDescription: 'Supervises regulatory and operational compliance.', coreResponsibilities: 'Control framework, regulatory evidence, policy adherence, remediation tracking.', decisionAuthority: 'Compliance exceptions, control escalations, audit response coordination.', dataAccessScope: 'Audit logs, control events, policy and process evidence.', modulesUsed: 'Reporting, Admin governance views' },
+      { name: 'Reinsurance Manager', tenantLevel: 'Platform / MGA', functionalDescription: 'Manages treaty architecture and ceded risk strategy.', coreResponsibilities: 'Treaty structure, placement negotiation, cession rules, recovery governance.', decisionAuthority: 'Treaty and facultative placement recommendations for approval.', dataAccessScope: 'Aggregation metrics, treaty utilization, ceded-loss events.', modulesUsed: 'Reporting, Underwriting views' },
+      { name: 'Product Owner', tenantLevel: 'Platform', functionalDescription: 'Owns product backlog across insurance modules.', coreResponsibilities: 'Feature prioritization, release scope, cross-domain dependency management.', decisionAuthority: 'Functional roadmap and release content sign-off.', dataAccessScope: 'Product telemetry, workflow KPIs, adoption metrics.', modulesUsed: 'All (product perspective)' },
+      { name: 'DevOps Lead', tenantLevel: 'Platform', functionalDescription: 'Owns reliability, deployment architecture, and runtime operations.', coreResponsibilities: 'CI/CD, environment hardening, observability, incident response.', decisionAuthority: 'Deployment gates, rollback decisions, operational risk mitigation.', dataAccessScope: 'Infrastructure logs, runtime metrics, deployment records.', modulesUsed: 'Platform ops tooling, monitoring stack' },
+      { name: 'Data Protection Officer (DPO)', tenantLevel: 'Platform', functionalDescription: 'Ensures data protection by design and by default.', coreResponsibilities: 'PII policy, retention controls, lawful processing review, data-rights governance.', decisionAuthority: 'Privacy control approval and data access escalation decisions.', dataAccessScope: 'PII policy metadata, access events, retention/audit evidence.', modulesUsed: 'Reporting, compliance views' }
+    ]
+  },
+  {
+    title: { de: '2) BROKER TENANT', en: '2) BROKER TENANT' },
+    intro: { de: 'Broker-Rollen für Onboarding, Submission-Handling, Portfoliosteuerung und Renewals.', en: 'Broker roles covering onboarding, submission handling, portfolio steering, and renewals.' },
+    roles: [
+      { name: 'Broker Admin', tenantLevel: 'Broker', functionalDescription: 'Administers broker tenant users and operating setup.', coreResponsibilities: 'Client onboarding, user-role assignment, workflow routing configuration.', decisionAuthority: 'Broker-internal access grants and process settings.', dataAccessScope: 'Broker tenant clients, submissions, policy-level broker views.', modulesUsed: 'Brokerfox, Reporting' },
+      { name: 'Broker Underwriter', tenantLevel: 'Broker', functionalDescription: 'Prepares risk submissions and supports market placement quality.', coreResponsibilities: 'Data quality checks, submission packaging, referral communication.', decisionAuthority: 'Submission readiness and market-routing proposals.', dataAccessScope: 'Risk intake data, quote comparisons, underwriting notes.', modulesUsed: 'Brokerfox, AI Fox' },
+      { name: 'Broker Claims Manager', tenantLevel: 'Broker', functionalDescription: 'Coordinates client-side claims oversight.', coreResponsibilities: 'FNOL validation, client communication, claims progress monitoring.', decisionAuthority: 'Escalation initiation and client-side settlement coordination.', dataAccessScope: 'Claims status, reserve summaries, communication logs.', modulesUsed: 'Claimsfox, Reporting' },
+      { name: 'Broker Account Executive', tenantLevel: 'Broker', functionalDescription: 'Owns portfolio relationship and growth strategy for assigned clients.', coreResponsibilities: 'Renewal planning, placement strategy, account expansion.', decisionAuthority: 'Offer selection recommendations and renewal negotiation strategy.', dataAccessScope: 'Account KPIs, quote outcomes, renewal pipeline.', modulesUsed: 'Brokerfox, Reporting' },
+      { name: 'Broker Finance Officer', tenantLevel: 'Broker', functionalDescription: 'Manages commission visibility and broker financial controls.', coreResponsibilities: 'Commission reconciliation, invoicing checks, broker finance reporting.', decisionAuthority: 'Broker financial validation and exception escalation.', dataAccessScope: 'Commission statements, invoice summaries, payment status.', modulesUsed: 'Reporting, finance views' }
+    ]
+  },
+  {
+    title: { de: '3) MGA / UNDERWRITING OPERATIONS', en: '3) MGA / UNDERWRITING OPERATIONS' },
+    intro: { de: 'Rollen für Risikobewertung, Pricing, Aggregationskontrolle und Kapazitätssteuerung.', en: 'Roles for risk assessment, pricing, aggregation control, and capacity steering.' },
+    roles: [
+      { name: 'MGA Underwriter', tenantLevel: 'MGA', functionalDescription: 'Executes delegated underwriting decisions within authority band.', coreResponsibilities: 'Risk scoring review, policy terms, referral handling.', decisionAuthority: 'Accept/decline/referral within defined underwriting authority.', dataAccessScope: 'Submission data, model outputs, policy terms history.', modulesUsed: 'Brokerfox, AI Fox' },
+      { name: 'Senior Underwriter', tenantLevel: 'MGA', functionalDescription: 'Handles complex or escalated underwriting cases.', coreResponsibilities: 'High-risk review, exception handling, mentoring quality standards.', decisionAuthority: 'Escalated case decisions and authority exceptions.', dataAccessScope: 'Complex submissions, referral evidence, historical loss signals.', modulesUsed: 'Brokerfox, AI Fox, Reporting' },
+      { name: 'Portfolio Manager', tenantLevel: 'MGA', functionalDescription: 'Steers portfolio performance against appetite and margin goals.', coreResponsibilities: 'Loss-ratio monitoring, segment steering, renewal direction.', decisionAuthority: 'Portfolio steering actions and risk appetite adjustments (proposed).', dataAccessScope: 'Portfolio KPIs, segment trends, accumulation metrics.', modulesUsed: 'Reporting, AI Fox' },
+      { name: 'Pricing Actuary', tenantLevel: 'MGA', functionalDescription: 'Maintains pricing assumptions and actuarial calibration.', coreResponsibilities: 'Rate model review, assumption governance, trend updates.', decisionAuthority: 'Pricing parameter recommendations and model-calibration sign-off.', dataAccessScope: 'Loss/severity trends, exposure metrics, pricing performance.', modulesUsed: 'AI Fox, Reporting' },
+      { name: 'Capacity Manager', tenantLevel: 'MGA / Carrier', functionalDescription: 'Coordinates capacity allocation and treaty alignment.', coreResponsibilities: 'Capacity distribution, authority utilization checks, carrier coordination.', decisionAuthority: 'Capacity allocation proposals and referral escalations to carrier.', dataAccessScope: 'Capacity utilization, treaty constraints, placement outcomes.', modulesUsed: 'Reporting, underwriting views' }
+    ]
+  },
+  {
+    title: { de: '4) CORPORATE CLIENT (LOGISTICS COMPANY)', en: '4) CORPORATE CLIENT (LOGISTICS COMPANY)' },
+    intro: { de: 'Interne Rollen eines Unternehmenskunden mit regionalem Scope und delegierbaren Rechten.', en: 'Internal corporate-client roles with regional scope and delegated permissions.' },
+    roles: [
+      { name: 'Global Client Administrator', tenantLevel: 'Corporate Client', functionalDescription: 'Administers tenant-internal user and module governance.', coreResponsibilities: 'User onboarding, role delegation, module activation by region.', decisionAuthority: 'Client-internal access decisions and permission delegation.', dataAccessScope: 'Organization-wide metadata and permission assignments.', modulesUsed: 'Brokerfox, Claimsfox, Fleetfox, Reporting' },
+      { name: 'Regional Fleet Manager', tenantLevel: 'Corporate Client', functionalDescription: 'Owns regional fleet operations and risk controls.', coreResponsibilities: 'Fleet supervision, event triage, regional safety execution.', decisionAuthority: 'Operational actions for assigned regional fleet scope.', dataAccessScope: 'Regional vehicle/driver telemetry, regional claims visibility.', modulesUsed: 'Fleetfox, Claimsfox, Reporting' },
+      { name: 'Claims Manager', tenantLevel: 'Corporate Client', functionalDescription: 'Manages corporate claims process and escalation.', coreResponsibilities: 'FNOL quality control, status oversight, reserve discussions.', decisionAuthority: 'Escalation and evidence completion decisions.', dataAccessScope: 'Corporate claims files and settlement-status views.', modulesUsed: 'Claimsfox, Reporting' },
+      { name: 'Risk Manager', tenantLevel: 'Corporate Client', functionalDescription: 'Coordinates risk prevention and insurance control framework.', coreResponsibilities: 'Risk register updates, mitigation measures, policy adequacy review.', decisionAuthority: 'Internal risk-control actions and prevention priorities.', dataAccessScope: 'Risk indicators, incident trends, policy coverage mapping.', modulesUsed: 'Fleetfox, Reporting' },
+      { name: 'Finance Officer', tenantLevel: 'Corporate Client', functionalDescription: 'Controls premium, invoice, and settlement finance flows.', coreResponsibilities: 'Billing review, premium allocation, financial reconciliation.', decisionAuthority: 'Financial validation and exception escalation.', dataAccessScope: 'Invoices, premium statements, settlement payment status.', modulesUsed: 'Reporting, finance views' },
+      { name: 'Warehouse Manager', tenantLevel: 'Corporate Client', functionalDescription: 'Manages warehouse and goods-handling risk operations.', coreResponsibilities: 'Incident documentation, handling controls, storage risk compliance.', decisionAuthority: 'Operational safety actions in warehouse domain.', dataAccessScope: 'Warehouse incidents, asset and handling event data.', modulesUsed: 'Claimsfox, Reporting' },
+      { name: 'Driver', tenantLevel: 'Corporate Client', functionalDescription: 'Executes transport operations and primary FNOL input.', coreResponsibilities: 'Event reporting, photo capture, incident detail submission.', decisionAuthority: 'Can submit own incidents; no pricing/policy governance rights.', dataAccessScope: 'Own journey and incident records only.', modulesUsed: 'Fleetfox, Claimsfox (restricted)' },
+      { name: 'Transport Planner', tenantLevel: 'Corporate Client', functionalDescription: 'Plans routes and load operations with risk awareness.', coreResponsibilities: 'Route assignment, exposure balancing, service continuity planning.', decisionAuthority: 'Operational route decisions within planning mandate.', dataAccessScope: 'Shipment schedules, route context, incident heatmaps.', modulesUsed: 'Fleetfox, Reporting' },
+      { name: 'HR / Compliance Officer', tenantLevel: 'Corporate Client', functionalDescription: 'Monitors policy adherence for people and process compliance.', coreResponsibilities: 'Training compliance, incident governance, conduct escalation.', decisionAuthority: 'Internal compliance escalation and control recommendations.', dataAccessScope: 'Compliance logs, role assignments, incident governance traces.', modulesUsed: 'Reporting, governance views' }
+    ]
+  },
+  {
+    title: { de: '5) CLAIMS ECOSYSTEM ROLES', en: '5) CLAIMS ECOSYSTEM ROLES' },
+    intro: { de: 'Partnerrollen mit ereignisgesteuertem, häufig zeitlich begrenztem Zugriff im Schadenökosystem.', en: 'Partner roles with event-triggered, often time-bound access in the claims ecosystem.' },
+    roles: [
+      { name: 'Claims Handler (Insurfox / Broker)', tenantLevel: 'Platform / Broker', functionalDescription: 'Primary operational claim processor.', coreResponsibilities: 'Coverage checks, reserve setting, workflow progression.', decisionAuthority: 'Operational claim-handling decisions within authority.', dataAccessScope: 'Assigned claims and relevant policy context.', modulesUsed: 'Claimsfox', trigger: 'Triggered on claim.created and escalation events.', temporaryAccess: 'No (core ongoing role).' },
+      { name: 'Surveyor / Loss Adjuster', tenantLevel: 'Partner', functionalDescription: 'Independent damage assessment specialist.', coreResponsibilities: 'Damage inspection, expert reports, technical causality evidence.', decisionAuthority: 'Assessment opinion; no final settlement authority.', dataAccessScope: 'Assigned claim dossier and evidence subset.', modulesUsed: 'Claimsfox (partner access)', trigger: 'Triggered for severity threshold or disputed causality.', temporaryAccess: 'Yes, assignment-bound access.' },
+      { name: 'Repair Network Partner', tenantLevel: 'Partner', functionalDescription: 'Performs repair services and cost estimates.', coreResponsibilities: 'Repair quote, work-status updates, invoice submission.', decisionAuthority: 'Repair feasibility and estimate confirmation.', dataAccessScope: 'Repair-relevant claim fields only.', modulesUsed: 'Partnerfox', trigger: 'Triggered after partner.assigned for repair path.', temporaryAccess: 'Yes, claim-task scope only.' },
+      { name: 'Rental Provider', tenantLevel: 'Partner', functionalDescription: 'Provides replacement vehicle continuity services.', coreResponsibilities: 'Rental confirmation, cost upload, utilization updates.', decisionAuthority: 'Can confirm rental costs; cannot approve settlement.', dataAccessScope: 'Assignment details only; no premium visibility.', modulesUsed: 'Partnerfox', trigger: 'Triggered after vehicle immobilization event.', temporaryAccess: 'Yes, temporary and assignment-bound.' },
+      { name: 'Towing & Recovery Operator', tenantLevel: 'Partner', functionalDescription: 'Handles towing, recovery, and transport assistance.', coreResponsibilities: 'Dispatch confirmation, incident recovery evidence upload.', decisionAuthority: 'Operational recovery completion decisions.', dataAccessScope: 'Location and assignment data only.', modulesUsed: 'Partnerfox', trigger: 'Triggered for disabled-vehicle events.', temporaryAccess: 'Yes, short-lived task access.' },
+      { name: 'Salvage Partner', tenantLevel: 'Partner', functionalDescription: 'Manages salvage valuation and disposal channels.', coreResponsibilities: 'Residual value estimation, disposal process execution.', decisionAuthority: 'Salvage bid and value recommendations.', dataAccessScope: 'Asset condition and claim disposition subset.', modulesUsed: 'Partnerfox, Claimsfox (limited)', trigger: 'Triggered on total-loss or salvage flag.', temporaryAccess: 'Yes, until salvage completion.' },
+      { name: 'Subrogation Specialist', tenantLevel: 'Partner / Platform', functionalDescription: 'Pursues recovery from liable third parties.', coreResponsibilities: 'Liability review, recovery documentation, recourse tracking.', decisionAuthority: 'Recovery-path recommendation and legal escalation input.', dataAccessScope: 'Liability evidence and payment history subset.', modulesUsed: 'Claimsfox, Reporting', trigger: 'Triggered on third-party liability indication.', temporaryAccess: 'Often case-bound; may be extended by mandate.' },
+      { name: 'Legal Counsel', tenantLevel: 'Partner / Platform', functionalDescription: 'Provides legal strategy for disputed claims.', coreResponsibilities: 'Legal review, litigation advisory, settlement risk analysis.', decisionAuthority: 'Legal recommendation authority; final settlement per claims governance.', dataAccessScope: 'Legal evidence set and case chronology.', modulesUsed: 'Claimsfox (restricted), Reporting', trigger: 'Triggered on legal dispute or high-severity escalation.', temporaryAccess: 'Yes, mandate-scoped.' },
+      { name: 'External Forensic Investigator', tenantLevel: 'Partner', functionalDescription: 'Performs forensic investigation for suspicious events.', coreResponsibilities: 'Forensic analysis, evidence chain validation, investigation report.', decisionAuthority: 'Forensic conclusion, no direct settlement control.', dataAccessScope: 'Investigation-specific evidence package only.', modulesUsed: 'Claimsfox (restricted)', trigger: 'Triggered on elevated fraud score or anomaly cluster.', temporaryAccess: 'Yes, strictly temporary.' },
+      { name: 'Fraud Analyst', tenantLevel: 'Platform / MGA', functionalDescription: 'Operates fraud detection review and intervention.', coreResponsibilities: 'Case triage, fraud-pattern validation, escalation to legal/claims.', decisionAuthority: 'Fraud investigation escalation and hold recommendation.', dataAccessScope: 'Fraud scores, signals, selected claim evidence.', modulesUsed: 'AI Fox, Claimsfox, Reporting', trigger: 'Triggered by fraud.flagged and risk anomalies.', temporaryAccess: 'No (core role), with case-scoped deep view.' }
+    ]
+  },
+  {
+    title: { de: '6) CARRIER / CAPACITY PROVIDER', en: '6) CARRIER / CAPACITY PROVIDER' },
+    intro: { de: 'Rollen der Kapazitätsgeber mit Oversight, Schwellenwerten und Eskalationsrechten.', en: 'Capacity-provider roles with oversight, threshold control, and escalation rights.' },
+    roles: [
+      { name: 'Carrier Underwriter', tenantLevel: 'Carrier', functionalDescription: 'Reviews carrier-risk view and delegated authority outcomes.', coreResponsibilities: 'Referral review, underwriting oversight, appetite alignment.', decisionAuthority: 'Approval/decline on carrier referral thresholds.', dataAccessScope: 'Referred cases, underwriting evidence, policy terms.', modulesUsed: 'Brokerfox, Reporting' },
+      { name: 'Carrier Claims Supervisor', tenantLevel: 'Carrier', functionalDescription: 'Supervises claim quality for carrier-exposed portfolios.', coreResponsibilities: 'Escalated claims review, reserve oversight, outcome validation.', decisionAuthority: 'Claims governance decisions above contractual threshold.', dataAccessScope: 'Escalated claims and reserve audit views.', modulesUsed: 'Claimsfox, Reporting' },
+      { name: 'Reinsurance Analyst', tenantLevel: 'Carrier', functionalDescription: 'Monitors ceded impact and exposure accumulation.', coreResponsibilities: 'Treaty utilization checks, aggregation analytics, recovery trend tracking.', decisionAuthority: 'Analytical recommendation for capacity/treaty adjustments.', dataAccessScope: 'Portfolio aggregates, event accumulations, ceded-loss analytics.', modulesUsed: 'Reporting' },
+      { name: 'Capacity Approval Officer', tenantLevel: 'Carrier', functionalDescription: 'Approves or adjusts capacity commitments.', coreResponsibilities: 'Capacity thresholds, line-level approvals, escalation management.', decisionAuthority: 'Formal capacity approval within carrier governance.', dataAccessScope: 'Capacity dashboards, performance indicators, risk concentration metrics.', modulesUsed: 'Reporting, underwriting views' }
+    ]
+  },
+  {
+    title: { de: '7) REINSURANCE & FINANCIAL CONTROL', en: '7) REINSURANCE & FINANCIAL CONTROL' },
+    intro: { de: 'Finanz- und Rückversicherungsrollen für Verluststeuerung, Aggregationen und Kapitalallokation.', en: 'Financial and reinsurance roles for loss control, aggregation oversight, and capital allocation.' },
+    roles: [
+      { name: 'Treaty Manager', tenantLevel: 'Platform / MGA', functionalDescription: 'Controls treaty performance and structure fitness.', coreResponsibilities: 'Treaty terms management, utilization controls, renewal negotiation input.', decisionAuthority: 'Treaty structure recommendations and trigger escalations.', dataAccessScope: 'Treaty metrics, cession flows, portfolio loss dynamics.', modulesUsed: 'Reporting' },
+      { name: 'Actuarial Analyst', tenantLevel: 'Platform / MGA', functionalDescription: 'Evaluates profitability and risk trend assumptions.', coreResponsibilities: 'Loss-ratio analysis, trend decomposition, scenario testing.', decisionAuthority: 'Actuarial recommendation authority for pricing updates.', dataAccessScope: 'Exposure data, claim severity/frequency trends, renewal outputs.', modulesUsed: 'AI Fox, Reporting' },
+      { name: 'Capital Risk Analyst', tenantLevel: 'Platform / Carrier', functionalDescription: 'Monitors capital stress and concentration risk.', coreResponsibilities: 'Aggregation exposure controls, capital stress analytics, risk limits monitoring.', decisionAuthority: 'Risk-limit escalation recommendations.', dataAccessScope: 'Aggregation cubes, catastrophe and concentration indicators.', modulesUsed: 'Reporting' },
+      { name: 'Financial Controller', tenantLevel: 'Platform / Broker / MGA', functionalDescription: 'Ensures financial integrity of premium and claims flows.', coreResponsibilities: 'Financial close controls, reconciliation, management reporting.', decisionAuthority: 'Financial control sign-off and exception escalation.', dataAccessScope: 'Premium flows, claim payments, reconciliation logs.', modulesUsed: 'Reporting, finance views' }
+    ]
+  },
+  {
+    title: { de: '8) AI & DATA ROLES', en: '8) AI & DATA ROLES' },
+    intro: { de: 'Rollen für Modelllebenszyklus, Daten-Governance, Audit und EU-AI-Act-konforme Steuerung.', en: 'Roles covering model lifecycle, data governance, audit, and EU AI Act-aligned control.' },
+    roles: [
+      { name: 'AI Model Owner', tenantLevel: 'Platform', functionalDescription: 'Owns business accountability for production AI models.', coreResponsibilities: 'Model objective definition, approval criteria, lifecycle sign-off.', decisionAuthority: 'Model release/freeze recommendation with governance board.', dataAccessScope: 'Model KPIs, drift metrics, explainability outcomes.', modulesUsed: 'AI Fox, Reporting' },
+      { name: 'Data Scientist', tenantLevel: 'Platform', functionalDescription: 'Develops and validates predictive model logic.', coreResponsibilities: 'Feature design, model experimentation, validation and recalibration.', decisionAuthority: 'Technical model recommendation authority.', dataAccessScope: 'Training datasets, engineered features, validation sets.', modulesUsed: 'AI Fox' },
+      { name: 'ML Engineer', tenantLevel: 'Platform', functionalDescription: 'Operates ML pipelines and production deployment reliability.', coreResponsibilities: 'CI/CD for models, inference performance, monitoring integration.', decisionAuthority: 'Technical deployment and rollback decisions.', dataAccessScope: 'Model artifacts, runtime telemetry, deployment traces.', modulesUsed: 'AI Fox, platform ops tooling' },
+      { name: 'Risk Analytics Lead', tenantLevel: 'Platform / MGA', functionalDescription: 'Connects analytics outcomes to underwriting and claims strategy.', coreResponsibilities: 'Risk dashboard design, decision analytics, scenario interpretation.', decisionAuthority: 'Analytical steering recommendations for management.', dataAccessScope: 'Cross-domain risk metrics, portfolio and claims analytics.', modulesUsed: 'Reporting, AI Fox' },
+      { name: 'AI Auditor', tenantLevel: 'Platform / Compliance', functionalDescription: 'Validates AI control compliance and traceability.', coreResponsibilities: 'Audit sampling, policy conformity checks, evidence packaging.', decisionAuthority: 'Audit findings and remediation escalation rights.', dataAccessScope: 'Model decisions, audit trails, policy versions, override logs.', modulesUsed: 'AI Fox, Reporting, governance views' }
+    ]
+  }
 ]
 
 function bi(value: BiText, lang: 'de' | 'en') {
@@ -1000,20 +1121,98 @@ packages/
         )}
 
         {section === 'roles' && (
-          <Card title={t('insideInsurfox.roles.title')}>
-            <div style={{ display: 'grid', gap: '0.75rem' }}>
-              {roleDetails.map((row) => (
-                <div key={row.role.en} style={roleCardStyle}>
-                  <h3 style={subHeadingStyle}>{bi(row.role, l)}</h3>
-                  <RoleLine label={t('insideInsurfox.roles.objectives')} value={bi(row.objectives, l)} />
-                  <RoleLine label={t('insideInsurfox.roles.responsibilities')} value={bi(row.responsibilities, l)} />
-                  <RoleLine label={t('insideInsurfox.roles.dataScope')} value={bi(row.dataScope, l)} />
-                  <RoleLine label={t('insideInsurfox.roles.decisions')} value={bi(row.decisions, l)} />
-                  <RoleLine label={t('insideInsurfox.roles.kpis')} value={bi(row.kpis, l)} />
+          <>
+            {enterpriseRoleSections.map((sectionDef) => (
+              <Card key={sectionDef.title.en} title={bi(sectionDef.title, l)}>
+                <p style={pStyle}>{bi(sectionDef.intro, l)}</p>
+
+                <div style={{ overflowX: 'auto', marginTop: '0.65rem' }}>
+                  <table style={tableStyle}>
+                    <thead>
+                      <tr style={headRowStyle}>
+                        <th style={thStyle}>{bi({ de: 'Rolle', en: 'Role' }, l)}</th>
+                        <th style={thStyle}>{bi({ de: 'Tenant Level', en: 'Tenant Level' }, l)}</th>
+                        <th style={thStyle}>{bi({ de: 'Module', en: 'Modules' }, l)}</th>
+                        <th style={thStyle}>{bi({ de: 'Entscheidungsbefugnis', en: 'Decision Authority' }, l)}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {sectionDef.roles.map((r) => (
+                        <tr key={`${sectionDef.title.en}-${r.name}`}>
+                          <td style={tdStrongStyle}>{r.name}</td>
+                          <td style={tdStyle}>{r.tenantLevel}</td>
+                          <td style={tdStyle}>{r.modulesUsed}</td>
+                          <td style={tdStyle}>{r.decisionAuthority}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
-              ))}
-            </div>
-          </Card>
+
+                <div style={{ display: 'grid', gap: '0.75rem', marginTop: '0.75rem' }}>
+                  {sectionDef.roles.map((r) => (
+                    <div key={`${sectionDef.title.en}-${r.name}-detail`} style={roleCardStyle}>
+                      <h3 style={subHeadingStyle}>{r.name}</h3>
+                      <RoleLine label={bi({ de: 'Tenant Level', en: 'Tenant Level' }, l)} value={r.tenantLevel} />
+                      <RoleLine label={bi({ de: 'Funktionale Beschreibung', en: 'Functional Description' }, l)} value={r.functionalDescription} />
+                      <RoleLine label={bi({ de: 'Kernverantwortungen', en: 'Core Responsibilities' }, l)} value={r.coreResponsibilities} />
+                      <RoleLine label={bi({ de: 'Entscheidungsbefugnis', en: 'Decision Authority' }, l)} value={r.decisionAuthority} />
+                      <RoleLine label={bi({ de: 'Datenzugriff', en: 'Data Access Scope' }, l)} value={r.dataAccessScope} />
+                      <RoleLine label={bi({ de: 'Genutzte Module', en: 'Modules Used' }, l)} value={r.modulesUsed} />
+                      {r.trigger ? <RoleLine label={bi({ de: 'Trigger', en: 'Trigger' }, l)} value={r.trigger} /> : null}
+                      {r.temporaryAccess ? <RoleLine label={bi({ de: 'Temporärer Zugriff', en: 'Temporary Access' }, l)} value={r.temporaryAccess} /> : null}
+                    </div>
+                  ))}
+                </div>
+              </Card>
+            ))}
+
+            <Card title={bi({ de: '9) ROLE INTERACTION MAP', en: '9) ROLE INTERACTION MAP' }, l)}>
+              <MermaidBlock
+                title={bi({ de: 'Interaktionsfluss', en: 'Interaction Flow' }, l)}
+                code={`flowchart LR
+  D[Driver] --> CH[Claims Handler]
+  CH --> SV[Surveyor]
+  SV --> RP[Repair Partner]
+  RP --> RT[Rental Provider]
+  RT --> FI[Finance Officer]
+  FI --> PM[Portfolio Manager]
+  PM --> RE[Reinsurance]`}
+              />
+              <p style={{ ...noteStyle, marginTop: '0.55rem' }}>
+                {bi(
+                  {
+                    de: 'Die Orchestrierung erfolgt ereignisgetrieben: Jeder Rollenschritt wird über Domain Events aktiviert, mit rollenbasierten Rechten versehen und auditierbar protokolliert.',
+                    en: 'Orchestration is event-driven: each role step is activated via domain events, constrained by role-based permissions, and fully audit-logged.'
+                  },
+                  l
+                )}
+              </p>
+            </Card>
+
+            <Card title={bi({ de: '10) ROLE HIERARCHY MODEL', en: '10) ROLE HIERARCHY MODEL' }, l)}>
+              <MermaidBlock
+                title={bi({ de: 'Hierarchieebenen', en: 'Hierarchy Layers' }, l)}
+                code={`flowchart TB
+  P[Platform Level]
+  B[Broker Level]
+  C[Corporate Level]
+  O[Operational Partner Level]
+  P --> B
+  B --> C
+  C --> O`}
+              />
+              <p style={{ ...noteStyle, marginTop: '0.55rem' }}>
+                {bi(
+                  {
+                    de: 'Berechtigungsgrenzen werden von oben nach unten vererbt, aber niemals ohne Scope-Filter erweitert. Plattformrechte steuern Governance, Brokerrechte steuern Kundenprozesse, Corporaterechte steuern interne Rollen, Partnerrechte bleiben strikt auf Aufgabenebene begrenzt.',
+                    en: 'Permission boundaries inherit top-down but never expand without scope filters. Platform rights govern governance, broker rights govern client processes, corporate rights govern internal roles, and partner rights stay strictly task-scoped.'
+                  },
+                  l
+                )}
+              </p>
+            </Card>
+          </>
         )}
 
         {section === 'lifecycle' && (

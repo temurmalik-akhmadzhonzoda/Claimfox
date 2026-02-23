@@ -3167,7 +3167,7 @@ export const translations: Record<Lang, TranslationTree> = {
         vision: { title: 'Vision', subtitle: 'Warum Insurfox als integriertes Insurance Operating System aufgebaut wird' },
         roles: { title: 'Rollen', subtitle: 'Verantwortlichkeiten, Entscheidungsrechte und KPI-Ownership' },
         lifecycle: { title: 'Lebenszyklus', subtitle: 'Von Registrierung bis Erneuerung als durchgängige Ausführungskette' },
-        'data-model': { title: 'Datenmodell', subtitle: 'Insurance-Data-Field-Explorer für operative und AI-relevante Felder' },
+        'data-model': { title: 'Datenmodell', subtitle: 'Insurance Data Field Explorer für operative und KI-relevante Felder' },
         'ai-core': { title: 'AI Core', subtitle: 'Modelle, Entscheidungshilfe, Explainability und Compliance' },
         architecture: { title: 'Architektur', subtitle: 'Layered GCP-Architektur für die Insurance-Execution-Plattform' },
         modules: { title: 'Module', subtitle: 'Brokerfox, Claimsfox, Fleetfox, Partnerfox und AI Fox im Zielbild' },
@@ -3205,7 +3205,7 @@ export const translations: Record<Lang, TranslationTree> = {
       },
       dataModel: {
         title: 'Datenmodell als Steuerungsgrundlage',
-        body: 'Der Explorer zeigt die zentralen Versicherungsfelder entlang der Prozessphasen inkl. Zweck und AI-Verwendung. So werden Datenverantwortung und Modellnutzung für Teams transparent.',
+        body: 'Der Explorer zeigt zentrale Versicherungsfelder entlang der Prozessphasen inklusive Zweck und KI-Verwendung. So werden Datenverantwortung und Modellnutzung für Teams transparent.',
         explorerTitle: 'Insurance Data Field Explorer'
       },
       aiCore: {
@@ -3273,7 +3273,7 @@ export const translations: Record<Lang, TranslationTree> = {
           mask: 'Maske',
           role: 'Rolle',
           purpose: 'Zweck',
-          aiUsage: 'AI-Nutzung'
+          aiUsage: 'KI-Nutzung'
         }
       },
       nav: {
