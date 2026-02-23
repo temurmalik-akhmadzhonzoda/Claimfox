@@ -226,6 +226,7 @@ import HypoportAnalysisPage from '@/pages/HypoportAnalysisPage'
 import SmartInsurTechAnalysisPage from '@/pages/SmartInsurTechAnalysisPage'
 import BlaudirektAnalysisPage from '@/pages/BlaudirektAnalysisPage'
 import FlockAdmiralAnalysisPage from '@/pages/FlockAdmiralAnalysisPage'
+import InsideInsurfoxPage from '@/pages/InsideInsurfoxPage'
 
 function NotFoundRedirect() {
   const { isAuthenticated } = useAuth()
@@ -312,6 +313,17 @@ export default function AppRouter() {
         <Route path="/analysis/smartinsurtech" element={<SmartInsurTechAnalysisPage />} />
         <Route path="/analysis/blaudirekt" element={<BlaudirektAnalysisPage />} />
         <Route path="/analysis/flock-admiral" element={<FlockAdmiralAnalysisPage />} />
+        <Route path="/inside-insurfox" element={<InsideInsurfoxPage section="home" />} />
+        <Route path="/inside-insurfox/vision" element={<InsideInsurfoxPage section="vision" />} />
+        <Route path="/inside-insurfox/roles" element={<InsideInsurfoxPage section="roles" />} />
+        <Route path="/inside-insurfox/lifecycle" element={<InsideInsurfoxPage section="lifecycle" />} />
+        <Route path="/inside-insurfox/data-model" element={<InsideInsurfoxPage section="data-model" />} />
+        <Route path="/inside-insurfox/ai-core" element={<InsideInsurfoxPage section="ai-core" />} />
+        <Route path="/inside-insurfox/architecture" element={<InsideInsurfoxPage section="architecture" />} />
+        <Route path="/inside-insurfox/modules" element={<InsideInsurfoxPage section="modules" />} />
+        <Route path="/inside-insurfox/reporting" element={<InsideInsurfoxPage section="reporting" />} />
+        <Route path="/inside-insurfox/renewal-loop" element={<InsideInsurfoxPage section="renewal-loop" />} />
+        <Route path="/inside-insurfox/mvp-roadmap" element={<InsideInsurfoxPage section="mvp-roadmap" />} />
       </Route>
       <Route element={<ProtectedRoute><FullscreenBgLayout showHeader /></ProtectedRoute>}>
         <Route path="/demo" element={<DemoOverviewPage />} />

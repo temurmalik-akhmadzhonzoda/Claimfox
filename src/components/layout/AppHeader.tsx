@@ -33,7 +33,8 @@ export default function AppHeader() {
 
   const navItems = isManagementUser
     ? [
-      { label: lang === 'de' ? 'Marktanalysen' : 'Market Analyses', route: '/managementreports' }
+      { label: lang === 'de' ? 'Marktanalysen' : 'Market Analyses', route: '/managementreports' },
+      { label: lang === 'de' ? 'Plattformstruktur' : 'Platform Structure', route: '/inside-insurfox' }
     ]
     : [
       { label: t('header.nav.insurance'), route: '/underwriterfox' },

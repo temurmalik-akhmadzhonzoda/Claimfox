@@ -287,6 +287,29 @@ type TranslationTree = {
       }
     }
   }
+  insideInsurfox: {
+    exportPdf: string
+    labels: {
+      structuredOverview: string
+      architectureFlow: string
+      flowHint: string
+      keyConcepts: string
+      callout: string
+    }
+    nav: {
+      home: string
+      vision: string
+      roles: string
+      lifecycle: string
+      dataModel: string
+      aiCore: string
+      architecture: string
+      modules: string
+      reporting: string
+      renewalLoop: string
+      mvpRoadmap: string
+    }
+  }
   hypoport: {
     title: string
     subtitle: string
@@ -3025,6 +3048,29 @@ export const translations: Record<Lang, TranslationTree> = {
           captureDate: 'Öffentliche Quellen erfasst am {{date}}.',
           disclaimer: 'Analyse auf Basis öffentlich verfügbarer Informationen. Es wurden keine unveröffentlichten Kennzahlen angenommen.'
         }
+      }
+    },
+    insideInsurfox: {
+      exportPdf: 'Als PDF drucken',
+      labels: {
+        structuredOverview: 'Strukturierte Einordnung',
+        architectureFlow: 'Plattformfluss / Architekturdiagramm',
+        flowHint: 'Die Schritte bilden den Kernfluss der jeweiligen Rubrik ab.',
+        keyConcepts: 'Schlüsselkonzepte',
+        callout: 'Kernpunkt'
+      },
+      nav: {
+        home: 'Start',
+        vision: 'Vision',
+        roles: 'Rollen',
+        lifecycle: 'Lifecycle',
+        dataModel: 'Datenmodell',
+        aiCore: 'AI Core',
+        architecture: 'Architektur',
+        modules: 'Module',
+        reporting: 'Reporting',
+        renewalLoop: 'Renewal Loop',
+        mvpRoadmap: 'MVP Roadmap'
       }
     },
     hypoport: {
@@ -7057,6 +7103,29 @@ export const translations: Record<Lang, TranslationTree> = {
           captureDate: 'Public sources captured on {{date}}.',
           disclaimer: 'Analysis based on publicly available information. No unpublished metrics were assumed.'
         }
+      }
+    },
+    insideInsurfox: {
+      exportPdf: 'Print as PDF',
+      labels: {
+        structuredOverview: 'Structured Overview',
+        architectureFlow: 'Platform Flow / Architecture Diagram',
+        flowHint: 'The steps describe the core flow of the selected section.',
+        keyConcepts: 'Key Concepts',
+        callout: 'Callout'
+      },
+      nav: {
+        home: 'Home',
+        vision: 'Vision',
+        roles: 'Roles',
+        lifecycle: 'Lifecycle',
+        dataModel: 'Data Model',
+        aiCore: 'AI Core',
+        architecture: 'Architecture',
+        modules: 'Modules',
+        reporting: 'Reporting',
+        renewalLoop: 'Renewal Loop',
+        mvpRoadmap: 'MVP Roadmap'
       }
     },
     hypoport: {
