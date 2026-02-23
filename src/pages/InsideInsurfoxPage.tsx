@@ -286,15 +286,219 @@ export default function InsideInsurfoxPage({ section }: { section: InsideSection
 
         {section === 'home' && (
           <>
-            <Card title={t('insideInsurfox.labels.structuredOverview')}>
-              <p style={pStyle}>{t('insideInsurfox.home.overview1')}</p>
-              <p style={{ ...pStyle, marginTop: '0.55rem' }}>{t('insideInsurfox.home.overview2')}</p>
+            <Card title={bi({ de: '1) Plattformidentität', en: '1) Platform Identity' }, l)}>
+              <h3 style={subHeadingStyle}>{bi({ de: 'Insurfox – AI-Native Insurance Operating System', en: 'Insurfox – AI-Native Insurance Operating System' }, l)}</h3>
+              <p style={pStyle}>
+                {bi(
+                  {
+                    de: 'Insurfox ist als Insurance Infrastructure as a Service (IaaS) aufgebaut und vereint Broker-, MGA-, AI-, Fleet- und Claims-Kompetenz in einem durchgängigen Betriebsmodell.',
+                    en: 'Insurfox is built as Insurance Infrastructure as a Service (IaaS), combining broker, MGA, AI, fleet, and claims capabilities in one integrated operating model.'
+                  },
+                  l
+                )}
+              </p>
+              <p style={{ ...pStyle, marginTop: '0.55rem' }}>
+                {bi(
+                  {
+                    de: 'Die Plattform umfasst Broker, MGA, AI Platform, Fleet Intelligence Engine, Claims Automation Engine und Partner Network Orchestrator. Multi-Tenant-Design und Rollenentkopplung stellen sicher, dass Mandanten sauber getrennt und gleichzeitig global skalierbar betrieben werden können.',
+                    en: 'The platform includes broker, MGA, AI platform, fleet intelligence engine, claims automation engine, and partner network orchestrator. Multi-tenant design and role separation ensure clean tenant boundaries with global scalability.'
+                  },
+                  l
+                )}
+              </p>
             </Card>
-            <Card title={t('insideInsurfox.labels.architectureFlow')}>
-              <div style={architectureDiagramStyle}>
-                {['Experience', 'Workflow', 'Domain', 'Data', 'AI', 'Reporting', 'Governance'].map((item) => (
-                  <div key={item} style={architectureNodeStyle}>{item}</div>
+
+            <Card title={bi({ de: '2) Globale Skalierungsstrategie', en: '2) Global Scaling Strategy' }, l)}>
+              <p style={pStyle}>
+                {bi(
+                  {
+                    de: 'Die Skalierungslogik startet mit einer DE-/EU-Compliance-Basis (Datenschutz, Governance, Auditierbarkeit) und erweitert sich auf Multi-Region-Betrieb für internationale Programme.',
+                    en: 'The scaling model starts from a DE/EU compliance baseline (data protection, governance, auditability) and expands into multi-region operations for international programs.'
+                  },
+                  l
+                )}
+              </p>
+              <p style={{ ...pStyle, marginTop: '0.55rem' }}>
+                {bi(
+                  {
+                    de: 'Datenresidenz wird über regionale Datenhaltung und tenant-spezifische Kontrollpfade umgesetzt. Tenant Isolation erfolgt auf Daten-, Zugriff- und Workflow-Ebene, um regulatorische Flexibilität für MGA-Expansion in mehreren Jurisdiktionen zu ermöglichen.',
+                    en: 'Data residency is implemented through regional storage and tenant-specific control paths. Tenant isolation is enforced at data, access, and workflow levels to support MGA expansion across jurisdictions.'
+                  },
+                  l
+                )}
+              </p>
+              <div style={{ ...roleCardStyle, marginTop: '0.65rem' }}>
+                <h3 style={subHeadingStyle}>{bi({ de: 'Warum Cloud Spanner statt nur Cloud SQL', en: 'Why Cloud Spanner instead of only Cloud SQL' }, l)}</h3>
+                <p style={noteStyle}>{bi({ de: 'Horizontale Skalierung, globale Replikation, starke Konsistenz, Multi-Region-Verfügbarkeit und niedrige Latenz bei regionübergreifenden Writes sind für globale Insurance-IaaS-Workloads entscheidend.', en: 'Horizontal scaling, global replication, strong consistency, multi-region availability, and low-latency cross-region writes are critical for global insurance IaaS workloads.' }, l)}</p>
+              </div>
+            </Card>
+
+            <Card title={bi({ de: '3) End-to-End Prozessfluss', en: '3) Full End-to-End Process Flow' }, l)}>
+              <div style={{ overflowX: 'auto' }}>
+                <table style={tableStyle}>
+                  <thead>
+                    <tr style={headRowStyle}>
+                      <th style={thStyle}>#</th>
+                      <th style={thStyle}>{bi({ de: 'Schritt', en: 'Step' }, l)}</th>
+                      <th style={thStyle}>{bi({ de: 'Rollen', en: 'Roles involved' }, l)}</th>
+                      <th style={thStyle}>{bi({ de: 'Erzeugte Daten', en: 'Data generated' }, l)}</th>
+                      <th style={thStyle}>{bi({ de: 'Entscheidungen', en: 'Decisions made' }, l)}</th>
+                      <th style={thStyle}>{bi({ de: 'Events', en: 'Events emitted' }, l)}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[
+                      ['1', 'Tenant Registration', 'Platform Owner, Corporate Admin', 'Tenant profile, access baseline', 'Tenant activation', 'tenant.registered'],
+                      ['2', 'Broker Onboarding', 'Broker, Operations', 'Broker account, authority mapping', 'Broker approval', 'broker.onboarded'],
+                      ['3', 'Risk Submission', 'Broker, Corporate Client', 'Submission payload, exposure data', 'Submission completeness', 'submission.created'],
+                      ['4', 'AI Risk Scoring', 'MGA, AI Core', 'Risk score, feature snapshot', 'Risk tier assignment', 'submission.scored'],
+                      ['5', 'Underwriting Decision', 'MGA, Carrier', 'Pricing corridor, referral flags', 'Accept/decline/referral', 'underwriting.decisioned'],
+                      ['6', 'Policy Issuance', 'Broker, Operations', 'Policy object, terms', 'Bind + issue', 'policy.bound'],
+                      ['7', 'Fleet Monitoring', 'Fleet Operator, AI Core', 'Telematics stream, behavior KPIs', 'Intervention trigger', 'fleet.signal.ingested'],
+                      ['8', 'FNOL (Claims Intake)', 'Client, Claims Ops', 'FNOL record, incident context', 'Claim opening', 'claim.created'],
+                      ['9', 'AI Damage Scan', 'Claims AI, Adjuster', 'Image extraction, damage indicators', 'Repair path recommendation', 'scan.completed'],
+                      ['10', 'Fraud Scoring', 'Claims AI, Governance', 'Fraud score, anomaly evidence', 'Investigation trigger', 'fraud.flagged'],
+                      ['11', 'Partner Assignment', 'Claims Ops, Partner Network', 'Partner SLA assignment', 'Dispatch decision', 'partner.assigned'],
+                      ['12', 'Settlement', 'Claims, Finance', 'Reserve update, payout record', 'Settle / close', 'claim.settled'],
+                      ['13', 'Portfolio Reporting', 'Management, Carrier', 'Loss, margin, risk dashboards', 'Portfolio steering', 'report.generated'],
+                      ['14', 'Renewal / Prolongation', 'Broker, MGA, Carrier', 'Renewal score, repricing suggestion', 'Renewal terms', 'renewal.generated']
+                    ].map((row) => (
+                      <tr key={row[0]}>
+                        <td style={tdStrongStyle}>{row[0]}</td>
+                        <td style={tdStrongStyle}>{row[1]}</td>
+                        <td style={tdStyle}>{row[2]}</td>
+                        <td style={tdStyle}>{row[3]}</td>
+                        <td style={tdStyle}>{row[4]}</td>
+                        <td style={tdStyle}><code>{row[5]}</code></td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </Card>
+
+            <Card title={bi({ de: '4) Detaillierte GCP-Architektur', en: '4) Detailed GCP Architecture' }, l)}>
+              <MermaidBlock title={bi({ de: 'Diagramm 1 – Context', en: 'Diagram 1 – Context' }, l)} code={`flowchart LR
+  Broker[Broker] --> Platform[Insurfox Platform]
+  Carrier[Carrier] --> Platform
+  Fleet[Fleet] --> Platform
+  Driver[Driver] --> Platform
+  Partner[Partner] --> Platform
+  APIs[External APIs] --> Platform`} />
+              <MermaidBlock title={bi({ de: 'Diagramm 2 – Container', en: 'Diagram 2 – Container' }, l)} code={`flowchart TB
+  FE[Frontend React / CDN] --> GW[API Gateway]
+  GW --> CR[Cloud Run Services]
+  CR --> BUS[Event Bus Pub/Sub]
+  CR --> SP[(Spanner Core DB)]
+  CR --> ST[(Cloud Storage Docs & Images)]
+  CR --> BQ[(BigQuery Analytics)]
+  CR --> VAI[Vertex AI Models]
+  CR --> SEC[Secret Manager]
+  CR --> IAM[IAM]
+  CR --> MON[Monitoring]`} />
+              <MermaidBlock title={bi({ de: 'Diagramm 3 – Deployment', en: 'Diagram 3 – Deployment' }, l)} code={`flowchart TB
+  ORG[GCP Organization]
+  ORG --> PROD[Folder prod]
+  ORG --> STAGE[Folder staging]
+  ORG --> DEV[Folder dev]
+  PROD --> NET[shared-net-prod]
+  PROD --> CORE[platform-core-prod]
+  PROD --> DATA[data-platform-prod]
+  PROD --> ML[ml-platform-prod]
+  NET --> VPC[Shared VPC]
+  VPC --> SUB[Private Subnets]
+  VPC --> NAT[Cloud NAT]
+  VPC --> LB[Load Balancer + Cloud Armor]
+  CORE --> RUN[Cloud Run services]
+  DATA --> SPN[Spanner multi-region]
+  DATA --> BQD[BigQuery datasets]
+  ML --> VEP[Vertex AI endpoints]`} />
+            </Card>
+
+            <Card title={bi({ de: '5) Datenbankstruktur (Spanner-ready)', en: '5) Database Structure (Spanner-ready)' }, l)}>
+              <p style={pStyle}>
+                {bi(
+                  {
+                    de: 'Domänentrennung erfolgt entlang Tenant & Identity, Company & Broker, Fleet & Driver, Underwriting & Policy, Claims, Telematics, Partner Network, AI Governance sowie Audit & Timeline.',
+                    en: 'Domain separation follows Tenant & Identity, Company & Broker, Fleet & Driver, Underwriting & Policy, Claims, Telematics, Partner Network, AI Governance, and Audit & Timeline.'
+                  },
+                  l
+                )}
+              </p>
+              <MermaidBlock title={bi({ de: 'Kern-ERD', en: 'Core ERD' }, l)} code={`erDiagram
+  tenants ||--o{ users : has
+  tenants ||--o{ accounts : owns
+  accounts ||--o{ submissions : creates
+  submissions ||--o{ policies : converts_to
+  policies ||--o{ endorsements : has
+  policies ||--o{ renewals : has
+  policies ||--o{ claims : suffers
+  claims ||--o{ claim_photos : contains
+  accounts ||--o{ vehicles : owns
+  vehicles ||--o{ drivers : assigned_to
+  claims }o--|| partners : handled_by
+  submissions ||--o{ ai_runs : evaluated_by
+  tenants ||--o{ timeline_events : logs`} />
+              <div style={{ ...roleCardStyle, marginTop: '0.65rem' }}>
+                <p style={noteStyle}><strong>{bi({ de: 'Primärschlüssel', en: 'Primary keys' }, l)}:</strong> {bi({ de: 'Globale IDs pro Entität mit tenant_id als führendem Partitionierungsmerkmal.', en: 'Global IDs per entity with tenant_id as leading partition key.' }, l)}</p>
+                <p style={{ ...noteStyle, marginTop: '0.35rem' }}><strong>{bi({ de: 'Fremdschlüssel', en: 'Foreign keys' }, l)}:</strong> {bi({ de: 'Domänensichere Referenzen zwischen Submission, Policy, Claim und Partner.', en: 'Domain-safe references across submission, policy, claim, and partner.' }, l)}</p>
+                <p style={{ ...noteStyle, marginTop: '0.35rem' }}><strong>{bi({ de: 'Indexing', en: 'Indexing strategy' }, l)}:</strong> {bi({ de: 'Sekundärindizes auf tenant_id + status + time für schnelle operative Filter.', en: 'Secondary indexes on tenant_id + status + time for fast operational filtering.' }, l)}</p>
+                <p style={{ ...noteStyle, marginTop: '0.35rem' }}><strong>{bi({ de: 'PII-Schutz', en: 'PII encryption' }, l)}:</strong> {bi({ de: 'Feldbasierte Verschlüsselung über Cloud KMS und rollenbasierte Entschlüsselung.', en: 'Field-level encryption via Cloud KMS with role-based decryption.' }, l)}</p>
+                <p style={{ ...noteStyle, marginTop: '0.35rem' }}><strong>{bi({ de: 'Retention', en: 'Retention policy' }, l)}:</strong> {bi({ de: 'Lifecycle-basierte Lösch-/Archivregeln je Datenklasse und regulatorischem Rahmen.', en: 'Lifecycle-based purge/archive rules by data class and regulatory context.' }, l)}</p>
+              </div>
+            </Card>
+
+            <Card title={bi({ de: '6) Event-Driven Architecture', en: '6) Event-Driven Architecture' }, l)}>
+              <p style={pStyle}>{bi({ de: 'Jede fachliche Aktion erzeugt ein Domain-Event und wird über Pub/Sub verteilt. Services verarbeiten Events idempotent, um Mehrfachzustellungen ohne Seiteneffekte zu beherrschen.', en: 'Every business action emits a domain event distributed over Pub/Sub. Services consume events idempotently to handle duplicate delivery without side effects.' }, l)}</p>
+              <div style={{ ...roleCardStyle, marginTop: '0.65rem' }}>
+                <p style={noteStyle}><code>submission.created</code>, <code>quote.generated</code>, <code>policy.bound</code>, <code>claim.created</code>, <code>scan.completed</code>, <code>fraud.flagged</code>, <code>renewal.generated</code></p>
+              </div>
+            </Card>
+
+            <Card title={bi({ de: '7) AI Core Integration', en: '7) AI Core Integration' }, l)}>
+              <p style={pStyle}>{bi({ de: 'Der AI Core umfasst Underwriting AI, Claims Vision AI, Fraud Detection, Fleet Risk Scoring und Renewal Optimization. Das Modell-Lifecycle-Management folgt einem kontrollierten Betriebsprozess.', en: 'The AI core includes underwriting AI, claims vision AI, fraud detection, fleet risk scoring, and renewal optimization. Model lifecycle management follows a controlled operating process.' }, l)}</p>
+              <div style={flowGridStyle}>
+                {['Data ingestion', 'Feature engineering', 'Training', 'Registry', 'Deployment', 'Monitoring', 'Human review'].map((step, idx) => (
+                  <div key={step} style={flowItemStyle}>
+                    <div style={flowIndexStyle}>{idx + 1}</div>
+                    <div style={flowLabelStyle}>{step}</div>
+                  </div>
                 ))}
+              </div>
+              <p style={{ ...noteStyle, marginTop: '0.55rem' }}>{bi({ de: 'Explainability, Human Override, Audit Logging und EU-AI-Act-konforme Governance sind verpflichtende Architekturbausteine.', en: 'Explainability, human override, audit logging, and EU AI Act-aligned governance are mandatory architecture components.' }, l)}</p>
+            </Card>
+
+            <Card title={bi({ de: '8) Data Flow Summary', en: '8) Data Flow Summary' }, l)}>
+              <MermaidBlock title={bi({ de: 'Lineare Übersicht', en: 'Linear Summary' }, l)} code={`flowchart LR
+  U[User Input] --> API[API]
+  API --> BUS[Event Bus]
+  BUS --> DB[Spanner]
+  DB --> AI[AI]
+  AI --> DEC[Decision]
+  DEC --> TL[Timeline]
+  TL --> REP[Reporting]
+  REP --> REN[Renewal]`} />
+            </Card>
+
+            <Card title={bi({ de: '9) Observability & Security', en: '9) Observability & Security' }, l)}>
+              <p style={pStyle}>{bi({ de: 'Sicherheits- und Betriebskontrollen basieren auf IAM-Rollenmodellen, dedizierten Service Accounts, Secret Manager, Cloud KMS, vollständigem Audit Trail sowie zentralem Logging & Monitoring.', en: 'Security and operations controls are built on IAM role models, dedicated service accounts, Secret Manager, Cloud KMS, full audit trails, and centralized logging & monitoring.' }, l)}</p>
+              <p style={{ ...pStyle, marginTop: '0.55rem' }}>{bi({ de: 'Zero-Trust-Netzwerkprinzipien mit privaten Subnetzen, kontrolliertem Egress und Perimeter-Schutz reduzieren laterale Risiken in Multi-Tenant-Umgebungen.', en: 'Zero-trust networking with private subnets, controlled egress, and perimeter protection reduces lateral risk in multi-tenant environments.' }, l)}</p>
+            </Card>
+
+            <Card title={bi({ de: '10) MVP zu globaler Skalierung', en: '10) MVP to Global Scale Roadmap' }, l)}>
+              <div style={{ display: 'grid', gap: '0.65rem' }}>
+                <div style={roleCardStyle}>
+                  <h3 style={subHeadingStyle}>Phase 1</h3>
+                  <p style={noteStyle}>{bi({ de: 'Cloud Run + Cloud SQL, manuelles Underwriting und FNOL-Kernprozess.', en: 'Cloud Run + Cloud SQL, manual underwriting and FNOL core flow.' }, l)}</p>
+                </div>
+                <div style={roleCardStyle}>
+                  <h3 style={subHeadingStyle}>Phase 2</h3>
+                  <p style={noteStyle}>{bi({ de: 'Spanner-Migration, event-driven Orchestrierung, AI Damage Scan in Claims.', en: 'Spanner migration, event-driven orchestration, and AI damage scan in claims.' }, l)}</p>
+                </div>
+                <div style={roleCardStyle}>
+                  <h3 style={subHeadingStyle}>Phase 3</h3>
+                  <p style={noteStyle}>{bi({ de: 'Multi-Region-Spanner, vollständiger AI-Feedback-Loop, Portfolio-Steering und Reinsurance-Integration.', en: 'Multi-region Spanner, full AI feedback loop, portfolio steering, and reinsurance integration.' }, l)}</p>
+                </div>
               </div>
             </Card>
           </>
@@ -502,6 +706,17 @@ function RoleLine({ label, value }: { label: string; value: string }) {
   )
 }
 
+function MermaidBlock({ title, code }: { title: string; code: string }) {
+  return (
+    <div style={{ ...roleCardStyle, marginTop: '0.65rem' }}>
+      <h3 style={subHeadingStyle}>{title}</h3>
+      <pre style={mermaidPreStyle}>
+        <code>{code}</code>
+      </pre>
+    </div>
+  )
+}
+
 const pStyle: CSSProperties = {
   margin: 0,
   color: '#334155',
@@ -577,4 +792,49 @@ const architectureNodeStyle: CSSProperties = {
   color: '#0f172a',
   fontWeight: 700,
   fontSize: '0.84rem'
+}
+
+const tableStyle: CSSProperties = {
+  width: '100%',
+  borderCollapse: 'collapse',
+  minWidth: 980
+}
+
+const headRowStyle: CSSProperties = {
+  background: '#e2e8f0'
+}
+
+const thStyle: CSSProperties = {
+  textAlign: 'left',
+  color: '#0f172a',
+  fontSize: '0.79rem',
+  fontWeight: 700,
+  border: '1px solid #dbe2ea',
+  padding: '0.48rem 0.52rem'
+}
+
+const tdStyle: CSSProperties = {
+  color: '#334155',
+  fontSize: '0.78rem',
+  border: '1px solid #dbe2ea',
+  padding: '0.46rem 0.52rem',
+  verticalAlign: 'top',
+  lineHeight: 1.45
+}
+
+const tdStrongStyle: CSSProperties = {
+  ...tdStyle,
+  color: '#0f172a',
+  fontWeight: 700
+}
+
+const mermaidPreStyle: CSSProperties = {
+  margin: 0,
+  overflowX: 'auto',
+  background: '#0f172a',
+  color: '#e2e8f0',
+  borderRadius: 8,
+  padding: '0.7rem',
+  fontSize: '0.75rem',
+  lineHeight: 1.5
 }
