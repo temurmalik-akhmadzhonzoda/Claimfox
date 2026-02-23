@@ -55,6 +55,89 @@ export default function DataFieldExplorer() {
     return labels[value] ?? value
   }
 
+  function fieldLabel(value: string) {
+    if (!isDe) return value
+    const labels: Record<string, string> = {
+      'Company Name': 'Unternehmensname',
+      'Legal Form': 'Rechtsform',
+      'Annual Revenue': 'Jahresumsatz',
+      'Claims History 5Y': 'Schadenhistorie 5J',
+      'License Plate': 'Kennzeichen',
+      'Vehicle Weight': 'Fahrzeuggewicht',
+      'Usage Type': 'Nutzungsart',
+      'Annual Mileage': 'Jahresfahrleistung',
+      'Telematics Installed': 'Telematik installiert',
+      'Date of Birth': 'Geburtsdatum',
+      'Years Licensed': 'Jahre mit Führerschein',
+      'Accidents Last 3Y': 'Unfälle letzte 3J',
+      'Traffic Violations': 'Verkehrsverstöße',
+      'Coverage Limit': 'Deckungslimit',
+      'Deductible': 'Selbstbehalt',
+      'Risk Score (AI)': 'Risikoscore (KI)',
+      'Expected Loss (AI)': 'Erwarteter Schaden (KI)',
+      'Suggested Premium (AI)': 'Prämienvorschlag (KI)',
+      'Referral Flag (AI)': 'Referral-Flag (KI)',
+      'Loss Date': 'Schadendatum',
+      'Loss Location': 'Schadenort',
+      'Description': 'Beschreibung',
+      'Photos': 'Fotos',
+      'Telematics Snapshot': 'Telematik-Snapshot',
+      'Weather Context': 'Wetterkontext',
+      'Fraud Score (AI)': 'Betrugsscore (KI)',
+      'Severity Estimate (AI)': 'Schadenschätzung (KI)',
+      'Speed': 'Geschwindigkeit',
+      'Harsh Braking': 'Starkes Bremsen',
+      'Night Driving %': 'Nachtfahrten %',
+      'Driver Risk Score (AI)': 'Fahrer-Risikoscore (KI)',
+      'Fleet Risk Index (AI)': 'Flotten-Risikoindex (KI)',
+      'Claim Frequency': 'Schadenhäufigkeit',
+      'Severity Trend': 'Schadenhöhe-Trend',
+      'Behaviour Improvement %': 'Verhaltensverbesserung %',
+      'Renewal Risk Score (AI)': 'Erneuerungs-Risikoscore (KI)',
+      'Suggested Premium Adjustment (AI)': 'Prämienanpassungsvorschlag (KI)'
+    }
+    return labels[value] ?? value
+  }
+
+  function localizedText(value: string | null) {
+    if (!value) return '-'
+    if (!isDe) return value
+    const replacements: Array<[string, string]> = [
+      ['Identify', 'Identifiziert'],
+      ['Determine', 'Bestimmt'],
+      ['Support', 'Unterstützt'],
+      ['Assess', 'Bewertet'],
+      ['Bind', 'Verknüpft'],
+      ['Segment', 'Segmentiert'],
+      ['Track', 'Überwacht'],
+      ['Capture', 'Erfasst'],
+      ['Provide', 'Liefert'],
+      ['Estimate', 'Schätzt'],
+      ['Define', 'Definiert'],
+      ['Set', 'Setzt'],
+      ['Recommend', 'Empfiehlt'],
+      ['Trigger', 'Löst aus'],
+      ['Feature', 'Merkmal'],
+      ['Input', 'Eingabe'],
+      ['output', 'Ausgabe'],
+      ['model', 'Modell'],
+      ['risk', 'Risiko'],
+      ['pricing', 'Pricing'],
+      ['claims', 'Schaden'],
+      ['severity', 'Schadenhöhe'],
+      ['fraud', 'Betrug'],
+      ['driver', 'Fahrer'],
+      ['fleet', 'Flotte'],
+      ['renewal', 'Erneuerung'],
+      ['policyholder', 'Versicherungsnehmer'],
+      ['legal', 'rechtlich'],
+      ['compliance', 'Compliance'],
+      ['validation', 'Validierung'],
+      ['context', 'Kontext']
+    ]
+    return replacements.reduce((acc, [from, to]) => acc.replaceAll(from, to), value)
+  }
+
   const roles = useMemo(() => {
     const allRoles = insuranceDataFields.flatMap((item) => item.role)
     return Array.from(new Set(allRoles)).sort((a, b) => a.localeCompare(b))
@@ -137,12 +220,12 @@ export default function DataFieldExplorer() {
           <tbody>
             {filtered.map((row: InsuranceDataField) => (
               <tr key={row.id}>
-                <td style={tdStrongStyle}>{row.fieldName}</td>
+                <td style={tdStrongStyle}>{fieldLabel(row.fieldName)}</td>
                 <td style={tdStyle}>{phaseLabel(row.phase)}</td>
                 <td style={tdStyle}>{maskLabel(row.mask)}</td>
                 <td style={tdStyle}>{row.role.map((r) => roleLabel(r)).join(', ')}</td>
-                <td style={tdStyle}>{row.purpose}</td>
-                <td style={tdStyle}>{row.aiUsage ?? '-'}</td>
+                <td style={tdStyle}>{localizedText(row.purpose)}</td>
+                <td style={tdStyle}>{localizedText(row.aiUsage)}</td>
               </tr>
             ))}
           </tbody>

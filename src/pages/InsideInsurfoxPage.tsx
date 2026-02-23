@@ -384,6 +384,63 @@ function tenantLevelText(value: string, lang: 'de' | 'en') {
   return map[value] ?? value
 }
 
+function roleText(value: string, lang: 'de' | 'en') {
+  if (lang !== 'de') return value
+  const replacements: Array<[string, string]> = [
+    ['Owns', 'Verantwortet'],
+    ['Leads', 'Leitet'],
+    ['Defines', 'Definiert'],
+    ['Ensures', 'Stellt sicher'],
+    ['Manages', 'Steuert'],
+    ['Monitors', 'Überwacht'],
+    ['Coordinates', 'Koordiniert'],
+    ['Executes', 'Führt aus'],
+    ['Reviews', 'Prüft'],
+    ['Controls', 'Steuert'],
+    ['Provides', 'Stellt bereit'],
+    ['supports', 'unterstützt'],
+    ['governance', 'Governance'],
+    ['underwriting', 'Underwriting'],
+    ['claims', 'Schaden'],
+    ['risk', 'Risiko'],
+    ['portfolio', 'Portfolio'],
+    ['renewal', 'Erneuerung'],
+    ['permissions', 'Berechtigungen'],
+    ['decision', 'Entscheidung'],
+    ['decisions', 'Entscheidungen'],
+    ['approval', 'Freigabe'],
+    ['approvals', 'Freigaben'],
+    ['escalation', 'Eskalation'],
+    ['escalations', 'Eskalationen'],
+    ['evidence', 'Nachweise'],
+    ['reporting', 'Reporting'],
+    ['model', 'Modell'],
+    ['models', 'Modelle'],
+    ['compliance', 'Compliance'],
+    ['policy', 'Police'],
+    ['policies', 'Policen'],
+    ['client', 'Kunde'],
+    ['clients', 'Kunden'],
+    ['financial', 'finanzielle'],
+    ['analytics', 'Analytik'],
+    ['workflow', 'Workflow'],
+    ['workflows', 'Workflows'],
+    ['quality', 'Qualität'],
+    ['service', 'Service'],
+    ['capacity', 'Kapazität'],
+    ['temporary', 'temporär'],
+    ['assignment', 'Zuweisung'],
+    ['assigned', 'zugewiesen'],
+    ['Cross-tenant', 'Mandantenübergreifend'],
+    ['System-wide', 'Systemweit'],
+    ['Primary', 'Primär'],
+    ['No ', 'Keine '],
+    ['no ', 'keine ']
+  ]
+
+  return replacements.reduce((acc, [from, to]) => acc.replaceAll(from, to), value)
+}
+
 export default function InsideInsurfoxPage({ section }: { section: InsideSectionKey }) {
   const { lang, t } = useI18n()
   const l = lang === 'de' ? 'de' : 'en'
@@ -1162,7 +1219,7 @@ packages/
                           <td style={tdStrongStyle}>{r.name}</td>
                           <td style={tdStyle}>{tenantLevelText(r.tenantLevel, l)}</td>
                           <td style={tdStyle}>{r.modulesUsed}</td>
-                          <td style={tdStyle}>{r.decisionAuthority}</td>
+                          <td style={tdStyle}>{roleText(r.decisionAuthority, l)}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -1174,13 +1231,13 @@ packages/
                     <div key={`${sectionDef.title.en}-${r.name}-detail`} style={roleCardStyle}>
                       <h3 style={subHeadingStyle}>{r.name}</h3>
                       <RoleLine label={bi({ de: 'Mandantenebene', en: 'Tenant Level' }, l)} value={tenantLevelText(r.tenantLevel, l)} />
-                      <RoleLine label={bi({ de: 'Funktionale Beschreibung', en: 'Functional Description' }, l)} value={r.functionalDescription} />
-                      <RoleLine label={bi({ de: 'Kernverantwortungen', en: 'Core Responsibilities' }, l)} value={r.coreResponsibilities} />
-                      <RoleLine label={bi({ de: 'Entscheidungsbefugnis', en: 'Decision Authority' }, l)} value={r.decisionAuthority} />
-                      <RoleLine label={bi({ de: 'Datenzugriff', en: 'Data Access Scope' }, l)} value={r.dataAccessScope} />
+                      <RoleLine label={bi({ de: 'Funktionale Beschreibung', en: 'Functional Description' }, l)} value={roleText(r.functionalDescription, l)} />
+                      <RoleLine label={bi({ de: 'Kernverantwortungen', en: 'Core Responsibilities' }, l)} value={roleText(r.coreResponsibilities, l)} />
+                      <RoleLine label={bi({ de: 'Entscheidungsbefugnis', en: 'Decision Authority' }, l)} value={roleText(r.decisionAuthority, l)} />
+                      <RoleLine label={bi({ de: 'Datenzugriff', en: 'Data Access Scope' }, l)} value={roleText(r.dataAccessScope, l)} />
                       <RoleLine label={bi({ de: 'Genutzte Module', en: 'Modules Used' }, l)} value={r.modulesUsed} />
-                      {r.trigger ? <RoleLine label={bi({ de: 'Trigger', en: 'Trigger' }, l)} value={r.trigger} /> : null}
-                      {r.temporaryAccess ? <RoleLine label={bi({ de: 'Temporärer Zugriff', en: 'Temporary Access' }, l)} value={r.temporaryAccess} /> : null}
+                      {r.trigger ? <RoleLine label={bi({ de: 'Trigger', en: 'Trigger' }, l)} value={roleText(r.trigger, l)} /> : null}
+                      {r.temporaryAccess ? <RoleLine label={bi({ de: 'Temporärer Zugriff', en: 'Temporary Access' }, l)} value={roleText(r.temporaryAccess, l)} /> : null}
                     </div>
                   ))}
                 </div>
