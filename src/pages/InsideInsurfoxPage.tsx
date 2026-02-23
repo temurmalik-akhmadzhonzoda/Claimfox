@@ -348,7 +348,7 @@ const enterpriseRoleSections: EnterpriseRoleSection[] = [
     ]
   },
   {
-    title: { de: '8) AI & DATA ROLES', en: '8) AI & DATA ROLES' },
+    title: { de: '8) KI- & DATENROLLEN', en: '8) AI & DATA ROLES' },
     intro: { de: 'Rollen für Modelllebenszyklus, Daten-Governance, Audit und EU-AI-Act-konforme Steuerung.', en: 'Roles covering model lifecycle, data governance, audit, and EU AI Act-aligned control.' },
     roles: [
       { name: 'AI Model Owner', tenantLevel: 'Platform', functionalDescription: 'Owns business accountability for production AI models.', coreResponsibilities: 'Model objective definition, approval criteria, lifecycle sign-off.', decisionAuthority: 'Model release/freeze recommendation with governance board.', dataAccessScope: 'Model KPIs, drift metrics, explainability outcomes.', modulesUsed: 'AI Fox, Reporting' },
@@ -362,6 +362,26 @@ const enterpriseRoleSections: EnterpriseRoleSection[] = [
 
 function bi(value: BiText, lang: 'de' | 'en') {
   return lang === 'de' ? value.de : value.en
+}
+
+function tenantLevelText(value: string, lang: 'de' | 'en') {
+  if (lang !== 'de') return value
+  const map: Record<string, string> = {
+    Platform: 'Plattform',
+    Broker: 'Makler',
+    'Corporate Client': 'Unternehmenskunde',
+    Carrier: 'Versicherer',
+    Partner: 'Partner',
+    MGA: 'MGA',
+    'Platform / MGA': 'Plattform / MGA',
+    'Platform / Broker': 'Plattform / Makler',
+    'Platform / Compliance': 'Plattform / Compliance',
+    'Platform / Carrier': 'Plattform / Versicherer',
+    'Broker / MGA': 'Makler / MGA',
+    'Partner / Platform': 'Partner / Plattform',
+    'Platform / MGA / Broker': 'Plattform / MGA / Makler'
+  }
+  return map[value] ?? value
 }
 
 export default function InsideInsurfoxPage({ section }: { section: InsideSectionKey }) {
@@ -1131,7 +1151,7 @@ packages/
                     <thead>
                       <tr style={headRowStyle}>
                         <th style={thStyle}>{bi({ de: 'Rolle', en: 'Role' }, l)}</th>
-                        <th style={thStyle}>{bi({ de: 'Tenant Level', en: 'Tenant Level' }, l)}</th>
+                        <th style={thStyle}>{bi({ de: 'Mandantenebene', en: 'Tenant Level' }, l)}</th>
                         <th style={thStyle}>{bi({ de: 'Module', en: 'Modules' }, l)}</th>
                         <th style={thStyle}>{bi({ de: 'Entscheidungsbefugnis', en: 'Decision Authority' }, l)}</th>
                       </tr>
@@ -1140,7 +1160,7 @@ packages/
                       {sectionDef.roles.map((r) => (
                         <tr key={`${sectionDef.title.en}-${r.name}`}>
                           <td style={tdStrongStyle}>{r.name}</td>
-                          <td style={tdStyle}>{r.tenantLevel}</td>
+                          <td style={tdStyle}>{tenantLevelText(r.tenantLevel, l)}</td>
                           <td style={tdStyle}>{r.modulesUsed}</td>
                           <td style={tdStyle}>{r.decisionAuthority}</td>
                         </tr>
@@ -1153,7 +1173,7 @@ packages/
                   {sectionDef.roles.map((r) => (
                     <div key={`${sectionDef.title.en}-${r.name}-detail`} style={roleCardStyle}>
                       <h3 style={subHeadingStyle}>{r.name}</h3>
-                      <RoleLine label={bi({ de: 'Tenant Level', en: 'Tenant Level' }, l)} value={r.tenantLevel} />
+                      <RoleLine label={bi({ de: 'Mandantenebene', en: 'Tenant Level' }, l)} value={tenantLevelText(r.tenantLevel, l)} />
                       <RoleLine label={bi({ de: 'Funktionale Beschreibung', en: 'Functional Description' }, l)} value={r.functionalDescription} />
                       <RoleLine label={bi({ de: 'Kernverantwortungen', en: 'Core Responsibilities' }, l)} value={r.coreResponsibilities} />
                       <RoleLine label={bi({ de: 'Entscheidungsbefugnis', en: 'Decision Authority' }, l)} value={r.decisionAuthority} />
@@ -1167,7 +1187,7 @@ packages/
               </Card>
             ))}
 
-            <Card title={bi({ de: '9) ROLE INTERACTION MAP', en: '9) ROLE INTERACTION MAP' }, l)}>
+            <Card title={bi({ de: '9) ROLLEN-INTERAKTIONSKARTE', en: '9) ROLE INTERACTION MAP' }, l)}>
               <MermaidBlock
                 title={bi({ de: 'Interaktionsfluss', en: 'Interaction Flow' }, l)}
                 code={`flowchart LR
@@ -1190,7 +1210,7 @@ packages/
               </p>
             </Card>
 
-            <Card title={bi({ de: '10) ROLE HIERARCHY MODEL', en: '10) ROLE HIERARCHY MODEL' }, l)}>
+            <Card title={bi({ de: '10) ROLLEN-HIERARCHIEMODELL', en: '10) ROLE HIERARCHY MODEL' }, l)}>
               <MermaidBlock
                 title={bi({ de: 'Hierarchieebenen', en: 'Hierarchy Layers' }, l)}
                 code={`flowchart TB
