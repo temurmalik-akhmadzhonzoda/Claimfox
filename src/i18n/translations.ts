@@ -161,6 +161,79 @@ type TranslationTree = {
         disclaimer: string
       }
     }
+    flock: {
+      title: string
+      subtitle: string
+      exportPdf: string
+      sections: {
+        executiveSummary: string
+        dealSnapshot: string
+        productLogic: string
+        comparison: string
+        implications: string
+        options: string
+        financial: string
+        blueprint: string
+        riskCompliance: string
+        actors: string
+        sources: string
+      }
+      labels: {
+        field: string
+        value: string
+        category: string
+        overlap: string
+        strategicValue: string
+        option: string
+        strategy: string
+        speed: string
+        control: string
+        capitalIntensity: string
+        uwEdge: string
+        distributionEdge: string
+        regComplexity: string
+        fleetGwp: string
+        lossRatio: string
+        commissionRate: string
+        expenseRatio: string
+        commissionIncome: string
+        uwMargin: string
+        totalContribution: string
+        breakEvenGwp: string
+        contribution: string
+      }
+      text: {
+        summaryP1: string
+        summaryP2: string
+        summaryP3: string
+        dataLayerTitle: string
+        dataLayerBody: string
+        modelLayerTitle: string
+        modelLayerBody: string
+        productLayerTitle: string
+        productLayerBody: string
+        outcomeLayerTitle: string
+        outcomeLayerBody: string
+        implicationsP1: string
+        implicationsP2: string
+        implicationsP3: string
+        bp1Title: string
+        bp1Body: string
+        bp2Title: string
+        bp2Body: string
+        bp3Title: string
+        bp3Body: string
+        bp4Title: string
+        bp4Body: string
+        bp5Title: string
+        bp5Body: string
+        riskP1: string
+        riskP2: string
+        riskP3: string
+        actorsIntro: string
+        actorsNote: string
+      }
+    }
     smartInsurTech: {
       title: string
       subtitle: string
@@ -2826,6 +2899,79 @@ export const translations: Record<Lang, TranslationTree> = {
           swotIfThreat: 'Ohne klare Governance besteht das Risiko von Channel-Konflikten, Datenhoheitsverlusten und Abhängigkeit von externen Distributionslayern.',
           captureDate: 'Öffentliche Quellen erfasst am {{date}}.',
           disclaimer: 'Analyse auf Basis öffentlich verfügbarer Informationen und interner Management-Einordnung.'
+        }
+      },
+      flock: {
+        title: 'Admiral Group akquiriert Flock - Strategische Analyse (Flock vs. Insurfox)',
+        subtitle: 'Flottenversicherung und Telematik-Konvergenz: strategische Implikationen für MGA-, Broker- und Plattformmodelle',
+        exportPdf: 'Executive Report (PDF) herunterladen',
+        sections: {
+          executiveSummary: 'Management-Zusammenfassung',
+          dealSnapshot: 'Transaktionsübersicht',
+          productLogic: 'Was Flock gebaut hat (Produktlogik)',
+          comparison: 'Flock vs. Insurfox - Strategischer Vergleich',
+          implications: 'Strategische Implikationen für Insurfox',
+          options: 'Strategieoptionen (Board-Ebene)',
+          financial: 'Finanzmodell - What-if',
+          blueprint: 'Betriebsmodell-Blueprint',
+          riskCompliance: 'Risiken & Compliance',
+          actors: 'Schlüsselakteure / Kontakte',
+          sources: 'Quellen'
+        },
+        labels: {
+          field: 'Feld',
+          value: 'Wert',
+          category: 'Kategorie',
+          overlap: 'Wettbewerbsüberschneidung',
+          strategicValue: 'Strategischer Wert',
+          option: 'Option',
+          strategy: 'Strategie',
+          speed: 'Geschwindigkeit',
+          control: 'Kontrolle',
+          capitalIntensity: 'Kapitalintensität',
+          uwEdge: 'Underwriting-Vorteil',
+          distributionEdge: 'Distributionsvorteil',
+          regComplexity: 'Regulatorische Komplexität',
+          fleetGwp: 'Flotten-GWP (EUR Mio.)',
+          lossRatio: 'Erwartete Schadenquote (%)',
+          commissionRate: 'Courtage-/Provisionssatz (%)',
+          expenseRatio: 'Kostenquote (%)',
+          commissionIncome: 'Courtage-/Provisionsertrag',
+          uwMargin: 'Underwriting-Marge',
+          totalContribution: 'Gesamtbeitrag',
+          breakEvenGwp: 'Break-even-GWP',
+          contribution: 'Beitrag (EUR Mio.)'
+        },
+        text: {
+          summaryP1: 'Admiral Group hat die Akquisition von Flock zu einem Eigenkapitalwert von £80m angekündigt; der Abschluss wird für Q2 2026 erwartet und steht unter regulatorischem Vorbehalt (Alliance News; FF News). Admiral und Flock arbeiten laut Berichterstattung bereits seit 2024 zusammen (Alliance News; FF News).',
+          summaryP2: 'Die Transaktion signalisiert einen klaren Markttrend: etablierte Carrier kaufen telematik- und KI-getriebene Fleet-Risk-Engines, statt nur lose Partnerschaften einzugehen. Flock wurde 2018 von Ed Leon Klinger und Antton Peña gegründet (FF News).',
+          summaryP3: 'Für Insurfox als Hybrid aus MGA, Broker und Plattform ist das strategisch hoch relevant: Telematik- und Risikosignale werden gleichzeitig zum Underwriting-Hebel und zur Distributionsdifferenzierung. Auf CEO-Ebene wird Admiral durch Milena Mondini de Focatiis geführt (Bloomberg).',
+          dataLayerTitle: 'Datenebene',
+          dataLayerBody: 'Flock positioniert sich mit telematik- und verhaltensbasierten Datenströmen sowie kontextualisierten Fahrereignissen für eine laufende Risikoüberwachung im Flottenbetrieb (Alliance News; FF News).',
+          modelLayerTitle: 'Modellebene',
+          modelLayerBody: 'Die öffentlich beschriebene Logik nutzt KI-/ML-basierte Risikosignale, um Pricing- und Sicherheitsentscheidungen im Commercial-Motor-Kontext zu unterstützen (FF News).',
+          productLayerTitle: 'Produktebene',
+          productLayerBody: 'Aus den Signalen entstehen Risiko-Insights, Safety-Maßnahmen und ein Pricing-Feedback-Loop zwischen Flottenverhalten, Underwriting und Portfolio-Steuerung (FF News).',
+          outcomeLayerTitle: 'Ergebnisebene',
+          outcomeLayerBody: 'Ergebnisversprechen wie höhere Sicherheit, bessere Selektion und verbesserte Profitabilität sind Teil des Marktnarrativs und nicht unabhängig verifiziert.',
+          implicationsP1: 'Der Deal zeigt, dass Incumbents Telematik-Kompetenz als Kernbaustein für Commercial-Motor-Rendite ansehen. Das erhöht den Druck auf MGA-/Broker-Modelle ohne tiefe Datenkopplung.',
+          implicationsP2: 'Für EU sowie GCC/MENA steigen Relevanz und Komplexität parallel: Datenverfügbarkeit, regulatorische Anforderungen und Capacity-Appetit müssen in kohärente Operating Models übersetzt werden.',
+          implicationsP3: 'Bedrohungen sind Copycat-Programme, carrier-eigene Telematikmodelle und potenzielle Broker-Disintermediation. Chancen sind eine Partner-first-Capacity-Strategie, Fleetfox-Scoring im MGA-Underwriting und Safety-Insights als Retention-Tool.',
+          bp1Title: 'Erfassen -> Normalisieren -> Risikoscore',
+          bp1Body: 'Telematik-Events erfassen, in ein einheitliches Datenmodell überführen und ein laufendes Flotten-Risikoscoring erzeugen.',
+          bp2Title: 'Underwriting-Trigger',
+          bp2Body: 'Risikowerte in Pricing-Anpassungen, Referral-Trigger und Portfolio-Alerts für Underwriter übersetzen.',
+          bp3Title: 'Claims-/FNOL-Anreicherung',
+          bp3Body: 'FNOL durch Fahrkontext, Zeit- und Ereignisdaten anreichern sowie Fraud- und Severity-Flags automatisiert setzen.',
+          bp4Title: 'Fleet-Coaching-Loop',
+          bp4Body: 'Sicherheits-Insights und Aufgaben an Flottenmanager ausspielen, um Schadenfrequenz und Retention aktiv zu steuern.',
+          bp5Title: 'Governance und EU-AI-Act-Readiness',
+          bp5Body: 'Audit-Trails, Model-Monitoring, Drift-Checks und transparente Modellkommunikation gemäß EU-AI-Act-/Governance-Anforderungen verankern.',
+          riskP1: 'EU AI Act: Für versicherungsnahe KI-Entscheidungsprozesse steigt die Relevanz von Transparenz, Dokumentation und potenzieller High-Risk-Einordnung je Use Case.',
+          riskP2: 'GDPR: Telematikdaten sind sensitiv; Rechtsgrundlage, Datenminimierung, Zweckbindung und Aufbewahrungslogik müssen vertraglich und technisch sauber umgesetzt werden.',
+          riskP3: 'Model Risk Management: Drift, Bias/Fairness und Performance unter Marktveränderungen erfordern ein laufendes Monitoring mit klaren Eskalationspfaden.',
+          actorsIntro: 'Öffentlich genannte Schlüsselakteure im Deal-Kontext:',
+          actorsNote: 'Für weitere Senior-Kontakte im Fleet-/Transport-Underwriting bitte interne Sales-Intelligence und LinkedIn manuell nutzen.'
         }
       },
       smartInsurTech: {
@@ -6785,6 +6931,79 @@ export const translations: Record<Lang, TranslationTree> = {
           swotIfThreat: 'Without clear governance, channel conflict, data-right dilution, and dependency on external distribution layers can increase.',
           captureDate: 'Public sources captured on {{date}}.',
           disclaimer: 'Analysis based on publicly available information and internal management interpretation.'
+        }
+      },
+      flock: {
+        title: 'Admiral Group acquires Flock - Strategic Analysis (Flock vs Insurfox)',
+        subtitle: 'Fleet insurance and telemetry convergence: strategic implications for MGA, broker, and platform models',
+        exportPdf: 'Download Executive Report (PDF)',
+        sections: {
+          executiveSummary: 'Executive Summary',
+          dealSnapshot: 'Deal Snapshot',
+          productLogic: 'What Flock built (product logic)',
+          comparison: 'Flock vs Insurfox - Strategic Comparison',
+          implications: 'Strategic Implications for Insurfox',
+          options: 'Strategy Options (Board Level)',
+          financial: 'Financial Model - What-if',
+          blueprint: 'Operating Model Blueprint',
+          riskCompliance: 'Risks & Compliance',
+          actors: 'Key Actors / Contacts',
+          sources: 'Sources'
+        },
+        labels: {
+          field: 'Field',
+          value: 'Value',
+          category: 'Category',
+          overlap: 'Competitive overlap',
+          strategicValue: 'Strategic value',
+          option: 'Option',
+          strategy: 'Strategy',
+          speed: 'Speed',
+          control: 'Control',
+          capitalIntensity: 'Capital intensity',
+          uwEdge: 'Underwriting edge',
+          distributionEdge: 'Distribution edge',
+          regComplexity: 'Regulatory complexity',
+          fleetGwp: 'Fleet GWP (EUR m)',
+          lossRatio: 'Expected loss ratio (%)',
+          commissionRate: 'Commission rate (%)',
+          expenseRatio: 'Expense ratio (%)',
+          commissionIncome: 'Commission income',
+          uwMargin: 'Underwriting margin',
+          totalContribution: 'Total contribution',
+          breakEvenGwp: 'Break-even GWP',
+          contribution: 'Contribution (EUR m)'
+        },
+        text: {
+          summaryP1: 'Admiral Group announced the acquisition of Flock at an equity value of GBP80 million; completion is expected in Q2 2026 and remains subject to regulatory approval (Alliance News; FF News). Admiral and Flock have reportedly been in partnership since 2024 (Alliance News; FF News).',
+          summaryP2: 'The transaction signals a clear market shift: incumbents are acquiring telemetry/AI fleet-risk engines rather than relying only on loose partnerships. Flock was founded in 2018 by Ed Leon Klinger and Antton Peña (FF News).',
+          summaryP3: 'For Insurfox as a hybrid MGA, broker, and platform operator, this matters directly: telemetry and risk insights become both underwriting edge and distribution hook. Admiral is led by CEO Milena Mondini de Focatiis (Bloomberg).',
+          dataLayerTitle: 'Data layer',
+          dataLayerBody: 'Flock is positioned around telematics and behavior-driven data flows with contextual driving-event visibility for continuous fleet risk observation (Alliance News; FF News).',
+          modelLayerTitle: 'Model layer',
+          modelLayerBody: 'Publicly described logic points to AI/ML-enabled risk scoring supporting pricing and safety decisions in commercial motor insurance (FF News).',
+          productLayerTitle: 'Product layer',
+          productLayerBody: 'Signals are translated into risk insights, safety actions, and a pricing feedback loop connecting fleet behavior, underwriting, and portfolio steering (FF News).',
+          outcomeLayerTitle: 'Outcome layer',
+          outcomeLayerBody: 'Claimed outcomes such as better safety, improved risk selection, and stronger portfolio performance remain market narrative and are not independently verified here.',
+          implicationsP1: 'The deal shows that incumbents view telemetry capability as a core profitability lever in commercial motor. This raises pressure on MGA/broker models without deep data coupling.',
+          implicationsP2: 'Across EU and GCC/MENA, relevance and complexity rise together: data availability, regulatory constraints, and capacity appetite must be translated into coherent operating models.',
+          implicationsP3: 'Key threats are copycat programs, carrier-owned telemetry models, and potential broker disintermediation. Key opportunities are partner-first capacity strategy, Fleetfox scoring in MGA underwriting, and safety insights as retention tooling.',
+          bp1Title: 'Ingest -> Normalize -> Risk score',
+          bp1Body: 'Ingest telematics events, normalize into a common data model, and produce continuous fleet risk scoring.',
+          bp2Title: 'Underwriting triggers',
+          bp2Body: 'Translate risk scores into pricing adjustments, referral triggers, and portfolio alerts for underwriters.',
+          bp3Title: 'Claims FNOL enrichment',
+          bp3Body: 'Enrich FNOL with driver context, timing, and event data while adding automated fraud and severity flags.',
+          bp4Title: 'Fleet coaching loop',
+          bp4Body: 'Deliver safety insights and task recommendations to fleet managers to actively influence frequency and retention.',
+          bp5Title: 'Governance & AI Act readiness',
+          bp5Body: 'Anchor audit trails, model monitoring, drift checks, and transparent model communication aligned with EU AI Act/governance expectations.',
+          riskP1: 'EU AI Act: Insurance-adjacent AI decision workflows increase requirements for transparency, documentation, and potential high-risk classification depending on use case.',
+          riskP2: 'GDPR: Telematics data is sensitive; legal basis, minimization, purpose limitation, and retention rules must be contractually and technically robust.',
+          riskP3: 'Model risk management: Drift, fairness, and performance under market changes require continuous monitoring with clear escalation paths.',
+          actorsIntro: 'Publicly referenced key actors in the deal context:',
+          actorsNote: 'For additional senior transport/fleet underwriting contacts, use internal sales intelligence and LinkedIn manually.'
         }
       },
       smartInsurTech: {

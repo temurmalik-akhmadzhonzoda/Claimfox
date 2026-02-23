@@ -225,6 +225,7 @@ import KairosAnalysisPage from '@/pages/KairosAnalysisPage'
 import HypoportAnalysisPage from '@/pages/HypoportAnalysisPage'
 import SmartInsurTechAnalysisPage from '@/pages/SmartInsurTechAnalysisPage'
 import BlaudirektAnalysisPage from '@/pages/BlaudirektAnalysisPage'
+import FlockAdmiralAnalysisPage from '@/pages/FlockAdmiralAnalysisPage'
 
 function NotFoundRedirect() {
   const { isAuthenticated } = useAuth()
@@ -310,6 +311,7 @@ export default function AppRouter() {
         <Route path="/analysis/hypoport" element={<HypoportAnalysisPage />} />
         <Route path="/analysis/smartinsurtech" element={<SmartInsurTechAnalysisPage />} />
         <Route path="/analysis/blaudirekt" element={<BlaudirektAnalysisPage />} />
+        <Route path="/analysis/flock-admiral" element={<FlockAdmiralAnalysisPage />} />
       </Route>
       <Route element={<ProtectedRoute><FullscreenBgLayout showHeader /></ProtectedRoute>}>
         <Route path="/demo" element={<DemoOverviewPage />} />

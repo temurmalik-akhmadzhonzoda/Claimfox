@@ -28,7 +28,8 @@ export default function ManagementReportsPage() {
       items: [
         { label: 'Allianz / VHV', route: '/transport-market-report' },
         { label: 'Nordic MIP', route: '/strategy/nmip-analysis' },
-        { label: 'Kairos RS', route: '/analysis/kairos' }
+        { label: 'Kairos RS', route: '/analysis/kairos' },
+        { label: 'AIG/Flock', route: '/analysis/flock-admiral' }
       ]
     },
     {
