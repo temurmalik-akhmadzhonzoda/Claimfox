@@ -1,12 +1,23 @@
 const { json, error, getAuth0Config } = require('./_utils')
 
-exports.handler = async () => {
+function detectOrigin(event) {
+  const envOrigin = process.env.SITE_ORIGIN
+  if (envOrigin) return envOrigin.replace(/\/+$/, '')
+
+  const proto = event?.headers?.['x-forwarded-proto'] || 'https'
+  const host = event?.headers?.host
+  if (host) return `${proto}://${host}`
+  return 'https://claimsfox.com'
+}
+
+exports.handler = async (event) => {
   try {
     const cfg = getAuth0Config()
     const clientId = process.env.AUTH0_CLIENT_ID || ''
     if (!clientId) {
       return error(500, 'auth_config_error', 'AUTH0_CLIENT_ID missing')
     }
+    const origin = detectOrigin(event)
     return json(200, {
       ok: true,
       config: {
@@ -15,7 +26,7 @@ exports.handler = async () => {
         issuer: cfg.issuer,
         rolesClaim: cfg.rolesClaim,
         clientId,
-        redirectUri: `${process.env.SITE_ORIGIN || 'https://claimsfox.com'}/auth/callback`
+        redirectUri: `${origin}/auth/callback`
       }
     })
   } catch (e) {
