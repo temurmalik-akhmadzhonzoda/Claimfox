@@ -1226,19 +1226,12 @@ packages/
                   </table>
                 </div>
 
-                <div style={{ display: 'grid', gap: '0.75rem', marginTop: '0.75rem' }}>
+                <div style={{ display: 'grid', gap: '0.55rem', marginTop: '0.75rem' }}>
+                  <h3 style={{ ...subHeadingStyle, marginBottom: 0 }}>{bi({ de: 'Kurzbeschreibung je Rolle', en: 'Short Role Description' }, l)}</h3>
                   {sectionDef.roles.map((r) => (
-                    <div key={`${sectionDef.title.en}-${r.name}-detail`} style={roleCardStyle}>
-                      <h3 style={subHeadingStyle}>{r.name}</h3>
-                      <RoleLine label={bi({ de: 'Mandantenebene', en: 'Tenant Level' }, l)} value={tenantLevelText(r.tenantLevel, l)} />
-                      <RoleLine label={bi({ de: 'Funktionale Beschreibung', en: 'Functional Description' }, l)} value={roleText(r.functionalDescription, l)} />
-                      <RoleLine label={bi({ de: 'Kernverantwortungen', en: 'Core Responsibilities' }, l)} value={roleText(r.coreResponsibilities, l)} />
-                      <RoleLine label={bi({ de: 'Entscheidungsbefugnis', en: 'Decision Authority' }, l)} value={roleText(r.decisionAuthority, l)} />
-                      <RoleLine label={bi({ de: 'Datenzugriff', en: 'Data Access Scope' }, l)} value={roleText(r.dataAccessScope, l)} />
-                      <RoleLine label={bi({ de: 'Genutzte Module', en: 'Modules Used' }, l)} value={r.modulesUsed} />
-                      {r.trigger ? <RoleLine label={bi({ de: 'Trigger', en: 'Trigger' }, l)} value={roleText(r.trigger, l)} /> : null}
-                      {r.temporaryAccess ? <RoleLine label={bi({ de: 'Temporärer Zugriff', en: 'Temporary Access' }, l)} value={roleText(r.temporaryAccess, l)} /> : null}
-                    </div>
+                    <p key={`${sectionDef.title.en}-${r.name}-short`} style={noteStyle}>
+                      <strong>{r.name}:</strong> {roleText(r.functionalDescription, l)}
+                    </p>
                   ))}
                 </div>
               </Card>
