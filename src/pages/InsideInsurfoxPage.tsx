@@ -1218,7 +1218,7 @@ packages/
                         <th style={thStyle}>{bi({ de: 'Mandantenebene', en: 'Tenant Level' }, l)}</th>
                         <th style={thStyle}>{bi({ de: 'Module', en: 'Modules' }, l)}</th>
                         <th style={thStyle}>{bi({ de: 'Entscheidungsbefugnis', en: 'Decision Authority' }, l)}</th>
-                        <th style={thStyle}>{bi({ de: 'Demo', en: 'Demo' }, l)}</th>
+                        <th style={thStyle}>{bi({ de: 'Info', en: 'Info' }, l)}</th>
                       </tr>
                     </thead>
                     <tbody>
