@@ -16,8 +16,8 @@ exports.handler = async (event) => {
   const audience = process.env.AUTH0_AUDIENCE || ''
   const clientId = process.env.AUTH0_CLIENT_ID || ''
 
-  if (!domain || !issuerRaw || !audience || !clientId) {
-    return error(500, 'auth_config_error', 'AUTH0_DOMAIN, AUTH0_ISSUER, AUTH0_AUDIENCE, AUTH0_CLIENT_ID must be configured')
+  if (!domain || !clientId) {
+    return error(500, 'auth_config_error', 'AUTH0_DOMAIN and AUTH0_CLIENT_ID must be configured')
   }
 
   const issuer = issuerRaw.endsWith('/') ? issuerRaw : `${issuerRaw}/`
@@ -27,7 +27,7 @@ exports.handler = async (event) => {
     ok: true,
     config: {
       domain,
-      audience,
+      audience: audience || null,
       issuer,
       clientId,
       redirectUri: `${origin}/auth/callback`

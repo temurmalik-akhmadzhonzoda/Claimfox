@@ -209,11 +209,11 @@ export function AuthProvider({ children }) {
       client_id: cfg.clientId,
       redirect_uri: cfg.redirectUri,
       scope: 'openid profile email offline_access',
-      audience: cfg.audience,
       state,
       code_challenge: challenge,
       code_challenge_method: 'S256'
     })
+    if (cfg.audience) params.set('audience', cfg.audience)
 
     if (mode === 'signup') params.set('screen_hint', 'signup')
 
