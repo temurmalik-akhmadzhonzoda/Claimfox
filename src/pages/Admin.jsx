@@ -14,7 +14,7 @@ export default function Admin() {
     setError('')
     setLoading(true)
     try {
-      const response = await api.get('/.netlify/functions/admin-users')
+      const response = await api.get('/api/admin-users')
       setUsers(response.users || [])
     } catch (err) {
       setError(err?.message || 'Nutzer konnten nicht geladen werden')
@@ -34,7 +34,7 @@ export default function Admin() {
 
     setBusyId(user.id)
     try {
-      await api.post('/.netlify/functions/admin-roles', {
+      await api.post('/api/admin-roles', {
         userId: user.id,
         roles: Array.from(current)
       })
