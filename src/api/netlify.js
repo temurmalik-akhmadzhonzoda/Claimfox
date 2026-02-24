@@ -1,16 +1,8 @@
 import { useAuth } from '@/auth/AuthProvider'
 
-function normalizeApiPath(path) {
-  if (typeof path !== 'string' || path.length === 0) return path
-  if (path.startsWith('/.netlify/functions/')) {
-    return `/api/${path.replace('/.netlify/functions/', '')}`
-  }
-  return path
-}
-
 export async function apiFetch(path, options = {}, getToken) {
   const token = await getToken()
-  const response = await fetch(normalizeApiPath(path), {
+  const response = await fetch(path, {
     method: options.method || 'GET',
     headers: {
       'Content-Type': 'application/json',
