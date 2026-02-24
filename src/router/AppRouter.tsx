@@ -235,6 +235,7 @@ import BrokerPortalDirectorRolePage from '@/pages/BrokerPortalDirectorRolePage'
 import AiGovernanceOfficerRolePage from '@/pages/AiGovernanceOfficerRolePage'
 import ComplianceRiskOfficerRolePage from '@/pages/ComplianceRiskOfficerRolePage'
 import ReinsuranceManagerRolePage from '@/pages/ReinsuranceManagerRolePage'
+import CpoChiefPlatformOwnerRolePage from '@/pages/CpoChiefPlatformOwnerRolePage'
 
 function NotFoundRedirect() {
   const { isAuthenticated } = useAuth()
@@ -326,6 +327,7 @@ export default function AppRouter() {
         <Route path="/inside-insurfox/vision" element={<InsideInsurfoxPage section="vision" />} />
         <Route path="/inside-insurfox/roles" element={<InsideInsurfoxPage section="roles" />} />
         <Route path="/inside-insurfox/roles/platform-super-admin" element={<PlatformSuperAdminRolePage />} />
+        <Route path="/inside-insurfox/roles/cpo-chief-platform-owner" element={<CpoChiefPlatformOwnerRolePage />} />
         <Route path="/inside-insurfox/roles/chief-underwriting-officer-mga" element={<CuoMgaRolePage />} />
         <Route path="/inside-insurfox/roles/head-of-claims-mga" element={<HeadOfClaimsMgaRolePage />} />
         <Route path="/inside-insurfox/roles/broker-portal-director" element={<BrokerPortalDirectorRolePage />} />
