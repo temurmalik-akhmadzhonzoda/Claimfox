@@ -348,13 +348,30 @@ function rolePerspective(role: RoleHandbookRole): RolePerspective {
 function buildSections(role: RoleHandbookRole): RoleSection[] {
   const cat = categoryBlueprint(role)
   const perspective = rolePerspective(role)
+  const isUnderwriterRole = role.name.toLowerCase().includes('underwriter')
+
+  const underwriterClassicDe =
+    'Ein Underwriter bewertet, kalkuliert und zeichnet Versicherungsrisiken in relevanten Sparten (z. B. Transport, Sach, Haftpflicht). Er entscheidet über Annahme oder Ablehnung von Anträgen, setzt Prämien und Vertragsbedingungen fest und entwickelt tragfähige Deckungskonzepte zur Sicherung der Portfolio-Profitabilität.'
+  const underwriterClassicEn =
+    'An underwriter evaluates, prices, and underwrites insurance risks across relevant lines (e.g., transport, property, liability). The role decides on acceptance or declination, sets premium and policy conditions, and develops sustainable coverage concepts to protect portfolio profitability.'
+
+  const underwriterCoreTasksDe =
+    'Kernaufgaben: Risikoanalyse und -bewertung (Anträge, Schadenbilder, Marktbedingungen), Tarifierung und Pricing, Vertragsgestaltung, Bestands- und Maklerbetreuung bei komplexen Risiken sowie aktives Portfoliomanagement inklusive Sanierungsmaßnahmen.'
+  const underwriterCoreTasksEn =
+    'Core responsibilities: risk analysis and assessment (submissions, loss scenarios, market context), tariffing and pricing, policy structuring, broker/account servicing for complex risks, and active portfolio management including remediation actions.'
+
+  const underwriterProfileDe =
+    'Anforderungsprofil: fundierte Versicherungs- und Spartenkenntnis, analytisches Urteilsvermögen, Risikobewusstsein, Verhandlungssicherheit, klare Entscheidungsfähigkeit und sichere Kommunikation mit Vertrieb, Schaden, Aktuariat und Rückversicherung.'
+  const underwriterProfileEn =
+    'Capability profile: strong insurance and line-specific expertise, analytical judgment, risk awareness, negotiation capability, decision ownership, and clear communication across distribution, claims, actuarial, and reinsurance functions.'
+
   return [
     {
       id: 'overview',
       title: { de: '1. Rollenüberblick', en: '1. Role Overview' },
       body: {
-        de: `Klassische Rolle: ${perspective.classic.de}\n\nInsurfox-Kontext: ${perspective.insurfox.de}\n\n${role.name} arbeitet auf der Mandantenebene ${tenantLevelText(role.tenantLevel, 'de')}. Die Rolle verantwortet die Ausführung in ${role.modules.join(', ')} und berichtet in die jeweilige Führungsstruktur von Plattform oder Tenant.`,
-        en: `Classical role: ${perspective.classic.en}\n\nInsurfox context: ${perspective.insurfox.en}\n\n${role.name} operates at tenant level ${role.tenantLevel}. The role is positioned as accountable owner for ${role.modules.join(', ')} execution and reports into the relevant platform/tenant leadership line.`
+        de: `Klassische Rolle: ${isUnderwriterRole ? underwriterClassicDe : perspective.classic.de}\n\nInsurfox-Kontext: ${perspective.insurfox.de}\n\n${role.name} arbeitet auf der Mandantenebene ${tenantLevelText(role.tenantLevel, 'de')}. Die Rolle verantwortet die Ausführung in ${role.modules.join(', ')} und berichtet in die jeweilige Führungsstruktur von Plattform oder Tenant.`,
+        en: `Classical role: ${isUnderwriterRole ? underwriterClassicEn : perspective.classic.en}\n\nInsurfox context: ${perspective.insurfox.en}\n\n${role.name} operates at tenant level ${role.tenantLevel}. The role is positioned as accountable owner for ${role.modules.join(', ')} execution and reports into the relevant platform/tenant leadership line.`
       }
     },
     {
@@ -377,8 +394,8 @@ function buildSections(role: RoleHandbookRole): RoleSection[] {
       id: 'responsibilities',
       title: { de: '4. Kernverantwortungen (detailliert)', en: '4. Core Responsibilities (Detailed)' },
       body: {
-        de: `Klassische Verantwortung: ${perspective.classic.de}\n\nInsurfox-spezifische Ausprägung: Operativ rollenspezifische Workflows in ${role.modules.join(', ')} ausführen. ${cat.governance.de} Eskalationstrigger: Schwellenwertverletzungen, Policy-Ausnahmen und Auffälligkeiten bei KI-Confidence. Freigaben erfolgen im Autoritätskorridor; Out-of-Band-Fälle gehen an die Senior Governance.`,
-        en: `Classical responsibility: ${perspective.classic.en}\n\nInsurfox-specific execution: run role-specific workflows in ${role.modules.join(', ')}. ${cat.governance.en} Escalation triggers: threshold breaches, policy exceptions, and AI-confidence anomalies. Approval corridor follows role authority; out-of-band cases escalate to senior governance.`
+        de: `Klassische Verantwortung: ${isUnderwriterRole ? underwriterCoreTasksDe : perspective.classic.de}\n\nInsurfox-spezifische Ausprägung: Operativ rollenspezifische Workflows in ${role.modules.join(', ')} ausführen. ${cat.governance.de} Eskalationstrigger: Schwellenwertverletzungen, Policy-Ausnahmen und Auffälligkeiten bei KI-Confidence. Freigaben erfolgen im Autoritätskorridor; Out-of-Band-Fälle gehen an die Senior Governance.`,
+        en: `Classical responsibility: ${isUnderwriterRole ? underwriterCoreTasksEn : perspective.classic.en}\n\nInsurfox-specific execution: run role-specific workflows in ${role.modules.join(', ')}. ${cat.governance.en} Escalation triggers: threshold breaches, policy exceptions, and AI-confidence anomalies. Approval corridor follows role authority; out-of-band cases escalate to senior governance.`
       }
     },
     {
@@ -441,8 +458,8 @@ function buildSections(role: RoleHandbookRole): RoleSection[] {
       id: 'training',
       title: { de: '12. Training & Wissensanforderungen', en: '12. Training & Knowledge Requirements' },
       body: {
-        de: `Erforderliche Fähigkeiten: versicherungstechnische Expertise, regulatorische Kompetenz, Data Literacy und KI-Literacy. Rollenreife erfordert kontinuierliches Training in Schwellenwert-Governance, Entscheidungsdokumentation und funktionsübergreifendem Incident-Handling.`,
-        en: `Required capability stack: insurance technical expertise, regulatory literacy, data literacy, and AI literacy. Role maturity requires continuous training in threshold governance, decision documentation, and cross-functional incident handling.`
+        de: `${isUnderwriterRole ? underwriterProfileDe : 'Erforderliche Fähigkeiten: versicherungstechnische Expertise, regulatorische Kompetenz, Data Literacy und KI-Literacy.'} Rollenreife erfordert kontinuierliches Training in Schwellenwert-Governance, Entscheidungsdokumentation und funktionsübergreifendem Incident-Handling.`,
+        en: `${isUnderwriterRole ? underwriterProfileEn : 'Required capability stack: insurance technical expertise, regulatory literacy, data literacy, and AI literacy.'} Role maturity requires continuous training in threshold governance, decision documentation, and cross-functional incident handling.`
       }
     },
     {
