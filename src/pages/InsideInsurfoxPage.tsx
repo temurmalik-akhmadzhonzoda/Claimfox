@@ -1,4 +1,5 @@
 import { useMemo, useState, type CSSProperties } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Card from '@/components/ui/Card'
 import Header from '@/components/ui/Header'
 import Button from '@/components/ui/Button'
@@ -441,8 +442,22 @@ function roleText(value: string, lang: 'de' | 'en') {
   return replacements.reduce((acc, [from, to]) => acc.replaceAll(from, to), value)
 }
 
+function demoRouteForRole(role: EnterpriseRole) {
+  const modules = role.modulesUsed.toLowerCase()
+  const name = role.name.toLowerCase()
+  const text = `${modules} ${name}`
+
+  if (text.includes('claimsfox') || text.includes('claim')) return '/claimsfox'
+  if (text.includes('partnerfox') || text.includes('partner') || text.includes('rental') || text.includes('towing')) return '/partnerfox'
+  if (text.includes('fleetfox') || text.includes('fleet') || text.includes('driver') || text.includes('transport')) return '/fleetfox'
+  if (text.includes('ai fox') || text.includes('aifox') || text.includes('ai ')) return '/aifox'
+  if (text.includes('brokerfox') || text.includes('broker')) return '/brokerfox'
+  return '/brokerfox'
+}
+
 export default function InsideInsurfoxPage({ section }: { section: InsideSectionKey }) {
   const { lang, t } = useI18n()
+  const navigate = useNavigate()
   const l = lang === 'de' ? 'de' : 'en'
   const [selectedLifecycle, setSelectedLifecycle] = useState<string>('registration')
 
@@ -1211,6 +1226,7 @@ packages/
                         <th style={thStyle}>{bi({ de: 'Mandantenebene', en: 'Tenant Level' }, l)}</th>
                         <th style={thStyle}>{bi({ de: 'Module', en: 'Modules' }, l)}</th>
                         <th style={thStyle}>{bi({ de: 'Entscheidungsbefugnis', en: 'Decision Authority' }, l)}</th>
+                        <th style={thStyle}>{bi({ de: 'Demo', en: 'Demo' }, l)}</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -1220,6 +1236,11 @@ packages/
                           <td style={tdStyle}>{tenantLevelText(r.tenantLevel, l)}</td>
                           <td style={tdStyle}>{r.modulesUsed}</td>
                           <td style={tdStyle}>{roleText(r.decisionAuthority, l)}</td>
+                          <td style={tdStyle}>
+                            <div className="print-hide">
+                              <Button size="sm" onClick={() => navigate(demoRouteForRole(r))}>Demo</Button>
+                            </div>
+                          </td>
                         </tr>
                       ))}
                     </tbody>
