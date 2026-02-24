@@ -178,13 +178,32 @@ export default function HeadOfClaimsMgaRolePage() {
 
         <Card title={bi({ de: '4. Claims-Lifecycle', en: '4. Claims Lifecycle Visualization' }, l)}>
           <div id="claims-lifecycle" style={{ display: 'grid', gap: '0.7rem' }}>
-            <div style={lifecycleWrapStyle}>
+            <div style={timelineRowStyle}>
               {lifecycleSteps.map((step, idx) => (
-                <div key={step.en} style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                  <div style={lifecycleStepStyle}>{bi(step, l)}</div>
-                  {idx < lifecycleSteps.length - 1 ? <span style={arrowStyle}>→</span> : null}
+                <div key={step.en} style={timelineItemStyle}>
+                  <div style={timelineNodeStyle}>{idx + 1}</div>
+                  <div style={timelineLabelStyle}>{bi(step, l)}</div>
+                  {idx < lifecycleSteps.length - 1 ? <div style={timelineConnectorStyle} /> : null}
                 </div>
               ))}
+            </div>
+            <div style={controlCalloutGridStyle}>
+              <div style={controlCalloutStyle}>
+                <strong>{bi({ de: 'Governance-Regeln', en: 'Governance Rules' }, l)}</strong>
+                <span>{bi({ de: 'Deckung, Reserve, SLA, Litigation', en: 'Coverage, reserve, SLA, litigation' }, l)}</span>
+              </div>
+              <div style={controlCalloutStyle}>
+                <strong>{bi({ de: 'Schwellenfreigaben', en: 'Threshold Approvals' }, l)}</strong>
+                <span>{bi({ de: 'Ab 100.000 € und Sonderfälle', en: 'Above €100k and exception cases' }, l)}</span>
+              </div>
+              <div style={controlCalloutStyle}>
+                <strong>{bi({ de: 'Partner-Policy', en: 'Partner Selection Policy' }, l)}</strong>
+                <span>{bi({ de: 'Qualität, Kosten, Recovery-Quote', en: 'Quality, cost, recovery rate' }, l)}</span>
+              </div>
+              <div style={controlCalloutStyle}>
+                <strong>{bi({ de: 'Eskalationsdesign', en: 'Escalation Design' }, l)}</strong>
+                <span>{bi({ de: 'Legal, Compliance, CUO, Reinsurance', en: 'Legal, compliance, CUO, reinsurance' }, l)}</span>
+              </div>
             </div>
             <p style={pStyle}>{bi({ de: 'Der Head of Claims steuert Governance-Regeln, Schwellenfreigaben, Partnerauswahlpolicy und Eskalationsdesign über den gesamten Ablauf.', en: 'The Head of Claims controls governance rules, threshold approvals, partner selection policy, and escalation design across the lifecycle.' }, l)}</p>
           </div>
@@ -271,6 +290,11 @@ export default function HeadOfClaimsMgaRolePage() {
                 </div>
               </div>
             ))}
+            <div style={tierDiagramStyle}>
+              <div style={{ ...tierBoxStyle, width: '34%', background: '#e2e8f0' }}>L1</div>
+              <div style={{ ...tierBoxStyle, width: '56%', background: '#cbd5e1' }}>L2</div>
+              <div style={{ ...tierBoxStyle, width: '100%', background: '#94a3b8' }}>L3</div>
+            </div>
           </div>
         </Card>
 
@@ -360,7 +384,22 @@ export default function HeadOfClaimsMgaRolePage() {
         </Card>
 
         <Card title={bi({ de: '10. Eskalationsmatrix', en: '10. Escalation Matrix' }, l)}>
-          <div id="escalation-matrix" style={{ overflowX: 'auto' }}>
+          <div id="escalation-matrix" style={{ display: 'grid', gap: '0.65rem' }}>
+            <div style={escalationHeatmapStyle}>
+              {[
+                { label: bi({ de: 'CUO', en: 'CUO' }, l), level: bi({ de: 'Hoch', en: 'High' }, l), color: '#b45309' },
+                { label: bi({ de: 'Legal Counsel', en: 'Legal Counsel' }, l), level: bi({ de: 'Sehr hoch', en: 'Very High' }, l), color: '#991b1b' },
+                { label: bi({ de: 'Compliance', en: 'Compliance' }, l), level: bi({ de: 'Mittel', en: 'Medium' }, l), color: '#334155' },
+                { label: bi({ de: 'Carrier', en: 'Carrier' }, l), level: bi({ de: 'Hoch', en: 'High' }, l), color: '#b45309' },
+                { label: bi({ de: 'Rückversicherung', en: 'Reinsurance' }, l), level: bi({ de: 'Sehr hoch', en: 'Very High' }, l), color: '#991b1b' }
+              ].map((item) => (
+                <div key={item.label} style={{ ...escalationHeatCellStyle, borderLeft: `6px solid ${item.color}` }}>
+                  <strong>{item.label}</strong>
+                  <span>{item.level}</span>
+                </div>
+              ))}
+            </div>
+            <div style={{ overflowX: 'auto' }}>
             <table style={tableStyle}>
               <thead>
                 <tr>
@@ -397,6 +436,7 @@ export default function HeadOfClaimsMgaRolePage() {
                 </tr>
               </tbody>
             </table>
+            </div>
           </div>
         </Card>
 
@@ -513,6 +553,64 @@ const lifecycleWrapStyle: CSSProperties = {
   alignItems: 'center'
 }
 
+const timelineRowStyle: CSSProperties = {
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+  gap: '0.55rem',
+  alignItems: 'stretch'
+}
+
+const timelineItemStyle: CSSProperties = {
+  border: '1px solid #dbe2ea',
+  borderRadius: 10,
+  background: '#f8fafc',
+  padding: '0.55rem',
+  display: 'grid',
+  gap: '0.35rem'
+}
+
+const timelineNodeStyle: CSSProperties = {
+  width: 24,
+  height: 24,
+  borderRadius: 999,
+  background: '#0f172a',
+  color: '#fff',
+  display: 'grid',
+  placeItems: 'center',
+  fontSize: '0.75rem',
+  fontWeight: 700
+}
+
+const timelineLabelStyle: CSSProperties = {
+  fontSize: '0.82rem',
+  color: '#0f172a',
+  fontWeight: 600,
+  lineHeight: 1.4
+}
+
+const timelineConnectorStyle: CSSProperties = {
+  height: 4,
+  borderRadius: 999,
+  background: '#cbd5e1'
+}
+
+const controlCalloutGridStyle: CSSProperties = {
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+  gap: '0.55rem'
+}
+
+const controlCalloutStyle: CSSProperties = {
+  border: '1px solid #dbe2ea',
+  borderRadius: 10,
+  background: '#f8fafc',
+  padding: '0.5rem 0.6rem',
+  display: 'grid',
+  gap: '0.2rem',
+  color: '#334155',
+  fontSize: '0.8rem'
+}
+
 const lifecycleStepStyle: CSSProperties = {
   border: '1px solid #dbe2ea',
   borderRadius: 999,
@@ -561,6 +659,21 @@ const scenarioCardStyle: CSSProperties = {
   gap: '0.35rem'
 }
 
+const tierDiagramStyle: CSSProperties = {
+  marginTop: '0.2rem',
+  display: 'grid',
+  gap: '0.35rem'
+}
+
+const tierBoxStyle: CSSProperties = {
+  borderRadius: 8,
+  padding: '0.35rem 0.55rem',
+  color: '#0f172a',
+  fontSize: '0.78rem',
+  fontWeight: 700,
+  textAlign: 'right'
+}
+
 const flowStyle: CSSProperties = {
   display: 'flex',
   flexWrap: 'wrap',
@@ -582,6 +695,23 @@ const tableStyle: CSSProperties = {
   borderCollapse: 'collapse',
   minWidth: 780,
   fontSize: '0.84rem'
+}
+
+const escalationHeatmapStyle: CSSProperties = {
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))',
+  gap: '0.45rem'
+}
+
+const escalationHeatCellStyle: CSSProperties = {
+  border: '1px solid #dbe2ea',
+  borderRadius: 8,
+  background: '#f8fafc',
+  padding: '0.45rem 0.55rem',
+  display: 'grid',
+  gap: '0.15rem',
+  color: '#0f172a',
+  fontSize: '0.78rem'
 }
 
 const thStyle: CSSProperties = {
