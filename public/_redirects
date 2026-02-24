@@ -2,19 +2,5 @@
 /signup /index.html 200
 /forgot-password /index.html 200
 /reset-password /index.html 200
-/management /index.html 200 Role=management,c-level
-/management/* /index.html 200 Role=management,c-level
-/managementreports* /index.html 200 Role=management,c-level
-/c-level /index.html 200 Role=c-level
-/c-level/* /index.html 200 Role=c-level
-/admin /index.html 200 Role=c-level
-/admin/* /index.html 200 Role=c-level
-/management /dashboard 302
-/management/* /dashboard 302
-/managementreports* /dashboard 302
-/c-level /dashboard 302
-/c-level/* /dashboard 302
-/admin /dashboard 302
-/admin/* /dashboard 302
-/* /login 302 Role=anonymous
+/auth/callback /index.html 200
 /* /index.html 200

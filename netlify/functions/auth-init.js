@@ -1,46 +1,28 @@
-const { requireAuth, getRoles, sanitizeRoles, callNetlifyAdmin, json, error, rateLimit } = require('./_utils')
+const { requireAuth, auth0ManagementRequest, sanitizeRoles, json, error, getAuth0Config } = require('./_utils')
 
-exports.handler = async (event, context) => {
-  if (event.httpMethod !== 'POST') {
-    return error(405, 'method_not_allowed', 'Only POST allowed')
-  }
+exports.handler = async (event) => {
+  if (event.httpMethod !== 'POST') return error(405, 'method_not_allowed', 'Only POST allowed')
 
-  const ip = event.headers['x-nf-client-connection-ip'] || 'unknown'
-  if (!rateLimit(`auth-init:${ip}`, 20, 60_000)) {
-    return error(429, 'rate_limited', 'Too many requests')
-  }
-
-  const auth = requireAuth(context)
+  const auth = await requireAuth(event)
   if (!auth.ok) return auth.response
 
-  const user = auth.user
-  const currentRoles = getRoles(user)
-  if (currentRoles.length > 0) {
-    return json(200, { ok: true, roles: currentRoles, initialized: false })
-  }
+  const currentRoles = sanitizeRoles(auth.roles)
+  if (currentRoles.length > 0) return json(200, { ok: true, roles: currentRoles })
 
-  const token = process.env.NETLIFY_AUTH_TOKEN
-  const siteId = process.env.NETLIFY_SITE_ID
-
-  if (!token || !siteId) {
-    return error(500, 'server_config_error', 'NETLIFY_AUTH_TOKEN/NETLIFY_SITE_ID missing')
-  }
-
-  const userId = user.sub || user.id
-  if (!userId) return error(400, 'invalid_user', 'User id missing')
+  const userId = auth.user?.id
+  if (!userId) return error(400, 'bad_request', 'User id missing')
 
   try {
-    const roles = sanitizeRoles(['mitarbeiter'])
-    await callNetlifyAdmin({
-      token,
-      siteId,
-      method: 'PUT',
-      path: `/identity/users/${encodeURIComponent(userId)}`,
-      body: { app_metadata: { roles } }
+    await auth0ManagementRequest({
+      method: 'PATCH',
+      path: `/users/${encodeURIComponent(userId)}`,
+      body: { app_metadata: { roles: ['mitarbeiter'] } }
     })
-
-    return json(200, { ok: true, roles, initialized: true })
+    return json(200, { ok: true, roles: ['mitarbeiter'] })
   } catch (e) {
-    return error(500, 'role_init_failed', 'Could not initialize default role', { message: e.message })
+    return error(409, 'role_init_failed', 'Default role could not be assigned', {
+      message: e.message,
+      rolesClaim: getAuth0Config().rolesClaim
+    })
   }
 }

@@ -2,7 +2,6 @@
   command = "npm run build"
   publish = "dist"
 
-# Public auth routes only
 [[redirects]]
   from = "/login"
   to = "/index.html"
@@ -23,93 +22,11 @@
   to = "/index.html"
   status = 200
 
-# Role-gated routes (allow rules)
 [[redirects]]
-  from = "/management"
+  from = "/auth/callback"
   to = "/index.html"
   status = 200
-  conditions = {Role = ["management", "c-level"]}
 
-[[redirects]]
-  from = "/management/*"
-  to = "/index.html"
-  status = 200
-  conditions = {Role = ["management", "c-level"]}
-
-[[redirects]]
-  from = "/managementreports*"
-  to = "/index.html"
-  status = 200
-  conditions = {Role = ["management", "c-level"]}
-
-[[redirects]]
-  from = "/c-level"
-  to = "/index.html"
-  status = 200
-  conditions = {Role = ["c-level"]}
-
-[[redirects]]
-  from = "/c-level/*"
-  to = "/index.html"
-  status = 200
-  conditions = {Role = ["c-level"]}
-
-[[redirects]]
-  from = "/admin"
-  to = "/index.html"
-  status = 200
-  conditions = {Role = ["c-level"]}
-
-[[redirects]]
-  from = "/admin/*"
-  to = "/index.html"
-  status = 200
-  conditions = {Role = ["c-level"]}
-
-# Role-gated routes (deny/fallback)
-[[redirects]]
-  from = "/management"
-  to = "/dashboard"
-  status = 302
-
-[[redirects]]
-  from = "/management/*"
-  to = "/dashboard"
-  status = 302
-
-[[redirects]]
-  from = "/managementreports*"
-  to = "/dashboard"
-  status = 302
-
-[[redirects]]
-  from = "/c-level"
-  to = "/dashboard"
-  status = 302
-
-[[redirects]]
-  from = "/c-level/*"
-  to = "/dashboard"
-  status = 302
-
-[[redirects]]
-  from = "/admin"
-  to = "/dashboard"
-  status = 302
-
-[[redirects]]
-  from = "/admin/*"
-  to = "/dashboard"
-  status = 302
-
-# Global lock: anonymous users can only see public auth routes above
-[[redirects]]
-  from = "/*"
-  to = "/login"
-  status = 302
-  conditions = {Role = ["anonymous"]}
-
-# SPA fallback for authenticated users
 [[redirects]]
   from = "/*"
   to = "/index.html"
