@@ -4,7 +4,6 @@ import {
   Bar,
   BarChart,
   CartesianGrid,
-  Cell,
   Legend,
   Line,
   LineChart,
@@ -16,29 +15,37 @@ import {
 import Card from '@/components/ui/Card'
 import Header from '@/components/ui/Header'
 import Button from '@/components/ui/Button'
+import { useI18n } from '@/i18n/I18nContext'
 
-const anchorSections = [
-  { id: 'role-definition', label: '1. Executive Role Definition' },
-  { id: 'role-delineation', label: '2. Role Delineation' },
-  { id: 'org-embedding', label: '3. Organizational Embedding' },
-  { id: 'iam-governance', label: '4. Identity & Access Governance' },
-  { id: 'tenant-lifecycle', label: '5. Tenant Lifecycle Management' },
-  { id: 'break-glass', label: '6. Break-Glass Authority' },
-  { id: 'system-configuration', label: '7. System Configuration Authority' },
-  { id: 'audit-oversight', label: '8. Audit & Logging Oversight' },
-  { id: 'architecture-context', label: '9. System Architecture Context' },
-  { id: 'kpi-monitoring', label: '10. KPI Monitoring' },
-  { id: 'decision-scenarios', label: '11. Realistic Decision Scenarios' },
-  { id: 'risk-ai-profile', label: '12. Risk Profile & AI Interaction' },
-  { id: 'permission-criticality', label: '13. Permission Heatmap & Structural Criticality' }
+type Lang = 'de' | 'en'
+type BiText = { de: string; en: string }
+
+function bi(value: BiText, lang: Lang) {
+  return lang === 'de' ? value.de : value.en
+}
+
+const anchorSections: { id: string; label: BiText }[] = [
+  { id: 'role-definition', label: { de: '1. Executive-Rollendefinition', en: '1. Executive Role Definition' } },
+  { id: 'role-delineation', label: { de: '2. Rollenabgrenzung', en: '2. Role Delineation' } },
+  { id: 'org-embedding', label: { de: '3. Organisatorische Einbettung', en: '3. Organizational Embedding' } },
+  { id: 'iam-governance', label: { de: '4. Identity & Access Governance', en: '4. Identity & Access Governance' } },
+  { id: 'tenant-lifecycle', label: { de: '5. Tenant Lifecycle Management', en: '5. Tenant Lifecycle Management' } },
+  { id: 'break-glass', label: { de: '6. Break-Glass-Befugnis', en: '6. Break-Glass Authority' } },
+  { id: 'system-configuration', label: { de: '7. Systemkonfigurationshoheit', en: '7. System Configuration Authority' } },
+  { id: 'audit-oversight', label: { de: '8. Audit- und Logging-Aufsicht', en: '8. Audit & Logging Oversight' } },
+  { id: 'architecture-context', label: { de: '9. Architekturkontext', en: '9. System Architecture Context' } },
+  { id: 'kpi-monitoring', label: { de: '10. KPI-Monitoring', en: '10. KPI Monitoring' } },
+  { id: 'decision-scenarios', label: { de: '11. Realistische Entscheidungsszenarien', en: '11. Realistic Decision Scenarios' } },
+  { id: 'risk-ai-profile', label: { de: '12. Risikoprofil & AI-Interaktion', en: '12. Risk Profile & AI Interaction' } },
+  { id: 'permission-criticality', label: { de: '13. Permission-Heatmap & strukturelle Kritikalität', en: '13. Permission Heatmap & Structural Criticality' } }
 ]
 
 const uptimeData = [
-  { month: 'Jan', uptime: 99.92 },
-  { month: 'Feb', uptime: 99.95 },
-  { month: 'Mar', uptime: 99.9 },
-  { month: 'Apr', uptime: 99.97 },
-  { month: 'May', uptime: 99.96 }
+  { period: { de: 'Jan', en: 'Jan' }, uptime: 99.92 },
+  { period: { de: 'Feb', en: 'Feb' }, uptime: 99.95 },
+  { period: { de: 'Mär', en: 'Mar' }, uptime: 99.9 },
+  { period: { de: 'Apr', en: 'Apr' }, uptime: 99.97 },
+  { period: { de: 'Mai', en: 'May' }, uptime: 99.96 }
 ]
 
 const incidentResponseData = [
@@ -57,14 +64,14 @@ const unauthorizedAccessData = [
 ]
 
 const tenantActivationData = [
-  { type: 'Broker', hours: 11 },
-  { type: 'Carrier', hours: 14 },
-  { type: 'Corporate', hours: 8 },
-  { type: 'Partner', hours: 6 }
+  { type: { de: 'Makler', en: 'Broker' }, hours: 11 },
+  { type: { de: 'Versicherer', en: 'Carrier' }, hours: 14 },
+  { type: { de: 'Unternehmen', en: 'Corporate' }, hours: 8 },
+  { type: { de: 'Partner', en: 'Partner' }, hours: 6 }
 ]
 
 type PermissionRow = {
-  role: string
+  role: BiText
   tenantCreation: boolean
   globalRoleEdit: boolean
   breakGlassOverride: boolean
@@ -74,7 +81,7 @@ type PermissionRow = {
 
 const permissionMatrix: PermissionRow[] = [
   {
-    role: 'Platform Super Admin',
+    role: { de: 'Platform Super Admin', en: 'Platform Super Admin' },
     tenantCreation: true,
     globalRoleEdit: true,
     breakGlassOverride: true,
@@ -82,7 +89,7 @@ const permissionMatrix: PermissionRow[] = [
     policyParameterChange: true
   },
   {
-    role: 'DevOps Lead',
+    role: { de: 'DevOps Lead', en: 'DevOps Lead' },
     tenantCreation: false,
     globalRoleEdit: false,
     breakGlassOverride: false,
@@ -90,7 +97,7 @@ const permissionMatrix: PermissionRow[] = [
     policyParameterChange: false
   },
   {
-    role: 'AI Governance Officer',
+    role: { de: 'AI Governance Officer', en: 'AI Governance Officer' },
     tenantCreation: false,
     globalRoleEdit: false,
     breakGlassOverride: false,
@@ -98,7 +105,7 @@ const permissionMatrix: PermissionRow[] = [
     policyParameterChange: false
   },
   {
-    role: 'Broker Admin',
+    role: { de: 'Broker Admin', en: 'Broker Admin' },
     tenantCreation: false,
     globalRoleEdit: false,
     breakGlassOverride: false,
@@ -106,7 +113,7 @@ const permissionMatrix: PermissionRow[] = [
     policyParameterChange: false
   },
   {
-    role: 'Tenant Admin',
+    role: { de: 'Tenant Admin', en: 'Tenant Admin' },
     tenantCreation: false,
     globalRoleEdit: false,
     breakGlassOverride: false,
@@ -117,10 +124,12 @@ const permissionMatrix: PermissionRow[] = [
 
 export default function PlatformSuperAdminRolePage() {
   const navigate = useNavigate()
+  const { lang } = useI18n()
+  const l: Lang = lang === 'de' ? 'de' : 'en'
 
   function handlePrint() {
     const previous = document.title
-    document.title = 'Platform_Super_Admin_Governance'
+    document.title = bi({ de: 'Platform_Super_Admin_Governance_DE', en: 'Platform_Super_Admin_Governance_EN' }, l)
     window.print()
     window.setTimeout(() => {
       document.title = previous
@@ -141,15 +150,27 @@ export default function PlatformSuperAdminRolePage() {
         <Card>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem', flexWrap: 'wrap' }}>
             <Header
-              title="Platform Super Admin – Enterprise Governance Definition"
-              subtitle="Inside Insurfox / Roles / Platform Super Admin"
+              title={bi(
+                {
+                  de: 'Platform Super Admin – Enterprise-Governance-Rolle',
+                  en: 'Platform Super Admin – Enterprise Governance Definition'
+                },
+                l
+              )}
+              subtitle={bi(
+                {
+                  de: 'Inside Insurfox / Rollen / Platform Super Admin',
+                  en: 'Inside Insurfox / Roles / Platform Super Admin'
+                },
+                l
+              )}
               titleColor="#0f172a"
               subtitleColor="#475569"
             />
             <div className="print-hide" style={{ display: 'grid', gap: '0.45rem' }}>
-              <Button size="sm" onClick={handlePrint}>Print as PDF</Button>
+              <Button size="sm" onClick={handlePrint}>{bi({ de: 'Als PDF drucken', en: 'Print as PDF' }, l)}</Button>
               <Button size="sm" variant="secondary" onClick={() => navigate('/inside-insurfox/roles')}>
-                Back to Roles Overview
+                {bi({ de: 'Zur Rollenübersicht', en: 'Back to Roles Overview' }, l)}
               </Button>
             </div>
           </div>
@@ -157,148 +178,149 @@ export default function PlatformSuperAdminRolePage() {
           <div className="print-hide" style={{ marginTop: '0.7rem', fontSize: '0.84rem', color: '#334155', display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
             <Link to="/inside-insurfox">Inside Insurfox</Link>
             <span>/</span>
-            <Link to="/inside-insurfox/roles">Roles</Link>
+            <Link to="/inside-insurfox/roles">{bi({ de: 'Rollen', en: 'Roles' }, l)}</Link>
             <span>/</span>
             <span>Platform Super Admin</span>
           </div>
 
           <div className="print-hide" style={{ marginTop: '0.8rem', display: 'flex', gap: '0.45rem', flexWrap: 'wrap' }}>
             {anchorSections.map((section) => (
-              <a key={section.id} href={`#${section.id}`} style={anchorStyle}>{section.label}</a>
+              <a key={section.id} href={`#${section.id}`} style={anchorStyle}>{bi(section.label, l)}</a>
             ))}
           </div>
         </Card>
 
-        <Card title="1. Executive Role Definition">
+        <Card title={bi({ de: '1. Executive-Rollendefinition', en: '1. Executive Role Definition' }, l)}>
           <div id="role-definition" style={{ display: 'grid', gap: '0.55rem' }}>
             <p style={pStyle}>
-              The Platform Super Admin is the highest technical and governance authority across the Insurfox Insurance Operating System.
-              This role owns tenant lifecycle control, system-level access governance, emergency intervention rights, and global platform configuration.
+              {bi(
+                {
+                  de: 'Der Platform Super Admin ist die höchste technische und governance-seitige Instanz im gesamten Insurfox Insurance Operating System. Die Rolle verantwortet Tenant-Lifecycle-Kontrolle, systemweite Zugriffssteuerung, Notfallinterventionsrechte und globale Plattformkonfiguration.',
+                  en: 'The Platform Super Admin is the highest technical and governance authority across the Insurfox Insurance Operating System. This role owns tenant lifecycle control, platform-wide access governance, emergency intervention rights, and global configuration control.'
+                },
+                l
+              )}
             </p>
             <p style={pStyle}>
-              The role has formal break-glass authority for major incidents and regulatory controls, but it does not make underwriting,
-              claims, pricing, or portfolio acceptance decisions. Business risk selection remains under underwriting and claims governance roles.
+              {bi(
+                {
+                  de: 'Die Rolle besitzt formale Break-Glass-Befugnis, trifft jedoch keine Underwriting-, Schaden-, Pricing- oder Portfolioentscheidungen. Versicherungsfachliche Risikoselektion bleibt ausdrücklich bei Underwriting- und Claims-Governance-Rollen.',
+                  en: 'The role has formal break-glass authority, but it does not make underwriting, claims, pricing, or portfolio acceptance decisions. Insurance risk selection remains with underwriting and claims governance roles.'
+                },
+                l
+              )}
             </p>
           </div>
         </Card>
 
-        <Card title="2. Role Delineation">
+        <Card title={bi({ de: '2. Rollenabgrenzung', en: '2. Role Delineation' }, l)}>
           <div id="role-delineation" style={{ display: 'grid', gap: '0.6rem' }}>
             <div style={compareGridStyle}>
               <div style={compareBoxStyle}>
                 <h3 style={subHeadingStyle}>Platform Super Admin</h3>
-                <p style={noteStyle}>Owns platform-wide IAM control, tenant separation, break-glass access, and immutable audit integrity.</p>
+                <p style={noteStyle}>{bi({ de: 'Verantwortet globales IAM, Tenant-Separation, Break-Glass-Zugriffe und unveränderliche Audit-Integrität.', en: 'Owns platform-wide IAM, tenant separation, break-glass access, and immutable audit integrity.' }, l)}</p>
               </div>
               <div style={compareBoxStyle}>
                 <h3 style={subHeadingStyle}>DevOps Lead</h3>
-                <p style={noteStyle}>Runs service reliability, deployments, and runtime operations, without global role governance authority.</p>
+                <p style={noteStyle}>{bi({ de: 'Steuert Stabilität, Deployments und Betrieb, jedoch ohne globale Rollenhoheit.', en: 'Runs reliability, deployments, and runtime operations, without global role-governance authority.' }, l)}</p>
               </div>
               <div style={compareBoxStyle}>
                 <h3 style={subHeadingStyle}>AI Governance Officer</h3>
-                <p style={noteStyle}>Defines AI policy controls and model governance but does not own full platform tenant lifecycle rights.</p>
+                <p style={noteStyle}>{bi({ de: 'Definiert AI-Policies und Modell-Governance, ohne vollständige Tenant-Lifecycle-Rechte.', en: 'Defines AI policy controls and model governance, without full tenant lifecycle authority.' }, l)}</p>
               </div>
               <div style={compareBoxStyle}>
                 <h3 style={subHeadingStyle}>Broker Admin / Tenant Admin</h3>
-                <p style={noteStyle}>Operates inside delegated tenant boundaries and cannot modify global policy engines or cross-tenant controls.</p>
+                <p style={noteStyle}>{bi({ de: 'Agiert innerhalb delegierter Tenant-Grenzen und kann keine globalen Policy-Engines ändern.', en: 'Operates within delegated tenant boundaries and cannot modify global policy engines.' }, l)}</p>
               </div>
             </div>
           </div>
         </Card>
 
-        <Card title="3. Organizational Embedding">
+        <Card title={bi({ de: '3. Organisatorische Einbettung', en: '3. Organizational Embedding' }, l)}>
           <div id="org-embedding" style={{ display: 'grid', gap: '0.55rem' }}>
-            <p style={pStyle}>
-              This function sits within Platform Operations and Core Infrastructure, typically reporting to the CTO or Chief Platform Officer.
-              It operates as the final technical governance instance for cross-tenant control, security posture, and compliance-enforceable access design.
-            </p>
-            <p style={pStyle}>
-              The role works daily with DevOps, Security Engineering, Compliance, the Data Protection Officer, Product Owner,
-              and the AI Governance Officer to align operational resilience with regulatory obligations.
-            </p>
+            <p style={pStyle}>{bi({ de: 'Die Rolle ist in Platform Operations/Core Infrastructure verankert und berichtet typischerweise an CTO oder Chief Platform Officer.', en: 'The role sits in Platform Operations/Core Infrastructure and typically reports to the CTO or Chief Platform Officer.' }, l)}</p>
+            <p style={pStyle}>{bi({ de: 'Zusammenarbeit erfolgt mit DevOps, Security, Compliance, DPO, Product Owner und AI Governance zur Sicherstellung regulatorisch belastbarer Betriebsstabilität.', en: 'It works closely with DevOps, Security, Compliance, DPO, Product Owner, and AI Governance to ensure resilient and compliant platform operations.' }, l)}</p>
           </div>
         </Card>
 
-        <Card title="4. Core Responsibilities A: Identity & Access Governance">
+        <Card title={bi({ de: '4. Kernaufgaben A: Identity & Access Governance', en: '4. Core Responsibilities A: Identity & Access Governance' }, l)}>
           <div id="iam-governance" style={{ display: 'grid', gap: '0.55rem' }}>
-            <p style={pStyle}>Defines IAM hierarchy, role templates, and policy guardrails across platform, broker, carrier, and corporate tenants.</p>
-            <p style={pStyle}>Enforces least-privilege access, field-level masking for sensitive data, and strict tenant isolation by design.</p>
-            <p style={pStyle}>Approves and audits privilege elevation pathways and validates segregation-of-duties controls for regulated workflows.</p>
+            <p style={pStyle}>{bi({ de: 'Definiert IAM-Struktur, Rollen-Templates und Policy-Grenzen über Plattform-, Makler-, Versicherer- und Unternehmensebene.', en: 'Defines IAM hierarchy, role templates, and policy guardrails across platform, broker, carrier, and corporate layers.' }, l)}</p>
+            <p style={pStyle}>{bi({ de: 'Setzt Least-Privilege, Feldmaskierung für sensible Daten und konsequente Tenant-Isolation durch.', en: 'Enforces least-privilege access, field-level masking for sensitive data, and strict tenant isolation.' }, l)}</p>
+            <p style={pStyle}>{bi({ de: 'Freigabe und Audit von Privileg-Eskalation inklusive Segregation-of-Duties-Kontrollen.', en: 'Approves and audits privilege escalation pathways and segregation-of-duties controls.' }, l)}</p>
           </div>
         </Card>
 
-        <Card title="5. Core Responsibilities B: Tenant Lifecycle Management">
+        <Card title={bi({ de: '5. Kernaufgaben B: Tenant Lifecycle Management', en: '5. Core Responsibilities B: Tenant Lifecycle Management' }, l)}>
           <div id="tenant-lifecycle" style={{ display: 'grid', gap: '0.55rem' }}>
-            <p style={pStyle}>Owns provisioning of new tenants, broker onboarding environments, and carrier tenant activation templates.</p>
-            <p style={pStyle}>Executes suspension, controlled lockout, and termination procedures with legal hold, archival, and traceability controls.</p>
-            <p style={pStyle}>Ensures lifecycle actions are compliant with retention policy, contractual requirements, and cross-border data constraints.</p>
+            <p style={pStyle}>{bi({ de: 'Verantwortet Provisionierung neuer Tenants, Makler-Onboarding-Umgebungen und Aktivierung von Versicherer-Tenants.', en: 'Owns provisioning of new tenants, broker onboarding environments, and carrier tenant activation.' }, l)}</p>
+            <p style={pStyle}>{bi({ de: 'Steuert Suspendierung, kontrollierte Sperrung und Terminierung inklusive Legal Hold, Archivierung und Nachvollziehbarkeit.', en: 'Executes suspension, controlled lockout, and termination with legal hold, archival, and traceability controls.' }, l)}</p>
+            <p style={pStyle}>{bi({ de: 'Sichert die Einhaltung von Retention-Vorgaben, Vertragsauflagen und grenzüberschreitenden Datenanforderungen.', en: 'Ensures lifecycle actions comply with retention policy, contractual requirements, and cross-border data constraints.' }, l)}</p>
           </div>
         </Card>
 
-        <Card title="6. Core Responsibilities C: Break-Glass Authority">
+        <Card title={bi({ de: '6. Kernaufgaben C: Break-Glass-Befugnis', en: '6. Core Responsibilities C: Break-Glass Authority' }, l)}>
           <div id="break-glass" style={{ display: 'grid', gap: '0.55rem' }}>
-            <p style={pStyle}>Can trigger emergency access override when production security, regulatory integrity, or operational continuity is at risk.</p>
-            <p style={pStyle}>Applies temporary privilege elevation with strict TTL controls, approver logging, and mandatory post-incident revocation.</p>
-            <p style={pStyle}>Can enforce a regulatory freeze to block risky changes and preserve evidentiary state during formal investigations.</p>
+            <p style={pStyle}>{bi({ de: 'Kann Notfall-Overrides aktivieren, wenn Produktionssicherheit, regulatorische Integrität oder Betriebsfähigkeit gefährdet sind.', en: 'Can trigger emergency access override when production security, regulatory integrity, or operational continuity is at risk.' }, l)}</p>
+            <p style={pStyle}>{bi({ de: 'Temporäre Privileg-Erhöhung nur mit TTL, Genehmiger-Logging und verpflichtender Rücknahme.', en: 'Applies temporary privilege elevation only with TTL, approver logging, and mandatory rollback.' }, l)}</p>
+            <p style={pStyle}>{bi({ de: 'Kann regulatorischen Freeze zur Sicherung des Evidenzzustands durchsetzen.', en: 'Can enforce a regulatory freeze to preserve evidentiary state during formal investigations.' }, l)}</p>
           </div>
         </Card>
 
-        <Card title="7. Core Responsibilities D: System Configuration Authority">
+        <Card title={bi({ de: '7. Kernaufgaben D: Systemkonfigurationshoheit', en: '7. Core Responsibilities D: System Configuration Authority' }, l)}>
           <div id="system-configuration" style={{ display: 'grid', gap: '0.55rem' }}>
-            <p style={pStyle}>Governs feature flags and global policy parameters that affect system behavior across all modules and tenants.</p>
-            <p style={pStyle}>Controls API access posture, service-to-service trust boundaries, and integration onboarding/disablement procedures.</p>
-            <p style={pStyle}>Validates change controls for high-impact configuration edits before they are promoted to production.</p>
+            <p style={pStyle}>{bi({ de: 'Steuert Feature-Flags und globale Parameter mit Wirkung auf alle Module und Tenants.', en: 'Governs feature flags and global configuration parameters affecting all modules and tenants.' }, l)}</p>
+            <p style={pStyle}>{bi({ de: 'Kontrolliert API-Zugriffsrichtlinien, Service-Trust-Boundaries und Integrationsfreigaben.', en: 'Controls API access posture, service trust boundaries, and integration enable/disable flows.' }, l)}</p>
+            <p style={pStyle}>{bi({ de: 'Validiert High-Impact-Änderungen vor Produktivsetzung.', en: 'Validates high-impact configuration edits before production rollout.' }, l)}</p>
           </div>
         </Card>
 
-        <Card title="8. Core Responsibilities E: Audit & Logging Oversight">
+        <Card title={bi({ de: '8. Kernaufgaben E: Audit- und Logging-Aufsicht', en: '8. Core Responsibilities E: Audit & Logging Oversight' }, l)}>
           <div id="audit-oversight" style={{ display: 'grid', gap: '0.55rem' }}>
-            <p style={pStyle}>Enforces immutable audit trail integrity for access changes, privilege use, and critical configuration actions.</p>
-            <p style={pStyle}>Reviews access violations and suspicious behavior signals with Security and Compliance escalation paths.</p>
-            <p style={pStyle}>Ensures platform events remain forensically reconstructable for internal audit and regulatory inquiry.</p>
+            <p style={pStyle}>{bi({ de: 'Stellt unveränderliche Audit-Trails für Zugriffsänderungen, Privileg-Nutzung und kritische Konfiguration sicher.', en: 'Enforces immutable audit trails for access changes, privilege usage, and critical configuration actions.' }, l)}</p>
+            <p style={pStyle}>{bi({ de: 'Bewertet Access-Violations und eskaliert auffällige Muster mit Security/Compliance.', en: 'Reviews access violations and escalates suspicious patterns with Security and Compliance.' }, l)}</p>
+            <p style={pStyle}>{bi({ de: 'Gewährleistet forensisch rekonstruierbare Ereignisketten für interne und regulatorische Prüfungen.', en: 'Ensures events remain forensically reconstructable for audit and regulatory inquiry.' }, l)}</p>
           </div>
         </Card>
 
-        <Card title="9. System Architecture Context">
+        <Card title={bi({ de: '9. Architekturkontext', en: '9. System Architecture Context' }, l)}>
           <div id="architecture-context" style={{ display: 'grid', gap: '0.8rem' }}>
             <div style={archStackStyle}>
-              <div style={archNodeStyle}>User Layer</div>
+              <div style={archNodeStyle}>{bi({ de: 'User Layer', en: 'User Layer' }, l)}</div>
               <div style={archArrowStyle}>↓</div>
-              <div style={archNodeStyle}>Application Layer (Brokerfox / Claimsfox / Fleetfox / Partnerfox / AI Fox)</div>
+              <div style={archNodeStyle}>{bi({ de: 'Application Layer (Brokerfox / Claimsfox / Fleetfox / Partnerfox / AI Fox)', en: 'Application Layer (Brokerfox / Claimsfox / Fleetfox / Partnerfox / AI Fox)' }, l)}</div>
               <div style={archArrowStyle}>↓</div>
               <div style={{ ...archNodeStyle, borderColor: '#0f172a', background: '#e2e8f0' }}>
-                Authorization Layer (IAM / Role Engine / Policy Engine)
+                {bi({ de: 'Authorization Layer (IAM / Role Engine / Policy Engine)', en: 'Authorization Layer (IAM / Role Engine / Policy Engine)' }, l)}
               </div>
               <div style={archArrowStyle}>↓</div>
-              <div style={archNodeStyle}>Data Layer (Spanner / Cloud Storage / Logging)</div>
+              <div style={archNodeStyle}>{bi({ de: 'Data Layer (Spanner / Cloud Storage / Logging)', en: 'Data Layer (Spanner / Cloud Storage / Logging)' }, l)}</div>
               <div style={archArrowStyle}>↓</div>
-              <div style={archNodeStyle}>Security & Monitoring Layer (SIEM / Alerts / Audit Logs)</div>
+              <div style={archNodeStyle}>{bi({ de: 'Security & Monitoring Layer (SIEM / Alerts / Audit Logs)', en: 'Security & Monitoring Layer (SIEM / Alerts / Audit Logs)' }, l)}</div>
             </div>
-            <p style={pStyle}>
-              Platform Super Admin authority is concentrated on authorization control, tenant separation integrity,
-              and break-glass override governance. This is the control point for platform trust and regulatory defensibility.
-            </p>
+            <p style={pStyle}>{bi({ de: 'Die Hoheit des Platform Super Admin konzentriert sich auf Authorization-Layer, Tenant-Separation und Break-Glass-Governance.', en: 'Platform Super Admin authority is concentrated on authorization-layer control, tenant separation integrity, and break-glass governance.' }, l)}</p>
           </div>
         </Card>
 
-        <Card title="10. KPI Monitoring Section">
+        <Card title={bi({ de: '10. KPI-Monitoring', en: '10. KPI Monitoring Section' }, l)}>
           <div id="kpi-monitoring" style={chartGridStyle}>
             <div style={chartCardStyle}>
-              <h3 style={chartTitleStyle}>System Uptime (%)</h3>
+              <h3 style={chartTitleStyle}>{bi({ de: 'System-Uptime (%)', en: 'System Uptime (%)' }, l)}</h3>
               <div style={chartWrapStyle}>
                 <ResponsiveContainer width="100%" height="100%">
-                  <LineChart data={uptimeData}>
+                  <LineChart data={uptimeData.map((d) => ({ ...d, periodLabel: bi(d.period, l) }))}>
                     <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="month" />
+                    <XAxis dataKey="periodLabel" />
                     <YAxis domain={[99.8, 100]} />
                     <Tooltip />
-                    <Line type="monotone" dataKey="uptime" stroke="#0f172a" strokeWidth={2} />
+                    <Line type="monotone" dataKey="uptime" stroke="#0f172a" strokeWidth={2} name={bi({ de: 'Uptime', en: 'Uptime' }, l)} />
                   </LineChart>
                 </ResponsiveContainer>
               </div>
             </div>
 
             <div style={chartCardStyle}>
-              <h3 style={chartTitleStyle}>Incident Response Time (minutes)</h3>
+              <h3 style={chartTitleStyle}>{bi({ de: 'Incident Response Time (Minuten)', en: 'Incident Response Time (minutes)' }, l)}</h3>
               <div style={chartWrapStyle}>
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={incidentResponseData}>
@@ -306,14 +328,14 @@ export default function PlatformSuperAdminRolePage() {
                     <XAxis dataKey="sev" />
                     <YAxis />
                     <Tooltip />
-                    <Bar dataKey="minutes" fill="#334155" />
+                    <Bar dataKey="minutes" fill="#334155" name={bi({ de: 'Minuten', en: 'Minutes' }, l)} />
                   </BarChart>
                 </ResponsiveContainer>
               </div>
             </div>
 
             <div style={chartCardStyle}>
-              <h3 style={chartTitleStyle}>Unauthorized Access Attempts</h3>
+              <h3 style={chartTitleStyle}>{bi({ de: 'Unbefugte Zugriffsversuche', en: 'Unauthorized Access Attempts' }, l)}</h3>
               <div style={chartWrapStyle}>
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart data={unauthorizedAccessData}>
@@ -321,22 +343,22 @@ export default function PlatformSuperAdminRolePage() {
                     <XAxis dataKey="week" />
                     <YAxis />
                     <Tooltip />
-                    <Line type="monotone" dataKey="attempts" stroke="#b91c1c" strokeWidth={2} />
+                    <Line type="monotone" dataKey="attempts" stroke="#b91c1c" strokeWidth={2} name={bi({ de: 'Versuche', en: 'Attempts' }, l)} />
                   </LineChart>
                 </ResponsiveContainer>
               </div>
             </div>
 
             <div style={chartCardStyle}>
-              <h3 style={chartTitleStyle}>Tenant Activation Time (hours)</h3>
+              <h3 style={chartTitleStyle}>{bi({ de: 'Tenant-Aktivierungszeit (Stunden)', en: 'Tenant Activation Time (hours)' }, l)}</h3>
               <div style={chartWrapStyle}>
                 <ResponsiveContainer width="100%" height="100%">
-                  <BarChart data={tenantActivationData}>
+                  <BarChart data={tenantActivationData.map((d) => ({ ...d, typeLabel: bi(d.type, l) }))}>
                     <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="type" />
+                    <XAxis dataKey="typeLabel" />
                     <YAxis />
                     <Tooltip />
-                    <Bar dataKey="hours" fill="#475569" />
+                    <Bar dataKey="hours" fill="#475569" name={bi({ de: 'Stunden', en: 'Hours' }, l)} />
                   </BarChart>
                 </ResponsiveContainer>
               </div>
@@ -344,102 +366,92 @@ export default function PlatformSuperAdminRolePage() {
           </div>
         </Card>
 
-        <Card title="11. Realistic Decision Scenarios">
+        <Card title={bi({ de: '11. Realistische Entscheidungsszenarien', en: '11. Realistic Decision Scenarios' }, l)}>
           <div id="decision-scenarios" style={{ display: 'grid', gap: '0.75rem' }}>
             <div style={scenarioCardStyle}>
-              <h3 style={subHeadingStyle}>Scenario 1: Broker tenant requests additional admin rights</h3>
-              <p style={noteStyle}><strong>Trigger:</strong> Broker tenant requests elevated global administrator capability.</p>
-              <p style={noteStyle}><strong>Decision:</strong> Super Admin denies request because it violates segregation and tenant boundary policy.</p>
-              <p style={noteStyle}><strong>Governance impact:</strong> Preserves least-privilege and prevents cross-tenant privilege creep.</p>
-              <p style={noteStyle}><strong>Documentation requirement:</strong> Record request, policy clause, and formal denial rationale in audit log.</p>
+              <h3 style={subHeadingStyle}>{bi({ de: 'Szenario 1: Broker-Tenant fordert zusätzliche Admin-Rechte', en: 'Scenario 1: Broker tenant requests additional admin rights' }, l)}</h3>
+              <p style={noteStyle}><strong>{bi({ de: 'Trigger:', en: 'Trigger:' }, l)}</strong> {bi({ de: 'Antrag auf erhöhte globale Administratorrechte.', en: 'Request for elevated global administrator capability.' }, l)}</p>
+              <p style={noteStyle}><strong>{bi({ de: 'Entscheidung:', en: 'Decision:' }, l)}</strong> {bi({ de: 'Ablehnung wegen Segregation-of-Duties und Tenant-Grenzverletzung.', en: 'Denied due to segregation policy and tenant boundary protection.' }, l)}</p>
+              <p style={noteStyle}><strong>{bi({ de: 'Governance-Wirkung:', en: 'Governance impact:' }, l)}</strong> {bi({ de: 'Schützt Least-Privilege und verhindert Rechteausweitung über Tenant-Grenzen.', en: 'Preserves least-privilege and prevents cross-tenant privilege creep.' }, l)}</p>
+              <p style={noteStyle}><strong>{bi({ de: 'Dokumentation:', en: 'Documentation requirement:' }, l)}</strong> {bi({ de: 'Antrag, Policy-Referenz und Ablehnungsbegründung im Audit-Log erfassen.', en: 'Record request, policy clause, and denial rationale in audit log.' }, l)}</p>
             </div>
 
             <div style={scenarioCardStyle}>
-              <h3 style={subHeadingStyle}>Scenario 2: Suspicious login pattern detected</h3>
-              <p style={noteStyle}><strong>Trigger:</strong> SIEM flags impossible-travel and repeated privileged login anomalies.</p>
-              <p style={noteStyle}><strong>Decision:</strong> Emergency account freeze and forced credential reset for affected principals.</p>
-              <p style={noteStyle}><strong>Governance impact:</strong> Containment of potential account compromise and reduced blast radius.</p>
-              <p style={noteStyle}><strong>Documentation requirement:</strong> Incident timeline, forensic indicators, and remediation actions must be logged.</p>
+              <h3 style={subHeadingStyle}>{bi({ de: 'Szenario 2: Auffälliges Login-Muster', en: 'Scenario 2: Suspicious login pattern detected' }, l)}</h3>
+              <p style={noteStyle}><strong>{bi({ de: 'Trigger:', en: 'Trigger:' }, l)}</strong> {bi({ de: 'SIEM meldet Impossible-Travel und wiederholte privilegierte Login-Anomalien.', en: 'SIEM flags impossible-travel and repeated privileged login anomalies.' }, l)}</p>
+              <p style={noteStyle}><strong>{bi({ de: 'Entscheidung:', en: 'Decision:' }, l)}</strong> {bi({ de: 'Sofortige Kontensperre und erzwungener Credential-Reset.', en: 'Immediate account freeze and forced credential reset.' }, l)}</p>
+              <p style={noteStyle}><strong>{bi({ de: 'Governance-Wirkung:', en: 'Governance impact:' }, l)}</strong> {bi({ de: 'Eindämmung des Kompromittierungsrisikos und Reduktion des Blast Radius.', en: 'Contains potential compromise and reduces blast radius.' }, l)}</p>
+              <p style={noteStyle}><strong>{bi({ de: 'Dokumentation:', en: 'Documentation requirement:' }, l)}</strong> {bi({ de: 'Incident-Timeline, forensische Indikatoren und Maßnahmen protokollieren.', en: 'Log incident timeline, forensic indicators, and remediation actions.' }, l)}</p>
             </div>
 
             <div style={scenarioCardStyle}>
-              <h3 style={subHeadingStyle}>Scenario 3: Data breach alert triggered</h3>
-              <p style={noteStyle}><strong>Trigger:</strong> Monitoring detects exfiltration signal in a privileged service account path.</p>
-              <p style={noteStyle}><strong>Decision:</strong> Break-glass protocol activated: immediate access revocation and emergency freeze.</p>
-              <p style={noteStyle}><strong>Governance impact:</strong> Protects evidentiary integrity and supports mandatory regulatory handling.</p>
-              <p style={noteStyle}><strong>Documentation requirement:</strong> Full chain-of-custody and regulator-ready incident packet required.</p>
+              <h3 style={subHeadingStyle}>{bi({ de: 'Szenario 3: Data-Breach-Alarm', en: 'Scenario 3: Data breach alert triggered' }, l)}</h3>
+              <p style={noteStyle}><strong>{bi({ de: 'Trigger:', en: 'Trigger:' }, l)}</strong> {bi({ de: 'Monitoring erkennt Exfiltrationssignal auf privilegiertem Service-Account-Pfad.', en: 'Monitoring detects exfiltration signal in privileged service account path.' }, l)}</p>
+              <p style={noteStyle}><strong>{bi({ de: 'Entscheidung:', en: 'Decision:' }, l)}</strong> {bi({ de: 'Break-Glass-Protokoll aktivieren: Zugriff entziehen und Notfall-Freeze setzen.', en: 'Activate break-glass protocol: revoke access and enforce emergency freeze.' }, l)}</p>
+              <p style={noteStyle}><strong>{bi({ de: 'Governance-Wirkung:', en: 'Governance impact:' }, l)}</strong> {bi({ de: 'Sichert Evidenzintegrität und regulatorische Handlungsfähigkeit.', en: 'Protects evidentiary integrity and supports mandatory regulatory handling.' }, l)}</p>
+              <p style={noteStyle}><strong>{bi({ de: 'Dokumentation:', en: 'Documentation requirement:' }, l)}</strong> {bi({ de: 'Chain-of-Custody und regulatorisches Incident-Paket erstellen.', en: 'Produce full chain-of-custody and regulator-ready incident package.' }, l)}</p>
             </div>
 
             <div style={scenarioCardStyle}>
-              <h3 style={subHeadingStyle}>Scenario 4: Carrier integration misconfiguration detected</h3>
-              <p style={noteStyle}><strong>Trigger:</strong> API contract drift introduces unauthorized scope in carrier integration.</p>
-              <p style={noteStyle}><strong>Decision:</strong> Platform-wide API key revocation for affected integration until corrected.</p>
-              <p style={noteStyle}><strong>Governance impact:</strong> Blocks propagation of insecure integration behavior.</p>
-              <p style={noteStyle}><strong>Documentation requirement:</strong> Change record, rollback proof, and re-approval checkpoint are mandatory.</p>
+              <h3 style={subHeadingStyle}>{bi({ de: 'Szenario 4: Fehlkonfiguration bei Versicherer-Integration', en: 'Scenario 4: Carrier integration misconfiguration detected' }, l)}</h3>
+              <p style={noteStyle}><strong>{bi({ de: 'Trigger:', en: 'Trigger:' }, l)}</strong> {bi({ de: 'API-Drift führt zu unzulässigem Scope in der Carrier-Integration.', en: 'API drift introduces unauthorized scope in carrier integration.' }, l)}</p>
+              <p style={noteStyle}><strong>{bi({ de: 'Entscheidung:', en: 'Decision:' }, l)}</strong> {bi({ de: 'Plattformweite API-Zugriffsdeaktivierung bis zur Korrektur.', en: 'Revoke affected API access platform-wide until corrected.' }, l)}</p>
+              <p style={noteStyle}><strong>{bi({ de: 'Governance-Wirkung:', en: 'Governance impact:' }, l)}</strong> {bi({ de: 'Verhindert die Ausbreitung unsicherer Integrationszustände.', en: 'Blocks propagation of insecure integration behavior.' }, l)}</p>
+              <p style={noteStyle}><strong>{bi({ de: 'Dokumentation:', en: 'Documentation requirement:' }, l)}</strong> {bi({ de: 'Change-Record, Rollback-Nachweis und Re-Approval-Checkpoint erforderlich.', en: 'Change record, rollback proof, and re-approval checkpoint are mandatory.' }, l)}</p>
             </div>
           </div>
         </Card>
 
-        <Card title="12. Risk Profile & AI Interaction">
+        <Card title={bi({ de: '12. Risikoprofil & AI-Interaktion', en: '12. Risk Profile & AI Interaction' }, l)}>
           <div id="risk-ai-profile" style={{ display: 'grid', gap: '0.7rem' }}>
-            <p style={pStyle}>
-              Risk exposure for this role is very high on operational continuity, high on regulatory accountability,
-              and high on cyber security posture. It has no underwriting capital exposure because the role does not accept insurance risk.
-            </p>
+            <p style={pStyle}>{bi({ de: 'Das Rollenprofil trägt sehr hohe operative Exponierung, hohe regulatorische Exponierung und hohe Cyber-Security-Exponierung. Es besteht keine Underwriting-Kapitalexponierung.', en: 'This role carries very high operational exposure, high regulatory exposure, and high cyber-security exposure. It has no underwriting capital exposure.' }, l)}</p>
             <div style={riskPillRowStyle}>
               {[
-                { label: 'Operational Risk', level: 'Very High', color: '#7f1d1d' },
-                { label: 'Regulatory Exposure', level: 'High', color: '#9a3412' },
-                { label: 'Cyber Security Exposure', level: 'High', color: '#9a3412' },
-                { label: 'Underwriting Capital Exposure', level: 'None', color: '#166534' }
+                { label: { de: 'Operatives Risiko', en: 'Operational Risk' }, level: { de: 'Sehr hoch', en: 'Very High' }, color: '#7f1d1d' },
+                { label: { de: 'Regulatorische Exponierung', en: 'Regulatory Exposure' }, level: { de: 'Hoch', en: 'High' }, color: '#9a3412' },
+                { label: { de: 'Cyber-Security-Exponierung', en: 'Cyber Security Exposure' }, level: { de: 'Hoch', en: 'High' }, color: '#9a3412' },
+                { label: { de: 'Underwriting-Kapitalexponierung', en: 'Underwriting Capital Exposure' }, level: { de: 'Keine', en: 'None' }, color: '#166534' }
               ].map((item) => (
-                <div key={item.label} style={{ ...riskPillStyle, borderLeft: `6px solid ${item.color}` }}>
-                  <strong>{item.label}</strong>
-                  <span>{item.level}</span>
+                <div key={item.label.en} style={{ ...riskPillStyle, borderLeft: `6px solid ${item.color}` }}>
+                  <strong>{bi(item.label, l)}</strong>
+                  <span>{bi(item.level, l)}</span>
                 </div>
               ))}
             </div>
-            <p style={pStyle}>
-              AI interaction is platform-governance focused: the Platform Super Admin may approve AI deployment to production,
-              approve rollback, enforce AI access controls, and ensure full auditability of model access events.
-              The role does not approve AI business decisions in underwriting or claims.
-            </p>
+            <p style={pStyle}>{bi({ de: 'Die AI-Interaktion ist rein plattformseitig: Freigabe von AI-Deployment in Produktion, Rollback-Freigabe, Zugriffskontrolle und Auditierbarkeit. Keine Freigabe fachlicher AI-Underwriting- oder Schadenentscheidungen.', en: 'AI interaction is platform-governance only: production deployment approval, rollback approval, access control enforcement, and auditability. No approval of AI business decisions in underwriting or claims.' }, l)}</p>
           </div>
         </Card>
 
-        <Card title="13. Permission Heatmap & Structural Criticality">
+        <Card title={bi({ de: '13. Permission-Heatmap & strukturelle Kritikalität', en: '13. Permission Heatmap & Structural Criticality' }, l)}>
           <div id="permission-criticality" style={{ display: 'grid', gap: '0.85rem' }}>
             <div style={{ overflowX: 'auto' }}>
               <table style={tableStyle}>
                 <thead>
                   <tr>
-                    <th style={thStyle}>Role</th>
-                    <th style={thStyle}>Tenant Creation</th>
-                    <th style={thStyle}>Global Role Edit</th>
-                    <th style={thStyle}>Break-Glass Override</th>
-                    <th style={thStyle}>AI Deployment Approval</th>
-                    <th style={thStyle}>Policy Parameter Change</th>
+                    <th style={thStyle}>{bi({ de: 'Rolle', en: 'Role' }, l)}</th>
+                    <th style={thStyle}>{bi({ de: 'Tenant-Erstellung', en: 'Tenant Creation' }, l)}</th>
+                    <th style={thStyle}>{bi({ de: 'Globale Rollenbearbeitung', en: 'Global Role Edit' }, l)}</th>
+                    <th style={thStyle}>{bi({ de: 'Break-Glass-Override', en: 'Break-Glass Override' }, l)}</th>
+                    <th style={thStyle}>{bi({ de: 'AI-Deployment-Freigabe', en: 'AI Deployment Approval' }, l)}</th>
+                    <th style={thStyle}>{bi({ de: 'Policy-Parameter-Änderung', en: 'Policy Parameter Change' }, l)}</th>
                   </tr>
                 </thead>
                 <tbody>
                   {permissionMatrix.map((row) => (
-                    <tr key={row.role}>
-                      <td style={tdRoleStyle}>{row.role}</td>
-                      <HeatCell allowed={row.tenantCreation} />
-                      <HeatCell allowed={row.globalRoleEdit} />
-                      <HeatCell allowed={row.breakGlassOverride} />
-                      <HeatCell allowed={row.aiDeploymentApproval} />
-                      <HeatCell allowed={row.policyParameterChange} />
+                    <tr key={row.role.en}>
+                      <td style={tdRoleStyle}>{bi(row.role, l)}</td>
+                      <HeatCell allowed={row.tenantCreation} lang={l} />
+                      <HeatCell allowed={row.globalRoleEdit} lang={l} />
+                      <HeatCell allowed={row.breakGlassOverride} lang={l} />
+                      <HeatCell allowed={row.aiDeploymentApproval} lang={l} />
+                      <HeatCell allowed={row.policyParameterChange} lang={l} />
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
 
-            <p style={pStyle}>
-              This role is structurally critical: without Platform Super Admin governance there is no enforceable tenant isolation,
-              no reliable regulatory control, no break-glass containment capability, no audit trail integrity, and no platform trust baseline for carriers.
-            </p>
+            <p style={pStyle}>{bi({ de: 'Ohne Platform Super Admin fehlen durchsetzbare Tenant-Isolation, regulatorische Steuerbarkeit, Break-Glass-Containment, Audit-Integrität und belastbare Vertrauensbasis für Versicherer.', en: 'Without Platform Super Admin governance, there is no enforceable tenant isolation, no reliable regulatory control, no break-glass containment capability, no audit integrity, and no trust baseline for carriers.' }, l)}</p>
           </div>
         </Card>
       </div>
@@ -447,7 +459,7 @@ export default function PlatformSuperAdminRolePage() {
   )
 }
 
-function HeatCell({ allowed }: { allowed: boolean }) {
+function HeatCell({ allowed, lang }: { allowed: boolean; lang: Lang }) {
   return (
     <td
       style={{
@@ -460,7 +472,7 @@ function HeatCell({ allowed }: { allowed: boolean }) {
         fontSize: '0.82rem'
       }}
     >
-      {allowed ? 'Allowed' : 'Blocked'}
+      {allowed ? bi({ de: 'Erlaubt', en: 'Allowed' }, lang) : bi({ de: 'Gesperrt', en: 'Blocked' }, lang)}
     </td>
   )
 }
