@@ -238,6 +238,7 @@ import ReinsuranceManagerRolePage from '@/pages/ReinsuranceManagerRolePage'
 import CpoChiefPlatformOwnerRolePage from '@/pages/CpoChiefPlatformOwnerRolePage'
 import CtoChiefTechnologyOfficerRolePage from '@/pages/CtoChiefTechnologyOfficerRolePage'
 import EnterpriseArchitectRolePage from '@/pages/EnterpriseArchitectRolePage'
+import CisoSecurityOfficerRolePage from '@/pages/CisoSecurityOfficerRolePage'
 
 function NotFoundRedirect() {
   const { isAuthenticated } = useAuth()
@@ -332,6 +333,7 @@ export default function AppRouter() {
         <Route path="/inside-insurfox/roles/cpo-chief-platform-owner" element={<CpoChiefPlatformOwnerRolePage />} />
         <Route path="/inside-insurfox/roles/cto-chief-technology-officer" element={<CtoChiefTechnologyOfficerRolePage />} />
         <Route path="/inside-insurfox/roles/enterprise-architect" element={<EnterpriseArchitectRolePage />} />
+        <Route path="/inside-insurfox/roles/ciso-security-officer" element={<CisoSecurityOfficerRolePage />} />
         <Route path="/inside-insurfox/roles/chief-underwriting-officer-mga" element={<CuoMgaRolePage />} />
         <Route path="/inside-insurfox/roles/head-of-claims-mga" element={<HeadOfClaimsMgaRolePage />} />
         <Route path="/inside-insurfox/roles/broker-portal-director" element={<BrokerPortalDirectorRolePage />} />
