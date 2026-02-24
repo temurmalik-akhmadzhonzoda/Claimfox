@@ -26,6 +26,11 @@ type CategoryBlueprint = {
   ai: BiText
 }
 
+type RolePerspective = {
+  classic: BiText
+  insurfox: BiText
+}
+
 function tenantLevelText(value: string, lang: 'de' | 'en') {
   if (lang !== 'de') return value
   const map: Record<string, string> = {
@@ -247,15 +252,109 @@ function categoryBlueprint(role: RoleHandbookRole): CategoryBlueprint {
   }
 }
 
+function rolePerspective(role: RoleHandbookRole): RolePerspective {
+  const name = role.name.toLowerCase()
+
+  if (name.includes('underwriter')) {
+    return {
+      classic: {
+        de: 'Klassisch bewertet die Rolle Risiken, definiert Konditionen und entscheidet über Annahme, Ablehnung oder Referral innerhalb klarer Zeichnungsrichtlinien.',
+        en: 'Classically, this role evaluates risk, sets terms, and decides accept/decline/referral within explicit underwriting guidelines.'
+      },
+      insurfox: {
+        de: 'Im Insurfox-Kontext steuert die Rolle dieselbe Zeichnungslogik über Brokerfox und AI Fox, abgestimmt auf das Zusammenspiel von MGA-Authority, Brokerportal und Carrier-Anbindung.',
+        en: 'In the Insurfox context, the same underwriting logic is executed through Brokerfox and AI Fox, aligned with MGA authority, broker-portal flows, and carrier connectivity.'
+      }
+    }
+  }
+
+  if (name.includes('claims') || name.includes('handler') || name.includes('adjuster') || name.includes('forensic') || name.includes('fraud')) {
+    return {
+      classic: {
+        de: 'Klassisch steuert die Rolle den Schadenvorgang von Prüfung, Reservierung und Partnerkoordination bis zur Regulierung unter Einhaltung von Deckung und Compliance.',
+        en: 'Classically, this role steers the claim lifecycle from review, reserving, and partner coordination to settlement under coverage and compliance constraints.'
+      },
+      insurfox: {
+        de: 'Im Insurfox-Kontext erfolgt die Schadensteuerung eventgetrieben über Claimsfox und Partnerfox, inklusive KI-gestützter Triage, Betrugssignale und revisionsfähiger Entscheidungspfade.',
+        en: 'In the Insurfox context, claims execution runs event-driven via Claimsfox and Partnerfox, including AI-assisted triage, fraud signals, and auditable decision paths.'
+      }
+    }
+  }
+
+  if (name.includes('broker')) {
+    return {
+      classic: {
+        de: 'Klassisch steht die Rolle für Kundenzugang, Risikoaufbereitung, Marktplatzierung und laufende Betreuung inklusive Erneuerungen.',
+        en: 'Classically, this role provides client access, risk packaging, market placement, and ongoing account servicing including renewals.'
+      },
+      insurfox: {
+        de: 'Im Insurfox-Kontext bleibt diese Kernfunktion erhalten, wird jedoch über das Brokerportal standardisiert und mit MGA-/Carrier-Prozessen auf derselben IaaS-Plattform synchronisiert.',
+        en: 'In the Insurfox context, this core function remains, but is standardized through the broker portal and synchronized with MGA/carrier processes on the same IaaS platform.'
+      }
+    }
+  }
+
+  if (name.includes('fleet') || name.includes('driver') || name.includes('transport') || name.includes('warehouse')) {
+    return {
+      classic: {
+        de: 'Klassisch verantwortet die Rolle operative Transport- und Flottensteuerung mit Fokus auf Sicherheit, Verfügbarkeit und Vorfallreaktion.',
+        en: 'Classically, this role owns transport and fleet operations with focus on safety, availability, and incident response.'
+      },
+      insurfox: {
+        de: 'Im Insurfox-Kontext wird diese operative Verantwortung über Fleetfox und Claimsfox mit Versicherungslogik verknüpft, sodass Prävention, FNOL und Renewal-Steuerung zusammengeführt werden.',
+        en: 'In the Insurfox context, this operational responsibility is connected via Fleetfox and Claimsfox to insurance logic, combining prevention, FNOL, and renewal steering.'
+      }
+    }
+  }
+
+  if (name.includes('reinsurance') || name.includes('treaty') || name.includes('actuarial') || name.includes('capital') || name.includes('controller') || name.includes('finance')) {
+    return {
+      classic: {
+        de: 'Klassisch liegt der Schwerpunkt auf Kapital- und Ergebnissteuerung über Rückversicherung, Aktuariat und finanzielle Kontrollen.',
+        en: 'Classically, the role focuses on capital and earnings steering through reinsurance, actuarial analysis, and financial controls.'
+      },
+      insurfox: {
+        de: 'Im Insurfox-Kontext werden diese Funktionen direkt mit Underwriting-, Claims- und Portfolio-Daten der IaaS-Plattform verbunden, um Kapazität und Margen in Echtzeit zu steuern.',
+        en: 'In the Insurfox context, these functions are directly connected to underwriting, claims, and portfolio data on the IaaS platform to steer capacity and margins in near real time.'
+      }
+    }
+  }
+
+  if (name.includes('ai') || name.includes('data') || name.includes('ml') || name.includes('analytics')) {
+    return {
+      classic: {
+        de: 'Klassisch verantwortet die Rolle Modellqualität, Datenqualität und methodische Nachvollziehbarkeit für analytische Entscheidungen.',
+        en: 'Classically, this role owns model quality, data quality, and methodological traceability for analytical decisions.'
+      },
+      insurfox: {
+        de: 'Im Insurfox-Kontext ist die Rolle in den operativen Entscheidungskreislauf eingebettet und steuert KI-Einsatz über Governance, Freigaben, Overrides und Audits.',
+        en: 'In the Insurfox context, the role is embedded in the operational decision loop and governs AI usage through approvals, overrides, and audits.'
+      }
+    }
+  }
+
+  return {
+    classic: {
+      de: 'Klassisch bündelt die Rolle fachliche Verantwortung, Prozessqualität und klare Entscheidungsgrenzen innerhalb des jeweiligen Versicherungsbereichs.',
+      en: 'Classically, this role combines domain accountability, process quality, and clear decision boundaries within its insurance function.'
+    },
+    insurfox: {
+      de: 'Im Insurfox-Kontext arbeitet die Rolle auf derselben IaaS-Plattform wie Broker, MGA, Carrier und Partner und setzt Entscheidungen entlang eines gemeinsamen Daten- und Governance-Modells um.',
+      en: 'In the Insurfox context, the role operates on the same IaaS platform as brokers, MGA, carriers, and partners, executing decisions on a shared data and governance model.'
+    }
+  }
+}
+
 function buildSections(role: RoleHandbookRole): RoleSection[] {
   const cat = categoryBlueprint(role)
+  const perspective = rolePerspective(role)
   return [
     {
       id: 'overview',
       title: { de: '1. Rollenüberblick', en: '1. Role Overview' },
       body: {
-        de: `${role.name} arbeitet auf der Mandantenebene ${tenantLevelText(role.tenantLevel, 'de')}. Die Rolle verantwortet die Ausführung in ${role.modules.join(', ')} und berichtet in die jeweilige Führungsstruktur von Plattform oder Tenant. Strategischer Zweck: hohe Entscheidungsqualität, Geschwindigkeit und kontrollierte Risikoergebnisse im Zusammenspiel von MGA, Broker und IaaS.`,
-        en: `${role.name} operates at tenant level ${role.tenantLevel}. The role is positioned as accountable owner for ${role.modules.join(', ')} execution and reports into the relevant platform/tenant leadership line. Strategic purpose: secure decision quality, speed, and controlled risk outcomes.`
+        de: `Klassische Rolle: ${perspective.classic.de}\n\nInsurfox-Kontext: ${perspective.insurfox.de}\n\n${role.name} arbeitet auf der Mandantenebene ${tenantLevelText(role.tenantLevel, 'de')}. Die Rolle verantwortet die Ausführung in ${role.modules.join(', ')} und berichtet in die jeweilige Führungsstruktur von Plattform oder Tenant.`,
+        en: `Classical role: ${perspective.classic.en}\n\nInsurfox context: ${perspective.insurfox.en}\n\n${role.name} operates at tenant level ${role.tenantLevel}. The role is positioned as accountable owner for ${role.modules.join(', ')} execution and reports into the relevant platform/tenant leadership line.`
       }
     },
     {
@@ -270,16 +369,16 @@ function buildSections(role: RoleHandbookRole): RoleSection[] {
       id: 'mission',
       title: { de: '3. Mission & strategische Verantwortung', en: '3. Mission & Strategic Responsibility' },
       body: {
-        de: `${cat.mission.de} Der Business-Impact liegt in Servicequalität und Margenstabilität. Gleichzeitig beeinflusst die Rolle Risikopositionen und Kapitaleffizienz durch geringere Leakage und weniger vermeidbare Volatilität.`,
-        en: `${cat.mission.en} Business impact includes service quality and margin stability. The role directly influences risk exposure decisions and contributes to capital efficiency by reducing leakage and avoidable volatility.`
+        de: `Klassische Perspektive: ${perspective.classic.de}\n\nInsurfox-Perspektive: ${cat.mission.de}\n\nDer Business-Impact liegt in Servicequalität und Margenstabilität. Gleichzeitig beeinflusst die Rolle Risikopositionen und Kapitaleffizienz durch geringere Leakage und weniger vermeidbare Volatilität.`,
+        en: `Classical perspective: ${perspective.classic.en}\n\nInsurfox perspective: ${cat.mission.en}\n\nBusiness impact includes service quality and margin stability. The role directly influences risk exposure decisions and contributes to capital efficiency by reducing leakage and avoidable volatility.`
       }
     },
     {
       id: 'responsibilities',
       title: { de: '4. Kernverantwortungen (detailliert)', en: '4. Core Responsibilities (Detailed)' },
       body: {
-        de: `Operativ: rollenspezifische Workflows in ${role.modules.join(', ')} ausführen. ${cat.governance.de} Eskalationstrigger: Schwellenwertverletzungen, Policy-Ausnahmen und Auffälligkeiten bei KI-Confidence. Freigaben erfolgen im Autoritätskorridor; Out-of-Band-Fälle gehen an die Senior Governance.`,
-        en: `Operational: run role-specific workflows in ${role.modules.join(', ')}. ${cat.governance.en} Escalation triggers: threshold breaches, policy exceptions, and AI-confidence anomalies. Approval corridor follows role authority; out-of-band cases escalate to senior governance.`
+        de: `Klassische Verantwortung: ${perspective.classic.de}\n\nInsurfox-spezifische Ausprägung: Operativ rollenspezifische Workflows in ${role.modules.join(', ')} ausführen. ${cat.governance.de} Eskalationstrigger: Schwellenwertverletzungen, Policy-Ausnahmen und Auffälligkeiten bei KI-Confidence. Freigaben erfolgen im Autoritätskorridor; Out-of-Band-Fälle gehen an die Senior Governance.`,
+        en: `Classical responsibility: ${perspective.classic.en}\n\nInsurfox-specific execution: run role-specific workflows in ${role.modules.join(', ')}. ${cat.governance.en} Escalation triggers: threshold breaches, policy exceptions, and AI-confidence anomalies. Approval corridor follows role authority; out-of-band cases escalate to senior governance.`
       }
     },
     {
@@ -350,8 +449,8 @@ function buildSections(role: RoleHandbookRole): RoleSection[] {
       id: 'why',
       title: { de: '13. Warum diese Rolle für Insurfox zentral ist', en: '13. Why This Role Matters for Insurfox' },
       body: {
-        de: `Diese Rolle ist ein struktureller Baustein der Insurfox-Mission. Sie verbindet das IaaS-Plattformmodell mit der operativen MGA-/Broker-Realität, bindet externe Broker über das Brokerportal ein und sichert auditierbare Ergebnisse über Underwriting-, Schaden- und Partner-Workflows.`,
-        en: `This role is a structural part of Insurfox mission execution. It links the IaaS platform model to MGA/Broker operating reality, connects external brokers through the broker portal, and ensures disciplined, auditable outcomes across underwriting, claims, and partner workflows.`
+        de: `Klassische Bedeutung: ${perspective.classic.de}\n\nInsurfox-Relevanz: Diese Rolle ist ein struktureller Baustein der Insurfox-Mission. Sie verbindet das IaaS-Plattformmodell mit der operativen MGA-/Broker-Realität, bindet externe Broker über das Brokerportal ein und sichert auditierbare Ergebnisse über Underwriting-, Schaden- und Partner-Workflows.`,
+        en: `Classical relevance: ${perspective.classic.en}\n\nInsurfox relevance: This role is a structural part of Insurfox mission execution. It links the IaaS platform model to MGA/Broker operating reality, connects external brokers through the broker portal, and ensures disciplined, auditable outcomes across underwriting, claims, and partner workflows.`
       }
     }
   ]
@@ -458,6 +557,7 @@ export default function InsideInsurfoxRoleDetailPage() {
 
 const bodyPStyle: CSSProperties = {
   margin: 0,
+  whiteSpace: 'pre-line',
   color: '#334155',
   fontSize: '0.9rem',
   lineHeight: 1.62
