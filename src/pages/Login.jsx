@@ -44,7 +44,7 @@ export default function Login() {
         </form>
         <div style={{ display: 'flex', justifyContent: 'space-between', gap: '0.6rem', fontSize: '0.84rem' }}>
           <Link to="/forgot-password">Passwort vergessen?</Link>
-          <Link to="/signup">Signup</Link>
+          <Link to="/signup" style={{ fontWeight: 600 }}>Registrieren</Link>
         </div>
       </div>
     </section>

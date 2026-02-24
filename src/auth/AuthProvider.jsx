@@ -61,18 +61,28 @@ function hasAtLeastRole(userRoles, requiredRole) {
 }
 
 async function identityRequest(path, options = {}) {
-  const response = await fetch(`/.netlify/identity${path}`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      ...(options.headers || {})
-    },
-    ...options
-  })
+  let response
+  try {
+    response = await fetch(`/.netlify/identity${path}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        ...(options.headers || {})
+      },
+      ...options
+    })
+  } catch (networkErr) {
+    const err = new Error('Identity-Service nicht erreichbar. Bitte später erneut versuchen.')
+    err.cause = networkErr
+    throw err
+  }
 
   if (!response.ok) {
     const payload = await response.json().catch(() => ({ error: 'request_failed' }))
-    const message = payload?.error_description || payload?.msg || payload?.error || `Request failed (${response.status})`
+    const isIdentityAvailabilityError = response.status === 404 || response.status === 405
+    const message = isIdentityAvailabilityError
+      ? 'Registrierung aktuell nicht verfügbar. Bitte Netlify Identity aktivieren und Redirect-Regeln für /.netlify/identity/* prüfen.'
+      : (payload?.error_description || payload?.msg || payload?.error || `Request failed (${response.status})`)
     const err = new Error(message)
     err.status = response.status
     err.payload = payload
