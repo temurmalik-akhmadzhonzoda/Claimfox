@@ -659,7 +659,7 @@ const controlPillStyle: CSSProperties = {
 const chartGridStyle: CSSProperties = {
   display: 'grid',
   gap: '0.7rem',
-  gridTemplateColumns: 'repeat(auto-fit, minmax(190px, 1fr))'
+  gridTemplateColumns: 'repeat(6, minmax(0, 1fr))'
 }
 
 const chartCardStyle: CSSProperties = {
@@ -672,14 +672,14 @@ const chartCardStyle: CSSProperties = {
 const chartTitleStyle: CSSProperties = {
   margin: 0,
   color: '#0f172a',
-  fontSize: '0.81rem',
+  fontSize: '0.76rem',
   lineHeight: 1.3,
-  minHeight: 34
+  minHeight: 30
 }
 
 const chartWrapStyle: CSSProperties = {
   width: '100%',
-  height: 185,
+  height: 130,
   marginTop: '0.3rem'
 }
 
