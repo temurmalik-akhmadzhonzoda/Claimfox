@@ -4,11 +4,6 @@
 
 # Public auth routes only
 [[redirects]]
-  from = "/.netlify/identity/*"
-  to = "/.netlify/identity/:splat"
-  status = 200
-
-[[redirects]]
   from = "/login"
   to = "/index.html"
   status = 200
