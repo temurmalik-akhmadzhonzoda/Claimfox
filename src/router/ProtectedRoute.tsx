@@ -7,7 +7,7 @@ type ProtectedRouteProps = {
 }
 
 export default function ProtectedRoute({ children }: ProtectedRouteProps) {
-  const { authReady, isAuthenticated, user } = useAuth()
+  const { authReady, isAuthenticated } = useAuth()
   const location = useLocation()
 
   if (!authReady) {
@@ -21,11 +21,6 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
   if (!isAuthenticated) {
     const returnTo = `${location.pathname}${location.search}${location.hash}`
     return <Navigate to={`/login?returnTo=${encodeURIComponent(returnTo)}`} replace />
-  }
-
-  const roles = Array.isArray(user?.roles) ? user.roles : []
-  if (roles.length === 0) {
-    return <Navigate to="/login" replace />
   }
 
   return children

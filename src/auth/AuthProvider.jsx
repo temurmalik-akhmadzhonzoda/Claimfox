@@ -7,11 +7,17 @@ const REFRESH_STORAGE_KEY = 'cf_refresh_token'
 const EXP_STORAGE_KEY = 'cf_token_exp'
 const USER_STORAGE_KEY = 'cf_user'
 
+const OAUTH_VERIFIER_KEY = 'cf_oauth_verifier'
+const OAUTH_STATE_KEY = 'cf_oauth_state'
+const OAUTH_RETURN_TO_KEY = 'cf_oauth_return_to'
+
 const ROLE_ORDER = {
   mitarbeiter: 1,
   management: 2,
   'c-level': 3
 }
+
+let auth0ConfigCache = null
 
 function safeJsonParse(raw) {
   try {
@@ -31,7 +37,7 @@ function readSession() {
   const refreshToken = window.localStorage.getItem(REFRESH_STORAGE_KEY)
   const exp = Number(window.localStorage.getItem(EXP_STORAGE_KEY) || 0)
   const user = safeJsonParse(window.localStorage.getItem(USER_STORAGE_KEY) || '')
-  if (!token || !refreshToken || !exp || !user) return null
+  if (!token || !exp || !user) return null
   return { token, refreshToken, exp, user }
 }
 
@@ -45,7 +51,8 @@ function persistSession(session) {
     return
   }
   window.localStorage.setItem(TOKEN_STORAGE_KEY, session.token)
-  window.localStorage.setItem(REFRESH_STORAGE_KEY, session.refreshToken)
+  if (session.refreshToken) window.localStorage.setItem(REFRESH_STORAGE_KEY, session.refreshToken)
+  else window.localStorage.removeItem(REFRESH_STORAGE_KEY)
   window.localStorage.setItem(EXP_STORAGE_KEY, String(session.exp))
   window.localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(session.user))
 }
@@ -60,49 +67,79 @@ function hasAtLeastRole(userRoles, requiredRole) {
   return userRoles.some((role) => (ROLE_ORDER[role] ?? 0) >= requiredWeight)
 }
 
-async function identityRequest(path, options = {}) {
-  let response
-  try {
-    response = await fetch(`/.netlify/identity${path}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        ...(options.headers || {})
-      },
-      ...options
-    })
-  } catch (networkErr) {
-    const err = new Error('Identity-Service nicht erreichbar. Bitte später erneut versuchen.')
-    err.cause = networkErr
-    throw err
-  }
-
-  if (!response.ok) {
-    const payload = await response.json().catch(() => ({ error: 'request_failed' }))
-    const isIdentityAvailabilityError = response.status === 404 || response.status === 405
-    const message = isIdentityAvailabilityError
-      ? 'Registrierung aktuell nicht verfügbar. Bitte Netlify Identity aktivieren und Redirect-Regeln für /.netlify/identity/* prüfen.'
-      : (payload?.error_description || payload?.msg || payload?.error || `Request failed (${response.status})`)
-    const err = new Error(message)
-    err.status = response.status
-    err.payload = payload
-    throw err
-  }
-
-  return response.json().catch(() => ({}))
+function base64UrlEncode(inputBuffer) {
+  const bytes = inputBuffer instanceof Uint8Array ? inputBuffer : new Uint8Array(inputBuffer)
+  let binary = ''
+  for (let i = 0; i < bytes.byteLength; i += 1) binary += String.fromCharCode(bytes[i])
+  return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/g, '')
 }
 
-function mapIdentityUser(raw) {
-  const roles = normalizeRoles(raw?.app_metadata?.roles)
+function randomString(size = 48) {
+  const bytes = new Uint8Array(size)
+  window.crypto.getRandomValues(bytes)
+  return base64UrlEncode(bytes)
+}
+
+async function sha256(text) {
+  const data = new TextEncoder().encode(text)
+  return window.crypto.subtle.digest('SHA-256', data)
+}
+
+function decodeJwt(token) {
+  const [, payload = ''] = String(token || '').split('.')
+  if (!payload) return {}
+  const normalized = payload.replace(/-/g, '+').replace(/_/g, '/')
+  const padded = normalized.padEnd(Math.ceil(normalized.length / 4) * 4, '=')
+  const json = atob(padded)
+  return safeJsonParse(json) || {}
+}
+
+function mapRolesFromClaims(claims) {
+  const namespaceRoles = claims?.['https://claimsfox.com/roles']
+  const topRoles = claims?.roles
+  const appMetaRoles = claims?.app_metadata?.roles
+  return normalizeRoles(namespaceRoles || topRoles || appMetaRoles || [])
+}
+
+function mapUserFromClaims(claims) {
+  const roles = mapRolesFromClaims(claims)
   return {
-    id: raw?.id || raw?.sub || '',
-    email: raw?.email || '',
-    username: raw?.user_metadata?.full_name || raw?.email || '',
-    fullName: raw?.user_metadata?.full_name || '',
+    id: claims?.sub || '',
+    email: claims?.email || '',
+    username: claims?.name || claims?.email || '',
+    fullName: claims?.name || '',
     roles,
-    app_metadata: raw?.app_metadata || {},
-    user_metadata: raw?.user_metadata || {}
+    app_metadata: { roles },
+    user_metadata: { full_name: claims?.name || '' }
   }
+}
+
+async function loadAuth0Config() {
+  if (auth0ConfigCache) return auth0ConfigCache
+  const res = await fetch('/.netlify/functions/auth-config', { method: 'GET' })
+  const payload = await res.json().catch(() => ({}))
+  if (!res.ok || !payload?.ok) {
+    const msg = payload?.error?.message || 'Auth-Konfiguration konnte nicht geladen werden.'
+    throw new Error(msg)
+  }
+  auth0ConfigCache = payload.config
+  return auth0ConfigCache
+}
+
+async function tokenRequest(domain, body) {
+  const response = await fetch(`https://${domain}/oauth/token`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  })
+  const payload = await response.json().catch(() => ({}))
+  if (!response.ok) {
+    const message = payload?.error_description || payload?.error || `Token request failed (${response.status})`
+    const err = new Error(message)
+    err.status = response.status
+    throw err
+  }
+  return payload
 }
 
 export function AuthProvider({ children }) {
@@ -124,24 +161,21 @@ export function AuthProvider({ children }) {
 
   const refresh = useCallback(async () => {
     const current = readSession()
-    if (!current?.refreshToken) throw new Error('No refresh token')
-    const refreshed = await identityRequest('/token', {
-      method: 'POST',
-      body: JSON.stringify({
-        grant_type: 'refresh_token',
-        refresh_token: current.refreshToken
-      })
+    if (!current?.refreshToken) throw new Error('Kein Refresh-Token vorhanden')
+    const cfg = await loadAuth0Config()
+    const refreshed = await tokenRequest(cfg.domain, {
+      grant_type: 'refresh_token',
+      client_id: cfg.clientId,
+      refresh_token: current.refreshToken
     })
 
-    const token = refreshed.access_token
-    const refreshToken = refreshed.refresh_token || current.refreshToken
-    const exp = Number(refreshed.expires_at || nowSeconds() + Number(refreshed.expires_in || 3600))
-    const userData = await identityRequest('/user', {
-      headers: { Authorization: `Bearer ${token}` }
-    })
-
-    const mappedUser = mapIdentityUser(userData)
-    const next = { token, refreshToken, exp, user: mappedUser }
+    const idClaims = decodeJwt(refreshed.id_token || '')
+    const next = {
+      token: refreshed.access_token,
+      refreshToken: refreshed.refresh_token || current.refreshToken,
+      exp: nowSeconds() + Number(refreshed.expires_in || 3600),
+      user: mapUserFromClaims(idClaims)
+    }
     applySession(next)
     return next
   }, [applySession])
@@ -149,109 +183,120 @@ export function AuthProvider({ children }) {
   const ensureValidToken = useCallback(async () => {
     const current = session || readSession()
     if (!current?.token) return null
-    const expiresIn = current.exp - nowSeconds()
-    if (expiresIn > 90) return current.token
+    if (current.exp - nowSeconds() > 90) return current.token
     const refreshed = await refresh()
     return refreshed.token
   }, [refresh, session])
 
-  const getToken = useCallback(async () => {
-    return ensureValidToken()
-  }, [ensureValidToken])
+  const getToken = useCallback(async () => ensureValidToken(), [ensureValidToken])
 
   const getRoles = useCallback(() => normalizeRoles(user?.roles), [user])
 
   const hasRole = useCallback((role) => hasAtLeastRole(getRoles(), role), [getRoles])
 
-  const initializeRoles = useCallback(async () => {
-    const token = await ensureValidToken()
-    if (!token) return
-    try {
-      const result = await fetch('/.netlify/functions/auth-init', {
-        method: 'POST',
-        headers: { Authorization: `Bearer ${token}` }
-      })
-      if (result.ok) {
-        const payload = await result.json().catch(() => ({}))
-        if (Array.isArray(payload.roles)) {
-          const nextUser = { ...(session?.user || user || {}), roles: normalizeRoles(payload.roles) }
-          const current = session || readSession()
-          if (current) applySession({ ...current, user: nextUser })
-        }
-      }
-    } catch {
-      // no-op: role bootstrap errors are handled server-side during secured calls
-    }
-  }, [applySession, ensureValidToken, session, user])
+  const startAuth = useCallback(async ({ mode = 'login', returnTo = '/dashboard' } = {}) => {
+    const cfg = await loadAuth0Config()
+    const state = randomString(24)
+    const verifier = randomString(64)
+    const challenge = base64UrlEncode(await sha256(verifier))
 
-  const signup = useCallback(async ({ email, password, fullName }) => {
-    await identityRequest('/signup', {
-      method: 'POST',
-      body: JSON.stringify({
-        email,
-        password,
-        data: fullName ? { full_name: fullName } : {}
-      })
+    sessionStorage.setItem(OAUTH_STATE_KEY, state)
+    sessionStorage.setItem(OAUTH_VERIFIER_KEY, verifier)
+    sessionStorage.setItem(OAUTH_RETURN_TO_KEY, returnTo)
+
+    const params = new URLSearchParams({
+      response_type: 'code',
+      client_id: cfg.clientId,
+      redirect_uri: cfg.redirectUri,
+      scope: 'openid profile email offline_access',
+      audience: cfg.audience,
+      state,
+      code_challenge: challenge,
+      code_challenge_method: 'S256'
     })
-    return { ok: true }
+
+    if (mode === 'signup') params.set('screen_hint', 'signup')
+
+    window.location.assign(`https://${cfg.domain}/authorize?${params.toString()}`)
   }, [])
 
-  const login = useCallback(async (email, password) => {
-    const payload = await identityRequest('/token', {
-      method: 'POST',
-      body: JSON.stringify({
-        grant_type: 'password',
-        username: email,
-        password
-      })
+  const login = useCallback(async (emailOrOptions) => {
+    const opts = typeof emailOrOptions === 'object' && emailOrOptions ? emailOrOptions : {}
+    await startAuth({ mode: 'login', returnTo: opts.returnTo || '/dashboard' })
+  }, [startAuth])
+
+  const signup = useCallback(async ({ returnTo } = {}) => {
+    await startAuth({ mode: 'signup', returnTo: returnTo || '/dashboard' })
+  }, [startAuth])
+
+  const handleAuthCallback = useCallback(async (search) => {
+    const params = new URLSearchParams(search || window.location.search)
+    const code = params.get('code')
+    const state = params.get('state')
+    const error = params.get('error')
+    const errorDescription = params.get('error_description')
+
+    if (error) throw new Error(errorDescription || error)
+    if (!code || !state) throw new Error('Ungültiger OAuth Callback')
+
+    const expectedState = sessionStorage.getItem(OAUTH_STATE_KEY)
+    const verifier = sessionStorage.getItem(OAUTH_VERIFIER_KEY)
+    const returnTo = sessionStorage.getItem(OAUTH_RETURN_TO_KEY) || '/dashboard'
+
+    if (!expectedState || state !== expectedState || !verifier) {
+      throw new Error('OAuth-Statusprüfung fehlgeschlagen')
+    }
+
+    const cfg = await loadAuth0Config()
+    const payload = await tokenRequest(cfg.domain, {
+      grant_type: 'authorization_code',
+      client_id: cfg.clientId,
+      code_verifier: verifier,
+      code,
+      redirect_uri: cfg.redirectUri
     })
 
-    const token = payload.access_token
-    const refreshToken = payload.refresh_token
-    const exp = Number(payload.expires_at || nowSeconds() + Number(payload.expires_in || 3600))
-    const userData = await identityRequest('/user', {
-      headers: { Authorization: `Bearer ${token}` }
-    })
+    const claims = decodeJwt(payload.id_token || '')
+    const next = {
+      token: payload.access_token,
+      refreshToken: payload.refresh_token,
+      exp: nowSeconds() + Number(payload.expires_in || 3600),
+      user: mapUserFromClaims(claims)
+    }
 
-    const mappedUser = mapIdentityUser(userData)
-    const next = { token, refreshToken, exp, user: mappedUser }
     applySession(next)
+    sessionStorage.removeItem(OAUTH_STATE_KEY)
+    sessionStorage.removeItem(OAUTH_VERIFIER_KEY)
+    sessionStorage.removeItem(OAUTH_RETURN_TO_KEY)
 
-    await initializeRoles()
-
-    return next
-  }, [applySession, initializeRoles])
+    return { returnTo }
+  }, [applySession])
 
   const logout = useCallback(async () => {
-    const token = session?.token || readSession()?.token
-    try {
-      if (token) {
-        await fetch('/.netlify/identity/logout', {
-          method: 'POST',
-          headers: { Authorization: `Bearer ${token}` }
-        })
-      }
-    } finally {
-      clearSession()
+    const cfg = await loadAuth0Config().catch(() => null)
+    clearSession()
+    if (cfg?.domain) {
+      const params = new URLSearchParams({
+        client_id: cfg.clientId,
+        returnTo: `${window.location.origin}/login`
+      })
+      window.location.assign(`https://${cfg.domain}/v2/logout?${params.toString()}`)
     }
-  }, [clearSession, session])
+  }, [clearSession])
 
   const forgotPassword = useCallback(async (email) => {
-    await identityRequest('/recover', {
-      method: 'POST',
-      body: JSON.stringify({ email })
+    const cfg = await loadAuth0Config()
+    const params = new URLSearchParams({
+      client_id: cfg.clientId,
+      email: String(email || '').trim()
     })
+    window.location.assign(`https://${cfg.domain}/lo/reset?${params.toString()}`)
     return { ok: true }
   }, [])
 
-  const resetPassword = useCallback(async ({ token, password }) => {
-    await identityRequest('/recover', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${token}`
-      },
-      body: JSON.stringify({ password })
-    })
+  const resetPassword = useCallback(async () => {
+    const cfg = await loadAuth0Config()
+    window.location.assign(`https://${cfg.domain}/lo/reset?client_id=${encodeURIComponent(cfg.clientId)}`)
     return { ok: true }
   }, [])
 
@@ -262,27 +307,16 @@ export function AuthProvider({ children }) {
       const existing = readSession()
       if (!existing) {
         if (mounted) {
-          setAuthReady(true)
           clearSession()
+          setAuthReady(true)
         }
         return
       }
 
       try {
         const token = existing.exp - nowSeconds() > 90 ? existing.token : (await refresh()).token
-        const userData = await identityRequest('/user', {
-          headers: { Authorization: `Bearer ${token}` }
-        })
-        const next = {
-          token,
-          refreshToken: existing.refreshToken,
-          exp: existing.exp,
-          user: mapIdentityUser(userData)
-        }
-        if (mounted) {
-          applySession(next)
-          await initializeRoles()
-        }
+        const current = readSession()
+        if (mounted && current) applySession({ ...current, token })
       } catch {
         if (mounted) clearSession()
       } finally {
@@ -295,7 +329,7 @@ export function AuthProvider({ children }) {
     return () => {
       mounted = false
     }
-  }, [applySession, clearSession, initializeRoles, refresh])
+  }, [applySession, clearSession, refresh])
 
   const value = useMemo(() => ({
     authReady,
@@ -306,10 +340,11 @@ export function AuthProvider({ children }) {
     logout,
     forgotPassword,
     resetPassword,
+    handleAuthCallback,
     getToken,
     getRoles,
     hasRole
-  }), [authReady, isAuthenticated, user, login, signup, logout, forgotPassword, resetPassword, getToken, getRoles, hasRole])
+  }), [authReady, isAuthenticated, user, login, signup, logout, forgotPassword, resetPassword, handleAuthCallback, getToken, getRoles, hasRole])
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
