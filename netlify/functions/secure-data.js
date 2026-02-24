@@ -1,15 +1,16 @@
 const { requireAnyRole, json, error, rateLimit, hasAtLeastRole } = require('./_utils')
 
-exports.handler = async (event) => {
+exports.handler = async (event, context) => {
   if (event.httpMethod !== 'GET') return error(405, 'method_not_allowed', 'Only GET allowed')
 
   const ip = event.headers['x-nf-client-connection-ip'] || 'unknown'
   if (!rateLimit(`secure-data:${ip}`, 80, 60_000)) return error(429, 'rate_limited', 'Too many requests')
 
-  const auth = await requireAnyRole(event, ['management'])
+  const auth = requireAnyRole(context, ['management'])
   if (!auth.ok) return auth.response
 
-  const level = hasAtLeastRole(auth.roles || [], 'c-level') ? 'c-level' : 'management'
+  const roles = auth.roles || []
+  const level = hasAtLeastRole(roles, 'c-level') ? 'c-level' : 'management'
 
   return json(200, {
     ok: true,

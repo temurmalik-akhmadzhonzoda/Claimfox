@@ -5,17 +5,21 @@ import { useAuth } from '@/auth/AuthProvider'
 export default function ForgotPassword() {
   const { forgotPassword } = useAuth()
   const [email, setEmail] = useState('')
+  const [message, setMessage] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
   async function onSubmit(event) {
     event.preventDefault()
     setError('')
+    setMessage('')
     setLoading(true)
     try {
       await forgotPassword(email.trim())
+      setMessage('Wenn die E-Mail existiert, wurde ein Reset-Link gesendet.')
     } catch (err) {
       setError(err?.message || 'Anfrage fehlgeschlagen')
+    } finally {
       setLoading(false)
     }
   }
@@ -27,7 +31,8 @@ export default function ForgotPassword() {
         <form onSubmit={onSubmit} style={{ display: 'grid', gap: '0.6rem' }}>
           <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="E-Mail" required style={inputStyle} />
           {error ? <div style={{ color: '#b91c1c', fontSize: '0.82rem' }}>{error}</div> : null}
-          <button disabled={loading} type="submit" style={buttonStyle}>{loading ? 'Weiterleitung...' : 'Reset starten'}</button>
+          {message ? <div style={{ color: '#166534', fontSize: '0.82rem' }}>{message}</div> : null}
+          <button disabled={loading} type="submit" style={buttonStyle}>{loading ? 'Sende...' : 'Reset-Link senden'}</button>
         </form>
         <Link to="/login" style={{ fontSize: '0.84rem' }}>Zurück zum Login</Link>
       </div>
