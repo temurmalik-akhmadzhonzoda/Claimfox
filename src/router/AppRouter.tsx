@@ -227,6 +227,7 @@ import SmartInsurTechAnalysisPage from '@/pages/SmartInsurTechAnalysisPage'
 import BlaudirektAnalysisPage from '@/pages/BlaudirektAnalysisPage'
 import FlockAdmiralAnalysisPage from '@/pages/FlockAdmiralAnalysisPage'
 import InsideInsurfoxPage from '@/pages/InsideInsurfoxPage'
+import InsideInsurfoxRoleDetailPage from '@/pages/InsideInsurfoxRoleDetailPage'
 
 function NotFoundRedirect() {
   const { isAuthenticated } = useAuth()
@@ -317,6 +318,7 @@ export default function AppRouter() {
         <Route path="/inside-insurfox/app-architecture" element={<InsideInsurfoxPage section="app-architecture" />} />
         <Route path="/inside-insurfox/vision" element={<InsideInsurfoxPage section="vision" />} />
         <Route path="/inside-insurfox/roles" element={<InsideInsurfoxPage section="roles" />} />
+        <Route path="/inside-insurfox/roles/:roleSlug" element={<InsideInsurfoxRoleDetailPage />} />
         <Route path="/inside-insurfox/lifecycle" element={<InsideInsurfoxPage section="lifecycle" />} />
         <Route path="/inside-insurfox/data-model" element={<InsideInsurfoxPage section="data-model" />} />
         <Route path="/inside-insurfox/ai-core" element={<InsideInsurfoxPage section="ai-core" />} />

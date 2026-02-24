@@ -6,6 +6,7 @@ import Button from '@/components/ui/Button'
 import { useI18n } from '@/i18n/I18nContext'
 import { InsideInsurfoxSubnav, type InsideSectionKey } from '@/components/inside-insurfox/InsideInsurfoxSubnav'
 import DataFieldExplorer from '@/components/inside-insurfox/DataFieldExplorer'
+import { slugifyRoleName } from '@/components/inside-insurfox/roleHandbookData'
 
 type BiText = { de: string; en: string }
 
@@ -316,7 +317,7 @@ const enterpriseRoleSections: EnterpriseRoleSection[] = [
     title: { de: '5) CLAIMS ECOSYSTEM ROLES', en: '5) CLAIMS ECOSYSTEM ROLES' },
     intro: { de: 'Partnerrollen mit ereignisgesteuertem, häufig zeitlich begrenztem Zugriff im Schadenökosystem.', en: 'Partner roles with event-triggered, often time-bound access in the claims ecosystem.' },
     roles: [
-      { name: 'Claims Handler (Insurfox / Broker)', tenantLevel: 'Platform / Broker', functionalDescription: 'Primary operational claim processor.', coreResponsibilities: 'Coverage checks, reserve setting, workflow progression.', decisionAuthority: 'Operational claim-handling decisions within authority.', dataAccessScope: 'Assigned claims and relevant policy context.', modulesUsed: 'Claimsfox', trigger: 'Triggered on claim.created and escalation events.', temporaryAccess: 'No (core ongoing role).' },
+      { name: 'Claims Handler', tenantLevel: 'Platform / Broker', functionalDescription: 'Primary operational claim processor.', coreResponsibilities: 'Coverage checks, reserve setting, workflow progression.', decisionAuthority: 'Operational claim-handling decisions within authority.', dataAccessScope: 'Assigned claims and relevant policy context.', modulesUsed: 'Claimsfox', trigger: 'Triggered on claim.created and escalation events.', temporaryAccess: 'No (core ongoing role).' },
       { name: 'Surveyor / Loss Adjuster', tenantLevel: 'Partner', functionalDescription: 'Independent damage assessment specialist.', coreResponsibilities: 'Damage inspection, expert reports, technical causality evidence.', decisionAuthority: 'Assessment opinion; no final settlement authority.', dataAccessScope: 'Assigned claim dossier and evidence subset.', modulesUsed: 'Claimsfox (partner access)', trigger: 'Triggered for severity threshold or disputed causality.', temporaryAccess: 'Yes, assignment-bound access.' },
       { name: 'Repair Network Partner', tenantLevel: 'Partner', functionalDescription: 'Performs repair services and cost estimates.', coreResponsibilities: 'Repair quote, work-status updates, invoice submission.', decisionAuthority: 'Repair feasibility and estimate confirmation.', dataAccessScope: 'Repair-relevant claim fields only.', modulesUsed: 'Partnerfox', trigger: 'Triggered after partner.assigned for repair path.', temporaryAccess: 'Yes, claim-task scope only.' },
       { name: 'Rental Provider', tenantLevel: 'Partner', functionalDescription: 'Provides replacement vehicle continuity services.', coreResponsibilities: 'Rental confirmation, cost upload, utilization updates.', decisionAuthority: 'Can confirm rental costs; cannot approve settlement.', dataAccessScope: 'Assignment details only; no premium visibility.', modulesUsed: 'Partnerfox', trigger: 'Triggered after vehicle immobilization event.', temporaryAccess: 'Yes, temporary and assignment-bound.' },
@@ -442,17 +443,8 @@ function roleText(value: string, lang: 'de' | 'en') {
   return replacements.reduce((acc, [from, to]) => acc.replaceAll(from, to), value)
 }
 
-function demoRouteForRole(role: EnterpriseRole) {
-  const modules = role.modulesUsed.toLowerCase()
-  const name = role.name.toLowerCase()
-  const text = `${modules} ${name}`
-
-  if (text.includes('claimsfox') || text.includes('claim')) return '/claimsfox'
-  if (text.includes('partnerfox') || text.includes('partner') || text.includes('rental') || text.includes('towing')) return '/partnerfox'
-  if (text.includes('fleetfox') || text.includes('fleet') || text.includes('driver') || text.includes('transport')) return '/fleetfox'
-  if (text.includes('ai fox') || text.includes('aifox') || text.includes('ai ')) return '/aifox'
-  if (text.includes('brokerfox') || text.includes('broker')) return '/brokerfox'
-  return '/brokerfox'
+function infoRouteForRole(role: EnterpriseRole) {
+  return `/inside-insurfox/roles/${slugifyRoleName(role.name)}`
 }
 
 export default function InsideInsurfoxPage({ section }: { section: InsideSectionKey }) {
@@ -1238,7 +1230,9 @@ packages/
                           <td style={tdStyle}>{roleText(r.decisionAuthority, l)}</td>
                           <td style={tdStyle}>
                             <div className="print-hide">
-                              <Button size="sm" onClick={() => navigate(demoRouteForRole(r))}>Demo</Button>
+                              <Button size="sm" onClick={() => navigate(infoRouteForRole(r))}>
+                                {bi({ de: 'Info', en: 'Info' }, l)}
+                              </Button>
                             </div>
                           </td>
                         </tr>
