@@ -628,8 +628,8 @@ const arrowStyle: CSSProperties = {
 
 const chartGridStyle: CSSProperties = {
   display: 'grid',
-  gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-  gap: '0.7rem'
+  gridTemplateColumns: 'repeat(5, minmax(0, 1fr))',
+  gap: '0.45rem'
 }
 
 const chartCardStyle: CSSProperties = {
@@ -647,7 +647,7 @@ const chartTitleStyle: CSSProperties = {
 
 const chartWrapStyle: CSSProperties = {
   width: '100%',
-  height: 240
+  height: 150
 }
 
 const scenarioCardStyle: CSSProperties = {

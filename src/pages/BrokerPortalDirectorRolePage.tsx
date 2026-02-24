@@ -436,10 +436,10 @@ const flowConnectorStyle: CSSProperties = { height: 4, borderRadius: 999, backgr
 const highlightGridStyle: CSSProperties = { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '0.55rem' }
 const highlightStyle: CSSProperties = { border: '1px solid #dbe2ea', borderRadius: 10, background: '#f8fafc', padding: '0.5rem 0.6rem', display: 'grid', gap: '0.2rem', color: '#334155', fontSize: '0.8rem' }
 
-const chartGridStyle: CSSProperties = { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '0.7rem' }
+const chartGridStyle: CSSProperties = { display: 'grid', gridTemplateColumns: 'repeat(5, minmax(0, 1fr))', gap: '0.45rem' }
 const chartCardStyle: CSSProperties = { border: '1px solid #dbe2ea', borderRadius: 10, padding: '0.65rem', background: '#f8fafc' }
 const chartTitleStyle: CSSProperties = { margin: '0 0 0.45rem', color: '#0f172a', fontSize: '0.9rem' }
-const chartWrapStyle: CSSProperties = { width: '100%', height: 240 }
+const chartWrapStyle: CSSProperties = { width: '100%', height: 150 }
 
 const scenarioCardStyle: CSSProperties = { border: '1px solid #dbe2ea', borderRadius: 10, padding: '0.65rem', background: '#f8fafc', display: 'grid', gap: '0.35rem' }
 
