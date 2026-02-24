@@ -48,6 +48,29 @@ const riskHeatmapData = [
   { category: { de: 'Kapitalakkumulationsrisiko', en: 'Capital Accumulation Risk' }, likelihood: 2.4, impact: 4.3 }
 ]
 
+const residualRiskScoreData = [
+  { category: { de: 'Regulatorischer Verstoß', en: 'Regulatory Breach' }, value: 18.6 },
+  { category: { de: 'Delegated-Authority-Verstoß', en: 'Delegated Authority Breach' }, value: 15.5 },
+  { category: { de: 'AI-Missbrauch', en: 'AI Misuse' }, value: 13.5 },
+  { category: { de: 'Datenschutzvorfall', en: 'Data Protection Incident' }, value: 13.9 },
+  { category: { de: 'Conduct Risk', en: 'Conduct Risk' }, value: 11.1 },
+  { category: { de: 'Kapitalakkumulationsrisiko', en: 'Capital Accumulation Risk' }, value: 10.3 }
+]
+
+const controlGapRatioData = [
+  { quarter: 'Q1', value: 8.2 },
+  { quarter: 'Q2', value: 7.4 },
+  { quarter: 'Q3', value: 6.9 },
+  { quarter: 'Q4', value: 5.8 }
+]
+
+const remediationSlaData = [
+  { quarter: 'Q1', value: 82 },
+  { quarter: 'Q2', value: 85 },
+  { quarter: 'Q3', value: 87 },
+  { quarter: 'Q4', value: 90 }
+]
+
 const complianceIncidentData = [
   { period: 'Q1', value: 14 },
   { period: 'Q2', value: 12 },
@@ -194,6 +217,39 @@ export default function ComplianceRiskOfficerRolePage() {
                   <Tooltip />
                   <Bar dataKey="impact" fill="#991b1b" />
                 </BarChart>
+              </ResponsiveContainer>
+            </ChartCard>
+            <ChartCard title={bi({ de: 'Residual Risk Score', en: 'Residual Risk Score' }, l)}>
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={residualRiskScoreData.map((d) => ({ ...d, label: bi(d.category, l) }))}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="label" />
+                  <YAxis />
+                  <Tooltip />
+                  <Bar dataKey="value" fill="#0f172a" />
+                </BarChart>
+              </ResponsiveContainer>
+            </ChartCard>
+            <ChartCard title={bi({ de: 'Control Gap Ratio (%)', en: 'Control Gap Ratio (%)' }, l)}>
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={controlGapRatioData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="quarter" />
+                  <YAxis />
+                  <Tooltip />
+                  <Line type="monotone" dataKey="value" stroke="#334155" strokeWidth={2} />
+                </LineChart>
+              </ResponsiveContainer>
+            </ChartCard>
+            <ChartCard title={bi({ de: 'Remediation SLA (%)', en: 'Remediation SLA (%)' }, l)}>
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={remediationSlaData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="quarter" />
+                  <YAxis />
+                  <Tooltip />
+                  <Line type="monotone" dataKey="value" stroke="#64748b" strokeWidth={2} />
+                </LineChart>
               </ResponsiveContainer>
             </ChartCard>
           </div>
