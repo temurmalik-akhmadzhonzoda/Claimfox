@@ -262,16 +262,26 @@ const reportingMetrics: ReportingMetric[] = [
 const enterpriseRoleSections: EnterpriseRoleSection[] = [
   {
     title: { de: '1) PLATFORM LEVEL (INSURFOX CORE)', en: '1) PLATFORM LEVEL (INSURFOX CORE)' },
-    intro: { de: 'Zentrale Rollen mit systemweiter Steuerung über Governance, Zeichnung, Schaden, Plattformbetrieb, AI und Compliance.', en: 'Central roles with system-wide control across governance, underwriting, claims, platform operations, AI, and compliance.' },
+    intro: { de: 'Zentrale Rollen mit klar getrennten Verantwortungen für Plattformstrategie (CPO), technische Architektur (CTO), Domänen-Produktsteuerung und Governance.', en: 'Central roles with clearly separated accountability for platform strategy (CPO), technical architecture (CTO), domain product steering, and governance.' },
     roles: [
+      { name: 'CPO – Chief Platform Owner', tenantLevel: 'Platform', functionalDescription: 'Owns strategic platform direction and module portfolio alignment.', coreResponsibilities: 'Platform vision, module portfolio strategy, international expansion priorities.', decisionAuthority: 'Business logic authority for platform strategy and portfolio direction.', dataAccessScope: 'Cross-module commercial KPIs, adoption metrics, strategic performance.', modulesUsed: 'All (business platform level)' },
+      { name: 'CTO – Chief Technology Officer', tenantLevel: 'Platform', functionalDescription: 'Owns architecture, cloud strategy, and technical platform governance.', coreResponsibilities: 'GCP architecture, scalability, resilience, security standards, technical operating model.', decisionAuthority: 'Technical authority for architecture, cloud infrastructure, and security baselines.', dataAccessScope: 'Architecture telemetry, platform reliability and security posture.', modulesUsed: 'All (technical layer)' },
       { name: 'Platform Super Admin', tenantLevel: 'Platform', functionalDescription: 'Owns global platform administration and tenant lifecycle.', coreResponsibilities: 'Tenant provisioning, root IAM, emergency controls, platform configuration baselines.', decisionAuthority: 'System-wide authorization and break-glass approval.', dataAccessScope: 'Cross-tenant metadata, audit domain, no default business data read.', modulesUsed: 'All (admin-only controls)' },
+      { name: 'Head of Engineering', tenantLevel: 'Platform', functionalDescription: 'Leads engineering delivery capability across platform domains.', coreResponsibilities: 'Engineering operating model, capacity planning, code quality and delivery reliability.', decisionAuthority: 'Engineering quality gates and delivery model decisions.', dataAccessScope: 'Delivery metrics, incident trends, service reliability KPIs.', modulesUsed: 'All (engineering delivery)' },
+      { name: 'Enterprise Architect', tenantLevel: 'Platform', functionalDescription: 'Owns target architecture and integration standards across modules.', coreResponsibilities: 'Architecture principles, integration patterns, domain boundaries, technical debt governance.', decisionAuthority: 'Architecture standards and cross-domain design approvals.', dataAccessScope: 'System maps, integration metadata, platform architecture evidence.', modulesUsed: 'All (architecture governance)' },
+      { name: 'CISO / Security Officer', tenantLevel: 'Platform', functionalDescription: 'Owns security governance and cyber control framework.', coreResponsibilities: 'Security policy, control baselines, incident governance, vulnerability management.', decisionAuthority: 'Security standard enforcement and major security escalation decisions.', dataAccessScope: 'Security events, access anomalies, vulnerability and control dashboards.', modulesUsed: 'All (security governance)' },
+      { name: 'Data Governance Lead', tenantLevel: 'Platform', functionalDescription: 'Owns enterprise data governance across all platform domains.', coreResponsibilities: 'Data standards, lineage, quality controls, stewardship model and ownership boundaries.', decisionAuthority: 'Data model and quality-policy governance decisions.', dataAccessScope: 'Data quality KPIs, lineage metadata, policy conformance indicators.', modulesUsed: 'All (data governance)' },
+      { name: 'UX / Experience Lead', tenantLevel: 'Platform', functionalDescription: 'Owns cross-module user experience and journey consistency.', coreResponsibilities: 'UX principles, design standards, usability governance, cross-module journey quality.', decisionAuthority: 'Experience standards and journey quality requirements.', dataAccessScope: 'Journey analytics, usability findings, adoption friction signals.', modulesUsed: 'All (experience layer)' },
+      { name: 'Product Owner – Core Platform', tenantLevel: 'Platform', functionalDescription: 'Coordinates cross-module delivery scope and shared capabilities.', coreResponsibilities: 'Shared platform backlog, dependency resolution, release scope orchestration.', decisionAuthority: 'Cross-module release scope and shared feature sequencing.', dataAccessScope: 'Cross-module telemetry, shared dependency and release metrics.', modulesUsed: 'Brokerfox, Claimsfox, Fleetfox, Partnerfox, AI Fox' },
+      { name: 'Product Owner – Brokerportal', tenantLevel: 'Platform', functionalDescription: 'Owns distribution architecture and broker-facing operating model.', coreResponsibilities: 'Broker onboarding journeys, broker channel workflows, distribution UX and quality gates.', decisionAuthority: 'Brokerportal release scope and distribution workflow requirements.', dataAccessScope: 'Broker conversion funnel, submission quality, channel SLA metrics.', modulesUsed: 'Brokerfox' },
+      { name: 'Product Owner – Claims', tenantLevel: 'Platform', functionalDescription: 'Owns claims workflow architecture and claims experience design.', coreResponsibilities: 'FNOL to closure workflow evolution, partner routing UX, claims processing control points.', decisionAuthority: 'Claims-domain release scope and process architecture priorities.', dataAccessScope: 'Claims cycle time, leakage trends, claims workflow performance.', modulesUsed: 'Claimsfox, Partnerfox' },
+      { name: 'Product Owner – AI', tenantLevel: 'Platform', functionalDescription: 'Owns AI feature integration into operational modules.', coreResponsibilities: 'AI feature roadmap, model-consumption features, explainability and workflow embedding.', decisionAuthority: 'AI feature integration scope and rollout sequencing.', dataAccessScope: 'Model consumption KPIs, override usage, AI feature effectiveness.', modulesUsed: 'AI Fox, Brokerfox, Claimsfox' },
       { name: 'Chief Underwriting Officer (MGA)', tenantLevel: 'Platform / MGA', functionalDescription: 'Defines MGA underwriting framework and authority design.', coreResponsibilities: 'Authority corridors, referral thresholds, portfolio appetite, underwriting governance.', decisionAuthority: 'Final underwriting policy and override rights for delegated lines.', dataAccessScope: 'Underwriting portfolios, referral history, risk-model outputs.', modulesUsed: 'Brokerfox, AI Fox, Reporting' },
       { name: 'Head of Claims (MGA)', tenantLevel: 'Platform / MGA', functionalDescription: 'Leads claims operating model and leakage controls.', coreResponsibilities: 'Claims SOPs, reserve governance, partner SLAs, escalation protocols.', decisionAuthority: 'Claims policy decisions and high-severity approval thresholds.', dataAccessScope: 'Claims files, reserves, fraud outputs, partner performance.', modulesUsed: 'Claimsfox, Partnerfox, Reporting' },
       { name: 'Broker Portal Director', tenantLevel: 'Platform', functionalDescription: 'Owns broker operating model and distribution processes.', coreResponsibilities: 'Broker onboarding policy, portal workflow standards, service quality.', decisionAuthority: 'Broker experience standards and distribution operations decisions.', dataAccessScope: 'Broker account metadata, submission throughput, channel KPIs.', modulesUsed: 'Brokerfox, Reporting' },
       { name: 'AI Governance Officer', tenantLevel: 'Platform', functionalDescription: 'Controls AI risk governance and model assurance.', coreResponsibilities: 'Model approval gates, explainability standards, monitoring and drift policies.', decisionAuthority: 'AI go-live/freeze decisions and mandatory human override rules.', dataAccessScope: 'Model registry, feature usage, decision traces, bias indicators.', modulesUsed: 'AI Fox, Reporting' },
       { name: 'Compliance & Risk Officer', tenantLevel: 'Platform', functionalDescription: 'Supervises regulatory and operational compliance.', coreResponsibilities: 'Control framework, regulatory evidence, policy adherence, remediation tracking.', decisionAuthority: 'Compliance exceptions, control escalations, audit response coordination.', dataAccessScope: 'Audit logs, control events, policy and process evidence.', modulesUsed: 'Reporting, Admin governance views' },
       { name: 'Reinsurance Manager', tenantLevel: 'Platform / MGA', functionalDescription: 'Manages treaty architecture and ceded risk strategy.', coreResponsibilities: 'Treaty structure, placement negotiation, cession rules, recovery governance.', decisionAuthority: 'Treaty and facultative placement recommendations for approval.', dataAccessScope: 'Aggregation metrics, treaty utilization, ceded-loss events.', modulesUsed: 'Reporting, Underwriting views' },
-      { name: 'Product Owner', tenantLevel: 'Platform', functionalDescription: 'Owns product backlog across insurance modules.', coreResponsibilities: 'Feature prioritization, release scope, cross-domain dependency management.', decisionAuthority: 'Functional roadmap and release content sign-off.', dataAccessScope: 'Product telemetry, workflow KPIs, adoption metrics.', modulesUsed: 'All (product perspective)' },
       { name: 'DevOps Lead', tenantLevel: 'Platform', functionalDescription: 'Owns reliability, deployment architecture, and runtime operations.', coreResponsibilities: 'CI/CD, environment hardening, observability, incident response.', decisionAuthority: 'Deployment gates, rollback decisions, operational risk mitigation.', dataAccessScope: 'Infrastructure logs, runtime metrics, deployment records.', modulesUsed: 'Platform ops tooling, monitoring stack' },
       { name: 'Data Protection Officer (DPO)', tenantLevel: 'Platform', functionalDescription: 'Ensures data protection by design and by default.', coreResponsibilities: 'PII policy, retention controls, lawful processing review, data-rights governance.', decisionAuthority: 'Privacy control approval and data access escalation decisions.', dataAccessScope: 'PII policy metadata, access events, retention/audit evidence.', modulesUsed: 'Reporting, compliance views' }
     ]
@@ -1279,23 +1289,57 @@ packages/
               <MermaidBlock
                 title={bi({ de: 'Hierarchieebenen', en: 'Hierarchy Layers' }, l)}
                 code={`flowchart TB
-  P[Platform Level]
-  B[Broker Level]
-  C[Corporate Level]
-  O[Operational Partner Level]
-  P --> B
-  B --> C
-  C --> O`}
+  B[Board / CEO]
+  CPO[CPO]
+  CTO[CTO]
+  DPO[Domain Product Owners]
+  ENG[Engineering]
+  OPS[Operational Roles]
+  B --> CPO
+  B --> CTO
+  CPO --> DPO
+  CTO --> ENG
+  DPO --> OPS
+  ENG --> OPS`}
               />
               <p style={{ ...noteStyle, marginTop: '0.55rem' }}>
                 {bi(
                   {
-                    de: 'Berechtigungsgrenzen werden von oben nach unten vererbt, aber niemals ohne Scope-Filter erweitert. Plattformrechte steuern Governance, Brokerrechte steuern Kundenprozesse, Corporaterechte steuern interne Rollen, Partnerrechte bleiben strikt auf Aufgabenebene begrenzt.',
-                    en: 'Permission boundaries inherit top-down but never expand without scope filters. Platform rights govern governance, broker rights govern client processes, corporate rights govern internal roles, and partner rights stay strictly task-scoped.'
+                    de: 'Geschäftslogik-Autorität liegt beim CPO, technische Autorität beim CTO. Domain Product Owners steuern Release-Scope je Fachdomäne; Engineering verantwortet die technische Ausführung; operative Rollen arbeiten innerhalb definierter Governance-Grenzen.',
+                    en: 'Business logic authority sits with the CPO, technical authority with the CTO. Domain product owners own release scope by domain; engineering owns technical execution; operational roles execute within defined governance boundaries.'
                   },
                   l
                 )}
               </p>
+            </Card>
+
+            <Card title={bi({ de: '11) DECISION OWNERSHIP MATRIX', en: '11) DECISION OWNERSHIP MATRIX' }, l)}>
+              <div style={{ overflowX: 'auto' }}>
+                <table style={tableStyle}>
+                  <thead>
+                    <tr style={headRowStyle}>
+                      <th style={thStyle}>{bi({ de: 'Entscheidungsfeld', en: 'Decision Domain' }, l)}</th>
+                      <th style={thStyle}>{bi({ de: 'Owner', en: 'Owner' }, l)}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[
+                      [{ de: 'Architektur', en: 'Architecture' }, 'CTO'],
+                      [{ de: 'Plattformstrategie', en: 'Platform Strategy' }, 'CPO'],
+                      [{ de: 'Release Scope', en: 'Release Scope' }, bi({ de: 'Product Owner (je Domäne)', en: 'Product Owner (by domain)' }, l)],
+                      [{ de: 'Underwriting Authority', en: 'Underwriting Authority' }, 'CUO'],
+                      [{ de: 'Claims Authority', en: 'Claims Authority' }, bi({ de: 'Head of Claims', en: 'Head of Claims' }, l)],
+                      [{ de: 'AI Release', en: 'AI Release' }, bi({ de: 'AI Governance Officer', en: 'AI Governance Officer' }, l)],
+                      [{ de: 'Regulatorische Aufsicht', en: 'Regulatory Oversight' }, bi({ de: 'Compliance & Risk Officer', en: 'Compliance & Risk Officer' }, l)]
+                    ].map((row) => (
+                      <tr key={`${(row[0] as BiText).en}-${row[1] as string}`}>
+                        <td style={tdStrongStyle}>{bi(row[0] as BiText, l)}</td>
+                        <td style={tdStyle}>{row[1] as string}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </Card>
           </>
         )}
