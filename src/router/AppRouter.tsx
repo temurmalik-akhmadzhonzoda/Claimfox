@@ -1,6 +1,9 @@
 import React from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
-import LoginPage from '@/pages/LoginPage'
+import Login from '@/pages/Login'
+import Signup from '@/pages/Signup'
+import ForgotPassword from '@/pages/ForgotPassword'
+import ResetPassword from '@/pages/ResetPassword'
 import HomePage from '@/pages/HomePage'
 import RegistrationPage from '@/pages/RegistrationPage'
 import RolesPage from '@/pages/RolesPage'
@@ -240,6 +243,12 @@ import CtoChiefTechnologyOfficerRolePage from '@/pages/CtoChiefTechnologyOfficer
 import EnterpriseArchitectRolePage from '@/pages/EnterpriseArchitectRolePage'
 import CisoSecurityOfficerRolePage from '@/pages/CisoSecurityOfficerRolePage'
 import DataGovernanceLeadRolePage from '@/pages/DataGovernanceLeadRolePage'
+import Dashboard from '@/pages/Dashboard'
+import Mitarbeiter from '@/pages/Mitarbeiter'
+import Management from '@/pages/Management'
+import CLevel from '@/pages/CLevel'
+import Admin from '@/pages/Admin'
+import RequireRole from '@/auth/RequireRole'
 
 function NotFoundRedirect() {
   const { isAuthenticated } = useAuth()
@@ -251,9 +260,12 @@ export default function AppRouter() {
     <Routes>
       <Route path="/" element={<Navigate to="/login" replace />} />
       <Route element={<FullscreenBgLayout showHeader={false} />}>
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
       </Route>
-      <Route element={<FullscreenBgLayout showHeader />}>
+      <Route element={<ProtectedRoute><FullscreenBgLayout showHeader /></ProtectedRoute>}>
         <Route path="/roles/underwriter/reporting" element={<UnderwriterReportingPage />} />
         <Route path="/roles/underwriter/junior" element={<UnderwriterJuniorPage />} />
         <Route path="/roles/underwriter/senior" element={<UnderwriterSeniorPage />} />
@@ -312,9 +324,14 @@ export default function AppRouter() {
         <Route path="/demo-partners/parts/step/:stepId" element={<DemoPartnerPartsStepPage />} />
       </Route>
       <Route element={<ProtectedRoute><FullscreenBgLayout showHeader /></ProtectedRoute>}>
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/mitarbeiter" element={<Mitarbeiter />} />
+        <Route path="/management" element={<RequireRole roles={['management']}><Management /></RequireRole>} />
+        <Route path="/c-level" element={<RequireRole roles={['c-level']}><CLevel /></RequireRole>} />
+        <Route path="/admin" element={<RequireRole roles={['c-level']}><Admin /></RequireRole>} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/transport-market-report" element={<TransportMarketReportPage />} />
-        <Route path="/managementreports" element={<ManagementReportsPage />} />
+        <Route path="/managementreports" element={<RequireRole roles={['management']}><ManagementReportsPage /></RequireRole>} />
         <Route path="/strategy/loadsure-analysis" element={<LoadsureAnalysisPage />} />
         <Route path="/strategy/wtw-analysis" element={<WTWAnalysisPage />} />
         <Route path="/strategy/nmip-analysis" element={<NMIPAnalysisPage />} />

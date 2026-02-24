@@ -1,13 +1,9 @@
 import React from 'react'
 import { Navigate, useLocation } from 'react-router-dom'
-import { useAuth } from '@/features/auth/AuthContext'
+import { useAuth } from '@/auth/AuthProvider'
 
-type ProtectedRouteProps = {
-  children: React.ReactElement
-}
-
-export default function ProtectedRoute({ children }: ProtectedRouteProps) {
-  const { authReady, isAuthenticated, user } = useAuth()
+export default function RequireAuth({ children }) {
+  const { authReady, isAuthenticated } = useAuth()
   const location = useLocation()
 
   if (!authReady) {
@@ -21,11 +17,6 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
   if (!isAuthenticated) {
     const returnTo = `${location.pathname}${location.search}${location.hash}`
     return <Navigate to={`/login?returnTo=${encodeURIComponent(returnTo)}`} replace />
-  }
-
-  const roles = Array.isArray(user?.roles) ? user.roles : []
-  if (roles.length === 0) {
-    return <Navigate to="/login" replace />
   }
 
   return children
