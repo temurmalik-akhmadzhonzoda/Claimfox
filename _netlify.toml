@@ -3,6 +3,18 @@
   publish = "dist"
 
 [[redirects]]
+  from = "http://claimsfox.com/*"
+  to = "https://claimsfox.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.claimsfox.com/*"
+  to = "https://claimsfox.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/:splat"
   status = 200
@@ -36,3 +48,13 @@
   from = "/*"
   to = "/index.html"
   status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Content-Security-Policy = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://*.auth0.com https://*.netlify.app https://claimsfox.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://*.auth0.com"
