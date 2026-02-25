@@ -9,7 +9,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "start": "node server/index.mjs",
-    "pdf": "node scripts/render-pdf.mjs"
+    "pdf": "node scripts/render-pdf.mjs",
+    "predeploy:check": "bash scripts/predeploy-check.sh"
   },
   "dependencies": {
     "react": "^18.2.0",
