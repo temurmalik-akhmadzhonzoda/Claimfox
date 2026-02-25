@@ -13,7 +13,6 @@ const OAUTH_RETURN_TO_KEY = 'cf_oauth_return_to'
 const OAUTH_VERIFIER_FALLBACK_KEY = 'cf_oauth_verifier_fallback'
 const OAUTH_STATE_FALLBACK_KEY = 'cf_oauth_state_fallback'
 const OAUTH_RETURN_TO_FALLBACK_KEY = 'cf_oauth_return_to_fallback'
-const OAUTH_TX_STORAGE_KEY = 'cf_oauth_transactions'
 
 const ROLE_ORDER = {
   mitarbeiter: 1,
@@ -57,33 +56,6 @@ function getOAuthItem(sessionKey, fallbackKey) {
 function clearOAuthItem(sessionKey, fallbackKey) {
   sessionStorage.removeItem(sessionKey)
   window.localStorage.removeItem(fallbackKey)
-}
-
-function readOAuthTransactions() {
-  const raw = window.localStorage.getItem(OAUTH_TX_STORAGE_KEY)
-  const parsed = safeJsonParse(raw || '[]')
-  if (!Array.isArray(parsed)) return []
-  return parsed.filter((tx) => tx && typeof tx.state === 'string' && typeof tx.verifier === 'string')
-}
-
-function writeOAuthTransactions(transactions) {
-  window.localStorage.setItem(OAUTH_TX_STORAGE_KEY, JSON.stringify(transactions))
-}
-
-function storeOAuthTransaction(tx) {
-  const current = readOAuthTransactions()
-  const next = [{ ...tx, createdAt: Date.now() }, ...current]
-    .filter((item) => Date.now() - Number(item.createdAt || 0) < 10 * 60 * 1000)
-    .slice(0, 8)
-  writeOAuthTransactions(next)
-}
-
-function consumeOAuthTransaction(state) {
-  const current = readOAuthTransactions()
-  const matched = current.find((tx) => tx.state === state) || null
-  if (!matched) return null
-  writeOAuthTransactions(current.filter((tx) => tx.state !== state))
-  return matched
 }
 
 function persistSession(session) {
@@ -261,7 +233,6 @@ export function AuthProvider({ children }) {
     setOAuthItem(OAUTH_STATE_KEY, OAUTH_STATE_FALLBACK_KEY, state)
     setOAuthItem(OAUTH_VERIFIER_KEY, OAUTH_VERIFIER_FALLBACK_KEY, verifier)
     setOAuthItem(OAUTH_RETURN_TO_KEY, OAUTH_RETURN_TO_FALLBACK_KEY, returnTo)
-    storeOAuthTransaction({ state, verifier, returnTo })
 
     const params = new URLSearchParams({
       response_type: 'code',
@@ -298,10 +269,9 @@ export function AuthProvider({ children }) {
     if (error) throw new Error(errorDescription || error)
     if (!code || !state) throw new Error('Ungültiger OAuth Callback')
 
-    const tx = consumeOAuthTransaction(state)
-    const expectedState = tx?.state || getOAuthItem(OAUTH_STATE_KEY, OAUTH_STATE_FALLBACK_KEY)
-    const verifier = tx?.verifier || getOAuthItem(OAUTH_VERIFIER_KEY, OAUTH_VERIFIER_FALLBACK_KEY)
-    const returnTo = tx?.returnTo || getOAuthItem(OAUTH_RETURN_TO_KEY, OAUTH_RETURN_TO_FALLBACK_KEY) || '/dashboard'
+    const expectedState = getOAuthItem(OAUTH_STATE_KEY, OAUTH_STATE_FALLBACK_KEY)
+    const verifier = getOAuthItem(OAUTH_VERIFIER_KEY, OAUTH_VERIFIER_FALLBACK_KEY)
+    const returnTo = getOAuthItem(OAUTH_RETURN_TO_KEY, OAUTH_RETURN_TO_FALLBACK_KEY) || '/dashboard'
 
     if (!expectedState || state !== expectedState || !verifier) {
       throw new Error('OAuth-Statusprüfung fehlgeschlagen')
