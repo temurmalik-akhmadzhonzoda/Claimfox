@@ -4,29 +4,17 @@ import { useAuth } from '@/auth/AuthProvider'
 
 export default function AuthCallback() {
   const navigate = useNavigate()
-  const { handleAuthCallback } = useAuth()
+  const { authReady, isAuthenticated } = useAuth()
   const [error, setError] = useState('')
 
   useEffect(() => {
-    let active = true
-
-    async function run() {
-      try {
-        const result = await handleAuthCallback(window.location.search)
-        if (!active) return
-        navigate(result?.returnTo || '/dashboard', { replace: true })
-      } catch (err) {
-        if (!active) return
-        setError(err?.message || 'Login Callback fehlgeschlagen')
-      }
+    if (!authReady) return
+    if (isAuthenticated) {
+      navigate('/dashboard', { replace: true })
+      return
     }
-
-    run()
-
-    return () => {
-      active = false
-    }
-  }, [handleAuthCallback, navigate])
+    setError('Auth0 Callback konnte nicht abgeschlossen werden.')
+  }, [authReady, isAuthenticated, navigate])
 
   return (
     <section style={{ minHeight: '100vh', display: 'grid', placeItems: 'center', background: '#f8fafc', padding: '1rem' }}>

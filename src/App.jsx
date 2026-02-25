@@ -7,11 +7,11 @@ import AppRouter from '@/router/AppRouter'
 export default function App() {
   return (
     <I18nProvider>
-      <AuthProvider>
-        <BrowserRouter>
+      <BrowserRouter>
+        <AuthProvider>
           <AppRouter />
-        </BrowserRouter>
-      </AuthProvider>
+        </AuthProvider>
+      </BrowserRouter>
     </I18nProvider>
   )
 }

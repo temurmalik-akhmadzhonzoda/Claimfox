@@ -1,11 +1,11 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import { Link, useNavigate, useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useAuth } from '@/auth/AuthProvider'
 
 export default function Login() {
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
-  const { login, authReady, isAuthenticated } = useAuth()
+  const { login, signup, forgotPassword, authReady, isAuthenticated } = useAuth()
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
@@ -26,6 +26,28 @@ export default function Login() {
     }
   }
 
+  async function startSignup() {
+    setError('')
+    setLoading(true)
+    try {
+      await signup({ returnTo })
+    } catch (err) {
+      setError(err?.message || 'Registrierung fehlgeschlagen')
+      setLoading(false)
+    }
+  }
+
+  async function startReset() {
+    setError('')
+    setLoading(true)
+    try {
+      await forgotPassword('')
+    } catch (err) {
+      setError(err?.message || 'Passwort-Reset fehlgeschlagen')
+      setLoading(false)
+    }
+  }
+
   return (
     <section style={{ minHeight: '100vh', display: 'grid', placeItems: 'center', background: '#f8fafc', padding: '1rem' }}>
       <div style={{ width: '100%', maxWidth: 420, background: '#fff', border: '1px solid #e2e8f0', borderRadius: 14, padding: '1.2rem', display: 'grid', gap: '0.8rem' }}>
@@ -34,8 +56,8 @@ export default function Login() {
         {error ? <div style={{ color: '#b91c1c', fontSize: '0.82rem' }}>{error}</div> : null}
         <button disabled={loading} onClick={startLogin} type="button" style={buttonStyle}>{loading ? 'Weiterleitung...' : 'Mit Auth0 anmelden'}</button>
         <div style={{ display: 'flex', justifyContent: 'space-between', gap: '0.6rem', fontSize: '0.84rem' }}>
-          <Link to="/forgot-password">Passwort vergessen?</Link>
-          <Link to="/signup" style={{ fontWeight: 600 }}>Registrieren</Link>
+          <button type="button" onClick={startReset} style={linkButtonStyle}>Passwort vergessen?</button>
+          <button type="button" onClick={startSignup} style={{ ...linkButtonStyle, fontWeight: 600 }}>Registrieren</button>
         </div>
       </div>
     </section>
@@ -50,4 +72,13 @@ const buttonStyle = {
   color: '#fff',
   fontWeight: 600,
   cursor: 'pointer'
+}
+
+const linkButtonStyle = {
+  appearance: 'none',
+  background: 'none',
+  border: 'none',
+  color: '#2563eb',
+  cursor: 'pointer',
+  padding: 0
 }
