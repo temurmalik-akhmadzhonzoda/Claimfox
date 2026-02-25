@@ -1,16 +1,31 @@
 import { useAuth } from '@/auth/AuthProvider'
 
+function normalizeApiPath(path) {
+  if (typeof path !== 'string' || path.length === 0) return path
+  if (path.startsWith('/.netlify/functions/')) {
+    return `/api/${path.replace('/.netlify/functions/', '')}`
+  }
+  return path
+}
+
 export async function apiFetch(path, options = {}, getToken) {
   const token = await getToken()
-  const response = await fetch(path, {
-    method: options.method || 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
-      ...(options.headers || {})
-    },
-    body: options.body ? JSON.stringify(options.body) : undefined
-  })
+  let response
+  try {
+    response = await fetch(normalizeApiPath(path), {
+      method: options.method || 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        ...(options.headers || {})
+      },
+      body: options.body ? JSON.stringify(options.body) : undefined
+    })
+  } catch (networkErr) {
+    const error = new Error(`Network error while calling ${normalizeApiPath(path)}: ${networkErr?.message || 'Failed to fetch'}`)
+    error.cause = networkErr
+    throw error
+  }
 
   const data = await response.json().catch(() => ({}))
 

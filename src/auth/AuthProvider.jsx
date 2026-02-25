@@ -116,7 +116,7 @@ function mapUserFromClaims(claims) {
 
 async function loadAuth0Config() {
   if (auth0ConfigCache) return auth0ConfigCache
-  const res = await fetch('/.netlify/functions/auth-config', { method: 'GET' })
+  const res = await fetch('/api/auth-config', { method: 'GET' })
   const payload = await res.json().catch(() => ({}))
   if (!res.ok || !payload?.ok) {
     const msg = payload?.error?.message || 'Auth-Konfiguration konnte nicht geladen werden.'
@@ -198,7 +198,7 @@ export function AuthProvider({ children }) {
     const token = tokenOverride || (await ensureValidToken())
     if (!token) return
     try {
-      await fetch('/.netlify/functions/auth-init', {
+      await fetch('/api/auth-init', {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}` }
       })
