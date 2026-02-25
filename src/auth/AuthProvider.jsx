@@ -85,6 +85,18 @@ function takeOAuthTransaction(state) {
   return match
 }
 
+function takeLatestFreshOAuthTransaction(maxAgeMs = 2 * 60 * 1000) {
+  const now = Date.now()
+  const all = readOAuthTransactions()
+  const fresh = all
+    .filter((item) => now - Number(item?.ts || 0) <= maxAgeMs)
+    .sort((a, b) => Number(b?.ts || 0) - Number(a?.ts || 0))
+  if (fresh.length !== 1) return null
+  const chosen = fresh[0]
+  writeOAuthTransactions(all.filter((item) => item?.state !== chosen.state))
+  return chosen
+}
+
 function normalizeRoles(rawRoles) {
   if (!Array.isArray(rawRoles)) return []
   return rawRoles.filter((role) => role in ROLE_ORDER)
@@ -309,7 +321,11 @@ export function AuthProvider({ children }) {
     if (error) throw new Error(errorDescription || error)
     if (!code || !state) throw new Error('Ungültiger OAuth Callback')
 
-    const tx = takeOAuthTransaction(state)
+    let tx = takeOAuthTransaction(state)
+    if (!tx) {
+      // Controlled fallback for browsers where state storage is intermittently lost.
+      tx = takeLatestFreshOAuthTransaction()
+    }
     const expectedState = tx?.state || sessionStorage.getItem(OAUTH_STATE_KEY) || window.localStorage.getItem(OAUTH_STATE_KEY)
     const verifier = tx?.verifier || sessionStorage.getItem(OAUTH_VERIFIER_KEY) || window.localStorage.getItem(OAUTH_VERIFIER_KEY)
     const returnTo = tx?.returnTo || sessionStorage.getItem(OAUTH_RETURN_TO_KEY) || window.localStorage.getItem(OAUTH_RETURN_TO_KEY) || '/dashboard'
