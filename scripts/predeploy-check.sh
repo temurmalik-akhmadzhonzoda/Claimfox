@@ -28,15 +28,13 @@ if rg -q "from = \"/\.netlify/" netlify.toml; then
 fi
 
 if [[ -f "public/_redirects" ]]; then
-  if ! rg -q "^/\* /index\.html 200$" public/_redirects; then
-    echo "public/_redirects missing canonical SPA fallback: '/* /index.html 200'"
-    exit 1
-  fi
+  echo "Found public/_redirects. Keep redirects in netlify.toml only to avoid rule drift."
+  exit 1
+fi
 
-  if rg -q "^/\.netlify/" public/_redirects; then
-    echo "Invalid redirect source '/.netlify/*' found in public/_redirects"
-    exit 1
-  fi
+if [[ -f "_netlify.toml" ]]; then
+  echo "Found _netlify.toml. Keep only netlify.toml to avoid confusion."
+  exit 1
 fi
 
 echo "[3/4] Auth runtime check (static sanity)"

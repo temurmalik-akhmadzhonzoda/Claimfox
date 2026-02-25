@@ -28,10 +28,20 @@ function detectOrigin(event) {
   return 'https://claimsfox.com'
 }
 
+function sanitizeAudience(rawAudience) {
+  const value = (rawAudience || '').trim()
+  if (!value) return null
+  // Auth0 Management API audience is for server-to-server use only and
+  // should not be requested by the browser login flow.
+  if (/\/api\/v2\/?$/i.test(value)) return null
+  return value
+}
+
 exports.handler = async (event) => {
   const domain = firstEnv('AUTH0_DOMAIN', 'VITE_AUTH0_DOMAIN', 'REACT_APP_AUTH0_DOMAIN', 'NEXT_PUBLIC_AUTH0_DOMAIN')
   const issuerRaw = firstEnv('AUTH0_ISSUER', 'VITE_AUTH0_ISSUER', 'REACT_APP_AUTH0_ISSUER', 'NEXT_PUBLIC_AUTH0_ISSUER') || (domain ? `https://${domain}/` : '')
-  const audience = firstEnv('AUTH0_AUDIENCE', 'VITE_AUTH0_AUDIENCE', 'REACT_APP_AUTH0_AUDIENCE', 'NEXT_PUBLIC_AUTH0_AUDIENCE')
+  const audienceRaw = firstEnv('AUTH0_AUDIENCE', 'VITE_AUTH0_AUDIENCE', 'REACT_APP_AUTH0_AUDIENCE', 'NEXT_PUBLIC_AUTH0_AUDIENCE')
+  const audience = sanitizeAudience(audienceRaw)
   const clientId = firstEnv('AUTH0_CLIENT_ID', 'VITE_AUTH0_CLIENT_ID', 'REACT_APP_AUTH0_CLIENT_ID', 'NEXT_PUBLIC_AUTH0_CLIENT_ID')
 
   if (!domain || !clientId) {
@@ -42,6 +52,13 @@ exports.handler = async (event) => {
         auth0_issuer: hasEnv('AUTH0_ISSUER', 'VITE_AUTH0_ISSUER', 'REACT_APP_AUTH0_ISSUER', 'NEXT_PUBLIC_AUTH0_ISSUER'),
         auth0_audience: hasEnv('AUTH0_AUDIENCE', 'VITE_AUTH0_AUDIENCE', 'REACT_APP_AUTH0_AUDIENCE', 'NEXT_PUBLIC_AUTH0_AUDIENCE')
       }
+    })
+  }
+
+  // Fast-fail common misconfiguration where AUTH0_CLIENT_ID is set to a domain.
+  if (/\./.test(clientId) || /auth0\.com/i.test(clientId)) {
+    return error(500, 'auth_config_error', 'AUTH0_CLIENT_ID is invalid. Use the Auth0 Application Client ID (not a domain).', {
+      hint: 'Open Auth0 Dashboard -> Applications -> your SPA app -> Settings -> Client ID'
     })
   }
 

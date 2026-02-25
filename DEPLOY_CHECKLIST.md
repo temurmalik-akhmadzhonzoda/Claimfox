@@ -2,8 +2,8 @@
 
 ## Before push to `main`
 1. Run `npm run predeploy:check`.
-2. Verify `netlify.toml` contains only safe fallback redirect (`/* -> /index.html 200`) unless intentionally changed.
-3. Verify `public/_redirects` contains `/* /index.html 200` and no `/.netlify/...` redirect sources.
+2. Verify `netlify.toml` contains the canonical redirects (`/api/* -> /.netlify/functions/:splat`, `/* -> /index.html 200`).
+3. Ensure there is no `public/_redirects` and no `_netlify.toml` (single source of truth: `netlify.toml`).
 4. Confirm auth env vars exist in Netlify (Production context):
    - `AUTH0_DOMAIN`
    - `AUTH0_CLIENT_ID`
@@ -18,13 +18,15 @@
 
 ## After deploy (smoke test)
 1. Open `/` and `/login`.
-2. Open `/.netlify/functions/auth-config` and verify `ok: true`.
-3. Open `/signup` and confirm redirect to Auth0 works.
-4. Complete login and confirm callback `/auth/callback` returns to app.
-5. Test new user without role:
+2. Open `/api/health` and verify `ok: true` and expected host.
+3. Open `/.netlify/functions/auth-config` and verify `ok: true`.
+4. Open `/auth/call` and verify it resolves to callback page (legacy-safe alias).
+5. Open `/signup` and confirm redirect to Auth0 works.
+6. Complete login and confirm callback `/auth/callback` returns to app.
+7. Test new user without role:
    - redirected to `/access-request`
    - no sensitive pages visible.
-6. Test admin flow:
+8. Test admin flow:
    - `/admin` loads users
    - role assignment works.
 
