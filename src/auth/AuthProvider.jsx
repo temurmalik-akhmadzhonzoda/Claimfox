@@ -10,6 +10,7 @@ const USER_STORAGE_KEY = 'cf_user'
 const OAUTH_VERIFIER_KEY = 'cf_oauth_verifier'
 const OAUTH_STATE_KEY = 'cf_oauth_state'
 const OAUTH_RETURN_TO_KEY = 'cf_oauth_return_to'
+const OAUTH_TX_KEY = 'cf_oauth_tx'
 
 const ROLE_ORDER = {
   mitarbeiter: 1,
@@ -56,6 +57,32 @@ function persistSession(session) {
   else window.localStorage.removeItem(REFRESH_STORAGE_KEY)
   window.localStorage.setItem(EXP_STORAGE_KEY, String(session.exp))
   window.localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(session.user))
+}
+
+function readOAuthTransactions() {
+  const raw = window.localStorage.getItem(OAUTH_TX_KEY)
+  const parsed = safeJsonParse(raw || '[]')
+  return Array.isArray(parsed) ? parsed : []
+}
+
+function writeOAuthTransactions(items) {
+  window.localStorage.setItem(OAUTH_TX_KEY, JSON.stringify(items))
+}
+
+function putOAuthTransaction(tx) {
+  const now = Date.now()
+  const next = [{ ...tx, ts: now }, ...readOAuthTransactions()]
+    .filter((item) => now - Number(item?.ts || 0) < 15 * 60 * 1000)
+    .slice(0, 10)
+  writeOAuthTransactions(next)
+}
+
+function takeOAuthTransaction(state) {
+  const all = readOAuthTransactions()
+  const match = all.find((item) => item?.state === state) || null
+  if (!match) return null
+  writeOAuthTransactions(all.filter((item) => item?.state !== state))
+  return match
 }
 
 function normalizeRoles(rawRoles) {
@@ -242,6 +269,10 @@ export function AuthProvider({ children }) {
     sessionStorage.setItem(OAUTH_STATE_KEY, state)
     sessionStorage.setItem(OAUTH_VERIFIER_KEY, verifier)
     sessionStorage.setItem(OAUTH_RETURN_TO_KEY, returnTo)
+    window.localStorage.setItem(OAUTH_STATE_KEY, state)
+    window.localStorage.setItem(OAUTH_VERIFIER_KEY, verifier)
+    window.localStorage.setItem(OAUTH_RETURN_TO_KEY, returnTo)
+    putOAuthTransaction({ state, verifier, returnTo })
 
     const params = new URLSearchParams({
       response_type: 'code',
@@ -278,9 +309,10 @@ export function AuthProvider({ children }) {
     if (error) throw new Error(errorDescription || error)
     if (!code || !state) throw new Error('Ungültiger OAuth Callback')
 
-    const expectedState = sessionStorage.getItem(OAUTH_STATE_KEY)
-    const verifier = sessionStorage.getItem(OAUTH_VERIFIER_KEY)
-    const returnTo = sessionStorage.getItem(OAUTH_RETURN_TO_KEY) || '/dashboard'
+    const tx = takeOAuthTransaction(state)
+    const expectedState = tx?.state || sessionStorage.getItem(OAUTH_STATE_KEY) || window.localStorage.getItem(OAUTH_STATE_KEY)
+    const verifier = tx?.verifier || sessionStorage.getItem(OAUTH_VERIFIER_KEY) || window.localStorage.getItem(OAUTH_VERIFIER_KEY)
+    const returnTo = tx?.returnTo || sessionStorage.getItem(OAUTH_RETURN_TO_KEY) || window.localStorage.getItem(OAUTH_RETURN_TO_KEY) || '/dashboard'
 
     if (!expectedState || state !== expectedState || !verifier) {
       throw new Error('OAuth-Statusprüfung fehlgeschlagen')
@@ -307,6 +339,9 @@ export function AuthProvider({ children }) {
     sessionStorage.removeItem(OAUTH_STATE_KEY)
     sessionStorage.removeItem(OAUTH_VERIFIER_KEY)
     sessionStorage.removeItem(OAUTH_RETURN_TO_KEY)
+    window.localStorage.removeItem(OAUTH_STATE_KEY)
+    window.localStorage.removeItem(OAUTH_VERIFIER_KEY)
+    window.localStorage.removeItem(OAUTH_RETURN_TO_KEY)
 
     if ((next.user?.roles || []).length === 0) {
       await initializeAccessRequest(next.token)
