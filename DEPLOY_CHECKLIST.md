@@ -15,6 +15,9 @@
    - `AUTH0_MGMT_CLIENT_SECRET`
    - `AUTH0_MGMT_AUDIENCE`
    - `AUTH0_MGMT_DOMAIN`
+6. Optional bootstrap admin (first access control owner):
+   - `AUTH_BOOTSTRAP_ADMIN_EMAIL` (single mail) or
+   - `AUTH_BOOTSTRAP_ADMIN_EMAILS` (comma-separated list)
 
 ## After deploy (smoke test)
 1. Open `/` and `/login`.

@@ -215,14 +215,23 @@ export function AuthProvider({ children }) {
     const token = tokenOverride || (await ensureValidToken())
     if (!token) return
     try {
-      await fetch('/api/auth-init', {
+      const res = await fetch('/api/auth-init', {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}` }
       })
+      const payload = await res.json().catch(() => ({}))
+
+      if (res.ok && Array.isArray(payload?.roles) && payload.roles.length > 0) {
+        const current = readSession()
+        if (current?.token) {
+          const nextUser = { ...(current.user || {}), roles: payload.roles, app_metadata: { ...(current.user?.app_metadata || {}), roles: payload.roles } }
+          applySession({ ...current, user: nextUser })
+        }
+      }
     } catch {
       // no-op
     }
-  }, [ensureValidToken])
+  }, [applySession, ensureValidToken])
 
   const startAuth = useCallback(async ({ mode = 'login', returnTo = '/dashboard' } = {}) => {
     const cfg = await loadAuth0Config()
