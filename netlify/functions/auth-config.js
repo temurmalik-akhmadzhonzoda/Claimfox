@@ -20,13 +20,11 @@ function detectOrigin(event) {
   const proto = event?.headers?.['x-forwarded-proto'] || 'https'
   const host = event?.headers?.host
 
-  // Prefer the actual request host to avoid stale SITE_ORIGIN values.
-  if (host && host.includes('claimsfox.com')) return `${proto}://${host}`
+  // Always prefer the actual request host (works for both claimsfox.com and claimsfox.netlify.app).
+  if (host) return `${proto}://${host}`
 
   const envOrigin = firstEnv('SITE_ORIGIN', 'URL', 'DEPLOY_PRIME_URL')
   if (envOrigin) return envOrigin.replace(/\/+$/, '')
-
-  if (host) return `${proto}://${host}`
   return 'https://claimsfox.com'
 }
 
