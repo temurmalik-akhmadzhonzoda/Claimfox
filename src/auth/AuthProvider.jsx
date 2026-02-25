@@ -10,6 +10,7 @@ const USER_STORAGE_KEY = 'cf_user'
 const OAUTH_VERIFIER_KEY = 'cf_oauth_verifier'
 const OAUTH_STATE_KEY = 'cf_oauth_state'
 const OAUTH_RETURN_TO_KEY = 'cf_oauth_return_to'
+const OAUTH_TX_KEY = 'cf_oauth_tx'
 
 const ROLE_ORDER = {
   mitarbeiter: 1,
@@ -92,6 +93,30 @@ function decodeJwt(token) {
   const padded = normalized.padEnd(Math.ceil(normalized.length / 4) * 4, '=')
   const json = atob(padded)
   return safeJsonParse(json) || {}
+}
+
+function writeOAuthTx(tx) {
+  try {
+    localStorage.setItem(OAUTH_TX_KEY, JSON.stringify(tx))
+  } catch {
+    // ignore storage errors
+  }
+}
+
+function readOAuthTx() {
+  try {
+    return safeJsonParse(localStorage.getItem(OAUTH_TX_KEY) || '')
+  } catch {
+    return null
+  }
+}
+
+function clearOAuthTx() {
+  try {
+    localStorage.removeItem(OAUTH_TX_KEY)
+  } catch {
+    // ignore storage errors
+  }
 }
 
 function mapRolesFromClaims(claims) {
@@ -216,6 +241,12 @@ export function AuthProvider({ children }) {
     sessionStorage.setItem(OAUTH_STATE_KEY, state)
     sessionStorage.setItem(OAUTH_VERIFIER_KEY, verifier)
     sessionStorage.setItem(OAUTH_RETURN_TO_KEY, returnTo)
+    writeOAuthTx({
+      state,
+      verifier,
+      returnTo,
+      ts: Date.now()
+    })
 
     const params = new URLSearchParams({
       response_type: 'code',
@@ -252,9 +283,10 @@ export function AuthProvider({ children }) {
     if (error) throw new Error(errorDescription || error)
     if (!code || !state) throw new Error('Ungültiger OAuth Callback')
 
-    const expectedState = sessionStorage.getItem(OAUTH_STATE_KEY)
-    const verifier = sessionStorage.getItem(OAUTH_VERIFIER_KEY)
-    const returnTo = sessionStorage.getItem(OAUTH_RETURN_TO_KEY) || '/dashboard'
+    const tx = readOAuthTx()
+    const expectedState = sessionStorage.getItem(OAUTH_STATE_KEY) || tx?.state || ''
+    const verifier = sessionStorage.getItem(OAUTH_VERIFIER_KEY) || tx?.verifier || ''
+    const returnTo = sessionStorage.getItem(OAUTH_RETURN_TO_KEY) || tx?.returnTo || '/dashboard'
 
     if (!expectedState || state !== expectedState || !verifier) {
       throw new Error('OAuth-Statusprüfung fehlgeschlagen')
@@ -281,6 +313,7 @@ export function AuthProvider({ children }) {
     sessionStorage.removeItem(OAUTH_STATE_KEY)
     sessionStorage.removeItem(OAUTH_VERIFIER_KEY)
     sessionStorage.removeItem(OAUTH_RETURN_TO_KEY)
+    clearOAuthTx()
 
     if ((next.user?.roles || []).length === 0) {
       await initializeAccessRequest(next.token)
