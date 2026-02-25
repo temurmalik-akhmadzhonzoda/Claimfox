@@ -18,6 +18,7 @@ const ROLE_ORDER = {
 }
 
 let auth0ConfigCache = null
+const AUTH_FETCH_TIMEOUT_MS = 12000
 
 function safeJsonParse(raw) {
   try {
@@ -116,7 +117,7 @@ function mapUserFromClaims(claims) {
 
 async function loadAuth0Config() {
   if (auth0ConfigCache) return auth0ConfigCache
-  const res = await fetch('/api/auth-config', { method: 'GET' })
+  const res = await fetchWithTimeout('/api/auth-config', { method: 'GET' }, AUTH_FETCH_TIMEOUT_MS)
   const payload = await res.json().catch(() => ({}))
   if (!res.ok || !payload?.ok) {
     const msg = payload?.error?.message || 'Auth-Konfiguration konnte nicht geladen werden.'
@@ -126,12 +127,28 @@ async function loadAuth0Config() {
   return auth0ConfigCache
 }
 
+async function fetchWithTimeout(input, init = {}, timeoutMs = AUTH_FETCH_TIMEOUT_MS) {
+  const controller = new AbortController()
+  const timeout = setTimeout(() => controller.abort(), timeoutMs)
+  try {
+    return await fetch(input, { ...init, signal: controller.signal })
+  } finally {
+    clearTimeout(timeout)
+  }
+}
+
 async function tokenRequest(domain, body) {
-  const response = await fetch(`https://${domain}/oauth/token`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body)
-  })
+  let response
+  try {
+    response = await fetchWithTimeout(`https://${domain}/oauth/token`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    }, AUTH_FETCH_TIMEOUT_MS)
+  } catch (err) {
+    const message = err?.name === 'AbortError' ? 'Auth0 request timeout' : `Auth0 request failed: ${err?.message || 'unknown error'}`
+    throw new Error(message)
+  }
   const payload = await response.json().catch(() => ({}))
   if (!response.ok) {
     const message = payload?.error_description || payload?.error || `Token request failed (${response.status})`
