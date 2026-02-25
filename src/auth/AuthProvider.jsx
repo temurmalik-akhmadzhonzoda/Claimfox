@@ -11,21 +11,46 @@ const ROLE_ORDER = {
 }
 
 function getAuthConfig() {
-  const domain = import.meta.env.VITE_AUTH0_DOMAIN || ''
-  const clientId = import.meta.env.VITE_AUTH0_CLIENT_ID || ''
-  const audience = import.meta.env.VITE_AUTH0_AUDIENCE || ''
-  const rolesClaim = import.meta.env.VITE_AUTH0_ROLES_CLAIM || 'https://claimsfox.com/roles'
+  const domain =
+    import.meta.env.VITE_AUTH0_DOMAIN ||
+    import.meta.env.AUTH0_DOMAIN ||
+    ''
 
-  if (!domain || !clientId) {
-    throw new Error('Missing VITE_AUTH0_DOMAIN or VITE_AUTH0_CLIENT_ID')
-  }
+  const clientId =
+    import.meta.env.VITE_AUTH0_CLIENT_ID ||
+    import.meta.env.AUTH0_CLIENT_ID ||
+    ''
+
+  const audience =
+    import.meta.env.VITE_AUTH0_AUDIENCE ||
+    import.meta.env.AUTH0_AUDIENCE ||
+    ''
+
+  const rolesClaim =
+    import.meta.env.VITE_AUTH0_ROLES_CLAIM ||
+    import.meta.env.AUTH0_ROLES_CLAIM ||
+    'https://claimsfox.com/roles'
 
   return {
     domain,
     clientId,
     audience: audience || undefined,
-    rolesClaim
+    rolesClaim,
+    isConfigured: Boolean(domain && clientId)
   }
+}
+
+function AuthConfigError() {
+  return (
+    <section style={{ minHeight: '100vh', display: 'grid', placeItems: 'center', background: '#fff', padding: '1rem' }}>
+      <div style={{ maxWidth: 700, width: '100%', border: '1px solid #e2e8f0', borderRadius: 12, padding: '1rem', background: '#fff' }}>
+        <h1 style={{ margin: 0, marginBottom: '0.5rem', color: '#0f172a', fontSize: '1.1rem' }}>Authentication Configuration Error</h1>
+        <p style={{ margin: 0, color: '#334155', fontSize: '0.92rem' }}>
+          Auth0 configuration missing. Please check Netlify environment variables.
+        </p>
+      </div>
+    </section>
+  )
 }
 
 function normalizeRoles(rawRoles) {
@@ -162,6 +187,9 @@ function Auth0ProviderWithNavigate({ children }) {
 }
 
 export function AuthProvider({ children }) {
+  const config = getAuthConfig()
+  if (!config.isConfigured) return <AuthConfigError />
+
   return (
     <Auth0ProviderWithNavigate>
       <AuthBridge>{children}</AuthBridge>
