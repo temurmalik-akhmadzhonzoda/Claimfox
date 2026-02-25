@@ -1,4 +1,5 @@
-const { requireRole, auth0ManagementRequest, sanitizeRoles, ROLE_VALUES, json, error, rateLimit } = require('./_utils')
+const { requireRole, sanitizeRoles, ROLE_VALUES } = require('./_auth0')
+const { auth0ManagementRequest, json, error, rateLimit } = require('./_utils')
 
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST' && event.httpMethod !== 'PATCH') {

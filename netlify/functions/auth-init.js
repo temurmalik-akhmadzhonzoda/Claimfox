@@ -1,4 +1,5 @@
-const { requireAuth, auth0ManagementRequest, sanitizeRoles, json, error, rateLimit } = require('./_utils')
+const { requireAuth, sanitizeRoles } = require('./_auth0')
+const { auth0ManagementRequest, json, error, rateLimit } = require('./_utils')
 
 function getBootstrapAdminEmails() {
   const raw = process.env.AUTH_BOOTSTRAP_ADMIN_EMAILS || process.env.AUTH_BOOTSTRAP_ADMIN_EMAIL || ''

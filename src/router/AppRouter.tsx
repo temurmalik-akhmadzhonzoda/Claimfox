@@ -1,9 +1,6 @@
 import React from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import Login from '@/pages/Login'
-import Signup from '@/pages/Signup'
-import ForgotPassword from '@/pages/ForgotPassword'
-import ResetPassword from '@/pages/ResetPassword'
 import AuthCallback from '@/pages/AuthCallback'
 import HomePage from '@/pages/HomePage'
 import RegistrationPage from '@/pages/RegistrationPage'
@@ -263,9 +260,10 @@ export default function AppRouter() {
       <Route path="/" element={<Navigate to="/login" replace />} />
       <Route element={<FullscreenBgLayout showHeader={false} />}>
         <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/signup" element={<Navigate to="/login" replace />} />
+        <Route path="/forgot-password" element={<Navigate to="/login" replace />} />
+        <Route path="/reset-password" element={<Navigate to="/login" replace />} />
+        <Route path="/callback" element={<AuthCallback />} />
         <Route path="/auth/callback" element={<AuthCallback />} />
         <Route path="/auth/call" element={<AuthCallback />} />
       </Route>

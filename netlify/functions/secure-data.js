@@ -1,4 +1,5 @@
-const { requireAnyRole, json, error, rateLimit, hasAtLeastRole } = require('./_utils')
+const { requireAnyRole, hasAtLeastRole } = require('./_auth0')
+const { json, error, rateLimit } = require('./_utils')
 
 exports.handler = async (event) => {
   if (event.httpMethod !== 'GET') return error(405, 'method_not_allowed', 'Only GET allowed')

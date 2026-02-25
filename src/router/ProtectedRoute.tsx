@@ -1,5 +1,6 @@
 import React from 'react'
-import { Navigate, useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import { useAuth } from '@/features/auth/AuthContext'
 
 type ProtectedRouteProps = {
@@ -7,8 +8,15 @@ type ProtectedRouteProps = {
 }
 
 export default function ProtectedRoute({ children }: ProtectedRouteProps) {
-  const { authReady, isAuthenticated, getRoles } = useAuth()
+  const { authReady, isAuthenticated, login } = useAuth()
   const location = useLocation()
+  const returnTo = `${location.pathname}${location.search}${location.hash}`
+  const shouldRedirectToLogin = authReady && !isAuthenticated
+
+  useEffect(() => {
+    if (!shouldRedirectToLogin) return
+    login({ returnTo }).catch(() => {})
+  }, [login, returnTo, shouldRedirectToLogin])
 
   if (!authReady) {
     return (
@@ -19,14 +27,11 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
   }
 
   if (!isAuthenticated) {
-    const returnTo = `${location.pathname}${location.search}${location.hash}`
-    return <Navigate to={`/login?returnTo=${encodeURIComponent(returnTo)}`} replace />
-  }
-
-  const roles = getRoles()
-  const isAccessRequestPage = location.pathname === '/access-request'
-  if (roles.length === 0 && !isAccessRequestPage) {
-    return <Navigate to="/access-request" replace />
+    return (
+      <section style={{ minHeight: '100vh', display: 'grid', placeItems: 'center', background: '#fff' }}>
+        <div style={{ color: '#334155', fontSize: '0.9rem' }}>Weiterleitung zum Login...</div>
+      </section>
+    )
   }
 
   return children

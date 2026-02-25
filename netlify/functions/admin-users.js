@@ -1,4 +1,5 @@
-const { requireRole, auth0ManagementRequest, sanitizeRoles, json, error, rateLimit } = require('./_utils')
+const { requireRole, sanitizeRoles } = require('./_auth0')
+const { auth0ManagementRequest, json, error, rateLimit } = require('./_utils')
 
 function mapUser(user) {
   const roles = sanitizeRoles(user?.app_metadata?.roles || [])

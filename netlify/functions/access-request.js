@@ -1,4 +1,5 @@
-const { requireAuth, auth0ManagementRequest, json, error, rateLimit } = require('./_utils')
+const { requireAuth } = require('./_auth0')
+const { auth0ManagementRequest, json, error, rateLimit } = require('./_utils')
 
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') return error(405, 'method_not_allowed', 'Only POST allowed')

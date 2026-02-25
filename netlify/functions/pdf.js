@@ -1,4 +1,5 @@
-const { requireAnyRole, error, rateLimit } = require('./_utils')
+const { requireAnyRole } = require('./_auth0')
+const { error, rateLimit } = require('./_utils')
 
 const ALLOWED_PREFIXES = [
   '/inside-insurfox',
