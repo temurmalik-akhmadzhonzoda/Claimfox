@@ -10,9 +10,6 @@ const USER_STORAGE_KEY = 'cf_user'
 const OAUTH_VERIFIER_KEY = 'cf_oauth_verifier'
 const OAUTH_STATE_KEY = 'cf_oauth_state'
 const OAUTH_RETURN_TO_KEY = 'cf_oauth_return_to'
-const OAUTH_VERIFIER_FALLBACK_KEY = 'cf_oauth_verifier_fallback'
-const OAUTH_STATE_FALLBACK_KEY = 'cf_oauth_state_fallback'
-const OAUTH_RETURN_TO_FALLBACK_KEY = 'cf_oauth_return_to_fallback'
 
 const ROLE_ORDER = {
   mitarbeiter: 1,
@@ -42,20 +39,6 @@ function readSession() {
   const user = safeJsonParse(window.localStorage.getItem(USER_STORAGE_KEY) || '')
   if (!token || !exp || !user) return null
   return { token, refreshToken, exp, user }
-}
-
-function setOAuthItem(sessionKey, fallbackKey, value) {
-  sessionStorage.setItem(sessionKey, value)
-  window.localStorage.setItem(fallbackKey, value)
-}
-
-function getOAuthItem(sessionKey, fallbackKey) {
-  return sessionStorage.getItem(sessionKey) || window.localStorage.getItem(fallbackKey)
-}
-
-function clearOAuthItem(sessionKey, fallbackKey) {
-  sessionStorage.removeItem(sessionKey)
-  window.localStorage.removeItem(fallbackKey)
 }
 
 function persistSession(session) {
@@ -230,9 +213,9 @@ export function AuthProvider({ children }) {
     const verifier = randomString(64)
     const challenge = base64UrlEncode(await sha256(verifier))
 
-    setOAuthItem(OAUTH_STATE_KEY, OAUTH_STATE_FALLBACK_KEY, state)
-    setOAuthItem(OAUTH_VERIFIER_KEY, OAUTH_VERIFIER_FALLBACK_KEY, verifier)
-    setOAuthItem(OAUTH_RETURN_TO_KEY, OAUTH_RETURN_TO_FALLBACK_KEY, returnTo)
+    sessionStorage.setItem(OAUTH_STATE_KEY, state)
+    sessionStorage.setItem(OAUTH_VERIFIER_KEY, verifier)
+    sessionStorage.setItem(OAUTH_RETURN_TO_KEY, returnTo)
 
     const params = new URLSearchParams({
       response_type: 'code',
@@ -269,9 +252,9 @@ export function AuthProvider({ children }) {
     if (error) throw new Error(errorDescription || error)
     if (!code || !state) throw new Error('Ungültiger OAuth Callback')
 
-    const expectedState = getOAuthItem(OAUTH_STATE_KEY, OAUTH_STATE_FALLBACK_KEY)
-    const verifier = getOAuthItem(OAUTH_VERIFIER_KEY, OAUTH_VERIFIER_FALLBACK_KEY)
-    const returnTo = getOAuthItem(OAUTH_RETURN_TO_KEY, OAUTH_RETURN_TO_FALLBACK_KEY) || '/dashboard'
+    const expectedState = sessionStorage.getItem(OAUTH_STATE_KEY)
+    const verifier = sessionStorage.getItem(OAUTH_VERIFIER_KEY)
+    const returnTo = sessionStorage.getItem(OAUTH_RETURN_TO_KEY) || '/dashboard'
 
     if (!expectedState || state !== expectedState || !verifier) {
       throw new Error('OAuth-Statusprüfung fehlgeschlagen')
@@ -295,9 +278,9 @@ export function AuthProvider({ children }) {
     }
 
     applySession(next)
-    clearOAuthItem(OAUTH_STATE_KEY, OAUTH_STATE_FALLBACK_KEY)
-    clearOAuthItem(OAUTH_VERIFIER_KEY, OAUTH_VERIFIER_FALLBACK_KEY)
-    clearOAuthItem(OAUTH_RETURN_TO_KEY, OAUTH_RETURN_TO_FALLBACK_KEY)
+    sessionStorage.removeItem(OAUTH_STATE_KEY)
+    sessionStorage.removeItem(OAUTH_VERIFIER_KEY)
+    sessionStorage.removeItem(OAUTH_RETURN_TO_KEY)
 
     if ((next.user?.roles || []).length === 0) {
       await initializeAccessRequest(next.token)
