@@ -15,10 +15,10 @@ function isSafeRoute(route) {
   return ALLOWED_PREFIXES.some((prefix) => route === prefix || route.startsWith(`${prefix}/`))
 }
 
-exports.handler = async (event, context) => {
+exports.handler = async (event) => {
   if (event.httpMethod !== 'GET') return error(405, 'method_not_allowed', 'Only GET allowed')
 
-  const auth = requireAnyRole(context, ['management'])
+  const auth = await requireAnyRole(event, ['management'])
   if (!auth.ok) return auth.response
 
   const ip = event.headers['x-nf-client-connection-ip'] || 'unknown'

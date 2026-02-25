@@ -194,6 +194,19 @@ export function AuthProvider({ children }) {
 
   const hasRole = useCallback((role) => hasAtLeastRole(getRoles(), role), [getRoles])
 
+  const initializeAccessRequest = useCallback(async (tokenOverride) => {
+    const token = tokenOverride || (await ensureValidToken())
+    if (!token) return
+    try {
+      await fetch('/.netlify/functions/auth-init', {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}` }
+      })
+    } catch {
+      // no-op
+    }
+  }, [ensureValidToken])
+
   const startAuth = useCallback(async ({ mode = 'login', returnTo = '/dashboard' } = {}) => {
     const cfg = await loadAuth0Config()
     const state = randomString(24)
@@ -269,8 +282,12 @@ export function AuthProvider({ children }) {
     sessionStorage.removeItem(OAUTH_VERIFIER_KEY)
     sessionStorage.removeItem(OAUTH_RETURN_TO_KEY)
 
+    if ((next.user?.roles || []).length === 0) {
+      await initializeAccessRequest(next.token)
+    }
+
     return { returnTo }
-  }, [applySession])
+  }, [applySession, initializeAccessRequest])
 
   const logout = useCallback(async () => {
     const cfg = await loadAuth0Config().catch(() => null)
@@ -317,6 +334,10 @@ export function AuthProvider({ children }) {
         const token = existing.exp - nowSeconds() > 90 ? existing.token : (await refresh()).token
         const current = readSession()
         if (mounted && current) applySession({ ...current, token })
+        const currentRoles = normalizeRoles(current?.user?.roles)
+        if (mounted && currentRoles.length === 0) {
+          await initializeAccessRequest(token)
+        }
       } catch {
         if (mounted) clearSession()
       } finally {
@@ -329,7 +350,7 @@ export function AuthProvider({ children }) {
     return () => {
       mounted = false
     }
-  }, [applySession, clearSession, refresh])
+  }, [applySession, clearSession, initializeAccessRequest, refresh])
 
   const value = useMemo(() => ({
     authReady,

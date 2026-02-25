@@ -1,6 +1,6 @@
-const { requireAuth, getRoles, sanitizeRoles, callNetlifyAdmin, json, error, rateLimit } = require('./_utils')
+const { requireAuth, auth0ManagementRequest, sanitizeRoles, json, error, rateLimit } = require('./_utils')
 
-exports.handler = async (event, context) => {
+exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') {
     return error(405, 'method_not_allowed', 'Only POST allowed')
   }
@@ -10,37 +10,33 @@ exports.handler = async (event, context) => {
     return error(429, 'rate_limited', 'Too many requests')
   }
 
-  const auth = requireAuth(context)
+  const auth = await requireAuth(event)
   if (!auth.ok) return auth.response
 
-  const user = auth.user
-  const currentRoles = getRoles(user)
+  const currentRoles = sanitizeRoles(auth.roles)
   if (currentRoles.length > 0) {
     return json(200, { ok: true, roles: currentRoles, initialized: false })
   }
 
-  const token = process.env.NETLIFY_AUTH_TOKEN
-  const siteId = process.env.NETLIFY_SITE_ID
-
-  if (!token || !siteId) {
-    return error(500, 'server_config_error', 'NETLIFY_AUTH_TOKEN/NETLIFY_SITE_ID missing')
-  }
-
-  const userId = user.sub || user.id
+  const userId = auth.user?.id
   if (!userId) return error(400, 'invalid_user', 'User id missing')
 
   try {
-    const roles = sanitizeRoles(['mitarbeiter'])
-    await callNetlifyAdmin({
-      token,
-      siteId,
-      method: 'PUT',
-      path: `/identity/users/${encodeURIComponent(userId)}`,
-      body: { app_metadata: { roles } }
+    await auth0ManagementRequest({
+      method: 'PATCH',
+      path: `/users/${encodeURIComponent(userId)}`,
+      body: {
+        app_metadata: {
+          access_request: {
+            status: 'pending',
+            requested_at: new Date().toISOString()
+          }
+        }
+      }
     })
 
-    return json(200, { ok: true, roles, initialized: true })
+    return json(200, { ok: true, roles: [], initialized: true, requestStatus: 'pending' })
   } catch (e) {
-    return error(500, 'role_init_failed', 'Could not initialize default role', { message: e.message })
+    return error(500, 'access_request_init_failed', 'Could not initialize access request status', { message: e.message })
   }
 }

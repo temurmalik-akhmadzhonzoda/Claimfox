@@ -9,6 +9,7 @@ export default function Admin() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [busyId, setBusyId] = useState('')
+  const [pendingCount, setPendingCount] = useState(0)
 
   async function loadUsers() {
     setError('')
@@ -16,6 +17,7 @@ export default function Admin() {
     try {
       const response = await api.get('/.netlify/functions/admin-users')
       setUsers(response.users || [])
+      setPendingCount(Number(response.pendingCount || 0))
     } catch (err) {
       setError(err?.message || 'Nutzer konnten nicht geladen werden')
     } finally {
@@ -49,6 +51,7 @@ export default function Admin() {
   return (
     <section style={{ minHeight: '100vh', padding: '1rem' }}>
       <h1>Admin – User & Rollen</h1>
+      <p style={{ color: '#475569', marginTop: 0 }}>Offene Freigaben ohne Rolle: {pendingCount}</p>
       {loading ? <p>Lade Nutzer...</p> : null}
       {error ? <p style={{ color: '#b91c1c' }}>{error}</p> : null}
       <div style={{ display: 'grid', gap: '0.7rem' }}>
@@ -56,6 +59,9 @@ export default function Admin() {
           <article key={user.id} style={{ border: '1px solid #e2e8f0', borderRadius: 12, padding: '0.7rem' }}>
             <div><strong>{user.email}</strong></div>
             <div style={{ fontSize: '0.85rem', color: '#475569' }}>id: {user.id}</div>
+            <div style={{ fontSize: '0.82rem', color: '#475569' }}>
+              Request: {user?.access_request?.status || ((user.roles || []).length === 0 ? 'pending' : 'approved')}
+            </div>
             <div style={{ marginTop: '0.5rem', display: 'flex', gap: '0.45rem', flexWrap: 'wrap' }}>
               {ALL_ROLES.map((role) => {
                 const active = (user.roles || []).includes(role)

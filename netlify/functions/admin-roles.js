@@ -1,19 +1,15 @@
-const { requireRole, callNetlifyAdmin, json, error, rateLimit, sanitizeRoles } = require('./_utils')
+const { requireRole, auth0ManagementRequest, sanitizeRoles, ROLE_VALUES, json, error, rateLimit } = require('./_utils')
 
-exports.handler = async (event, context) => {
+exports.handler = async (event) => {
   if (event.httpMethod !== 'POST' && event.httpMethod !== 'PATCH') {
     return error(405, 'method_not_allowed', 'Only POST/PATCH allowed')
   }
 
-  const auth = requireRole(context, 'c-level')
+  const auth = await requireRole(event, 'c-level')
   if (!auth.ok) return auth.response
 
   const ip = event.headers['x-nf-client-connection-ip'] || 'unknown'
   if (!rateLimit(`admin-roles:${ip}`, 30, 60_000)) return error(429, 'rate_limited', 'Too many requests')
-
-  const token = process.env.NETLIFY_AUTH_TOKEN
-  const siteId = process.env.NETLIFY_SITE_ID
-  if (!token || !siteId) return error(500, 'server_config_error', 'NETLIFY_AUTH_TOKEN/NETLIFY_SITE_ID missing')
 
   let payload = {}
   try {
@@ -26,14 +22,24 @@ exports.handler = async (event, context) => {
   const roles = sanitizeRoles(payload.roles)
 
   if (!userId) return error(400, 'bad_request', 'userId is required')
+  if (roles.some((role) => !ROLE_VALUES.includes(role))) {
+    return error(400, 'bad_request', 'Invalid role value')
+  }
 
   try {
-    await callNetlifyAdmin({
-      token,
-      siteId,
-      method: 'PUT',
-      path: `/identity/users/${encodeURIComponent(userId)}`,
-      body: { app_metadata: { roles } }
+    await auth0ManagementRequest({
+      method: 'PATCH',
+      path: `/users/${encodeURIComponent(userId)}`,
+      body: {
+        app_metadata: {
+          roles,
+          access_request: {
+            status: 'approved',
+            approved_at: new Date().toISOString(),
+            approved_by: auth.user?.email || auth.user?.id || 'unknown'
+          }
+        }
+      }
     })
 
     return json(200, { ok: true, userId, roles })

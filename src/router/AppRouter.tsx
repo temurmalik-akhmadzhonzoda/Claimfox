@@ -250,6 +250,7 @@ import Management from '@/pages/Management'
 import CLevel from '@/pages/CLevel'
 import Admin from '@/pages/Admin'
 import RequireRole from '@/auth/RequireRole'
+import AccessRequestPage from '@/pages/AccessRequestPage'
 
 function NotFoundRedirect() {
   const { isAuthenticated } = useAuth()
@@ -327,6 +328,7 @@ export default function AppRouter() {
       </Route>
       <Route element={<ProtectedRoute><FullscreenBgLayout showHeader /></ProtectedRoute>}>
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/access-request" element={<AccessRequestPage />} />
         <Route path="/mitarbeiter" element={<Mitarbeiter />} />
         <Route path="/management" element={<RequireRole roles={['management']}><Management /></RequireRole>} />
         <Route path="/c-level" element={<RequireRole roles={['c-level']}><CLevel /></RequireRole>} />
