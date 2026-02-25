@@ -8,14 +8,6 @@ function firstEnv(...keys) {
   return ''
 }
 
-function firstEnvWithKey(...keys) {
-  for (const key of keys) {
-    const value = process.env[key]
-    if (typeof value === 'string' && value.trim()) return { key, value: value.trim() }
-  }
-  return { key: null, value: '' }
-}
-
 function hasEnv(...keys) {
   for (const key of keys) {
     const value = process.env[key]
@@ -50,8 +42,7 @@ exports.handler = async (event) => {
   const issuerRaw = firstEnv('AUTH0_ISSUER', 'VITE_AUTH0_ISSUER', 'REACT_APP_AUTH0_ISSUER', 'NEXT_PUBLIC_AUTH0_ISSUER') || (domain ? `https://${domain}/` : '')
   const audienceRaw = firstEnv('AUTH0_AUDIENCE', 'VITE_AUTH0_AUDIENCE', 'REACT_APP_AUTH0_AUDIENCE', 'NEXT_PUBLIC_AUTH0_AUDIENCE')
   const audience = sanitizeAudience(audienceRaw)
-  const clientIdRead = firstEnvWithKey('AUTH0_CLIENT_ID', 'VITE_AUTH0_CLIENT_ID', 'REACT_APP_AUTH0_CLIENT_ID', 'NEXT_PUBLIC_AUTH0_CLIENT_ID')
-  const clientId = clientIdRead.value
+  const clientId = firstEnv('AUTH0_CLIENT_ID', 'VITE_AUTH0_CLIENT_ID', 'REACT_APP_AUTH0_CLIENT_ID', 'NEXT_PUBLIC_AUTH0_CLIENT_ID')
 
   if (!domain || !clientId) {
     return error(500, 'auth_config_error', 'AUTH0_DOMAIN and AUTH0_CLIENT_ID must be configured', {
@@ -67,13 +58,7 @@ exports.handler = async (event) => {
   // Fast-fail common misconfiguration where AUTH0_CLIENT_ID is set to a domain.
   if (/\./.test(clientId) || /auth0\.com/i.test(clientId)) {
     return error(500, 'auth_config_error', 'AUTH0_CLIENT_ID is invalid. Use the Auth0 Application Client ID (not a domain).', {
-      hint: 'Open Auth0 Dashboard -> Applications -> your SPA app -> Settings -> Client ID',
-      debug: {
-        sourceKey: clientIdRead.key,
-        valueHasDot: /\./.test(clientId),
-        valueContainsAuth0Domain: /auth0\.com/i.test(clientId),
-        valueLength: clientId.length
-      }
+      hint: 'Open Auth0 Dashboard -> Applications -> your SPA app -> Settings -> Client ID'
     })
   }
 
