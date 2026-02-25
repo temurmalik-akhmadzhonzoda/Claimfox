@@ -17,11 +17,15 @@ function hasEnv(...keys) {
 }
 
 function detectOrigin(event) {
+  const proto = event?.headers?.['x-forwarded-proto'] || 'https'
+  const host = event?.headers?.host
+
+  // Prefer the actual request host to avoid stale SITE_ORIGIN values.
+  if (host && host.includes('claimsfox.com')) return `${proto}://${host}`
+
   const envOrigin = firstEnv('SITE_ORIGIN', 'URL', 'DEPLOY_PRIME_URL')
   if (envOrigin) return envOrigin.replace(/\/+$/, '')
 
-  const proto = event?.headers?.['x-forwarded-proto'] || 'https'
-  const host = event?.headers?.host
   if (host) return `${proto}://${host}`
   return 'https://claimsfox.com'
 }
